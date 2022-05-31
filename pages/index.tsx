@@ -2,6 +2,7 @@ import { Heading, IconButton, Box, Flex } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import HamburgerIcon from '../components/HamburgerIcon'
+import SideDrawer from '../components/SideDrawer'
 
 const Home: NextPage = () => {
   return (
@@ -13,11 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Flex justify={'end'}>
-          <Box mr={4}>
-            <IconButton aria-label='Search database' variant='ghost' icon={<HamburgerIcon />} />
-          </Box>
-        </Flex>
+            <SideDrawer />
         <Heading>Education Platform</Heading>
       </main>
     </div>
