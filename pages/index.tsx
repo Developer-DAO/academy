@@ -1,6 +1,7 @@
-import {Heading} from '@chakra-ui/react'
-import type {NextPage} from 'next'
+import { Heading, IconButton, Box, Flex } from '@chakra-ui/react'
+import type { NextPage } from 'next'
 import Head from 'next/head'
+import SideDrawer from '../components/SideDrawer'
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
+            <SideDrawer />
         <Heading>Education Platform</Heading>
       </main>
     </div>
