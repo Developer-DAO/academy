@@ -1,5 +1,7 @@
 import React from 'react'
-import { Image, Box, Flex, Heading, Button, Spacer, Link } from '@chakra-ui/react'
+import { Image, Box, Flex, Heading, Button, Spacer, Link, IconButton } from '@chakra-ui/react'
+import HamburgerIcon from './HamburgerIcon'
+
 
 function NavBar() {
   return (
@@ -11,10 +13,13 @@ function NavBar() {
         <Spacer />
         <Box>
           <Flex alignItems='center'>
-            <Link pr = '9' color= "yellow.300">JOIN THE COMMUNITY</Link>
+            <Link pr='9' color="yellow.300">JOIN THE COMMUNITY</Link>
             <Button colorScheme='gray' variant='solid'>Connect Wallet</Button>
+            <IconButton aria-label='Search database' variant='ghost' icon={<HamburgerIcon />} />
+
           </Flex>
         </Box>
+
       </Flex>
     </Box>
 

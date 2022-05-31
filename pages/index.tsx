@@ -1,7 +1,7 @@
-import {Heading} from '@chakra-ui/react'
-import type {NextPage} from 'next'
+import { Heading, IconButton, Box, Flex } from '@chakra-ui/react'
+import type { NextPage } from 'next'
 import Head from 'next/head'
-import NavBar from '../components/NavBar'
+import HamburgerIcon from '../components/HamburgerIcon'
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +13,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <NavBar/>
+        <Flex justify={'end'}>
+          <Box mr={4}>
+            <IconButton aria-label='Search database' variant='ghost' icon={<HamburgerIcon />} />
+          </Box>
+        </Flex>
         <Heading>Education Platform</Heading>
       </main>
     </div>
