@@ -19,8 +19,6 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
     idx,
   } = props
 
-  console.log(icons)
-
   return (
     <>
       <Flex
@@ -34,7 +32,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
           <Flex
             bg="#1D1E20"
             w="fit-content"
-            fontSize={10}
+            fontSize={[8, 10]}
             px={2}
             rounded={5}
             align="center"
@@ -51,7 +49,9 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                   px={2}
                   justify="center"
                   align="center"
-                  rounded={10}
+                  rounded={8}
+                  fontSize={[10, 14]}
+                  fontWeight="bold"
                 >
                   {icon}
                 </Flex>
@@ -59,11 +59,11 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
           </HStack>
         </Flex>
         <Flex color="#FFD500">
-          <Heading as="h3" fontSize={16} my={2}>
+          <Heading as="h3" fontSize={[12, 16]} my={2}>
             {title}
           </Heading>
         </Flex>
-        <Flex fontSize={12} mr={200}>
+        <Flex fontSize={[8, 12]} mr={100}>
           {description}
         </Flex>
       </Flex>
