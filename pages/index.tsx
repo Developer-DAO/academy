@@ -12,10 +12,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-            <SideDrawer />
-        <Heading>Education Platform</Heading>
-      </main>
+      <Box as="main" p={3}>
+        <Flex align="center">
+          <SideDrawer />
+          <Heading>Education Platform</Heading>
+        </Flex>
+      </Box>
     </div>
   )
 }
