@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack, Icon, VStack } from '@chakra-ui/react'
+import { Flex, Heading, HStack } from '@chakra-ui/react'
 
 interface LessonProps {
   lesson: {
