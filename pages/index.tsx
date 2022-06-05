@@ -1,7 +1,7 @@
-import { Heading, IconButton, Box, Flex } from '@chakra-ui/react'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import SideDrawer from '../components/SideDrawer'
+import { Heading, IconButton, Box, Flex } from "@chakra-ui/react";
+import type { NextPage } from "next";
+import Head from "next/head";
+import SideDrawer from "../components/SideDrawer";
 
 const Home: NextPage = () => {
   return (
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         </Flex>
       </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
