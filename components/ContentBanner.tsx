@@ -27,6 +27,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
         bg="#35363A"
         p={5}
         rounded={5}
+        minW={'22rem'}
       >
         <Flex justify="space-between">
           <Flex
