@@ -23,10 +23,10 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
       </Head>
       <Flex as="main" py={4} px={[12, 16, 24]} direction="column">
         <Stack spacing={5} direction="column">
-          <Heading size="lg" as="h2" textAlign="center" color="#F96C9D">
+          <Heading fontSize={["md", "lg"]} as="h2" textAlign="center" color="#F96C9D">
             SMART CONTRACT DEVELOPMENT TRACK
           </Heading>
-          <Heading size="sm" as="h3" textAlign="center">
+          <Heading fontSize={["xs", "sm"]} as="h3" textAlign="center">
             CURRENT LESSONS
           </Heading>
           {lessons.map((lesson: any, idx: number) => (
