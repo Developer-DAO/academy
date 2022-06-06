@@ -8,7 +8,7 @@ const nextConfig = {
     fallbackLng: ['en'],
   },
   react: { useSuspense: false },
-  reactStrictMode: false
+  reactStrictMode: false,
 }
 
 module.exports = nextConfig

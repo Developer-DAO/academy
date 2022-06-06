@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,5 +1,6 @@
-import { Container, Flex, Heading, HStack, Stack } from '@chakra-ui/react'
+import { Flex, Heading, HStack, SimpleGrid, Stack, Wrap, WrapItem } from '@chakra-ui/react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface LessonProps {
   lesson: {
@@ -22,6 +23,8 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
     idx,
   } = props
 
+  console.log(typeof icons[0])
+
   return (
     <>
       <Link href={'/lessons/' + slug} passHref>
@@ -33,35 +36,36 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
             p={5}
             rounded={5}
           >
-            <Flex justify="space-between">
+            <Flex justify="space-between" align="center">
               <Flex
                 bg="#1D1E20"
-                w="fit-content"
                 fontSize={[6, 8, 10]}
                 px={2}
                 rounded={5}
-                align="center"
-                justifyItems="flex-start"
+                mr={[6, 10, 16]}
               >
                 Lesson {idx + 1}
               </Flex>
-              <Stack direction={["column", "row"]}>
+              <Wrap>
                 {icons &&
-                  icons.map((icon: string) => (
-                    <Flex
-                      bg="#FFFFFF"
-                      color="#000000"
-                      px={2}
-                      justify="center"
-                      align="center"
-                      rounded={8}
-                      fontSize={[8, 10, 12, 14]}
-                      fontWeight="bold"
-                    >
-                      {icon}
-                    </Flex>
+                  icons.map((icon: string) =>
+                  (
+                    // <Flex
+                    //   bg="#FFFFFF"
+                    //   color="#000000"
+                    //   p={0.5}
+                    //   justify="center"
+                    //   align="center"
+                    //   rounded={"50%"}
+                    //   fontSize={[8, 10, 12, 14]}
+                    //   fontWeight="bold"
+                    // >
+                    <WrapItem bg="#FFFFFF" p={0.5} rounded={"50%"}>
+                      <Image src={`/assets/${icon}.png`} width={12} height={12} />
+                    </WrapItem>
+                    // </Flex>
                   ))}
-              </Stack>
+              </Wrap>
             </Flex>
             <Flex color="#FFD500">
               <Heading as="h3" fontSize={[12, 14, 16]} my={2}>
@@ -78,7 +82,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
   )
 }
 
-// const lessonIcons = [
-//   {solidity: '../assets/solidity.png'},
-//   {remix: '../assets/remix.png'},
-// ]
+// const lessonIcons = {
+//   solidity: '/assets/solidity.png',
+//   remix: '/assets/remix.png',
+// }
