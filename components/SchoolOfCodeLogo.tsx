@@ -11,8 +11,8 @@ import { type } from 'os'
 import { useEffect, useRef, useState } from 'react'
 // import Typewriter, { TypewriterClass } from 'typewriter-effect'
 
-const DELETE_SPEED = 100
-const WRITE_SPEED = 150
+const DELETE_SPEED = 150
+const WRITE_SPEED = 250
 
 const DEVELOPER_DAO = 'DEVELOPER DAO'
 const D = 'D'
@@ -58,21 +58,30 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   const CURSOR_WAIT = 6 * WRITE_SPEED // 900
   const STATIC_WAIT = 5 * CURSOR_WAIT // 4500
 
+  const cursorKeyframes = keyframes`
+    0% { opacity: 1; }
+   60% { opacity: 1; }
+   61% { opacity: 0; }
+   99% { opacity: 0; }
+  100% { opacity: 1; }
+  `
+  const eyeKeyframes = keyframes`
+    from {transform: scale(1,1);}
+    to {transform: scale(1,0.1); top 80%;}
+  `
+  const cursorAnimation = `${cursorKeyframes} 1s infinite`
+  const eyeAnimation = `${eyeKeyframes} ${
+    CURSOR_WAIT / 4000
+  }s infinite alternate`
+
   const [status, setStatus] = useState(0)
   const [dev, setDev] = useState(DEVELOPER_DAO)
   const [dao, setDao] = useState('')
   const [cursor, setCursor] = useState('')
   const [isAnimating, setIsAnimating] = useState(false)
+  const [cursorAnimationCSS, setCursorAnimationCSS] = useState(cursorAnimation)
   const [eyeAnimationCSS, setEyeAnimationCSS] = useState('')
   const [showGraduationHat, setShowGraduationHat] = useState(false)
-
-  const eyeKeyframes = keyframes`
-    from {transform: scale(1,1);}
-    to {transform: scale(1,0.1); top 80%;}
-  `
-  const eyeAnimation = `${eyeKeyframes} ${
-    CURSOR_WAIT / 4000
-  }s infinite alternate`
 
   const didMount = useRef(false)
 
@@ -126,6 +135,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
 
   const stopBlinking = () => {
     // TODO: Stop Blinking Cursor
+    setCursorAnimationCSS('')
     incStatus()
   }
 
@@ -165,6 +175,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
 
   const startBlinking = () => {
     // TODO: Start Blinking Cursor
+    setCursorAnimationCSS(cursorAnimation)
     incStatus()
   }
 
@@ -275,11 +286,34 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
         <Box w="20" h="12"></Box>
       )}
       <HStack fontWeight={300} fontSize={40} w="100%" spacing={0} my={0} py={0}>
-        <Box animation={eyeAnimationCSS}>{dev}</Box>
-        <Box>{cursor}</Box>
-        <Box animation={eyeAnimationCSS}>{dao}</Box>
+        <Box
+          bgClip={'text'}
+          bgGradient={'linear(to-b, rgb(208,64,184), rgb(216,144,204))'}
+          animation={eyeAnimationCSS}
+        >
+          {dev}
+        </Box>
+        <Box
+          bgClip={'text'}
+          bgGradient={'linear(to-b, rgb(208,64,184), rgb(216,144,204))'}
+          animation={cursorAnimationCSS}
+        >
+          {cursor}
+        </Box>
+        <Box
+          bgClip={'text'}
+          bgGradient={'linear(to-b, rgb(208,64,184), rgb(216,144,204))'}
+          animation={eyeAnimationCSS}
+        >
+          {dao}
+        </Box>
       </HStack>
-      <Box fontWeight={700} fontSize={36}>
+      <Box
+        bgClip={'text'}
+        bgGradient={'linear(to-b, rgb(216,144,204), rgb(224,224,224))'}
+        fontWeight={700}
+        fontSize={36}
+      >
         SCHOOL OF CODE
       </Box>
     </VStack>
