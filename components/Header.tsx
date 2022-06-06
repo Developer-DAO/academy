@@ -1,24 +1,23 @@
-// components/Header.js
 import Image from 'next/image'
 import MainHeaderLogo from '../assets/logo.svg'
-import ConnectWalletButton from "../components/ConnectWalletButton";
-import { Box } from '@chakra-ui/react'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Flex } from '@chakra-ui/react'
 
 export default function Header() {
   return (
-    <Box
+    <Flex
       m="40px"
       mx="10%"
       display="flex"
-      flexDirection="row"
-      alignItems="center"
-      justifyContent="space-between"
+      direction="row"
+      align="center"
+      justify="space-between"
     >
       <Image
         src={MainHeaderLogo}
         alt="DEVELOPER DAO LOGO - SCHOOL OF CODE"
       />
-      <ConnectWalletButton />
-    </Box>
+      <ConnectButton chainStatus="none" showBalance={false} />
+    </Flex>
   );
 }
