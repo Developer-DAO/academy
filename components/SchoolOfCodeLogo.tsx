@@ -1,18 +1,10 @@
-import {
-  Box,
-  HStack,
-  Icon,
-  VStack,
-  keyframes,
-  VisuallyHidden,
-} from '@chakra-ui/react'
+import GraduationHat from './GraduationHat'
+import { Box, HStack, Icon, VStack, keyframes } from '@chakra-ui/react'
 import type { NextPage } from 'next'
-import { type } from 'os'
 import { useEffect, useRef, useState } from 'react'
-// import Typewriter, { TypewriterClass } from 'typewriter-effect'
 
 const DELETE_SPEED = 150
-const WRITE_SPEED = 250
+const WRITE_SPEED = 150
 
 const DEVELOPER_DAO = 'DEVELOPER DAO'
 const D = 'D'
@@ -44,6 +36,7 @@ type SchoolOfCodeLogoProps = {
   logToConsole?: boolean
   deleteSpeed?: number
   writeSpeed?: number
+  size?: number
 }
 
 const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
@@ -54,9 +47,12 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   deleteSpeed = DELETE_SPEED,
   writeSpeed = WRITE_SPEED,
 }) => {
-  const INTERVAL_WAIT = 5 * DELETE_SPEED // 500
-  const CURSOR_WAIT = 6 * WRITE_SPEED // 900
-  const STATIC_WAIT = 5 * CURSOR_WAIT // 4500
+  const INTERVAL_WAIT = 3 * DELETE_SPEED // 450
+  const CURSOR_WAIT = 10 * WRITE_SPEED // 1500
+  const STATIC_WAIT = 5 * CURSOR_WAIT // 7500
+
+  const cursorBorderCSS = `2px solid #d685c8`
+  const cursorBorderRadiusCSS = `.1875em`
 
   const cursorKeyframes = keyframes`
     0% { opacity: 1; }
@@ -66,10 +62,10 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   100% { opacity: 1; }
   `
   const eyeKeyframes = keyframes`
-    from {transform: scale(1,1);}
-    to {transform: scale(1,0.1); top 80%;}
+    from { transform: scale(1,1); }
+    to   { transform: scale(1,0.1); top 80%; }
   `
-  const cursorAnimation = `${cursorKeyframes} 1s infinite`
+  const cursorAnimation = `${cursorKeyframes} .6s infinite`
   const eyeAnimation = `${eyeKeyframes} ${
     CURSOR_WAIT / 4000
   }s infinite alternate`
@@ -77,7 +73,8 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   const [status, setStatus] = useState(0)
   const [dev, setDev] = useState(DEVELOPER_DAO)
   const [dao, setDao] = useState('')
-  const [cursor, setCursor] = useState('')
+  const [cursorBorder, setCursorBorder] = useState('0')
+  const [cursorBorderRadius, setCursorBorderRadius] = useState('0')
   const [isAnimating, setIsAnimating] = useState(false)
   const [cursorAnimationCSS, setCursorAnimationCSS] = useState(cursorAnimation)
   const [eyeAnimationCSS, setEyeAnimationCSS] = useState('')
@@ -111,8 +108,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   }
 
   const showCursor = () => {
-    // TODO: Show Cursor
-    setCursor('_')
+    setCursorBorder(cursorBorderCSS)
     incStatus()
   }
 
@@ -134,47 +130,41 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   }
 
   const stopBlinking = () => {
-    // TODO: Stop Blinking Cursor
     setCursorAnimationCSS('')
     incStatus()
   }
 
   const showHat = () => {
-    // TODO: Show Hat Icon
     setShowGraduationHat(true)
     incStatus()
   }
 
   const startSmiling = () => {
-    // TODO: Start Smile
+    setCursorBorderRadius(cursorBorderRadiusCSS)
     incStatus()
   }
 
   const closeEyes = () => {
-    // TODO: Start Blinking Eyes
     setEyeAnimationCSS(eyeAnimation)
     incStatus()
   }
 
   const openEyes = () => {
-    // TODO: Stop Blinking Eyes
     setEyeAnimationCSS('')
     incStatus()
   }
 
   const hideHat = () => {
-    // TODO: Hide Hat
     setShowGraduationHat(false)
     incStatus()
   }
 
   const stopSmiling = () => {
-    // TODO: Stop Smile
+    setCursorBorderRadius('0')
     incStatus()
   }
 
   const startBlinking = () => {
-    // TODO: Start Blinking Cursor
     setCursorAnimationCSS(cursorAnimation)
     incStatus()
   }
@@ -193,8 +183,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   }
 
   const hideCursor = () => {
-    // TODO: Hide Cursor
-    setCursor('')
+    setCursorBorder('0')
     incStatus()
   }
 
@@ -209,20 +198,23 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
 
   const funcs = [
     { func: initialState, delay: 0 },
-    { func: showCursor, delay: clickToStart ? writeSpeed : STATIC_WAIT },
+    {
+      func: showCursor,
+      delay: clickToStart && !loop && !autoStart ? writeSpeed : STATIC_WAIT,
+    },
     { func: startRemovingLettters, delay: CURSOR_WAIT },
     { func: removeLetter, delay: deleteSpeed },
-    { func: stopBlinking, delay: INTERVAL_WAIT },
+    { func: stopBlinking, delay: writeSpeed },
     { func: showHat, delay: INTERVAL_WAIT },
     { func: startSmiling, delay: INTERVAL_WAIT },
     { func: closeEyes, delay: INTERVAL_WAIT },
     { func: openEyes, delay: CURSOR_WAIT },
     { func: hideHat, delay: INTERVAL_WAIT },
-    { func: stopSmiling, delay: INTERVAL_WAIT },
+    { func: stopSmiling, delay: deleteSpeed },
     { func: startBlinking, delay: INTERVAL_WAIT },
-    { func: removeSecondDLetter, delay: INTERVAL_WAIT },
+    { func: removeSecondDLetter, delay: writeSpeed },
     { func: addLetter, delay: writeSpeed },
-    { func: hideCursor, delay: CURSOR_WAIT },
+    { func: hideCursor, delay: INTERVAL_WAIT },
     { func: finalState, delay: 0 },
   ]
 
@@ -264,28 +256,19 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   return (
     <VStack align={'start'} my={0} py={0} spacing={0} onClick={logoClicked}>
       {showGraduationHat ? (
-        <Icon w="20" h="12" viewBox="0 6 100 50" fill="none" stroke="white">
-          <defs>
-            <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
-              <stop offset="0" stopColor="rgb(216,144,204)" />
-              <stop offset="1" stopColor="rgb(208,64,184)" />
-            </linearGradient>
-          </defs>
-          <path
-            strokeWidth="3"
-            stroke="url(#gradient)"
-            d="
-        M50 10L97 20L50 30L3 20z
-        M50 20L12.5 22.5L12.5 40
-        M25 25L25 45Q50 60 75 45L75 25
-        M12.5 40L10 50C7.5 60 7.5 60 12.5 60C17.5 60 17.5 60 15 50z
-        "
-          />
-        </Icon>
+        <GraduationHat w="1.55em" h=".775em" />
       ) : (
-        <Box w="20" h="12"></Box>
+        <Box w="1.55em" h=".775em"></Box>
       )}
-      <HStack fontWeight={300} fontSize={40} w="100%" spacing={0} my={0} py={0}>
+      <HStack
+        fontWeight={300}
+        fontSize={`1.75rem`}
+        lineHeight={`1.5rem`}
+        // w="100%"
+        spacing={0}
+        my={0}
+        py={0}
+      >
         <Box
           bgClip={'text'}
           bgGradient={'linear(to-b, rgb(208,64,184), rgb(216,144,204))'}
@@ -297,8 +280,13 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
           bgClip={'text'}
           bgGradient={'linear(to-b, rgb(208,64,184), rgb(216,144,204))'}
           animation={cursorAnimationCSS}
+          w={4}
+          h={6}
+          lineHeight={8}
+          borderBottom={cursorBorder}
+          borderRadius={cursorBorderRadius}
         >
-          {cursor}
+          &nbsp;
         </Box>
         <Box
           bgClip={'text'}
@@ -311,8 +299,9 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
       <Box
         bgClip={'text'}
         bgGradient={'linear(to-b, rgb(216,144,204), rgb(224,224,224))'}
-        fontWeight={700}
-        fontSize={36}
+        fontWeight={800}
+        fontSize={`1.55rem`}
+        lineHeight={`1.5rem`}
       >
         SCHOOL OF CODE
       </Box>
