@@ -29,11 +29,10 @@ const colors = {
 
 const styles = {
   global: {
-    // styles for the `body`
-    body: {
+    html: {
       bg: colors.soc.eerieBlack,
     },
-    main: {
+    body: {
       bg: colors.soc.gradientLanding,
       // bg: colors.soc.gradientLessons,
       // bg: colors.soc.gradientTrack,

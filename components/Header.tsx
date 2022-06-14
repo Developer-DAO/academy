@@ -5,15 +5,15 @@ import SchoolOfCodeLogo from './SchoolOfCodeLogo'
 export default function Header() {
   return (
     <Flex
-      m="40px"
-      mx="10%"
+      p="1.25em"
+      px="5%"
       display="flex"
       direction="row"
-      align="center"
+      align="end"
       justify="space-between"
     >
       <SchoolOfCodeLogo autoStart={true} loop={true} />
-      <ConnectButton chainStatus="none" showBalance={false} />
+      <ConnectButton chainStatus="icon" showBalance={false} />
     </Flex>
   )
 }

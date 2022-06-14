@@ -257,13 +257,13 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   return (
     <VStack align={'start'} my={0} py={0} spacing={0} onClick={logoClicked}>
       {showGraduationHat ? (
-        <GraduationHat w="1.55em" h=".775em" />
+        <GraduationHat w="3.1em" h="1.55em" />
       ) : (
-        <Box w="1.55em" h=".775em"></Box>
+        <Box w="3.1em" h="1.55em"></Box>
       )}
       <HStack
         fontWeight={300}
-        fontSize={`1.75rem`}
+        fontSize={`1.55rem`}
         lineHeight={`1.5rem`}
         // w="100%"
         spacing={0}
@@ -301,8 +301,8 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
         bgClip={'text'}
         bgGradient={'linear(to-b, rgb(216,144,204), rgb(224,224,224))'}
         fontWeight={800}
-        fontSize={`1.55rem`}
-        lineHeight={`1.5rem`}
+        fontSize={`1.3125rem`}
+        lineHeight={`1.25rem`}
       >
         SCHOOL OF CODE
       </Box>
