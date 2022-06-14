@@ -7,6 +7,7 @@ const DELETE_SPEED = 150
 const WRITE_SPEED = 150
 
 const DEVELOPER_DAO = 'DEVELOPER DAO'
+const DEVELOPER_D = 'DEVELOPER D'
 const D = 'D'
 
 const STATUS_COUNT = 16
@@ -121,7 +122,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
       incStatus()
       return
     }
-    if (dev === 'DEVELOPER D') {
+    if (dev === DEVELOPER_D) {
       delCharDev(2)
       showD()
       return
