@@ -1,7 +1,6 @@
 import { Heading, IconButton, Box, Flex } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import HamburgerIcon from '../components/HamburgerIcon'
 import SideDrawer from '../components/SideDrawer'
 
 const Home: NextPage = () => {
