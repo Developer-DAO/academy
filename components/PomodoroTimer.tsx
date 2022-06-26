@@ -1,6 +1,12 @@
 import { useInterval } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useReducer } from 'react'
 import { formatTime, minute, second } from '../lib/time'
+
+export interface TimerState {
+  status: TimerStatus
+  timeRemaining: number
+  isRunning: boolean
+}
 
 export enum TimerStatus {
   Idle = 'idle',
@@ -9,6 +15,84 @@ export enum TimerStatus {
   StudyingComplete = 'studying-complete',
   Break = 'break',
   BreakComplete = 'break-complete',
+}
+
+export type TimerEvent =
+  | 'break'
+  | 'pause'
+  | 'reset'
+  | 'resume'
+  | 'skip'
+  | 'study'
+  | 'tick'
+
+const initialState: TimerState = {
+  status: TimerStatus.Idle,
+  timeRemaining: 25 * minute,
+  isRunning: false,
+}
+
+const reducer = (state: TimerState, event: TimerEvent): TimerState => {
+  switch (event) {
+    case 'break':
+      return {
+        status: TimerStatus.Break,
+        timeRemaining: 5 * minute,
+        isRunning: true,
+      }
+
+    case 'pause':
+      return {
+        ...state,
+        status: TimerStatus.StudyingPaused,
+        isRunning: false,
+      }
+
+    case 'reset':
+      return initialState
+
+    case 'resume':
+      return {
+        ...state,
+        status: TimerStatus.Studying,
+        isRunning: true,
+      }
+
+    case 'skip':
+      return initialState
+
+    case 'study':
+      return {
+        status: TimerStatus.Studying,
+        timeRemaining: 25 * minute,
+        isRunning: true,
+      }
+
+    case 'tick':
+      const remaining = state.timeRemaining - 1 * second
+      const timeRemaining = remaining < 0 ? 0 : remaining
+
+      if (timeRemaining !== 0) {
+        return {
+          ...state,
+          timeRemaining,
+        }
+      }
+
+      return {
+        status:
+          state.status === TimerStatus.Break
+            ? TimerStatus.BreakComplete
+            : TimerStatus.StudyingComplete,
+        timeRemaining: 0,
+        isRunning: false,
+      }
+
+    default:
+      // throw if event is not handled, helpful for development
+      const exhaustiveCheck: never = event
+      throw new Error(`Unhandled event: ${exhaustiveCheck}`)
+  }
 }
 
 const Status = ({ children }: { children?: string }) => (
@@ -20,59 +104,10 @@ const TimeRemaining = ({ time }: { time: number }) => (
 )
 
 export const PomodoroTimer = () => {
-  const [status, setStatus] = useState(TimerStatus.Idle)
-  const [timeRemaining, setTimeRemaining] = useState(25 * minute)
-  const [isRunning, setIsRunning] = useState(false)
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { isRunning, status, timeRemaining } = state
 
-  const onStudy = () => {
-    setStatus(TimerStatus.Studying)
-    setIsRunning(true)
-  }
-
-  const onPause = () => {
-    setStatus(TimerStatus.StudyingPaused)
-    setIsRunning(false)
-  }
-
-  const onResume = () => {
-    setStatus(TimerStatus.Studying)
-    setIsRunning(true)
-  }
-
-  const onReset = () => {
-    setStatus(TimerStatus.Idle)
-    setTimeRemaining(25 * minute)
-    setIsRunning(false)
-  }
-
-  const onBreak = () => {
-    setStatus(TimerStatus.Break)
-    setTimeRemaining(5 * minute)
-    setIsRunning(true)
-  }
-
-  const tick = () => {
-    setTimeRemaining((timeRemaining) => {
-      const remaining = timeRemaining - 1 * second
-      return remaining < 0 ? 0 : remaining
-    })
-  }
-
-  useInterval(tick, isRunning ? 1 * second : null)
-
-  useEffect(() => {
-    if (timeRemaining > 0) {
-      return
-    }
-
-    if (status === TimerStatus.Studying) {
-      setStatus(TimerStatus.StudyingComplete)
-    }
-    if (status === TimerStatus.Break) {
-      setStatus(TimerStatus.BreakComplete)
-    }
-    setIsRunning(false)
-  }, [timeRemaining, status])
+  useInterval(() => dispatch('tick'), isRunning ? 1 * second : null)
 
   switch (status) {
     case TimerStatus.Idle:
@@ -80,7 +115,7 @@ export const PomodoroTimer = () => {
         <div>
           <Status />
           <TimeRemaining time={timeRemaining} />
-          <button onClick={onStudy}>Study</button>
+          <button onClick={() => dispatch('study')}>Study</button>
         </div>
       )
 
@@ -89,8 +124,8 @@ export const PomodoroTimer = () => {
         <div>
           <Status>Studying</Status>
           <TimeRemaining time={timeRemaining} />
-          <button onClick={onPause}>Pause</button>
-          <button onClick={onReset}>Reset</button>
+          <button onClick={() => dispatch('pause')}>Pause</button>
+          <button onClick={() => dispatch('reset')}>Reset</button>
         </div>
       )
 
@@ -99,8 +134,8 @@ export const PomodoroTimer = () => {
         <div>
           <Status>Studying paused</Status>
           <TimeRemaining time={timeRemaining} />
-          <button onClick={onResume}>Resume</button>
-          <button onClick={onReset}>Reset</button>
+          <button onClick={() => dispatch('resume')}>Resume</button>
+          <button onClick={() => dispatch('reset')}>Reset</button>
         </div>
       )
 
@@ -109,7 +144,7 @@ export const PomodoroTimer = () => {
         <div>
           <Status>Studying complete</Status>
           <TimeRemaining time={0} />
-          <button onClick={onBreak}>Break</button>
+          <button onClick={() => dispatch('break')}>Break</button>
         </div>
       )
 
@@ -118,7 +153,7 @@ export const PomodoroTimer = () => {
         <div>
           <Status>On Break</Status>
           <TimeRemaining time={timeRemaining} />
-          <button onClick={onReset}>Skip</button>
+          <button onClick={() => dispatch('skip')}>Skip</button>
         </div>
       )
 
@@ -127,7 +162,7 @@ export const PomodoroTimer = () => {
         <div>
           <Status>Break complete</Status>
           <TimeRemaining time={0} />
-          <button onClick={onStudy}>Study</button>
+          <button onClick={() => dispatch('study')}>Study</button>
         </div>
       )
 
