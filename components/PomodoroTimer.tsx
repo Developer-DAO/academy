@@ -7,6 +7,8 @@ export enum TimerStatus {
   Studying = 'studying',
   StudyingPaused = 'studying-paused',
   StudyingComplete = 'studying-complete',
+  Break = 'break',
+  BreakComplete = 'break-complete',
 }
 
 const Status = ({ children }: { children?: string }) => (
@@ -43,6 +45,12 @@ export const PomodoroTimer = () => {
     setIsRunning(false)
   }
 
+  const onBreak = () => {
+    setStatus(TimerStatus.Break)
+    setTimeRemaining(5 * minute)
+    setIsRunning(true)
+  }
+
   const tick = () => {
     setTimeRemaining((timeRemaining) => {
       const remaining = timeRemaining - 1 * second
@@ -53,11 +61,18 @@ export const PomodoroTimer = () => {
   useInterval(tick, isRunning ? 1 * second : null)
 
   useEffect(() => {
-    if (timeRemaining === 0) {
-      setStatus(TimerStatus.StudyingComplete)
-      setIsRunning(false)
+    if (timeRemaining > 0) {
+      return
     }
-  }, [timeRemaining])
+
+    if (status === TimerStatus.Studying) {
+      setStatus(TimerStatus.StudyingComplete)
+    }
+    if (status === TimerStatus.Break) {
+      setStatus(TimerStatus.BreakComplete)
+    }
+    setIsRunning(false)
+  }, [timeRemaining, status])
 
   switch (status) {
     case TimerStatus.Idle:
@@ -68,6 +83,7 @@ export const PomodoroTimer = () => {
           <button onClick={onStudy}>Study</button>
         </div>
       )
+
     case TimerStatus.Studying:
       return (
         <div>
@@ -77,6 +93,7 @@ export const PomodoroTimer = () => {
           <button onClick={onReset}>Reset</button>
         </div>
       )
+
     case TimerStatus.StudyingPaused:
       return (
         <div>
@@ -86,15 +103,34 @@ export const PomodoroTimer = () => {
           <button onClick={onReset}>Reset</button>
         </div>
       )
+
     case TimerStatus.StudyingComplete:
       return (
         <div>
           <Status>Studying complete</Status>
-          <TimeRemaining time={timeRemaining} />
-          <button onClick={onResume}>Resume</button>
-          <button onClick={onReset}>Reset</button>
+          <TimeRemaining time={0} />
+          <button onClick={onBreak}>Break</button>
         </div>
       )
+
+    case TimerStatus.Break:
+      return (
+        <div>
+          <Status>On Break</Status>
+          <TimeRemaining time={timeRemaining} />
+          <button onClick={onReset}>Skip</button>
+        </div>
+      )
+
+    case TimerStatus.BreakComplete:
+      return (
+        <div>
+          <Status>Break complete</Status>
+          <TimeRemaining time={0} />
+          <button onClick={onStudy}>Study</button>
+        </div>
+      )
+
     default:
       // throw if status is not handled, helpful for development
       const exhaustiveCheck: never = status

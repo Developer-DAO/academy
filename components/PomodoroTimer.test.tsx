@@ -91,4 +91,56 @@ test('study session', async () => {
   expect(timeRemaining).toHaveTextContent('00:00')
 
   // TODO: empty study session timer can begin a break session
+  user.click(screen.getByRole('button', { name: 'Break' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('On Break'))
+})
+
+test('break session', async () => {
+  const user = userEvent.setup()
+  render(<PomodoroTimer />)
+
+  const timerStatus = screen.getByLabelText('timer status')
+  const timeRemaining = screen.getByLabelText('time remaining')
+
+  // move to break
+  user.click(screen.getByRole('button', { name: 'Study' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('Studying'))
+  await act(() => {
+    jest.advanceTimersByTime(25 * minute)
+  })
+  await waitFor(() =>
+    expect(timerStatus).toHaveTextContent('Studying complete'),
+  )
+  user.click(screen.getByRole('button', { name: 'Break' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('On Break'))
+
+  // break session timer starts with 05:00
+  expect(timeRemaining).toHaveTextContent('05:00')
+
+  // active break timer can be skipped which returns to idle state
+  user.click(screen.getByRole('button', { name: 'Skip' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent(''))
+
+  // move back to break
+  user.click(screen.getByRole('button', { name: 'Study' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('Studying'))
+  await act(() => {
+    jest.advanceTimersByTime(25 * minute)
+  })
+  await waitFor(() =>
+    expect(timerStatus).toHaveTextContent('Studying complete'),
+  )
+  user.click(screen.getByRole('button', { name: 'Break' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('On Break'))
+
+  // empty break timer allows user to immediately start a new study session
+  await act(() => {
+    jest.advanceTimersByTime(5 * minute)
+  })
+  await waitFor(() => expect(timerStatus).toHaveTextContent('Break complete'))
+  expect(timeRemaining).toHaveTextContent('00:00')
+
+  // validate back in studying state
+  user.click(screen.getByRole('button', { name: 'Study' }))
+  await waitFor(() => expect(timerStatus).toHaveTextContent('Studying'))
 })
