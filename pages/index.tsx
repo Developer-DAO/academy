@@ -1,4 +1,5 @@
-import { Heading } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
+import SideDrawer from '../components/SideDrawer'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Hero from '../components/Hero'
@@ -13,7 +14,9 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Hero />
+        <Box as="main">
+          <Hero />
+        </Box>
       </main>
     </div>
   )
