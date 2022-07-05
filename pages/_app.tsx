@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </RainbowKitProvider>
       </WagmiConfig>
     </ChakraProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
