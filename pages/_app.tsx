@@ -1,8 +1,9 @@
 import '@fontsource/inter/300.css'
 import '@fontsource/inter/800.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, Box } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { theme } from '../theme'
+import Header from '../components/Header'
 
 import '@rainbow-me/rainbowkit/styles.css'
 import {
@@ -34,11 +35,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains} theme={darkTheme()}>
-          <Component {...pageProps} />
+          <Box p="1.25em" px="5%">
+            <Header />
+            <Component {...pageProps} />
+          </Box>
         </RainbowKitProvider>
       </WagmiConfig>
     </ChakraProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
