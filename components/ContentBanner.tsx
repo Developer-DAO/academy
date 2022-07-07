@@ -23,8 +23,6 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
     idx,
   } = props
 
-  console.log(typeof icons[0])
-
   return (
     <>
       <Link href={'/lessons/' + slug} passHref>
@@ -49,16 +47,6 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
               <Wrap>
                 {icons &&
                   icons.map((icon: string) => (
-                    // <Flex
-                    //   bg="#FFFFFF"
-                    //   color="#000000"
-                    //   p={0.5}
-                    //   justify="center"
-                    //   align="center"
-                    //   rounded={"50%"}
-                    //   fontSize={[8, 10, 12, 14]}
-                    //   fontWeight="bold"
-                    // >
                     <WrapItem bg="#FFFFFF" p={0.5} rounded={'50%'}>
                       <Image
                         src={`/assets/${icon}.png`}
@@ -66,7 +54,6 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                         height={12}
                       />
                     </WrapItem>
-                    // </Flex>
                   ))}
               </Wrap>
             </Flex>
@@ -83,9 +70,4 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
       </Link>
     </>
   )
-}
-
-const lessonIcons = {
-  solidity: '/assets/solidity.png',
-  remix: '/assets/remix.png',
 }

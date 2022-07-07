@@ -35,13 +35,9 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
           <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
             CURRENT LESSONS
           </Heading>
-          {/* <Image layout="fill" src="/assets/solidity.png" /> */}
           {lessons.map((lesson: any, idx: number) => (
             <Link href={'/lessons/' + lesson.slug} passHref>
               <ContentBanner lesson={lesson} idx={idx} />
-              {/* <p key={lesson.title}>
-                  Lesson {idx + 1}: {lesson.frontMatter.title}
-                </p> */}
             </Link>
           ))}
         </Stack>
