@@ -1,9 +1,11 @@
+import { Code, Heading, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import SyntaxHighlighter from 'react-syntax-highlighter'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { useTranslation } from 'next-i18next'
 
 interface LessonProps {
@@ -13,6 +15,34 @@ interface LessonProps {
   mdxSource: MDXRemoteSerializeResult
 }
 
+const components = {
+  code: (props: any) => {
+    const [, language] =
+      (props.className as string)?.match(/language-(\w+)/) ?? []
+
+    if (language) {
+      return (
+        <SyntaxHighlighter language={language} {...props} style={dracula} />
+      )
+    }
+
+    return <Code fontSize="md" {...props} />
+  },
+  h1: (props: any) => <Heading as="h1" apply="mdx.h1" {...props} />,
+  h2: (props: any) => (
+    <Heading as="h2" apply="mdx.h2" fontSize="4xl" {...props} />
+  ),
+  h3: (props: any) => (
+    <Heading as="h3" apply="mdx.h3" fontSize="3xl" {...props} />
+  ),
+  h4: (props: any) => (
+    <Heading as="h4" apply="mdx.h4" fontSize="2xl" {...props} />
+  ),
+  p: (props: any) => <Text as="p" apply="mdx.p" fontSize="xl" {...props} />,
+  a: (props: any) => <Text as="a" apply="mdx.a" fontSize="xl" {...props} />,
+  ul: (props: any) => <Text as="ul" apply="mdx.ul" fontSize="xl" {...props} />,
+}
+
 const Lesson: React.FC<LessonProps> = ({
   frontMatter: { i18n },
   mdxSource,
@@ -20,7 +50,7 @@ const Lesson: React.FC<LessonProps> = ({
   const { t } = useTranslation(i18n)
   return (
     <div>
-      <MDXRemote {...mdxSource} components={{ SyntaxHighlighter }} />
+      <MDXRemote {...mdxSource} components={components} />
     </div>
   )
 }
