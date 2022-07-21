@@ -9,6 +9,7 @@ import {
   Text,
   Button,
   Center,
+  Link,
 } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import Image from 'next/image'
@@ -37,16 +38,18 @@ const Hero = () => {
                 of building web3 Open Source.
               </Text>
 
-              <Button
-                colorScheme="pink"
-                size="lg"
-                bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
-                color="white"
-                alignSelf={{ base: 'center', md: 'flex-start' }}
-                leftIcon={<ArrowForwardIcon />}
-              >
-                Get Started
-              </Button>
+              <Link href={'/lessons'}>
+                <Button
+                  colorScheme="pink"
+                  size="lg"
+                  bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
+                  color="white"
+                  alignSelf={{ base: 'center', md: 'flex-start' }}
+                  leftIcon={<ArrowForwardIcon />}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </VStack>
           </VStack>
 
