@@ -48,6 +48,19 @@ const components = {
         color: 'yellow.300',
         textTransform: 'uppercase',
         fontWeight: 'bold',
+        p: '4px',
+      },
+      'top-navigation-active': {
+        mr: 9,
+        color: 'black',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        backgroundColor: 'yellow.300',
+        p: '4px',
+        borderRadius: '4px',
+        _hover: {
+          textDecoration: 'none',
+        },
       },
       logo: {
         _hover: {
