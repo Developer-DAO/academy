@@ -40,6 +40,24 @@ const styles = {
   },
 }
 
+const components = {
+  Link: {
+    variants: {
+      'top-navigation': {
+        mr: 9,
+        color: 'yellow.300',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+      },
+      logo: {
+        _hover: {
+          textDecoration: 'none',
+        },
+      },
+    },
+  },
+}
+
 export const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
@@ -130,4 +148,5 @@ export const theme = extendTheme({
       maxWidth: '10vw',
     },
   },
+  components,
 })

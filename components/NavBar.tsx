@@ -10,31 +10,33 @@ import {
   IconButton,
 } from '@chakra-ui/react'
 import HamburgerIcon from './HamburgerIcon'
+import SchoolOfCodeLogo from './SchoolOfCodeLogo'
+// import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 function NavBar() {
   return (
-    <Box pl="235px" pr="235px">
-      <Flex justify="center" alignItems="center">
-        <Box my={-20}>
-          <Image
-            boxSize={{ base: '120px', md: '300px' }}
-            src="/public/assets/logo.svg"
-          />
-        </Box>
+    <Box>
+      <Flex justify="left" alignItems="center">
+        <Link variant="logo" href={'/'}>
+          <SchoolOfCodeLogo autoStart={true} loop={true} />
+        </Link>
         <Spacer />
         <Box>
           <Flex alignItems="center">
-            <Link pr="9" color="yellow.300">
-              JOIN THE COMMUNITY
+            <Link variant="top-navigation" href={'/'}>
+              Home
             </Link>
-            <Button colorScheme="gray" variant="solid">
-              Connect Wallet
-            </Button>
-            <IconButton
+            <Link variant="top-navigation" href={'/lessons'}>
+              Tracks
+            </Link>
+            {/* <Button colorScheme="gray" variant="solid">
+              <ConnectButton chainStatus="icon" showBalance={false} />
+            </Button> */}
+            {/* <IconButton
               aria-label="Search database"
               variant="ghost"
               icon={<HamburgerIcon />}
-            />
+            /> */}
           </Flex>
         </Box>
       </Flex>
