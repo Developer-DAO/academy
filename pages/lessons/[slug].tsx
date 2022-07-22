@@ -1,4 +1,4 @@
-import { Code, Heading, Text } from '@chakra-ui/react'
+import { Code, Heading, Image, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'
@@ -41,6 +41,7 @@ const components = {
   p: (props: any) => <Text as="p" apply="mdx.p" fontSize="xl" {...props} />,
   a: (props: any) => <Text as="a" apply="mdx.a" fontSize="xl" {...props} />,
   ul: (props: any) => <Text as="ul" apply="mdx.ul" fontSize="xl" {...props} />,
+  img: (props: any) => <Image as="img" apply="mdx.image" {...props} />,
 }
 
 const Lesson: React.FC<LessonProps> = ({

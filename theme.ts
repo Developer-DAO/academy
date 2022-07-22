@@ -126,5 +126,8 @@ export const theme = extendTheme({
       py: '2px',
       lineHeight: 'normal',
     },
+    img: {
+      maxWidth: '10vw',
+    },
   },
 })
