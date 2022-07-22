@@ -4,62 +4,23 @@ title: Getting Started with Smart Contract Development
 description: Learn Basics of Smart Contract Development and Remix.
 icons: ["solidity", "remix"]
 ---
+# Lesson 1 - Intro to Smart Contract Development - Lesson
 
-# Getting Started with Smart Contract Development (A Project)
+## What are we building?
 
-[Suggested changes](https://www.notion.so/Suggested-changes-806959930b2444fe921ab679295a3ce4)
+To start up creating smart contracts, we are going to create a web3 "fortune-teller".
 
-# Who is this project for?/ Good to know before you start
+The idea is that our contract will receive a message and react to it, stating if we are going to make it or not in this space.
 
-# Project Goals:
-
-- Get people excited about Smart Contract Development
-- Getting familiarized with Smart Contract Development
-
-**Expectation**: to be filled. (eg. who this course if for, level, what you can learn from it; encourage solving doubts via Google; no front-end dev knowledge required in this)
-
-# **Project Overview**
-
-In this project we are going to create a web3 fortune-teller.
-
-For this, we will write a smart contract, using the Solidity language.
-
-- **What is a Smart Contract?** (new - open for newer edits)
-  [edits for ‘smart contract (new)’](https://www.notion.so/edits-for-smart-contract-new-f9ae168c9b214c45b7c0cfe54349170f)
-  Like a traditional contract, a **Smart Contract** is a set of data and custom rules, with the addition of pre-defined instructions, like a computer program, that can be executed when a user makes a transaction with them. These instructions can modify the data stored in the contract.
-  ![Smart Contract - small.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Smart*Contract*-\_small.png)
-  They live in the **Blockchain**, a public structure of chained blocks to store information that uses cryptography to secure it and make it practically impossible to change the data stored in previous blocks.
-  The Ethereum Blockchain runs on a global network of nodes (computers running a specific software, accessible by anyone) that replicate the data globally, creating a consensus that adds to its security and makes it **decentralized**.
-  ![Centralized vs Decentralized.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Centralized_vs_Decentralized.png)
-  **Decentralization** helps prevent central authorities from gaining excessive control (eg. a bank flipping a switch to lock user funds or deny user access) and removing a single point of failure. Even if some nodes fail, the network and everything on it continues to work seamlessly.
-  Since the Blockchain is public, Smart Contracts are **publicly auditable**, anyone can see the code and be certain of the outcome when using them.
-  The chained structure of blocks makes anything that we store in them **immutable**, including our Smart Contracts. This means they cannot be changed once they are created.
-  These rules and instructions are running on computers, so the execution of transactions and its verification are finished within minutes or even seconds. This makes Smart Contracts more **fast and efficient** than traditional financial institutions.
-  Decentralization, immutability, auditability, speed and efficiency makes Smart Contracts perfect for **trust-less** or trust minimized agreements. We can minimize trust when interacting with unknown parties, because we can be immediately certain what the Smart Contract outcome will be.
-  This is why they are commonly created and used to store and transfer value, removing the need for trusted intermediators, arbitrators, reduce the cost to enforce the rules defined, as well as the reduction of malicious actors.
-- **What is a Smart contract?** (old)
-  A smart contracts is a set of self executing instructions without the need for a third party. It is similar to a traditional contract but instead it is digital. The terms and conditions are coded and when met, certain predefined tasks are executed. The smart contract is stored and run on distributed (accessible by everyone) and decentralized (no central controlling authority) blockchain networks. A smart contract also has the ability to hold funds and perform transactions like any user account. Users can then use their own accounts to interact with the smart contract. A smart contract and transactions associated with it permanently live on the blockchain network and are irreversible.
-  **Benefits of a Smart Contract**
-  - Decentralized: Exists on a blockchain that is replicated in a network of nodes (computers running the same client software) that has no central controlling authority. Instead a set of nodes operate/run the same. Decentralization helps us prevent central authorities from gaining excessive control (eg. a bank flipping a switch to lock user funds or deny user access). This also removes the possibility of having a single point of failure. Even if one node fails, the blockchain network and everything on it continues to function seamlessly.
-    ![Untitled](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Untitled.png)
-  - Transparent: Everyone can see everything on the blockchain. Thus, anyone can verify smart contracts and the transactions associated with it.
-  - Fast and Efficient: Blockchains execute and verify transactions within few seconds to a few minutes. Comparatively, traditional financial institutions take anywhere between a few hours to a few days for most modes of payment.
-  - Secure and Immutable: Anything uploaded on the blockchain, including smart contracts, is immutable (cannot be changed) and tamper proof and thus, it cannot be corrupted.
-  - Trust-less/ Trust minimized agreements: A contract is a math/ code based system and executes the same way every time irrespective of the interacting parties. Thus, we can minimize the need for trust when interacting with unknown parties.
-- Archived (to be removed)
-  Project starts from creating a file in Remix and ends with a smart contract that predicts your future in Web3, depending on the message you post.
-  We are starting the process of turning you into a solidity wizard. To do that, we will be going through small projects. For our first project, we want you to create some smart contract magic that will predict your future in Web3, depending on the message you post.
-  ![Untitled-2022-04-25-2345 (1).png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Untitled-2022-04-25-2345\_(1).png)
-
-# **Let’s get this party started!**
+## **Let’s get this party started!**
 
 Before we start, we need a place to write our smart contract in Solidity, and some tools to run it. For that we use an IDE, short for Integrated Development Environment.
 
 ## Setting up Remix (IDE)
 
-To get started we will use the Remix IDE to write, compile, test and debug code quickly and easily. Head over to [https://remix.ethereum.org/](https://remix.ethereum.org/) to see what it’s all about and get started.
+To get started we will use the Remix IDE to write, compile, test and debug code quickly and easily. Head over to [https://remix.ethereum.org/](https://remix.ethereum.org/) to see what it’s all about and get started. 
 
-![Screen Shot 2022-04-18 at 09.10.58.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-18_at_09.10.58.png)
+![Remix IDE Toolbar](/assets/lessons/1/img_1.png)
 
 On the left hand side, in the File Explorer tab, delete all the files and folders in our workspace. We want to start fresh. Create a new folder named `contracts` and in it create a new file named `WAGMI.sol`.
 
@@ -74,11 +35,11 @@ The first line of a Solidity file is for the license, the second line lets the I
 pragma solidity ^0.8.4;
 ```
 
-The MIT license is an open source license. We at Developer DAO love open source, and we love building public goods that others are free to build on…. for free! The version of Solidity we’re working with is `0.8.4` and above(`^`).
+The MIT license is an open source license. We at Developer DAO love open source, and we love building public goods that others are free to build on… for free! The version of Solidity we’re working with is `0.8.4` and above(`^`).
 
 ## Diving into our Smart Contracts
 
-A smart contract can contain data that can be modified (**state variables**) and “recipes” with instructions (**functions**), that can be called/run whenever a user executes a transaction with them.
+A smart contract can contain data that can be modified (**~~state~~ variables**) and “recipes” with instructions (**functions**), that can be called/run whenever a user executes a transaction with them.
 
 A contract in solidity is similar to a **class** in other programming languages.
 
@@ -103,28 +64,38 @@ We can use `//` as above to write line comments in solidity.
 
 ## Defining Variables
 
-To begin with our work, we want our contract to be able to store a message from a user. We also want to keep a record of the number of messages received from users. So we need to store these in variables, containers where the values have the ability to vary, and in this case we need **state _variables ._** State variables are persistent, meaning they live permanently in the contract. For the moment, we’ll just create them as placeholders with no value, but when we interact with our smart contract later, they will be _set_ with actual values.
+To begin with our work, we want our contract to be able to store a message from a user. We also want to keep a record of the number of any messages received from future users. So we store this information in variables. You can think of variables like containers. Different **types** of variable can store different types of information, e.g. numbers, ‘strings’ of text, addresses, etc. In this case we need **state *variables .*** State variables are persistent, meaning they live permanently in the contract. For the moment, we’ll just create them as placeholders with no value, but when we interact with our smart contract later, they will be *set* with actual values.
 
 We chose `message` and `messageCount` as our variable names, and we will assign them the **types** `string` and `uint256` respectively.
 
-- **More on Variables and Types**
-  [edit of ‘More on Variables and Types’](https://www.notion.so/edit-of-More-on-Variables-and-Types-2056c0bbe10541cfa868f1ae104b9e56)
-  **Variables**
-  There are two main forms of variables in Solidity i.e. State variables and Local variables.
-  ![Untitled](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Untitled%201.png)
-  A **State** variable can be accessed throughout the contract. Functions inside a contract can call and use a state variable. This is known as `global scope`. A state variable is permanently stored in the contract. Variables `message` and `messageCount` in our code are state variables.
-  A **Local** variable is limited to the function within which it is defined and it cannot be used outside that function. This is known as `local scope`. A local variable is stored temporarily until the function in which it is defined, is executed.
-  **Types**
-  The type of each variable in Solidity needs to be specified. In addition, types can interact with each other in expressions containing operators (eg. comparing values).
-  - **Value Types**: Store their own data. These are the basic data types provided by solidity. Some value types are as follows:
-    - **Boolean:** This data type accepts only two values True or False.
-    - **Integer:** This data type is used to store integer (a number without fractions) values, `int` and `uint` are used to declare *signed* and *unsigned integers* respectively.
-    - **Address:** Address hold a 20-byte value which represents the size of an Ethereum address. An address can be used to get balance or to transfer a balance.
-    - **Bytes and Strings:** Bytes are used to store a fixed-sized character set while the string is used to store the character set equal to or more than a byte. The length of bytes is from 1 to 32, while the string has a dynamic length. Byte has an advantage that it uses less gas, so better to use when we know the length of data.
-  - **Reference Types**: Store the location of the data. They don’t share the data directly.
-    - **Arrays:** An array is a group of variables of the same data type in which a variable has a particular location known as an index. By using the index location, the desired variable can be accessed. The array size can be of fixed or dynamic size.
-    - **Struct:** Solidity allows users to create and define their own type in the form of structures. The structure is a group of different types even though it’s not possible to contain a member of its own type. The structure is a reference type variable which can contain both value types and reference types.
-  - **Mapping Type**: Stores the data in a key-value pair where a key can be any value types. It is like a hash table or dictionary as in any other programming language, where data can be retrieved by key.
+- **More on Variables and Types (Add this to Sidedrawer)**
+    
+    [edit of ‘More on Variables and Types’](https://www.notion.so/edit-of-More-on-Variables-and-Types-2056c0bbe10541cfa868f1ae104b9e56)
+    
+    **Variables**
+    
+    There are two main forms of variables in Solidity i.e. State variables and Local variables.
+    
+    ![Vairables and their Scopes](/assets/lessons/1/img_2.png)
+    
+    A **State** variable can be accessed throughout the contract. Functions inside a contract can call and use a state variable. This is known as `global scope`. A state variable is permanently stored in the contract. Variables `message` and `messageCount` in our code are state variables.
+    
+    A **Local** variable is limited to the function within which it is defined and it cannot be used outside that function. This is known as `local scope`. A local variable is stored temporarily until the function in which it is defined, is executed.
+    
+    **Types**
+    
+    The type of each variable in Solidity needs to be specified. In addition, types can interact with each other in expressions containing operators (eg. comparing values).
+    
+    - **Value Types**: Store their own data. These are the basic data types provided by solidity. Some value types are as follows:
+        - **Boolean:** This data type accepts only two values True or False.
+        - **Integer:** This data type is used to store integer (a number without fractions) values, `int` and `uint` are used to declare *signed* and *unsigned integers* respectively.
+        - **Address:** Address hold a 20-byte value which represents the size of an Ethereum address. An address can be used to get balance or to transfer a balance.
+        - **Bytes and Strings:** Bytes are used to store a fixed-sized character set while the string is used to store the character set equal to or more than a byte. The length of bytes is from 1 to 32, while the string has a dynamic length. Byte has an advantage that it uses less gas, so better to use when we know the length of data.
+    - **Reference Types**: Store the location of the data. They don’t share the data directly.
+        - **Arrays:** An array is a group of variables of the same data type in which a variable has a particular location known as an index. By using the index location, the desired variable can be accessed. The array size can be of fixed or dynamic size.
+        - **Struct:** Solidity allows users to create and define their own type in the form of structures. The structure is a group of different types even though it’s not possible to contain a member of its own type. The structure is a reference type variable which can contain both value types and reference types.
+    - **Mapping Type**: Stores the data in a key-value pair where a key can be any value types. It is like a hash table or dictionary as in any other programming language, where data can be retrieved by key.
+    
 
 Let’s add our two state variable definitions inside our contract:
 
@@ -141,9 +112,9 @@ contract WAGMI {
 
 ## Creating Functions
 
-Our contract needs a way to store new information on the blockchain! But both our variables are _empty_ and have no way of storing any info... **yet**.
+Our contract needs a way to store new information on the blockchain! But both our variables are *empty* and have no way of storing any info... *yet*.
 
-That’s why we now need some **functions** to store and retrieve information to and from our contract on the blockchain. The basic syntax for a public function in Solidity would look like this:
+That’s why we now need some **functions** to store and retrieve information to and from our contract on the blockchain. The basic syntax for a *public* function in Solidity would look like this:
 
 ```solidity
 function functionName(uint256 value) public returns(bool) {
@@ -153,27 +124,39 @@ function functionName(uint256 value) public returns(bool) {
 }
 ```
 
-- **More on Functions**
-  [edits: More on Functions ](https://www.notion.so/edits-More-on-Functions-f2e049d12a264040b23c8f562d63f6c6)
-  Functions are the way we have to store logic inside a Smart Contract.
-  They can receive typed parameters and also return them. Solidity is a typed language, so every parameter type must be specified.
-  Writing data to the blockchain has cost, thus reference type parameters must indicate the data location. From more expensive to more cheap, these parameters can be in:
-  - **storage**: it is a reference to stored data in the blockchain
-  - **memory**: it is a reference to a place in memory
-  - **calldata**: it is a read-only area where function parameters are stored. It behaves mostly like memory.
-  Functions can have different purposes. In solidity we have to define what a function will be able to do (to asses if the function call will spend gas or not). A function can be:
-  - **view**: it doesn’t write data to the blockchain state
-  - **pure**: it doesn’t write or read data to or from the blockchain state
-  If none of these is specified, it is assumed the function can write to the blockchain state and it will **always** spend gas when called.
-  Also, since we can transfer value in the blockchain, we can specify another modifier:
-  - **payable**: A function that can receive funds (ETH)
-  Lastly, functions in smart contracts can be called from a varying set of points. For that we have visibility modifiers:
-  - **external**: can be called from other contracts via transactions, but not internally (not directly)
-  - **public**: can be called internally or from another contract
-  - **internal**: can only be accessed from within the contract or contracts deriving from it. They cannot be accessed externally.
-  - **private**: same as internal, but they are not visible in derived contracts
+- **More on Functions (Add this to Sidedrawer)**
+    
+    [edits: More on Functions ](https://www.notion.so/edits-More-on-Functions-f2e049d12a264040b23c8f562d63f6c6)
+    
+    Functions are the way we have to store logic inside a Smart Contract.
+    
+    They can receive typed parameters and also return them. Solidity is a typed language, so every parameter type must be specified.
+    
+    Writing data to the blockchain has cost, thus reference type parameters must indicate the data location. From more expensive to more cheap, these parameters can be in:
+    
+    - **storage**: it is a reference to stored data in the blockchain
+    - **memory**: it is a reference to a place in memory
+    - **calldata**: it is a read-only area where function parameters are stored. It behaves mostly like memory.
+    
+    Functions can have different purposes. In solidity we have to define what a function will be able to do (to asses if the function call will spend gas or not). A function can be:
+    
+    - **view**: it doesn’t write data to the blockchain state
+    - **pure**: it doesn’t write or read data to or from the blockchain state
+    
+    If none of these is specified, it is assumed the function can write to the blockchain state and it will **always** spend gas when called.
+    
+    Also, since we can transfer value in the blockchain, we can specify another modifier:
+    
+    - **payable**: A function that can receive funds (ETH)
+    
+    Lastly, functions in smart contracts can be called from a varying set of points. For that we have visibility modifiers:
+    
+    - **external**: can be called from other contracts via transactions, but not internally (not directly)
+    - **public**: can be called internally or from another contract
+    - **internal**: can only be accessed from within the contract or contracts deriving from it. They cannot be accessed externally.
+    - **private**: same as internal, but they are not visible in derived contracts
 
-We want to be able to read both values, so we are going to create a function to _get_ the value for each variable. Later on we can store the values, but first let’s retrieve them. We have to add two new functions **below** our state variable definitions (do **not** delete our `message`and `messageCount` variables!):
+We want to be able to read both the message and the count, so we are going to create a function to *get* the value for each variable. Later on we can *set* (store) the values, but first let’s retrieve them. We have to add two new functions **below** our state variable definitions (do **not** delete our `message`and `messageCount` variables and please pay attention to all the {} ; and ()):
 
 ```solidity
 // ...
@@ -192,7 +175,7 @@ contract WAGMI {
 }
 ```
 
-Yes, there are some new keywords up there but don’t panic:
+Yes, there are some new keywords up there e.g. return, returns, view, etc, but don’t panic:
 
 `public` defines the **visibility** of our function and means it can be called from anywhere e.g. directly calling it with our externally owned address, from another smart contract, or even from another function inside our smart contract. We can use a public function for making a transaction, or querying a value from a contract.
 
@@ -202,7 +185,7 @@ Yes, there are some new keywords up there but don’t panic:
 
 Ok, now we have to figure out a way to store some info on our contract!
 
-We want to _set_ a new message in our contract, so now we define a new function below the ones we recently created. The function should receive a new message as a parameter, store it in our state variable and also update the message count:
+We want to *set* a new message in our contract, so now we define a new function below the ones we recently created. The function should receive a new message as a parameter, store it in our state variable and also update the message count: 
 
 ```solidity
 function setMessage(string calldata newMessage) public {
@@ -227,7 +210,7 @@ We would love to have a history of the messages, but storing everything on-chain
 
 To make this possible, we need to **define** an `event` and then we can make any of our functions **emit** it.
 
-When our function emits it, the values used in the **parameters** will be stored in the transaction logs. We usually define our events under the state variables/near the top of the contract
+When our function emits it, the values used in the **parameters** will be stored in the transaction logs. We usually define our events near the top of the contract, under the state variables.
 
 The basic syntax for defining an event with 3 parameters would be:
 
@@ -237,15 +220,23 @@ event EventName(uint256 indexed param1, bool param2, string param3);
 
 In Solidity, there are two types of event parameter. The first type we define with our **indexed** keyword. This allows us to find past events on the blockchain if we need to by using filters on their parameters. The other type is simply not indexed and therefore not searchable. Each event can have multiple parameters, but we can only make three of them indexed.
 
-- Indexed Event Parameters
-  Blockchain keeps event parameters in transaction logs. Transaction logs remains in the blockchain as long as the block is accessible.
-  Event parameters can be either `indexed` or not indexed.
-  Based on that, parameters will be stored in different parts of the transaction log: **topics** and **data**.
-  - `indexed` parameters will be stored in the **topics** sections of the log
-  - non-indexed parameters will be ABI-encoded into the **data** portion of the log
-  Once the event data is stored inside the transaction log in a block, we can later on filter events.
-  We can filter events by name and by contract address, and by any parameters stored in the topics part of the logs, hence using the `indexed` keyword, we have a way to retrieve specific events emitted.
-  For example, we can search for all the Transfers of a certain ERC20 Token, from or to a specific address.
+- Indexed Event Parameters (Add this to Sidedrawer)
+    
+    Blockchain keeps event parameters in transaction logs. Transaction logs remains in the blockchain as long as the block is accessible.
+    
+    Event parameters can be either `indexed` or not indexed.
+    
+    Based on that, parameters will be stored in different parts of the transaction log: **topics** and **data**.
+    
+    - `indexed` parameters will be stored in the **topics** sections of the log
+    - non-indexed parameters will be ABI-encoded into the **data** portion of the log
+    
+    Once the event data is stored inside the transaction log in a block, we can later on filter events.
+    
+    We can filter events by name and by contract address, and by any parameters stored in the topics part of the logs, hence using the `indexed` keyword, we have a way to retrieve specific events emitted.
+    
+    For example, we can search for all the Transfers of a certain ERC20 Token, from or to a specific address.
+    
 
 Our function will **emit** the event each time we need to log that “something happened”, i.e. someone called setMessage, or anything we want, it is a log.
 
@@ -255,7 +246,7 @@ Thus, to emit one using the example event above we can write:
 emit EventName(2, false, 'Hello World!');
 ```
 
-There’s a lot to unpack, so let’s leave it at that for now and create an event to log all the messages sent to our smart contract… and see if the message sent is worthy of “making it” in the web3 world 😉
+There’s a lot to unpack, so let’s leave it at that for now and create an event to log all the messages sent to our smart contract… and see if the message sent is worthy of “making it” in the web3 world. 😉
 
 So, after our state variables, we can define our new event as:
 
@@ -293,25 +284,31 @@ function setMessage(string calldata newMessage) public {
 }
 ```
 
-If you were wondering what `msg.sender` is, we can simplify it as the ethereum address that called the function. You also probably noticed how we compare newMessage with `‘gm’`. That’s because Solidity doesn’t have a way to easily compare two text strings, so we are using `abi.encodePacked()` to convert the string into `bytes` and then using the hashing function `keccak256()` to compare the two “hashes”, and if they are equal, the strings are equal 🙌. We can dive deep on these in future lessons, so no worries!
+If you were wondering what `msg.sender` is, we can simplify it as the Ethereum address that called the function. You also probably noticed how we compare newMessage with `‘gm’`. That’s because Solidity doesn’t have a way to easily compare two text strings, so we are using `abi.encodePacked()` to convert the string into `bytes` and then using the hashing function `keccak256()` to compare the two “hashes”, and if they are equal, the strings are equal 🙌.  We can dive deep on these in future lessons, so no worries!
 
-- **More on Events**
-  In the Ethereum Blockchain, whenever we run or execute a transaction it stores a log with the results and data of the transaction. Solidity provides us with **Events** so we can write data to said logs.
-  Applications can subscribe and listen to this events, or even search for past logs using filters.
-  Whenever a function calls (**emits**) an event, the values passed as parameters are stored in a special data structure in the blockchain: the transaction log. It is worth noticing that Smart Contracts cannot access the log and its event data.
-  If we define a parameter as `indexed`, instead of being added to the data part of the log, it is added to a special data structure called **topics** instead of the data part of the log. A topic can only hold a single word of 32 bytes, so if we use a **reference type**, only its hash is stored (using keccak-256). Each event can **only** hold a maximum of 3 `indexed` parameters.
-  Topics are what lets us search for events in the blockchain logs. We can filter them by a specific event, the contract address that emitted them, and any indexed parameters defined in the event.
+- **More on Events (Add this to Sidedrawer)**
+    
+    In the Ethereum Blockchain, whenever we run or execute a transaction it stores a log with the results and data of the transaction. Solidity provides us with **Events** so we can write data to said logs.
+    
+    Applications can subscribe and listen to this events, or even search for past logs using filters.
+    
+    Whenever a function calls (**emits**) an event, the values passed as parameters are stored in a special data structure in the blockchain: the transaction log. It is worth noticing that Smart Contracts cannot access the log and its event data.
+    
+    If we define a parameter as `indexed`, instead of being added to the data part of the log, it is added to a special data structure called **topics** instead of the data part of the log. A topic can only hold a single word of 32 bytes, so if we use a **reference type**, only its hash is stored (using keccak-256). Each event can **only** hold a maximum of 3 `indexed` parameters.
+    
+    Topics are what lets us search for events in the blockchain logs. We can filter them by a specific event, the contract address that emitted them,  and any indexed parameters defined in the event.
+    
 
-We should ask the learner to sum up what they have learned.
-\*see the **Comment\*** in the very last line of this lesson under ‘Now, please go ahead and hop in the forum/discord to tell us: **what is your future in web3?’**
+We should ask the learner to sum up what they have learned. 
+*see the **Comment*** in the very last line of this lesson under ‘Now, please go ahead and hop in the forum/discord to tell us: **what is your future in web3?’** 
 
 ## Compile & Deploy
 
 Now that we have written our smart contract in full, we can compile it and deploy it to a blockchain. Since we are using the Remix IDE, we can use its tools in the sidebar for this. Here’s a brief description of the tools icons:
 
-![Remix-Menu.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Remix-Menu.png)
+![Remix Menu](/assets/lessons/1/img_3.png)
 
-At the top, the logo links us to the Home (and Help links) of Remix
+At the top, the logo links us to the Home (and Help links) of Remix 
 
 Then, we have our File Explorer
 
@@ -325,55 +322,59 @@ To compile our smart contract we should click on the **Solidity Compiler** icon 
 
 Leave all the settings in their default, manually select our contract in the drop down menu and click on the **Compile WAGMI.sol** button.
 
-![Screen Shot 2022-04-22 at 11.15.34.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-22_at_11.15.34.png)
+![Remix Contract Compiler Button](/assets/lessons/1/img_4.png)
 
-![Screen Shot 2022-04-21 at 16.00.24.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-21_at_16.00.24.png)
+![Remix Successful Compilation Indicator](/assets/lessons/1/img_5.png)
 
 After compiling, we should see a green check mark on top of the Solidity Compiler sidebar icon.
 
-- Problems at Compile time?
-  First, check that you have selected a compiler compatible with our version (0.8.4 or any higher inside the 0.8 version).
-  If you still have any problems when compiling, you can compare your code to my final code. Mine looks like this (with most comments removed for readability):
-  ```solidity
-  // SPDX-License-Identifier: MIT
-  pragma solidity ^0.8.4;
-
-  contract WAGMI {
-
-      // State Variables
-      string message;
-      uint256 messageCount;
-
-      // Events
-      event Web3Future(uint256 indexed messageIndex, address indexed author, string message, string future);
-
-      // Functions
-      function getMessage() public view returns(string memory) {
-          return message;
-      }
-
-      function getMessageCount() public view returns(uint256) {
-          return messageCount;
-      }
-
-      function setMessage(string calldata newMessage) public {
-          messageCount++;
-          message = newMessage;
-
-          string memory future = 'NGMI';
-          if (keccak256(abi.encodePacked(newMessage)) == keccak256(abi.encodePacked('gm'))) {
-              future = 'WAGMI';
-          }
-
-          emit Web3Future(messageCount, msg.sender, newMessage, future);
-      }
-
-  }
-  ```
+- Problems at Compile time (Add this to Sidedrawer)?
+    
+    First, check that you have selected a compiler compatible with our version (0.8.4 or any higher inside the 0.8 version).
+    
+    If you still have any problems when compiling, you can compare your code to my final code. Mine looks like this (with most comments removed for readability):
+    
+    ```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.4;
+    
+    contract WAGMI {
+    
+        // State Variables
+        string message;
+        uint256 messageCount;
+    
+        // Events
+        event Web3Future(uint256 indexed messageIndex, address indexed author, string message, string future);
+    
+        // Functions
+        function getMessage() public view returns(string memory) {
+            return message;
+        }
+    
+        function getMessageCount() public view returns(uint256) {
+            return messageCount;
+        }
+    
+        function setMessage(string calldata newMessage) public {
+            messageCount++;
+            message = newMessage;
+    
+            string memory future = 'NGMI';
+            if (keccak256(abi.encodePacked(newMessage)) == keccak256(abi.encodePacked('gm'))) {
+                future = 'WAGMI';
+            }
+    
+            emit Web3Future(messageCount, msg.sender, newMessage, future);
+        }
+    
+    }
+    ```
+    
 
 Now we are ready to deploy our contract. We can now head to the **Deploy & Run transactions** icon in the sidebar (marked in the green box). Below we can see a message that says ‘Currently you have no contract instances to interact with’, so we haven’t deployed anything yet.
 
-![Screen Shot 2022-04-22 at 11.29.06.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-22_at_11.29.06.png)
+![Contract Instance Warning](/assets/lessons/1/img_6.png)
 
 Again, we are leaving all options to default for now (we’ll be learning how to deploy to a testnet later on). Click on the **Deploy** button!
 
@@ -384,70 +385,22 @@ Open the dropdown under ‘Deployed Contracts’, to see our function tabs:
 - the blue ones are our “**view**” functions that doesn’t modify our state
 - the orange one lets usFrom here on, we can interact with our contract. Feel free to test the functions. Click on the getMessage and messageCount tabs before and after setting a new message. modify data on our contract.
 
-![Screen Shot 2022-04-22 at 11.33.26.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-22_at_11.33.26.png)
+![Available Interactive Options once Contract is Deployed](/assets/lessons/1/img_7.png)
 
 From here on, we can interact with our contract. Feel free to test the functions. Click on the getMessage and messageCount tabs before and after setting a new message.
 
 On the right hand side, below our contract code, there’s a bar on the bottom. If it hasn’t opened automatically, we can open the console from here to see any transactions with the green check mark. The first transaction is the deployment of our contract. Click it to open it.
 
-![console.button.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/console.button.png)
+![Button to Minimise and Maximise Console](/assets/lessons/1/img_8.png)
 
-Once you set a new message, you’ll see again, that the transaction has a green check mark, open it and look for the “**logs**”. Here’s my info after setting the message to “**My first smart contract**”:
+Once you *set* a new message, you’ll see again, that the transaction has a green check mark, open it and look for the “**logs**”. Here’s my info after setting the message to “**My first smart contract**”:
 
-![Screen Shot 2022-04-22 at 11.41.55.png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-22_at_11.41.55.png)
+![Complete Transaction Log of Deployed Contract](/assets/lessons/1/img_9.png)
 
 If you look closely, inside the “logs” part, our smart contract predicted a “future” for us.
 
 What if you try out setting the message to `gm` and look at the logs again. Can you see the magical spell that is being cast here?
 
-![Untitled-2022-04-25-2345 (2).png](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Untitled-2022-04-25-2345\_(2).png)
+![Wizard Wooshing on Successful Lesson](/assets/lessons/1/img_10.png)
 
 Now, please go ahead and hop in the forum/discord to tell us: **what is your future in web3?**
-
-[Remix - Ethereum IDE](https://remix.ethereum.org/?#activate=solidity,debugger&gist=d61621b90a7fa3feb6f58d373cab8650&call=fileManager//open//browser/gist-d61621b90a7fa3feb6f58d373cab8650/WAGMI.sol)
-
-# Remix Screenshots Archive
-
-![Compile Tab on Sidebar](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.21.13.png)
-
-Compile Tab on Sidebar
-
-![Deploy Tab on Sidebar](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.21.38.png)
-
-Deploy Tab on Sidebar
-
-![Deploying Contract on Rinkeby - Metamask Popup (we need to add Eth from Rinkeby Faucet first!)](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.22.16.png)
-
-Deploying Contract on Rinkeby - Metamask Popup (we need to add Eth from Rinkeby Faucet first!)
-
-![Contract Deployed - Showing under “Deployed Contracts” in Sidebar](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.23.07.png)
-
-Contract Deployed - Showing under “Deployed Contracts” in Sidebar
-
-![Contract Deployment Transaction Info (Metamask)](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.23.29.png)
-
-Contract Deployment Transaction Info (Metamask)
-
-![Empty Console, before calling “setMessage” function with parameter “Batman”](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.25.45.png)
-
-Empty Console, before calling “setMessage” function with parameter “Batman”
-
-![Metamask popup to Confirm “setMessage” transaction](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.26.19.png)
-
-Metamask popup to Confirm “setMessage” transaction
-
-![Console showing “setMessage” Transaction approved result](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.27.24.png)
-
-Console showing “setMessage” Transaction approved result
-
-![Transaction Result open in console, showing “logs” (events emitted) in “setMessage” function call](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.28.12.png)
-
-Transaction Result open in console, showing “logs” (events emitted) in “setMessage” function call
-
-![Calling “setMessage” again with parameter “gm” (+ Metamask popup to Confirm)](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.29.47.png)
-
-Calling “setMessage” again with parameter “gm” (+ Metamask popup to Confirm)
-
-![New transaction result in console, showing different “logs” (events emitted) in “setMessage” function call](Getting%20Started%20with%20Smart%20Contract%20Development%20(A%20dafef367604b4babb6cd7a149dabd2df/Screen_Shot_2022-04-16_at_15.30.25.png)
-
-New transaction result in console, showing different “logs” (events emitted) in “setMessage” function call

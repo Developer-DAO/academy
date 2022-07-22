@@ -5,7 +5,6 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { ContentBanner } from '../../components/ContentBanner'
-import Image from 'next/image'
 
 interface LessonProps {
   lessons: {
