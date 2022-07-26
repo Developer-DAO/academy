@@ -1,29 +1,51 @@
+## Developer DAO - School of Code
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with
 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+**Prerequisites:**
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+    node --version 16.x
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+Refer to the `node` and `npm` installation with `nvm` guide in Lesson 2. A link
+to the guide can be found
+[here](https://www.notion.so/How-to-install-node-js-and-npm-67b2ab1f76f148f49f547b9156aeaf28):
 
-You can start editing the page by modifying `pages/index.tsx`. The page
-auto-updates as you edit the file.
+**Clone and `cd` into the repo:**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
-endpoint can be edited in `pages/api/hello.ts`.
+    git clone https://github.com/Developer-DAO/school-of-code.git
+    cd school-of-code/
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are
-treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
-of React pages.
+**Installation and run:**
+
+    yarn install
+    yarn dev
+
+This will create a local instance of the app running and can be viewed at
+`http://localhost:3000` in your browser.
+
+## Grabbing latest version of the code
+
+**Since this is a work in progress, your local version of the app can be updated
+with the following commands:**
+
+Stop the locally running app with:
+
+    Ctrl + C
+
+Use `git pull` for the most up-to-date version:
+
+    git pull
+
+Reinstall with `yarn`:
+
+    yarn install
+
+Run the updated app:
+
+    yarn dev
 
 ## Learn More
 
