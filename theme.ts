@@ -40,6 +40,37 @@ const styles = {
   },
 }
 
+const components = {
+  Link: {
+    variants: {
+      'top-navigation': {
+        mr: 9,
+        color: 'yellow.300',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        p: '4px',
+      },
+      'top-navigation-active': {
+        mr: 9,
+        color: 'black',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        backgroundColor: 'yellow.300',
+        p: '4px',
+        borderRadius: '4px',
+        _hover: {
+          textDecoration: 'none',
+        },
+      },
+      logo: {
+        _hover: {
+          textDecoration: 'none',
+        },
+      },
+    },
+  },
+}
+
 export const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
@@ -130,4 +161,5 @@ export const theme = extendTheme({
       maxWidth: '10vw',
     },
   },
+  components,
 })
