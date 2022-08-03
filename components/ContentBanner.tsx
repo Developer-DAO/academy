@@ -47,11 +47,12 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
               <Wrap>
                 {icons &&
                   icons.map((icon: string) => (
-                    <WrapItem bg="#FFFFFF" p={0.5} rounded={'50%'}>
+                    <WrapItem key={icon} bg="#FFFFFF" p={0.5} rounded={'50%'}>
                       <Image
                         src={`/assets/${icon}.png`}
                         width={12}
                         height={12}
+                        alt={icon}
                       />
                     </WrapItem>
                   ))}

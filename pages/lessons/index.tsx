@@ -35,7 +35,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
             CURRENT LESSONS
           </Heading>
           {lessons.map((lesson: any, idx: number) => (
-            <Link href={'/lessons/' + lesson.slug} passHref>
+            <Link key={lesson.slug} href={'/lessons/' + lesson.slug} passHref>
               <ContentBanner lesson={lesson} idx={idx} />
             </Link>
           ))}
