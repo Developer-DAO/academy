@@ -1,4 +1,17 @@
-import { Code, Heading, Image, Text } from '@chakra-ui/react'
+import {
+  Code,
+  Heading,
+  Image,
+  Text,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+} from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'

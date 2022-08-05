@@ -30,7 +30,12 @@ const Hero = () => {
                 Learning Web3 with friends
               </Heading>
 
-              <Text color="white" fontSize="lg" maxW="20rem">
+              <Text
+                color="white"
+                fontSize="lg"
+                maxW="20rem"
+                alignSelf={{ base: 'center', md: 'flex-start' }}
+              >
                 <Box as="span" color="#FFD500" fontWeight="bold">
                   School of Code
                 </Box>{' '}

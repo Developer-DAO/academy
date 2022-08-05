@@ -4,6 +4,7 @@ title: Getting Started with Smart Contract Development
 description: Learn Basics of Smart Contract Development and Remix.
 icons: ["solidity", "remix"]
 ---
+
 # Lesson 1 - Intro to Smart Contract Development - Lesson
 
 ## What are we building?
@@ -68,7 +69,13 @@ To begin with our work, we want our contract to be able to store a message from 
 
 We chose `message` and `messageCount` as our variable names, and we will assign them the **types** `string` and `uint256` respectively.
 
-- **More on Variables and Types (Add this to Sidedrawer)**
+<Button mt={2}>
+    More on Variables and Types
+</Button>
+<Drawer 
+placement='right'>
+**More on Variables and Types (Add this to Sidedrawer)**
+</Drawer>
     
     [edit of ‘More on Variables and Types’](https://www.notion.so/edit-of-More-on-Variables-and-Types-2056c0bbe10541cfa868f1ae104b9e56)
     
@@ -95,7 +102,6 @@ We chose `message` and `messageCount` as our variable names, and we will assign 
         - **Arrays:** An array is a group of variables of the same data type in which a variable has a particular location known as an index. By using the index location, the desired variable can be accessed. The array size can be of fixed or dynamic size.
         - **Struct:** Solidity allows users to create and define their own type in the form of structures. The structure is a group of different types even though it’s not possible to contain a member of its own type. The structure is a reference type variable which can contain both value types and reference types.
     - **Mapping Type**: Stores the data in a key-value pair where a key can be any value types. It is like a hash table or dictionary as in any other programming language, where data can be retrieved by key.
-    
 
 Let’s add our two state variable definitions inside our contract:
 
