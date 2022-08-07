@@ -41,7 +41,7 @@ const components = {
   h4: (props: any) => (
     <Heading as="h4" apply="mdx.h4" fontSize="xl" {...props} />
   ),
-  p: (props: any) => <Text as="p" apply="mdx.p" fontSize="lg" {...props} />,
+  p: (props: any) => <Text as="p" apply="mdx.p" fontSize="xl" {...props} />,
   a: (props: any) => <Text as="a" apply="mdx.a" {...props} />,
   ul: (props: any) => <Text as="ul" apply="mdx.ul" {...props} />,
   img: (props: any) => (

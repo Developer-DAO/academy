@@ -33,10 +33,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
             Smart Contract Development
           </Heading>
           <Heading apply="mdx.h3" as="h3" textAlign="center" fontSize="2xl">
-            Solidity Track
-          </Heading>
-          <Heading apply="mdx.h4" as="h4" textAlign="center" fontSize="xl">
-            Lessons
+            Solidity Track Lessons
           </Heading>
           {lessons.map((lesson: any, idx: number) => (
             <Link key={lesson.slug} href={'/lessons/' + lesson.slug} passHref>
