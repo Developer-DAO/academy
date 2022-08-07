@@ -55,6 +55,19 @@ function NavBar() {
                   </NextLink>
                 </MenuItem>
                 <MenuItem>
+                  <NextLink href="/getting-started" passHref>
+                    <Link
+                      variant={
+                        router.pathname.startsWith('/getting-started')
+                          ? 'top-navigation-active'
+                          : 'top-navigation'
+                      }
+                    >
+                      GET STARTED
+                    </Link>
+                  </NextLink>
+                </MenuItem>
+                <MenuItem>
                   <NextLink href="/lessons" passHref>
                     <Link
                       variant={
@@ -84,6 +97,18 @@ function NavBar() {
                 }
               >
                 Home
+              </Link>
+            </NextLink>
+
+            <NextLink href="/getting-started" passHref>
+              <Link
+                variant={
+                  router.pathname.startsWith('/getting-started')
+                    ? 'top-navigation-active'
+                    : 'top-navigation'
+                }
+              >
+                Get Started
               </Link>
             </NextLink>
 

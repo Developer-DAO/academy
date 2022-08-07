@@ -30,7 +30,13 @@ const Hero = () => {
                 Learning Web3 with friends
               </Heading>
 
-              <Text color="white" fontSize="lg" maxW="20rem">
+              <Text
+                color="white"
+                fontSize="lg"
+                maxW="20rem"
+                pb="2rem"
+                alignSelf={{ base: 'center', md: 'flex-start' }}
+              >
                 <Box as="span" color="#FFD500" fontWeight="bold">
                   School of Code
                 </Box>{' '}
@@ -38,22 +44,23 @@ const Hero = () => {
                 of building web3 Open Source.
               </Text>
 
-              <Link href={'/lessons'}>
-                <Button
-                  colorScheme="pink"
-                  size="lg"
-                  bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
-                  color="white"
-                  alignSelf={{ base: 'center', md: 'flex-start' }}
-                  leftIcon={<ArrowForwardIcon />}
-                >
-                  Get Started
-                </Button>
-              </Link>
+              <Button
+                colorScheme="pink"
+                size="lg"
+                fontSize="2xl"
+                fontWeight="700"
+                p="2rem"
+                bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
+                color="white"
+                alignSelf={{ base: 'center', md: 'flex-start' }}
+                leftIcon={<ArrowForwardIcon />}
+              >
+                <Link href={'/getting-started'}>Get Started</Link>
+              </Button>
             </VStack>
           </VStack>
 
-          <Box flex={1} order={{ base: -1, md: 1 }}>
+          <Box alignSelf="center" flex={1} order={{ base: -1, md: 1 }}>
             <Image
               // layout="responsive"
               width={459}

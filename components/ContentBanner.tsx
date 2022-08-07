@@ -37,21 +37,28 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
             <Flex justify="space-between" align="center">
               <Flex
                 bg="#1D1E20"
-                fontSize={[6, 8, 10]}
+                fontSize={[0, 6, 8, 10]}
                 px={2}
                 rounded={5}
-                mr={[6, 10, 16]}
+                mr={[0, 4, 10, 16]}
+                apply="mdx.p"
               >
                 Lesson {idx + 1}
               </Flex>
               <Wrap>
                 {icons &&
-                  icons.map((icon: string) => (
-                    <WrapItem key={icon} bg="#FFFFFF" p={0.5} rounded={'50%'}>
+                  icons.map((icon: string, idx: number) => (
+                    <WrapItem
+                      key={idx}
+                      bg="#FFFFFF"
+                      p={1.5}
+                      rounded={'50%'}
+                      mx="auto"
+                    >
                       <Image
                         src={`/assets/${icon}.png`}
-                        width={12}
-                        height={12}
+                        width={16}
+                        height={16}
                         alt={icon}
                       />
                     </WrapItem>
@@ -59,11 +66,11 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
               </Wrap>
             </Flex>
             <Flex color="#FFD500">
-              <Heading as="h3" fontSize={[12, 14, 16]} my={2}>
+              <Heading as="h3" apply="mdx.h3" fontSize={[12, 14, 16]} my={2}>
                 {title}
               </Heading>
             </Flex>
-            <Flex fontSize={[0, 8, 8, 12]} mr={100}>
+            <Flex fontSize={[0, 0, 10, 12]} mr={100}>
               {description}
             </Flex>
           </Flex>

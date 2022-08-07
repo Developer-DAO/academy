@@ -1,7 +1,9 @@
 import { extendTheme } from '@chakra-ui/react'
 
 const fonts = {
-  heading: `Inter, sans-serif`,
+  heading: `system-ui, Inter, sans-serif`,
+  // body: `Georgia, serif`,
+  mono: `Menlo, monospace`,
 }
 
 const colors = {
@@ -18,6 +20,7 @@ const colors = {
     ultramarineBlue: '#175df2',
     magenta: '#ff00f5',
     dodgerBlue: '#0094ff',
+    blackRussian: '#00000f',
     gradientLanding:
       'radial-gradient(80% 70% at 80% 20%, #AD00FFFF 0%, #175df200 100%)',
     gradientLessons:
@@ -33,9 +36,11 @@ const styles = {
       bg: colors.soc.eerieBlack,
     },
     body: {
-      bg: colors.soc.gradientLanding,
+      bg: colors.soc.blackRussian,
+      // bg: colors.soc.gradientLanding,
       // bg: colors.soc.gradientLessons,
       // bg: colors.soc.gradientTrack,
+      color: 'gray.300',
     },
   },
 }
@@ -80,37 +85,30 @@ export const theme = extendTheme({
   styles,
   mdx: {
     h1: {
-      mt: '2rem',
-      lineHeight: 1.2,
+      mt: '1.5em',
       fontWeight: 'bold',
       fontSize: '1.875rem',
       letterSpacing: '-.025em',
+      color: 'yellow.300',
     },
     h2: {
-      mt: '1.5rem',
-      lineHeight: 1.3,
+      mt: '1.2em',
       fontWeight: 'bold',
-      fontSize: '1.5rem',
-      py: '0.25em',
+      fontSize: '1.3rem',
       letterSpacing: '-.025em',
       '& + h3': {
         mt: '1.5rem',
       },
     },
     h3: {
-      mt: '1.25rem',
-      lineHeight: 1.25,
+      mt: '1em',
       fontWeight: 'semibold',
-      fontSize: '1.5rem',
-      py: '0.1em',
+      fontSize: '1.1rem',
       letterSpacing: '-.025em',
     },
     h4: {
       mt: '0.75em',
-      lineHeight: 1.375,
       fontWeight: 'semibold',
-      fontSize: '1.125rem',
-      py: '0.05em',
     },
     a: {
       color: 'steelblue',
