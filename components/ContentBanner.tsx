@@ -41,6 +41,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                 px={2}
                 rounded={5}
                 mr={[0, 4, 10, 16]}
+                apply="mdx.p"
               >
                 Lesson {idx + 1}
               </Flex>
@@ -65,7 +66,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
               </Wrap>
             </Flex>
             <Flex color="#FFD500">
-              <Heading as="h3" fontSize={[12, 14, 16]} my={2}>
+              <Heading as="h3" apply="mdx.h3" fontSize={[12, 14, 16]} my={2}>
                 {title}
               </Heading>
             </Flex>

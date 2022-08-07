@@ -23,33 +23,30 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
       </Head>
       <Flex as="main" py={5} px={[4, 10, 16]} direction="column">
         <Stack spacing={5} direction="column">
-          <Heading
-            fontSize={['md', 'lg']}
-            as="h2"
-            textAlign="center"
-            color="#F96C9D"
-          >
+          <Heading as="h2" textAlign="center" color="#F96C9D" apply="mdx.h2">
             GETTING STARTED
           </Heading>
-          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+          <Divider />
+          <Heading apply="mdx.h3" as="h3" textAlign="center">
             How it started (Introduction to project)
           </Heading>
           <Divider />
-          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+          <Heading apply="mdx.h3" as="h3" textAlign="center">
             Highlights of Resources
           </Heading>
           <Divider />
-          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+          <Heading apply="mdx.h3" as="h3" textAlign="center">
             Roadmap
           </Heading>
           <Divider />
-          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+          <Heading apply="mdx.h3" as="h3" textAlign="center">
             How to send feedback
           </Heading>
           <Divider />
-          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
-            CURRENT LESSONS
+          <Heading apply="mdx.h3" as="h3" textAlign="center">
+            Current Lessons
           </Heading>
+          <Divider />
           {lessons.map((lesson: any, idx: number) => (
             <Link key={lesson.slug} href={'/lessons/' + lesson.slug} passHref>
               <ContentBanner lesson={lesson} idx={idx} />
