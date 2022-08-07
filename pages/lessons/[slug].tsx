@@ -1,17 +1,4 @@
-import {
-  Code,
-  Heading,
-  Image,
-  Text,
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
-} from '@chakra-ui/react'
+import { Code, Container, Heading, Image, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'
@@ -20,6 +7,7 @@ import matter from 'gray-matter'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { useTranslation } from 'next-i18next'
+import ContentSideDrawer from '../../components/ContentSideDrawer'
 
 interface LessonProps {
   frontMatter: {
@@ -41,20 +29,25 @@ const components = {
 
     return <Code fontSize="md" {...props} />
   },
-  h1: (props: any) => <Heading as="h1" apply="mdx.h1" {...props} />,
+  h1: (props: any) => (
+    <Heading as="h1" apply="mdx.h1" fontSize="4xl" {...props} />
+  ),
   h2: (props: any) => (
-    <Heading as="h2" apply="mdx.h2" fontSize="4xl" {...props} />
+    <Heading as="h2" apply="mdx.h2" fontSize="3xl" {...props} />
   ),
   h3: (props: any) => (
-    <Heading as="h3" apply="mdx.h3" fontSize="3xl" {...props} />
+    <Heading as="h3" apply="mdx.h3" fontSize="2xl" {...props} />
   ),
   h4: (props: any) => (
-    <Heading as="h4" apply="mdx.h4" fontSize="2xl" {...props} />
+    <Heading as="h4" apply="mdx.h4" fontSize="xl" {...props} />
   ),
-  p: (props: any) => <Text as="p" apply="mdx.p" fontSize="xl" {...props} />,
-  a: (props: any) => <Text as="a" apply="mdx.a" fontSize="xl" {...props} />,
-  ul: (props: any) => <Text as="ul" apply="mdx.ul" fontSize="xl" {...props} />,
-  img: (props: any) => <Image as="img" alt="" apply="mdx.image" {...props} />,
+  p: (props: any) => <Text as="p" apply="mdx.p" fontSize="lg" {...props} />,
+  a: (props: any) => <Text as="a" apply="mdx.a" {...props} />,
+  ul: (props: any) => <Text as="ul" apply="mdx.ul" {...props} />,
+  img: (props: any) => (
+    <Image as="img" apply="mdx.image" m="0 auto" alt="" {...props} />
+  ),
+  ContentSideDrawer,
 }
 
 const Lesson: React.FC<LessonProps> = ({

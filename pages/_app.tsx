@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains} theme={darkTheme()}>
-          <Box p="1.25em" px="5%">
+          <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '4rem', lg: '6rem' }}>
             <Header />
             <Component {...pageProps} />
           </Box>

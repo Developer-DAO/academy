@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { Heading, Flex, Stack } from '@chakra-ui/react'
+import { Heading, Flex, Stack, Divider } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -29,8 +29,24 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
             textAlign="center"
             color="#F96C9D"
           >
-            SMART CONTRACT DEVELOPMENT TRACK
+            GETTING STARTED
           </Heading>
+          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+            How it started (Introduction to project)
+          </Heading>
+          <Divider />
+          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+            Highlights of Resources
+          </Heading>
+          <Divider />
+          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+            Roadmap
+          </Heading>
+          <Divider />
+          <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
+            How to send feedback
+          </Heading>
+          <Divider />
           <Heading fontSize={['xs', 'sm']} as="h3" textAlign="center">
             CURRENT LESSONS
           </Heading>
