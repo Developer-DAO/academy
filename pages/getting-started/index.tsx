@@ -52,7 +52,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             What is School of Code?
           </Heading>
           <Text apply="mdx.p" as="p" fontSize="xl">
-            "School of Code" is an open-source education platform created by the
+            &quot;School of Code&quot; is an open-source education platform created by the
             Developer DAO.
           </Text>
           <Text apply="mdx.p" as="p" fontSize="xl">
@@ -112,7 +112,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           <Text apply="mdx.div" as="div" fontSize="xl">
             <UnorderedList>
               <ListItem>
-                We're looking for{' '}
+                We&apos;re looking for{' '}
                 <Text fontWeight="bold" as="strong" color="#F96C9D">
                   feedback
                 </Text>{' '}
@@ -129,7 +129,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
                 </NextLink>
               </ListItem>
               <ListItem>
-                We're also looking for{' '}
+                We&apos;re also looking for{' '}
                 <Text fontWeight="bold" as="strong" color="#F96C9D">
                   Developer DAO members
                 </Text>{' '}
