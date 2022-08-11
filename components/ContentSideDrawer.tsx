@@ -20,7 +20,7 @@ function ContentSideDrawer(props: any) {
         onClick={onOpen}
         aria-label="Open Drawer"
         variant="ghost"
-        fontSize="1.1em"
+        fontSize="xl"
         fontWeight="bold"
         bg="gray.700"
         mt="1em"

@@ -24,8 +24,8 @@ const Hero = () => {
           textAlign={{ base: 'center', md: 'left' }}
           align={{ base: 'center', md: 'flex-start' }}
         >
-          <VStack flex={1} py={20} alignItems="flex-start">
-            <VStack spacing={3} alignItems="flex-start" pt={8}>
+          <VStack flex={1} py={5} alignItems="flex-start">
+            <VStack spacing={3} alignItems="flex-start">
               <Heading as="h1" size="4xl" color="#FFD500">
                 Learning Web3 with friends
               </Heading>

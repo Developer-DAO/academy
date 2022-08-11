@@ -32,7 +32,10 @@ function NavBar() {
           {/*
                 MOBILE / HAMBURGER MENU
           */}
-          <Flex alignItems="center" display={{ base: 'block', md: 'none' }}>
+          <Flex
+            alignItems="center"
+            display={{ base: 'block', md: 'block', lg: 'none' }}
+          >
             <Menu autoSelect={false}>
               <MenuButton
                 as={IconButton}
@@ -87,7 +90,10 @@ function NavBar() {
           {/*
                 DESKTOP VERSION
           */}
-          <Flex alignItems="center" display={{ base: 'none', md: 'block' }}>
+          <Flex
+            alignItems="center"
+            display={{ base: 'none', md: 'none', lg: 'block' }}
+          >
             <NextLink href="/" passHref>
               <Link
                 variant={

@@ -27,16 +27,27 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
     <>
       <Link href={'/lessons/' + slug} passHref>
         <a>
-          <Flex
-            direction="column"
-            justifyContent="center"
-            bg="#35363A"
-            p={5}
-            rounded={5}
-          >
-            <Flex justify="space-between" align="center">
-              <Flex
-                bg="#1D1E20"
+          <Flex direction="column" bg="gray.800" p={5} rounded={5}>
+            <Flex
+              direction="row"
+              justify="space-between"
+              align="center"
+              // bg="#35363A"
+            >
+              <Flex direction="column" justifyContent="center">
+                <Flex color="#FFD500">
+                  <Heading
+                    as="h3"
+                    apply="mdx.h3"
+                    fontSize={[14, 14, 16]}
+                    my={2}
+                  >
+                    {slug}:&nbsp;{title}
+                  </Heading>
+                </Flex>
+              </Flex>
+              {/* <Flex
+                bg="#00000f"
                 fontSize={[0, 6, 8, 10]}
                 px={2}
                 rounded={5}
@@ -44,8 +55,8 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                 apply="mdx.p"
               >
                 Lesson {idx + 1}
-              </Flex>
-              <Wrap>
+              </Flex> */}
+              <Wrap ml={20}>
                 {icons &&
                   icons.map((icon: string, idx: number) => (
                     <WrapItem
@@ -54,6 +65,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                       p={1.5}
                       rounded={'50%'}
                       mx="auto"
+                      title={icon}
                     >
                       <Image
                         src={`/assets/${icon}.png`}
@@ -65,12 +77,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                   ))}
               </Wrap>
             </Flex>
-            <Flex color="#FFD500">
-              <Heading as="h3" apply="mdx.h3" fontSize={[12, 14, 16]} my={2}>
-                {title}
-              </Heading>
-            </Flex>
-            <Flex fontSize={[0, 0, 10, 12]} mr={100}>
+            <Flex fontSize={[8, 8, 10, 12]} pt={4}>
               {description}
             </Flex>
           </Flex>
