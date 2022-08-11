@@ -15,6 +15,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/inter": "^4.5.11",
+    "@fullstory/browser": "^1.6.1",
     "@rainbow-me/rainbowkit": "^0.2.1",
     "ethers": "^5.6.8",
     "framer-motion": "^6",

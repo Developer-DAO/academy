@@ -1450,6 +1450,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.11.tgz#3c45014821e8c82b247a291f1944dd2764a2d1ed"
   integrity sha512-toizzQkfXL8YJcG/f8j3EYXYGQe4OxiDEItThSigvHU+cYNDw8HPp3wLYQX745hddsnHqOGCM4exitFSBOU8+w==
 
+"@fullstory/browser@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@fullstory/browser/-/browser-1.6.1.tgz#dd3f2d3ce1dc72aa8e896f30cb5da83c72097816"
+  integrity sha512-WZ8mR5nluF7W8OhSe7J8FAyxDLOwDnI+0Jj8f+qBd5WsExwrtwb2LOO2064Gn+U3m2WI3tEo6WbHeMs6qtv0YA==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"
