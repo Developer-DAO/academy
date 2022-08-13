@@ -28,9 +28,13 @@ function ContentSideDrawer(props: any) {
         {props.title}&nbsp;&nbsp;
         <ArrowRightIcon />
       </Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="lg">
-        <DrawerOverlay />
-        <DrawerContent bg="#00000f">
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
+        <DrawerOverlay
+          backdropFilter="auto"
+          backdropInvert="10%"
+          backdropBlur="3px"
+        />
+        <DrawerContent bg="#00000f" px="4" pb="8">
           <DrawerCloseButton />
           <DrawerHeader fontSize="3xl" textColor="yellow.300">
             {props.title}
