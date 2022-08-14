@@ -39,7 +39,6 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
         direction="column"
         minH="100vh"
         mt="6"
-        border="1px solid #1A202C"
         borderRadius="5px"
       >
         <Stack spacing={5} direction="column">
@@ -179,10 +178,13 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           >
             Highlights of Resources
           </Heading>
-          <Image
-            src="/assets/getting-started/img_1.png"
-            alt="highlights of resources"
-          />
+          <Box alignSelf="center">
+            <Image
+              src="/assets/getting-started/img_1.png"
+              alt="highlights of resources"
+              w="40em"
+            />
+          </Box>
           <Divider />
 
           <Heading
@@ -194,10 +196,14 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           >
             Roadmap
           </Heading>
-          <Image
-            src="/assets/getting-started/img_2.png"
-            alt="3 month roadmap"
-          />
+          <Box alignSelf="center" pb="1.25rem">
+            <Image
+              src="/assets/getting-started/img_2.png"
+              alt="3 month roadmap"
+              w="40em"
+              borderRadius="0.875rem"
+            />
+          </Box>
         </Stack>
       </Flex>
     </>

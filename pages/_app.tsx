@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { WalletProvider } from '../components/WalletProvider'
 import { theme } from '../theme'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
