@@ -74,23 +74,14 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             Current Lessons
           </Heading>
 
-          <Text apply="mdx.p" as="p" fontSize="xl">
-            Here are our{' '}
-            <Text fontWeight="bold" as="strong" color="#F96C9D">
-              current lessons
-            </Text>
-            .
-          </Text>
-
           <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList>
+            <UnorderedList listStyleType="none">
               {lessons.map((lesson: any, idx: number) => (
-                <ListItem key={lesson.slug}>
+                <ListItem key={lesson.slug} my="2" textAlign="center">
                   <NextLink href={'/lessons/' + lesson.slug} passHref>
                     <Link>
                       <Button>
-                        Lesson&nbsp;{lesson.slug}:&nbsp;
-                        {lesson.frontMatter.title}
+                        Lesson {lesson.slug}: {lesson.frontMatter.title}
                       </Button>
                     </Link>
                   </NextLink>
@@ -110,7 +101,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Heading>
 
           <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList>
+            <UnorderedList listStyleType="none">
               <ListItem>
                 We&apos;re looking for{' '}
                 <Text fontWeight="bold" as="strong" color="#F96C9D">
