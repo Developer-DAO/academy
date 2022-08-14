@@ -11,6 +11,7 @@ import {
   ListItem,
   Link,
   Divider,
+  Box,
 } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
@@ -85,13 +86,26 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Heading>
 
           <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList listStyleType="none">
+            <UnorderedList listStyleType="none" textAlign="center">
               {lessons.map((lesson: any, idx: number) => (
-                <ListItem key={lesson.slug} my="2" textAlign="center">
+                <ListItem key={lesson.slug} my="2">
                   <NextLink href={'/lessons/' + lesson.slug} passHref>
                     <Link>
-                      <Button>
-                        Lesson {lesson.slug}: {lesson.frontMatter.title}
+                      <Button
+                        height={[
+                          `${
+                            lesson.frontMatter.title.length > 30
+                              ? '3.75rem'
+                              : '2.5rem'
+                          }`,
+                          '2.5rem',
+                        ]}
+                        style={{
+                          whiteSpace: 'normal',
+                          wordWrap: 'break-word',
+                        }}
+                      >
+                        {lesson.slug}: {lesson.frontMatter.title}
                       </Button>
                     </Link>
                   </NextLink>
@@ -146,14 +160,13 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             </UnorderedList>
           </Text>
 
-          <Text apply="mdx.p" as="p" fontSize="xl">
+          <Text as="span" apply="mdx.p" fontSize="xl" textAlign="center">
             Read more at{' '}
             <NextLink href="https://ddschoolofcode.arweave.dev/" passHref>
               <Link isExternal textDecoration="underline">
                 ddschoolofcode.arweave.dev
               </Link>
             </NextLink>
-            .
           </Text>
           <Divider />
 
