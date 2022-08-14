@@ -96,6 +96,7 @@ function NavBar() {
                 DESKTOP VERSION
           */}
           <Flex
+            mt="6"
             alignItems="center"
             display={{ base: 'none', md: 'none', lg: 'block' }}
           >
