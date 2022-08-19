@@ -80,7 +80,7 @@ up the terminal icon. Click on the icon.
 ![MacOS Terminal Open](/public/assets/lessons/install_npm/terminal.png)
 ![MacOS Terminal](/public/assets/lessons/install_npm/terminal2.png)
 
-**Install brew by copy and pasting the command below: **
+**Install brew by copy and pasting the command below:**
    `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
 ![MacOS Install Homebrew](/public/assets/lessons/install_npm/install-homebrew.png)
@@ -92,7 +92,7 @@ up the terminal icon. Click on the icon.
 *`eval "$(/opt/homebrew/bin/brew shellenv)”`*
 
 
-**Verify the installation by typing in brew , then Enter. You should see the menu as below: **
+**Verify the installation by typing in brew , then Enter. You should see the menu as below:**
 ![MacOS Verify Brew](/public/assets/lessons/install_npm/verify-brew.png)
 
 
@@ -135,6 +135,73 @@ Important steps to make the directory for `nvm` and set its PATH:
 - Verify the installation in the command line with `nvm` and it should return the following:
 ![MacOS Verify NVM](/public/assets/lessons/install_npm/verify-nvm-macOS.png)
 
+**Hang in there! We’re almost done!** 👍 😀
+
+Let’s install a few different versions of `nodejs` and `npm` (finally!😅)!
+
+- You can install the latest `nodejs` version with:
+
+`nvm install node`
+
+- In my case, I needed 2 specific versions of `nodejs` (also known as `node`) `16.10.0` and `14.16.0` because the dependency versions were needed for my particular projects. I install each separately using the following:
+
+`nvm install 16.10.0`
+
+`nvm install 14.16.0`
+
+
+Verify our `nodejs` versions in `nvm`:
+
+`nvm ls`
+![MacOS NVM List](/public/assets/lessons/install_npm/nvm-list-mac.png)
+
+**You did it!! nodejs and npm have been installed with nvm. Woo hoo!!** 🎉💥
+
+
+## Installing `node.js` and `npm` with `nvm` on Ubuntu Linux
+
+**Installing `nvm` on Ubuntu Linux is very easy. If it is a new installation of Ubuntu,** <br>
+**we will need to install `cURL`,  then install `nodejs` with `npm`. Just in case** <br>
+**you were curious, `cURL` is a command line tool that developers use to transfer data** <br>
+**from one server to another, in our case to download `nvm`. After a few easy steps,** <br>
+**you will be up and running! 🏃🏾‍♀️**
+
+- **Install `cURL` if it is not already installed with `sudo apt install curl`.**
+![Ubuntu Install CURL](/public/assets/lessons/install_npm/curl.png)
+
+- **Download nvm with cURL:** 
+    `curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash`
+![Ubuntu Install NVM](/public/assets/lessons/install_npm/small-nvm.png)
+
+- **Rather than log out and log in again to set our environment for `nvm`,**<br>
+  **we can simply set the environment by executing: `source ~/.bashrc`**
+
+- **Verify your installation with the command `nvm` and you should see the output below.**
+![Ubuntu Verify NVM](/public/assets/lessons/install_npm/verify-nvm.png)
+
+- **Install the latest version of `nodejs` (also known as just `node`) with `nvm install node`.**
+![Ubuntu Install Latest](/public/assets/lessons/install_npm/nvm-install-latest-node.png)
+
+- **Install a specific version of `node` with `nvm install <VERSION>` .**
+![Ubuntu Install Specific 1](/public/assets/lessons/install_npm/nvm-install-16.10.0-ub.png)
+
+- **Install another specific version of `node` with `nvm install <VERSION>` .**
+![Ubuntu Install Specific 2](/public/assets/lessons/install_npm/nvm-install-14.16.0-ub.png)
+
+
+- **List all of your installed versions of `node` with `nvm ls`.**<br>
+  **In my case there are several that have already been installed.**
+![Ubuntu List NVM Versions](/public/assets/lessons/install_npm/list-nvm-versions-ub.png)
+
+- **Let’s verify the current loaded version with `node -v` .**
+![Ubuntu Check Current Version](/public/assets/lessons/install_npm/check-current-version.png)
+
+- **Now we can switch to another installed version using `nvm use <VERSION>` .**
+![Ubuntu Change Current Version](/public/assets/lessons/install_npm/change-and-check-current-version.png)
+
+
+**You made it to the end of our nodejs and npm installation with nvm tutorial!**  <br>
+**Congratulations!!** 🎉💥🥇
 
 
 
