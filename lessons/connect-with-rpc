@@ -1,0 +1,10 @@
+# Connecting to a Network via RPC
+
+**Remote Procedure Call (RPC)** could be classified as a type of API (application programming<br> interface) that allows for developers to run code that can be executed on servers remotely.<br> 
+In plain English, an RPC call is how a dApp communicates with the blockchain or accesses other<br> information from remote servers. In this section, we will concern ourselves with RPC calls to<br>
+the blockchain via *Metamask* to Ethereum testnets such as *Rinkeby* and RPC endpoint providers<br> such as *Infura*, *Alchemy* and *Ankr*.
+
+### Connecting to a Testnet with Metamask
+
+When opening up the Metamask browser extension, we can connect to the various testnets by<br>
+clicking on the pull-down menu as seen below and chose your desired testnet network:
