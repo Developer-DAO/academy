@@ -25,9 +25,29 @@ operating systems, a command line mini-lesson and more.**
 
 <h3>Let’s get the party started and install `npm` on WSL2!</h3>
 
-1. ** Click on the Windows Start Button, then open Ubuntu 20.04 on Windows.**
+** 1) Click on the Windows Start Button, then open Ubuntu 20.04 on Windows.**
 
 ![WSL2 in Windows App List](/public/assets/lessons/install_npm/wsl-s_in_windows_app_list.png)
+
+** 2) We need to install curl into our WSL-2 instance, so type into the command line, <br>
+`sudo apt-get install curl`. You may be prompted for a password. It is the same password <br>
+you created when you first set up WSL-2. You are prompted to use the password because you are <br>
+using `sudo` which is “super user permission”. `cURL` allows us to to download necessary software <br>
+from outside software library servers.
+
+![WSL2 Install CURL](/public/assets/lessons/install_npm/install-curl.png)
+
+** 3) Next, we want to install Node Version Manager (nvm). NVM is a super helpful tool because <br>
+it allows you to download and run different versions of npm. In our command line, we need to <br>
+copy and paste the following command:<br>
+         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash <br>                                                                                curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash and hit Enter. Let’s verify that it was installed correctly by typing command -v nvm. This should return nvm if it was installed correctly. If you get an error or no output, close the Ubuntu terminal down and restart it. It should now return nvm. 
+and hit Enter. Let’s verify that it was installed correctly by typing command -v nvm. This <br>
+should return nvm if it was installed correctly. If you get an error or no output, close <br>
+the Ubuntu terminal down and restart it. It should now return nvm. **
+
+![WSL2 Install NVM](/public/assets/lessons/install_npm/install-nvm-2.PNG)
+
+
 
 
 
