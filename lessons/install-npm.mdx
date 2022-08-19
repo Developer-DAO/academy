@@ -25,39 +25,39 @@ operating systems, a command line mini-lesson and more.**
 
 <h3>Let’s get the party started and install `npm` on WSL2!</h3>
 
-** Click on the Windows Start Button, then open Ubuntu 20.04 on Windows.**
+<h3>Click on the Windows Start Button, then open Ubuntu 20.04 on Windows.</h3>
 
 ![WSL2 in Windows App List](/public/assets/lessons/install_npm/wsl-s_in_windows_app_list.png)
 
-** We need to install curl into our WSL-2 instance, so type into the command line, <br>
+**We need to install curl into our WSL-2 instance, so type into the command line, <br>
 `sudo apt-get install curl`. You may be prompted for a password. It is the same password <br>
 you created when you first set up WSL-2. You are prompted to use the password because you are <br>
 using `sudo` which is “super user permission”. `cURL` allows us to to download necessary software <br>
-from outside software library servers.
+from outside software library servers.**
 
 ![WSL2 Install CURL](/public/assets/lessons/install_npm/install-curl.png)
 
-** Next, we want to install Node Version Manager (nvm). NVM is a super helpful tool because <br>
+**Next, we want to install Node Version Manager (nvm). NVM is a super helpful tool because <br>
 it allows you to download and run different versions of npm. In our command line, we need to <br>
 copy and paste the following command:<br>
 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash` <br>
 and hit Enter. Let’s verify that it was installed correctly by typing `command -v nvm`. <br>
 This should return nvm if it was installed correctly. If you get an error or no output, <br>
-close the Ubuntu terminal down and restart it. It should now return nvm. **
+close the Ubuntu terminal down and restart it. It should now return nvm.**
 
 ![WSL2 Install NVM](/public/assets/lessons/install_npm/install-nvm-2.PNG)
 
-** We’re all ready to install our first version of node.js! 👍 For this demo, <br>
+**We’re all ready to install our first version of node.js! 👍 For this demo, <br>
 I installed node.js version 14.16.0. In the command line type `nvm install 14.16.0` <br>
 and hit enter. This will install this version of node.js and it can be verified by <br>
 typing `node -v` for the node.js version and `npm -v` for the npm version. In the event <br>
 that you need a different version of node.js, the commands `nvm install <VERSION>` will <br>
-install the new version. **
+install the new version.**
 
 ![WSL2 Install Another Node version](/public/assets/lessons/install_npm/install-another-version.PNG)
 
-** After you have installed a few different versions of node.js depending on the requirements <br>
-of your projects, you can list the versions using the `nvm ls` command.
+**After you have installed a few different versions of node.js depending on the requirements <br>
+of your projects, you can list the versions using the `nvm ls` command.**
 
 ![WSL2 List Installed versions of Node](/public/assets/lessons/install_npm/list-installed-versions-of-node.PNG)
 
