@@ -26,6 +26,10 @@ to the guide can be found
 This will create a local instance of the app running and can be viewed at
 `http://localhost:3000` in your browser.
 
+Also it's handy to install the Prettier plugin for your browser. You can then
+use it to automatically format files. It helps keep the code base tiday, for
+Typescript, MDX and Markdown files.
+
 ## Grabbing latest version of the code
 
 **Since this is a work in progress, your local version of the app can be updated
@@ -46,6 +50,25 @@ Reinstall with `yarn`:
 Run the updated app:
 
     yarn dev
+
+## Submit your changes and create a Pull Request
+
+Before pushing your branch to GitHub and opening a PR:
+
+- Run `yarn confirm` which will make sure your files are consistently formatted,
+  lint the code base looking for problems and then actually building the site
+  locally to ensure no build problems
+- If you see warnings or errors please fix.
+- Also, this step runs Prettier so some files may have changed and need to be
+  checked in.
+
+Now everything should be ready-to-go. You may have to run this process several
+times.
+
+Just push your branch and open a PR, and send a quick note on Discord to let the
+team know you're looking for a review.
+
+Thank you for your contribution!
 
 ## Learn More
 
