@@ -59,6 +59,23 @@ You can check out
 [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
 feedback and contributions are welcome!
 
+## Storybook
+
+This project uses [Storybook](https://storybook.js.org/). Storybook allows us to
+develop components in isolation from our app.
+
+Stories are loaded from `*.stories.(mdx|js|jsx|ts|tsx)` files in any directory.
+
+To use Storybook, run the `storybook` script:
+
+```bash
+yarn storybook
+```
+
+To learn more about how to write Storybook stories, check out the official
+[Intro to Storybook](https://storybook.js.org/tutorials/intro-to-storybook/)
+tutorial.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the
