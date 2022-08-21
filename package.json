@@ -5,11 +5,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --max-warnings=0",
     "prepare": "husky install",
     "test": "jest",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "style": "prettier --write ./pages ./components ./lessons ./README.md",
+    "confirm": "yarn style && yarn lint && yarn build"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.1",
