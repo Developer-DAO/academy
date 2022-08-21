@@ -1,9 +1,13 @@
 ## Developer DAO - School of Code
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with
-[`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+&quot;School of Code&quot; is an open-source education platform created by the
+Developer DAO.
 
-## Getting Started
+## How do I get started?
+
+Please read our [CONTRIBUTING Guide](CONTRIBUTING.md) to get started.
+
+## Project Setup
 
 **Prerequisites:**
 
@@ -13,9 +17,9 @@ Refer to the `node` and `npm` installation with `nvm` guide in Lesson 2. A link
 to the guide can be found
 [here](https://www.notion.so/How-to-install-node-js-and-npm-67b2ab1f76f148f49f547b9156aeaf28):
 
-**Clone and `cd` into the repo:**
+**Fork this repo, clone forked repo locally and `cd` into the repo:**
 
-    git clone https://github.com/Developer-DAO/school-of-code.git
+    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/school-of-code.git
     cd school-of-code/
 
 **Installation and run:**
