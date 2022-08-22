@@ -1,6 +1,14 @@
 Welcome to the School of Code project!
 
-To join in and contribute code or content:
+This is an open-source project, but at this early stage, we require contributors
+to be members of the Developer DAO. Our project uses various Developer DAO
+planning and communication tools, such as Discord.
+
+To join the Developer DAO, I'd recommend reading our
+[What is DeveloperDAO](https://blog.developerdao.com/what-is-developer-dao)
+post.
+
+Once you're a member, to contribute code or content:
 
 - please join us in the Developer DAO Discord (`#school-of-code` channel)
 - setup the project by visiting our [README.md](./README.md)
