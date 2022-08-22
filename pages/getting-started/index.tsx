@@ -52,8 +52,8 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             What is School of Code?
           </Heading>
           <Text apply="mdx.p" as="p" fontSize="xl">
-            &quot;School of Code&quot; is an open-source education platform created by the
-            Developer DAO.
+            &quot;School of Code&quot; is an open-source education platform
+            created by the Developer DAO.
           </Text>
           <Text apply="mdx.p" as="p" fontSize="xl">
             We seek to{' '}

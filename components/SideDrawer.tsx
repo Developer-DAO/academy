@@ -10,13 +10,13 @@ import {
   Box,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import React from "react";
+} from '@chakra-ui/react'
+import React from 'react'
 
-import HamburgerIcon from "./HamburgerIcon";
+import HamburgerIcon from './HamburgerIcon'
 
 function SideDrawer() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -50,7 +50,7 @@ function SideDrawer() {
         </DrawerContent>
       </Drawer>
     </>
-  );
+  )
 }
 
-export default SideDrawer;
+export default SideDrawer
