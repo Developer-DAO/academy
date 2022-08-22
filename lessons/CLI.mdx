@@ -1,0 +1,226 @@
+**What is a CLI?**
+
+A CLI stands for **C**ommand **L**ine **I**nterface. Most Linux users call a CLI a terminal, Mac users a console, Windows users a shell. Actually all these names have some technical differences, but for (the needs of) our projects we are going to stick with the name CLI.
+
+**Why do we use this primitive looking stuff in the 21st Century?**
+
+Come on! It looks retro, so it has to be cool! A CLI allows us access to the file system of our computer by entering our text commands into it. We can also access the **root** of our commuter i.e. our operating system, which is something very powerful, in those cases we need to be really careful. And even better, we can access a world of open source work (repositories, libraries, etc) that our fellow developers have created before us. It’s acts like a gateway for our machine to develop with the outside world. And that makes it cool. 
+
+There are a few concepts we first need to understand before we start. Using a CLI for our work looks really old school, but it’s tried and tested. Still wondering? Using text is extremely resource efficient. No graphics. Text for input, text for output. For every task in the CLI, there’s a user command/programme for it. Each command is wrapped in what is called the **shell** programme. This shell interprets the commands to the kernel (the operating system), which in turn is the gateway to all our hardware.
+
+In our mini lesson, we’ll only look at some basic commands to get you up and running. 
+
+**A couple of things you are used to doing with text….but can’t do in a CLI…**
+
+You can’t just place your mouse pointer anywhere in the window. We’re interfacing the inner file system, the brain, of our computer. For now only use **your mouse** to copy and paste text. Keyboard shortcuts you already know, won’t work the same in here. One keyboard shortcut, we want you to remember is CTRL+C, which lets you abort any programme, or command that’s running e.g. if you make a mistake and the program gets stuck. But it won’t copy any text in there for you! And your arrow keys up and down will take you through previous commands. Handy for not re-typing long commands.
+
+Let’s open a CLI up and have a look then. From your keyboard type the following and wait for the magic:
+
+INFOGRAPHIC of CLIs Linux/Unix/Window
+
+For Linux press CTRL+ALT+T
+For Mac ([https://support.apple.com/guide/terminal/keyboard-shortcuts-trmlshtcts/mac](https://support.apple.com/guide/terminal/keyboard-shortcuts-trmlshtcts/mac))
+For Windows press WinKey+R > type **cmd** > OK 
+
+**Use CLI commands with great attention! Wrong use can easily delete files or destroy your computer system completely.**
+
+Here is a list of some of the very basic commands for CLI:
+
+![Linux-CLI-commands.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c74c4b2-45ba-425d-806b-aacd0f00a47c/Linux-CLI-commands.png)
+
+## CLI for Mac
+
+Before using the CLI environment for MacOS, you will need to install **Homebrew.** 
+
+What is **Homebrew** and why do we need it? **Homebrew** or `brew` is the Missing Package Manager for MacOS. Homebrew is the easiest and most flexible way to to install Linux tools that Apple did not include in MacOS. It can also install software not packaged in your Linux distribution to your home directory without requiring the `sudo` command. A quick and recent guide to install `brew` can be found at: [https://crunchify.com/how-to-install-homebrew-on-macos/](https://crunchify.com/how-to-install-homebrew-on-macos/)
+
+Once `brew` has been successfully installed, a list of `brew` commands can be found by using the `brew help` command. `brew` can be used to install new programs such as **Node.js** or **NVM**. Once these programs are installed, it is not necessary to use the `brew` command, but rather the commands that are specific to the program you are using. In example for **Node.js** or **NVM,** you would use the `npm` or `nvm` as commands. The installation of `brew` allows you to use all of the basic Linux commands described in the table above in the **Linux** section.
+
+## CLI for Windows
+
+Before you get started using your Windows machine for development, you will need to download and install **Windows Subsystem for Linux 2.** An easy ****guide to downloading and installing **WSL-2** can be found here: [https://docs.microsoft.com/en-us/windows/wsl/install-manual](https://docs.microsoft.com/en-us/windows/wsl/install-manual)
+
+Once **WSL-2** is installed on your machine, the commands are essentially the same as they are in Linux. You can find a list of some of the most basic Linux commands in the list above in the **Linux** section.
+We’re going to use Linux here:
+
+
+
+=========================
+**Let’s get moving around**…
+You know when you’re in your Home folder, or Home **directory** as we call it, when you can see the **~** tilda symbol at the end of your location, followed by $. Please pay attention to these symbols and whatever comes **before $** as you learn. They can act as **your compass**.
+
+```bash
+myname@pcname:~$ 
+```
+
+Let’s just see how to check which directory you are in if you get lost. In lower case type the **pwd** **p**rint **w**orking **d**irectory command followed by the Enter key. Our **working** directory means the one we are ‘working’ in now. Printing it just means displaying it to the screen. Why don’t you have a go yourself:
+```bash
+myname@pcname:~$ pwd
+/home/myname
+myname@pcname:~$
+```
+
+Good, you’re still in your home folder! And the last line is ‘prompting’ you to type a new command if needed. That’s why it’s called the prompt line or command line.
+
+More basics: sometimes you run a command and get a lot of output. Other times, only the prompt line and no other text output appears. That also signifies a successful result. No confirmation output, no “hey, it worked!” Just efficiency!
+
+~~Let’s see how our computer’s file system is structured so we can find our way around easily. It looks simple, and it is, but it can be a bit frustrating to learn to navigate in the beginning. We’ve all been here. We’ll learn a few shell commands, and then you can get back to building out your project.~~ 
+
+Our **working directory** is what the shell understands as the default location for carrying out any file operations. So if you create, search for, delete a file or directory, the shell will assume you want to do that in the directory you are ‘working’ in, otherwise you have to specify just where you want those operations done. Remember **pwd** is your friend if you’re ever lost, although what’s directly **before $** will tell you too! Navigating in the CLI at the start is always a little bit tricky, a little bit quirky. 
+
+**Absolute and relative paths**
+
+Our **cd** command is our navigator. It simply means **c**hange **d**irectory, and we usually use cd like a verb e.g. Hey there, cd into your home directory. So let *us* cd into **/**
+```bash
+myname@pcname:~$ cd /
+/
+myname@pcname:~$
+```
+
+The working directory is now **/**, which is your root directory, the main parent directory of your whole operating system, **so be careful in there**. All other sub directories and files branch out from that root directory in file trees. We’ll touch on another meaning of ***root*** later. Type the following:
+
+```bash
+myname@pcname:~$ cd home
+myname@pcname:/home$ pwd
+/home
+```
+
+You guessed it, you’re in your home directory, a sub directory of **/**  (root). To cd back from any sub-directory to its parent, use **cd ..** with a space before the two dots. To move up more than one level of parent directories, you can use them like so **../../..** etc. The two dots bring you one level back up the file tree, the forward slash signifies the parent above each level. Another little hint, the simple command of **cd** will take you from anywhere to your home directory. 
+
+Trying to cd into the wrong directory and getting lost, which happens to the best of us, looks like this:
+```bash
+ bash: cd: WRONG DIRECTORY: No such file or directory), 
+```
+
+Let’s try a few moves. Remember to pwd each time and check where you are, but check all those symbols before the $ to confirm the same thing:
+
+```bash
+myname@pcname:/home$ cd ..
+myname@pcname:/$ pwd
+myname@pcname:/$ cd
+myname@pcname:~$ pwd
+myname@pcname:~$ cd ../..
+myname@pcname:/$ pwd
+```
+
+Just say you want to go up a few parents and then down into sub-directories, you can do it in one go like this. First, cd into your home directory to get a feel for where you are:
+
+```bash
+myname@pcname:/$ cd
+myname@pcname:~$ pwd
+myname@pcname:~$ cd ../../usr/lib
+myname@pcname:/usr/lib$ pwd
+```
+==================================
+**usr** is a sub-directory of **/** and the parent of **lib**  deep in the root of the file system of your computer! So you went two levels up, and two down! This is called a **relative path**, which starts from, therefore *is relative* to your working directory.  But we can’t expect to know where all the files are on our hard disc, so we have a trick in the form of an **absolute path** to help us find them more easily. We have used two of them already!
+
+We saw the simple **cd** command that switches us straight to our home directory, and **cd /** which takes us directly to our root directory. We know the forward slash signifies a parent directory, so by starting our path from the root directory, we can easily navigate to our destination file/directory. Let’s just start from that **lib** directory, go from there, through the root, and to our Documents (uppercase D) directory:
+
+```bash
+myname@pcname:/usr/lib$ cd /home/myname/Documents
+myname@pcname:~/Documents$ pwd
+/home/myname/Documents
+```
+
+In the same way we can use the **/** to denote an absolute path from the root directory, similarly the **~** lets us create an absolute path from our home directory. But let’s look at another little trick before we do that. It’s the **cd -** command. Yes that is a dash and not a tilda. It’s quite restricted in what it can do, but it can come in very handy. Try out this **cd ~** four or five times. You don’t need to **pwd** afterwards each time, trust us, you’ll see what happens: 
+
+```bash
+myname@pcname:~/Documents$ cd -
+/usr/lib
+myname@pcname:~/usr/lib$ cd -
+home/myname/Documents
+myname@pcname:~/Documents$ cd ~/Downloads
+myname@pcname:~/Downloads$ pwd
+home/myname/Downloads
+```
+
+You see that it switches back and forth between your present and last folder. But no more than that. It mightn’t seem like much, but you’ll be really happy to know it in the future!
+
+So these are what we call paths (pathways) in your file system. All the packages that you’ll download and install in the future use the same basic file and directory tree path structure. Simple, powerful and effective.
+### Let’s make some files and folders to make sense of all of this!
+
+We’re not going to go too in depth here. Just enough to get your first couple of projects up and running. Further into School of Code, we’ll be giving you a few more tricks.
+
+**Folders? Tut tut, no. We call them directories. You know that**:
+
+As you build your dev experience, you’ll have a dedicated directory for all your development work. For reasons of safety, just for practice, you’re going to create a temporary one right now in the **/tmp** directory inside your root. We don’t want any mishaps in your file system after all. 
+
+From now on, we won’t display the whole command prompt line. Now let’s **mkdir**!!! You guessed it, make a directory and then we’ll cd into it. One thing to note, is that you make your file and directory names without spaces. There are ways around that, but we’re not covering them this time round. 
+
+```bash
+mkdir /tmp/learnbash
+cd /tmp/learnbash
+```
+
+Note how we start with **/**, an absolute path. First to take us from root, and also to let us create our one new directory nested under **/tmp**. You can double check by **pwd**-ing, but we think you’re starting to get the hang of that by simply looking at your prompt line! 
+
+Now, with your well-being in mind, we want to create a few healthy directories all in one go, and after we hit Enter, we want to list them using the **ls** command: 
+
+```bash
+mkdir learnapple learnbanana learncoconut learndate
+ls
+learnapple learnbanana learncoconut learndate
+```
+
+The four directories are side by side, and not nested because we left a space between each of the four parameters/arguments. 
+
+Now using the **touch** command, we’re going to make a couple of files where, technically, you would be able to write your project code. You could of course create them in your code editor, but hey, we’re hardcore devs, aren’t we, and do this in our CLI:
+```bash
+rmdir: failed to remove 'learnapple': Directory not empty
+rmdir: failed to remove 'learnbanana': Directory not empty
+```
+
+Like we said, we first need to remove the files from the directories. 
+
+There is an aggressive option for removing directories that *do* contain files and your directories too. If you choose to use it, do so with extreme caution. Please note, when you use your machine as an everyday user, there *is* a Trash folder, and you can restore deleted files. When we’re working in our machine’s file system like this,  **there is no Trash folder** to dig anything out of. Once your files and folders are gone, they are gone for good. 
+
+The command we’re speaking of is **rm -r** and because of the **-r** switch, it removes the contained files and directories recursively. It more advisable to take the time to actually manually delete the files just using **rm**, and then **cd ..** back to the parent directory, so you can **rmdir** it like this:
+Last, but certainly not least…..we have a command called **sudo** which is short for **s**uper**u**ser/**s**witch **u**ser **do** …this command…. which will give you *superpowers that you need be sure about before using*. And here is some background for understanding security and your machine.
+
+Now that you are moving into developer space, you can expect to do more than just modify a few files. You will be using code instructions that require you to perform tasks as the administrator of your machine. You’ll be searching for these online. Until now, we have been using the **/** to refer to the **root directory**, or help us navigate to and from it with absolute paths, but now we are getting into what some developers call the ***root command***, which we mentioned at the start of this lesson. With great power comes great responsibility. 
+
+Your operating system is already set up to be as safe from attack as possible. Root can change up your whole system and actually open up your computer to all sorts of vulnerabilities around network services and firewalls, etc. It can let you do most anything. You might be advised to download software and change permissions by using a super user command, but it could potentially open a hole to let some malware onto your system. That one command you use could end up triggering many more. Remember, we’re only human, and also prone to making mistakes, so please be careful. Use good judgement when you find content online. If someone is asking you to use the ***root*** account, or the **su** command, it’s good to be **su**per careful and if you actually feel **su**spicious, that’s okay. Unless you’re totally **su**re of what you are doing, ask around for solid advice e.g. on Stack Exchange (soon, you’ll be able to ask on our School of Code Forum, when we are up and running!!) The safest source for software is from your operating system’s official repositories i.e. its app store. 
+
+**Okay you superuser, you!!**
+
+Each time you use a **sudo** command, you will need to type in your own system password. The default cache period for holding the password is 15 minutes in most Linux distros. Keep that in mind. If you are typing in commands in that time period, you are in superuser mode. Let’s use the **cat** command which would normally let us view the content of a directory, but because it has encrypted passwords, therefore sensitive, we will need our sudo command to access it. Try it without and then with sudo. Note that your password will be invisible as you type it:
+```bash
+myname@pcname:/tmp/learnbash$ cat /etc/shadow
+cat: /etc/shadow: Permission denied
+myname@pcname:/tmp/learnbash$ sudo cat /etc/shadow
+[sudo] password for myname: <password here>
+```
+
+ So it gave you a list of passwords. Great. Now you’re going to type and run the **reset** command to clear out the terminal, and then run **sudo cat /etc/shadow** again. You won’t need your password this time. Why? Because your password is in the cache…..for the 15 minutes.  
+
+Just to give you some more context. If you are asked to use **sudo apt-add repository** to add a new software repository, be sure you trust the sources. Get them from the official source of the project you are working on. Some examples of commands that allow you to change a file’s permissions to make it executable are **npm**, **npx**, **yarn**, **pip**, **wget**, **make** and **curl** . You’re going to see a lot of some of these!
+
+Let’s see sudo in action once more before we start to tidy up. If you’re using Ubuntu, then you have its standard repositories and you can follow along, otherwise just enjoy this as a little guide. 
+
+Type in the following, provide your password, press Enter and wait a few moments while the **apt** programme prints the process of the install to your terminal. When your command line prompt shows up again, you’re good to go!  
+
+```bash
+sudo apt install tree
+tree
+```
+Wait. Is t**ree** a command? No! **tree** is a programme, and we can simply run it like that.
+What else is different? What about our commands? Yes, they are a bit more complex. 
+
+When we use the sudo command without any switch options, it will assume the next parameter is a command to run as a **su**peruser, where any *extra* parameters will pass to that new command. Any sudo switch we might use, will start with either one or two hyphens. This lets it differentiate between a command and that option. 
+
+Also new to us is our command, **apt**, which also takes a command. **install** tells **apt** to expect one or more software package names as parameters to add new software to our machine. So you can run any command as a superuser by putting sudo before it, but it’s not very often that you need to.
+
+By using sudo in our CLI, we hope to reduce the dangers of being in that root account. We hope we’ve helped you to think critically about using online resources that suggest using these tools. Use your super powers like a super dev would! 
+
+Now let’s clean out the last of our directories and files with the elusive, and most dangerous….. **rm -r**!! Follow these last steps on your way to super stardom devland!
+
+```bash
+cd /tmp/learnbash
+rmdir learnapple
+rmdir: failed to remove 'learnapple': Directory not empty
+rm -r learnapple
+ls    <directory and files should be gone now>
+cd ..
+rmdir learnbash
+```
+You should be back where you started with a clean slate and hopefully a few more skills to get you building. In the same way you opened your terminal window with ctrl+alt+tab, you can close it with ctrl+D. We hope you enjoyed that and look forward to seeing you on your journey as a superstar, superuser, superdev!! Stay super safe!!
