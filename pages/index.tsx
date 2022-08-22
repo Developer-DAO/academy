@@ -1,17 +1,32 @@
 import { Box } from '@chakra-ui/react'
-import { useEffect } from 'react'
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Hero from '../components/Hero'
+import { NextSeo } from 'next-seo'
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>Developer DAO Academy</title>
-        <meta name="description" content="Developer DAO Academy" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title="Developer DAO Academy"
+        description="Developer DAO Academy"
+        openGraph={{
+          images: [
+            {
+              url: '/landing-page-screenshot.png',
+              width: 800,
+              height: 600,
+              alt: 'Developer DAO School of Code',
+              type: 'image/png',
+            },
+          ],
+        }}
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.ico',
+          },
+        ]}
+      />
 
       <main>
         <Box as="main">
