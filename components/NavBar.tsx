@@ -50,11 +50,9 @@ function NavBar() {
                 icon={<HamburgerIcon />}
                 ml={5}
                 variant="outline"
-                _hover={{ backgroundColor: 'soc.vividViolet' }}
-                _active={{ backgroundColor: 'soc.vividViolet' }}
               />
-              <MenuList backgroundColor="black">
-                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
+              <MenuList backgroundColor={'soc.vividViolet'}>
+                <MenuItem>
                   <NextLink href="/" passHref>
                     <Link
                       variant={
@@ -67,7 +65,7 @@ function NavBar() {
                     </Link>
                   </NextLink>
                 </MenuItem>
-                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
+                <MenuItem>
                   <NextLink href="/getting-started" passHref>
                     <Link
                       variant={
@@ -80,7 +78,7 @@ function NavBar() {
                     </Link>
                   </NextLink>
                 </MenuItem>
-                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
+                <MenuItem>
                   <NextLink href="/lessons" passHref>
                     <Link
                       variant={
