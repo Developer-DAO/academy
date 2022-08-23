@@ -165,14 +165,14 @@ learnapple learnbanana learncoconut learndate
 
 The four directories are side by side, and not nested because we left a space between each of the four parameters/arguments. 
 
-Now using the **touch** command, we’re going to make a couple of files where, technically, you would be able to write your project code. You could of course create them in your code editor, but hey, we’re hardcore devs, aren’t we, and do this in our CLI:
+Now using the **touch** command, we’re going to make a couple of files where, technically, you would be able to write your project code. You could of course create them in your code editor, but hey, we’re hardcore CLI devs, aren’t we:
 ```bash
 cd learnapple
 touch elderberry.js  fig.css  grapefruit.html
 ls
 ```
 
-Let’s cd back, and then straight into learnbanana and make a couple of files in there too
+Let’s cd back, and then straight into learnbanana and make a couple of files in there too:
 
 ```bash
 cd ../learnbanana
@@ -195,9 +195,10 @@ rmdir: failed to remove 'learnbanana': Directory not empty
 
 Like we said, we first need to remove the files from the directories. 
 
-There is an aggressive option for removing directories that *do* contain files and your directories too. If you choose to use it, do so with extreme caution. Please note, when you use your machine as an everyday user, there *is* a Trash folder, and you can restore deleted files. When we’re working in our machine’s file system like this,  **there is no Trash folder** to dig anything out of. Once your files and folders are gone, they are gone for good. 
+There is an aggressive option for removing directories that *do* contain files and your directories too. If you choose to, use it with extreme caution. Please note, when you use your machine as an everyday user, there *is* a Trash folder, and you can restore deleted files. When we’re working in our machine’s file system like this,  **there is no Trash folder**! Once your files and folders are gone, they are gone for good. 
 
 The command we’re speaking of is **rm -r** and because of the **-r** switch, it removes the contained files and directories recursively. It more advisable to take the time to actually manually delete the files just using **rm**, and then **cd ..** back to the parent directory, so you can **rmdir** it like this:
+ 
 Last, but certainly not least…..we have a command called **sudo** which is short for **s**uper**u**ser/**s**witch **u**ser **do** …this command…. which will give you *superpowers that you need be sure about before using*. And here is some background for understanding security and your machine.
 
 Now that you are moving into developer space, you can expect to do more than just modify a few files. You will be using code instructions that require you to perform tasks as the administrator of your machine. You’ll be searching for these online. Until now, we have been using the **/** to refer to the **root directory**, or help us navigate to and from it with absolute paths, but now we are getting into what some developers call the ***root command***, which we mentioned at the start of this lesson. With great power comes great responsibility. 
