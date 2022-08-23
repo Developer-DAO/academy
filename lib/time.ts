@@ -1,6 +1,6 @@
-export const millisecond = 1000
+export const millisecond = 1
 
-export const second = millisecond * 60
+export const second = millisecond * 1000
 
 export const minute = second * 60
 
