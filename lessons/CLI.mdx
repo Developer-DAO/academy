@@ -1,4 +1,4 @@
-**What is a CLI?** **Who is this tutorial for?**
+**What is a CLI?** **Who is this tutorial for?** **CLI is a bit tricky to get used to, you can't see everything readily, so learning to navigate is needed, and those basics need a bit of practice to avoid frustration**
 
 A CLI stands for **C**ommand **L**ine **I**nterface. Most Linux users call a CLI a terminal, Mac users a console, Windows users a shell. Actually all these names have some technical differences, but we are going to stick with CLI.
 
@@ -67,11 +67,11 @@ More basics: sometimes you run a command and get a lot of output. Other times, o
 
 ~~Let’s see how our computer’s file system is structured so we can find our way around easily. It looks simple, and it is, but it can be a bit frustrating to learn to navigate in the beginning. We’ve all been here. We’ll learn a few shell commands, and then you can get back to building out your project.~~ 
 
-Our **working directory** is what the shell understands as the default location for carrying out any file operations. So if you create, search for, delete a file or directory, the shell will assume you want to do that in the directory you are ‘working’ in, otherwise you have to specify just where you want those operations done. Remember **pwd** is your friend if you’re ever lost, although what’s directly **before $** will tell you too! Navigating in the CLI at the start is always a little bit tricky, a little bit quirky.It's not the same as your computers GUI where you can see all your files and folders. 
+Our **working directory** is what the shell understands as the default location for carrying out any file operations. So if you create, search for, delete a file or directory, the shell will assume you want to do that in the directory you are ‘working’ in, otherwise you have to specify just where you want those operations done. Remember **pwd** is your friend if you’re ever lost, although what’s directly **before $** will tell you too! Navigating in the CLI at the start is always a little bit tricky, a little bit quirky.It's not the same as your computers GUI where you can see all your files and folders. We need to know how to move around to be able to see stuff.
 
 **Absolute and relative paths**
 
-Our **cd** command is our navigator. It simply means **c**hange **d**irectory, and we usually use cd like a verb e.g. Hey there, cd into your home directory. So let *us* cd into **/**
+Our **cd** command is our navigator. It simply means **c**hange **d**irectory, and we usually use cd like a verb e.g. Hey there, cd into your home directory. So let's cd into **/**
 ```bash
 myname@pcname:~$ cd /
 /
@@ -146,16 +146,16 @@ We’re not going to go too in depth here. Just enough to get your first couple 
 
 As you build your dev experience, you’ll have a dedicated directory for all your development work. For reasons of safety, just for practice, you’re going to create a temporary one right now in the **/tmp** directory inside your root. We don’t want any mishaps in your file system after all. 
 
-From now on, we won’t display the whole command prompt line. Now let’s **mkdir**!!! You guessed it, make a directory and then we’ll cd into it. One thing to note, is that you make your file and directory names without spaces. There are ways around that, but we’re not covering them this time round. 
+From now on, we won’t display the whole command prompt line, just the actual commands. Now let’s **mkdir**!!! You guessed it, make a directory and then we’ll cd into it. One thing to note, is that you must make your file and directory names without spaces. There are ways around that, but we’re not covering them this time round. 
 
 ```bash
 mkdir /tmp/learnbash
 cd /tmp/learnbash
 ```
 
-Note how we start with **/**, an absolute path. First to take us from root, and also to let us create our one new directory nested under **/tmp**. You can double check by **pwd**-ing, but we think you’re starting to get the hang of that by simply looking at your prompt line! 
+Note how we start with **/**, an absolute path. First to take us from root, and also to let us create our one new directory nested under **/tmp**. You can double check by **pwd**-ing, but we think you’re starting to get the hang of that by simply looking on the left of that $ symbol on your prompt line! 
 
-Now, with your well-being in mind, we want to create a few healthy directories all in one go, and after we hit Enter, we want to list them using the **ls** command: 
+Now, all in one go, let's to create a few directories dedicated to your well-being, and after we hit Enter, we want to list them using the **ls** command: 
 
 ```bash
 mkdir learnapple learnbanana learncoconut learndate
