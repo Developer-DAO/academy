@@ -167,6 +167,28 @@ The four directories are side by side, and not nested because we left a space be
 
 Now using the **touch** command, we’re going to make a couple of files where, technically, you would be able to write your project code. You could of course create them in your code editor, but hey, we’re hardcore devs, aren’t we, and do this in our CLI:
 ```bash
+cd learnapple
+touch elderberry.js  fig.css  grapefruit.html
+ls
+```
+
+Let’s cd back, and then straight into learnbanana and make a couple of files in there too
+
+```bash
+cd ../learnbanana
+touch honeydew.ts iboga.sol
+```
+
+If you need to remove i.e. delete a file, you can use **rm** <filename>. If you need to remove directories, you need to make sure they’re empty first to be able to use **rmdir**. So let’s see what happens when we run that. First cd back into learnbash:
+
+```bash
+cd ..
+rmdir learnapple learnbanana learncoconut learndate
+```
+
+So what happened?
+
+```bash
 rmdir: failed to remove 'learnapple': Directory not empty
 rmdir: failed to remove 'learnbanana': Directory not empty
 ```
