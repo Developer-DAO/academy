@@ -1,10 +1,10 @@
-**What is a CLI?**
+**What is a CLI?** **Who is this tutorial for?**
 
-A CLI stands for **C**ommand **L**ine **I**nterface. Most Linux users call a CLI a terminal, Mac users a console, Windows users a shell. Actually all these names have some technical differences, but for (the needs of) our projects we are going to stick with the name CLI.
+A CLI stands for **C**ommand **L**ine **I**nterface. Most Linux users call a CLI a terminal, Mac users a console, Windows users a shell. Actually all these names have some technical differences, but we are going to stick with CLI.
 
 **Why do we use this primitive looking stuff in the 21st Century?**
 
-Come on! It looks retro, so it has to be cool! A CLI allows us access to the file system of our computer by entering our text commands into it. We can also access the **root** of our commuter i.e. our operating system, which is something very powerful, in those cases we need to be really careful. And even better, we can access a world of open source work (repositories, libraries, etc) that our fellow developers have created before us. It’s acts like a gateway for our machine to develop with the outside world. And that makes it cool. 
+Come on! It looks retro, so it must be cool! A CLI allows us access to the file system of our computer by entering our text commands into it. We can also access the **root** of our commuter i.e. our operating system, which is something very powerful, in those cases we need to be really careful. And even better, we can access a world of open source work (repositories, libraries, etc) that our fellow developers have created before us. It’s acts like a gateway for our machine to develop with the outside world. And that makes it cool. 
 
 There are a few concepts we first need to understand before we start. Using a CLI for our work looks really old school, but it’s tried and tested. Still wondering? Using text is extremely resource efficient. No graphics. Text for input, text for output. For every task in the CLI, there’s a user command/programme for it. Each command is wrapped in what is called the **shell** programme. This shell interprets the commands to the kernel (the operating system), which in turn is the gateway to all our hardware.
 
@@ -14,7 +14,7 @@ In our mini lesson, we’ll only look at some basic commands to get you up and r
 
 You can’t just place your mouse pointer anywhere in the window. We’re interfacing the inner file system, the brain, of our computer. For now only use **your mouse** to copy and paste text. Keyboard shortcuts you already know, won’t work the same in here. One keyboard shortcut, we want you to remember is CTRL+C, which lets you abort any programme, or command that’s running e.g. if you make a mistake and the program gets stuck. But it won’t copy any text in there for you! And your arrow keys up and down will take you through previous commands. Handy for not re-typing long commands.
 
-Let’s open a CLI up and have a look then. From your keyboard type the following and wait for the magic:
+If you are using a Mac or Windows, read below how to set them up and then you can continue along with the/us Linux folks. Let’s open a CLI up and have a look then. From your keyboard type the following and wait for the magic:
 
 INFOGRAPHIC of CLIs Linux/Unix/Window
 
@@ -41,7 +41,8 @@ Once `brew` has been successfully installed, a list of `brew` commands can be fo
 Before you get started using your Windows machine for development, you will need to download and install **Windows Subsystem for Linux 2.** An easy ****guide to downloading and installing **WSL-2** can be found here: [https://docs.microsoft.com/en-us/windows/wsl/install-manual](https://docs.microsoft.com/en-us/windows/wsl/install-manual)
 
 Once **WSL-2** is installed on your machine, the commands are essentially the same as they are in Linux. You can find a list of some of the most basic Linux commands in the list above in the **Linux** section.
-We’re going to use Linux here:
+
+Right, now that we are all on the same Linux page, let's go!:
 
 
 
@@ -66,7 +67,7 @@ More basics: sometimes you run a command and get a lot of output. Other times, o
 
 ~~Let’s see how our computer’s file system is structured so we can find our way around easily. It looks simple, and it is, but it can be a bit frustrating to learn to navigate in the beginning. We’ve all been here. We’ll learn a few shell commands, and then you can get back to building out your project.~~ 
 
-Our **working directory** is what the shell understands as the default location for carrying out any file operations. So if you create, search for, delete a file or directory, the shell will assume you want to do that in the directory you are ‘working’ in, otherwise you have to specify just where you want those operations done. Remember **pwd** is your friend if you’re ever lost, although what’s directly **before $** will tell you too! Navigating in the CLI at the start is always a little bit tricky, a little bit quirky. 
+Our **working directory** is what the shell understands as the default location for carrying out any file operations. So if you create, search for, delete a file or directory, the shell will assume you want to do that in the directory you are ‘working’ in, otherwise you have to specify just where you want those operations done. Remember **pwd** is your friend if you’re ever lost, although what’s directly **before $** will tell you too! Navigating in the CLI at the start is always a little bit tricky, a little bit quirky.It's not the same as your computers GUI where you can see all your files and folders. 
 
 **Absolute and relative paths**
 
