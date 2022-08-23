@@ -8,6 +8,7 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Button,
+  Box,
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -28,8 +29,15 @@ function ContentSideDrawer(props: any) {
         {props.title}&nbsp;&nbsp;
         <ArrowRightIcon />
       </Button>
-      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        size="xl"
+        h="100vw"
+      >
         <DrawerOverlay
+          h="100vw"
           backdropFilter="auto"
           backdropInvert="10%"
           backdropBlur="3px"
