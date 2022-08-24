@@ -51,8 +51,8 @@ important for an open-source project.
 
 Some helpful things when reviewing PRs:
 
-- **ALWAYS** download and run the code you're reviewing. Never eyeball it in
-  the PR and approve it.
+- **ALWAYS** download and run the code you're reviewing. Never eyeball it in the
+  PR and approve it.
 - when you review a PR, please add yourself as a reviewer in GitHub so we know
   someone is reviewing
 - go through the formal GitHub review process of starting a review and then
@@ -99,6 +99,21 @@ sure that you check the link to install the requirements to use it) to easily
 create an isolated development environment for your fork. After installing the
 minimum requirements, you can start using it following this
 [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
+
+**Environment Variables**
+
+Copy .env.example and create your own local `.env.local` file for your env
+variables
+
+_note_: If you add a new environment variable, make sure to update the example
+file
+
+If you aren't getting the correct values from your env files ensure you are
+following NextJS naming conventions i.e: `NEXT_PUBLIC_`
+
+[Browser Naming Conventions](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser)
+
+[Server](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables)
 
 ## Grabbing latest version of the code
 
