@@ -183,6 +183,7 @@ cd ../learnbanana
 touch honeydew.ts iboga.sol
 ```
 **What about deleting?**
+
 If you need to remove i.e. delete a file, you can use **rm** </filename>. If you need to remove directories, you need to make sure they’re empty first to be able to use **rmdir**. And you can't remove your working directory, that would be like vapourising yourself! So let’s see what happens if we don't empty them. First cd back into learnbash:
 
 ```bash
@@ -218,7 +219,7 @@ As a developer, you can expect to do more than just modify a few files. You will
 
 Your operating system is already set up to be as safe from attack as possible. Root can change up your whole system and actually open it up to all sorts of vulnerabilities around network services and firewalls, etc. It can let you do most anything. Sometimes you will get advice to download software and change permissions by using a super user command, but it could potentially open a hole where malware can get into your system. And that one command you use could end up triggering a chain reaction of many more. Remember, we’re only human, and also prone to making mistakes, so please be careful. Use good judgement when you find content online. If someone is asking you to use the ***root*** account, or the **su** command, it’s good to be **su**per careful and if you actually feel **su**spicious, that’s okay. Unless you’re totally **su**re of what you are doing, ask around for solid advice e.g. on Stack Exchange (soon, you’ll be able to ask on our School of Code Forum, post-MVP!!) The safest source for software is actually from your operating system’s official repositories i.e. its app store, but as devs, we do need to work a lot from the command line.
 
-**I want to be superuser too!!**
+**I want to be a superuser too!!**
 
 Each time you use a **sudo** command, you will need to type in your own system's password. The default cache period for holding the password is 15 minutes in most Linux distros. Keep that in mind. If you are typing in commands in that time period, you are in superuser mode. Let’s use the **cat** command which would normally let us view the content of a directory, but because it has encrypted passwords, therefore sensitive, we will need our sudo command to access it. Try it **without** and then **with** sudo. Also note that your password will be invisible as you type it:
 ```bash
