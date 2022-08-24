@@ -8,7 +8,8 @@ const Home: NextPage = () => {
     <div>
       <NextSeo
         title="Developer DAO Academy"
-        description="Developer DAO Academy"
+        description="Academy is an open-source education platform created by the
+        Developer DAO."
         openGraph={{
           images: [
             {
