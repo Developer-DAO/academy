@@ -17,9 +17,9 @@ icons:
   ]
 ---
 
-# Lesson 3 - Tier NFTs - Lesson
+# Lesson 3 - Tier NFTs
 
-# What are we building?
+## What are we building?
 
 We are going to build on-chain NFTs, that have different Tiers (and prices).
 
@@ -32,7 +32,7 @@ services depending on the NFT they mint/own.
 
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
-# First things first 👷‍♂️
+## First things first 👷‍♂️
 
 Before we start coding, we need to create our project. We are going to follow
 the same steps as in previous lessons. Using our package manager (npm, yarn,
@@ -46,21 +46,21 @@ Let’s `cd` into our School of Code projects folder, and create a folder for ou
 NFT project:
 
 ```bash
-# (OPTIONAL) create a folder for our schoolofcode projects
+## (OPTIONAL) create a folder for our schoolofcode projects
 mkdir schoolofcode
 cd schoolofcode
 
-# create a folder for this project
+## create a folder for this project
 mkdir tierNFT
 cd tierNFT
 
-# initialize our folder as an npm package
+## initialize our folder as an npm package
 npm init -y
 
-# install hardhat (and its dependencies)
+## install hardhat (and its dependencies)
 npm install --save-dev hardhat
 
-# create a Hardhat project
+## create a Hardhat project
 npx hardhat
 ```
 
@@ -122,7 +122,7 @@ In a Hardhat project, the default folders are supposed to be for:
 - `scripts/` is where simple automation scripts go.
 - `test/` is where your tests should go.
 
-## Let’s start coding!
+### Let’s start coding!
 
 Fire up your code editor and let’s start hacking. I’m using VSCode, so I run
 `code .` in my terminal.
@@ -141,7 +141,7 @@ contract TierNFT {
 Now that we have our License, the version of solidity we will be using and the
 contract set up, we can add the logic and the state.
 
-# What do we need?
+## What do we need?
 
 As we are creating tiers (or categories/levels) for our NFTs, we need to store
 information about tiers on our contracts.
@@ -149,7 +149,7 @@ information about tiers on our contracts.
 Let’s write our smart contract within four steps. We will try to go step by
 step.
 
-## Inheriting OpenZeppelin ERC721 and adding a Mint Function
+### Inheriting OpenZeppelin ERC721 and adding a Mint Function
 
 Let’s get started with a simple contract. We will inherit OpenZeppelin ERC721
 contract again.
@@ -204,7 +204,7 @@ contract TierNFT is ERC721 {
 <br/>
 
 
-## Adding Tiers and Using Them in the Mint Function
+### Adding Tiers and Using Them in the Mint Function
 
 Now it’s time for us to add our tiers. Just as we explained before each tiers
 will have different values as the service subscription. Now let’s go ahead and
@@ -322,7 +322,7 @@ contract TierNFT is ERC721 {
 </details>
 <br/>
 
-## Create a (simple) tokenURI function
+### Create a (simple) tokenURI function
 
 When we inherited ERC721 contract, we also got a function for `tokenURI` where
 we can store anything that we want. It can be an image, video or anything that
@@ -492,7 +492,7 @@ uint256) public tokenTier;
 </details>
 <br/>
 
-## Complete TokenURI function (With our SVG!)
+### Complete TokenURI function (With our SVG!)
 
 We did a bunch of things with our contract but now the time has come for us to
 create the incredible SVG we want.
@@ -638,7 +638,7 @@ contract TierNFT is ERC721 {
 </details>
 <br/>
 
-## Where are all our funds??? We need a withdraw Function!
+### Where are all our funds??? We need a withdraw Function!
 
 We need to find a way to withdraw our funds otherwise we might end up loosing
 all our funds.
@@ -799,7 +799,7 @@ contract TierNFT is ERC721, Ownable {
 </details>
 <br/>
 
-## Time for our Deploy Script
+### Time for our Deploy Script
 
 We need a script for us to deploy our smart contract. Let’s write that.
 
@@ -851,7 +851,7 @@ main().catch((error) => {
   any) to the console.
 
 
-## Time to DEPLOY but also some changes
+### Time to DEPLOY but also some changes
 
 Now the time has come for us to deploy our Smart Contract. But before we can do
 that we need to change our `hardhat.config.js` file placed in our root folder to
@@ -886,7 +886,7 @@ Testnet to deploy the contract.
   testnet button and search for Mumbai. You will see the testnet network with
   chainID 80001 and add it to the wallet. Note: Always make sure to use a spare
   wallet with no money for these tutorials.
-  ### Getting Some Testnet
+  #### Getting Some Testnet
   Testnet is an experimental network with sandbox environment where developers
   can test, create and modify functionalities, monitor the blockchain network
   performance, fix bugs and other network failures without having to use the
@@ -947,7 +947,7 @@ Woohoo! Finally we deployed our contract.
 
 Now copy the contract address because we will need it in a bit.
 
-## Create a Script to Mint our tier NFTs
+### Create a Script to Mint our tier NFTs
 
 Without a Mint Script we won’t be able to mint any of our tier NFTs.
 
@@ -1017,7 +1017,7 @@ main().catch((error) => {
 - `let totalSupply = await contract.totalSupply()` - is calling the
   `totalSupply()` function to check if the 3 NFTs minted correctly.
 
-## Let’s MINT
+### Let’s MINT
 
 To mint our tier NFTs we will run the following command.
 
@@ -1041,4 +1041,4 @@ with your contract address or with the name that you chose in
 Well of course we ended up minting more than three NFTs. But you will be able to
 view the three NFTs which you minted.
 
-# Woohoo ✨ Now it’s time to celebrate.
+## Woohoo ✨ Now it’s time to celebrate.
