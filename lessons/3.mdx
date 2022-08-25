@@ -1,0 +1,1044 @@
+---
+i18n: 'smart-contracts'
+title: TierNFTs
+description:
+  Write and deploy a Smart Contract for a Tier Based NFT. Builds on knowledge
+  from Lesson 2.
+icons:
+  [
+    'npm',
+    'solidity',
+    'hardhat',
+    'openzeppelin',
+    'ethereum',
+    'etherscan',
+    'opensea',
+    'polygon',
+  ]
+---
+
+# Lesson 3 - Tier NFTs - Lesson
+
+# What are we building?
+
+We are going to build on-chain NFTs, that have different Tiers (and prices).
+
+In the previous lesson, we talked about NFTs and their use cases. If we can use
+an NFT to login to a web page, or to access a service, we can try to use them to
+differentiate different levels or categories in said service. Think of some
+streaming services out there (Netflix, Disney+, etc). Some have different levels
+of access depending on your subscription. We want to let users access different
+services depending on the NFT they mint/own.
+
+![1_diagram.png](/public/assets/lessons/3/1_diagram.png)
+
+# First things first 👷‍♂️
+
+Before we start coding, we need to create our project. We are going to follow
+the same steps as in previous lessons. Using our package manager (npm, yarn,
+etc) we create a Hardhat project and remove unnecessary files.
+
+If you’ve done our previous lesson, it’s the exact same process. Make a note of
+remembering these steps and what they do, for they are going to be used a lot in
+the future.
+
+Let’s `cd` into our School of Code projects folder, and create a folder for our
+NFT project:
+
+```bash
+# (OPTIONAL) create a folder for our schoolofcode projects
+mkdir schoolofcode
+cd schoolofcode
+
+# create a folder for this project
+mkdir tierNFT
+cd tierNFT
+
+# initialize our folder as an npm package
+npm init -y
+
+# install hardhat (and its dependencies)
+npm install --save-dev hardhat
+
+# create a Hardhat project
+npx hardhat
+```
+
+<aside>
+💡 The `--save-dev` flag used in the last command, lets the project know it's a development dependency (not needed in production). You can view what dependencies are needed in the `package.json` file in the root of the project.
+
+</aside>
+
+Choose `Create a basic sample project` and hardhat will create an example
+project for us. It will give us 3 prompts for options. Choosing the defaults is
+ok for us. Here's what mine asked me:
+
+```bash
+#✔ What do you want to do? ...
+> Create a basic sample project
+#✔ Hardhat project root: · ~/schoolofcode/projectNFT
+#✔ Do you want to add a .gitignore? (Y/n) · y
+#✔ Do you want to install this sample project's dependencies with npm (@nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers)? (Y/n) · y
+```
+
+- **Hardhat project root** → The folder where we want to create the project
+- **Do you want to add a .gitignore?** → Select 'y'. If you are patient to
+  finish the lesson, you'll learn what it's for
+- **Do you want to install this sample project's dependencies with npm (…)?** →
+  Select 'y'. These are packages (programs) that our project needs to be able to
+  run.
+
+<aside>
+💡 The project asked us to install `@nomicfoundation/hardhat-toolbox` in the last prompt. If it didn’t install or we accidentally chose ‘n’, we can always install it manually with:
+
+```bash
+npm install --save-dev @nomicfoundation/hardhat-toolbox ethers ethereum-waffle chai
+```
+
+</aside>
+
+We now need to add our last dependency (OpenZeppelin contracts):
+
+```bash
+npm install @openzeppelin/contracts
+```
+
+<aside>
+💡 Open Zeppelin developed a lot of standard contracts that are super powerful, widely used and fully tested and audited. We are going to try and step in the shoulder of giants and leverage the power of open source to create our project in a simpler way, while not loosing focus on security that’s super important in the web3 world
+
+</aside>
+
+We delete some files so we start fresh:
+
+```bash
+rm contracts/Lock.sol
+rm scripts/deploy.js
+rm test/Lock.js
+```
+
+In a Hardhat project, the default folders are supposed to be for:
+
+- `contracts/` is where the source files for your contracts should be.
+- `scripts/` is where simple automation scripts go.
+- `test/` is where your tests should go.
+
+## Let’s start coding!
+
+Fire up your code editor and let’s start hacking. I’m using VSCode, so I run
+`code .` in my terminal.
+
+Let’s create an empty file named `TierNFT.sol` inside the `contracts/` folder
+and copy this code inside:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
+
+contract TierNFT {
+}
+```
+
+Now that we have our License, the version of solidity we will be using and the
+contract set up, we can add the logic and the state.
+
+# What do we need?
+
+As we are creating tiers (or categories/levels) for our NFTs, we need to store
+information about tiers on our contracts.
+
+Let’s write our smart contract within four steps. We will try to go step by
+step.
+
+## Inheriting OpenZeppelin ERC721 and adding a Mint Function
+
+Let’s get started with a simple contract. We will inherit OpenZeppelin ERC721
+contract again.
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+contract TierNFT is ERC721 {
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol) {}
+
+}
+```
+
+We have a constructor on our contract. We need to have this constructor as we
+are inheriting ERC721 from OpenZeppelin implementation. If we didn’t have the
+constructor then the compiler would have thrown us errors.
+
+Now let’s go ahead and add a mint function to our contract. We will add a
+function that only uses `_safeMint`
+
+<br/>
+<details>
+<summary>**Our code will look something like this**</summary>
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
+
+contract TierNFT is ERC721 {
+
+    uint256 public totalSupply;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+    function mint() public payable {
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+    }
+
+}
+
+````
+</details>
+<br/>
+
+
+## Adding Tiers and Using Them in the Mint Function
+
+Now it’s time for us to add our tiers. Just as we explained before each tiers
+will have different values as the service subscription. Now let’s go ahead and
+add the tiers and assign their values.
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+string constant TIER_NAME_0 = "NOOB";
+string constant TIER_NAME_1 = "DEV";
+string constant TIER_NAME_2 = "HACKER";
+uint256 constant TIER_VALUE_0 = 0.01 ether;
+uint256 constant TIER_VALUE_1 = 0.02 ether;
+uint256 constant TIER_VALUE_2 = 0.05 ether;
+
+contract TierNFT is ERC721 {
+
+    uint256 public totalSupply;
+    mapping(uint256 => uint256) public tokenTier;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+		// We will add more code here
+
+}
+````
+
+We have added three types of tiers such as `NOOB` , `DEV` and `HACKER` . We
+assigned their values also.
+
+The mapping `mapping(uint256 => uint256) public tokenTier;` will store the tiers
+that we select with our msg values.
+
+Now we need to add our mint function for the tier NFTs:
+
+```solidity
+    // constructor part of the code...
+
+		function mint() public payable {
+        require(
+            msg.value >= TIER_VALUE_0,
+            "Not enough value for the minimum Tier"
+        );
+
+        uint256 tierId = 0;
+        if (msg.value >= TIER_VALUE_2) tierId = 2;
+        else if (msg.value >= TIER_VALUE_1) tierId = 1;
+
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+        tokenTier[totalSupply] = tierId;
+    }
+
+		// We will add more code here
+}
+```
+
+With `msg.value` we are storing the tiers we are selecting. We are telling the
+mint function to select tiers based on the amount of value we have. If we don’t
+have enough value for our tier 0 then we will get a message mentioning us, "Not
+enough value for the minimum Tier".
+
+But if we have enough value then we can select the value we want otherwise our
+function will pick the possible tier value we can acquire with the amount we
+have.
+
+<br/>
+<details>
+<summary>**View full code here**</summary>
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
+
+string constant TIER_NAME_0 = "NOOB";
+string constant TIER_NAME_1 = "DEV";
+string constant TIER_NAME_2 = "HACKER";
+uint256 constant TIER_VALUE_0 = 0.01 ether;
+uint256 constant TIER_VALUE_1 = 0.02 ether;
+uint256 constant TIER_VALUE_2 = 0.05 ether;
+
+contract TierNFT is ERC721 {
+
+    uint256 public totalSupply;
+    mapping(uint256 => uint256) public tokenTier;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+    function mint() public payable {
+        require(
+            msg.value >= TIER_VALUE_0,
+            "Not enough value for the minimum Tier"
+        );
+
+        uint256 tierId = 0;
+        if (msg.value >= TIER_VALUE_2) tierId = 2;
+        else if (msg.value >= TIER_VALUE_1) tierId = 1;
+
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+        tokenTier[totalSupply] = tierId;
+    }
+
+}
+
+````
+</details>
+<br/>
+
+## Create a (simple) tokenURI function
+
+When we inherited ERC721 contract, we also got a function for `tokenURI` where
+we can store anything that we want. It can be an image, video or anything that
+we want. With the help of the OpenZeppelin’s ERC721 contract we have the ability
+to define **a base path** for creating an unique URI which adds the token ID
+towards the end.
+
+```solidity
+// Place this next to the other imports at the top:
+import "@openzeppelin/contracts/utils/Base64.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+````
+
+We imported `Base64` which will help us to encode the tokenURI so that it
+returns the JSON file we need for our tier NFTs.
+
+Remember how we talked about having token ID towards the end of the unique URI?
+
+To do that, we would need to import `Strings` which will be able to write our
+tokenID in a string inside the JSON file.
+
+For this lesson we won’t be creating a separate JSON file. We will write it
+together with the contract.
+
+```solidity
+    // mint function part of the code...
+
+    // Create the tokenURI json on the fly without creating files individually
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(tokenId), "Nonexistent token");
+
+        string memory imageSVG = "PLACEHOLDER FOR SVG IMAGE";
+
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "', name(), " #", Strings.toString(tokenId),
+                        '", "description": "TierNFTs collection",'
+												'"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
+                        '"}'
+                    )
+                )
+            )
+        );
+
+        return string(abi.encodePacked("data:application/json;base64,", json));
+    }
+
+		// We will add more code here
+}
+```
+
+Let’s break it down for us to understand.
+
+- Within the `tokenURI` function we have included `override` which is a ERC721
+  function we will be using because we are not creating a separate JSON file to
+  store images or other services but creating it on the fly.
+- We also added, `require(_exists(tokenId), "Nonexistent token");` . According
+  to ERC721 specification it is required to throw an error (revert tx) if the
+  NFT doesn't exist.
+- `imageSVG` is a placeholder for our image and we will deal with it a bit
+  later.
+- `Base64.encode` is for encoding the JSON in Base64 so browsers can translate
+  that into a file (the same way e-mail carry attached files inside them).
+- `string( abi.encodePacked () )` concatenates string the string in similar way,
+  which we did during our previous lesson.
+
+This is the JSON format of our metadata:
+
+```solidity
+'{"name": "', name(), " #", Strings.toString(tokenId),
+'", "description": "TierNFTs collection",'
+'"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
+'"}'
+```
+
+The part `data:image/svg+xml;base64` tells the browser that the part following
+the comma is a string of text written in Base64, (image/svg…) so the browsers
+can decode it back into our SVG file format. Just as an example, if our
+collection `TierNFT`, and the TokenID was `3`, our JSON would end up look
+something like this:
+
+```solidity
+{
+	"name": "TierNFT #3",
+	"description": "TierNFTs collection",'
+	"image": "data:image/svg+xml;base64,A_BUNCH_OF_BASE64_LETTERS_AND_NUMBERS_HERE"
+}
+```
+
+<br/>
+<details>
+<summary>**here’s the updated code**</summary>
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
+import '@openzeppelin/contracts/utils/Base64.sol'
+import '@openzeppelin/contracts/utils/Strings.sol'
+
+string constant TIER_NAME_0 = "NOOB"; string constant TIER_NAME_1 = "DEV";
+string constant TIER_NAME_2 = "HACKER"; uint256 constant TIER_VALUE_0 = 0.01
+ether; uint256 constant TIER_VALUE_1 = 0.02 ether; uint256 constant TIER_VALUE_2
+= 0.05 ether;
+
+contract TierNFT is ERC721 { uint256 public totalSupply; mapping(uint256 =>
+uint256) public tokenTier;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+    function mint() public payable {
+        require(
+            msg.value >= TIER_VALUE_0,
+            "Not enough value for the minimum Tier"
+        );
+
+        uint256 tierId = 0;
+        if (msg.value >= TIER_VALUE_2) tierId = 2;
+        else if (msg.value >= TIER_VALUE_1) tierId = 1;
+
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+        tokenTier[totalSupply] = tierId;
+    }
+
+    // Create the tokenURI json on the fly without creating files individually
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(tokenId), "Nonexistent token");
+
+        string memory imageSVG = "PLACEHOLDER FOR SVG IMAGE";
+
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "', name(), " #", Strings.toString(tokenId),
+                        '", "description": "TierNFTs collection",'
+                                            '"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
+                        '"}'
+                    )
+                )
+            )
+        );
+
+        return string(abi.encodePacked("data:application/json;base64,", json));
+    }
+
+}
+
+````
+</details>
+<br/>
+
+## Complete TokenURI function (With our SVG!)
+
+We did a bunch of things with our contract but now the time has come for us to
+create the incredible SVG we want.
+
+Add these lines right next to the other constants defined for the tiers:
+
+```solidity
+string constant SVG_START = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" font-family="sans-serif"><defs><filter id="A" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="500" width="500"><feDropShadow dx="1" dy="2" stdDeviation="8" flood-opacity=".67" width="200%" height="200%" /></filter><linearGradient id="B" x1="0" y1="0" x2="15000" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#ad00ff" /><stop offset=".23" stop-color="#4e00ec" /><stop offset=".41" stop-color="#ff00f5" /><stop offset=".59" stop-color="#e0e0e0" /><stop offset=".77" stop-color="#ffd810" /><stop offset=".95" stop-color="#ad00ff" /></linearGradient><linearGradient id="C" x1="0" y1="60" x2="0" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#d040b8" /><stop offset="1" stop-color="#e0e0e0" /></linearGradient></defs><path fill="url(#B)" d="M0 0h15000v500H0z"><animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="-14500 0" dur="16s" repeatCount="indefinite" /></path><circle fill="#1d1e20" cx="100" cy="90" r="45" filter="url(#A)" /><text x="101" y="99" text-anchor="middle" class="nftLogo" font-size="32px" fill="url(#C)" filter="url(#A)">D_D<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 90" to="360 100 90" dur="5s" repeatCount="indefinite" /></text><g font-size="32" fill="#fff" filter="url(#A)"><text x="250" y="280" text-anchor="middle" class="tierName">';
+string constant SVG_END = "</text></g></svg>";
+// string constant TIER_NAME = ...
+````
+
+Here, we prepared the start and end of our SVG. We can test this out by pasting
+this code into this [online svg editor](https://editsvgcode.com/).
+
+Now we need to modify our tokenURI function again.
+
+Inside our tokenURI function, right below our `require(…)` we add these lines:
+
+```solidity
+// require(...);
+
+string memory tierName = tokenTier[tokenId] == 2
+            ? TIER_NAME_2
+            : tokenTier[tokenId] == 1
+            ? TIER_NAME_1
+            : TIER_NAME_0;
+
+        string memory imageSVG = string(
+            abi.encodePacked(SVG_START, tierName, SVG_END)
+        );
+
+// string memory imageSVG = string(...
+```
+
+- We added `tierName` to understand the name of the tierNFT which will help us
+  to understand what types of tier we are getting.
+- `imageSVG` is to create a SVG image of the tier inside.
+
+For marketplaces to recognize our NFT assets, we need to add JSON attributes. We
+created our JSON metadata attributes based on
+[Opensea Metadata Standard](https://docs.opensea.io/docs/metadata-standards)
+which you can take a look at to understand it better.
+
+We'll replace the JSON part to add our attributes:
+
+```solidity
+    '{"name": "',name()," #",Strings.toString(tokenId),
+    '", "description": "TierNFTs collection",'
+		'"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
+    '","attributes":[{"trait_type": "Tier", "value": "',tierName,
+    '" }]}'
+```
+
+Based on the metadata standards, we added attributes which are basically some
+trait types.
+
+<br/>
+<details>
+<summary>**View updated code**</summary>
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
+import '@openzeppelin/contracts/utils/Base64.sol'
+import '@openzeppelin/contracts/utils/Strings.sol'
+
+string constant SVG_START = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" font-family="sans-serif"><defs><filter id="A" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="500" width="500"><feDropShadow dx="1" dy="2" stdDeviation="8" flood-opacity=".67" width="200%" height="200%" /></filter><linearGradient id="B" x1="0" y1="0" x2="15000" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#ad00ff" /><stop offset=".23" stop-color="#4e00ec" /><stop offset=".41" stop-color="#ff00f5" /><stop offset=".59" stop-color="#e0e0e0" /><stop offset=".77" stop-color="#ffd810" /><stop offset=".95" stop-color="#ad00ff" /></linearGradient><linearGradient id="C" x1="0" y1="60" x2="0" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#d040b8" /><stop offset="1" stop-color="#e0e0e0" /></linearGradient></defs><path fill="url(#B)" d="M0 0h15000v500H0z"><animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="-14500 0" dur="16s" repeatCount="indefinite" /></path><circle fill="#1d1e20" cx="100" cy="90" r="45" filter="url(#A)" /><text x="101" y="99" text-anchor="middle" class="nftLogo" font-size="32px" fill="url(#C)" filter="url(#A)">D_D<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 90" to="360 100 90" dur="5s" repeatCount="indefinite" /></text><g font-size="32" fill="#fff" filter="url(#A)"><text x="250" y="280" text-anchor="middle" class="tierName">';
+string constant SVG_END = "</text></g></svg>";
+
+string constant TIER_NAME_0 = "NOOB";
+string constant TIER_NAME_1 = "DEV";
+string constant TIER_NAME_2 = "HACKER";
+uint256 constant TIER_VALUE_0 = 0.01 ether;
+uint256 constant TIER_VALUE_1 = 0.02 ether;
+uint256 constant TIER_VALUE_2 = 0.05 ether;
+
+contract TierNFT is ERC721 {
+
+    uint256 public totalSupply;
+    mapping(uint256 => uint256) public tokenTier;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+    function mint() public payable {
+        require(
+            msg.value >= TIER_VALUE_0,
+            "Not enough value for the minimum Tier"
+        );
+
+        uint256 tierId = 0;
+        if (msg.value >= TIER_VALUE_2) tierId = 2;
+        else if (msg.value >= TIER_VALUE_1) tierId = 1;
+
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+        tokenTier[totalSupply] = tierId;
+    }
+
+    // Create the tokenURI json on the fly without creating files individually
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(tokenId), "Nonexistent token");
+
+        string memory tierName = tokenTier[tokenId] == 2
+            ? TIER_NAME_2
+            : tokenTier[tokenId] == 1
+            ? TIER_NAME_1
+            : TIER_NAME_0;
+
+        string memory imageSVG = string(
+            abi.encodePacked(SVG_START, tierName, SVG_END)
+        );
+
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "',name()," #",Strings.toString(tokenId),
+                        '", "description": "TierNFTs collection",'
+                                            '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
+                        '","attributes":[{"trait_type": "Tier", "value": "',tierName,
+                        '" }]}'
+                    )
+                )
+            )
+        );
+
+        return string(abi.encodePacked("data:application/json;base64,", json));
+    }
+
+}
+
+````
+</details>
+<br/>
+
+## Where are all our funds??? We need a withdraw Function!
+
+We need to find a way to withdraw our funds otherwise we might end up loosing
+all our funds.
+
+```solidity
+// Place this next to the other imports at the top:
+import "@openzeppelin/contracts/access/Ownable.sol";
+````
+
+We imported `Ownable` so that only we can withdraw our funds, not anyone else.
+
+```solidity
+// Replace our contract definition, adding 'Ownable' at the end of the line:
+
+contract TierNFT is ERC721, Ownable {
+
+		// Our whole contract code here
+
+}
+```
+
+We inherit `Ownable` from the Open Zeppelin contract.
+
+Now let’s write our withdraw function.
+
+```solidity
+    // tokenURI function part of the code...
+
+		// Function to withdraw funds from contract
+    function withdraw() public onlyOwner {
+        // Check that we have funds to withdraw
+        uint256 balance = address(this).balance;
+        require(balance > 0, "Balance should be > 0");
+
+        // Withdraw funds.
+        (bool success, ) = payable(owner()).call{value: balance}("");
+        require(success, "Withdraw failed");
+    }
+
+		// 'withdraw' will be our last function at the end of the contract
+
+}
+```
+
+- `onlyOwner` - This is where we use the Ownable imported at the top. This makes
+  sure that only the account that deployed the contract (owner is assigned on
+  constructor) can execute this function.
+- With `uint256 balance = address(this).balance` function we are making sure
+  that we have something to withdraw by using
+  `require(balance > 0, "Balance should be > 0");` . The function consumes gas,
+  so we need to make sure that we aren’t running the function unless we have
+  some amount which we can draw.
+- `(bool success, ) = payable(owner()).call{value: balance}("")` - is an actual
+  transfer of funds which uses the whole balance that we checked in the previous
+  instruction. We need to keep in mind that `call` doesn’t revert.
+- `require(success, "Withdraw failed")` - This is a good practice because the
+  call doesn’t revert. With this practice we can make sure that the transfer
+  occurred and throw an error if it didn’t.
+
+<br/>
+<details>
+<summary>**View the Full Contract Here**</summary>
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity 0.8.11;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Base64.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
+string constant SVG_START = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" font-family="sans-serif"><defs><filter id="A" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="500" width="500"><feDropShadow dx="1" dy="2" stdDeviation="8" flood-opacity=".67" width="200%" height="200%" /></filter><linearGradient id="B" x1="0" y1="0" x2="15000" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#ad00ff" /><stop offset=".23" stop-color="#4e00ec" /><stop offset=".41" stop-color="#ff00f5" /><stop offset=".59" stop-color="#e0e0e0" /><stop offset=".77" stop-color="#ffd810" /><stop offset=".95" stop-color="#ad00ff" /></linearGradient><linearGradient id="C" x1="0" y1="60" x2="0" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#d040b8" /><stop offset="1" stop-color="#e0e0e0" /></linearGradient></defs><path fill="url(#B)" d="M0 0h15000v500H0z"><animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="-14500 0" dur="16s" repeatCount="indefinite" /></path><circle fill="#1d1e20" cx="100" cy="90" r="45" filter="url(#A)" /><text x="101" y="99" text-anchor="middle" class="nftLogo" font-size="32px" fill="url(#C)" filter="url(#A)">D_D<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 90" to="360 100 90" dur="5s" repeatCount="indefinite" /></text><g font-size="32" fill="#fff" filter="url(#A)"><text x="250" y="280" text-anchor="middle" class="tierName">';
+string constant SVG_END = "</text></g></svg>";
+
+string constant TIER_NAME_0 = "NOOB";
+string constant TIER_NAME_1 = "DEV";
+string constant TIER_NAME_2 = "HACKER";
+uint256 constant TIER_VALUE_0 = 0.01 ether;
+uint256 constant TIER_VALUE_1 = 0.02 ether;
+uint256 constant TIER_VALUE_2 = 0.05 ether;
+
+contract TierNFT is ERC721, Ownable {
+    uint256 public totalSupply;
+    mapping(uint256 => uint256) public tokenTier;
+
+    constructor(string memory _name, string memory _symbol)
+        ERC721(_name, _symbol)
+    {}
+
+    function mint() public payable {
+        require(
+            msg.value >= TIER_VALUE_0,
+            "Not enough value for the minimum Tier"
+        );
+
+        uint256 tierId = 0;
+        if (msg.value >= TIER_VALUE_2) tierId = 2;
+        else if (msg.value >= TIER_VALUE_1) tierId = 1;
+
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+        tokenTier[totalSupply] = tierId;
+    }
+
+    // Create the tokenURI json on the fly without creating files individually
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        virtual
+        override
+        returns (string memory)
+    {
+        require(_exists(tokenId), "Nonexistent token");
+
+        string memory tierName = tokenTier[tokenId] == 2
+            ? TIER_NAME_2
+            : tokenTier[tokenId] == 1
+            ? TIER_NAME_1
+            : TIER_NAME_0;
+
+        string memory imageSVG = string(
+            abi.encodePacked(SVG_START, tierName, SVG_END)
+        );
+
+        string memory json = Base64.encode(
+            bytes(
+                string(
+                    abi.encodePacked(
+                        '{"name": "',
+                        name(),
+                        " #",
+                        Strings.toString(tokenId),
+                        '", "description": "TierNFTs collection", "image": "data:image/svg+xml;base64,',
+                        Base64.encode(bytes(imageSVG)),
+                        '","attributes":[{"trait_type": "Tier", "value": "',
+                        tierName,
+                        '" }]}'
+                    )
+                )
+            )
+        );
+
+        return string(abi.encodePacked("data:application/json;base64,", json));
+    }
+
+    // Function to withdraw funds from contract
+    function withdraw() public onlyOwner {
+        // Check that we have funds to withdraw
+        uint256 balance = address(this).balance;
+        require(balance > 0, "Balance should be > 0");
+
+        // Withdraw funds.
+        (bool success, ) = payable(owner()).call{value: balance}("");
+        require(success, "Withdraw failed");
+    }
+}
+```
+</details>
+<br/>
+
+## Time for our Deploy Script
+
+We need a script for us to deploy our smart contract. Let’s write that.
+
+Create a new javascript file named `deploy.js` in the `scripts` folder with this
+code:
+
+```jsx
+const hre = require('hardhat')
+
+/** Set contract and collection name **/
+const CONTRACT_NAME = 'TierNFT'
+const COLLECTION_NAME = 'TierNFT'
+const COLLECTION_SYMBOL = 'Tier'
+
+/** Main deploy function **/
+async function main() {
+  const contractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME)
+  const contract = await contractFactory.deploy(
+    COLLECTION_NAME,
+    COLLECTION_SYMBOL,
+  )
+  await contract.deployed()
+  // Print our newly deployed contract address
+  console.log(`Contract deployed to ${contract.address}`)
+}
+
+/** Run Main function - Do not change **/
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+- `CONTRACT_NAME = "TierNFT"` - is the name of our contract, we will use it
+  later to tell Hardhat to deploy our contract.
+- With `const COLLECTION_NAME = "TierNFT"` and
+  `const COLLECTION_SYMBOL = "Tier"` - we are defining Name and Symbol to pass
+  to our constructor when we need to deploy.
+- `hre.ethers.getContractFactory(CONTRACT_NAME)` - We are asking Hardhat Runtime
+  Environment to get us a contract factory for our contract.
+- `contractFactory.deploy` - We are asking the contract factory to deploy our
+  contract. This is the deploy tx!
+- `COLLECTION_NAME, COLLECTION_SYMBOL` - These are the parameters for our
+  contract's constructor function.
+- `await contract.deployed()` - It waits for the tx to be approved and our
+  contract is finished deploying.
+- The `main().catch( … )` at the very end just makes sure that all the previous
+  code is run when someone runs this script, and also prints out the errors (if
+  any) to the console.
+
+
+## Time to DEPLOY but also some changes
+
+Now the time has come for us to deploy our Smart Contract. But before we can do
+that we need to change our `hardhat.config.js` file placed in our root folder to
+something like this.
+
+```jsx
+require('@nomicfoundation/hardhat-toolbox')
+require('dotenv').config()
+
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: '0.8.11',
+  networks: {
+    mumbai: {
+      url: 'https://rpc-mumbai.maticvigil.com',
+      accounts: [process.env.PRIVATE_KEY],
+    },
+  },
+}
+```
+
+We are adding the RPC and the network to our config file. We will need some
+Testnet to deploy the contract.
+
+<br/>
+<details>
+<summary>**Details on adding the network and getting some testnet**</summary>
+
+  ![2_faucet.png](/public/assets/lessons/3/2_faucet.png)
+  To add the Polygon Mumbai network head over to the
+  [Chainlist](https://chainlist.org/) and connect your wallet. Then toggle the
+  testnet button and search for Mumbai. You will see the testnet network with
+  chainID 80001 and add it to the wallet. Note: Always make sure to use a spare
+  wallet with no money for these tutorials.
+  ### Getting Some Testnet
+  Testnet is an experimental network with sandbox environment where developers
+  can test, create and modify functionalities, monitor the blockchain network
+  performance, fix bugs and other network failures without having to use the
+  real crypto coins or worrying about breaking the main chain. The cost of
+  operation on mainnet is higher. As every operation performed on the blockchain
+  requires a fee so we can use testnet for testing purposes. We get testnets
+  from faucets. Faucets are websites which dips small amount of testnets on
+  addresses and sometimes they require completion of small tasks before dipping
+  some testnet on the wallets. Note: Testnet and mainnet are separate networks.
+  You can not send money from testnet to mainnet. To get some testnet let’s head
+  over to this [website](https://faucet.paradigm.xyz/).
+  ![3_faucet.png](/public/assets/lessons/3/3_faucet.png)
+  If you complete the required tasks that was asked, you can get testnets that
+  are not limited to one kind of testnet.
+</details>
+<br/>
+
+We can’t deploy yet. We need to add a `.env` file to our root folder to make
+sure we are not pushing our private keys into public repositories.
+
+```bash
+PRIVATE_KEY=f8abc629b....
+```
+
+You need to add your private key into this `.env` file.
+
+<aside>
+💡 Also, make sure you have a line that says `.env` in the `.gitignore` file at our root folder. If this file doesn't exist, create it and add that line! This makes sure we don't accidentally upload our `.env` file to our public repositories by mistake.
+
+</aside>
+
+Now we will run this command to install the `dotenv` package:
+
+```bash
+npm install dotenv --save
+```
+
+This takes care of loading our environment variables from our `.env` file so we
+don’t have to store sensitive information (like our private keys) to standard
+configuration files which we need uploaded to a project's repo.
+
+Remember to always **protect your private keys** to keep your wallet safe.
+
+**It’s Time**
+
+We will deploy our Smart Contract by using this command.
+
+```bash
+npx hardhat run scripts/deploy.js --network mumbai
+```
+
+We are specifying where we want to deploy our contract to in the `—network` part
+of the command.
+
+![4_deploy.png](/public/assets/lessons/3/4_deploy.png)
+
+Woohoo! Finally we deployed our contract.
+
+Now copy the contract address because we will need it in a bit.
+
+## Create a Script to Mint our tier NFTs
+
+Without a Mint Script we won’t be able to mint any of our tier NFTs.
+
+We are going to call the mint function in our contract 3 times to mint the 3
+different Tier.
+
+**Here’s the mint script.**
+
+```jsx
+const hre = require('hardhat')
+
+/** Set contract and collection name **/
+const CONTRACT_NAME = 'TierNFT'
+const CONTRACT_ADDRESS = '0x....'
+const VALUE_TIER_0 = '0.01' // in ethers/matic
+const VALUE_TIER_1 = '0.02' // in ethers/matic
+const VALUE_TIER_2 = '0.05' // in ethers/matic
+
+/** Main deploy function **/
+async function main() {
+  const contractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME)
+  const contract = await contractFactory.attach(CONTRACT_ADDRESS)
+  // Print our newly deployed contract address
+  console.log(`Attached contract: ${contract.address}`)
+
+  // Call the mint function for Tier 0
+  let txn = await contract.mint({
+    value: hre.ethers.utils.parseEther(VALUE_TIER_0),
+  })
+  await txn.wait() // Wait for the NFT to be minted
+  console.log('Minted a Tier 0 NFT!')
+
+  // Call the mint function for Tier 1
+  txn = await contract.mint({
+    value: hre.ethers.utils.parseEther(VALUE_TIER_1),
+  })
+  await txn.wait() // Wait for the NFT to be minted
+  console.log('Minted a Tier 1 NFT!')
+
+  // Call the mint function for Tier 2
+  txn = await contract.mint({
+    value: hre.ethers.utils.parseEther(VALUE_TIER_2),
+  })
+  await txn.wait() // Wait for the NFT to be minted
+  console.log('Minted a Tier 2 NFT!')
+
+  let totalSupply = await contract.totalSupply()
+  console.log("Collection's new totalSupply: ", totalSupply)
+}
+
+/** Run Main function - Do not change **/
+main().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+- `const contract = await` and `contractFactory.attach(CONTRACT_ADDRESS)` will
+  make sure that we are not deploying the contract again, instead we need
+  hardhat to use the contract we deployed to the testnet.
+- `let txn = await [contract.mint](http://contract.mint)` is calling the mint
+  function.
+- `value: hre.ethers.utils.parseEther(VALUE_TIER_0)` - defines the value that we
+  want to send to the mint function (this defines which Tier we get)
+- `ethers.utils.parseEther` - here we use ethers to translate the value into wei
+  (multiply it with 10\*\*18)
+- `let totalSupply = await contract.totalSupply()` - is calling the
+  `totalSupply()` function to check if the 3 NFTs minted correctly.
+
+## Let’s MINT
+
+To mint our tier NFTs we will run the following command.
+
+```bash
+npx hardhat run scripts/mint.js --network mumbai
+```
+
+If we look at our terminal we will see something like this.
+
+![5_mint.png](/public/assets/lessons/3/5_mint.png)
+
+We finally minted our tier NFTs.
+
+Let’s go ahead and view them on Opensea marketplace. This could take a few
+minutes to appear, don't panic. You can search your newly created collection
+with your contract address or with the name that you chose in
+[https://testnets.opensea.io/](https://testnets.opensea.io/)
+
+![6_opensea.png](/public/assets/lessons/3/6_opensea.png)
+
+Well of course we ended up minting more than three NFTs. But you will be able to
+view the three NFTs which you minted.
+
+# Woohoo ✨ Now it’s time to celebrate.
