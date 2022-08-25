@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
           <Header />
           <Component {...pageProps} />
+          <Footer />
         </Box>
       </WalletProvider>
     </ChakraProvider>
