@@ -42,9 +42,11 @@ function NavBar() {
                 aria-label="Options"
                 icon={<HamburgerIcon />}
                 variant="outline"
+                _hover={{ backgroundColor: 'soc.vividViolet' }}
+                _active={{ backgroundColor: 'soc.vividViolet' }}
               />
-              <MenuList backgroundColor={'soc.vividViolet'}>
-                <MenuItem>
+              <MenuList backgroundColor="black">
+                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
                   <NextLink href="/" passHref>
                     <Link
                       variant={
@@ -57,7 +59,7 @@ function NavBar() {
                     </Link>
                   </NextLink>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
                   <NextLink href="/getting-started" passHref>
                     <Link
                       variant={
@@ -70,7 +72,7 @@ function NavBar() {
                     </Link>
                   </NextLink>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem _hover={{ backgroundColor: 'soc.vividViolet' }}>
                   <NextLink href="/lessons" passHref>
                     <Link
                       variant={
