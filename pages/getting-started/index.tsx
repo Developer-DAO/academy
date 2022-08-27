@@ -57,9 +57,9 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Text>
           <Text apply="mdx.p" as="p" fontSize="xl">
             We seek to{' '}
-            {/* <Text fontWeight="bold" as="strong" color="#F96C9D">
+            <Text fontWeight="bold" as="strong" color="#F96C9D">
               empower learners
-            </Text>{' '} */}
+            </Text>{' '}
             with knowledge and tools that can be applied to real-world projects
             while promoting a healthy learning environment.
           </Text>
