@@ -25,6 +25,11 @@ function ContentSideDrawer(props: any) {
         fontWeight="bold"
         bg="gray.700"
         mt="1em"
+        height={[`${props.title.length > 30 ? '3.75rem' : '2.5rem'}`, '2.5rem']}
+        style={{
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
       >
         {props.title}&nbsp;&nbsp;
         <ArrowRightIcon />
