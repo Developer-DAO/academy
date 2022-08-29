@@ -77,7 +77,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                   ))}
               </Wrap>
             </Flex>
-            <Flex fontSize={[8, 8, 10, 12]} pt={4}>
+            <Flex fontSize={[10, 10, 12, 14]} pt={4}>
               {description}
             </Flex>
           </Flex>
