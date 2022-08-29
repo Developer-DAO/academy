@@ -74,7 +74,7 @@ There are a lot more features in Remix, but those are the ones we’ll be workin
 
 To get started we will use the Remix IDE to write, compile, test and debug code quickly and easily. Head over to [https://remix.ethereum.org/](https://remix.ethereum.org/) to see what it’s all about and get started. 
 
-![Remix IDE Toolbar](/public/assets/lessons/1/img_1.png)
+![Remix IDE Toolbar](/assets/lessons/1/img_1.png)
 
 On the left hand side, in the File Explorer tab, delete all the files and folders in our workspace. We want to start fresh. Create a new folder named `contracts` and in it create a new file named `WAGMI.sol`.
 
@@ -381,7 +381,7 @@ see the Comment in the very last line of this lesson under ‘Now, please go ahe
 
 Now that we have written our smart contract in full, we can compile it and deploy it to a blockchain. Since we are using the Remix IDE, we can use its tools in the sidebar for this. Here’s a brief description of the tools icons:
 
-![Remix Menu](/public/assets/lessons/1/img_3.png)
+![Remix Menu](/assets/lessons/1/img_3.png)
 
 At the top, the logo links us to the Home (and Help links) of Remix 
 
@@ -397,9 +397,9 @@ To compile our smart contract we should click on the **Solidity Compiler** icon 
 
 Leave all the settings in their default, manually select our contract in the drop down menu and click on the **Compile WAGMI.sol** button.
 
-![Remix Contract Compiler Button](/public/assets/lessons/1/img_4.png)
+![Remix Contract Compiler Button](/assets/lessons/1/img_4.png)
 
-![Remix Successful Compilation Indicator](/public/assets/lessons/1/img_5.png)
+![Remix Successful Compilation Indicator](/assets/lessons/1/img_5.png)
 
 After compiling, we should see a green check mark on top of the Solidity Compiler sidebar icon.
 
@@ -450,7 +450,7 @@ After compiling, we should see a green check mark on top of the Solidity Compile
 
 Now we are ready to deploy our contract. We can now head to the Deploy & Run transactions icon in the sidebar (marked in the green box). Below we can see a message that says ‘Currently you have no contract instances to interact with’, so we haven’t deployed anything yet.
 
-![Contract Instance Warning](/public/assets/lessons/1/img_6.png)
+![Contract Instance Warning](/assets/lessons/1/img_6.png)
 
 Again, we are leaving all options to default for now (we’ll be learning how to deploy to a testnet later on). Click on the **Deploy** button!
 
@@ -461,23 +461,23 @@ Open the dropdown under ‘Deployed Contracts’, to see our function tabs:
 - the blue ones are our “**view**” functions that doesn’t modify our state
 - the orange one lets us trigger the setMessage function which will change the state. Be sure to click on the little drop down menu on the right. From here on, we can interact with our contract. Feel free to test the functions. Click on the getMessage and messageCount tabs before and after setting a new message. modify data on our contract.
 
-![Available Interactive Options once Contract is Deployed](/public/assets/lessons/1/img_7.png)
+![Available Interactive Options once Contract is Deployed](/assets/lessons/1/img_7.png)
 
 From here on, we can interact with our contract. Feel free to test the functions. Click on the getMessage and messageCount tabs before and after setting a new message.
 
 On the right hand side, below our contract code, there’s a bar on the bottom. If it hasn’t opened automatically, we can open the console from here to see any transactions with the green check mark. The first transaction is the deployment of our contract. Click it to open it.ons with the green check mark. The first transaction is the deployment of our contract. Click it to open it.
 
-![Button to Minimise and Maximise Console](/public/assets/lessons/1/img_8.png)
+![Button to Minimise and Maximise Console](/assets/lessons/1/img_8.png)
 
 Once you set a new message, you’ll see again, that the transaction has a green check mark, open it and look for the “logs”. Here’s my info after setting the message to “My first smart contract”:
 
-![Complete Transaction Log of Deployed Contract](/public/assets/lessons/1/img_9.png)
+![Complete Transaction Log of Deployed Contract](/assets/lessons/1/img_9.png)
 
 If you look closely, inside the “logs” part, our smart contract predicted a “future” for us.
 
 What if you try out setting the message to `gm` and look at the logs again. Can you see the magical spell that is being cast here?
 
-![Wizard Wooshing on Successful Lesson](/public/assets/lessons/1/img_10.png)
+![Wizard Wooshing on Successful Lesson](/assets/lessons/1/img_10.png)
 
 Before you go ahead and tell us: **what your future in web3 is,** have a check on what you didn’t know a little while ago, and what you know now!
 **Fellow devs: the answers to these questions are in each comment. Could we use a simple form for this for now with just a hover over the question to display the answer (or something more creative). The user wouldn’t have to actually answer the questions for MVP, but we want to let them self test, using their own trust to see what they do and don’t know at this stage. On top of that, we want to get some feedback as to the nature of the questions and maybe get some feedback on the actual presentation style/method which is pretty unadventurous here, so we can get creative and also more meaningful later.** 

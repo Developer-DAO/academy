@@ -22,7 +22,7 @@ icons:
 
 In this project we will build a basic NFT smart contract, that will serve us as the backbone or foundation for almost any ~~future~~ NFT project.
 
-![thatd.be.great.jpeg](/public/assets/lessons/2/img_1.jpeg)
+![thatd.be.great.jpeg](/assets/lessons/2/img_1.jpeg)
 
 **Why?** Because NFTs are not just jpegs, they carry many superpowers that could improve our lives in many ways.
 
@@ -38,7 +38,7 @@ Now that we know they can be much more than just an image, let‘s start our pro
 
 For this project, we are leaving the comfort of Remix IDE, to start developing like the pros. For that we are going to set up our working environment in our computer, making sure we have all the necessary tools to create, debug and deploy smart contracts. 
 
-![expectations.reality.jpeg](/public/assets/lessons/2/img_2.jpeg)
+![expectations.reality.jpeg](/assets/lessons/2/img_2.jpeg)
 
 To begin our project, we should open a console (check your Operating System options on how to use one).
 
@@ -76,7 +76,7 @@ npm install --save-dev hardhat
 
 Once we have our environment set up, we need to create a project.
 
-![you.shall.not.pass.jpeg](/public/assets/lessons/2/img_3.jpeg)
+![you.shall.not.pass.jpeg](/assets/lessons/2/img_3.jpeg)
 
 We run the `npx hardhat` command to create a basic project:
 
@@ -175,7 +175,7 @@ With our project folder ready, we can now fire up our Code Editor.
 
 Enough rambling, let’s start writing our contract!
 
-![code.i.write.jpeg](/public/assets/lessons/2/img_4.jpeg)
+![code.i.write.jpeg](/assets/lessons/2/img_4.jpeg)
 
 In your console, type `code .` and yes, with that dot at the end! Wait for the magic.
 
@@ -199,7 +199,7 @@ All of it is pretty much for our project, but luckily OpenZeppelin has developed
 
 For this we are going to ‘inherit’ (think of *using* or *extending* for now) the ERC721 contract from OpenZeppelin from our contract.
 
-![standing.in.the.shoulder.of.giants.nft.jpeg](/public/assets/lessons/2/img_5.jpeg)
+![standing.in.the.shoulder.of.giants.nft.jpeg](/assets/lessons/2/img_5.jpeg)
 
 This is what we need in our code:
 
@@ -225,7 +225,7 @@ contract ProjectNFT is ERC721 {
 
 We need to identify our NFTs, this is what gives each one its uniqueness on the blockchain.
 
-![spiderman.pointing.jpeg](/public/assets/lessons/2/img_6.jpeg)
+![spiderman.pointing.jpeg](/assets/lessons/2/img_6.jpeg)
 
 We are going to use a [state variable](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b) to keep track of the total supply of NFTs, which we can use as our ID for each new token created:
 
@@ -251,7 +251,7 @@ Here we only created a private variable called totalSupply that will store exact
 
 Once we have a way to identify our NFTs, we only need a way to create them.
 
-![mint.feels.good.jpeg](/public/assets/lessons/2/img_7.jpeg)
+![mint.feels.good.jpeg](/assets/lessons/2/img_7.jpeg)
 
 We will add a [function](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b) to mint new items. We call it 'to mint' or 'minting' to the moment when we create a new NFT:
 
@@ -284,7 +284,7 @@ As you can see, OpenZeppelin implementation takes care of all the heavy lifting,
 
 We can create unique NFTs by now, but we didn't add any media or utility to them just yet.
 
-![cmon.do.something.nft.jpeg](/public/assets/lessons/2/img_8.jpeg)
+![cmon.do.something.nft.jpeg](/assets/lessons/2/img_8.jpeg)
 
 We are missing the last piece of the puzzle. For now they are just a numbered proof of ownership from our contract, stored on the blockchain. And here is where the magic starts.
 
@@ -341,7 +341,7 @@ Internally, when someone needs to consult an NFT's info, they call the OpenZeppe
 
 With that we can see the power of inheritance and overriding. We can inherit a whole set of functionalities and change only what we need to create a different experience. 
 
-![im.something.of.a.scientist.myself.jpeg](/public/assets/lessons/2/img_9.jpeg)
+![im.something.of.a.scientist.myself.jpeg](/assets/lessons/2/img_9.jpeg)
 
 ## JSON
 
@@ -351,7 +351,7 @@ Marketplaces uses the standard to display info for our NFTs, and that means we h
 
 For that we are using a `.json` file. JSON stands for JavaScript Object Notation.
 
-![json-meme_-500x500.jpeg](/public/assets/lessons/2/img_10.jpeg)
+![json-meme_-500x500.jpeg](/assets/lessons/2/img_10.jpeg)
 
 Our files will basically look like this (if you add some spaces for readability):
 
@@ -376,7 +376,7 @@ For our project we will need to create as many JSON files as NFTs we plan our co
 
 As you see in the example, in the “image” we have a link to a file on the web (we will refer to it as web2). So, every time this site goes down, our NFTs will loose its images. This is not very “decentralized” of us.
 
-![nft.pepe.jpeg](/public/assets/lessons/2/img_11.jpeg)
+![nft.pepe.jpeg](/assets/lessons/2/img_11.jpeg)
 
 For us to achieve a higher level of decentralization and availability, we are going to have to go to the moon…
 
@@ -386,7 +386,7 @@ Literally.
 
 There are many services that lets us store files in a decentralized manner. We are using the one called IPFS. Inter-Planetary File System. Yep, no joke.
 
-![ipfs.jpeg](/public/assets/lessons/2/img_12.jpeg)
+![ipfs.jpeg](/assets/lessons/2/img_12.jpeg)
 
 For a one line explanation, nothing better than quoting the docs: “**IPFS is a distributed system for storing and accessing files, websites, applications, and data**”
 
@@ -404,7 +404,7 @@ Once you got your account, try to upload a few images for our first NFTs.
 
 Ok, now that you have uploaded the images, videos, audio or whatever you want your NFTs to point at, you need to create the `.json` files. We must name them as numbers (1,2,3,…) without extension so our solidity function `tokenURI` works. It will work somewhat like this:
 
-![ipfs explained.2x.png](/public/assets/lessons/2/img_13.png)
+![ipfs explained.2x.png](/assets/lessons/2/img_13.png)
 
 To see an example of the files on the diagram, you can open the [json files folder](https://gateway.pinata.cloud/ipfs/QmVugFDxagshJ4wCGYhGocCMURCfgsyJW7APNCPnS6nx7S) here, and the images are [here](https://gateway.pinata.cloud/ipfs/QmZskMvDzm5qbnkV2mzE6Acun78gZEsD7eCVii5YCSR6CB), [here](https://gateway.pinata.cloud/ipfs/Qmbry7cFd1yb5XCD41EnDKrt8Pp9Zes7g9E71PUSs1RFnw) and [here](https://gateway.pinata.cloud/ipfs/Qma2rLNBm4cQ2RXxYt75cRJ42NJHPXXyCZPi9p3Wi4n9et).
 
@@ -416,7 +416,7 @@ And, if we filled our JSON files correctly, each with the corresponding CID of o
 
 Here is a screenshot of how we have set up our files in pinata for this project:
 
-![Pinata Setup.png](/public/assets/lessons/2/img_14.png)
+![Pinata Setup.png](/assets/lessons/2/img_14.png)
 
 You could use our CID for your project (remember the files are there, just like when you publish an image in imgur or any other web2, only ours is decentralized). However, we feel that getting your feet wet and interacting with an IPFS service will surely help you get ahead in your learning.
 
@@ -430,7 +430,7 @@ Why did we deviate from Solidity? Because of the way we set our contract up, whe
 
 So, now that we have our media and JSONs uploaded, we can deploy our NFT contract!
 
-![deploy.jpeg](/public/assets/lessons/2/img_15.jpeg)
+![deploy.jpeg](/assets/lessons/2/img_15.jpeg)
 
 Remember that scripts folder at the beginning of our project? That's where we are going to create our script to tell Hardhat the set of instructions to follow. We can create one for deploy, another one to mint or call functions of our contract. Hardhat uses javascript for this.
 
@@ -486,7 +486,7 @@ npx hardhat run scripts/deploy.js
 
 This is the output i got:
 
-![deploy.output.png](/public/assets/lessons/2/img_16.png)
+![deploy.output.png](/assets/lessons/2/img_16.png)
 
 Notice that ‘Compiled 10 Solidity files successfully’? But we only wrote 1 Solidity file!
 
@@ -519,7 +519,7 @@ Let's add this lines after the console.log part, right where we left a placehold
 
 Let's run the script again and see what it tells us! Here's my output:
 
-![deploy.output.2.png](/public/assets/lessons/2/img_17.png)
+![deploy.output.2.png](/assets/lessons/2/img_17.png)
 
 We got the URI of the token right! So, now we know we can deploy it (and mint) to a real blockchain!
 
@@ -548,7 +548,7 @@ We **strongly** recommend you use a separate wallet for developing, completely i
 
 Wallets have special number, called private key. You should **never**, **ever** share your private keys with **anyone**. If anyones has that number, they can take full control of the wallet, and even empty it of anything it has.
 
-![keys.jpeg](/public/assets/lessons/2/img_18.jpeg)
+![keys.jpeg](/assets/lessons/2/img_18.jpeg)
 
 To be able to deploy our contract, we are going to use that number, that's why we recommend, yet again, to use a separate wallet for developing.
 
@@ -605,7 +605,7 @@ npx hardhat run scripts/deploy.js --network rinkeby
 
 This is the output i got in my console:
 
-![deploy.rinkeby.png](/public/assets/lessons/2/img_19.png)
+![deploy.rinkeby.png](/assets/lessons/2/img_19.png)
 
 Remember we are deploying to the actual blockchain, a testnet, but a blockchain none the less.
 
@@ -615,6 +615,6 @@ So now we can go and explore the chain to find your contract (and mine too!). Ju
 
 You can view my links as an example on [Etherscan](https://rinkeby.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f) and [Opensea](https://testnets.opensea.io/collection/soc)
 
-![opensea.png](/public/assets/lessons/2/img_20.png)
+![opensea.png](/assets/lessons/2/img_20.png)
 
 And that's it! You have created your own NFT collection from scratch!
