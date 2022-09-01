@@ -1,4 +1,4 @@
-import { Code, Container, Heading, Image, Text } from '@chakra-ui/react'
+import { Code, Container, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'
@@ -6,14 +6,25 @@ import path from 'path'
 import matter from 'gray-matter'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
-import { useTranslation } from 'next-i18next'
 import ContentSideDrawer from '../../components/ContentSideDrawer'
+import { ActionButton } from '../../components/ActionButton'
 
 interface LessonProps {
   frontMatter: {
     i18n: string
   }
   mdxSource: MDXRemoteSerializeResult
+  slug: string
+}
+
+type LessonConnection = Record<string, string>
+
+const LESSONS_GRAPH_LIST: LessonConnection = {
+  1: '2',
+  2: 'connect-with-rpc',
+  'connect-with-rpc': 'ipfs-filecoin_and_arweave',
+  'ipfs-filecoin_and_arweave': 'open_zeppelin',
+  open_zeppelin: 'testnets',
 }
 
 const components = {
@@ -53,12 +64,67 @@ const components = {
 const Lesson: React.FC<LessonProps> = ({
   frontMatter: { i18n },
   mdxSource,
+  slug,
 }) => {
-  const { t } = useTranslation(i18n)
+  const flexJustifyContentActions = (slug: string) => {
+    const shouldHavePrevious = shouldHavePreviousLessonButton(slug)
+    const shouldHaveNext = shouldHaveNextLessonButton(slug)
+
+    if (shouldHavePrevious && shouldHaveNext) {
+      return 'space-between'
+    }
+
+    if (shouldHavePrevious) {
+      return 'left'
+    }
+
+    if (shouldHaveNext) {
+      return 'right'
+    }
+  }
+
+  const shouldHavePreviousLessonButton = (slug: string) => {
+    return (
+      Object.values(LESSONS_GRAPH_LIST).filter((value) => value === slug)
+        .length > 0
+    )
+  }
+
+  const shouldHaveNextLessonButton = (slug: string) => {
+    return LESSONS_GRAPH_LIST[slug] !== undefined
+  }
+
+  const getPreviousButtonHref = (slug: string) => {
+    const previousLesson = Object.keys(LESSONS_GRAPH_LIST).find(
+      (key) => LESSONS_GRAPH_LIST[key] === slug,
+    )
+    return `/lessons/${previousLesson}`
+  }
+
+  const getNextButtonHref = (slug: string) => {
+    return `/lessons/${LESSONS_GRAPH_LIST[slug]}`
+  }
+
   return (
-    <div>
+    <>
       <MDXRemote {...mdxSource} components={components} />
-    </div>
+      <Flex
+        direction="row"
+        justifyContent={flexJustifyContentActions(slug)}
+        pt="3"
+        pb="3"
+      >
+        {shouldHavePreviousLessonButton(slug) && (
+          <ActionButton
+            label="Previous Lesson"
+            href={getPreviousButtonHref(slug)}
+          />
+        )}
+        {shouldHaveNextLessonButton(slug) && (
+          <ActionButton label="Next Lesson" href={getNextButtonHref(slug)} />
+        )}
+      </Flex>
+    </>
   )
 }
 
