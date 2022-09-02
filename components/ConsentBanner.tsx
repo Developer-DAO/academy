@@ -1,6 +1,11 @@
 import CookieConsent from 'react-cookie-consent'
-import * as FullStory from '@fullstory/browser'
-export default function ConsentBanner() {
+interface ConsentProps {
+  isConsented: (p: boolean) => void
+}
+
+const ConsentBanner = (props: ConsentProps) => {
+  const { isConsented } = props
+
   return (
     <CookieConsent
       debug={process.env.NODE_ENV === 'development'}
@@ -22,9 +27,12 @@ export default function ConsentBanner() {
         backgroundColor: '#fff',
       }}
       expires={150}
-      onAccept={() => FullStory.init({ orgId: 'o-1CKVPB-na1' })}
+      onAccept={() => isConsented(true)}
+      onDecline={() => isConsented(false)}
     >
       This website uses cookies to enhance the user experience.{' '}
     </CookieConsent>
   )
 }
+
+export default ConsentBanner
