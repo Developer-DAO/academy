@@ -6,9 +6,6 @@ import Hero from '../components/Hero'
 import * as FullStory from '@fullstory/browser'
 
 const Home: NextPage = () => {
-  useEffect(() => {
-    FullStory.init({ orgId: 'o-1CKVPB-na1' })
-  }, [])
   return (
     <div>
       <Head>
