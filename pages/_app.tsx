@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {consented && (
           <div>
             {/* @TODO - ADD GOOGLE ANALYTICS KEY NEXT_PUBLIC_GOOGLE_ANALYTICS */}
-            <Script
+            {/* <Script
               id="ga-script-1"
               strategy="lazyOnload"
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                     page_path: window.location.pathname,
                     });
                 `}
-            </Script>
+            </Script> */}
           </div>
         )}
         <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
