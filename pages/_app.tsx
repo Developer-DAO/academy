@@ -4,6 +4,7 @@ import { WalletProvider } from '../components/WalletProvider'
 import { theme } from '../theme'
 import Header from '../components/Header'
 import Footer from '../components/footer/Footer'
+import ConsentBanner from '../components/ConsentBanner'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Header />
           <Component {...pageProps} />
           <Footer />
+          <ConsentBanner />
         </Box>
       </WalletProvider>
     </ChakraProvider>
