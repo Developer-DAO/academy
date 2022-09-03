@@ -22,11 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <div>
             {/* @TODO - ADD GOOGLE ANALYTICS KEY NEXT_PUBLIC_GOOGLE_ANALYTICS */}
             <Script
+              id="ga-script-1"
               strategy="lazyOnload"
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
             />
 
-            <Script strategy="lazyOnload">
+            <Script strategy="lazyOnload" id="ga-script-2">
               {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
