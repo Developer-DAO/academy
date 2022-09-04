@@ -90,6 +90,10 @@ Also it's handy to install the Prettier plugin for your browser. You can then
 use it to automatically format files. It helps keep the code base tiday, for
 Typescript, MDX and Markdown files.
 
+**VSCode Remote Containers (alternative setup)**
+
+If you use VSCode for development, we already have the configuration files for you to use [Remote Containers](https://code.visualstudio.com/docs/remote/containers) (make sure that you check the link to install the requirements to use it) to easily create an isolated development environment for your fork. After installing the minimum requirements, you can start using it following this [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
+
 ## Grabbing latest version of the code
 
 **Since this is a work in progress, your local version of the app can be updated
