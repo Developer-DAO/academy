@@ -1,6 +1,6 @@
-## Developer DAO - School of Code
+## Developer DAO Academy
 
-&quot;School of Code&quot; is an open-source education platform created by the
+&quot;Developer DAO Academy&quot; is an open-source education platform created by the
 Developer DAO.
 
 ## How do I get started?
