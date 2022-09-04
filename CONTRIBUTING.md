@@ -1,4 +1,4 @@
-Welcome to the School of Code project!
+Welcome to the `Developer DAO Academy` project!
 
 This is an open-source project, but at this early stage, we require contributors
 to be members of the Developer DAO. Our project uses various Developer DAO
@@ -10,7 +10,7 @@ post.
 
 Once you're a member, to contribute code or content:
 
-- please join us in the Developer DAO Discord (`#school-of-code` channel)
+- please join us in the Developer DAO Discord (`#devdao-academy` channel)
 - setup the project by visiting our [README.md](./README.md)
 - add code or content by forking this repo. You can then submit PRs for review.
 - peruse our [issues](https://github.com/Developer-DAO/school-of-code/issues)
