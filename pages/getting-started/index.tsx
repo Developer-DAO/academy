@@ -95,13 +95,14 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
                           `${
                             lesson.frontMatter.title.length > 30
                               ? '3.75rem'
-                              : '2.5rem'
+                              : '3.25rem'
                           }`,
-                          '2.5rem',
+                          '3.25rem',
                         ]}
                         style={{
                           whiteSpace: 'normal',
                           wordWrap: 'break-word',
+                          padding: '0.25rem',
                         }}
                       >
                         {lesson.slug}: {lesson.frontMatter.title}
