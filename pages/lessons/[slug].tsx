@@ -38,7 +38,7 @@ const components = {
       )
     }
 
-    return <Code fontSize="md" {...props} />
+    return <Code fontSize="md" wordBreak="break-all" {...props} />
   },
   h1: (props: any) => (
     <Heading as="h1" apply="mdx.h1" fontSize="4xl" {...props} />
