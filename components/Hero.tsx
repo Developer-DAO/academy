@@ -44,19 +44,23 @@ const Hero = () => {
                 of building web3 Open Source.
               </Text>
 
-              <Button
-                colorScheme="pink"
-                size="lg"
-                fontSize="2xl"
-                fontWeight="700"
-                p="2rem"
-                bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
-                color="white"
+              <Link
+                href={'/getting-started'}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
-                leftIcon={<ArrowForwardIcon />}
               >
-                <Link href={'/getting-started'}>Get Started</Link>
-              </Button>
+                <Button
+                  colorScheme="pink"
+                  size="lg"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  p="2rem"
+                  bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
+                  color="white"
+                  leftIcon={<ArrowForwardIcon />}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </VStack>
           </VStack>
 
