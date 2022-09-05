@@ -84,34 +84,28 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             Current Lessons
           </Heading>
 
-          <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList listStyleType="none" textAlign="center">
-              {lessons.map((lesson: any, idx: number) => (
-                <ListItem key={lesson.slug} my="2">
-                  <NextLink href={'/lessons/' + lesson.slug} passHref>
-                    <Link>
-                      <Button
-                        height={[
-                          `${
-                            lesson.frontMatter.title.length > 30
-                              ? '3.75rem'
-                              : '2.5rem'
-                          }`,
-                          '2.5rem',
-                        ]}
-                        style={{
-                          whiteSpace: 'normal',
-                          wordWrap: 'break-word',
-                        }}
-                      >
-                        {lesson.slug}: {lesson.frontMatter.title}
-                      </Button>
-                    </Link>
-                  </NextLink>
-                </ListItem>
-              ))}
-            </UnorderedList>
-          </Text>
+          <UnorderedList listStyleType="none" textAlign="center" as="div">
+            {lessons.map((lesson: any, idx: number) => (
+              <ListItem key={lesson.slug} my="2">
+                <NextLink href={'/lessons/' + lesson.slug} passHref>
+                  <Link>
+                    <Button
+                      height="auto"
+                      style={{
+                        whiteSpace: 'normal',
+                        wordWrap: 'break-word',
+                        padding: '0.5rem',
+                        width: '100%',
+                        fontSize: 'xl',
+                      }}
+                    >
+                      {lesson.slug}: {lesson.frontMatter.title}
+                    </Button>
+                  </Link>
+                </NextLink>
+              </ListItem>
+            ))}
+          </UnorderedList>
           <Divider />
 
           <Heading
@@ -124,40 +118,38 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             This project is just getting started.
           </Heading>
 
-          <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList listStyleType="none">
-              <ListItem>
-                We&apos;re looking for{' '}
-                <Text fontWeight="bold" as="strong" color="#F96C9D">
-                  feedback
-                </Text>{' '}
-                about this project and our current lessons.{' '}
-                <NextLink
-                  href={
-                    'https://github.com/Developer-DAO/school-of-code/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
-                  }
-                  passHref
-                >
-                  <Link isExternal textDecoration="underline">
-                    Submit your suggestion or bug report.
-                  </Link>
-                </NextLink>
-              </ListItem>
-              <ListItem>
-                We&apos;re also looking for{' '}
-                <Text fontWeight="bold" as="strong" color="#F96C9D">
-                  Developer DAO members
-                </Text>{' '}
-                who are interested in writing lesson content, or building
-                website and blockchain features. The team can be found in the
-                Developer DAO Discord{' '}
-                <Text fontWeight="bold" as="strong">
-                  #school-of-code
-                </Text>{' '}
-                channel.
-              </ListItem>
-            </UnorderedList>
-          </Text>
+          <UnorderedList listStyleType="none" as="div" fontSize="xl">
+            <ListItem>
+              We&apos;re looking for{' '}
+              <Text fontWeight="bold" as="strong" color="#F96C9D">
+                feedback
+              </Text>{' '}
+              about this project and our current lessons.{' '}
+              <NextLink
+                href={
+                  'https://github.com/Developer-DAO/school-of-code/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
+                }
+                passHref
+              >
+                <Link isExternal textDecoration="underline">
+                  Submit your suggestion or bug report.
+                </Link>
+              </NextLink>
+            </ListItem>
+            <ListItem>
+              We&apos;re also looking for{' '}
+              <Text fontWeight="bold" as="strong" color="#F96C9D">
+                Developer DAO members
+              </Text>{' '}
+              who are interested in writing lesson content, or building website
+              and blockchain features. The team can be found in the Developer
+              DAO Discord{' '}
+              <Text fontWeight="bold" as="strong">
+                #school-of-code
+              </Text>{' '}
+              channel.
+            </ListItem>
+          </UnorderedList>
 
           <Text as="span" apply="mdx.p" fontSize="xl" textAlign="center">
             Read more at{' '}
