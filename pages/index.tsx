@@ -3,14 +3,13 @@ import { useEffect } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Hero from '../components/Hero'
-import * as FullStory from '@fullstory/browser'
 
 const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Developer DAO School of Code</title>
-        <meta name="description" content="Developer DAO's school of code" />
+        <title>Developer DAO Academy</title>
+        <meta name="description" content="Developer DAO Academy" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
