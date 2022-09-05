@@ -44,7 +44,10 @@ const Hero = () => {
                 of building web3 Open Source.
               </Text>
 
-              <Link href={'/getting-started'}>
+              <Link
+                href={'/getting-started'}
+                alignSelf={{ base: 'center', md: 'flex-start' }}
+              >
                 <Button
                   colorScheme="pink"
                   size="lg"
@@ -53,7 +56,6 @@ const Hero = () => {
                   p="2rem"
                   bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
                   color="white"
-                  alignSelf={{ base: 'center', md: 'flex-start' }}
                   leftIcon={<ArrowForwardIcon />}
                 >
                   Get Started
