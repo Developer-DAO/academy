@@ -1,9 +1,7 @@
 ## Developer DAO Academy
 
-`Developer DAO Academy` is an open-source education platform created by the
-Developer DAO.
-
-It's referred to as `D_D Academy` for branding, and [@devdao_academy](https://twitter.com/devdao_academy) on Twitter.
+&quot;Developer DAO Academy&quot; is an open-source education platform created
+by the Developer DAO.
 
 ## How do I get started?
 
@@ -77,8 +75,8 @@ to the guide can be found
 
 **Fork this repo, clone forked repo locally and `cd` into the repo:**
 
-    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/school-of-code.git
-    cd school-of-code/
+    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/academy.git
+    cd academy/
 
 **Installation and run:**
 
@@ -94,7 +92,13 @@ Typescript, MDX and Markdown files.
 
 **VSCode Remote Containers (alternative setup)**
 
-If you use VSCode for development, we already have the configuration files for you to use [Remote Containers](https://code.visualstudio.com/docs/remote/containers) (make sure that you check the link to install the requirements to use it) to easily create an isolated development environment for your fork. After installing the minimum requirements, you can start using it following this [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
+If you use VSCode for development, we already have the configuration files for
+you to use
+[Remote Containers](https://code.visualstudio.com/docs/remote/containers) (make
+sure that you check the link to install the requirements to use it) to easily
+create an isolated development environment for your fork. After installing the
+minimum requirements, you can start using it following this
+[quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 
 ## Grabbing latest version of the code
 

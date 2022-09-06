@@ -33,7 +33,7 @@ export default function Footer() {
           </SocialButton>
           <SocialButton
             label={'Github'}
-            href={'https://github.com/developer-dao/school-of-code'}
+            href={'https://github.com/developer-dao/academy'}
           >
             <FaGithub />
           </SocialButton>
