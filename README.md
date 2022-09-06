@@ -1,7 +1,9 @@
 ## Developer DAO Academy
 
-&quot;Developer DAO Academy&quot; is an open-source education platform created by the
+`Developer DAO Academy` is an open-source education platform created by the
 Developer DAO.
+
+It's referred to as `D_D Academy` for branding, and [@devdao_academy](https://twitter.com/devdao_academy) on Twitter.
 
 ## How do I get started?
 
