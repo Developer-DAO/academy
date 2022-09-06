@@ -1,7 +1,7 @@
 ## Developer DAO Academy
 
-&quot;Developer DAO Academy&quot; is an open-source education platform created
-by the Developer DAO.
+`Developer DAO Academy` is an open-source education platform created by the
+Developer DAO.
 
 ## How do I get started?
 
