@@ -47,11 +47,11 @@ Assume no one knows what your PR is about. So helpful to:
 ### How do I review a PR?
 
 It's also important that people review PRs -- a great learning experience and
-important for an open-source proeject.
+important for an open-source project.
 
 Some helpful things when reviewing PRs:
 
-- **ALWAYS** download and run the code you're reviewing. Never eye-ball it in
+- **ALWAYS** download and run the code you're reviewing. Never eyeball it in
   the PR and approve it.
 - when you review a PR, please add yourself as a reviewer in GitHub so we know
   someone is reviewing
@@ -87,7 +87,7 @@ This will create a local instance of the app running and can be viewed at
 `http://localhost:3000` in your browser.
 
 Also it's handy to install the Prettier plugin for your browser. You can then
-use it to automatically format files. It helps keep the code base tiday, for
+use it to automatically format files. It helps keep the code base tidy, for
 Typescript, MDX and Markdown files.
 
 **VSCode Remote Containers (alternative setup)**
