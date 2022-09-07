@@ -304,7 +304,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
         fontSize={`1.3125rem`}
         lineHeight={`1.25rem`}
       >
-        SCHOOL OF CODE
+        ACADEMY
       </Box>
     </VStack>
   )

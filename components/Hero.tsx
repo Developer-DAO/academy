@@ -38,7 +38,7 @@ const Hero = () => {
                 alignSelf={{ base: 'center', md: 'flex-start' }}
               >
                 <Box as="span" color="#FFD500" fontWeight="bold">
-                  School of Code
+                  D_D Academy
                 </Box>{' '}
                 is on a mission to educate coders to the exciting possibilities
                 of building web3 Open Source.
@@ -70,7 +70,7 @@ const Hero = () => {
               width={459}
               height={674}
               src="/schoolofcode.png"
-              alt="school of code"
+              alt="D_D Academy"
             />
           </Box>
         </Flex>
