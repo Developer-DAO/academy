@@ -1,5 +1,5 @@
 {
-  "name": "school-of-code",
+  "name": "dd-academy",
   "private": true,
   "scripts": {
     "dev": "next dev",
