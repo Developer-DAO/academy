@@ -42,6 +42,9 @@ const styles = {
       // bg: colors.soc.gradientTrack,
       color: 'gray.300',
     },
+    time: {
+      fontFamily: fonts.mono,
+    },
   },
 }
 
@@ -49,14 +52,14 @@ const components = {
   Link: {
     variants: {
       'top-navigation': {
-        mr: 9,
+        ml: 5,
         color: 'yellow.300',
         textTransform: 'uppercase',
         fontWeight: 'bold',
         p: '4px',
       },
       'top-navigation-active': {
-        mr: 9,
+        ml: 5,
         color: 'black',
         textTransform: 'uppercase',
         fontWeight: 'bold',
@@ -71,6 +74,47 @@ const components = {
         _hover: {
           textDecoration: 'none',
         },
+      },
+    },
+  },
+  Button: {
+    variants: {
+      pomodoroControl: {
+        color: 'yellow.300',
+        borderColor: 'gray.700',
+        borderWidth: '1px',
+        _hover: {
+          borderColor: 'yellow.300',
+        },
+      },
+      pomodoroIcon: {
+        color: 'yellow.300',
+        borderWidth: '1px',
+        _hover: {
+          borderColor: 'yellow.300',
+        },
+      },
+    },
+  },
+  PomodoroIcon: {
+    baseStyle: {
+      mr: 0,
+      mt: 6,
+    },
+  },
+  PomodoroTimer: {
+    baseStyle: {
+      // mr: 6,
+      color: 'yellow.300',
+      bg: colors.soc.eerieBlack,
+      fontWeight: 'bold',
+      py: '1',
+      px: '3',
+      borderRadius: '6px',
+      borderWidth: '1px',
+      borderColor: 'none',
+      _hover: {
+        borderColor: 'yellow.300',
       },
     },
   },

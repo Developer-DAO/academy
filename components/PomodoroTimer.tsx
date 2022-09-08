@@ -1,5 +1,28 @@
-import { useInterval } from '@chakra-ui/react'
-import { useReducer } from 'react'
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  useInterval,
+  useStyleConfig,
+  Stack,
+  Popover,
+  PopoverTrigger,
+  IconButton,
+  PopoverContent,
+  PopoverArrow,
+  useMediaQuery,
+} from '@chakra-ui/react'
+import { ReactElement, useReducer } from 'react'
+import { FaGraduationCap } from 'react-icons/fa'
+import { IoTimerOutline } from 'react-icons/io5'
+import {
+  MdPlayArrow,
+  MdPause,
+  MdReplay,
+  MdFastForward,
+  MdVideogameAsset,
+  MdOutlineCheck,
+} from 'react-icons/md'
 import { formatTime, minute, second } from '../lib/time'
 
 export interface TimerState {
@@ -25,6 +48,12 @@ export type TimerEvent =
   | 'skip'
   | 'study'
   | 'tick'
+
+export interface TimerEventData {
+  event: TimerEvent
+  eventDesc: string
+  eventIcon?: ReactElement
+}
 
 const initialState: TimerState = {
   status: TimerStatus.Idle,
@@ -103,67 +132,119 @@ const TimeRemaining = ({ time }: { time: number }) => (
   <time aria-label="time remaining">{formatTime(time)}</time>
 )
 
-export const PomodoroTimer = () => {
+export const PomodoroTimer = (props: any) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { isRunning, status, timeRemaining } = state
+
+  const { variant, ...rest } = props
+  const [isBigScreen] = useMediaQuery('(min-width: 62em)')
+  const maxPopoverWidth = isBigScreen ? '14rem' : '11rem'
+
+  const timerStyle = useStyleConfig('PomodoroTimer', { variant })
+  const iconStyle = useStyleConfig('PomodoroIcon', { variant })
+
+  const getButton = (data: TimerEventData) => {
+    return data.eventIcon ? (
+      isBigScreen ? (
+        <Button onClick={() => dispatch(data.event)} leftIcon={data.eventIcon}>
+          {data.eventDesc}
+        </Button>
+      ) : (
+        <IconButton
+          onClick={() => dispatch(data.event)}
+          icon={data.eventIcon}
+          aria-label={data.eventDesc}
+        />
+      )
+    ) : (
+      <Button onClick={() => dispatch(data.event)}>{data.eventDesc}</Button>
+    )
+  }
+
+  const buildPomodoroUI = (
+    mainIcon: ReactElement,
+    status: string | undefined,
+    time: number,
+    events: TimerEventData[],
+  ) => {
+    return (
+      <Popover
+        trigger="hover"
+        placement={isBigScreen ? 'bottom' : 'bottom-end'}
+      >
+        <PopoverTrigger>
+          <Box __css={iconStyle} display="inline-flex">
+            <IconButton
+              icon={mainIcon}
+              variant="pomodoroIcon"
+              aria-label="Pomodoro Timer"
+            />
+          </Box>
+        </PopoverTrigger>
+        <PopoverContent maxWidth={maxPopoverWidth}>
+          <PopoverArrow />
+          <Stack direction="column" align="center" __css={timerStyle}>
+            {status ? <Status>{status}</Status> : <Status>&nbsp;</Status>}
+            <TimeRemaining time={time} />
+            <ButtonGroup variant="pomodoroControl" size="sm" gap="0" isAttached>
+              {events.map((e) => getButton(e))}
+            </ButtonGroup>
+          </Stack>
+        </PopoverContent>
+      </Popover>
+    )
+  }
 
   useInterval(() => dispatch('tick'), isRunning ? 1 * second : null)
 
   switch (status) {
     case TimerStatus.Idle:
-      return (
-        <div>
-          <Status />
-          <TimeRemaining time={timeRemaining} />
-          <button onClick={() => dispatch('study')}>Study</button>
-        </div>
-      )
+      return buildPomodoroUI(<IoTimerOutline />, '', timeRemaining, [
+        { event: 'study', eventDesc: 'Study', eventIcon: <FaGraduationCap /> },
+      ])
 
     case TimerStatus.Studying:
-      return (
-        <div>
-          <Status>Studying</Status>
-          <TimeRemaining time={timeRemaining} />
-          <button onClick={() => dispatch('pause')}>Pause</button>
-          <button onClick={() => dispatch('reset')}>Reset</button>
-        </div>
-      )
+      return buildPomodoroUI(<FaGraduationCap />, 'Studying', timeRemaining, [
+        { event: 'pause', eventDesc: 'Pause', eventIcon: <MdPause /> },
+        {
+          event: 'reset',
+          eventDesc: 'Reset',
+          eventIcon: <MdReplay />,
+        },
+      ])
 
     case TimerStatus.StudyingPaused:
-      return (
-        <div>
-          <Status>Studying paused</Status>
-          <TimeRemaining time={timeRemaining} />
-          <button onClick={() => dispatch('resume')}>Resume</button>
-          <button onClick={() => dispatch('reset')}>Reset</button>
-        </div>
-      )
+      return buildPomodoroUI(<MdPause />, 'Studying Paused', timeRemaining, [
+        { event: 'resume', eventDesc: 'Resume', eventIcon: <MdPlayArrow /> },
+        {
+          event: 'reset',
+          eventDesc: 'Reset',
+          eventIcon: <MdReplay />,
+        },
+      ])
 
     case TimerStatus.StudyingComplete:
-      return (
-        <div>
-          <Status>Studying complete</Status>
-          <TimeRemaining time={0} />
-          <button onClick={() => dispatch('break')}>Break</button>
-        </div>
-      )
+      return buildPomodoroUI(<MdOutlineCheck />, 'Studying Complete', 0, [
+        { event: 'break', eventDesc: 'Break', eventIcon: <MdVideogameAsset /> },
+      ])
 
     case TimerStatus.Break:
-      return (
-        <div>
-          <Status>On Break</Status>
-          <TimeRemaining time={timeRemaining} />
-          <button onClick={() => dispatch('skip')}>Skip</button>
-        </div>
-      )
+      return buildPomodoroUI(<MdVideogameAsset />, 'On Break', timeRemaining, [
+        { event: 'skip', eventDesc: 'Skip', eventIcon: <MdFastForward /> },
+      ])
 
     case TimerStatus.BreakComplete:
-      return (
-        <div>
-          <Status>Break complete</Status>
-          <TimeRemaining time={0} />
-          <button onClick={() => dispatch('study')}>Study</button>
-        </div>
+      return buildPomodoroUI(
+        <IoTimerOutline />,
+        'Break Complete',
+        timeRemaining,
+        [
+          {
+            event: 'study',
+            eventDesc: 'Study',
+            eventIcon: <FaGraduationCap />,
+          },
+        ],
       )
 
     default:

@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import HamburgerIcon from './HamburgerIcon'
 import SchoolOfCodeLogo from './SchoolOfCodeLogo'
+import { PomodoroTimer } from './PomodoroTimer'
 // import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 function NavBar() {
@@ -29,11 +30,16 @@ function NavBar() {
           )}
         </Link>
         <Spacer />
+        {/*
+                POMODORO TIMER
+          */}
+        {router.pathname.startsWith('/lessons') ? <PomodoroTimer /> : ''}
         <Box>
           {/*
                 MOBILE / HAMBURGER MENU
           */}
           <Flex
+            mt={6}
             alignItems="center"
             display={{ base: 'block', md: 'block', lg: 'none' }}
           >
@@ -42,6 +48,7 @@ function NavBar() {
                 as={IconButton}
                 aria-label="Options"
                 icon={<HamburgerIcon />}
+                ml={5}
                 variant="outline"
                 _hover={{ backgroundColor: 'soc.vividViolet' }}
                 _active={{ backgroundColor: 'soc.vividViolet' }}
