@@ -1,0 +1,102 @@
+---
+i18n: 'ipfs-arweave'
+title: IPFS Filecoin and Arweave mini lesson
+description: Overview on Storage Protocols.
+icons: []
+author: 'georgemac510'
+---
+
+# Storage with IPFS/Filecoin and Arweave
+
+Among the many use cases for these great technologies, the most common are for
+storage of image, audio and video NFTs as well as deploying web dApps.
+
+## What is IPFS/Filecoin and how is it used in Web3 development?
+
+![IPFS/Filecoin](/assets/lessons/ipfs-filecoin_and_arweave/ipfs-filecoin4.jpg)
+
+**The textbook definition:** **IPFS** is a distributed system for storing and
+accessing files, websites, applications, and data. **Filecoin** is a
+peer-to-peer network that stores files, with built-in economic incentives to
+ensure files are stored reliably over time.
+
+**IPFS and Filecoin**
+
+The **IPFS** decentralized web is made up of all the computers connected to it,
+known as  *nodes*. Nodes can store data and make it accessible to anyone who
+requests it.
+
+If someone requests a file or a webpage, a copy of the file is cached on their
+node. As more and more people request that data, more and more cached copies
+will exist. Subsequent requests for that file can be fulfilled by any node or
+combination of nodes that has the file on it. The burden of delivering the data
+and fulfilling the request is gradually shared out amongst many nodes, so the
+more popular the file, the deeper the _distribution_ of the file will be. For
+IPFS, caching recall is shorter-term, unless using a gateway provider such as
+[https://www.pinata.cloud/](https://www.pinata.cloud/), who provides over 200
+caching locations allowing for speedy retrieval.
+
+For longer-term storage, this is where **Filecoin** comes in. Filecoin is a
+decentralized blockchain where miners are incentivized by payment in FIL, the
+protocol’s native cryptocurrency, to store medium files such as videos, audios,
+NFT images, NFT collections, scientific data. The Filecoin network allows for
+**verification of storage** for users by accessing “proofs” on the Filecoin
+blockchain.
+
+**How is data stored on the traditional internet?** The data storage behind the
+traditional internet(Web2) is predominantly servers—physical or virtual—in
+massive server farms or cloud platforms such as AWS or Google Cloud. What
+happens if the server farm is infected with a nasty virus and the entire
+platform goes offline? These are centralized, potential points of failure which
+we are “trusting” to stay online and continue to render service.
+
+**Decentralized web networks such as IPFS/Filecoin and Arweave solve this
+centralization** **problem by distributing the data to nodes and eliminate a
+central point of failure.**
+
+# What is Arweave and how is it used in Web3 development?
+
+![Arweave Permaweb](/assets/lessons/ipfs-filecoin_and_arweave/arweave6.png)
+
+### What is Arweave?
+
+Arweave works on similar principals to IPFS and Filecoin, but functions more
+like the combination of the two in its **blockweave** protocol.
+Its [P2P protocol](https://www.webroot.com/in/en/resources/glossary/what-is-peer-to-peer-networking)
+allows various users
+([nodes](https://learn.bybit.com/blockchain/what-are-nodes/)) with large storage
+spaces on their hard drives to connect with the Arweave network, and to store
+data for others. The network then rewards these nodes for offering their storage
+services. As the volume of data stored in a particular system increases, the
+amount of
+ [hashing](https://learn.bybit.com/blockchain/what-is-hashing-in-blockchain/)
+needed for the consensus decreases, resulting in more cost-effective data
+storage.
+
+### How does Arweave work?
+
+The workings of the Arweave protocol can be best understood by looking at the
+two layers involved: blockweave
+and [permaweb](https://arweave.medium.com/welcome-to-the-permaweb-ce0e6c73ddfb).
+
+**_Blockweave_** is different from the typical blockchain that many cryptos are
+built upon. Apart from storing transactional information, blockweave also stores
+the data information on each block. Like other blockchains, each block on
+blockweave refers to its previous block. On blockweave, however, this previous
+block is attached to a randomly selected block known as the **recall block.**
+The Arweave protocol uses a consensus mechanism called 
+[SPoRA](https://tokenpost.com/Arweave-Introduces-New-Consensus-SPoRA-6729), a
+**_proof of access_**.
+
+This consensus rewards the participating _nodes_ in the network for storing all
+of Arweave’s transactional history. Let’s say you want to manage a node on the
+Arweave blockchain. To receive block rewards, you must prove to blockweave that
+you have complete **_access_** to the data in the previous block, along with
+some randomly selected **_recall block_**. If you don’t have **_access_** to the
+**_recall block_**, blockweave will know that you aren’t storing all the
+transactional data on the Arweave blockchain, and will thus deny you any block
+reward.
+
+The other main component in the Arweave network is **_permaweb_**, a
+decentralized web built on top of the Arweave blockchain. This is where all of
+the deployed Arweave DApps are stored.

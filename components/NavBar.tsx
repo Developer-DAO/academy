@@ -2,10 +2,8 @@ import React from 'react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import {
-  Image,
   Box,
   Flex,
-  Button,
   Spacer,
   Link,
   IconButton,
@@ -20,12 +18,15 @@ import SchoolOfCodeLogo from './SchoolOfCodeLogo'
 
 function NavBar() {
   const router = useRouter()
-
   return (
     <Box>
       <Flex justify="left" alignItems="center">
         <Link variant="logo" href={'/'}>
-          <SchoolOfCodeLogo autoStart={true} loop={true} />
+          {router.pathname.endsWith('/[slug]') ? (
+            <SchoolOfCodeLogo />
+          ) : (
+            <SchoolOfCodeLogo autoStart={true} loop={true} />
+          )}
         </Link>
         <Spacer />
         <Box>
@@ -93,6 +94,7 @@ function NavBar() {
                 DESKTOP VERSION
           */}
           <Flex
+            mt="6"
             alignItems="center"
             display={{ base: 'none', md: 'none', lg: 'block' }}
           >

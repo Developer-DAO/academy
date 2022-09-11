@@ -16,7 +16,7 @@ const { chains, provider } = configureChains(
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'Developer DAO School of Code',
+  appName: 'D_D Academy',
   chains,
 })
 

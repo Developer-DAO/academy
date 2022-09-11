@@ -1,6 +1,6 @@
-## Developer DAO - School of Code
+## Developer DAO Academy
 
-&quot;School of Code&quot; is an open-source education platform created by the
+`Developer DAO Academy` is an open-source education platform created by the
 Developer DAO.
 
 ## How do I get started?
@@ -8,6 +8,60 @@ Developer DAO.
 Please read our [CONTRIBUTING Guide](CONTRIBUTING.md) to get started. We ask
 that you are a member of Developer DAO to contribute, since our project uses
 various Developer DAO planning and communication tools, such as Discord.
+
+## How to contribute code
+
+If you're new to the project, see below for setup instructions.
+
+### Considerations as you write code
+
+As you're working on code, some things to think about:
+
+- PRs should be as small as possible so they are easy to review
+- There are strategies you can use to keep PRs small, even if your feature is
+  big.
+  [How to Split Pull Requests – Good Practices, Methods and Git Strategies](https://www.thedroidsonroids.com/blog/splitting-pull-request)
+
+### What should I do before submitting the PR?
+
+- Run `yarn confirm` which will make sure your files are consistently formatted,
+  lint the code base looking for problems and then actually building the site
+  locally to ensure no build problems
+- If you see warnings or errors please fix.
+- Also, this step runs Prettier so some files may have changed and need to be
+  checked in.
+
+Now you're ready to submit your PR.
+
+Assume no one knows what your PR is about. So helpful to:
+
+- writing a description in the PR to explain what you're fixing/adding and how
+  to test.
+- if your work is based on a GitHub issue, add that in the description, though
+  make sure you use the exact words of "Closes #123" since this will
+  automatically close the issue when the PR is merged. Using "this refers to
+  #123" won't do that.
+- send a signal that your PR is ready for review, such as asking someone to
+  review your PR
+
+### How do I review a PR?
+
+It's also important that people review PRs -- a great learning experience and
+important for an open-source proeject.
+
+Some helpful things when reviewing PRs:
+
+- **ALWAYS** download and run the code you're reviewing. Never eye-ball it in
+  the PR and approve it.
+- when you review a PR, please add yourself as a reviewer in GitHub so we know
+  someone is reviewing
+- go through the formal GitHub review process of starting a review and then
+  finishing with "approved" or "needs changes"
+
+### Who should merge the PR?
+
+Once a PR is reviewed, the author of the PR should merge, and the author should
+run through the live site and make sure the code is performing as expected.
 
 ## Project Setup
 
@@ -21,8 +75,8 @@ to the guide can be found
 
 **Fork this repo, clone forked repo locally and `cd` into the repo:**
 
-    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/school-of-code.git
-    cd school-of-code/
+    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/academy.git
+    cd academy/
 
 **Installation and run:**
 
@@ -35,6 +89,16 @@ This will create a local instance of the app running and can be viewed at
 Also it's handy to install the Prettier plugin for your browser. You can then
 use it to automatically format files. It helps keep the code base tiday, for
 Typescript, MDX and Markdown files.
+
+**VSCode Remote Containers (alternative setup)**
+
+If you use VSCode for development, we already have the configuration files for
+you to use
+[Remote Containers](https://code.visualstudio.com/docs/remote/containers) (make
+sure that you check the link to install the requirements to use it) to easily
+create an isolated development environment for your fork. After installing the
+minimum requirements, you can start using it following this
+[quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 
 ## Grabbing latest version of the code
 
@@ -56,25 +120,6 @@ Reinstall with `yarn`:
 Run the updated app:
 
     yarn dev
-
-## Submit your changes and create a Pull Request
-
-Before pushing your branch to GitHub and opening a PR:
-
-- Run `yarn confirm` which will make sure your files are consistently formatted,
-  lint the code base looking for problems and then actually building the site
-  locally to ensure no build problems
-- If you see warnings or errors please fix.
-- Also, this step runs Prettier so some files may have changed and need to be
-  checked in.
-
-Now everything should be ready-to-go. You may have to run this process several
-times.
-
-Just push your branch and open a PR, and send a quick note on Discord to let the
-team know you're looking for a review.
-
-Thank you for your contribution!
 
 ## Learn More
 

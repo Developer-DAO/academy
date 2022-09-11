@@ -38,25 +38,29 @@ const Hero = () => {
                 alignSelf={{ base: 'center', md: 'flex-start' }}
               >
                 <Box as="span" color="#FFD500" fontWeight="bold">
-                  School of Code
+                  D_D Academy
                 </Box>{' '}
                 is on a mission to educate coders to the exciting possibilities
                 of building web3 Open Source.
               </Text>
 
-              <Button
-                colorScheme="pink"
-                size="lg"
-                fontSize="2xl"
-                fontWeight="700"
-                p="2rem"
-                bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
-                color="white"
+              <Link
+                href={'/getting-started'}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
-                leftIcon={<ArrowForwardIcon />}
               >
-                <Link href={'/getting-started'}>Get Started</Link>
-              </Button>
+                <Button
+                  colorScheme="pink"
+                  size="lg"
+                  fontSize="2xl"
+                  fontWeight="700"
+                  p="2rem"
+                  bgGradient="linear(to-tl, #FF6D9A , #5F4ADF)"
+                  color="white"
+                  leftIcon={<ArrowForwardIcon />}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </VStack>
           </VStack>
 
@@ -66,7 +70,7 @@ const Hero = () => {
               width={459}
               height={674}
               src="/schoolofcode.png"
-              alt="school of code"
+              alt="D_D Academy"
             />
           </Box>
         </Flex>

@@ -3,6 +3,8 @@ import type { AppProps } from 'next/app'
 import { WalletProvider } from '../components/WalletProvider'
 import { theme } from '../theme'
 import Header from '../components/Header'
+import Footer from '../components/footer/Footer'
+import ConsentBanner from '../components/ConsentBanner'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,6 +13,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
           <Header />
           <Component {...pageProps} />
+          <Footer />
+          <ConsentBanner />
         </Box>
       </WalletProvider>
     </ChakraProvider>
