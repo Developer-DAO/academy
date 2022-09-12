@@ -1,0 +1,67 @@
+---
+i18n: 'wallets'
+title: Introduction to web3 wallets
+description: Overview of wallet use cases and setting up environment.
+icons: []
+author: ['piablo', 'Meowy']
+---
+
+# Web3 wallets....
+
+### What do we have in store?
+
+If you are reading this, you are new to blockchain development and want to know a little about crypto *wallets* and how you can use them effectively along your way. We’ll look at variants, the typical use cases, a little at the technology under the hood, and we’ll discover why without a wallet we just can’t get near a blockchain! We’ll also give you a run down of best practices on setting up your wallet for development, so you can get to work!
+
+### **First a bit on wallet variants and use cases**
+
+A blockchain enthusiast can choose from a few different types of wallets.
+Custody. Who holds the keys:
+
+- **Custodial**: *You don't* have the keys, but a *custodian* does e.g. a CEX (centralised exchange)
+- **Non custodial**: *You do* have the keys. You’re a web3 boss!
+- **Shared custody**: Multiple people utilise their individual keys i.e. a multi-sig(nature)
+
+Wallets vary on their connectivity:
+- **Hot**: Always connected to the internet e.g. a browser extension, a mobile app, a CEX wallet
+- **Warm**: Connected, but requires human interaction to sign…. a more recent development
+- **Cold**: Never connected to the internet e.g. a USB hardware wallet, a paper wallet
+
+The crypto original is the paper wallet. Make sure you have **at least** **one paper variant for all your private and public keys, and mnemonic details stored on paper or offline somewhere really safe. Below, a couple of hot wallets:
+
+![wallet_choices.png](/assets/lessons/wallets/wallet_choices.png)
+
+A typical user would have a wallet for making transactions such as buying, selling, swapping, or *staking* of all sorts of crypto tokens. Also for *signing* other messages, e.g. casting a vote, claiming attendance at an event, proving identity, or getting access to an organisation’s Discord server.  Multi-sig wallets, or safes are often used by organisations for added security. **Multi**ple **sig**natures are required to sign off on decisions or to authorise transactions. The list of types and use cases is growing fast. You will even use your own new wallet to sign and prove that you have completed the lesson you’re doing right now! 
+
+### **So you what actually goes on in this wallet?**
+
+First things first. A wallet doesn’t hold any tokens. It’s more like a window, letting you look from Web2 internet into the Web3 blockchain ledger where those tokens **do** live. Remember that these two *webs* are not naturally connected. The wallet is actually how an everyday user can connect with a blockchain and prove ownership and identity.
+
+![window.ethereum.code.png](/assets/lessons/wallets/window.ethereum.code.png)
+
+The wallet *does hold* what are called a public and private *key pair*, and let’s not forget the mnemonic (seed) phrase/recovery phrase that generates this key pair*,* **all of which you should have noted safely on your *cold* paper wallet**. 
+
+When downloading it, a wallet application generates a private key and an accompanying mnemonic phrase (a group of usually 12 special, but random words), which in turn generates a public key, which gets encoded with the Keccak-256 hashing function to create an cryptographic blockchain address, just for you. Lots of maths and cryptography!
+
+![EthAddressGenerated.png](/assets/lessons/wallets/EthAddressGenerated.png)
+
+Public Key Cryptography even at a simplistic high level warrants some time and we look forward to giving it proper attention in a proper blockchain fundamentals piece, as it is a cornerstone to the integrity of decentralised networks letting us interact safely with each other on them. For the moment, please just know that you use your public key to authorise transactions and private key to sign off on other *messages*, Together they are a powerful pair for proving your identity and what you own. **Guard your seed/recovery phrases and private keys with your life!**
+
+### Enough talk, let’s get you set up…… **with safety in mind!**
+
+**Step 1**. We recommend that you **do not** use your personal wallet for web development. We suggest that you create a new browser profile for each new one. You can see below I have really separate needs and thus created a profile each with a separate wallet:
+
+![profiles_on_browser.png](/assets/lessons/wallets/profiles_on_browser.png)
+
+You will have a separate mnemonic seed phrase plus public and private keys for each one, which you need to store safely somewhere. You can generate any number of key pairs from the seed phrase, which means that you can create many accounts as you want inside a wallet. As a dev, that’s handy if you want send transactions to mock actors when you are testing your apps. I have a few accounts in my dev_workshops wallet.
+
+ **Step 2**. Download a wallet. We are going to be using Metamask, as it’s a well audited wallet with lots of features to get our job done. <a style={{textDecoration: 'underline'}} href="https://metamask.io/" target="\_blank">Download MetaMask</a> and follow the steps carefully:
+
+ ![MM_for_Brave.png](/assets/lessons/wallets/MM_for_Brave.png)
+
+ When you have completed your download, **make sure that you have all those keys, your password and recovery phrases written down on paper and/or stored offline. If you have them saved on your machine and your operating system gets hacked, or dies for whatever reason, you have no way of recovering these private details. There’s no customer service. Gone is gone.** 
+
+### Ready to Roll!
+
+We will have a separate article on using Github as you will likely be using shared public repositories quite often. We will show you how to safely store private keys in private **.env** files. Stay tuned for that. 
+
+Now you should be ready to get up and running with your project. If you need test ETH, see the end of our article on *Testnets*, where you can find steps to the *faucet* for Goerli Testnet. Stay safe with those keys and happy coding!!!
