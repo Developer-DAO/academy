@@ -175,9 +175,6 @@ constructor then the compiler would have thrown us errors.
 Now let’s go ahead and add a mint function to our contract. We will add a
 function that only uses `_safeMint`
 
-<br/>
-<details>
-<summary>**Our code will look something like this**</summary>
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.11;
@@ -189,8 +186,7 @@ contract TierNFT is ERC721 {
     uint256 public totalSupply;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
     function mint() public payable {
         totalSupply++;
@@ -199,10 +195,7 @@ contract TierNFT is ERC721 {
 
 }
 
-````
-</details>
-<br/>
-
+```
 
 ### Adding Tiers and Using Them in the Mint Function
 
@@ -216,9 +209,9 @@ pragma solidity 0.8.11;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-string constant TIER_NAME_0 = "NOOB";
-string constant TIER_NAME_1 = "DEV";
-string constant TIER_NAME_2 = "HACKER";
+string constant TIER_NAME_0 = "Basic";
+string constant TIER_NAME_1 = "Medium";
+string constant TIER_NAME_2 = "Premium";
 uint256 constant TIER_VALUE_0 = 0.01 ether;
 uint256 constant TIER_VALUE_1 = 0.02 ether;
 uint256 constant TIER_VALUE_2 = 0.05 ether;
@@ -229,21 +222,25 @@ contract TierNFT is ERC721 {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
-		// We will add more code here
+    function mint() public payable {
+        totalSupply++;
+        _safeMint(msg.sender, totalSupply);
+    }
+    
+    // We will add more code here
 
 }
 ````
 
-We have added three types of tiers such as `NOOB` , `DEV` and `HACKER` . We
+We have added three types of tiers such as `Basic` , `Medium` and `Premium` . We
 assigned their values also.
 
 The mapping `mapping(uint256 => uint256) public tokenTier;` will store the tiers
 that we select with our msg values.
 
-Now we need to add our mint function for the tier NFTs:
+Now we need to modify our mint function for the tier NFTs:
 
 ```solidity
     // constructor part of the code...
@@ -285,9 +282,9 @@ pragma solidity 0.8.11;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 
-string constant TIER_NAME_0 = "NOOB";
-string constant TIER_NAME_1 = "DEV";
-string constant TIER_NAME_2 = "HACKER";
+string constant TIER_NAME_0 = "Basic";
+string constant TIER_NAME_1 = "Medium";
+string constant TIER_NAME_2 = "Premium";
 uint256 constant TIER_VALUE_0 = 0.01 ether;
 uint256 constant TIER_VALUE_1 = 0.02 ether;
 uint256 constant TIER_VALUE_2 = 0.05 ether;
@@ -298,8 +295,7 @@ contract TierNFT is ERC721 {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
     function mint() public payable {
         require(
@@ -366,10 +362,10 @@ together with the contract.
             bytes(
                 string(
                     abi.encodePacked(
-                        '{"name": "', name(), " #", Strings.toString(tokenId),
-                        '", "description": "TierNFTs collection",'
-												'"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
-                        '"}'
+                      '{"name": "', name(), " #", Strings.toString(tokenId),
+                      '", "description": "TierNFTs collection",'
+                      '"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
+                      '"}'
                     )
                 )
             )
@@ -431,17 +427,18 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 import '@openzeppelin/contracts/utils/Base64.sol'
 import '@openzeppelin/contracts/utils/Strings.sol'
 
-string constant TIER_NAME_0 = "NOOB"; string constant TIER_NAME_1 = "DEV";
-string constant TIER_NAME_2 = "HACKER"; uint256 constant TIER_VALUE_0 = 0.01
-ether; uint256 constant TIER_VALUE_1 = 0.02 ether; uint256 constant TIER_VALUE_2
-= 0.05 ether;
+string constant TIER_NAME_0 = "Basic";
+string constant TIER_NAME_1 = "Medium";
+string constant TIER_NAME_2 = "Premium";
+uint256 constant TIER_VALUE_0 = 0.01 ether;
+uint256 constant TIER_VALUE_1 = 0.02 ether;
+uint256 constant TIER_VALUE_2 = 0.05 ether;
 
 contract TierNFT is ERC721 { uint256 public totalSupply; mapping(uint256 =>
 uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
     function mint() public payable {
         require(
@@ -476,7 +473,7 @@ uint256) public tokenTier;
                     abi.encodePacked(
                         '{"name": "', name(), " #", Strings.toString(tokenId),
                         '", "description": "TierNFTs collection",'
-                                            '"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
+                        '"image": "data:image/svg+xml;base64,',Base64.encode(bytes(imageSVG)),
                         '"}'
                     )
                 )
@@ -505,8 +502,8 @@ string constant SVG_END = "</text></g></svg>";
 // string constant TIER_NAME = ...
 ````
 
-Here, we prepared the start and end of our SVG. We can test this out by pasting
-this code into this [online svg editor](https://editsvgcode.com/).
+Here, we prepared the start and end of our SVG. We can test this out by joining
+the start and end of the SVG into this [online svg editor](https://editsvgcode.com/).
 
 Now we need to modify our tokenURI function again.
 
@@ -542,7 +539,7 @@ We'll replace the JSON part to add our attributes:
 ```solidity
     '{"name": "',name()," #",Strings.toString(tokenId),
     '", "description": "TierNFTs collection",'
-		'"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
+    '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
     '","attributes":[{"trait_type": "Tier", "value": "',tierName,
     '" }]}'
 ```
@@ -564,9 +561,9 @@ import '@openzeppelin/contracts/utils/Strings.sol'
 string constant SVG_START = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" font-family="sans-serif"><defs><filter id="A" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="500" width="500"><feDropShadow dx="1" dy="2" stdDeviation="8" flood-opacity=".67" width="200%" height="200%" /></filter><linearGradient id="B" x1="0" y1="0" x2="15000" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#ad00ff" /><stop offset=".23" stop-color="#4e00ec" /><stop offset=".41" stop-color="#ff00f5" /><stop offset=".59" stop-color="#e0e0e0" /><stop offset=".77" stop-color="#ffd810" /><stop offset=".95" stop-color="#ad00ff" /></linearGradient><linearGradient id="C" x1="0" y1="60" x2="0" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#d040b8" /><stop offset="1" stop-color="#e0e0e0" /></linearGradient></defs><path fill="url(#B)" d="M0 0h15000v500H0z"><animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="-14500 0" dur="16s" repeatCount="indefinite" /></path><circle fill="#1d1e20" cx="100" cy="90" r="45" filter="url(#A)" /><text x="101" y="99" text-anchor="middle" class="nftLogo" font-size="32px" fill="url(#C)" filter="url(#A)">D_D<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 90" to="360 100 90" dur="5s" repeatCount="indefinite" /></text><g font-size="32" fill="#fff" filter="url(#A)"><text x="250" y="280" text-anchor="middle" class="tierName">';
 string constant SVG_END = "</text></g></svg>";
 
-string constant TIER_NAME_0 = "NOOB";
-string constant TIER_NAME_1 = "DEV";
-string constant TIER_NAME_2 = "HACKER";
+string constant TIER_NAME_0 = "Basic";
+string constant TIER_NAME_1 = "Medium";
+string constant TIER_NAME_2 = "Premium";
 uint256 constant TIER_VALUE_0 = 0.01 ether;
 uint256 constant TIER_VALUE_1 = 0.02 ether;
 uint256 constant TIER_VALUE_2 = 0.05 ether;
@@ -577,8 +574,7 @@ contract TierNFT is ERC721 {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
     function mint() public payable {
         require(
@@ -621,7 +617,7 @@ contract TierNFT is ERC721 {
                     abi.encodePacked(
                         '{"name": "',name()," #",Strings.toString(tokenId),
                         '", "description": "TierNFTs collection",'
-                                            '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
+                        '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(imageSVG)),
                         '","attributes":[{"trait_type": "Tier", "value": "',tierName,
                         '" }]}'
                     )
@@ -713,9 +709,9 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 string constant SVG_START = '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="none" font-family="sans-serif"><defs><filter id="A" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="500" width="500"><feDropShadow dx="1" dy="2" stdDeviation="8" flood-opacity=".67" width="200%" height="200%" /></filter><linearGradient id="B" x1="0" y1="0" x2="15000" y2="0" gradientUnits="userSpaceOnUse"><stop offset=".05" stop-color="#ad00ff" /><stop offset=".23" stop-color="#4e00ec" /><stop offset=".41" stop-color="#ff00f5" /><stop offset=".59" stop-color="#e0e0e0" /><stop offset=".77" stop-color="#ffd810" /><stop offset=".95" stop-color="#ad00ff" /></linearGradient><linearGradient id="C" x1="0" y1="60" x2="0" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#d040b8" /><stop offset="1" stop-color="#e0e0e0" /></linearGradient></defs><path fill="url(#B)" d="M0 0h15000v500H0z"><animateTransform attributeName="transform" attributeType="XML" type="translate" from="0 0" to="-14500 0" dur="16s" repeatCount="indefinite" /></path><circle fill="#1d1e20" cx="100" cy="90" r="45" filter="url(#A)" /><text x="101" y="99" text-anchor="middle" class="nftLogo" font-size="32px" fill="url(#C)" filter="url(#A)">D_D<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 100 90" to="360 100 90" dur="5s" repeatCount="indefinite" /></text><g font-size="32" fill="#fff" filter="url(#A)"><text x="250" y="280" text-anchor="middle" class="tierName">';
 string constant SVG_END = "</text></g></svg>";
 
-string constant TIER_NAME_0 = "NOOB";
-string constant TIER_NAME_1 = "DEV";
-string constant TIER_NAME_2 = "HACKER";
+string constant TIER_NAME_0 = "Basic";
+string constant TIER_NAME_1 = "Medium";
+string constant TIER_NAME_2 = "Premium";
 uint256 constant TIER_VALUE_0 = 0.01 ether;
 uint256 constant TIER_VALUE_1 = 0.02 ether;
 uint256 constant TIER_VALUE_2 = 0.05 ether;
@@ -725,8 +721,7 @@ contract TierNFT is ERC721, Ownable {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {}
+        ERC721(_name, _symbol) {}
 
     function mint() public payable {
         require(
@@ -873,36 +868,40 @@ module.exports = {
 }
 ```
 
-We are adding the RPC and the network to our config file. We will need some
-Testnet to deploy the contract.
+We are adding the RPC and the network to our config file. We will need to
+connect our wallet to the testnet and add some testnet funds to deploy the
+contract.
 
-<br/>
-<details>
-<summary>**Details on adding the network and getting some testnet**</summary>
+### Adding the testnet network
 
-  ![2_faucet.png](/assets/lessons/3/2_faucet.png)
-  To add the Polygon Mumbai network head over to the
-  [Chainlist](https://chainlist.org/) and connect your wallet. Then toggle the
-  testnet button and search for Mumbai. You will see the testnet network with
-  chainID 80001 and add it to the wallet. Note: Always make sure to use a spare
-  wallet with no money for these tutorials.
-  #### Getting Some Testnet
-  Testnet is an experimental network with sandbox environment where developers
-  can test, create and modify functionalities, monitor the blockchain network
-  performance, fix bugs and other network failures without having to use the
-  real crypto coins or worrying about breaking the main chain. The cost of
-  operation on mainnet is higher. As every operation performed on the blockchain
-  requires a fee so we can use testnet for testing purposes. We get testnets
-  from faucets. Faucets are websites which dips small amount of testnets on
-  addresses and sometimes they require completion of small tasks before dipping
-  some testnet on the wallets. Note: Testnet and mainnet are separate networks.
-  You can not send money from testnet to mainnet. To get some testnet let’s head
-  over to this [website](https://faucet.paradigm.xyz/).
-  ![3_faucet.png](/assets/lessons/3/3_faucet.png)
-  If you complete the required tasks that was asked, you can get testnets that
-  are not limited to one kind of testnet.
-</details>
-<br/>
+To add the Polygon Mumbai network head over to the
+[Chainlist](https://chainlist.org/) page and connect your wallet. Then toggle
+the testnet button and search for Mumbai. You will see the testnet network
+with chainID 80001 and add it to the wallet.
+Note: Always make sure to use a spare wallet with no money for these tutorials.
+
+![2_faucet.png](/assets/lessons/3/2_faucet.png)
+
+### Getting Some Testnet Funds
+
+Testnet is an experimental network with sandbox environment where developers
+can test, create and modify functionalities, monitor the blockchain network
+performance, fix bugs and other network failures without having to use the
+real crypto coins or worrying about breaking the main chain. The cost of
+operation on mainnet is higher. As every operation performed on the blockchain
+requires a fee so we can use testnet for testing purposes. We get testnets
+from faucets. Faucets are websites which dips small amount of testnets on
+addresses and sometimes they require completion of small tasks before dipping
+some testnet on the wallets.
+Note: Testnet and mainnet are separate networks. You can not send funds from
+testnet to mainnet. To get some testnet funds let’s head over to this
+[website](https://faucet.paradigm.xyz/).
+
+![3_faucet.png](/assets/lessons/3/3_faucet.png)
+
+If you complete the required tasks that was asked, you can get funds that
+are not limited to one kind of testnet.
+
 
 We can’t deploy yet. We need to add a `.env` file to our root folder to make
 sure we are not pushing our private keys into public repositories.
@@ -938,7 +937,7 @@ We will deploy our Smart Contract by using this command.
 npx hardhat run scripts/deploy.js --network mumbai
 ```
 
-We are specifying where we want to deploy our contract to in the `—network` part
+We are specifying where we want to deploy our contract to in the `—-network` part
 of the command.
 
 ![4_deploy.png](/assets/lessons/3/4_deploy.png)
@@ -1008,8 +1007,7 @@ main().catch((error) => {
 - `const contract = await` and `contractFactory.attach(CONTRACT_ADDRESS)` will
   make sure that we are not deploying the contract again, instead we need
   hardhat to use the contract we deployed to the testnet.
-- `let txn = await [contract.mint](http://contract.mint)` is calling the mint
-  function.
+- `let txn = await contract.mint(...` is calling the mint function.
 - `value: hre.ethers.utils.parseEther(VALUE_TIER_0)` - defines the value that we
   want to send to the mint function (this defines which Tier we get)
 - `ethers.utils.parseEther` - here we use ethers to translate the value into wei
@@ -1029,9 +1027,9 @@ If we look at our terminal we will see something like this.
 
 ![5_mint.png](/assets/lessons/3/5_mint.png)
 
-We finally minted our tier NFTs.
+We have just minted 3 NFTs with different Tiers!
 
-Let’s go ahead and view them on Opensea marketplace. This could take a few
+Let’s go ahead and view them on the Opensea marketplace. This could take a few
 minutes to appear, don't panic. You can search your newly created collection
 with your contract address or with the name that you chose in
 [https://testnets.opensea.io/](https://testnets.opensea.io/)
