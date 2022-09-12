@@ -1,9 +1,7 @@
 import {
-  AspectRatio,
   Box,
   Heading,
   VStack,
-  HStack,
   Container,
   Flex,
   Text,

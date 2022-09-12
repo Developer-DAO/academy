@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { Heading, Flex, Stack, Divider, VStack } from '@chakra-ui/react'
+import { Flex, Stack } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
