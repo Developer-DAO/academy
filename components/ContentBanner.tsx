@@ -27,7 +27,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
 
   return (
     <>
-      <Link href={`/lessons/${path}/${slug}`} passHref>
+      <Link key={slug} href={`/lessons/${path}/${slug}`} passHref>
         <a>
           <Flex direction="column" bg="gray.800" p={5} rounded={5}>
             <Flex
@@ -44,7 +44,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                     fontSize={[14, 14, 16]}
                     my={2}
                   >
-                    {slug}:&nbsp;{title}
+                    {title}
                   </Heading>
                 </Flex>
               </Flex>
