@@ -85,7 +85,13 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Heading>
           <UnorderedList listStyleType="none" textAlign="center" as="div">
             {lessons.map((lesson: any, idx: number) => (
-              <ListItem key={lesson.slug} my="2">
+              <ListItem
+                key={lesson.slug}
+                my="2"
+                py="2"
+                maxW="40vw"
+                margin="0 auto"
+              >
                 <NextLink
                   href={`/lessons/${lesson.path}/${lesson.slug}`}
                   passHref
@@ -101,7 +107,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
                         fontSize: 'xl',
                       }}
                     >
-                      {lesson.slug}: {lesson.frontMatter.title}
+                      {lesson.frontMatter.title}
                     </Button>
                   </Link>
                 </NextLink>
@@ -213,7 +219,7 @@ export const getStaticProps = async () => {
       lessons.push({
         path: filename,
         frontMatter,
-        slug: `${file.replace('.mdx', '')}`,
+        slug: file.replace('.mdx', ''),
       })
     })
   })

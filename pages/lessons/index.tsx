@@ -25,11 +25,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
       <Flex as="main" py={5} px={[4, 10, 16]} direction="column" minH="90vh">
         <Stack spacing={5} direction="column">
           {lessons.map((lesson: any, idx: number) => (
-            <VStack key={lesson.slug}>
-              <Link href={`${lesson.path}/${lesson.slug}`} passHref>
-                <ContentBanner lesson={lesson} idx={idx} />
-              </Link>
-            </VStack>
+            <ContentBanner key={lesson + idx} lesson={lesson} idx={idx} />
           ))}
         </Stack>
       </Flex>

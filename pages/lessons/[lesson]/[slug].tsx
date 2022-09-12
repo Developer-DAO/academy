@@ -6,14 +6,12 @@ import path from 'path'
 import matter from 'gray-matter'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
-import ContentSideDrawer from '../../components/ContentSideDrawer'
-import ContentCallout from '../../components/ContentCallout'
-import { ActionButton } from '../../components/ActionButton'
+import ContentSideDrawer from '../../../components/ContentSideDrawer'
+import ContentCallout from '../../../components/ContentCallout'
+import { ActionButton } from '../../../components/ActionButton'
 
 interface LessonProps {
-  frontMatter: {
-    i18n: string
-  }
+  frontMatter: object
   mdxSource: MDXRemoteSerializeResult
   slug: string
 }
@@ -63,11 +61,7 @@ const components = {
   ContentCallout,
 }
 
-const Lesson: React.FC<LessonProps> = ({
-  frontMatter: { i18n },
-  mdxSource,
-  slug,
-}) => {
+const Lesson: React.FC<LessonProps> = ({ mdxSource, slug }) => {
   const flexJustifyContentActions = (slug: string) => {
     const shouldHavePrevious = shouldHavePreviousLessonButton(slug)
     const shouldHaveNext = shouldHaveNextLessonButton(slug)
@@ -133,30 +127,42 @@ const Lesson: React.FC<LessonProps> = ({
 export default Lesson
 
 export const getStaticPaths = async () => {
-  const files = fs.readdirSync(path.join('lessons'))
-  const paths = files.map((filename) => ({
+  const trackDir = path.join('lessons')
+
+  const topicDirectories = fs.readdirSync(trackDir)
+
+  const allPaths: {
     params: {
-      slug: filename.replace('.mdx', ''),
-    },
-  }))
+      lesson: string
+      slug: string
+    }
+  }[] = []
+
+  topicDirectories.forEach((topic: string) => {
+    const topicDirectory = path.join(trackDir, topic)
+    const files = fs.readdirSync(topicDirectory)
+
+    files.forEach((fileName: string) => {
+      const path = {
+        params: {
+          lesson: topic,
+          slug: fileName.replace('.mdx', ''),
+        },
+      }
+
+      allPaths.push(path)
+    })
+  })
+
   return {
-    paths,
-    fallback: false,
+    paths: allPaths,
+    fallback: false, // if access path/slug that doesn't exist -> 404 page
   }
 }
 
-export const getStaticProps = async ({ params: { slug } }: any) => {
-  const markdownWithMeta = fs.readFileSync(
-    path.join('lessons', slug + '.mdx'),
-    'utf-8',
-  )
-  const { data: frontMatter, content } = matter(markdownWithMeta)
-  const mdxSource = await serialize(content)
-  return {
-    props: {
-      frontMatter,
-      slug,
-      mdxSource,
-    },
-  }
+export const getStaticProps = async ({ params: { lesson, slug } }: any) => {
+  const learn = fs.readFileSync(path.join('lessons', lesson, slug + '.mdx'))
+  const { data: metaData, content } = matter(learn)
+  const mdxSource = await serialize(content, { scope: metaData })
+  return { props: { mdxSource: mdxSource, lesson, slug } }
 }
