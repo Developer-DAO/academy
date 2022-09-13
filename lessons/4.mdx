@@ -1,0 +1,103 @@
+---
+title: Testing your Tier NFT
+description: Add tests to your Tier NFT. Builds on knowledge from Lesson 3.
+icons: ['solidity', 'hardhat', 'openzeppelin']
+---
+
+# Lesson 4: Testing your Tier NFT
+
+In this lesson, we'll be adding automated tests for our smart contract from
+Lesson 3.
+
+## Why automated testing?
+
+- How do you know your contract actually works?
+- Once you know it works, how do you know it won't break when you make future
+  changes?
+- Particularly if you're a new engineer to the code-base. It may not be obvious
+  when something breaks.
+- I found a bug and fixed it. How do I know the bug won't come back again?
+
+This is where automated test comes into. Tests are a tool for writing your code,
+and making sure it it keeps working as expected when changes are made.
+
+Of course this doesn't replace testing your smart contract for real on devnet,
+but it's an important tool to knowing your contract will work as expected.
+
+## Let's add some tests
+
+### Adding Test Framework
+
+- Adding hardhat tests
+- NOTE: Since we didn't introduce TypeScript on this project, we won't discuss
+  using TypeScript for the testing.
+
+### What do we want to test on our Tier NFT contract?
+
+- Let's look at our contract. What's it trying to do?
+
+### Writing initial tests for constructor(), mint() and withdraw()
+
+- Walk through and demonstrate tests for `constructor()`
+- and for `mint()`
+- and for `withdraw()`
+
+## But what about testing tokenURI()?
+
+Notice the current version of `tokenURI()` in our contract outputs a giant
+opaque Base64 string, which contains the JSON file with an embedded SVG image:
+
+```
+data:application/json;base64,eyJuYW1lIjogIlRpZXJORlQgIzEiLCAiZGVzY3JpcHRpb24
+iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmF
+zZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2l
+
+-- removed 50 lines in between --
+
+JSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRBd0lpQm1hV3hzUFNKdWIyNWxJaUJtYjI1MEx
+XWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1JsWm5NK1BHWnBiSFJsY2lCcFpEMGlRU0lnWTI
+5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBaWEp6UFNKelVrZENJaUJtYVd4MFpYSlZibWw
+6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVlIjogIkJhc2ljIiB9XX0=
+```
+
+This is impossible to test because if you make a change to the code, you get a
+different Base64 string but how do you know if it's correct?
+
+What's I'd recommend here is to refactor this to make it easier to test.
+
+But first, let's wrap `tokenURI()` with a test that **DOES** capture this opaque
+string. This gives us a "safety net" as we refactor our code. If we break things
+while dividing this problem into helper methods, the test will help us discover
+that. We can then toss this test at the end.
+
+Let's write some helper methods that are more easily testable.
+
+- Discuss new `tierNameOf()` helper method
+- Discuss new `imageSVGOf()` helper method
+- Discuss new `finalJSON` helper method
+- Note I didn't test the final stripped down `tokenURI()`. I didn't want to test
+  the base64 string (as discussed above) so felt comfortable testing all the
+  pieces instead. ...
+
+## Food for Thought
+
+With all the helpfulness of tests, why didn't we start with tests?
+
+The main reason was trying to minimize all the things you needed to learn to get
+started, but the methodolgy when writing tests first is called "Test Driven
+Development" (TDD).
+
+TDD is a very powerful methodology which goes like this:
+
+- Before you write implementation code, you write one or more tests and run
+  them.
+- Of course those tests fail initially. This is actually an important step. If
+  your tests pass and you haven't written any code yet, your test is broken.
+- You then add your implementation until the test passes.
+
+Voila! You've written tests as you go, which are much more fun to write, and you
+end up writing better code to start with because otherwise it's too hard to
+test. So in the refactor example above for `tokenURI()` you would never have
+written the version that outputs a long base64 string because it's not testable.
+Bolting on tests after the fact can be painful, boring and you lose the
+potential code improvements you would have made if you tested as you go.
