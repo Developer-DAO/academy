@@ -46,6 +46,21 @@ const styles = {
 }
 
 const components = {
+  ContentCallout: {
+    baseStyle: {
+      bg: colors.soc.eerieBlack,
+      borderRadius: '1em',
+      px: '1em',
+      pb: '1em',
+      m: '1em',
+    },
+    variants: {
+      info: {
+        borderWidth: '0 0 0 4px',
+        borderColor: colors.soc.schoolBusYellow,
+      },
+    },
+  },
   Link: {
     variants: {
       'top-navigation': {

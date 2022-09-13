@@ -7,6 +7,7 @@ import matter from 'gray-matter'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import ContentSideDrawer from '../../components/ContentSideDrawer'
+import ContentCallout from '../../components/ContentCallout'
 import { ActionButton } from '../../components/ActionButton'
 
 interface LessonProps {
@@ -59,6 +60,7 @@ const components = {
     <Image as="img" apply="mdx.image" m="0 auto" alt="" {...props} />
   ),
   ContentSideDrawer,
+  ContentCallout,
 }
 
 const Lesson: React.FC<LessonProps> = ({
