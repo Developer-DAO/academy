@@ -175,7 +175,7 @@ last prompt. If they didn’t install or we accidentally chose ‘n’, we can a
 install them manually with:
 
 ```bash
-npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
 
 {/* ```bash
@@ -777,7 +777,8 @@ Hardhat configuration file. Go into your main project's folder and open
 We are going to replace our file with this:
 
 ```jsx
-require('@nomiclabs/hardhat-waffle')
+require('@nomicfoundation/hardhat-chai-matchers')
+require('@nomiclabs/hardhat-ethers');
 
 const WALLET_PRIVATE_KEY = 'YOUR-PRIVATE-KEY-DONT-SHARE'
 
