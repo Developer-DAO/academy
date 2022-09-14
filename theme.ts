@@ -59,7 +59,7 @@ const components = {
     },
     variants: {
       info: {
-        borderWidth: '0 0 0 4px',
+        borderWidth: '0 0 0 1px',
         borderColor: colors.soc.schoolBusYellow,
       },
     },
