@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Flex, Stack } from '@chakra-ui/react'
+import { Flex, Stack, Heading } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -14,6 +14,13 @@ interface LessonProps {
 }
 
 const Lessons: React.FC<LessonProps> = ({ lessons }) => {
+  const result = lessons.reduce((acc: any, curr: any) => {
+    if (!acc[curr.path]) acc[curr.path] = []
+
+    acc[curr.path].push(curr)
+    return acc
+  }, {})
+
   return (
     <>
       <Head>
@@ -23,9 +30,20 @@ const Lessons: React.FC<LessonProps> = ({ lessons }) => {
       </Head>
       <Flex as="main" py={5} px={[4, 10, 16]} direction="column" minH="90vh">
         <Stack spacing={5} direction="column">
-          {lessons.map((lesson: any, idx: number) => (
-            <ContentBanner key={lesson + idx} lesson={lesson} idx={idx} />
-          ))}
+          <>
+            {Object.entries(result).map((track: any) => {
+              return (
+                <>
+                  <Heading size="lg" color="yellow.300">
+                    {track[0].toUpperCase()}
+                  </Heading>
+                  {track[1].map((lesson: any, idx: number) => {
+                    return <ContentBanner key={idx} lesson={lesson} idx={idx} />
+                  })}
+                </>
+              )
+            })}
+          </>
         </Stack>
       </Flex>
     </>

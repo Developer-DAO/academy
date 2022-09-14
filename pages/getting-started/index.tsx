@@ -25,6 +25,13 @@ interface LessonProps {
 }
 
 const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
+  const result = lessons.reduce((acc: any, curr: any) => {
+    if (!acc[curr.path]) acc[curr.path] = []
+
+    acc[curr.path].push(curr)
+    return acc
+  }, {})
+
   return (
     <>
       <Head>
@@ -83,37 +90,51 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           >
             Current Lessons
           </Heading>
-          <UnorderedList listStyleType="none" textAlign="center" as="div">
-            {lessons.map((lesson: any, idx: number) => (
-              <ListItem
-                key={lesson.slug}
-                my="2"
-                py="2"
-                maxW="40vw"
-                margin="0 auto"
+          {Object.entries(result).map((track: any, idx: number) => {
+            return (
+              <UnorderedList
+                listStyleType="none"
+                textAlign="center"
+                as="div"
+                key={idx}
               >
-                <NextLink
-                  href={`/lessons/${lesson.path}/${lesson.slug}`}
-                  passHref
-                >
-                  <Link>
-                    <Button
-                      height="auto"
-                      style={{
-                        whiteSpace: 'normal',
-                        wordWrap: 'break-word',
-                        padding: '0.5rem',
-                        width: '100%',
-                        fontSize: 'xl',
-                      }}
+                <Heading size="md" color="yellow.300">
+                  {track[0].toUpperCase()}
+                </Heading>
+                <>
+                  {track[1].map((lesson: any, idx: number) => (
+                    <ListItem
+                      key={idx}
+                      my="2"
+                      py="2"
+                      maxW="40vw"
+                      margin="0 auto"
                     >
-                      {lesson.frontMatter.title}
-                    </Button>
-                  </Link>
-                </NextLink>
-              </ListItem>
-            ))}
-          </UnorderedList>
+                      <NextLink
+                        href={`/lessons/${lesson.path}/${lesson.slug}`}
+                        passHref
+                      >
+                        <Link>
+                          <Button
+                            height="auto"
+                            style={{
+                              whiteSpace: 'normal',
+                              wordWrap: 'break-word',
+                              padding: '0.5rem',
+                              width: '100%',
+                              fontSize: 'xl',
+                            }}
+                          >
+                            {lesson.frontMatter.title}
+                          </Button>
+                        </Link>
+                      </NextLink>
+                    </ListItem>
+                  ))}
+                </>
+              </UnorderedList>
+            )
+          })}
           <Divider />
 
           <Heading
