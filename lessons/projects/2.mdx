@@ -160,7 +160,7 @@ ok for us. Here's what mine asked me:
 ✔ Do you want to install this sample project's dependencies with npm (@nomicfoundation/hardhat-toolbox)? (Y/n) · y
 ```
 
-- **Hardhat project root** → The folder where we want to create the project
+- **Hardhat project root** → Hit enter (this is the folder where we want to create the project)
 - **Do you want to add a .gitignore?** → Select 'y'. If you are patient to
   finish the lesson, you'll learn what it's for
 - **Do you want to install this sample project's dependencies with npm (…)?** →
@@ -656,6 +656,16 @@ and a Base URI for our files. With that info set at the top, the script deploys
 the contract, waits for it to be deployed and then prints the address of our
 deployed contract to the console.
 
+Before we run our script, we need to tell Hardhat what solidity version our
+contracts are using. For that, we need to go into the `hardhat.config.js` file
+in our root folder. Find the line that says `solidity: '0.8.xx',` and replace
+the `0.8.xx` for the pragma used in our contract: `0.8.12`.
+
+We could have used a range of solidity versions e.g. `^0.8.0` in our contract,
+but we like to promote best practices by choosing a fixed solidity version
+and knowing beforehand nothing is going to change in our bytecode if a new
+version in that range is released.
+
 Now, to run the script we type this in the console:
 
 ```bash
@@ -714,7 +724,7 @@ For us to get our contract out of our computers and into the real world, we are
 going to run the deploy again, but this time to a testnet.
 
 What is a testnet? It is a basically a whole running blockchain, but it runs
-only so people can try stuff out. On it, you have eth, tokens, NFTs, but they have no monetary value. This way, you can develop and test your contracts without fear of losing real money. For the moment, we are choosing to do this on the Rinkeby (it's one of the many Ethereum testnets)
+only so people can try stuff out. On it, you have eth, tokens, NFTs, but they have no monetary value. This way, you can develop and test your contracts without fear of losing real money. For the moment, we are choosing to do this on the Goerli (it's one of the many Ethereum testnets)
 
 Before we go any further, let's take an extra step for precaution, until the
 next project where we are going to learn how to use collaborative tools to store
@@ -727,14 +737,14 @@ hardhat.config.js
 
 In order to do this we need:
 
-- An ethereum wallet that can connect to Rinkeby.
+- An ethereum wallet that can connect to Goerli.
   [Metamask](https://metamask.io/) is the most used.
-- Some ~~Rinkeby~~-Eth. You can ask for some in a faucet, it's free, although
-  some are faster than others! Options: [#1](https://rinkebyfaucet.com/),
-  [#2](https://faucets.chain.link/rinkeby), [#3](https://faucet.rinkeby.io/)
+- Some Goerli-Eth. You can ask for some in a faucet, it's free, although
+  some are faster than others! Options: [#1](https://goerlifaucet.com/),
+  [#2](https://faucets.chain.link/goerli), [#3](https://faucet.paradigm.xyz/)
 - An API Key from an Ethereum RPC Node Provider
 ([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
-[Ankr](https://rpc.ankr.com/eth_rinkeby))
+[Ankr](https://rpc.ankr.com/eth_goerli))
 - A minor change in the Hardhat Configuration file
 
 First and foremost, **security**. We are exploring new grounds, experimenting
@@ -760,7 +770,7 @@ Once you have your wallet funded with test eth, you need sign up for one of the
 Ethereum RPC Node Providers. Alchemy and Infura are the most used, Ankr has a "community endpoint" without signing up that is not dedicated, to list a few options.
 
 Once you sign up, you'll be asked to create an App, be sure to select the
-~~Rinkeby~~ network there.
+Goerli network there.
 
 When the app is created, you'll see a "View Key" button, or similar. Press it
 and copy the HTTP link, we'll use it in our next step.
@@ -785,7 +795,7 @@ const RPC_API_KEY = 'YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY'
 module.exports = {
   solidity: '0.8.12',
   networks: {
-    rinkeby: {
+    goerli: {
       url: RPC_API_KEY,
       accounts: [WALLET_PRIVATE_KEY],
     },
@@ -809,7 +819,7 @@ Please, if your are already a developer and you plan to use git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
-Ok. We are ready, let's deploy to the Rinkeby testnet!
+Ok. We are ready, let's deploy to the Goerli testnet!
 
 Now we need to run our deploy.js script and the deployment is going to cost us
 some eth (test eth, don't worry) from our wallet, since we are storing
@@ -821,7 +831,7 @@ deploy, delete all the lines we added to test the minting.
 Run:
 
 ```bash
-npx hardhat run scripts/deploy.js --network rinkeby
+npx hardhat run scripts/deploy.js --network goerli
 ```
 
 This is the output i got in my console:
@@ -836,12 +846,11 @@ key from `hardhat.config.js` to minimize the handling of the wallet. In the next
 project we will learn about tools to collaborate and store your projects online
 
 So now we can go and explore the chain to find your contract (and mine too!).
-Just go to [Etherscan](https://rinkeby.etherscan.io/) (or
+Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
 [Opensea](https://testnets.opensea.io/)) and search for the address of our
 deployed contract.
 
-You can view my links as an example on
-[Etherscan](https://rinkeby.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)
+You can view my links as an example on ~~[Etherscan](https://goerli.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)~~
 and [Opensea](https://testnets.opensea.io/collection/soc)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
