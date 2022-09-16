@@ -21,29 +21,29 @@ icons:
 
 ## What are we building?
 
-We are going to build on-chain NFTs, that have different Tiers (and prices).
+We are going to build on-chain NFTs, that have different Tiers and prices.
 
 In the previous lesson, we talked about NFTs and their use cases. If we can use
-an NFT to login to a web page, or to access a service, we can try to use them to
-differentiate different levels or categories in said service. Think of some
-streaming services out there (Netflix, Disney+, etc). Some have different levels
-of access depending on your subscription. We want to let users access different
-services depending on the NFT they mint/own.
+an NFT to login to a web page, or to access a service, we can use them to
+differentiate between different levels or categories in that service. Think of some
+streaming services out there such as Netflix, Disney+, etc. Some have different levels
+of access depending on the subscription. We want to let users access different
+services depending on the NFT they mint and own.
 
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
 ## First things first 👷‍♂️
 
-Before we start coding, we need to create our project. We are going to follow
+Before we start coding, we need to create our project template. We are going to follow
 the same steps as in previous lessons. Using our package manager (npm, yarn,
 etc) we create a Hardhat project and remove unnecessary files.
 
 If you’ve done our previous lesson, it’s the exact same process. Make a note of
-remembering these steps and what they do, for they are going to be used a lot in
+remembering these steps and what they do, for we will use them a lot in
 the future.
 
-Let’s `cd` into our D_D Academy projects folder, and create a folder for our
-NFT project:
+Let’s first open a console and cd into our `d_d_academy` folder, or create it
+first if you don't have it. Then let's create a folder for our NFT project:
 
 ```bash
 ## (OPTIONAL) create a folder for our D_D Academy projects
@@ -81,12 +81,13 @@ ok for us. Here's what mine asked me:
 ✔ Do you want to install this sample project's dependencies with npm (@nomicfoundation/hardhat-toolbox)? (Y/n) · y
 ```
 
-- **Hardhat project root** → The folder where we want to create the project
+- **Hardhat project root** → Hit enter (this is the folder where we want to create the project)
 - **Do you want to add a .gitignore?** → Select 'y'. If you are patient to
   finish the lesson, you'll learn what it's for
 - **Do you want to install this sample project's dependencies with npm (…)?** →
   Select 'y'. These are packages (programs) that our project needs to be able to
-  run.
+  run. It will show the progress and several Warning messages that are normal.
+  If you get any Error messages, that's different story.
 
 <ContentCallout emoji='💡' size='md' variant='info'>
 The project asked us to install `@nomicfoundation/hardhat-toolbox` in the
@@ -140,13 +141,13 @@ contract TierNFT {
 }
 ```
 
-Now that we have our License, the version of solidity we will be using and the
-contract set up, we can add the logic and the state.
+Now that we have our License, the version of solidity we are using and the
+contract set up, we can add the logic and the variables we need to store.
 
 ## What do we need?
 
-As we are creating tiers (or categories/levels) for our NFTs, we need to store
-information about tiers on our contracts.
+As we are creating tiers for the categories of our NFTs, we need to also store
+information about tiers in our contracts.
 
 Let’s write our smart contract within four steps. We will try to go step by
 step.
@@ -154,11 +155,11 @@ step.
 ### Inheriting OpenZeppelin ERC721 and adding a Mint Function
 
 Let’s get started with a simple contract. We will inherit OpenZeppelin ERC721
-contract again.
+contract like we did last time.
 
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -170,16 +171,16 @@ contract TierNFT is ERC721 {
 }
 ```
 
-We have a constructor on our contract. We need to have this constructor as we
-are inheriting ERC721 from OpenZeppelin implementation. If we didn’t have the
+We have a constructor in our contract. We need to have this constructor as we
+are inheriting ERC721 from the OpenZeppelin implementation. If we didn’t have the
 constructor then the compiler would have thrown us errors.
 
 Now let’s go ahead and add a mint function to our contract. We will add a
 function that only uses `_safeMint`
 
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 
@@ -201,13 +202,13 @@ contract TierNFT is ERC721 {
 
 ### Adding Tiers and Using Them in the Mint Function
 
-Now it’s time for us to add our tiers. Just as we explained before each tiers
-will have different values as the service subscription. Now let’s go ahead and
+Now it’s time for us to add our tiers. Just as we explained before each tier
+will have a value that represents the service description. Now let’s go ahead and
 add the tiers and assign their values.
 
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -236,11 +237,8 @@ contract TierNFT is ERC721 {
 }
 ````
 
-We have added three types of tiers such as `Basic` , `Medium` and `Premium` . We
-assigned their values also.
-
-The mapping `mapping(uint256 => uint256) public tokenTier;` will store the tiers
-that we select with our msg values.
+We have added `Basic` , `Medium` and `Premium` as our tiers and assigned their
+values. We store what tier each NFT hold in `mapping(uint256 => uint256) public tokenTier;`.
 
 Now we need to modify our mint function for the tier NFTs:
 
@@ -266,21 +264,19 @@ Now we need to modify our mint function for the tier NFTs:
 }
 ```
 
-With `msg.value` we are storing the tiers we are selecting. We are telling the
-mint function to select tiers based on the amount of value we have. If we don’t
-have enough value for our tier 0 then we will get a message mentioning us, "Not
+We tell the mint function to select tiers based on the amount of value it received. If we don’t
+have enough value for tier 0 we will get a message telling us, "Not
 enough value for the minimum Tier".
 
-But if we have enough value then we can select the value we want otherwise our
-function will pick the possible tier value we can acquire with the amount we
-have.
+But if we have enough value, we can select the value we want, otherwise the
+function will choose tier for us, based on what we can afford.
 
 <br/>
 <details>
 <summary>**View full code here**</summary>
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 
@@ -322,24 +318,23 @@ contract TierNFT is ERC721 {
 
 ### Create a (simple) tokenURI function
 
-When we inherited ERC721 contract, we also got a function for `tokenURI` where
-we can store anything that we want. It can be an image, video or anything that
-we want. With the help of the OpenZeppelin’s ERC721 contract we have the ability
-to define **a base path** for creating an unique URI which adds the token ID
-towards the end.
+When we inherited ERC721 contract, it gave us a function for `tokenURI` where
+we can store an image, a video and lots more. With the help of the OpenZeppelin’s
+ERC721 contract we have the ability to define **a base path** for creating an
+unique URI which adds the token ID at the end of it.
 
 ```solidity
-// Place this next to the other imports at the top:
+// Place this under the other imports at the top:
 import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 ````
 
-We imported `Base64` which will help us to encode the tokenURI so that it
-returns the JSON file we need for our tier NFTs.
+We imported `Base64.sol` which encodes the tokenURI so that it returns the JSON
+file we need for our tier NFTs.
 
-Remember how we talked about having token ID towards the end of the unique URI?
+Remember how we talked about having token ID at the end of the unique URI?
 
-To do that, we would need to import `Strings` which will be able to write our
+To do that, we need to import `Strings.sol` which will be able to write our
 tokenID in a string inside the JSON file.
 
 For this lesson we won’t be creating a separate JSON file. We will write it
@@ -390,10 +385,10 @@ Let’s break it down for us to understand.
   NFT doesn't exist.
 - `imageSVG` is a placeholder for our image and we will deal with it a bit
   later.
-- `Base64.encode` is for encoding the JSON in Base64 so browsers can translate
-  that into a file (the same way e-mail carry attached files inside them).
-- `string( abi.encodePacked () )` concatenates string the string in similar way,
-  which we did during our previous lesson.
+- `Base64.encode` is for encoding the JSON into Base64 so browsers can translate
+  it into a file much in the same way as a file attached to an email.
+- `string( abi.encodePacked () )` concatenates the string in similar way,
+  as in our previous lesson.
 
 This is the JSON format of our metadata:
 
@@ -404,10 +399,10 @@ This is the JSON format of our metadata:
 '"}'
 ```
 
-The part `data:image/svg+xml;base64` tells the browser that the part following
-the comma is a string of text written in Base64, (image/svg…) so the browsers
+The part `data:image/svg+xml;base64` tells the browser that follows
+the comma is a string of text written in Base64, so the browser
 can decode it back into our SVG file format. Just as an example, if our
-collection `TierNFT`, and the TokenID was `3`, our JSON would end up look
+collection `TierNFT`, and the TokenID were `3`, our JSON would end up look
 something like this:
 
 ```solidity
@@ -422,8 +417,8 @@ something like this:
 <details>
 <summary>**here’s the updated code**</summary>
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 import '@openzeppelin/contracts/utils/Base64.sol'
@@ -491,10 +486,9 @@ uint256) public tokenTier;
 </details>
 <br/>
 
-### Complete TokenURI function (With our SVG!)
+### Complete TokenURI function with our SVG
 
-We did a bunch of things with our contract but now the time has come for us to
-create the incredible SVG we want.
+We did a bunch of things with our contract and now we're going to tell you what and SVG is.
 
 Add these lines right next to the other constants defined for the tiers:
 
@@ -553,8 +547,8 @@ trait types.
 <details>
 <summary>**View updated code**</summary>
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
 import '@openzeppelin/contracts/utils/Base64.sol'
@@ -700,8 +694,8 @@ Now let’s write our withdraw function.
 <details>
 <summary>**View the Full Contract Here**</summary>
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.11;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.12;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -860,7 +854,7 @@ require('dotenv').config()
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: '0.8.11',
+  solidity: '0.8.12',
   networks: {
     mumbai: {
       url: 'https://rpc-mumbai.maticvigil.com',
