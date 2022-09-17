@@ -23,12 +23,11 @@ Testing can:
 - ensure a bug is fixed and won't come back again
 - give you a safety net when you refactor code
 
-Tests are a tool for writing your code and making sure it it keeps working as
+Tests are a tool for writing your code and making sure it keeps working as
 expected when changes are made.
 
-Automated tests don't fully replace manually testing your smart contract on
-devnet, but it's an important tool to ensuring your contract will work as
-expected.
+Automated tests don't fully replace manually testing your smart contract but
+it's an important tool to ensuring your contract will work as expected.
 
 ## Let's add some tests
 
@@ -37,8 +36,8 @@ expected.
 You've already setup hardhat in Lesson 2, which is a great framework for writing
 automated tests.
 
-Add a line in your `scripts` section of `package.json` so it looks something
-like this:
+Add a line in your `scripts` section of `package.json` so it looks like this
+below. You may already have other scripts' lines so don't get rid of those.
 
 ```javascript
 "scripts": {
@@ -46,8 +45,8 @@ like this:
 },
 ```
 
-Next create an empty test file to get started in a new `test` folder called
-`tier-nft.test.js` with just these lines:
+Next create a `test` folder in the root of your site, and add a new file called
+`tier-nft.test.js` with these lines:
 
 ```javascript
 const { expect } = require('chai')
@@ -57,8 +56,10 @@ describe('TierNFT', function () {
 })
 ```
 
-`expect()` from the Chai library is used to test various conditions. There are
-many examples in this lesson.
+<ContentCallout emoji="💡" size="md" variant="info">
+  `expect()` from the Chai library is used to test various conditions. There are
+  many examples in this lesson.
+</ContentCallout>
 
 Now with a test file and a command to run the tests, try `npm test` and you
 should see:
@@ -78,8 +79,8 @@ This now proves:
 - the tests are found and are running
 
 `pending` means we haven't added the real test yet, so it is neither passing nor
-failing since no test code written. Adding `pending` placeholders are a good way
-to brainstorm and remind yourself what tests you need to write.
+failing. Adding `pending` placeholders are a good way to brainstorm and remind
+yourself what tests you need to write.
 
 ## What do we want to test on our Tier NFT contract?
 
@@ -276,7 +277,7 @@ the contract is deployed from scratch for each test and this is where that
 happens. "Before each" test, this code will run and re-inialize everything,
 which prevents one test's results from interfering with another test.
 
-What's the gist of what's happening in `beforeEach()`?
+What's happening in `beforeEach()`?
 
 The hardhat framework give us the tools to deploy our contract to a
 locally-running blockchain. So when this code finishes, we have a fully deployed
@@ -301,9 +302,20 @@ it('set proper collection symbol', async function () {
 })
 ```
 
-They each call a method and verify the results.
+They each call a method and verify the results. "Is the contract name really
+TierNFT?" "Is the contract symbol really Tier?"
 
-### Here are some general testing concepts:
+<ContentCallout emoji="💡" size="md" variant="info">
+  You'll notice a lot of `await` statements. That's because most of these calls
+  are asynchronous. Without `await` the program would keep going without waiting
+  for the result. You may want to take a detour and learn more about what those
+  do, but for now, think of them as basically waiting for an asynchronous call
+  to return before moving on to the next line.
+</ContentCallout>
+
+They also lead us to talk about general testing concepts.
+
+### General testing concepts
 
 - Tests should be as simple as possible. By moving setup code into
   `beforeEach()` that helps keep it easy to focus on the test itself. If you
@@ -314,8 +326,8 @@ They each call a method and verify the results.
   each. In practice we could have tested both the name and the symbol in one
   test, but see bullet 1 above!
 - And basically every test has two pieces (in addition to the `beforeEach()`
-  setup code): a call of a method to be tested, and code to compare the result
-  of that call with what's expected.
+  setup code): a call of a method to be tested, and code to see if the expected
+  result happened.
 
 Lastly when you write a test, always make sure it fails first! So try changing
 `expect` line to test the name `Anita` instead of `TierNFT`, run the test via
