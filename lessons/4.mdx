@@ -9,7 +9,7 @@ icons: ['solidity', 'hardhat', 'openzeppelin']
 # Lesson 4: Testing your Tier NFT
 
 In this lesson, we'll be adding automated tests for our smart contract that was
-create in Lesson 3.
+created in Lesson 3.
 
 ## Why automated testing?
 
@@ -23,22 +23,22 @@ Testing can:
 - ensure a bug is fixed and won't come back again
 - give you a safety net when you refactor code
 
-This is where automated test come in. Tests are a tool for writing your code,
+This is where automated tests come in. Tests are a tool for writing your code
 and making sure it it keeps working as expected when changes are made.
 
-Of course this doesn't replace testing your smart contract for real on devnet,
-but it's an important tool to knowing your contract will work as expected.
+Automated tests don't fully replace manually testing your smart contract on
+devnet, but it's an important tool to ensuring your contract will work as
+expected.
 
 ## Let's add some tests
 
 ### First add a test framework
 
-You've already setup hardhat in Lesson 2, which is a great framework for writing
-automated tests too.
+You've already setup hardhat in Lesson 2, which is also a great framework for
+writing automated tests.
 
-Assuming you already have hardhat running in your project (from Lesson 2), add a
-line in your `scripts` section of `package.json` so it looks something like
-this:
+Add a line in your `scripts` section of `package.json` so it looks something
+like this:
 
 ```javascript
 "scripts": {
@@ -58,7 +58,7 @@ describe('TierNFT', function () {
 ```
 
 `expect` from the Chai library is used to test various conditions. There are
-many examples here in this lesson.
+many examples in this lesson.
 
 Now with a test file and a command to run the tests, try `npm test` and you
 should see:
@@ -78,14 +78,8 @@ This now proves:
 - the tests are found and are running
 
 `pending` means we haven't added the real test yet, so it is neither passing nor
-failing since there is no test code written. Adding `pending` placeholders are a
-good way to brainstorm and remind yourself what tests you need to write.
-
-<ContentCallout emoji="💡" size="md" variant="info">
-  Since we didn't introduce TypeScript in this project we won't discuss writing
-  tests in TypeScript. Just mentioning here since TypeScript is something you'll
-  want to learn more about and we may cover in a future lesson.
-</ContentCallout>
+failing since no test code written. Adding `pending` placeholders are a good way
+to brainstorm and remind yourself what tests you need to write.
 
 ## What do we want to test on our Tier NFT contract?
 
@@ -209,12 +203,10 @@ mint fails if there is not enough Eth spent.
 ### Start testing constructor(), mint() and withdraw()
 
 Let's start with the `constructor`. This one is pretty straight forward since
-the heavy lifting is done by OpenZeppelin base classes, but let's make sure we
+the heavy lifting is done by OpenZeppelin's base classes, but let's make sure we
 can set the NFT name and symbol.
 
-Let's take a leap forward with our first two tests!
-
-It's looks like a lot, but we'll walk through. This code includes setup code
+Let's take a leap forward with our first two tests, as well as some setup code
 that we'll reuse for all the other tests too.
 
 ```javascript
@@ -279,10 +271,10 @@ Notice "TierNFT" comes from the first `describe()` block and `constructor` is
 from the inner `describe()` block. The tests are then indented under there.
 Makes for a nicely organized suite of tests.
 
-Next is a `beforeEach()` block. When tests run it's important that the contract
-is deployed from scratch for each test and this is where that happens. "Before
-each" test, this code will run and re-inialize everything, which prevents one
-test's results from interfering with another test.
+Next notice the `beforeEach()` code block. When tests run it's important that
+the contract is deployed from scratch for each test and this is where that
+happens. "Before each" test, this code will run and re-inialize everything,
+which prevents one test's results from interfering with another test.
 
 What's the gist of what's happening in `beforeEach()`?
 
@@ -309,6 +301,8 @@ it('set proper collection symbol', async function () {
 })
 ```
 
+They each call a method and verify the results.
+
 ### Here are some general testing concepts:
 
 - Tests should be as simple as possible. By moving setup code into
@@ -323,7 +317,7 @@ it('set proper collection symbol', async function () {
   setup code): a call of a method to be tested, and code to compare the result
   of that call with what's expected.
 
-Oh, and when you write a test, always make sure it fails first! So try changing
+Lastly when you write a test, always make sure it fails first! So try changing
 `expect` line to test the name `Anita` instead of `TierNFT`, run the test via
 `npm test` and make sure it fails. If your test passes when you make an obvious
 change like that, something is wrong with your test.
@@ -398,7 +392,7 @@ describe('mint', async () => {
 })
 ```
 
-This group of tests introduce some new concepts that are very useful.
+These tests introduce additional code that are helpful when testing contracts.
 
 With minting, one needs to pay the right price, we should also see the total
 supply of TierNFTs rise with each mint, and since we're minting 3 different
@@ -408,13 +402,13 @@ The first test is a great example of how to test to ensure an expected error
 occurs. If not enough Eth is sent, the contract fails with an error and the
 transaction is reverted as if nothing happened.
 
-So the heavily lifting is in the
+So the heavy-lifting happens in the
 `await expect().to.be.revertedWith('Not enough value for the minimum Tier')`
-line. The contract call is temporarily removed here to highlight what's
-happening. We're expecting the call to be reverted with that specific error
-message from the contract when not sending enough payment.
+line. The code calling the contract has been temporarily removed to highlight
+what's happening. We're expecting the call to be reverted when not sending
+enough payment, along with a specific error message from the contract.
 
-The method inside that `expect()` method looks like this:
+And the method inside that `expect()` method looks like this:
 
 ```javascript
 contract.mint({
@@ -426,12 +420,12 @@ Here we're just calling `mint()` with a parameter that sets the amount of Eth we
 want to send. In this case `0.001` Eth is less than our contract minimum of
 `0.01` Eth so this correctly fails. Our test confirms this.
 
-Now for the remaining mint tests, we want to successfully mint, so they all need
-to mint with a minimum of `0.01` Eth. You'll see the same line at the top of the
-remaining tests in this section.
+Now for the remaining mint tests, these all depend on a successful mint, so they
+all need to mint with a minimum of `0.01` Eth. You'll see the same line at the
+top of the remaining tests in this section.
 
-And really each of those remaining tests all has a single `expect()` line and
-test the various conditions upon a successful mint. The tier tests each put in
+And each of those remaining tests has a single `expect()` line to test the
+various conditions upon a successful mint. The tier-related tests each put in
 enough Eth to trigger a mint for the correct tier.
 
 Notice each line tests the first token (`contract.tokenTier(1)`). Remember that
