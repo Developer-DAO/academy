@@ -1,24 +1,29 @@
 ---
 title: Testing your Tier NFT
-description: Add tests to your Tier NFT. Builds on knowledge from Lesson 3.
+description:
+  Prove your Tier NFT contract works with automated tests! Builds on knowledge
+  from Lesson 3.
 icons: ['solidity', 'hardhat', 'openzeppelin']
 ---
 
 # Lesson 4: Testing your Tier NFT
 
-In this lesson, we'll be adding automated tests for our smart contract from
-Lesson 3.
+In this lesson, we'll be adding automated tests for our smart contract that was
+create in Lesson 3.
 
 ## Why automated testing?
 
-- How do you know your contract actually works?
-- Once you know it works, how do you know it won't break when you make future
-  changes?
-- Particularly if you're a new engineer to the code-base. It may not be obvious
-  when something breaks.
-- I found a bug and fixed it. How do I know the bug won't come back again?
+Testing can:
 
-This is where automated test comes into. Tests are a tool for writing your code,
+- prove code actually works
+- help you write code that is testable
+- ensure code doesn't break when you or others make changes or add new features.
+  People new to the code-base may not even know when something breaks without
+  tests.
+- ensure a bug is fixed and won't come back again
+- give you a safety net when you refactor code
+
+This is where automated test come in. Tests are a tool for writing your code,
 and making sure it it keeps working as expected when changes are made.
 
 Of course this doesn't replace testing your smart contract for real on devnet,
@@ -26,13 +31,14 @@ but it's an important tool to knowing your contract will work as expected.
 
 ## Let's add some tests
 
-### Add Test Framework
+### First add a test framework
 
-You've already setup hardhat in Lesson 2, which is also a great framework for
-writing automated tests.
+You've already setup hardhat in Lesson 2, which is a great framework for writing
+automated tests too.
 
-Assuming you already have hardhat running in your project, add a line in your
-`scripts` section of `package.json" so it looks something like this:
+Assuming you already have hardhat running in your project (from Lesson 2), add a
+line in your `scripts` section of `package.json` so it looks something like
+this:
 
 ```javascript
 "scripts": {
@@ -40,7 +46,7 @@ Assuming you already have hardhat running in your project, add a line in your
 },
 ```
 
-Let's create an empty test file to get started in a `test` folder called
+Next create an empty test file to get started in a new `test` folder called
 `tier-nft.test.js` with just these lines:
 
 ```javascript
@@ -51,16 +57,13 @@ describe('TierNFT', function () {
 })
 ```
 
-Now with both of those changes, run `npm test` and you should see:
+`expect` from the Chai library is used to test various conditions. There are
+many examples here in this lesson.
+
+Now with a test file and a command to run the tests, try `npm test` and you
+should see:
 
 ```bash
-$ npm test
-
-> project1-nfts@1.0.0 test
-> hardhat test --network hardhat
-
-
-
   TierNFT
     - placeholder test
 
@@ -69,13 +72,14 @@ $ npm test
   1 pending
 ```
 
-This now proves you:
+This now proves:
 
 - hardhat is running ok
 - the tests are found and are running
-- `pending` means we haven't added the real test yet since there is no function
-  added to hold the test code. This is a good way to brainstorm the tests you
-  want to write and add placeholders as reminders to implement those tests.
+
+`pending` means we haven't added the real test yet, so it is neither passing nor
+failing since there is no test code written. Adding `pending` placeholders are a
+good way to brainstorm and remind yourself what tests you need to write.
 
 <ContentCallout emoji="💡" size="md" variant="info">
   Since we didn't introduce TypeScript in this project we won't discuss writing
@@ -83,18 +87,15 @@ This now proves you:
   want to learn more about and we may cover in a future lesson.
 </ContentCallout>
 
-### What do we want to test on our Tier NFT contract?
+## What do we want to test on our Tier NFT contract?
 
-Now that the tools are setup, what are we really needing to test?
+Now that the tools are setup, what should we test?
 
-Let's look at our contract from Lesson 3
+Let's look at our contract from Lesson 3:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
-// for debugging
-// import "hardhat/console.sol";
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -191,9 +192,8 @@ contract TierNFT is ERC721, Ownable {
 }
 ```
 
-What is it trying to do?
+What is the contract trying to do?
 
-- it's being initialized by a constructor and has some initial settings
 - it accepts payment and mints NFTs
 - it renders art as a SVG image
 - it allows the contract owner to withdraw funds
@@ -203,19 +203,19 @@ the correct art or withdraw funds at the end.
 
 We want to test that those functions work in a variety of cases.
 
-For example, we can test that a mint happens when enough Eth is spent, and that
-a mint fails if there is not enough Eth spent.
+For example, we can test that a mint happens when enough Eth is spent and that a
+mint fails if there is not enough Eth spent.
 
-### Writing start with tests for constructor(), mint() and withdraw()
+### Start testing constructor(), mint() and withdraw()
 
-Let's start with `constructor`. This one is pretty straight forward since the
-heavy lifting is done by OpenZeppelin base classes, but let's make sure it
-works.
+Let's start with the `constructor`. This one is pretty straight forward since
+the heavy lifting is done by OpenZeppelin base classes, but let's make sure we
+can set the NFT name and symbol.
 
-Let's take a leap forward into some setup and our first two tests!
+Let's take a leap forward with our first two tests!
 
-It's looks like a bunch, but we'll walk through. And this code includes setup
-that we'll use for all the other tests too.
+It's looks like a lot, but we'll walk through. This code includes setup code
+that we'll reuse for all the other tests too.
 
 ```javascript
 const { expect } = require('chai')
@@ -254,8 +254,7 @@ describe('TierNFT', function () {
 })
 ```
 
-We're going to construct the contract in the test and so we set some fixed
-constant values we'll use in the tests:
+At the top we see constants with the name and symbol of the NFT collection:
 
 ```javascript
 const CONTRACT_NAME = 'TierNFT'
@@ -263,11 +262,11 @@ const COLLECTION_NAME = 'TierNFT'
 const COLLECTION_SYMBOL = 'Tier'
 ```
 
-Next is a `describe('TierNFT', function () {` line. What's cool about describe
-is that it basically just groups tests together so you'll see nicely organized
-output.
+Next is a `describe('TierNFT', function () { ...` line. What's cool about
+`describe()` is that it logically groups tests together so you'll see nicely
+organized output.
 
-For example when we run the tests we see:
+When we run the tests we see:
 
 ```bash
 TierNFT
@@ -277,26 +276,26 @@ TierNFT
 ```
 
 Notice "TierNFT" comes from the first `describe()` block and `constructor` is
-from the inner `describe()` block.
+from the inner `describe()` block. The tests are then indented under there.
+Makes for a nicely organized suite of tests.
 
-Next is a `beforeEach()` block. When tests run it's important that everything
-get setup from scratch each time and this all happens here. "Before each" test,
-this code will run and re-inialize everything for each test that runs. This way
-one test result doesn't impact another.
+Next is a `beforeEach()` block. When tests run it's important that the contract
+is deployed from scratch for each test and this is where that happens. "Before
+each" test, this code will run and re-inialize everything, which prevents one
+test's results from interfering with another test.
 
-What's the gist here?
+What's the gist of what's happening in `beforeEach()`?
 
 The hardhat framework give us the tools to deploy our contract to a
-locally-running blockchain. So when this blocks finishes, we have a fully
-deployed contract, and a couple of wallets to use for testing -- `owner` is who
-has all the permissions since it deployed the contract, and `otherUser` is a
-wallet with less permissions -- these will be handy when testing `withdraw`
-later on.
+locally-running blockchain. So when this code finishes, we have a fully deployed
+contract, and a couple of wallets to use for testing -- `owner` is who has all
+the permissions since it deployed the contract, and `otherUser` is a wallet with
+less permissions -- these will be handy when testing `withdraw` later on.
 
 Those `let` statements above are to hold these values so we can use them
 throughout all our tests.
 
-Finally, we then come across our first two actual tests:
+Finally we then come across our first two actual tests:
 
 ```javascript
 it('set proper collection name', async function () {
@@ -310,25 +309,27 @@ it('set proper collection symbol', async function () {
 })
 ```
 
-Here are a couple of new things to notice:
+### Here are some general testing concepts:
 
 - Tests should be as simple as possible. By moving setup code into
-  `beforeEach()` that helps keep it simple as well. If you pack too much into a
-  test, you could introduce bugs that may lead to incorrect tests, and if
-  something fails, it may be hard to debug which piece actually failed.
-- So it's best practice to have a separate test with one simple `expect` in
-  each. In theory, we could have tested both the name and the symbol in one
+  `beforeEach()` that helps keep it easy to focus on the test itself. If you
+  pack too much into a test, you could introduce bugs in the test code itself
+  that may lead to incorrect results, and if something fails it may be hard to
+  debug which piece actually broken.
+- Therefore it's best practice to have many separate tests with one `expect` in
+  each. In practice we could have tested both the name and the symbol in one
   test, but see bullet 1 above!
-- And a test has two pieces (besides the `beforeEach()` setup code): you run a
-  method on the contract (also called "exercising a method") and then you test
-  that the result is what you expect.
+- And basically every test has two pieces (in addition to the `beforeEach()`
+  setup code): a call of a method to be tested, and code to compare the result
+  of that call with what's expected.
 
 Oh, and when you write a test, always make sure it fails first! So try changing
-`expect` line to test the name `Anita` instead of `TierNFT`, run the tests via
+`expect` line to test the name `Anita` instead of `TierNFT`, run the test via
 `npm test` and make sure it fails. If your test passes when you make an obvious
 change like that, something is wrong with your test.
 
-So you properly see:
+So after intentionally causing one of our tests to fail, here is what the
+failure looks like:
 
 ```bash
 
@@ -354,7 +355,7 @@ So you properly see:
 
 ### Let's add tests for mint()
 
-Here's what we'll be adding:
+Here are tests we'll be adding:
 
 ```javascript
 describe('mint', async () => {
@@ -397,23 +398,23 @@ describe('mint', async () => {
 })
 ```
 
-This one introduces some new concepts that are very useful.
+This group of tests introduce some new concepts that are very useful.
 
-With minting, one needs to pay the right price, we should see the total supply
-of TierNFTs rise with each mint, and since we're minting 3 different tiers, we
-need to test each one of those.
+With minting, one needs to pay the right price, we should also see the total
+supply of TierNFTs rise with each mint, and since we're minting 3 different
+tiers, we need to test each one of those gets minted based on the right price.
 
-The first test is a great example of how to test that an error occurs. If not
-enough Eth is sent, the contract fails with an error and the transaction is
-reverted as if nothing happened.
+The first test is a great example of how to test to ensure an expected error
+occurs. If not enough Eth is sent, the contract fails with an error and the
+transaction is reverted as if nothing happened.
 
 So the heavily lifting is in the
 `await expect().to.be.revertedWith('Not enough value for the minimum Tier')`
-line. The contract call is is temporarily removed here to highlight what's
+line. The contract call is temporarily removed here to highlight what's
 happening. We're expecting the call to be reverted with that specific error
-message from the contract.
+message from the contract when not sending enough payment.
 
-The method itself looks like this:
+The method inside that `expect()` method looks like this:
 
 ```javascript
 contract.mint({
@@ -423,23 +424,23 @@ contract.mint({
 
 Here we're just calling `mint()` with a parameter that sets the amount of Eth we
 want to send. In this case `0.001` Eth is less than our contract minimum of
-`0.01` Eth so this correctly fails and our test confirms this.
+`0.01` Eth so this correctly fails. Our test confirms this.
 
-Now for the remaining mint tests, we want to prove success, so they all need to
-mint with a minimum of `0.01` Eth so you'll see the same line at the top of the
+Now for the remaining mint tests, we want to successfully mint, so they all need
+to mint with a minimum of `0.01` Eth. You'll see the same line at the top of the
 remaining tests in this section.
 
 And really each of those remaining tests all has a single `expect()` line and
-test the various conditions upon a successful mint. And the tier-testing tests
-each put in enough Eth to trigger a mint for the correct tier.
+test the various conditions upon a successful mint. The tier tests each put in
+enough Eth to trigger a mint for the correct tier.
 
-Notice each line tests the #1 token (`contract.tokenTier(1)`). Remember that
+Notice each line tests the first token (`contract.tokenTier(1)`). Remember that
 each test starts from scratch with no supply of NFTs, so after you mint one in a
 test, you just have one token, the first one.
 
 ### Testing withdraw()
 
-Let's look at `withdraw()` next with these 3 tests:
+Let's look at testing `withdraw()` next with these 3 tests:
 
 ```javascript
 describe('withdrawal', async () => {
@@ -470,67 +471,87 @@ describe('withdrawal', async () => {
 })
 ```
 
-You'll see similar patterns to the `mint()` tests prior, with a couple of
+You'll see similar patterns from the `mint()` tests prior. Here are a couple of
 additional highlights:
 
 - In the contract, only a `owner` can withdraw funds, so the first tests changes
-  the user to `otherUser` and makes sure that wallet can not mint. See
-  `contract.connect(otherUser)` for how to change users before calling the
-  method.
-- Another condition is to error if an owner tries to withdraw from a
-  zero-balance contact
-- Finally, let's make sure an owner can successfully withdraw funds. Notice the
-  `withdraw()` method is surrounded by
-  `hre.ethers.provider.getBalance(contract.address)` lines. When we mint on that
-  first line, we know the contract now has `0.01` Eth so we check that after the
-  mint, then run `withdraw` then check the balance again and it should be back
-  to zero since all funds withdrawn. Ok, yes, we do have two `expect()` lines in
-  one test that breaks our rule of one expect per test, but as long as the test
-  is kept simple, we choose what makes sense for what we're trying to test.
+  the user to `otherUser` and makes sure that wallet can not mint. The snippet
+  to change wallets before calling the method is: `contract.connect(otherUser)`.
+- Another condition to test is that an error is raised if an owner tries to
+  withdraw from a zero-balance contact
+- Finally let's make sure an owner can successfully withdraw funds. Notice the
+  `withdraw()` method call is surrounded by
+  `hre.ethers.provider.getBalance(contract.address)` lines. When we mint we know
+  the contract now has `0.01` Eth so we check that. Then after running
+  `withdraw`, check the balance again and it should be back to zero since all
+  funds withdrawn. Ok, yes we do have two `expect()` lines in one test that
+  breaks our rule of one expect per test, but as long as the test is kept
+  simple, we choose what makes sense for what we're trying to test.
 
-## But what about testing tokenURI()?
+### Testing tokenURI()
 
 Here's where things get even more interesting!
 
 Notice the current version of `tokenURI()` in our contract outputs a giant
-opaque Base64 string, which contains the JSON file with an embedded SVG image:
-
-```
-data:application/json;base64,eyJuYW1lIjog
-iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFn
-zZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0Rvdkwz
-
--- removed 50 lines in between --
-
-JSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRB
-XWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1Js
-5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBa
-6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVl
-```
+opaque Base64 string that's not discernable by humans. For example the text
+"Hello World" when encoded is `SGVsbG8gV29ybGQ=`
+([Base64 encoder](https://www.base64encode.org/))
 
 This is impossible to test because if you make a change to the code, you get a
 different Base64 string but how do you know if it's correct?
 
-What's I'd recommend here is to refactor this to make it easier to test.
+You need to refactor this method into smaller helper methods, each which are
+more testable.
 
-But first, let's use the power of testing to make sure we don't break the
+But first let's use the power of testing to make sure we don't break the
 implementation as we refactor. Let's wrap `tokenURI()` with a test that **DOES**
 capture this opaque string. This gives us a "safety net" as we refactor our
 code. If we break things while dividing this problem into helper methods, the
 test will help us discover that. We can then toss this test at the end.
 
+Here's an example of what that looks like:
+
+```javascript
+it('should return base64-encoded data for tokenURI for Tier 0', async function () {
+  await contract.mint({
+    value: hre.ethers.utils.parseEther('0.01'),
+  })
+  await expect(await contract.tokenURI(1)).to.equal(
+    'data:application/json;base64, <full string removed to fit in lesson>',
+  )
+})
+```
+
 First, here's the new contract that now contains a bunch of new helper methods
 to make `tokenURI()` testing possible.
 
-So you'll still see `tokenURI()` but the implementation in there is calling
-various helper methods.
+You'll still see `tokenURI()` but its implementation now calls several new
+helper methods.
+
+Let's quickly describe the new helper methods you'll see below. Each one breaks
+down the "create an encoded SVG" problem into manageable functions that can each
+be tested and understood by humans writing these tests.
+
+- `tierNameOf()` just takes one of 3 tiers and returns the name of that tier.
+  Easy to test!
+- `imageSVGOf()` just concatenates three values into a string. Also easy to
+  test.
+- `finalJSON` also just concatenates multiple values into a string, and like the
+  method says, it creates a string that represents the final JSON blob.
+- Notice that none of these methods does the Base64 encoding, which immediately
+  makes it impossible for a human to interpret the results and that makes for a
+  bad test.
+- So that does leave some lifting at the end still in `tokenURI()` but it's much
+  simpler now. It calls well-tested helper methods that do the heavy lifting and
+  finally does the dreaded Base64 encoding. Which tests, and how many to write,
+  is subjective. In this case the non-automated-tested part is minimized and a
+  test wasn't added. Though it is possible someone will come along, and with a
+  typo break this file. It's up to you as a tester to decided if more tests are
+  needed for peace of mind.
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
-// for debugging
-// import "hardhat/console.sol";
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -656,28 +677,13 @@ contract TierNFT is ERC721, Ownable {
 }
 ```
 
-Let's quickly describe the new helper methods. Each one breaks down the "create
-an encoded SVG" problem into manageable functions that can each be tested and
-understood by humans writing these tests.
-
-- `tierNameOf()` just takes one of 3 tiers and returns the name of that tier.
-  Easy to test!
-- `imageSVGOf()` just concatenates three values into a string. Also easy to
-  test.
-- `finalJSON` also just concatenates multiple values into a string, and like the
-  method says, it creates a string that represents the final JSON blob.
-- Notice that none of these methods does the Base64 encoding, which immediately
-  makes it impossible for a human to interpret the results and that makes for a
-  bad test.
-- So that does leave some lifting at the end still in `tokenURI()` but it's much
-  simpler now. It calls well-tested helper methods that do the heavy lifting and
-  finally does the dreaded Base64 encoding. Which tests, and how many to write,
-  is subjective. In this case the non-automated-tested part is minimized and a
-  test wasn't added. Though it is possible someone will come along, and with a
-  typo break this file. It's up to you as a tester to decided if more tests are
-  needed for peace of mind.
-
 Ok, here are some tests for these helpers!
+
+<ContentCallout emoji="💡" size="md" variant="info">
+  Since an SVG is basically a bunch of strings, you'll notice all these tests
+  are nearly simple single lines -- but they're comparing the results with long
+  strings that eventually make up the final SVG.
+</ContentCallout>
 
 ```javascript
 describe('tokenURI and helpers', async () => {
@@ -749,23 +755,18 @@ describe('tokenURI and helpers', async () => {
       value: hre.ethers.utils.parseEther('0.01'),
     })
     await expect(await contract.tokenURI(1)).to.equal(
-      'data:application/json;base64, etc etc',
+      'data:application/json;base64, <full string removed to fit in lesson>',
     )
   })
 })
 ```
 
-Since an SVG is basically a bunch of strings, you'll notice all these tests are
-nearly simple single lines -- but they're comparing the results with long
-strings that eventually make up the final SVG.
-
 The final test is an example mentioned earlier about adding a test before
-refactoring with helper methods. _I removed the whole base64 string since it was
-too big to show here._ It just checks that the initial `tokenURI()` method (that
-returns an encoded base64 string) returns the right result. It's helpful while
-refactoring to make sure we didn't break things along the way, and it's helpful
-at the end to ensure the `tokenURI()` method continues to work without fail when
-code changes.
+refactoring with helper methods. It checks that the initial `tokenURI()` method
+(which returns an encoded Base64 string) returns the right result. It's helpful
+while refactoring to make sure we didn't break things along the way, and it's
+helpful at the end to ensure the `tokenURI()` method continues to work without
+fail when code changes.
 
 ## Food for Thought
 
@@ -778,12 +779,12 @@ Development" (TDD).
 
 TDD is a very powerful methodology which goes like this:
 
-- Before you write implementation code, you write one or more tests and run
+- before you write implementation code, you write one or more tests and run
   them.
-- Of course those tests fail initially since there are methods that don't have
+- of course those tests fail initially since there are methods that don't have
   any implementaiton yet. As mentioned earlier, it's always important to prove
   your test fails initially.
-- You then add your implementation until the tests pass.
+- then add your implementation until the tests pass.
 
 Voila!
 
@@ -800,5 +801,5 @@ With TDD:
   Bolting on tests after the fact can be painful, boring and you lose the
   potential code improvements you would have made if you tested as you go.
 
-Go forth, test, and prosper with solid code you have confidence in deploying in
-the world.
+Go forth, test, and prosper knowing you have confidence in the code you're
+deploying into the world.
