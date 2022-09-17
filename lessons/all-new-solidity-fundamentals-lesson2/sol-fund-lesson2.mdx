@@ -1,21 +1,98 @@
 ## Solidity Fundamental Side Drawers for Lesson 2
 
-### import 
-    - 1 paragraph
+### import
 
+    The idea of importing files in Solidity is very similar to the concept of modules. A modulus is a chunk of code. The idea behind modules is to break code into         reusable components. You group functionalities in a module file and expose them to other files so that these other files can use them.
+    
+    It helps modularise your smart contracts by:
+- Creating reusable pieces that other files can import.
+- Making it easier to understand and digest the entire Solidity codebase of your project.
+- Making it easier to work with the *“Solidity modules”* by focusing on smaller files (useful when debugging).
+You can import local and external files in Solidity.
+
+**Local**
+Here is our folder structure.
+```
+- Name.sol
+- Import.sol
+```
+
+Name.sol
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract Name {
+    string public name = "Developer_DAO";
+}
+```
+Import.sol
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+// import Name.sol from current directory
+import "./Name.sol";
+
+contract Import {
+    // Initialize Name.sol
+    Name public importName = new Name();
+
+    // Test Name.sol by getting its name.
+    function getName() public view returns (string memory) {
+        return importName.name();
+    }
+}
+```
+
+**External**
+
+You can also import from [Github](https://github.com/) by simply copying the url
+```
+// Example import ECDSA.sol from openzeppelin-contract repo, release-v4.5 branch
+// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.5/contracts/utils/cryptography/ECDSA.sol
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v4.5/contracts/utils/cryptography/ECDSA.sol";
+```
 
 
 
 
 ### constructor 
-    - 2 paragraphs
+    A constructor is an optional function that is executed upon contract creation.
+
+    With Solidity, the code defined inside the constructor will run only once, at the time the contract is created and deployed in the network.
+    
+    Here are examples of how to pass arguments to constructors.
+ ```
+    // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+// Base contract X
+contract X {
+    string public name;
+
+    constructor(string memory _name) {
+        name = _name;
+    }
+}
+```
+Also we can add the keyword `immutable` in 
+```
+string public immutable name;
+```
+To make our code more gas efficient
 
 
 
 
 
 ### msg.sender 
-    - 1 or 2 short paragraphs
+    Every smart contract invocation has a caller address. 
+    Each EVM (Ethereum Virtual Machine that executes the code) knows which account carries out each action. 
+    In Solidity, you can access the calling account by referencing `msg.sender`
+
+So when you call a function of solidity contract, your contract already gets the information of your account, so your account is the `msg.sender`
+    
 
 
 
