@@ -202,7 +202,7 @@ contract TierNFT is ERC721 {
 
 ### Adding Tiers and Using Them in the Mint Function
 
-Now it’s time for us to add our tiers. Just as we explained before each tier
+Now it’s time for us to add our tiers. Just as we explained before, each tier
 will have a value that represents the service description. Now let’s go ahead and
 add the tiers and assign their values.
 
@@ -399,8 +399,7 @@ This is the JSON format of our metadata:
 '"}'
 ```
 
-The part `data:image/svg+xml;base64` tells the browser that follows
-the comma is a string of text written in Base64, so the browser
+The part `data:image/svg+xml;base64` tells the browser that the code after the comma is a string of text written in Base64, so the browser
 can decode it back into our SVG file format. Just as an example, if our
 collection `TierNFT`, and the TokenID were `3`, our JSON would end up look
 something like this:
@@ -488,7 +487,7 @@ uint256) public tokenTier;
 
 ### Complete TokenURI function with our SVG
 
-We did a bunch of things with our contract and now we're going to tell you what and SVG is.
+We did a bunch of things with our contract and now we're going to tell you what an SVG is!
 
 Add these lines right next to the other constants defined for the tiers:
 
@@ -863,6 +862,11 @@ module.exports = {
   },
 }
 ```
+
+**const POLYGON_URL = process.env.POLYGON_URL;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+url: POLYGON_URL,
+accounts: [PRIVATE_KEY]** ***We need an API key in .env file, and is reflected in config under URL*** 
 
 We are adding the RPC and the network to our config file. We will need to
 connect our wallet to the testnet and add some testnet funds to deploy the
