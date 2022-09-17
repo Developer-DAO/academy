@@ -8,23 +8,23 @@ icons: ['solidity', 'hardhat', 'openzeppelin']
 
 # Lesson 4: Testing your Tier NFT
 
-In this lesson, we'll be adding automated tests for our smart contract that was
-created in Lesson 3.
+In this lesson, we'll be adding automated tests for our smart contract created
+in Lesson 3.
 
 ## Why automated testing?
 
 Testing can:
 
 - prove code actually works
-- help you write code that is testable
+- help you write more modular code
 - ensure code doesn't break when you or others make changes or add new features.
   People new to the code-base may not even know when something breaks without
   tests.
 - ensure a bug is fixed and won't come back again
 - give you a safety net when you refactor code
 
-This is where automated tests come in. Tests are a tool for writing your code
-and making sure it it keeps working as expected when changes are made.
+Tests are a tool for writing your code and making sure it it keeps working as
+expected when changes are made.
 
 Automated tests don't fully replace manually testing your smart contract on
 devnet, but it's an important tool to ensuring your contract will work as
@@ -34,8 +34,8 @@ expected.
 
 ### First add a test framework
 
-You've already setup hardhat in Lesson 2, which is also a great framework for
-writing automated tests.
+You've already setup hardhat in Lesson 2, which is a great framework for writing
+automated tests.
 
 Add a line in your `scripts` section of `package.json` so it looks something
 like this:
@@ -57,7 +57,7 @@ describe('TierNFT', function () {
 })
 ```
 
-`expect` from the Chai library is used to test various conditions. There are
+`expect()` from the Chai library is used to test various conditions. There are
 many examples in this lesson.
 
 Now with a test file and a command to run the tests, try `npm test` and you
