@@ -9,6 +9,7 @@ interface LessonProps {
       description: string
       icons: string[]
     }
+    path: string
     slug: string
   }
   idx: number
@@ -17,6 +18,7 @@ interface LessonProps {
 export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
   const {
     lesson: {
+      path,
       frontMatter: { title, description, icons },
       slug,
     },
@@ -25,7 +27,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
 
   return (
     <>
-      <Link href={'/lessons/' + slug} passHref>
+      <Link key={slug} href={`/lessons/${path}/${slug}`} passHref>
         <a>
           <Flex direction="column" bg="gray.800" p={5} rounded={5}>
             <Flex
@@ -42,7 +44,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                     fontSize={[14, 14, 16]}
                     my={2}
                   >
-                    {slug}:&nbsp;{title}
+                    {title}
                   </Heading>
                 </Flex>
               </Flex>
