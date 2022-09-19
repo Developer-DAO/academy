@@ -25,6 +25,13 @@ interface LessonProps {
 }
 
 const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
+  const result = lessons.reduce((acc: any, curr: any) => {
+    if (!acc[curr.path]) acc[curr.path] = []
+
+    acc[curr.path].push(curr)
+    return acc
+  }, {})
+
   return (
     <>
       <Head>
@@ -83,34 +90,51 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           >
             Current Lessons
           </Heading>
-
-          <Text apply="mdx.div" as="div" fontSize="xl">
-            <UnorderedList listStyleType="none" textAlign="center">
-              {lessons.map((lesson: any, idx: number) => (
-                <ListItem key={lesson.slug} my="2">
-                  <NextLink href={'/lessons/' + lesson.slug} passHref>
-                    <Link>
-                      <Button
-                        height={[
-                          `${lesson.frontMatter.title.length > 30
-                            ? '3.75rem'
-                            : '2.5rem'
-                          }`,
-                          '2.5rem',
-                        ]}
-                        style={{
-                          whiteSpace: 'normal',
-                          wordWrap: 'break-word',
-                        }}
+          {Object.entries(result).map((track: any, idx: number) => {
+            return (
+              <UnorderedList
+                listStyleType="none"
+                textAlign="center"
+                as="div"
+                key={idx}
+              >
+                <Heading size="md" color="yellow.300">
+                  {track[0].toUpperCase()}
+                </Heading>
+                <>
+                  {track[1].map((lesson: any, idx: number) => (
+                    <ListItem
+                      key={idx}
+                      my="2"
+                      py="2"
+                      maxW="40vw"
+                      margin="0 auto"
+                    >
+                      <NextLink
+                        href={`/lessons/${lesson.path}/${lesson.slug}`}
+                        passHref
                       >
-                        {lesson.slug}: {lesson.frontMatter.title}
-                      </Button>
-                    </Link>
-                  </NextLink>
-                </ListItem>
-              ))}
-            </UnorderedList>
-          </Text>
+                        <Link>
+                          <Button
+                            height="auto"
+                            style={{
+                              whiteSpace: 'normal',
+                              wordWrap: 'break-word',
+                              padding: '0.5rem',
+                              width: '100%',
+                              fontSize: 'xl',
+                            }}
+                          >
+                            {lesson.frontMatter.title}
+                          </Button>
+                        </Link>
+                      </NextLink>
+                    </ListItem>
+                  ))}
+                </>
+              </UnorderedList>
+            )
+          })}
           <Divider />
 
           <Heading
@@ -203,17 +227,22 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
 export default GettingStarted
 
 export const getStaticProps = async () => {
-  const files = fs.readdirSync(path.join('lessons'))
-  const lessons = files.map((filename) => {
-    const markdownWithMeta = fs.readFileSync(
-      path.join('lessons', filename),
-      'utf-8',
-    )
-    const { data: frontMatter } = matter(markdownWithMeta)
-    return {
-      frontMatter,
-      slug: filename.split('.')[0],
-    }
+  const directories = fs.readdirSync(path.join('lessons'))
+  const lessons: object[] = []
+  directories.reverse().map((filename) => {
+    fs.readdirSync(path.join('lessons', filename)).map((file) => {
+      const markdownWithMeta = fs.readFileSync(
+        path.join('lessons', filename, file),
+        'utf-8',
+      )
+
+      const { data: frontMatter } = matter(markdownWithMeta)
+      lessons.push({
+        path: filename,
+        frontMatter,
+        slug: file.replace('.mdx', ''),
+      })
+    })
   })
   return {
     props: {

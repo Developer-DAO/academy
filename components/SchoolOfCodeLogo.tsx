@@ -1,5 +1,5 @@
 import GraduationHat from './GraduationHat'
-import { Box, HStack, Icon, VStack, keyframes } from '@chakra-ui/react'
+import { Box, HStack, VStack, keyframes } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import { useEffect, useRef, useState } from 'react'
 
