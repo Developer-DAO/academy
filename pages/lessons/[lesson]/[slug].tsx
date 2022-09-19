@@ -105,7 +105,7 @@ const Lesson: React.FC<LessonProps> = ({ mdxSource, slug }) => {
   return (
     <>
       <MDXRemote {...mdxSource} components={components} />
-      <Flex
+      {/* <Flex
         direction="row"
         justifyContent={flexJustifyContentActions(slug)}
         pt="3"
@@ -120,7 +120,7 @@ const Lesson: React.FC<LessonProps> = ({ mdxSource, slug }) => {
         {shouldHaveNextLessonButton(slug) && (
           <ActionButton label="Next Lesson" href={getNextButtonHref(slug)} />
         )}
-      </Flex>
+      </Flex> */}
     </>
   )
 }
