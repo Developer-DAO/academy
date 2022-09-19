@@ -13,16 +13,16 @@ icons:
 
 # Lesson 5: Connecting to a Frontend
 
-In the previous lessons we learnt how to deal with the logic and backend through
-smart contracts and assistive tools and protocols. But to create a full stack
-decentralised application, we also need a frontend for users to interact with. In
-this lesson that is exactly what we're going to create.
+In the previous lessons we learnt how to write smart contracts, use token standards, 
+and test driven development, as well. But to create a full stack decentralised 
+application, we also need a frontend for users to interact with. In this lesson
+that is exactly what we're going to create.
 
 We shall use:
 - [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
 wallet management (i.e. Handling wallet connections to our application).
 - [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
-functions from our smart contract through the frontend using the provided hooks.
+functions from our smart contract through the frontend using the provided *hooks*.
 
 and create a basic **NFT minting application** that displays the three tiers of NFTs
 created in our smart contract and gives users a one-click option to mint them. Once
@@ -33,13 +33,16 @@ Let's dive in!
 ## Getting started
 
 For all things related to our frontend we are going to create a new sub-directory
-within our root directory to maintain good practice, keep or code clean and easy to
+within our root directory to maintain good practice, keep our code clean, and easy to
 locate and read.
 
 The first step is to initiate a [nextJS](https://nextjs.org/) application inside our
-root directory by running the following command:
+root directory by running the following command.
 
-> Make sure you are in your root directory before running the command.
+<aside>
+  Make sure you are in your root directory before running the command.
+
+</aside>
 
 ```bash
 npx create-next-app frontend
@@ -47,7 +50,9 @@ npx create-next-app frontend
 
 The command creates a sub-directory named `frontend` inside our root directory
 and sets up all the necessary files and folders within it. The `create-next-app` command
-uses the `yarn` package manager by default. If a different package manager has been used
+uses the `yarn` package manager by default.
+
+If a different package manager has been used
 for your previous lessons, pass in the appropriate flag while running your command as
 follows:
 
@@ -70,7 +75,7 @@ provide an interface. A simple process that is easily accessible.
 
 Let's start by creating a way to handle wallet connections.
 
-### Wallet Connection
+### The Main Application
 
 We will use [RainbowKit](https://www.rainbowkit.com/docs/introduction) for this.
 It provides us the ability to handle wallet connections, support for numerous
@@ -137,9 +142,11 @@ with a fall back `publicProvider`.
 capture the state, respectively.
 
 After importing we create the configurations we need and create a new instance of 
-`wagmiClient` using those.
+`wagmiClient` using them.
 
 ```jsx
+// import statements code...
+
 const { chains, provider } = configureChains(
   [chain.goerli],
   [
@@ -158,9 +165,11 @@ const wagmiClient = createClient({
   connectors,
   provider
 })
+
+// function MyApp code...
 ```
 
-For this application we will be using the `goerli` testnet. Other chains can
+For this application we will continue using the `goerli` testnet. Other chains can
 be added simply using the following syntax: `chain.chain_name`.
 For custom providers, like the `alchemyProvider` we can pass in our private
 `apiKey` as well.
@@ -169,6 +178,8 @@ Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
 so that have access to their features throughout our application.
 
 ```jsx
+// import statements and configs code...
+
 function MyApp({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
@@ -188,6 +199,8 @@ hydration error is basically when the pre-rendered state does not match the init
 rendering on browser refresh.
 
 ```jsx
+// import statements and configs code...
+
 function MyApp({ Component, pageProps }) {
   const [showMinter, setShowMinter] = useState(false);
   useEffect(() => {
@@ -211,6 +224,55 @@ function MyApp({ Component, pageProps }) {
   };
 };
 ```
+
+When our page is loading, the `useEffect` hook runs to change the state of
+`showMinter` to `true`. If the state remains `false` then nothing is returned.
+If the state is `true` but the window object is undefined then an empty `jsx` 
+element is returned.
+
+Now that we have our application setup, we can edit the Index Page.
+
+### The Index Page
+
+The `index.js` page in the `/frontend/pages` directory should look like this 
+after deleting all the children in the `<main>` tag and deleting the `<footer>`.
+
+```jsx
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+
+export default function Home() {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main}>
+      </main>
+    </div>
+  )
+}
+```
+
+Let's start with some imports.
+
+```jsx
+// prev imports...
+
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
+import styles from '../styles/Home.module.css';
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+
+// 
+```
+
+
 
 
 
