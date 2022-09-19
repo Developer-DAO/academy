@@ -100,21 +100,6 @@ create an isolated development environment for your fork. After installing the
 minimum requirements, you can start using it following this
 [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 
-**Environment Variables**
-
-Copy .env.example and create your own local `.env.local` file for your env
-variables
-
-_note_: If you add a new environment variable, make sure to update the example
-file
-
-If you aren't getting the correct values from your env files ensure you are
-following NextJS naming conventions i.e: `NEXT_PUBLIC_`
-
-[Browser Naming Conventions](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser)
-
-[Server](https://nextjs.org/docs/basic-features/environment-variables#loading-environment-variables)
-
 ## Grabbing latest version of the code
 
 **Since this is a work in progress, your local version of the app can be updated
