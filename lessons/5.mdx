@@ -1,0 +1,120 @@
+---
+i18n: 'smart-contracts'
+title: Connecting to a Frontend
+description:
+  Connect your smart contract to a UI for people to interact with.
+icons:
+  [
+    'rainbowkit',
+    'wagmi',
+    'ethersjs',
+  ]
+---
+
+# Lesson 5: Connecting to a Frontend
+
+In the previous lessons we learnt how to deal with the logic and backend through
+smart contracts and assistive tools and protocols. But to create a full stack
+decentralised application, we also need a frontend for users to interact with. In
+this lesson that is exactly what we're going to create.
+
+We shall use:
+- [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
+wallet management (i.e. Handling wallet connections to our application).
+- [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
+functions from our smart contract through the frontend using the provided hooks.
+
+and create a basic **NFT minting application** that displays the three tiers of NFTs
+created in our smart contract and gives users a one-click option to mint them. Once
+minted, users will be redirected to a page that displays information of their mint.
+
+Let's dive in!
+
+## Getting started
+
+For all things related to our frontend we are going to create a new sub-directory
+within our root directory to maintain good practice, keep or code clean and easy to
+locate and read.
+
+The first step is to initiate a [nextJS](https://nextjs.org/) application inside our
+root directory by running the following command:
+
+> Make sure you are in your root directory before running the command.
+
+```bash
+npx create-next-app frontend
+```
+
+The command creates a sub-directory named `frontend` inside our root directory
+and sets up all the necessary files and folders within it. The `create-next-app` command
+uses the `yarn` package manager by default. If a different package manager has been used
+for your previous lessons, pass in the appropriate flag while running your command as
+follows:
+
+```bash
+#For npm
+
+npx create-next-app frontend --use-npm
+```
+
+Once the setup is complete, we open the `frontend` directory and get cracking.
+
+```bash
+cd frontend
+```
+
+## The Frontend
+
+For users to easily interact with our smart contract and mint the NFTs we must
+provide an interface. A simple process that is easily accessible.
+
+Let's start by creating a way to handle wallet connections.
+
+### Wallet Connection
+
+We will use [RainbowKit](https://www.rainbowkit.com/docs/introduction) for this.
+It provides us the ability to handle wallet connections, support for numerous
+wallets and a customisable `ConnectButton` out-of-the-box among other features.
+It relies on the [WAGMI](https://wagmi.sh/) and [ethers](https://docs.ethers.io/v5/)
+libraries for interoperability between various chains and wallet providers and 
+thus needs some configurations.
+
+To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
+directory. The file should look something like this from our initial setup.
+
+```jsx
+import '../styles/globals.css'
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+```
+
+We need to make some additional imports to create our configurations.
+
+```jsx
+// previous imports...
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import {
+  chain,
+  configureChains,
+  createClient,
+  WagmiConfig,
+} from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { MainContext } from '../context';
+import { useEffect, useState } from 'react';
+
+// function MyApp code...
+```
+
+
+
+
