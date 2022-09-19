@@ -25,10 +25,10 @@ Testing can:
 - prove code actually works
 - help you write more modular code
 - ensure code doesn't break when you or others make changes or add new features.
-  People new to the code-base may not even know when something breaks without
+  People new to the project may not even know when something breaks without
   tests.
 - ensure a bug is fixed and won't come back again
-- give you a safety net when you refactor code
+- give you a safety net when you make improvements to the code later
 
 Tests are a tool for writing your code and making sure it keeps working as
 expected when changes are made.
@@ -52,7 +52,7 @@ below. You may already have other scripts' lines so don't get rid of those.
 },
 ```
 
-Next create a `test` folder in the root of your site, and add a new file called
+Next create a `test` folder in the root of your project, and add a new file called
 `tier-nft.test.js` with these lines:
 
 ```javascript
@@ -281,7 +281,7 @@ Makes for a nicely organized suite of tests.
 
 Next notice the `beforeEach()` code block. When tests run it's important that
 the contract is deployed from scratch for each test and this is where that
-happens. "Before each" test, this code will run and re-inialize everything,
+happens. So before each test, this code will run and re-inialize everything,
 which prevents one test's results from interfering with another test.
 
 What's happening in `beforeEach()`?
@@ -783,11 +783,11 @@ fail when code changes.
 
 ## Food for Thought
 
-With all the helpfulness of tests, why didn't we start with tests before we
+With all the helpfulness of tests, why didn't we start with them before we
 wrote any of the contract implementation?
 
 The main reason was trying to minimize all the things you needed to learn to get
-started, but the methodology when writing tests first is called "Test Driven
+started, but the methodology of writing tests first is called "Test Driven
 Development" (TDD).
 
 TDD is a very powerful methodology which goes like this:
@@ -806,13 +806,13 @@ With TDD:
 - you would have written tests as you go, which are much more fun to write than
   all at once at the end
 - you would have ended up writing better code because you discover quickly when
-  code is impossible to test. You'll end up with added benefit of breaking a big
+  code is impossible to test. You'll end up with the added benefit of breaking a big
   method into multiple smaller methods that are easily testable. So in the
   refactor example above for `tokenURI()` you would never have written the
   version that outputs a long base64 string because it's not testable.
 
-  Bolting on tests after the fact can be painful, boring and you lose the
-  potential code improvements you would have made if you tested as you go.
+  Bolting on tests after the fact can be painful and boring, and you lose the
+  potential code improvements you can make when you test as you go.
 
 Go forth, test, and prosper knowing you have confidence in the code you're
 deploying into the world.
