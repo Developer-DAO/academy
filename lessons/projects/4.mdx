@@ -95,7 +95,7 @@ yourself what tests you need to write.
 
 ## What do we want to test on our TierNFT contract?
 
-Now that the tools are setup, what should we test?
+Now that the tools are set up, what should we test?
 
 Let's look at our contract from Lesson 3:
 
@@ -285,15 +285,16 @@ Makes for a nicely organized suite of tests.
 Next notice the `beforeEach()` code block. When tests run it's important that
 the contract is deployed from scratch for each test and this is where that
 happens. So before each test, this code will run and re-inialize everything,
-which prevents one test's results from interfering with another test.
+which prevents one test's results from interfering with another one.
 
 What's happening in `beforeEach()`?
 
-The hardhat framework give us the tools to deploy our contract to a
-locally-running blockchain. So when this code finishes, we have a fully deployed
-contract, and a couple of wallets to use for testing -- `owner` is who has all
-the permissions since it deployed the contract, and `otherUser` is a wallet with
-less permissions -- these will be handy when testing `withdraw` later on.
+The hardhat framework gives us the tools to deploy our contract to a
+locally-running blockchain. So when the `beforeEach()` code finishes the tests
+have a fully deployed contract ready to call methods on. In addition there are
+two wallets provided by hardhat to use for testing, including `owner` who has
+all the permissions, since it deployed the contract, and `otherUser` with fewer
+permissions. These will be handy when testing withdraw later on.
 
 Those `let` statements above are to hold these values so we can use them
 throughout all our tests.
@@ -323,15 +324,13 @@ TierNFT?" "Is the contract symbol really Tier?"
   to return before moving on to the next line.
 </ContentCallout>
 
-They also lead us to talk about general testing concepts.
-
 ### General testing concepts
 
 - Tests should be as simple as possible. By moving setup code into
   `beforeEach()` that helps keep it easy to focus on the test itself. If you
   pack too much into a test, you could introduce bugs in the test code itself
   that may lead to incorrect results, and if something fails it may be hard to
-  debug which piece actually broken.
+  debug which piece is actually broken.
 - Therefore it's best practice to have many separate tests with one `expect` in
   each. In practice we could have tested both the name and the symbol in one
   test, but see bullet 1 above!
@@ -340,9 +339,9 @@ They also lead us to talk about general testing concepts.
   result happened.
 
 Lastly when you write a test, always make sure it fails first! So try changing
-`expect` line to test the name `Anita` instead of `TierNFT`, run the test via
-`npm test` and make sure it fails. If your test passes when you make an obvious
-change like that, something is wrong with your test.
+the `expect` line to test the name `Anita` instead of `TierNFT`, run the test
+via `npm test` and make sure it fails. If your test passes when you make an
+obvious change like that, something is wrong with your test.
 
 So after intentionally causing one of our tests to fail, here is what the
 failure looks like:
@@ -417,17 +416,18 @@ describe('mint', async () => {
 These tests introduce additional code that are helpful when testing contracts.
 
 With minting, one needs to pay the right price, we should also see the total
-supply of TierNFTs rise with each mint, and since we're minting 3 different
+supply of TierNFTs increase with each mint, and since we're minting 3 different
 tiers, we need to test each one of those gets minted based on the right price.
 
 The first test is a great example of how to test to ensure an expected error
 occurs. If not enough Eth is sent, the contract fails with an error and the
 transaction is reverted as if nothing happened.
 
-So the heavy-lifting happens in the
+In this first test we want to ensure our method call is properly reverted when
+the proper amount of Eth is not provided. This happens in the
 `await expect().to.be.revertedWith('Not enough value for the minimum Tier')`
-line. The code calling the contract has been temporarily removed to highlight
-what's happening. We're expecting the call to be reverted when not sending
+line. _The code calling the contract has been temporarily removed to highlight
+what's happening._ We're expecting the call to be reverted when not sending
 enough payment, along with a specific error message from the contract.
 
 And the method inside that `expect()` method looks like this:
@@ -487,10 +487,10 @@ describe('withdrawal', async () => {
 })
 ```
 
-You'll see similar patterns from the `mint()` tests prior. Here are a couple of
-additional highlights:
+You'll see similar patterns from the previous `mint()` tests. Here are a couple
+of additional highlights:
 
-- In the contract, only a `owner` can withdraw funds, so the first tests changes
+- In the contract, only `owner` can withdraw funds, so the first test changes
   the user to `otherUser` and makes sure that wallet can not mint. The snippet
   to change wallets before calling the method is: `contract.connect(otherUser)`.
 - Another condition to test is that an error is raised if an owner tries to
@@ -500,9 +500,9 @@ additional highlights:
   `hre.ethers.provider.getBalance(contract.address)` lines. When we mint we know
   the contract now has `0.01` Eth so we check that. Then after running
   `withdraw`, check the balance again and it should be back to zero since all
-  funds withdrawn. Ok, yes we do have two `expect()` lines in one test that
+  funds are withdrawn. Ok, yes we do have two `expect()` lines in one test that
   breaks our rule of one expect per test, but as long as the test is kept
-  simple, we choose what makes sense for what we're trying to test.
+  simple, we can choose what makes sense for what we're trying to test.
 
 ### Testing tokenURI()
 
@@ -514,9 +514,9 @@ opaque Base64 string that's not discernable by humans. For example the text
 ([Base64 encoder](https://www.base64encode.org/))
 
 This is impossible to test because if you make a change to the code, you get a
-different Base64 string but how do you know if it's correct?
+different Base64 string. But how do you know if it's correct?
 
-You need to refactor this method into smaller helper methods, each which are
+You need to refactor this method into smaller helper methods, each of which are
 more testable.
 
 But first let's use the power of testing to make sure we don't break the
@@ -562,7 +562,7 @@ be tested and understood by humans writing these tests.
   finally does the dreaded Base64 encoding. Which tests, and how many to write,
   is subjective. In this case the non-automated-tested part is minimized and a
   test wasn't added. Though it is possible someone will come along, and with a
-  typo break this file. It's up to you as a tester to decided if more tests are
+  typo break this file. It's up to you as a tester to decide if more tests are
   needed for peace of mind.
 
 ```solidity
