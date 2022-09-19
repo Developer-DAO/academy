@@ -38,10 +38,15 @@ it's an important tool to ensuring your contract will work as expected.
 
 ## Let's add some tests
 
-### First add a test framework
+### First configure hardhat for testing
 
-You've already setup hardhat in Lesson 2, which is a great framework for writing
-automated tests.
+<ContentCallout emoji="💡" size="md" variant="info">
+  We'll depend on `hardhat` as our project framework and will use its testing
+  features. Your project is already hardhat-based so you should be all set to
+  continue. However if you're unsure on how to setup the initial hardhat
+  project, refer to Lesson 2 and search for `npx hardhat` in the "Create your
+  project" section.
+</ContentCallout>
 
 Add a line in your `scripts` section of `package.json` so it looks like this
 below. You may already have other scripts' lines so don't get rid of those.
@@ -52,8 +57,8 @@ below. You may already have other scripts' lines so don't get rid of those.
 },
 ```
 
-Next create a `test` folder in the root of your project, and add a new file called
-`tier-nft.test.js` with these lines:
+Next create a `test` folder in the root of your project, and add a new file
+called `tier-nft.test.js` with these lines:
 
 ```javascript
 const { expect } = require('chai')
@@ -210,12 +215,11 @@ mint fails if there is not enough Eth spent.
 
 ### Start testing constructor(), mint() and withdraw()
 
-Let's start with the `constructor`. This one is pretty straight forward since
-the heavy lifting is done by OpenZeppelin's base classes, but let's make sure we
-can set the NFT name and symbol.
+Let's start with testing the `constructor` and making sure we can set and
+retrieve the NFT name and symbol.
 
-Let's take a leap forward with our first two tests, as well as some setup code
-that we'll reuse for all the other tests too.
+In addition to these first two tests we'll add setup code that we'll reuse for
+all the other tests too.
 
 ```javascript
 const { expect } = require('chai')
@@ -783,8 +787,8 @@ fail when code changes.
 
 ## Food for Thought
 
-With all the helpfulness of tests, why didn't we start with them before we
-wrote any of the contract implementation?
+With all the helpfulness of tests, why didn't we start with them before we wrote
+any of the contract implementation?
 
 The main reason was trying to minimize all the things you needed to learn to get
 started, but the methodology of writing tests first is called "Test Driven
@@ -806,8 +810,8 @@ With TDD:
 - you would have written tests as you go, which are much more fun to write than
   all at once at the end
 - you would have ended up writing better code because you discover quickly when
-  code is impossible to test. You'll end up with the added benefit of breaking a big
-  method into multiple smaller methods that are easily testable. So in the
+  code is impossible to test. You'll end up with the added benefit of breaking a
+  big method into multiple smaller methods that are easily testable. So in the
   refactor example above for `tokenURI()` you would never have written the
   version that outputs a long base64 string because it's not testable.
 
