@@ -3,6 +3,10 @@
 `Developer DAO Academy` is an open-source education platform created by the
 Developer DAO.
 
+Live site is at <https://academy.developerdao.com>.
+
+![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
+
 ## How do I get started?
 
 Please read our [CONTRIBUTING Guide](CONTRIBUTING.md) to get started. We ask
@@ -51,8 +55,8 @@ important for an open-source project.
 
 Some helpful things when reviewing PRs:
 
-- **ALWAYS** download and run the code you're reviewing. Never eyeball it in
-  the PR and approve it.
+- **ALWAYS** download and run the code you're reviewing. Never eyeball it in the
+  PR and approve it.
 - when you review a PR, please add yourself as a reviewer in GitHub so we know
   someone is reviewing
 - go through the formal GitHub review process of starting a review and then

@@ -143,21 +143,28 @@ export const PomodoroTimer = (props: any) => {
   const timerStyle = useStyleConfig('PomodoroTimer', { variant })
   const iconStyle = useStyleConfig('PomodoroIcon', { variant })
 
-  const getButton = (data: TimerEventData) => {
+  const getButton = (data: TimerEventData, idx: number) => {
     return data.eventIcon ? (
       isBigScreen ? (
-        <Button onClick={() => dispatch(data.event)} leftIcon={data.eventIcon}>
+        <Button
+          key={idx}
+          onClick={() => dispatch(data.event)}
+          leftIcon={data.eventIcon}
+        >
           {data.eventDesc}
         </Button>
       ) : (
         <IconButton
+          key={idx}
           onClick={() => dispatch(data.event)}
           icon={data.eventIcon}
           aria-label={data.eventDesc}
         />
       )
     ) : (
-      <Button onClick={() => dispatch(data.event)}>{data.eventDesc}</Button>
+      <Button key={idx} onClick={() => dispatch(data.event)}>
+        {data.eventDesc}
+      </Button>
     )
   }
 
@@ -187,7 +194,7 @@ export const PomodoroTimer = (props: any) => {
             {status ? <Status>{status}</Status> : <Status>&nbsp;</Status>}
             <TimeRemaining time={time} />
             <ButtonGroup variant="pomodoroControl" size="sm" gap="0" isAttached>
-              {events.map((e) => getButton(e))}
+              {events.map((e, idx) => getButton(e, idx))}
             </ButtonGroup>
           </Stack>
         </PopoverContent>
