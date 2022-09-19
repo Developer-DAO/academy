@@ -13,10 +13,10 @@ const Home: NextPage = () => {
         openGraph={{
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
+              url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
               width: 800,
               height: 600,
-              alt: 'Developer DAO School of Code',
+              alt: 'Developer DAO Academy',
               type: 'image/png',
             },
           ],
