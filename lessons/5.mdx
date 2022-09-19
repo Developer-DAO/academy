@@ -79,6 +79,12 @@ It relies on the [WAGMI](https://wagmi.sh/) and [ethers](https://docs.ethers.io/
 libraries for interoperability between various chains and wallet providers and 
 thus needs some configurations.
 
+But first we need to install the necessary dependencies.
+
+```bash
+yarn add @rainbow-me/rainbowkit wagmi ethers
+```
+
 To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
 directory. The file should look something like this from our initial setup.
 
@@ -114,6 +120,99 @@ import { useEffect, useState } from 'react';
 
 // function MyApp code...
 ```
+
+`import '@rainbow-me/rainbowkit/styles.css';` gives us some basic styling from
+Rainbowkit.
+`import { getDefaultWallets, RainbowKitProvider, } from '@rainbow-me/rainbowkit';` returns
+the default wallet provider option and a RainbowKit Provider to "wrap" around our app
+so that we can use its features throughout the app's pages and components.
+`import { chain, configureChains, createClient, WagmiConfig, } from 'wagmi';` provides
+a way to configure the WagmiConfig wrapper for our app based on the chains and providers
+of our choice along with some other customisations.
+`import { alchemyProvider } from 'wagmi/providers/alchemy';` and 
+`import { publicProvider } from 'wagmi/providers/public';` give us the provider configs
+for the providers we will be using. In our app we are using an `alchemyProvider` along
+with a fall back `publicProvider`.
+`useEffect` and `useState` are react hooks that help us perform side effects and
+capture the state, respectively.
+
+After importing we create the configurations we need and create a new instance of 
+`wagmiClient` using those.
+
+```jsx
+const { chains, provider } = configureChains(
+  [chain.goerli],
+  [
+    alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+})
+```
+
+For this application we will be using the `goerli` testnet. Other chains can
+be added simply using the following syntax: `chain.chain_name`.
+For custom providers, like the `alchemyProvider` we can pass in our private
+`apiKey` as well.
+
+Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
+so that have access to their features throughout our application.
+
+```jsx
+function MyApp({ Component, pageProps }) {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Component {...pageProps} />
+      </RainbowKitProvider >
+    </WagmiConfig >
+  );
+};
+
+export default MyApp
+```
+
+Lastly, we need to add a few conditionals so that our application renders without
+any [Hydration errors](https://nextjs.org/docs/messages/react-hydration-error). A
+hydration error is basically when the pre-rendered state does not match the initial
+rendering on browser refresh.
+
+```jsx
+function MyApp({ Component, pageProps }) {
+  const [showMinter, setShowMinter] = useState(false);
+  useEffect(() => {
+    setShowMinter(true);
+  }, []);
+
+  if (!showMinter) {
+    return null;
+  }
+
+  if (typeof window === 'undefined') {
+    return <></>
+  } else {
+    return (
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <Component {...pageProps} />
+        </RainbowKitProvider >
+      </WagmiConfig >
+    );
+  };
+};
+```
+
+
 
 
 
