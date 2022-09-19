@@ -16,15 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             type: 'website',
             locale: 'en_US',
             url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
-            site_name: 'Deveoper DAO Academy',
+            site_name: 'Developer DAO Academy',
             title: 'Developer DAO Academy',
             description:
               'Academy is an open-source education platform created by the Developer DAO.',
             images: [
               {
                 url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
-                width: 800,
-                height: 600,
                 alt: 'Developer DAO Academy',
                 type: 'image/png',
               },
