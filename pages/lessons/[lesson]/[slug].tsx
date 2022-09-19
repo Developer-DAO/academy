@@ -1,7 +1,7 @@
 import { Code, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import fs from 'fs'
+import fs, { readdirSync } from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -14,6 +14,7 @@ interface LessonProps {
   frontMatter: object
   mdxSource: MDXRemoteSerializeResult
   slug: string
+  lessons: any
 }
 
 type LessonConnection = Record<string, string>
@@ -104,7 +105,7 @@ const Lesson: React.FC<LessonProps> = ({ mdxSource, slug }) => {
   return (
     <>
       <MDXRemote {...mdxSource} components={components} />
-      {/* <Flex
+      <Flex
         direction="row"
         justifyContent={flexJustifyContentActions(slug)}
         pt="3"
@@ -119,7 +120,7 @@ const Lesson: React.FC<LessonProps> = ({ mdxSource, slug }) => {
         {shouldHaveNextLessonButton(slug) && (
           <ActionButton label="Next Lesson" href={getNextButtonHref(slug)} />
         )}
-      </Flex> */}
+      </Flex>
     </>
   )
 }
@@ -135,6 +136,7 @@ export const getStaticPaths = async () => {
     params: {
       lesson: string
       slug: string
+      lessons: any
     }
   }[] = []
 
@@ -147,6 +149,7 @@ export const getStaticPaths = async () => {
         params: {
           lesson: topic,
           slug: fileName.replace('.mdx', ''),
+          lessons: files,
         },
       }
 

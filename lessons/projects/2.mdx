@@ -53,8 +53,6 @@ like the pros. For that we are going to set up our working environment in our
 computer, making sure we have all the necessary tools to create, debug and
 deploy smart contracts.
 
-![expectations.reality.jpeg](/assets/lessons/2/img_2.jpeg)
-
 To begin our project, we should open a console (check your Operating System
 options on how to use one).
 
@@ -93,8 +91,6 @@ The `--save-dev` flag used in the last command, lets the project know it's a dev
 ## Create your project
 
 Once we have our environment set up, we need to create a project.
-
-![you.shall.not.pass.jpeg](/assets/lessons/2/img_3.jpeg)
 
 We run the `npx hardhat` command to create a basic project:
 
@@ -202,8 +198,6 @@ We are using VSCode for this one (we think it has a good balance of costs vs. be
 
 Enough rambling, let’s start writing our contract!
 
-![code.i.write.jpeg](/assets/lessons/2/img_4.jpeg)
-
 In your console, type `code .` and yes, with that dot at the end! Wait for the
 magic.
 
@@ -240,8 +234,6 @@ going to use them inside our contract.
 
 For this we are going to ‘inherit’ (think of _using_ or _extending_ for now) the
 ERC721 contract from OpenZeppelin from our contract.
-
-![standing.in.the.shoulder.of.giants.nft.jpeg](/assets/lessons/2/img_5.jpeg)
 
 This is what we need in our code:
 
@@ -307,8 +299,6 @@ this variable to identify each new NFT created.
 ## Mint… Feels Good
 
 Once we have a way to identify our NFTs, we only need a way to create them.
-
-![mint.feels.good.jpeg](/assets/lessons/2/img_7.jpeg)
 
 We will add a [function](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b)
 to mint new items. We call it 'to mint' or 'minting' to the moment when we
@@ -423,8 +413,6 @@ With that we can see the power of inheritance and overriding. We can inherit a
 whole set of functionalities and change only what we need to create a different
 experience.
 
-![im.something.of.a.scientist.myself.jpeg](/assets/lessons/2/img_9.jpeg)
-
 ## JSON
 
 We have most of our smart contract ready, so we are going to focus on the media
@@ -436,8 +424,6 @@ attributes), and that file will point to our media.
 
 For that we are using a `.json` file. JSON stands for JavaScript Object
 Notation.
-
-![json-meme_-500x500.jpeg](/assets/lessons/2/img_10.jpeg)
 
 Our files will basically look like this (if you add some spaces for
 readability):
@@ -477,8 +463,6 @@ Literally.
 
 There are many services that lets us store files in a decentralized manner. We
 are using the one called IPFS. Inter-Planetary File System. Yep, no joke.
-
-![ipfs.jpeg](/assets/lessons/2/img_12.jpeg)
 
 For a one line explanation, nothing better than quoting the docs: “**IPFS is a
 distributed system for storing and accessing files, websites, applications, and
@@ -560,8 +544,6 @@ to store the files somewhere to get the address we need to run the deployment.
 
 So, now that we have our media and JSONs uploaded, we can deploy our NFT
 contract!
-
-![deploy.jpeg](/assets/lessons/2/img_15.jpeg)
 
 Remember that scripts folder at the beginning of our project? That's where we
 are going to create our script to tell Hardhat the set of instructions to
@@ -717,8 +699,6 @@ you have any.
 Wallets have special number, called private key. You should **never**, **ever**
 share your private keys with **anyone**. If anyones has that number, they can
 take full control of the wallet, and even empty it of anything it has.
-
-![keys.jpeg](/assets/lessons/2/img_18.jpeg)
 
 To be able to deploy our contract, we are going to use that number, that's why
 we recommend, yet again, to use a separate wallet for developing.
