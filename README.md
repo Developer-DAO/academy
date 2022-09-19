@@ -3,6 +3,8 @@
 `Developer DAO Academy` is an open-source education platform created by the
 Developer DAO.
 
+Live site is at <https://academy.developerdao.com>.
+
 ![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
 
 ## How do I get started?
