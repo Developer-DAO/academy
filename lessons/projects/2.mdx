@@ -1,5 +1,4 @@
 ---
-i18n: 'smart-contracts'
 title: Build a Basic NFT
 description:
   Write and deploy a Smart Contract for a Basic NFT. Builds on knowledge from
@@ -29,23 +28,22 @@ the backbone or foundation for almost any ~~future~~ NFT project.
 improve our lives in many ways.
 
 **What is an NFT?** NFT stands for Non-Fungible Token. It is basically a crypto
-token that is unique and ~~cannot be "funged"~~ cannot be replaced, because
+token that is unique, because
 there is no other token that is identical in utility and therefore value.
 
-**So, what can we do with them?** Since they live in the blockchain and they are
+**So, what can we do with them?** Since they live on the blockchain and are
 unique, we can use them to verify ownership of a real world asset (real estate
 deeds, art), to represent a membership (club membership, fan club), to track
 real world items in a supply chain (medicine, food, clothing), to use as tickets
 (movies, events, concerts, VIPs) and many more use cases we have yet to
 discover.
 
-**But, what is it with all the hype around them?** Thanks to being unique, the
-ability to carry properties inside them, the value inherent to blockchains and
+**But, what is it with all the hype around them?** As well as being unique, they have the
+ability to carry properties inside them. The value inherent to blockchains and
 the fact ownership can be transferred, leads to people attaching value to them.
-This created huge opportunities for marketplaces to buy and sell these assets.
+This has created huge opportunities for marketplaces to buy and sell these assets.
 
-Now that we know they can be much more than just an image, let‘s start our
-project
+Now that we know they can be much more than just an image, what are we waiting for!
 
 ## Set up your environment
 
@@ -63,10 +61,11 @@ We will be using `npm`, the package manager from Node, and its command `npx`
 that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
-<aside>
-💡 To install `npm` on your system, please follow the instructions on [this link](https://www.notion.so/67b2ab1f76f148f49f547b9156aeaf28).
 
-</aside>
+<ContentCallout emoji='💡' size='md' variant='info'>
+To install `npm` on your system, please follow the instructions on
+[this link](https://www.notion.so/67b2ab1f76f148f49f547b9156aeaf28).
+</ContentCallout>
 
 Let’s create and `cd` into our D_D Academy projects folder, and create a
 folder for our NFT project:
@@ -87,10 +86,9 @@ npm init -y
 npm install --save-dev hardhat
 ```
 
-<aside>
-💡 The `--save-dev` flag used in the last command, lets the project know it's a development dependency (not needed in production). You can view what dependencies are needed in the `package.json` file in the root of the project.
-
-</aside>
+<ContentCallout emoji='💡' size='md' variant='info'>
+The `--save-dev` flag used in the last command, lets the project know it's a development dependency (not needed in production). You can view what dependencies are needed in the `package.json` file in the root of the project.
+</ContentCallout>
 
 ## Create your project
 
@@ -156,15 +154,15 @@ ok for us. Here's what mine asked me:
 
 options
 
-<aside>
-💡 The project asked us to install `hardhat-waffle` and `hardhat-ethers` in the last prompt. If they didn’t install or we accidentally chose ‘n’, we can always install them manually with:
+<ContentCallout emoji='💡' size='md' variant='info'>
+The project asked us to install `hardhat-waffle` and `hardhat-ethers` in the
+last prompt. If they didn’t install or we accidentally chose ‘n’, we can always
+install them manually with:
 
 ```bash
 npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle ethereum-waffle chai
-
 ```
-
-</aside>
+</ContentCallout>
 
 We now need to add our last dependency (OpenZeppelin contracts):
 
@@ -172,10 +170,10 @@ We now need to add our last dependency (OpenZeppelin contracts):
 npm install @openzeppelin/contracts
 ```
 
-<aside>
-💡 Open Zeppelin developed a lot of standard contracts that are super powerful, widely used and fully tested and audited. We are going to try and step in the shoulder of giants and leverage the power of open source to create our project in a simpler way, while not loosing focus on security that’s super important in the web3 world
+<ContentCallout emoji='💡' size='md' variant='info'>
+Open Zeppelin developed a lot of standard contracts that are super powerful, widely used and fully tested and audited. We are going to try and step in the shoulder of giants and leverage the power of open source to create our project in a simpler way, while not loosing focus on security that’s super important in the web3 world
 
-</aside>
+</ContentCallout>
 
 We delete some files so we start fresh:
 
@@ -197,10 +195,10 @@ default paths
 
 With our project folder ready, we can now fire up our Code Editor.
 
-<aside>
-💡 We are using VSCode for this one (we think it has a good balance of costs vs. benefits) but you can use whatever you feel comfortable with. A few of the more popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
+<ContentCallout emoji='💡' size='md' variant='info'>
+We are using VSCode for this one (we think it has a good balance of costs vs. benefits) but you can use whatever you feel comfortable with. A few of the more popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
 
-</aside>
+</ContentCallout>
 
 Enough rambling, let’s start writing our contract!
 

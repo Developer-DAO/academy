@@ -1,5 +1,6 @@
 import CookieConsent from 'react-cookie-consent'
-import * as FullStory from '@fullstory/browser'
+import TagManager from 'react-gtm-module'
+
 export default function ConsentBanner() {
   return (
     <CookieConsent
@@ -22,7 +23,7 @@ export default function ConsentBanner() {
         backgroundColor: '#fff',
       }}
       expires={150}
-      onAccept={() => FullStory.init({ orgId: 'o-1CKVPB-na1' })}
+      onAccept={() => TagManager.initialize({ gtmId: 'G-KKEPK007XK' })}
     >
       This website uses cookies to enhance the user experience.{' '}
     </CookieConsent>
