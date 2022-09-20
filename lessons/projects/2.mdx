@@ -20,7 +20,7 @@ icons:
 ## What are we buidling?
 
 In this project we will build a basic NFT smart contract, that will serve us as
-the backbone or foundation for almost any ~~future~~ NFT project.
+the backbone or foundation for almost any future NFT project.
 
 ![thatd.be.great.jpeg](/assets/lessons/2/img_1.jpeg)
 
@@ -28,7 +28,7 @@ the backbone or foundation for almost any ~~future~~ NFT project.
 improve our lives in many ways.
 
 **What is an NFT?** NFT stands for Non-Fungible Token. It is basically a crypto
-token that is unique, because
+token that is unique and cannot be replaced, because
 there is no other token that is identical in utility and therefore value.
 
 **So, what can we do with them?** Since they live on the blockchain and are
@@ -45,9 +45,20 @@ This has created huge opportunities for marketplaces to buy and sell these asset
 
 Now that we know they can be much more than just an image, what are we waiting for!
 
+By the end of this lesson we are going to learn a lot of things. A simple breakdown of the steps to get there is:
+
+- Set up our environment to work
+  - Install dependencies
+  - Create a project
+- Create a Smart Contract using a code editor
+- Use images and files for our NFTs
+  - (Optional) Create your own images and files and store them in a decentralized way
+- Deploy our Smart Contract to a Testnet Blockchain
+- Create (or “mint”) our very own NFT
+- See our NFT in a public marketplace
+
 ## Set up your environment
 
-For this project, we are leaving the comfort of Remix IDE, to start developing
 like the pros. For that we are going to set up our working environment in our
 computer, making sure we have all the necessary tools to create, debug and
 deploy smart contracts.
@@ -64,16 +75,16 @@ comfortable with another package manager, feel free to use it.
 
 <ContentCallout emoji='💡' size='md' variant='info'>
 To install `npm` on your system, please follow the instructions on
-[this link](https://www.notion.so/67b2ab1f76f148f49f547b9156aeaf28).
+[this link](/lessons/install-npm).
 </ContentCallout>
 
 Let’s create and `cd` into our D_D Academy projects folder, and create a
 folder for our NFT project:
 
 ```bash
-# create a folder for all our schoolofcode projects
-mkdir schoolofcode
-cd schoolofcode
+# create a folder for all our D_D Academy projects
+mkdir d_d_academy
+cd d_d_academy
 
 # create a folder for this project
 mkdir projectNFT
@@ -87,7 +98,9 @@ npm install --save-dev hardhat
 ```
 
 <ContentCallout emoji='💡' size='md' variant='info'>
-The `--save-dev` flag used in the last command, lets the project know it's a development dependency (not needed in production). You can view what dependencies are needed in the `package.json` file in the root of the project.
+The `--save-dev` flag used in the last command, lets the project know it's a
+development dependency (not needed in production). You can view what
+dependencies are needed in the `package.json` file in the root of the project.
 </ContentCallout>
 
 ## Create your project
@@ -100,12 +113,16 @@ We run the `npx hardhat` command to create a basic project:
 
 <ContentSideDrawer title="What on Earth is Hardhat?">
   Since we’re flying to Jupiter, we need safety apparel! That’s what Hardhat is.
+
   It provides a blockchain for us along the way, where we can have lots of value
   on it, and we can waste as much as we want and get hit on the head with
-  asteroids without getting any scars. Hardhat lets us do all the things we did
-  in Remix, but instead of clicking ‘Deploy’ and ‘Compile’ buttons, and reading
-  our logs from inside the browser IDE, we will be writing our commands in the
-  console and debugging our errors from a code editor on your ‘local’ computer.
+  asteroids without getting any scars.
+  
+  Hardhat lets us do all the things we did in Remix, but instead of clicking
+  ‘Deploy’ and ‘Compile’ buttons, or reading our logs from inside the browser
+  IDE, we will be writing our commands in the console and debugging our errors
+  from a code editor on our ‘local’ computer.
+
   Hardhat is simply a set of tools that includes a local mini blockchain that
   can run on your machine.
 </ContentSideDrawer>
@@ -113,74 +130,59 @@ We run the `npx hardhat` command to create a basic project:
 After you enter your `npx hardhat` command, what information can you see? What
 are those ten lines and what is?
 
-```bash
-#888    888                      888 888               888
-#888    888                      888 888               888
-#888    888                      888 888               888
-#8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
-#888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
-#888    888 .d888888 888    888  888 888  888 .d888888 888
-#888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
-#888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
+```less
+// 888    888                      888 888               888
+// 888    888                      888 888               888
+// 888    888                      888 888               888
+// 8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888
+// 888    888     "88b 888P"  d88" 888 888 "88b     "88b 888
+// 888    888 .d888888 888    888  888 888  888 .d888888 888
+// 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
+// 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
 
-#👷 Welcome to Hardhat 👷‍
+👷 Welcome to Hardhat v2.11.1 👷
 
-#? What do you want to do? …
-#❯ Create a basic sample project
-#  Create an advanced sample project
-#  Create an advanced sample project that uses TypeScript
-#  Create an empty hardhat.config.js
-#  Quit
+? What do you want to do? … 
+❯ Create a JavaScript project
+  Create a TypeScript project
+  Create an empty hardhat.config.js
+  Quit
 ```
 
-We choose `Create a basic sample project` and hardhat will create an example
+We choose `Create a Javascript project` and hardhat will create an example
 project for us. It will give us 3 prompts for options. Choosing the defaults is
 ok for us. Here's what mine asked me:
 
-```bash
-#✔ What do you want to do? ...
-> Create a basic sample project
-#✔ Hardhat project root: · ~/schoolofcode/projectNFT
-#✔ Do you want to add a .gitignore? (Y/n) · y
-#✔ Do you want to install this sample project's dependencies with npm (@nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers)? (Y/n) · y
+```less
+✔ What do you want to do? · Create a JavaScript project
+✔ Hardhat project root: · ~/d_d_academy/projectNFT
+✔ Do you want to add a .gitignore? (Y/n) · y
+✔ Do you want to install this sample project's dependencies with npm (@nomicfoundation/hardhat-toolbox)? (Y/n) · y
 ```
 
-- **Hardhat project root** → The folder where we want to create the project
+- **Hardhat project root** → Hit enter (this is the folder where we want to create the project)
 - **Do you want to add a .gitignore?** → Select 'y'. If you are patient to
   finish the lesson, you'll learn what it's for
 - **Do you want to install this sample project's dependencies with npm (…)?** →
   Select 'y'. These are packages (programs) that our project needs to be able to
   run.
 
-options
-
 <ContentCallout emoji='💡' size='md' variant='info'>
-The project asked us to install `hardhat-waffle` and `hardhat-ethers` in the
+The project asked us to install `@nomicfoundation/hardhat-toolbox` in the
 last prompt. If they didn’t install or we accidentally chose ‘n’, we can always
 install them manually with:
 
 ```bash
-npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle ethereum-waffle chai
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
-</ContentCallout>
-
-We now need to add our last dependency (OpenZeppelin contracts):
-
-```bash
-npm install @openzeppelin/contracts
-```
-
-<ContentCallout emoji='💡' size='md' variant='info'>
-Open Zeppelin developed a lot of standard contracts that are super powerful, widely used and fully tested and audited. We are going to try and step in the shoulder of giants and leverage the power of open source to create our project in a simpler way, while not loosing focus on security that’s super important in the web3 world
-
 </ContentCallout>
 
 We delete some files so we start fresh:
 
 ```bash
-rm contracts/Greeter.sol
-rm scripts/sample-script.js
-rm test/sample-test.js
+rm contracts/*.sol
+rm scripts/*.js
+rm test/*.js
 ```
 
 In a Hardhat project, the default folders are supposed to be for:
@@ -191,12 +193,26 @@ default paths
 - `scripts/` is where simple automation scripts go.
 - `test/` is where your tests should go.
 
+We now need to add our last dependency (OpenZeppelin contracts):
+
+```bash
+npm install @openzeppelin/contracts
+```
+
+<ContentCallout emoji='💡' size='md' variant='info'>
+Open Zeppelin developed a lot of standard contracts that are super powerful,
+widely used and fully tested and audited. Read more about them
+[here](/lessons/open_zeppelin).
+</ContentCallout>
+
 ## Let’s start coding!
 
 With our project folder ready, we can now fire up our Code Editor.
 
 <ContentCallout emoji='💡' size='md' variant='info'>
-We are using VSCode for this one (we think it has a good balance of costs vs. benefits) but you can use whatever you feel comfortable with. A few of the more popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
+We are using VSCode for this one (we think it has a good balance of costs vs.
+benefits) but you can use whatever you feel comfortable with. A few of the more
+popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
 
 </ContentCallout>
 
@@ -219,16 +235,16 @@ contract ProjectNFT {
 ```
 
 If you’ve been through our
-[first project](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b), you’ll
-remember the first lines defines our copyright license, the second one defines
-the solidity version we are going to be using for this contract and the last two
-lines are how we declare a smart contract in solidity.
+[first project](/lessons/1), you’ll remember the first lines defines our
+copyright license, the second one defines the solidity version we are going to
+be using for this contract and the last two lines are how we declare a smart
+contract in solidity.
 
 With an empty project, now we can start adding what we need to create our
-awesome NFT collection. In particular, ERC721 (the formal specification to
-follow for NFTs) have a lot of requirements to meet (they should have a numbered
-ID, functions to transfer them, approve others as delegates to transfer them,
-etc).
+awesome NFT collection. In particular, [ERC721](/lessons/token-standards) (the
+formal specification to follow for NFTs) have a lot of requirements to meet
+(they should have a numbered ID, functions to transfer them, approve others as
+delegates to transfer them, etc).
 
 All of it is pretty much for our project, but luckily OpenZeppelin has developed
 a lot of contracts that implements these standards and more, they are widely
@@ -238,8 +254,9 @@ going to use them inside our contract.
 
 ## Standing in the shoulder of giants
 
-For this we are going to ‘inherit’ (think of _using_ or _extending_ for now) the
-ERC721 contract from OpenZeppelin from our contract.
+For this we are going to ‘inherit’ (think of _using the properties of_ or
+_extending_ for now) the ERC721 contract from OpenZeppelin. In the same way you
+_inherit_ the DNA and characteristics from your family/relatives.
 
 ![standing.in.the.shoulder.of.giants.nft.jpeg](/assets/lessons/2/img_5.jpeg)
 
@@ -260,17 +277,17 @@ contract ProjectNFT is ERC721 {
 ```
 
 - After our pragma statement, we add an `import` statement, that lets us use the
-  contracts defined in the `ERC721.sol` file.
+  contracts in the `ERC721.sol` file.
 - Next, we add `is ERC721` to our `contract ProjectNFT` statement. This lets us
   inherit all the variables, functions, events, etc from `ERC721` into the new
-  `ProjectNFT` contract and use them as well as anything new we code as if they
-  were its own.
-- Every contract has a `constructor` function, which is called only once when
-  the contract is first deployed. The `ERC721` `constructor` which we will
-  inherit has two parameters, but we need to assign them arguments i.e. an
-  actual name and symbol for our NFT. Therefore, we will create a new
-  constructor, while inheriting the `ERC721`’s. Our `constructor` will receive 2
-  parameters and call the `ERC721` constructor with them.
+  `ProjectNFT` contract, where we can use them, as if they were its own, as well
+  as any new code we write.
+- Every contract has a `constructor` function. This is called only once when the
+  contract is first deployed. The `ERC721` `constructor` which we will inherit
+  has two parameters, so we need to assign them arguments i.e. an actual name
+  and symbol for our NFT. Therefore, we will create a new constructor, while
+  still inheriting the `ERC721`’s. Our `constructor` will receive 2 parameters
+  and call the `ERC721` constructor with them. Composability, eh?
 
 ## Whose is whose?
 
@@ -279,10 +296,8 @@ blockchain.
 
 ![spiderman.pointing.jpeg](/assets/lessons/2/img_6.jpeg)
 
-We are going to use a
-[state variable](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b) to keep
-track of the total supply of NFTs, which we can use as our ID for each new token
-created:
+We are going to use a state variable to keep track of the total supply of NFTs,
+which we can use as our ID for each new token created:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -300,9 +315,9 @@ contract ProjectNFT is ERC721 {
 }
 ```
 
-Here we only created a private variable called totalSupply that will store
-exactly how many NFTs have been minted so far. In the next step we will harness
-this variable to identify each new NFT created.
+We made our totalSupply variable private and it will store exactly how many NFTs
+have been minted so far. In the next step we will use this variable to identify
+each new NFT that’s created.
 
 ## Mint… Feels Good
 
@@ -310,9 +325,8 @@ Once we have a way to identify our NFTs, we only need a way to create them.
 
 ![mint.feels.good.jpeg](/assets/lessons/2/img_7.jpeg)
 
-We will add a [function](https://www.notion.so/221fce16b8324f8cbc414acbf3955d1b)
-to mint new items. We call it 'to mint' or 'minting' to the moment when we
-create a new NFT:
+We will add a function to **mint** new items, and yes, that means creating a new
+NFT:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -336,9 +350,9 @@ contract ProjectNFT is ERC721 {
 ```
 
 What our `mint` function does first is increment our `totalSupply` state
-variable by 1, because our collection will have one more item, and then it calls
-a function from our inherited `ERC721` called `_safeMint` that adds a new item
-to the contract.
+variable by 1, because our collection will have one item more. Then it calls a
+function from our inherited `ERC721` contract called `_safeMint` that allows a
+new item to be added to our ProjectNFT contract.
 
 As you can see, OpenZeppelin implementation takes care of all the heavy lifting,
 but later in our learning journey we will be able to understand how it all works
@@ -352,29 +366,31 @@ just yet.
 ![cmon.do.something.nft.jpeg](/assets/lessons/2/img_8.jpeg)
 
 We are missing the last piece of the puzzle. For now they are just a numbered
-proof of ownership from our contract, stored on the blockchain. And here is
-where the magic starts.
+proof of ownership from our contract, stored on the blockchain. So here is where
+the magic starts.
 
 We can make our NFT collection about anything we want: text, images, music,
 videos, anything you want. But how?
 
 The `ERC721` implementation we inherited has a function to store a `tokenURI`.
 
-What is this black magic? This is just a unique URI, a web address if you
-prefer, that points to something in the internet, whatever we want it to be.
+What is this black magic? This is just a unique URI, a web address if you prefer,
+that points to something on the internet, whatever we want it to be. e.g. a video,
+an image.
 
-OpenZeppelin implementation provides us a way to create unique URIs from the IDs
-of the NFTs. It gives a way to define a base path for a web address and just
-attaches the token ID at the end of it. So, if you please, you could upload your
-NFT info (we'll look how do we store that later) to any web address, say
+OpenZeppelin ERC721 contract provides us a way to create unique URIs from the
+IDs of the NFTs. It gives a way to define a base path for a web address and just
+attaches the token ID at the end of it. So, if you wanted, you could upload your
+NFT info (we'll look at how we store that later) to any web address, say
 [www.my-site.com/my-nft-collection](http://www.my-site.com/my-nft-collection/)
 and number each info file with the corresponding ID (1, 2, 3, 4…).
 
 We are not going to limit the size of our collection for this project.
 
-So, to let our inherited contract where our NFTs will be stored, we have to
-`override` an OpenZeppelin function (actually, you are expected to do this if
-you look into OpenZeppelin's documentation).
+So, to let our inherited contract know where our NFTs will be stored, we have to
+`override` an OpenZeppelin function. Actually, you are expected to do this if
+you look into OpenZeppelin's documentation. There’s a good reason for
+everything. Well, lots of things. And this is one of them!
 
 Here's the modifications we will add and i'll explain them below:
 
@@ -386,22 +402,22 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract ProjectNFT is ERC721 {
 
-    uint256 private totalSupply;
-    string private ipfsBaseURI;
+  uint256 private totalSupply;
+  string private ipfsBaseURI;
 
-    constructor(string memory _name, string memory _symbol, string memory baseURI)
-        ERC721(_name, _symbol) {
-            ipfsBaseURI = baseURI;
-        }
-
-    function mint() public {
-        totalSupply++;
-        _safeMint(msg.sender, totalSupply);
+  constructor(string memory _name, string memory _symbol, string memory baseURI)
+    ERC721(_name, _symbol) {
+      ipfsBaseURI = baseURI;
     }
 
-    function _baseURI() internal view override returns (string memory) {
-        return ipfsBaseURI;
-    }
+  function mint() public {
+    totalSupply++;
+    _safeMint(msg.sender, totalSupply);
+  }
+
+  function _baseURI() internal view override returns (string memory) {
+    return ipfsBaseURI;
+  }
 
 }
 ```
@@ -410,14 +426,14 @@ What have we done?
 
 - We added a state variable where we will store the base of the URI for the NFTs
 - We added a 3rd parameter to our constructor, so we can store our base URI when
-  we deploy the contract in the blockchain
+  we deploy the contract to the blockchain
 - Inside the constructor, we assign this new parameter to our new state variable
 - Finally, we create a function that has the `override` modifier to indicate
   that this function replaces the one that is inside our inherited contract.
 
 Internally, when someone needs to consult an NFT's info, they call the
-OpenZeppelin's `tokenURI` function, and that function only joins the return of
-our newly `_baseURI`function with the ID of the token requested.
+OpenZeppelin's `tokenURI` function. That function only joins the return
+***value*** of our newly `_baseURI`function with the ID of the token requested.
 
 With that we can see the power of inheritance and overriding. We can inherit a
 whole set of functionalities and change only what we need to create a different
@@ -425,26 +441,42 @@ experience.
 
 ![im.something.of.a.scientist.myself.jpeg](/assets/lessons/2/img_9.jpeg)
 
+## Media for our NFTs
+
+We have most of our smart contract ready, so we are going to focus on the media
+that we want on our NFTs.
+
+We propose a "Choose your own adventure" for this part of the project:
+
+- If you want to go quickly into deploying the contract, you can use the images
+and files that we prepared, and move on to the next section.
+
+- If you want to create your own images and have an NFT of your own, you'll have
+to take the winding road and learn a little about the standard used to identify NFTs
+and a solution to store files in a decentralized way.
+
+<ContentSideDrawer title="Longer Path (learn about JSON and IPFS)">
 ## JSON
 
 We have most of our smart contract ready, so we are going to focus on the media
 that we want on our NFTs.
 
-Marketplaces uses the standard to display info for our NFTs, and that means we
-have to create a file with our NFT information (name, description, image and
-attributes), and that file will point to our media.
+To keep all our LEGO pieces composable, marketplaces also use a standard to
+display info for our NFTs, and that means we create a file with our NFT
+information (name, description, image and attributes), and that file will point
+to our media.
 
 For that we are using a `.json` file. JSON stands for JavaScript Object
 Notation.
 
 ![json-meme_-500x500.jpeg](/assets/lessons/2/img_10.jpeg)
 
-Our files will basically look like this (if you add some spaces for
-readability):
+Our JSON files will basically look like this, after adding some spaces for
+readability:
 
 ```json
 {
-  "name": "SchoolOfCode",
+  "name": "D_D_Academy",
   "description": "This is the NFT Description",
   "image": "https://i.imgur.com/LQPJINE.png",
   "attributes": [
@@ -456,15 +488,17 @@ readability):
 }
 ```
 
-If you didn't notice it, it's just a way to describe objects as key-value pairs.
+In case you didn't notice, it's just a way to describe objects as key-value
+pairs, e.g. “Background” is the key, “Starry” is the value.
 
-For our project we will need to create as many JSON files as NFTs we plan our
-collection to have. Each of them will have (as a minimum) “name”, “description”
-and “image” with the values that we want them to be.
+For our project we will need to create the same number of JSON files we plan our
+collection to have as NFTs. Each of them will have as a minimum a “name”,
+“description” and “image” along with the values that we want them to be.
 
-As you see in the example, in the “image” we have a link to a file on the web
-(we will refer to it as web2). So, every time this site goes down, our NFTs will
-loose its images. This is not very “decentralized” of us.
+As you see in the example, under “image” we have a link to a file on the web,
+which we will refer to as Web2. So, if this website were to go down, our NFTs
+would loose their images, showing us the limitations of the centralization of
+web2 data storage.
 
 ![nft.pepe.jpeg](/assets/lessons/2/img_11.jpeg)
 
@@ -487,20 +521,20 @@ data**”
 It runs on top of a network of nodes that replicate the data being uploaded. A
 computer that downloads a file using IPFS, also shares that file with others for
 a limited amount of time. You can make content available more permanently by
-_pinning_ it, until you decide to _unpin_ it.
+*pinning* it, until you decide to *unpin* it.
 
-To ease our path into the IPFS network, services for _pinning_ content (e.g.
-Pinata) offer paid and free tiers that ensures that the files we upload are
-_pinned_ in IPFS.
+To ease our path into the IPFS network, services for *pinning* content (e.g.
+Pinata) offer paid and free tiers that ensure that the files we upload are
+*pinned* in IPFS.
 
-So, go ahead and grab yourself a free pinata (account) in this
+So, go ahead and grab yourself a free pinata account in this
 [link](https://www.pinata.cloud/).
 
 One of the peculiarities of IPFS is that files, or better called ‘content’, are
-not referenced by name but for its 'CID'. It stands for Content IDentifier, and
+not referenced by name but by its 'CID'. It stands for Content IDentifier, and
 that's because that jumble of letters is a hash of the content. Instead of being
-location-based, IPFS addresses a file by *what's in it*, or by its *content*.
-The content identifier is a *unique cryptographic hash* of the content at that
+location-based, IPFS addresses a file by *what's in it*, i.e. its *content*. The
+content identifier is a *unique cryptographic hash* of the content at that
 address.
 
 Pretty something, right?
@@ -508,9 +542,9 @@ Pretty something, right?
 Once you got your account, try to upload a few images for our first NFTs.
 
 Ok, now that you have uploaded the images, videos, audio or whatever you want
-your NFTs to point at, you need to create the `.json` files. We must name them
-as numbers (1,2,3,…) without extension so our solidity function `tokenURI`
-works. It will work somewhat like this:
+your NFTs to point at, you need to create the `.json` files in your preferred
+text editor. We must name them as numbers (1,2,3,…) without extension, so our
+solidity function `tokenURI` works. It will work somewhat like this:
 
 ![ipfs explained.2x.png](/assets/lessons/2/img_13.png)
 
@@ -546,6 +580,7 @@ an IPFS service will surely help you get ahead in your learning.
 
 Have your json files folder IPFS link saved (the full link, that links to all
 the files), for we will use it in our next step.
+</ContentSideDrawer>
 
 ## Deploy! (back to Solidity, kind of)
 
@@ -554,8 +589,8 @@ have our contract ready, we can compile and deploy. In remix, we had a bunch of
 buttons in the web interface, but now we are getting pro (a.k.a. doing it all
 ourselves, with the console).
 
-Why did we deviate from Solidity? Because of the way we set our contract up,
-when we deploy we tell our contract where our files are stored. Therefore we had
+Why did we deviate from Solidity? Because of the way we set our contract up.
+When we deploy we tell our contract where our files are stored. Therefore we had
 to store the files somewhere to get the address we need to run the deployment.
 
 So, now that we have our media and JSONs uploaded, we can deploy our NFT
@@ -578,10 +613,11 @@ const hre = require('hardhat')
 const CONTRACT_NAME = 'ProjectNFT'
 
 // The 3 parameters for our smart contract's constructor (CHANGE THIS!!!)
-const NFT_NAME = 'SoC'
+const NFT_NAME = 'Academy'
 const NFT_DESCRIPTION = 'D_D Academy Basic NFT Collection'
-const NFT_BASE_URI =
-  'https://gateway.pinata.cloud/ipfs/QmVugFDxagshJ4wCGYhGocCMURCfgsyJW7APNCPnS6nx7S/'
+
+// Change this if you created your own images/JSONs:
+const NFT_BASE_URI = 'https://gateway.pinata.cloud/ipfs/QmSCNdaA5JBT5D6V5FbivfZonKjdsMPeZeTyTWzq1D3yrJ/'
 
 // We define a function with all we want Hardhat to run
 async function main() {
@@ -620,6 +656,16 @@ and a Base URI for our files. With that info set at the top, the script deploys
 the contract, waits for it to be deployed and then prints the address of our
 deployed contract to the console.
 
+Before we run our script, we need to tell Hardhat what solidity version our
+contracts are using. For that, we need to go into the `hardhat.config.js` file
+in our root folder. Find the line that says `solidity: '0.8.xx',` and replace
+the `0.8.xx` for the pragma used in our contract: `0.8.12`.
+
+We could have used a range of solidity versions e.g. `^0.8.0` in our contract,
+but we like to promote best practices by choosing a fixed solidity version
+and knowing beforehand nothing is going to change in our bytecode if a new
+version in that range is released.
+
 Now, to run the script we type this in the console:
 
 ```bash
@@ -638,15 +684,13 @@ compiler also has to process everything we are importing in our contract.
 
 Since we are in a development environment, Hardhat provides us with the tools to
 run this in a local blockchain, without the hassle of dealing with blockchain
-times, tokens to pay gas for our deployment, etc. This means our contract was
-deployed to a dummy blockchain Hardhat created, it all went well, and then the
-blockchain gets deleted.
+times, tokens to pay gas for our deployment, etc. This means our contract was deployed to a dummy blockchain Hardhat created, it all went well, and then the blockchain gets deleted.
 
 Taking advantage of this, we are going to add a mint after the deploy to test if
 all goes well.
 
-Let's add this lines after the console.log part, right where we left a
-placeholder before:
+Let's add these lines after the console.log part, right where we left a
+placeholder before in our deploy.js file:
 
 ```jsx
 	// --> ( We'll add more stuff here later ) <--
@@ -671,7 +715,7 @@ Let's run the script again and see what it tells us! Here's my output:
 
 ![deploy.output.2.png](/assets/lessons/2/img_17.png)
 
-We got the URI of the token right! So, now we know we can deploy it (and mint)
+We got the URI of the token, right? So, now we know we can deploy it (and mint)
 to a real blockchain!
 
 ## Things just got real!
@@ -680,10 +724,7 @@ For us to get our contract out of our computers and into the real world, we are
 going to run the deploy again, but this time to a testnet.
 
 What is a testnet? It is a basically a whole running blockchain, but it runs
-only so people can try stuff out. You have eth, tokens, NFTs, but they have no
-monetary value. This way, you can develop and test your contracts without fear
-of losing real money. For the moment, we are choosing to do this on the Rinkeby
-(it's one of the many Ethereum testnets)
+only so people can try stuff out. On it, you have eth, tokens, NFTs, but they have no monetary value. This way, you can develop and test your contracts without fear of losing real money. For the moment, we are choosing to do this on the Goerli (it's one of the many Ethereum testnets)
 
 Before we go any further, let's take an extra step for precaution, until the
 next project where we are going to learn how to use collaborative tools to store
@@ -696,14 +737,14 @@ hardhat.config.js
 
 In order to do this we need:
 
-- An ethereum wallet that can connect to Rinkeby.
+- An ethereum wallet that can connect to Goerli.
   [Metamask](https://metamask.io/) is the most used.
-- Some Rinkeby-Eth. You can ask for some in a faucet, it's free! Options:
-  [#1](https://rinkebyfaucet.com/), [#2](https://faucets.chain.link/rinkeby),
-  [#3](https://faucet.rinkeby.io/)
+- Some Goerli-Eth. You can ask for some in a faucet, it's free, although
+  some are faster than others! Options: [#1](https://goerlifaucet.com/),
+  [#2](https://faucets.chain.link/goerli), [#3](https://faucet.paradigm.xyz/)
 - An API Key from an Ethereum RPC Node Provider
-  ([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
-  [Ankr](https://rpc.ankr.com/eth_rinkeby))
+([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
+[Ankr](https://rpc.ankr.com/eth_goerli))
 - A minor change in the Hardhat Configuration file
 
 First and foremost, **security**. We are exploring new grounds, experimenting
@@ -711,27 +752,25 @@ and by doing so, we could make mistakes that we don't want to happen where we
 have our money.
 
 We **strongly** recommend you use a separate wallet for developing, completely
-independent from the one that holds your personal assets on the blockchain, if
-you have any.
+independent from the one that holds your personal assets on the blockchain, if you have any.
 
-Wallets have special number, called private key. You should **never**, **ever**
-share your private keys with **anyone**. If anyones has that number, they can
-take full control of the wallet, and even empty it of anything it has.
+Wallets have a special number, called a private key. You should **never**,
+**ever** share your private keys with **anyone**. If anyone has that number,
+they can take full control of the wallet, and empty it of all that is in it!
 
 ![keys.jpeg](/assets/lessons/2/img_18.jpeg)
 
 To be able to deploy our contract, we are going to use that number, that's why
 we recommend, yet again, to use a separate wallet for developing.
 
-We need to inform Hardhat our
+We need to inform Hardhat what node are we using to connect to the
+blockchain/network
 
 Once you have your wallet funded with test eth, you need sign up for one of the
-Ethereum RPC Node Providers. Alchemy and Infura are the most used, Ankr has a
-"community endpoint" without signing up that is not dedicated, to list a few
-options.
+Ethereum RPC Node Providers. Alchemy and Infura are the most used, Ankr has a "community endpoint" without signing up that is not dedicated, to list a few options.
 
 Once you sign up, you'll be asked to create an App, be sure to select the
-Rinkeby network there.
+Goerli network there.
 
 When the app is created, you'll see a "View Key" button, or similar. Press it
 and copy the HTTP link, we'll use it in our next step.
@@ -743,7 +782,8 @@ Hardhat configuration file. Go into your main project's folder and open
 We are going to replace our file with this:
 
 ```jsx
-require('@nomiclabs/hardhat-waffle')
+require('@nomicfoundation/hardhat-chai-matchers')
+require('@nomiclabs/hardhat-ethers');
 
 const WALLET_PRIVATE_KEY = 'YOUR-PRIVATE-KEY-DONT-SHARE'
 
@@ -755,7 +795,7 @@ const RPC_API_KEY = 'YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY'
 module.exports = {
   solidity: '0.8.12',
   networks: {
-    rinkeby: {
+    goerli: {
       url: RPC_API_KEY,
       accounts: [WALLET_PRIVATE_KEY],
     },
@@ -766,7 +806,7 @@ module.exports = {
 And you need to fill those 2 global variables with your own for hardhat to
 communicate correctly to the network.
 
-We have already went through how to get your API KEY.
+We have already gone through how to get your API KEY.
 
 For your wallet's private key, the most sensitive data of the project, you need
 to open Metamask, click on the three dots next to your Account Name, and then on
@@ -779,19 +819,19 @@ Please, if your are already a developer and you plan to use git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
-Ok. We are ready, let's deploy to the Rinkeby testnet!
+Ok. We are ready, let's deploy to the Goerli testnet!
 
 Now we need to run our deploy.js script and the deployment is going to cost us
 some eth (test eth, don't worry) from our wallet, since we are storing
 information (i.e. our contract) in the blockchain. We only have to add 2 words
-to the command to let Hardhat know we are doing the real thing now. Remember our
-deploy script will create our contract AND mint one NFT. If you only want to
+to the command to let Hardhat know we are doing the real thing now. Remember
+our deploy script will create our contract AND mint one NFT. If you only want to
 deploy, delete all the lines we added to test the minting.
 
 Run:
 
 ```bash
-npx hardhat run scripts/deploy.js --network rinkeby
+npx hardhat run scripts/deploy.js --network goerli
 ```
 
 This is the output i got in my console:
@@ -802,19 +842,18 @@ Remember we are deploying to the actual blockchain, a testnet, but a blockchain
 none the less.
 
 Now that we have run the deploy script, delete the private key and the RPC API
-key from `hardhat.config.js` to minimize the handling of the wallet. In the
-nexts project we will learn about tools to collaborate and store your projects
-online
+key from `hardhat.config.js` to minimize the handling of the wallet. In the next
+project we will learn about tools to collaborate and store your projects online
 
 So now we can go and explore the chain to find your contract (and mine too!).
-Just go to [Etherscan](https://rinkeby.etherscan.io/) (or
+Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
 [Opensea](https://testnets.opensea.io/)) and search for the address of our
 deployed contract.
 
-You can view my links as an example on
-[Etherscan](https://rinkeby.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)
+You can view my links as an example on ~~[Etherscan](https://goerli.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)~~
 and [Opensea](https://testnets.opensea.io/collection/soc)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
 
-And that's it! You have created your own NFT collection from scratch!
+And that's it! You have created your own NFT collection from scratch! What a
+super star!!
