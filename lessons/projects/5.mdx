@@ -54,9 +54,8 @@ The command creates a sub-directory named `frontend` inside our root directory
 and sets up all the necessary files and folders within it. The `create-next-app` command
 uses the `yarn` package manager by default.
 
-If a different package manager has been used
-for your previous lessons, pass in the appropriate flag while running your command as
-follows:
+If a different package manager has been used for previous lessons, pass in the appropriate 
+flag while running your command as follows:
 
 ```bash
 #For npm
@@ -92,7 +91,7 @@ thus needs some configurations.
 But first we need to install the necessary dependencies.
 
 ```bash
-yarn add @rainbow-me/rainbowkit wagmi ethers
+npm install @rainbow-me/rainbowkit wagmi ethers
 ```
 
 To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
@@ -421,9 +420,13 @@ a page and the correct sub heading tags as well. The `ConnectButton` is
 a direct import from `RainbowKit` that is generated using the configurations
 setup previously in our Main Application.
 
-With this setup we can run the `yarn dev` command in our console and click 
+With this setup we can run the `npm run dev` command in our console and click 
 the returned link (`http://localhost:portnumber`) to preview our application. 
 This is a good way to debug and see if our code is behaving as expected.
+
+<ContentCallout emoji="💡">
+  Make sure you are in the frontend directory before running the command.
+</ContentCallout>
 
 The preview should look like this: 
 
@@ -503,9 +506,9 @@ of the error with good commenting.
 Then we create a new folder named `nfts` in the `/public` directory and
 save our Tier SVGs in it. You can find links for the SVGs here.
 
-- [0_basic.svg](https://arweave.net/ZXHYEUSG0kZ9ZKjb5u4jSaBHkZ9t9iLE2aBVyo8U-zw)
-- [1_medium.svg](https://arweave.net/Z-nKUvID3HUS-FIMRQR9wyEPj7XHJ5310D0lEDkWC6s)
-- [2_premium.svg](https://arweave.net/SC0UOFJHtVhVQz-oY1JSKt4boKpUEWYh1XAoCGCOEgk)
+- [0_basic.svg](https://arweave.net/o9z59y3sDvBaamvBDJGtyX5BGM983n1zwbs-UaZRUM8)
+- [1_medium.svg](https://arweave.net/-sa-soe34iPLridK0T98rWb7XvfHRSTDdBCoXCuwv60)
+- [2_premium.svg](https://arweave.net/AG0bE-GMrUh-7YjtxlY01woT7kbwEPwgREzuPptJZBo)
 
 Save them with the same names as shown in the links above for smooth flow
 in the code.
@@ -1065,9 +1068,9 @@ the transaction details on Etherscan. Additionally we have a **Close**
 button that changes the state of the `modalShow` to `false` and thus 
 closes the modal modal when we click it.
 
-The final modal should look something: like this:
+The final modal should look like this:
 
-![Successful Mint Modal Preview]()
+![Successful Mint Modal Preview](/assets/lessons/5/img_3.png)
 
 If you are stuck somewhere, please refer to the code side drawer below.
 

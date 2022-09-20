@@ -62,11 +62,11 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           >
             What is D_D Academy?
           </Heading>
-          <Text apply="mdx.p" as="p" fontSize="xl">
-            &quot;D_D Academy&quot; is an open-source education platform created
-            by the Developer DAO.
+          <Text apply="mdx.p" as="p" fontSize="xl" textAlign="center">
+            <strong>D_D Academy</strong> is an open-source education platform
+            created by the Developer DAO.
           </Text>
-          <Text apply="mdx.p" as="p" fontSize="xl">
+          <Text apply="mdx.p" as="p" fontSize="xl" textAlign="center">
             We seek to{' '}
             <Text fontWeight="bold" as="strong" color="#F96C9D">
               empower learners
@@ -141,7 +141,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
             This project is just getting started.
           </Heading>
 
-          <Text apply="mdx.div" as="div" fontSize="xl">
+          <Text apply="mdx.div" as="div" fontSize="xl" textAlign="center">
             <UnorderedList listStyleType="none">
               <ListItem>
                 We&apos;re looking for{' '}
