@@ -14,7 +14,7 @@
     "confirm": "yarn style && yarn lint && yarn build"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.1",
+    "@chakra-ui/icons": "^2.0.10",
     "@chakra-ui/react": "^2.0.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
