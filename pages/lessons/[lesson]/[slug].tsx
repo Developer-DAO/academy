@@ -1,4 +1,4 @@
-import { Code, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import { Code, Box, Heading, Image, Text } from '@chakra-ui/react'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import fs from 'fs'
@@ -9,6 +9,7 @@ import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import ContentSideDrawer from '../../../components/ContentSideDrawer'
 import ContentCallout from '../../../components/ContentCallout'
 import { ActionButton } from '../../../components/ActionButton'
+import { CopyToClipboard } from '../../../components/CopyToClipboard'
 
 interface LessonProps {
   frontMatter: object
@@ -33,7 +34,10 @@ const components = {
 
     if (language) {
       return (
-        <SyntaxHighlighter language={language} {...props} style={dracula} />
+        <Box position="relative">
+          <SyntaxHighlighter language={language} {...props} style={dracula} />
+          <CopyToClipboard {...props} />
+        </Box>
       )
     }
 
