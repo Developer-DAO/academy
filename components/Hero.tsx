@@ -24,7 +24,7 @@ const Hero = () => {
         >
           <VStack flex={1} py={5} alignItems="flex-start">
             <VStack spacing={3} alignItems="flex-start">
-              <Heading as="h1" size="4xl" color="#FFD500">
+              <Heading fontSize={['4xl', '6xl']} color="#FFD500">
                 Learning Web3 with friends
               </Heading>
 
@@ -32,7 +32,7 @@ const Hero = () => {
                 color="white"
                 fontSize="lg"
                 maxW="20rem"
-                pb="2rem"
+                pb={['0', '2rem']}
                 alignSelf={{ base: 'center', md: 'flex-start' }}
               >
                 <Box as="span" color="#FFD500" fontWeight="bold">
@@ -62,7 +62,7 @@ const Hero = () => {
             </VStack>
           </VStack>
 
-          <Box alignSelf="center" flex={1} order={{ base: -1, md: 1 }}>
+          <Box flex={1} order={{ base: -1, md: 1 }}>
             <Image
               // layout="responsive"
               width={459}
