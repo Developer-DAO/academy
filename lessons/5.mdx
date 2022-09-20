@@ -42,10 +42,9 @@ locate and read.
 The first step is to initiate a [nextJS](https://nextjs.org/) application inside our
 root directory by running the following command.
 
-<aside>
-💡 Make sure you are in your root directory before running the command.
-
-</aside>
+<ContentCallout emoji="💡">
+  Make sure you are in your root directory before running the command.
+</ContentCallout>
 
 ```bash
 npx create-next-app frontend
@@ -380,12 +379,12 @@ using the `useState` hook is:
 
 `const [variableName, functionToSetVariable] = useState(intialValue)`
 
-<aside>
-💡 The initial value also serves as the type for the value assigned. If the 
+<ContentCallout emoji="💡">
+  The initial value also serves as the type for the value assigned. If the 
   initial value is a string, then the values set later must be strings too.
   If value type is not known, we can choose to not pass in any initalValue,
   however, it is not good practice to do so. 
-</aside>
+</ContentCallout>
 
 We will revisit these state variables later to see their implementation.
 
