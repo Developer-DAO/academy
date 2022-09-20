@@ -35,69 +35,38 @@ expected when changes are made.
 Automated tests don't fully replace manually testing your smart contract but
 it's an important tool to ensuring your contract will work as expected.
 
-## Let's add some tests
+## Let's Get Started
 
-### First configure hardhat for testing
+### Setting up our project
 
-<ContentCallout emoji="💡" size="md" variant="info">
-  We'll depend on `hardhat` as our project framework and will use its testing
-  features. Your project is already hardhat-based so you should be all set to
-  continue. However if you're unsure on how to setup the initial hardhat
-  project, refer to Lesson 2 and search for `npx hardhat` in the "Create your
-  project" section.
-</ContentCallout>
+If you have an existing project from your previous work on the TierNFT lesson,
+you have all the Hardhat dependencies installed in order to run our testing
+suite.
 
-Add a line in your `scripts` section of `package.json` so it looks like this
-below. You may already have other scripts' lines so don't get rid of those.
+Otherwise, let's create a new Hardhat project, copy in the contract and jump
+into some testing!
+
+1. Please refer to Lesson 2 and search for `npx hardhat` in the "Create your
+   project" section to get your project going. After running through that
+   section you'll have a working Hardhat project for the next steps.
+
+2. Next add a line in your `scripts` section of `package.json` so it looks like
+   this below. You may already have other scripts' lines so don't get rid of
+   those. If you already have a `"test"` script line, make sure it now has
+   `hardhat test --network hardhat`. If you have multiple script lines make sure
+   the last line does not have a comma at the end, otherwise you'll see an
+   error.
 
 ```javascript
 "scripts": {
+  "something": "some other script",
   "test": "hardhat test --network hardhat"
 },
 ```
 
-Next create a `test` folder in the root of your project, and add a new file
-called `tier-nft.test.js` with these lines:
-
-```javascript
-const { expect } = require('chai')
-
-describe('TierNFT', function () {
-  it('placeholder test')
-})
-```
-
-<ContentCallout emoji="💡" size="md" variant="info">
-  `expect()` from the Chai library is used to test various conditions. There are
-  many examples in this lesson.
-</ContentCallout>
-
-Now with a test file and a command to run the tests, try `npm test` and you
-should see:
-
-```bash
-  TierNFT
-    - placeholder test
-
-
-  0 passing (5ms)
-  1 pending
-```
-
-This now proves:
-
-- hardhat is running ok
-- the tests are found and are running
-
-`pending` means we haven't added the real test yet, so it is neither passing nor
-failing. Adding `pending` placeholders are a good way to brainstorm and remind
-yourself what tests you need to write.
-
-## What do we want to test on our TierNFT contract?
-
-Now that the tools are set up, what should we test?
-
-Let's look at our contract from Lesson 3:
+3. Below is the contract from Lesson 3 we'll be testing. Please copy this code
+   into a new file called `TierNFT.sol` in a `contracts` folder in the root of
+   the project.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -198,6 +167,11 @@ contract TierNFT is ERC721, Ownable {
 }
 ```
 
+## What do we want to test on our TierNFT contract?
+
+Now that the tools are set up, let's talk about what we want to test in our
+smart contract. We'll then add create tests.
+
 What is the contract trying to do?
 
 - it accepts payment and mints NFTs
@@ -212,6 +186,11 @@ We want to test that those functions work in a variety of cases.
 For example, we can test that a mint happens when enough Eth is spent and that a
 mint fails if there is not enough Eth spent.
 
+### Creating our test file
+
+Create a `test` folder in the root of your project, and add a new file called
+`tier-nft.test.js` which will hold our new test code.
+
 ### Start testing constructor(), mint() and withdraw()
 
 Let's start with testing the `constructor` and making sure we can set and
@@ -219,6 +198,8 @@ retrieve the NFT name and symbol.
 
 In addition to these first two tests we'll add setup code that we'll reuse for
 all the other tests too.
+
+Please add the following code to your new `tier-nft.test.js` file:
 
 ```javascript
 const { expect } = require('chai')
@@ -256,6 +237,18 @@ describe('TierNFT', function () {
   })
 })
 ```
+
+<ContentCallout emoji="💡" size="md" variant="info">
+  Before we walk through, let's make sure everything is working correctly. Run
+  the tests using `npm test` and you should see these two initial tests pass.
+</ContentCallout>
+
+Now let's walk through the test code we've pasted in and explain what it does.
+
+<ContentCallout emoji="💡" size="md" variant="info">
+  `expect()` from the Chai library is used to test various conditions. There are
+  many examples in this lesson.
+</ContentCallout>
 
 At the top we see constants with the name and symbol of the NFT collection:
 
@@ -372,6 +365,12 @@ failure looks like:
 
 Here are tests we'll be adding:
 
+<ContentCallout emoji="💡" size="md" variant="info">
+In the next sections we'll be continuing to add groups of tests in new `describe` sections.
+Where do these go in the file? You have an existing section that starts with `describe('constructor', async () => {`.
+Ensure you paste the future `describe` sections immediately after where that previous section ends.
+</ContentCallout>
+
 ```javascript
 describe('mint', async () => {
   it('should not mint if value is below the minimum tier', async function () {
@@ -413,6 +412,10 @@ describe('mint', async () => {
 })
 ```
 
+<ContentCallout emoji="💡" size="md" variant="info">
+  Run the tests using `npm test`
+</ContentCallout>
+
 These tests introduce additional code that are helpful when testing contracts.
 
 With minting, one needs to pay the right price, we should also see the total
@@ -424,19 +427,18 @@ occurs. If not enough Eth is sent, the contract fails with an error and the
 transaction is reverted as if nothing happened.
 
 In this first test we want to ensure our method call is properly reverted when
-the proper amount of Eth is not provided. This happens in the
-`await expect().to.be.revertedWith('Not enough value for the minimum Tier')`
-line. _The code calling the contract has been temporarily removed to highlight
-what's happening._ We're expecting the call to be reverted when not sending
-enough payment, along with a specific error message from the contract.
-
-And the method inside that `expect()` method looks like this:
+the proper amount of Eth is not provided. This happens here:
 
 ```javascript
-contract.mint({
-  value: hre.ethers.utils.parseEther('0.001'),
-})
+await expect(
+  contract.mint({
+    value: hre.ethers.utils.parseEther('0.001'),
+  }),
+).to.be.revertedWith('Not enough value for the minimum Tier')
 ```
+
+We're expecting the call to be reverted when not sending enough payment, along
+with a specific error message from the contract.
 
 Here we're just calling `mint()` with a parameter that sets the amount of Eth we
 want to send. In this case `0.001` Eth is less than our contract minimum of
@@ -486,6 +488,10 @@ describe('withdrawal', async () => {
   })
 })
 ```
+
+<ContentCallout emoji="💡" size="md" variant="info">
+  Run the tests using `npm test`
+</ContentCallout>
 
 You'll see similar patterns from the previous `mint()` tests. Here are a couple
 of additional highlights:
@@ -776,6 +782,10 @@ describe('tokenURI and helpers', async () => {
   })
 })
 ```
+
+<ContentCallout emoji="💡" size="md" variant="info">
+  Run the tests using `npm test`
+</ContentCallout>
 
 The final test is an example mentioned earlier about adding a test before
 refactoring with helper methods. It checks that the initial `tokenURI()` method
