@@ -26,6 +26,28 @@ export default function Footer() {
         align={{ base: 'center', md: 'center' }}
       >
         <Text>Developer DAO - {new Date().getFullYear()}</Text>
+        <Stack direction={'row'} spacing={3}>
+          <NextLink
+            href={
+              'https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
+            }
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              Feedback
+            </Link>
+          </NextLink>
+          <NextLink
+            href={
+              'https://github.com/Developer-DAO/academy/blob/main/CONTRIBUTING.md'
+            }
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              Contribute
+            </Link>
+          </NextLink>
+        </Stack>
         <Stack direction={'row'} spacing={6}>
           <SocialButton
             label={'Twitter'}
@@ -40,30 +62,6 @@ export default function Footer() {
             <FaGithub />
           </SocialButton>
         </Stack>
-        <Box>
-          <NextLink
-            href={
-              'https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
-            }
-            passHref
-          >
-            <Link isExternal textDecoration="underline">
-              Where to send feedback
-            </Link>
-          </NextLink>
-          {'. '}
-          <NextLink
-            href={
-              'https://github.com/Developer-DAO/academy/blob/main/CONTRIBUTING.md'
-            }
-            passHref
-          >
-            <Link isExternal textDecoration="underline">
-              How to Contribute
-            </Link>
-          </NextLink>
-          {'.'}
-        </Box>
       </Container>
     </Box>
   )
