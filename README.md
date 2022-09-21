@@ -106,6 +106,10 @@ create an isolated development environment for your fork. After installing the
 minimum requirements, you can start using it following this
 [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
 
+**For Windows Users**
+
+You may run into setup problems if using Windows Powershell. We suggest you use WSL.
+
 ## Grabbing latest version of the code
 
 **Since this is a work in progress, your local version of the app can be updated
