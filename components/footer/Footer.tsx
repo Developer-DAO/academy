@@ -3,8 +3,10 @@ import {
   Container,
   Stack,
   Text,
+  Link,
   useColorModeValue,
 } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { FaTwitter, FaGithub } from 'react-icons/fa'
 import { SocialButton } from './SocialButton'
 
@@ -38,6 +40,30 @@ export default function Footer() {
             <FaGithub />
           </SocialButton>
         </Stack>
+        <Box>
+          <NextLink
+            href={
+              'https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
+            }
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              Where to send feedback
+            </Link>
+          </NextLink>
+          {'. '}
+          <NextLink
+            href={
+              'https://github.com/Developer-DAO/academy/blob/main/CONTRIBUTING.md'
+            }
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              How to Contribute
+            </Link>
+          </NextLink>
+          {'.'}
+        </Box>
       </Container>
     </Box>
   )
