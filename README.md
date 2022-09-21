@@ -5,6 +5,8 @@ Developer DAO.
 
 Live site is at <https://academy.developerdao.com>.
 
+Find us on Twitter at <https://twitter.com/devdao_academy>.
+
 ![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
 
 ## How do I get started?
