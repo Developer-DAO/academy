@@ -63,6 +63,33 @@ export default function Footer() {
           </SocialButton>
         </Stack>
       </Container>
+
+      <Container maxW={'6xl'} py={4} centerContent>
+        <p>
+          All website content licensed under{' '}
+          <NextLink
+            href={'http://creativecommons.org/licenses/by-nc/4.0/'}
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              CC BY-NC 4.0
+            </Link>
+          </NextLink>
+          .
+        </p>
+        <p>
+          Website code is licensed under{' '}
+          <NextLink
+            href={'https://github.com/Developer-DAO/academy/blob/main/LICENSE'}
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              MIT
+            </Link>
+          </NextLink>
+          .
+        </p>
+      </Container>
     </Box>
   )
 }
