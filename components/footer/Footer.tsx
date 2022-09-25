@@ -25,7 +25,7 @@ export default function Footer() {
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
       >
-        <Text>Developer DAO - {new Date().getFullYear()}</Text>
+        <Text>Developer DAO Foundation © {new Date().getFullYear()}</Text>
         <Stack direction={'row'} spacing={3}>
           <NextLink
             href={
