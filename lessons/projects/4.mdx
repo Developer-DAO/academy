@@ -270,7 +270,8 @@ describe('TierNFT', function () {
 <ContentCallout emoji="💡" size="md" variant="info">
   Before we walk through, let's make sure everything is working correctly. Run
   the tests using `npm test` and you should see these two initial tests pass.
-  <strong>This is an important milestone! You created your first tests and they now pass.<strong>
+  **This is an important milestone! You created your first tests and they now
+  pass.**
 </ContentCallout>
 
 Now let's walk through the test code we've pasted in and explain what it does.
@@ -393,12 +394,38 @@ failure looks like:
 
 ### Let's add tests for mint()
 
-Here are tests we'll be adding:
+Now is time to add tests for our `mint()` method. We'll group these new tests
+into a new `describe` section.
+
+Where exactly do we add this `describe` block?
+
+Currently the end of our `tier-nft.test.js` looks like this, with just one
+additional comment line I added that says
+`// this is where existing describe section ends`:
+
+```javascript
+  describe('constructor', async () => {
+    it('set proper collection name', async function () {
+      const name = await contract.name()
+      expect(name).to.equal('TierNFT')
+    })
+
+    it('set proper collection symbol', async function () {
+      const symbol = await contract.symbol()
+      expect(symbol).to.equal('Tier')
+    })
+  })
+  // this is where existing describe section ends
+})
+```
+
+Our new `describe` section show below will replace that line that says
+`// this is where existing describe section ends`.
 
 <ContentCallout emoji="💡" size="md" variant="info">
-In the next sections we'll be continuing to add groups of tests in new `describe` sections.
-Where do these go in the file? You have an existing section that starts with `describe('constructor', async () => {`.
-Ensure you paste the future `describe` sections immediately after where that previous section ends.
+  Make sure you keep that last line `})` which is the very end of the block of
+  code that holds **all** of the `describe` blocks you're adding in this whole
+  lesson.
 </ContentCallout>
 
 ```javascript
