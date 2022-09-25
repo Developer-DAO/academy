@@ -37,25 +37,30 @@ it's an important tool to ensuring your contract will work as expected.
 
 ## Let's Get Started
 
-### Setting up our project
+### Setting up our project dependencies
 
 If you have an existing project from your previous work on the TierNFT lesson,
-you have all the Hardhat dependencies installed in order to run our testing
-suite.
+you have all the Hardhat dependencies installed.
 
-Otherwise, let's create a new Hardhat project, copy in the contract and jump
-into some testing!
+Otherwise let's create a new Hardhat project and copy in the contract which
+we'll be testing.
 
-1. Please refer to Lesson 2 and search for `npx hardhat` in the "Create your
-   project" section to get your project going. After running through that
-   section you'll have a working Hardhat project for the next steps.
+To create a new project, please refer to _Lesson 3 - Tier NFTs_ and search for
+the “First things first 👷‍♂️" section to get your project going. Follow the steps
+until "Let’s start coding”, then open up your code editor.
 
-2. Next add a line in your `scripts` section of `package.json` so it looks like
-   this below. You may already have other scripts' lines so don't get rid of
-   those. If you already have a `"test"` script line, make sure it now has
-   `hardhat test --network hardhat`. If you have multiple script lines make sure
-   the last line does not have a comma at the end, otherwise you'll see an
-   error.
+_If you are using VSCode, type `code .` in your terminal to open VSCode._
+
+After running through that section you'll have a working Hardhat project for the
+next steps.
+
+### Add test command for running tests
+
+Add a line in your `scripts` section of `package.json` so it looks like this
+below. You may already have other scripts' lines so don't get rid of those. If
+you already have a `"test"` script line, make sure it now has
+`hardhat test --network hardhat`. If you have multiple script lines make sure
+the last line does not have a comma at the end, otherwise you'll see an error.
 
 ```javascript
 "scripts": {
@@ -64,9 +69,11 @@ into some testing!
 },
 ```
 
-3. Below is the contract from Lesson 3 we'll be testing. Please copy this code
-   into a new file called `TierNFT.sol` in a `contracts` folder in the root of
-   the project.
+### Bring in the contract we'll be testing
+
+If you don't already have `TierNFT.sol` in your project from Lesson 3, below is
+that same contract. Please create a new file called `TierNFT.sol` in a
+`contracts` folder in the root of the project, and copy in this code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -167,10 +174,31 @@ contract TierNFT is ERC721, Ownable {
 }
 ```
 
+### Verify Solidity Version
+
+One small, but crucial change before we proceed. Ensure the version of Solidity
+being used to run the contract is the same one configured in
+`hardhat.config.js`.
+
+Copy the Solidity version from the `pragma` statement at the top of your
+contract, to the `hardhat.config.js` file and replace that `solidity: "version"`
+with that of your contract.
+
+For example, since our contract is using Solidity `0.8.12`:
+
+```
+require("@nomicfoundation/hardhat-toolbox");
+require('dotenv').config();
+
+module.exports = {
+  solidity: "0.8.12",
+};
+```
+
 ## What do we want to test on our TierNFT contract?
 
 Now that the tools are set up, let's talk about what we want to test in our
-smart contract. We'll then add create tests.
+smart contract. We'll then create the tests.
 
 What is the contract trying to do?
 
@@ -188,8 +216,9 @@ mint fails if there is not enough Eth spent.
 
 ### Creating our test file
 
-Create a `test` folder in the root of your project, and add a new file called
-`tier-nft.test.js` which will hold our new test code.
+If you don't have one already, create a `test` folder in the root of your
+project, and add a new file called `tier-nft.test.js` which will hold our new
+test code.
 
 ### Start testing constructor(), mint() and withdraw()
 
@@ -241,6 +270,7 @@ describe('TierNFT', function () {
 <ContentCallout emoji="💡" size="md" variant="info">
   Before we walk through, let's make sure everything is working correctly. Run
   the tests using `npm test` and you should see these two initial tests pass.
+  <strong>This is an important milestone! You created your first tests and they now pass.<strong>
 </ContentCallout>
 
 Now let's walk through the test code we've pasted in and explain what it does.
