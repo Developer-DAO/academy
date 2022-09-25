@@ -11,9 +11,11 @@ Find us on Twitter at <https://twitter.com/devdao_academy>.
 
 ## What license applies to this site's content and code?
 
-- All website content licensed under
+- All Developer DAO Academy website content © 2022 by Developer DAO Foundation
+  licensed under
   [Attribution-NonCommercial 4.0 International](http://creativecommons.org/licenses/by-nc/4.0/).
-- Website code is licensed under [MIT](./LICENSE).
+- Developer DAO Academy website code © 2022 by Developer DAO Foundation licensed
+  under [MIT](./LICENSE).
 
 ## How do I get started?
 
