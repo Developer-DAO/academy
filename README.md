@@ -3,6 +3,12 @@
 `Developer DAO Academy` is an open-source education platform created by the
 Developer DAO.
 
+Live site is at <https://academy.developerdao.com>.
+
+Find us on Twitter at <https://twitter.com/devdao_academy>.
+
+![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
+
 ## How do I get started?
 
 Please read our [CONTRIBUTING Guide](CONTRIBUTING.md) to get started. We ask
@@ -51,8 +57,8 @@ important for an open-source project.
 
 Some helpful things when reviewing PRs:
 
-- **ALWAYS** download and run the code you're reviewing. Never eyeball it in
-  the PR and approve it.
+- **ALWAYS** download and run the code you're reviewing. Never eyeball it in the
+  PR and approve it.
 - when you review a PR, please add yourself as a reviewer in GitHub so we know
   someone is reviewing
 - go through the formal GitHub review process of starting a review and then
@@ -99,6 +105,10 @@ sure that you check the link to install the requirements to use it) to easily
 create an isolated development environment for your fork. After installing the
 minimum requirements, you can start using it following this
 [quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
+
+**For Windows Users**
+
+You may run into setup problems if using Windows Powershell. We suggest you use WSL.
 
 ## Grabbing latest version of the code
 
