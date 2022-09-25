@@ -65,8 +65,8 @@ export default function Footer() {
       </Container>
 
       <Container maxW={'6xl'} py={4} centerContent>
-        <p>
-          All website content licensed under{' '}
+        <Text align="center">
+          Website content licensed under{' '}
           <NextLink
             href={'http://creativecommons.org/licenses/by-nc/4.0/'}
             passHref
@@ -76,8 +76,8 @@ export default function Footer() {
             </Link>
           </NextLink>
           .
-        </p>
-        <p>
+        </Text>
+        <Text>
           Website code is licensed under{' '}
           <NextLink
             href={'https://github.com/Developer-DAO/academy/blob/main/LICENSE'}
@@ -88,7 +88,7 @@ export default function Footer() {
             </Link>
           </NextLink>
           .
-        </p>
+        </Text>
       </Container>
     </Box>
   )
