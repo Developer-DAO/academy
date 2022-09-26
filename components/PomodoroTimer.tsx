@@ -12,7 +12,7 @@ import {
   PopoverArrow,
   useMediaQuery,
 } from '@chakra-ui/react'
-import { ReactElement, useReducer } from 'react'
+import { ReactElement, useEffect, useReducer, useState } from 'react'
 import { FaGraduationCap } from 'react-icons/fa'
 import { IoTimerOutline } from 'react-icons/io5'
 import {
@@ -137,13 +137,26 @@ export const PomodoroTimer = (props: any) => {
   const { isRunning, status, timeRemaining } = state
 
   const { variant, ...rest } = props
-  const [isBigScreen] = useMediaQuery('(min-width: 62em)')
-  const maxPopoverWidth = isBigScreen ? '14rem' : '11rem'
+  const [isBigScreenMediaQuery] = useMediaQuery('(min-width: 62em)')
+  const [isBigScreen, setIsBigScreen] = useState(false)
+  const [maxPopoverWidth, setMaxPopoverWidth] = useState('14rem')
+
+  useEffect(() => {
+    setIsBigScreen(isBigScreenMediaQuery)
+  }, [isBigScreenMediaQuery])
+
+  useEffect(() => {
+    setMaxPopoverWidth(isBigScreen ? '14rem' : '11rem')
+  }, [isBigScreen])
 
   const timerStyle = useStyleConfig('PomodoroTimer', { variant })
   const iconStyle = useStyleConfig('PomodoroIcon', { variant })
 
-  const getButton = (data: TimerEventData, idx: number) => {
+  const getButton = (
+    data: TimerEventData,
+    idx: number,
+    isBigScreen: boolean,
+  ) => {
     return data.eventIcon ? (
       isBigScreen ? (
         <Button
@@ -194,7 +207,7 @@ export const PomodoroTimer = (props: any) => {
             {status ? <Status>{status}</Status> : <Status>&nbsp;</Status>}
             <TimeRemaining time={time} />
             <ButtonGroup variant="pomodoroControl" size="sm" gap="0" isAttached>
-              {events.map((e, idx) => getButton(e, idx))}
+              {events.map((e, idx) => getButton(e, idx, isBigScreen))}
             </ButtonGroup>
           </Stack>
         </PopoverContent>
