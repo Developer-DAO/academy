@@ -1,13 +1,21 @@
 ## Developer DAO Academy
 
 `Developer DAO Academy` is an open-source education platform created by the
-Developer DAO.
+Developer DAO Foundation.
 
 Live site is at <https://academy.developerdao.com>.
 
 Find us on Twitter at <https://twitter.com/devdao_academy>.
 
 ![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
+
+## What license applies to this site's content and code?
+
+- All Developer DAO Academy website content © 2022 by Developer DAO Foundation
+  licensed under
+  [Attribution-NonCommercial 4.0 International](http://creativecommons.org/licenses/by-nc/4.0/).
+- Developer DAO Academy website code © 2022 by Developer DAO Foundation licensed
+  under [MIT](./LICENSE).
 
 ## How do I get started?
 
@@ -108,7 +116,8 @@ minimum requirements, you can start using it following this
 
 **For Windows Users**
 
-You may run into setup problems if using Windows Powershell. We suggest you use WSL.
+You may run into setup problems if using Windows Powershell. We suggest you use
+WSL.
 
 ## Grabbing latest version of the code
 

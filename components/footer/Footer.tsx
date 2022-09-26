@@ -25,7 +25,7 @@ export default function Footer() {
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
       >
-        <Text>Developer DAO - {new Date().getFullYear()}</Text>
+        <Text>Developer DAO Foundation © {new Date().getFullYear()}</Text>
         <Stack direction={'row'} spacing={3}>
           <NextLink
             href={
@@ -62,6 +62,33 @@ export default function Footer() {
             <FaGithub />
           </SocialButton>
         </Stack>
+      </Container>
+
+      <Container maxW={'6xl'} py={4} centerContent>
+        <Text align="center">
+          Website content licensed under{' '}
+          <NextLink
+            href={'http://creativecommons.org/licenses/by-nc/4.0/'}
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              CC BY-NC 4.0
+            </Link>
+          </NextLink>
+          .
+        </Text>
+        <Text>
+          Website code is licensed under{' '}
+          <NextLink
+            href={'https://github.com/Developer-DAO/academy/blob/main/LICENSE'}
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              MIT
+            </Link>
+          </NextLink>
+          .
+        </Text>
       </Container>
     </Box>
   )
