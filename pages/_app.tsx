@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             site_name: 'Developer DAO Academy',
             title: 'Developer DAO Academy',
             description:
-              'Academy is an open-source education platform created by the Developer DAO Foundation.',
+              'Academy is an open-source education platform created by the Developer DAO.',
             images: [
               {
                 url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
