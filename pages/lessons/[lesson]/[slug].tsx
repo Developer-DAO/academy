@@ -56,7 +56,7 @@ const components = {
     <Heading as="h4" apply="mdx.h4" fontSize="xl" {...props} />
   ),
   p: (props: any) => <Text as="p" apply="mdx.p" fontSize="xl" {...props} />,
-  a: (props: any) => <Text as="a" apply="mdx.a" {...props} />,
+  a: (props: any) => <Text as="a" apply="mdx.a" {...props} target="_blank" />,
   ul: (props: any) => <Text as="ul" apply="mdx.ul" fontSize="xl" {...props} />,
   img: (props: any) => (
     <Image as="img" apply="mdx.image" m="0 auto" alt="" {...props} />

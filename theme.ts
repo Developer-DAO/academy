@@ -54,7 +54,7 @@ const components = {
       bg: colors.soc.eerieBlack,
       borderRadius: '1em',
       px: '1em',
-      pb: '1em',
+      pb: '0.75em',
       m: '1em',
     },
     variants: {

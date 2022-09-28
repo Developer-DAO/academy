@@ -42,7 +42,7 @@ airtight using tests in lesson 4. Now we're going use all of this knowledge and
 connect it to a frontend for users to see and interact with.
 
 We're going to start where we left off in lesson 4. Open your code editor and 
-`cd` into the `**TierNFT**` project directory. 
+`cd` into the **`TierNFT`** project directory. 
 
 For all things related to our frontend we are going to create a new sub-directory
 within our project's root directory to maintain good practice, keep our code clean, 
@@ -151,7 +151,8 @@ of our choice along with some other customisations.
 - `import { alchemyProvider } from 'wagmi/providers/alchemy';` and 
 `import { publicProvider } from 'wagmi/providers/public';` give us the provider configs
 for the providers we will be using. In our app we are using an `alchemyProvider` along
-with a fall back `publicProvider`. 
+with a fall back `publicProvider`. A provider allows our application to communicate with 
+a blockchain.
 - `useEffect` and `useState` are react hooks that help us perform side effects and
 capture the state, respectively. More on [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/) 
 and the [useEffect](https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/) hook.
@@ -169,7 +170,7 @@ After importing, we create the configurations we need, and create a new instance
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
   [
-    alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    alchemyProvider({ apiKey: process.env.API_KEY }),
     publicProvider()
   ]
 );
@@ -191,7 +192,14 @@ const wagmiClient = createClient({
 For this application we will continue using the `mumbai` testnet. Other chains can
 be added simply using the following syntax: `chain.chain_name`.
 For custom providers, like the `alchemyProvider` we can pass in our private
-`apiKey` as well.
+`apiKey` as well. 
+
+Set your API Key in a new file named `.env` inside our `frontend` directory 
+as follows:
+
+```dotenv
+API_KEY='YOUR-API-KEY-FROM-PROVIDER'
+```
 
 Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
 so that have access to their features throughout our application. Our code should 
@@ -360,7 +368,7 @@ import { useEffect, useState } from 'react';
 ```
 
 - RainbowKit provides us a ready-made `ConnectButton`.
-- We need to the `useAccount` hook from WAGMI to check account connection 
+- We need to use the `useAccount` hook from WAGMI to check account connection 
 and `useContractRead` and `useContractWrite` to interact with our smart 
 contract. We will look into WAGMI and these hooks a little down the line.
 - `TierABI` is our contract's Application Binary Interface (ABI). The ABI 
@@ -513,11 +521,11 @@ const mintToken = async (e) => {
 ```
 
 - We pass in `e` as an argument so that we can pick the amount of ETH 
-associated with a particular Tier. This is 
-- We want to wait for our minting transaction to complete before moving 
-on to other pieces of code.This is passed to the mint function using the 
+associated with a particular Tier. This is passed to the mint function using the 
 `recklesslySetUnpreparedOverrides` override config. Read more about it 
-[here](https://wagmi.sh/docs/hooks/useContractWrite#override-config).
+[here](https://wagmi.sh/docs/hooks/useContractWrite#override-config). 
+- We want to wait for our minting transaction to complete before moving 
+on to other pieces of code so we use `wait()`.
 - After minting is processed we log the returned data to ensure the 
 success of our transaction.
 - Using `try...catch` statements makes our error handling more robust. The 
