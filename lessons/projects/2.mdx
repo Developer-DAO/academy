@@ -75,7 +75,7 @@ comfortable with another package manager, feel free to use it.
 
 <ContentCallout emoji='💡' size='md' variant='info'>
 To install `npm` on your system, please follow the instructions on
-[this link](/lessons/install-npm).
+[this link](/lessons/fundamentals/install-npm).
 </ContentCallout>
 
 Let’s create and `cd` into our D_D Academy projects folder, and create a
@@ -202,7 +202,7 @@ npm install @openzeppelin/contracts
 <ContentCallout emoji='💡' size='md' variant='info'>
 Open Zeppelin developed a lot of standard contracts that are super powerful,
 widely used and fully tested and audited. Read more about them
-[here](/lessons/open_zeppelin).
+[here](/lessons/fundamentals/open_zeppelin).
 </ContentCallout>
 
 ## Let’s start coding!
@@ -235,13 +235,13 @@ contract ProjectNFT {
 ```
 
 If you’ve been through our
-[first project](/lessons/1), you’ll remember the first lines defines our
+[first project](/lessons/projects/1), you’ll remember the first lines defines our
 copyright license, the second one defines the solidity version we are going to
 be using for this contract and the last two lines are how we declare a smart
 contract in solidity.
 
 With an empty project, now we can start adding what we need to create our
-awesome NFT collection. In particular, [ERC721](/lessons/token-standards) (the
+awesome NFT collection. In particular, [ERC721](/lessons/fundamentals/token-standards) (the
 formal specification to follow for NFTs) have a lot of requirements to meet
 (they should have a numbered ID, functions to transfer them, approve others as
 delegates to transfer them, etc).
@@ -382,7 +382,7 @@ OpenZeppelin ERC721 contract provides us a way to create unique URIs from the
 IDs of the NFTs. It gives a way to define a base path for a web address and just
 attaches the token ID at the end of it. So, if you wanted, you could upload your
 NFT info (we'll look at how we store that later) to any web address, say
-[www.my-site.com/my-nft-collection](http://www.my-site.com/my-nft-collection/)
+`www.my-site.com/my-nft-collection`
 and number each info file with the corresponding ID (1, 2, 3, 4…).
 
 We are not going to limit the size of our collection for this project.
@@ -850,7 +850,7 @@ Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
 [Opensea](https://testnets.opensea.io/)) and search for the address of our
 deployed contract.
 
-You can view my links as an example on ~~[Etherscan](https://goerli.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)~~
+You can view my links as an example on [Etherscan](https://goerli.etherscan.io/address/0x76A9332DbBB0c497Eca36C2E4370227fff3C058f)
 and [Opensea](https://testnets.opensea.io/collection/soc)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
