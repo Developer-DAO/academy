@@ -1044,7 +1044,7 @@ We're there at last! Now we can render our modal.
                     </button>
                     <button style={modalButton}>
                       <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
-                        View on Etherscan
+                        View on Polygonscan
                       </a>
                     </button>
                     <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
@@ -1063,7 +1063,7 @@ This may seem like a lot of code but we're going to look at it in bits:
 - The body shows us the name, id and image of the NFT minted. We fetch 
 from the information stored earlier in the `latestNFTMinted` variable.
 - We have a footer that provides links to view our NFT on OpenSea and to 
-the transaction details on Etherscan. Additionally we have a **Close** 
+the transaction details on Polygonscan. Additionally we have a **Close** 
 button that changes the state of the `modalShow` to `false` and thus 
 closes the modal modal when we click it.
 
@@ -1238,7 +1238,7 @@ export default function Home() {
                     </button>
                     <button style={modalButton}>
                       <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
-                        View on Etherscan
+                        View on Polygonscan
                       </a>
                     </button>
                     <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
