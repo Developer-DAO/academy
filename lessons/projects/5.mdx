@@ -161,7 +161,7 @@ After importing, we create the configurations we need, and create a new instance
 // import statements code...
 
 const { chains, provider } = configureChains(
-  [chain.goerli],
+  [chain.polygonMumbai],
   [
     alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider()
@@ -182,7 +182,7 @@ const wagmiClient = createClient({
 // function MyApp code...
 ```
 
-For this application we will continue using the `goerli` testnet. Other chains can
+For this application we will continue using the `mumbai` testnet. Other chains can
 be added simply using the following syntax: `chain.chain_name`.
 For custom providers, like the `alchemyProvider` we can pass in our private
 `apiKey` as well.
@@ -1038,12 +1038,12 @@ We're there at last! Now we can render our modal.
                   </div>
                   <div style={modalFooter}>
                     <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
                         View on OpenSea
                       </a>
                     </button>
                     <button style={modalButton}>
-                      <a href={`https://goerli.etherscan.io/tx/${mintData.hash}`} target="_blank">
+                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
                         View on Etherscan
                       </a>
                     </button>
@@ -1232,12 +1232,12 @@ export default function Home() {
                   </div>
                   <div style={modalFooter}>
                     <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/goerli/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
                         View on OpenSea
                       </a>
                     </button>
                     <button style={modalButton}>
-                      <a href={`https://goerli.etherscan.io/tx/${mintData.hash}`} target="_blank">
+                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
                         View on Etherscan
                       </a>
                     </button>
