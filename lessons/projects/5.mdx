@@ -36,14 +36,14 @@ Let's dive in!
 ## Getting started
 
 For all things related to our frontend we are going to create a new sub-directory
-within our root directory to maintain good practice, keep our code clean, and easy to
-locate and read.
+within our project's root directory to maintain good practice, keep our code clean, 
+and easy to locate and read.
 
 We're going to start where we left off in lesson 4. Open your code editor and 
-`cd` into the project repository. 
+`cd` into the `**TierNFT**` project directory. 
 
-The first step is to initiate a [nextJS](https://nextjs.org/) application inside our 
-root directory by running the following command.
+The first step is to initiate a [nextJS](https://nextjs.org/) application inside the 
+project's root directory by running the following command.
 
 <ContentCallout emoji="💡">
   Make sure you are in your root directory before running the command.
@@ -51,7 +51,7 @@ root directory by running the following command.
 
 The command creates a sub-directory named `frontend` inside our root directory
 and sets up all the necessary files and folders within it. The `create-next-app` command
-uses the `yarn` package manager by default.
+uses the `yarn` package manager by default. *But be careful...*
 
 There is a chance that a different package manager has been used for your previous project 
 set up, so check that out and choose your command accordingly:
@@ -129,7 +129,6 @@ import {
 } from 'wagmi';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { MainContext } from '../context';
 import { useEffect, useState } from 'react';
 
 // function MyApp code...
@@ -351,7 +350,7 @@ import styles from '../styles/Home.module.css';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 
-// function Home code...
+// function Home() code...
 ```
 
 - RainbowKit provides us a ready-made `ConnectButton`.
@@ -382,7 +381,8 @@ export default function Home() {
 ```
 
 We're creating a default function called `Home` that will render our home/
-index page.
+index page. As you can see , we are required to add the `CONTRACT_ADDRESS`
+which is displayed in your command line when we deploy the contract.
 The `useAccount` hook lets us access account data and check connection status.
 We will use this as a check to provide access to the minting features of our
 app.
@@ -420,7 +420,7 @@ export default function Home() {
           <ConnectButton />
         </header>
 
-        {/* More code... */}
+        {/* <main> element */}
 
       </div>
   )
@@ -503,14 +503,16 @@ const mintToken = async (e) => {
     }
   };
 
-// function Home code...
+// function Home() code...
 ```
 
 - We pass in `e` as an argument so that we can pick the amount of ETH 
-associated with a particular Tier and use that for calling the mint function.
+associated with a particular Tier. This is 
 - We want to wait for our minting transaction to complete before moving 
-on to other pieces of code.
-- After minting is processed we log the returned data to ensure we the 
+on to other pieces of code.This is passed to the mint function using the 
+`recklesslySetUnpreparedOverrides` override config. Read more about it 
+[here](https://wagmi.sh/docs/hooks/useContractWrite#override-config).
+- After minting is processed we log the returned data to ensure the 
 success of our transaction.
 - Using `try...catch` statements makes our error handling more robust. The 
 compiler runs each line of code and exits in between if an error occurs.
@@ -518,7 +520,7 @@ We can console log this error to easily identify the cause and location
 of the error with clear comments.
 
 Then we create a new folder named `nfts` in the `/public` directory for 
-saving Tier SVGs. You can find links for the SVGs here.
+saving Tier SVGs. You can find links for downloading the SVGs here.
 
 - [0_basic.svg](https://arweave.net/o9z59y3sDvBaamvBDJGtyX5BGM983n1zwbs-UaZRUM8)
 - [1_medium.svg](https://arweave.net/-sa-soe34iPLridK0T98rWb7XvfHRSTDdBCoXCuwv60)
@@ -527,10 +529,15 @@ saving Tier SVGs. You can find links for the SVGs here.
 Save them with the same names as shown in the links above for smooth flow
 in the code.
 
+<ContentCallout emoji="💡">
+  Make sure you have downloaded the SVG file and not just saved the URL of
+  the file.
+</ContentCallout>
+
 Now we can render our NFT Cards.
 
 ```jsx
-// return statement for rendering...
+// return statement for rendering and <header> element...
 
         <main className={styles.main}>
           <div style={NFTFlex}>
@@ -610,20 +617,20 @@ directly reference the source as `/nfts/0_basic.svg`. We also need
 to pass in the width and height explicitly.
 - A `button` element let's us call the `mintToken` function `onClick` and 
 we send the value associated with the button to that function so that 
-it can be used to mint the specific tier of NFT. Make sure you pass 
-in the right value for each tier. Lastly, we want to disable the 
-button when another mint is underway. For this we use the true/ false 
+it can be used to mint the specific tier of NFT in the <button> element. 
+Make sure you pass in the right value for each tier. Lastly, we want to 
+disable the button when another mint is underway. For this we use the true/ false 
 values received from `isMintLoading`. The button will be disabled when 
 `isMintLoading` is `true`.
 
-Great but anyone can view and call our mint functions even if their 
-wallet is not connected to the application. This could result in some 
+Great but anyone can view and call our mint functions in the frontend of our app
+even if their wallet is not connected to the application. This could result in some 
 errors. We must check if a user is connected before we let them 
 interact with our application simply by using the `isConnected` utility
 from Wagmi and setting setting its value in our `isUserConnected` state.
 
 ```jsx
-// imports and consts...
+// consts...
 
   useEffect(() => {
     try {
@@ -631,9 +638,9 @@ from Wagmi and setting setting its value in our `isUserConnected` state.
     } catch (error) {
       console.log("Error connecting to user", error.message);
     }
-  }, [isConnected])
+  }, [isConnected]);
 
-// function Home code...
+// function Home() code...
 ```
 
 The `useEffect` hook runs the functions within it everytime the value of 
@@ -647,7 +654,7 @@ Then we can wrap the `<main>` element as follows:
       {isUserConnected ?
         <main className={styles.main}>
           
-          {/* main code here... */}
+          {/* NFT Flex div code here... */}
 
         </main>
         :
@@ -706,43 +713,13 @@ export default function Home() {
     functionName: "mint",
   });
 
-  const {
-    data: tokenData,
-    refetch: refetchTokenData,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "totalSupply",
-    watch: true,
-  })
-
-  const {
-    data: tokenURI,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "tokenURI",
-    args: tokenData,
-    watch: true,
-  })
-
   useEffect(() => {
     try {
       setIsUserConnected(isConnected);
     } catch (error) {
       console.log("Error connecting to user", error.message);
     }
-  }, [isConnected])
-
-  useEffect(() => {
-    try {
-      if (tokenURI) {
-        setLatestNFTMinted(JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(',') + 1))));
-      }
-    } catch (error) {
-      console.log("Error fetching token URI", error.message);
-    }
-  }, [tokenData, tokenURI]);
+  }, [isConnected]);
 
   const mintToken = async (e) => {
     try {
@@ -920,7 +897,8 @@ result once the mint *is successful*.
 
 But what is this *modal*. It is a an element that is usually used as 
 an overlay that provides its own interaction environment separate from 
-the page below it.
+the page below it. This interaction environment provides a focus element 
+where only options from this can be selected while it is active.
 
 Okay lets write some code for it.
 
@@ -964,13 +942,16 @@ get information about it from our smart contract.
 
   const mintToken = async (e) => {
     try {
-      // mint txn function
-
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
       await mintTxn.wait();
       console.log("This is the mint data", mintData);
       refetchTokenData();
       
-      // catch condition for mintToken...
+      // catch statement for mintToken function...
   };
 
   // return statement...
@@ -980,13 +961,16 @@ get information about it from our smart contract.
 can do so by reading the value of the `totalSupply` stored in our smart 
 contract because the `totalSupply` should equal to the latest `tokenId` in
 our case. We can fetch this using the `useContractRead` hook from WAGMI 
-that is configured for reading data from smart contracts. The 
-`refetchTokenData` function will be called in our `mintToken` function 
+that is configured for reading data from smart contracts. The cool thing about 
+solidity is that it automatically gives us a way to read values of variables 
+that are tagged as `public`, which is why we are able to read the value of 
+`totalSupply`.
+- The `refetchTokenData` function will be called in our `mintToken` function 
 to update the `tokenData` after minting has succeeded. We pass a 
-`watch: true` key-value pair so that the hook keeps and active watch on 
+`watch: true` key-value pair so that the hook keeps an active watch on 
 the value of totalSupply.
 - Then the returned value (tokenData) is passed in as an argument to the 
-`tokenURI` function from our smart contract and we received a `Base64` 
+`tokenURI` function from our smart contract and we receive a `Base64` 
 encoded string in return.
 - A `useEffect` hook keeps updating this string everytime the `tokenData` 
 or `tokenURI` is updated and stores a decoded JSON format of it in the 
@@ -995,7 +979,8 @@ or `tokenURI` is updated and stores a decoded JSON format of it in the
 We're almost there. We just need to do two more checks before we actually
 look at our modal. The first is that we must display our modal only when 
 we want it to and the other is to display a loading message until our NFT 
-has successfully minted. 
+has successfully minted. This is how the mintToken function should look 
+now:
 
 ```jsx 
 // useEffect for tokenURI...
@@ -1035,7 +1020,7 @@ We're there at last! Now we can render our modal.
         <main className={styles.main}>
           <div style={NFTFlex}>
 
-            {/* NFT Card code... */}
+            {/* NFT Card div code... */}
 
           </div>
           {modalShow && (
@@ -1145,7 +1130,7 @@ export default function Home() {
     } catch (error) {
       console.log("Error connecting to user", error.message);
     }
-  }, [isConnected])
+  }, [isConnected]);
 
   useEffect(() => {
     try {
@@ -1361,7 +1346,7 @@ const modalButton = {
 
 ## Fin.
 
-**Hoorah! We've done it! Pat yourselves on the back and get some ice cream.**
+**Hoorah! We've done it. Pat yourselves on the back and get some ice cream!**
 
 Right from learning the basics of smart contract development using 
 solidity to creating a full stack decentralised NFT Minting Application.
