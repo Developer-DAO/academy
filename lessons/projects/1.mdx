@@ -284,6 +284,20 @@ contract WAGMI {
         - **Struct:** Solidity allows users to create and define their own type in the form of structures. The structure is a group of different types even though it’s not possible to contain a member of its own type. The structure is a reference type variable which can contain both value types and reference types.
     - **Mapping Type**: Stores the data in a key-value pair where a key can be any value types. It is like a hash table or dictionary as in any other programming language, where data can be retrieved by key.
 
+    ### Visibility of State Variables
+
+    In Solidity , there are 3 types of visibility modifiers that a developer can use :
+
+    - **Public**: If a state variable visibility is marked as `public` then those variables can be used within the smart contract and can be accessed by other contracts as well.
+
+    - **Internal**: A state variable with a `internal` visibility can only be accessed within the smart contract and its subclasses. It can *NOT* be accessed externally.
+
+    - **Private**: When a state variable visibility is marked as `private` then it means , that it is only ment to be used within the defined smart contract . No subclasses and no external function should access a variable with a `private` visibility.
+
+    #### Which visibility should I use ?
+
+    A simple answer to this is , start with giving every variable a `private` visibility then as you move further in contract developement modify variables to `internal` visibility as a next step of modification. Try to use `public` visibility as little as possible in order to be gas efficient and making less vulnerabilities in the smart contract.
+
 </ContentSideDrawer>
 
 ## Creating Functions
@@ -687,10 +701,9 @@ you see the magical spell that is being cast here?
 ![Wizard Wooshing on Successful Lesson](/assets/lessons/1/img_10.png)
 
 Before you go ahead and tell us: **what your future in web3 is,** have a check
-on what you didn’t know a little while ago, and what you know now! *
+on what you didn’t know a little while ago, and what you know now! \*
 
-Apart from a user wallet, what else uses a blockchain (Ethereum)
-address?
+Apart from a user wallet, what else uses a blockchain (Ethereum) address?
 
 How many parameters can we have in an event?
 
@@ -700,8 +713,7 @@ Ethereum uses something for transaction fees. What’s it called?
 
 Where do the values for event parameters get stored?
 
-What is the use of the **pragma solidity** statement in our smart
-contract?
+What is the use of the **pragma solidity** statement in our smart contract?
 
 Do state variables stay permanently on the blockchain?
 
@@ -710,4 +722,4 @@ Can a view function modify the state of the blockchain?
 What can we use a smart contract for?
 
 **Now, go to the community in Discord to share your new Open Sourcerer
-powers**......and find the answers too!!! 
+powers**......and find the answers too!!!
