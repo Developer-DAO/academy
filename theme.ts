@@ -49,7 +49,7 @@ const styles = {
 }
 
 const components = {
-  ContentCallout: {
+  Callout: {
     baseStyle: {
       bg: colors.soc.eerieBlack,
       borderRadius: '1em',

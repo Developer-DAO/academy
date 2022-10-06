@@ -3,8 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { ContentBanner } from '../../components/ContentBanner'
-
-const CONTENT_PATH = 'lessons'
+import { CONTENT_PATH } from '../../lib/constants'
 
 interface Lesson {
   path: string
@@ -63,22 +62,27 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
 export default Lessons
 
 export const getStaticProps = async () => {
-  const directories = fs.readdirSync(path.join(CONTENT_PATH))
+  const contentDir = path.join(CONTENT_PATH)
+  const directories = fs.readdirSync(path.join(contentDir))
   const lessons: Lesson[] = []
-  directories.reverse().map((filename) => {
-    fs.readdirSync(path.join('lessons', filename)).map((file) => {
-      const markdownWithMeta = fs.readFileSync(
-        path.join('lessons', filename, file),
-        'utf-8',
-      )
+  directories.reverse().map((folder) => {
+    if (fs.lstatSync(path.join(contentDir, folder)).isDirectory()) {
+      fs.readdirSync(path.join(contentDir, folder)).map((file) => {
+        if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
+          const markdownWithMeta = fs.readFileSync(
+            path.join(contentDir, folder, file),
+            'utf-8',
+          )
 
-      const { data: frontMatter } = matter(markdownWithMeta)
-      lessons.push({
-        path: filename,
-        frontMatter,
-        slug: `${file.replace('.mdx', '')}`,
+          const { data: frontMatter } = matter(markdownWithMeta)
+          lessons.push({
+            path: folder,
+            frontMatter,
+            slug: `${file.replace('.mdx', '')}`,
+          })
+        }
       })
-    })
+    }
   })
   return {
     props: {

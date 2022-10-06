@@ -14,6 +14,8 @@ icons:
     'opensea',
   ]
 ---
+import OpenZeppelin from '../fundamentals/open_zeppelin.mdx'
+import DecentralizedStorage from '../fundamentals/decentralized-storage.mdx'
 
 # Lesson 2: Build a Basic NFT
 
@@ -73,10 +75,10 @@ that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 To install `npm` on your system, please follow the instructions on
 [this link](/lessons/fundamentals/install-npm).
-</ContentCallout>
+</Callout>
 
 Let’s create and `cd` into our D_D Academy projects folder, and create a
 folder for our NFT project:
@@ -97,11 +99,11 @@ npm init -y
 npm install --save-dev hardhat
 ```
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 The `--save-dev` flag used in the last command, lets the project know it's a
 development dependency (not needed in production). You can view what
 dependencies are needed in the `package.json` file in the root of the project.
-</ContentCallout>
+</Callout>
 
 ## Create your project
 
@@ -111,7 +113,7 @@ Once we have our environment set up, we need to create a project.
 
 We run the `npx hardhat` command to create a basic project:
 
-<ContentSideDrawer title="What on Earth is Hardhat?">
+<SideDrawer buttonText="What on Earth is Hardhat?">
   Since we’re flying to Jupiter, we need safety apparel! That’s what Hardhat is.
 
   It provides a blockchain for us along the way, where we can have lots of value
@@ -125,7 +127,7 @@ We run the `npx hardhat` command to create a basic project:
 
   Hardhat is simply a set of tools that includes a local mini blockchain that
   can run on your machine.
-</ContentSideDrawer>
+</SideDrawer>
 
 After you enter your `npx hardhat` command, what information can you see? What
 are those ten lines and what is?
@@ -167,7 +169,7 @@ ok for us. Here's what mine asked me:
   Select 'y'. These are packages (programs) that our project needs to be able to
   run.
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 The project asked us to install `@nomicfoundation/hardhat-toolbox` in the
 last prompt. If they didn’t install or we accidentally chose ‘n’, we can always
 install them manually with:
@@ -175,7 +177,7 @@ install them manually with:
 ```bash
 npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
-</ContentCallout>
+</Callout>
 
 We delete some files so we start fresh:
 
@@ -199,22 +201,24 @@ We now need to add our last dependency (OpenZeppelin contracts):
 npm install @openzeppelin/contracts
 ```
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 Open Zeppelin developed a lot of standard contracts that are super powerful,
-widely used and fully tested and audited. Read more about them
-[here](/lessons/fundamentals/open_zeppelin).
-</ContentCallout>
+widely used and fully tested and audited.
+</Callout>
+<SideDrawer buttonText="More on Open Zeppelin">
+  <OpenZeppelin/>
+</SideDrawer>
 
 ## Let’s start coding!
 
 With our project folder ready, we can now fire up our Code Editor.
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 We are using VSCode for this one (we think it has a good balance of costs vs.
 benefits) but you can use whatever you feel comfortable with. A few of the more
 popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
 
-</ContentCallout>
+</Callout>
 
 Enough rambling, let’s start writing our contract!
 
@@ -455,7 +459,7 @@ and files that we prepared, and move on to the next section.
 to take the winding road and learn a little about the standard used to identify NFTs
 and a solution to store files in a decentralized way.
 
-<ContentSideDrawer title="Longer Path (learn about JSON and IPFS)">
+<SideDrawer buttonText="Longer Path (learn about JSON and IPFS)">
 ## JSON
 
 We have most of our smart contract ready, so we are going to focus on the media
@@ -517,6 +521,10 @@ are using the one called IPFS. Inter-Planetary File System. Yep, no joke.
 For a one line explanation, nothing better than quoting the docs: “**IPFS is a
 distributed system for storing and accessing files, websites, applications, and
 data**”
+
+<SideDrawer buttonText="More on Decentralized Storage" title="&nbsp;">
+  <DecentralizedStorage />
+</SideDrawer>
 
 It runs on top of a network of nodes that replicate the data being uploaded. A
 computer that downloads a file using IPFS, also shares that file with others for
@@ -580,7 +588,7 @@ an IPFS service will surely help you get ahead in your learning.
 
 Have your json files folder IPFS link saved (the full link, that links to all
 the files), for we will use it in our next step.
-</ContentSideDrawer>
+</SideDrawer>
 
 ## Deploy! (back to Solidity, kind of)
 

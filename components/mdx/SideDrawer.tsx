@@ -12,8 +12,11 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-function ContentSideDrawer(props: any) {
+function SideDrawer(props: any) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { buttonText, title } = props
+  const drawerTitle = title ? title : buttonText
 
   return (
     <>
@@ -25,14 +28,16 @@ function ContentSideDrawer(props: any) {
         fontWeight="bold"
         bg="gray.700"
         mt="1em"
-        height={[`${props.title.length > 30 ? '3.75rem' : '2.5rem'}`, '2.5rem']}
+        height={[`${buttonText.length > 30 ? '3.75rem' : '2.5rem'}`, '2.5rem']}
         style={{
           whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
+        rightIcon={<ArrowRightIcon />}
       >
-        {props.title}&nbsp;&nbsp;
-        <ArrowRightIcon />
+        {buttonText}
+        {/* &nbsp;&nbsp; */}
+        {/* <ArrowRightIcon /> */}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
         <DrawerOverlay
@@ -44,7 +49,7 @@ function ContentSideDrawer(props: any) {
         <DrawerContent bg="#00000f" px="4" pb="8">
           <DrawerCloseButton />
           <DrawerHeader fontSize="3xl" textColor="yellow.300">
-            {props.title}
+            {drawerTitle}
           </DrawerHeader>
           <DrawerBody>{props.children}</DrawerBody>
         </DrawerContent>
@@ -53,4 +58,4 @@ function ContentSideDrawer(props: any) {
   )
 }
 
-export default ContentSideDrawer
+export default SideDrawer

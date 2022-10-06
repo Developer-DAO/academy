@@ -8,7 +8,7 @@ import Footer from '../components/footer/Footer'
 import ConsentBanner from '../components/ConsentBanner'
 import { DefaultSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
-import MDXcomponents from '../components/mdx/MDXComponents'
+import Components from '../components/mdx/Components'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
           <Header />
-          <MDXProvider components={MDXcomponents}>
+          <MDXProvider components={Components}>
             <Component {...pageProps} />
           </MDXProvider>
           <Footer />

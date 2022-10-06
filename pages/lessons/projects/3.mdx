@@ -16,6 +16,7 @@ icons:
     'polygon',
   ]
 ---
+import OpenZeppelin from '../fundamentals/open_zeppelin.mdx'
 
 # Lesson 3 - Tier NFTs
 
@@ -64,11 +65,11 @@ npm install --save-dev hardhat
 npx hardhat
 ```
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 The `--save-dev` flag used in the last command, lets the project know it's a
 development dependency (not needed in production). You can view what
 dependencies are needed in the `package.json` file in the root of the project.
-</ContentCallout>
+</Callout>
 
 Choose `Create a Javascript project` and hardhat will create an example
 project for us. It will give us 3 prompts for options. Choosing the defaults is
@@ -89,7 +90,7 @@ ok for us. Here's what mine asked me:
   run. It will show the progress and several Warning messages that are normal.
   If you get any Error messages, that's different story.
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 The project asked us to install `@nomicfoundation/hardhat-toolbox` in the
 last prompt. If they didn’t install or we accidentally chose ‘n’, we can always
 install them manually with:
@@ -97,7 +98,7 @@ install them manually with:
 ```bash
 npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
-</ContentCallout>
+</Callout>
 
 We delete some files so we start fresh:
 
@@ -119,11 +120,13 @@ We now need to add our last dependency (OpenZeppelin contracts):
 npm install @openzeppelin/contracts
 ```
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 Open Zeppelin developed a lot of standard contracts that are super powerful,
-widely used and fully tested and audited. Read more about them
-[here](/lessons/fundamentals/open_zeppelin).
-</ContentCallout>
+widely used and fully tested and audited.
+</Callout>
+<SideDrawer buttonText="More on Open Zeppelin">
+  <OpenZeppelin/>
+</SideDrawer>
 
 ### Let’s start coding!
 
@@ -865,12 +868,12 @@ notice so you know that you are entering the danger zone. Confirm and you'll be 
 PRIVATE_KEY=f8abc629b....
 ```
 
-<ContentCallout emoji='💡' size='md' variant='info'>
+<Callout emoji='💡' size='md' variant='info'>
 Also, make sure you have a line that says `.env` in the `.gitignore` file in our
 root folder. If this file doesn't exist, create it and add that line! This makes
 sure we don't accidentally upload our `.env` file to our public repositories by
 mistake.
-</ContentCallout>
+</Callout>
 
 Now we will run this command to install the `dotenv` package:
 

@@ -267,19 +267,19 @@ describe('TierNFT', function () {
 })
 ```
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Before we walk through, let's make sure everything is working correctly. Run
   the tests using `npm test` and you should see these two initial tests pass.
   **This is an important milestone! You created your first tests and they now
   pass.**
-</ContentCallout>
+</Callout>
 
 Now let's walk through the test code we've pasted in and explain what it does.
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   `expect()` from the Chai library is used to test various conditions. There are
   many examples in this lesson.
-</ContentCallout>
+</Callout>
 
 At the top we see constants with the name and symbol of the NFT collection:
 
@@ -340,13 +340,13 @@ it('set proper collection symbol', async function () {
 They each call a method and verify the results. "Is the contract name really
 TierNFT?" "Is the contract symbol really Tier?"
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   You'll notice a lot of `await` statements. That's because most of these calls
   are asynchronous. Without `await` the program would keep going without waiting
   for the result. You may want to take a detour and learn more about what those
   do, but for now, think of them as basically waiting for an asynchronous call
   to return before moving on to the next line.
-</ContentCallout>
+</Callout>
 
 ### General testing concepts
 
@@ -422,11 +422,11 @@ additional comment line I added that says
 Our new `describe` section show below will replace that line that says
 `// this is where existing describe section ends`.
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Make sure you keep that last line `})` which is the very end of the block of
   code that holds **all** of the `describe` blocks you're adding in this whole
   lesson.
-</ContentCallout>
+</Callout>
 
 ```javascript
 describe('mint', async () => {
@@ -469,9 +469,9 @@ describe('mint', async () => {
 })
 ```
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Run the tests using `npm test`
-</ContentCallout>
+</Callout>
 
 These tests introduce additional code that are helpful when testing contracts.
 
@@ -546,9 +546,9 @@ describe('withdrawal', async () => {
 })
 ```
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Run the tests using `npm test`
-</ContentCallout>
+</Callout>
 
 You'll see similar patterns from the previous `mint()` tests. Here are a couple
 of additional highlights:
@@ -758,11 +758,11 @@ contract TierNFT is ERC721, Ownable {
 
 Ok, here are some tests for these helpers!
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Since an SVG is basically a bunch of strings, you'll notice all these tests
   are nearly simple single lines -- but they're comparing the results with long
   strings that eventually make up the final SVG.
-</ContentCallout>
+</Callout>
 
 ```javascript
 describe('tokenURI and helpers', async () => {
@@ -840,9 +840,9 @@ describe('tokenURI and helpers', async () => {
 })
 ```
 
-<ContentCallout emoji="💡" size="md" variant="info">
+<Callout emoji="💡" size="md" variant="info">
   Run the tests using `npm test`
-</ContentCallout>
+</Callout>
 
 The final test is an example mentioned earlier about adding a test before
 refactoring with helper methods. It checks that the initial `tokenURI()` method

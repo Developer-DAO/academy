@@ -2,8 +2,10 @@ import { Box, Code, Heading, Image, Text } from '@chakra-ui/react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { CopyToClipboard } from '../CopyToClipboard'
+import SideDrawer from './SideDrawer'
+import Callout from './Callout'
 
-const MDXcomponents = {
+const Components = {
   code: (props: any) => {
     const [, language] =
       (props.className as string)?.match(/language-(\w+)/) ?? []
@@ -37,8 +39,8 @@ const MDXcomponents = {
   img: (props: any) => (
     <Image as="img" apply="mdx.image" m="0 auto" alt="" {...props} />
   ),
-  // ContentSideDrawer,
-  // ContentCallout,
+  SideDrawer,
+  Callout,
 }
 
-export default MDXcomponents
+export default Components
