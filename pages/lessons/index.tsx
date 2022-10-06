@@ -4,6 +4,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import { ContentBanner } from '../../components/ContentBanner'
 
+const CONTENT_PATH = 'lessons'
+
 interface Lesson {
   path: string
   frontMatter: any
@@ -61,7 +63,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
 export default Lessons
 
 export const getStaticProps = async () => {
-  const directories = fs.readdirSync(path.join('lessons'))
+  const directories = fs.readdirSync(path.join(CONTENT_PATH))
   const lessons: Lesson[] = []
   directories.reverse().map((filename) => {
     fs.readdirSync(path.join('lessons', filename)).map((file) => {
