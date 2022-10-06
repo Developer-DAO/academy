@@ -288,11 +288,11 @@ contract WAGMI {
 
     In Solidity , there are 3 types of variable visibility modifiers that a developer can use :
 
-    - **Public**: If a state variable visibility is marked as `public` then those variables can be used within the smart contract and can be accessed by other contracts as well.Compilers automatically generates functions to read its value when calling the contract, they are called 'getter' functions
+    - **Public**: If a state variable visibility is marked as `public` then those variables can be used within the smart contract and can be accessed by other contracts as well. Compilers automatically generates functions to read its value when calling the contract, they are called 'getter' functions.
 
-    - **Internal**: A state variable with a `internal` visibility can only be accessed within the smart contract and its derived contracts. It can *NOT* be accessed externally. This is the default for state variables when no visibilty is specified.
+    - **Internal**: A state variable with an `internal` visibility can only be accessed within the smart contract and its derived contracts. It can *NOT* be accessed externally. This is the default for state variables when no visibilty is specified.
 
-    - **Private**: When a state variable visibility is marked as `private` then it means , that it is only meant to be used within the defined smart contract . No derived contract can read a variable with a variable with a `private` visibility.
+    - **Private**: When a state variable visibility is marked as `private` it is only meant to be used within the defined smart contract . No derived contract can read a variable with a `private` visibility.
 
     <ContentCallout emoji='💡' size='md' variant='info'>
     While private and internal are not readable or modifiable from other contracts, its values are set on a public blockchain, making its values visible from the outside world.
