@@ -36,8 +36,6 @@ function SideDrawer(props: any) {
         rightIcon={<ArrowRightIcon />}
       >
         {buttonText}
-        {/* &nbsp;&nbsp; */}
-        {/* <ArrowRightIcon /> */}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
         <DrawerOverlay
