@@ -16,6 +16,8 @@ icons:
 ---
 import OpenZeppelin from '../fundamentals/open_zeppelin.mdx'
 import DecentralizedStorage from '../fundamentals/decentralized-storage.mdx'
+import InstallNpm from '../fundamentals/install-npm.mdx'
+import TokenStandards from '../fundamentals/token-standards.mdx'
 
 # Lesson 2: Build a Basic NFT
 
@@ -74,11 +76,9 @@ We will be using `npm`, the package manager from Node, and its command `npx`
 that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
-
-<Callout emoji='💡' size='md' variant='info'>
-To install `npm` on your system, please follow the instructions on
-[this link](/lessons/fundamentals/install-npm).
-</Callout>
+<SideDrawer title=" " buttonText="How to install NPM on your system">
+  <InstallNpm/>
+</SideDrawer>
 
 Let’s create and `cd` into our D_D Academy projects folder, and create a
 folder for our NFT project:
@@ -245,10 +245,14 @@ be using for this contract and the last two lines are how we declare a smart
 contract in solidity.
 
 With an empty project, now we can start adding what we need to create our
-awesome NFT collection. In particular, [ERC721](/lessons/fundamentals/token-standards) (the
+awesome NFT collection. In particular, ERC721 (the
 formal specification to follow for NFTs) have a lot of requirements to meet
 (they should have a numbered ID, functions to transfer them, approve others as
 delegates to transfer them, etc).
+
+<SideDrawer title=" " buttonText="More about Token Standards">
+  <TokenStandards/>
+</SideDrawer>
 
 All of it is pretty much for our project, but luckily OpenZeppelin has developed
 a lot of contracts that implements these standards and more, they are widely
