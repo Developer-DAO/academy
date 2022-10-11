@@ -52,9 +52,9 @@ and easy to locate and read.
 The first step is to initiate a [nextJS](https://nextjs.org/) application inside the 
 project's root directory by running the following command.
 
-<ContentCallout emoji="💡">
+<Callout emoji="💡">
   Make sure you are in your root directory before running the command.
-</ContentCallout>
+</Callout>
 
 The command creates a sub-directory named `frontend` inside our root directory
 and sets up all the necessary files and folders within it. The `create-next-app` command
@@ -158,9 +158,9 @@ a blockchain.
 capture the state, respectively. More on [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/) 
 and the [useEffect](https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/) hook.
 
-<ContentCallout emoji="💡">
+<Callout emoji="💡">
   Hooks are JavaScript functions that manage the state's behaviour and side effects by isolating them from a component.
-</ContentCallout>
+</Callout>
 
 After importing, we create the configurations we need, and create a new instance of 
 `wagmiClient` using them.
@@ -258,7 +258,7 @@ styling from the side drawer below, into our file. This is some default styling
 created for the application, which you can play around with themes, responsiveness, 
 etc., if needed.
 
-<ContentSideDrawer title="Code for default style">
+<SideDrawer buttonText="Code for default style">
 
 ```jsx
 export default function Home() {
@@ -350,7 +350,7 @@ const modalButton = {
 }
 ```
 
-</ ContentSideDrawer>
+</ SideDrawer>
 <br/>
 
 Moving onto imports.
@@ -406,13 +406,13 @@ connected. The general syntax for using the `useState` hook is:
 
 `const [variableName, functionToSetVariable] = useState(intialValue)`
 
-<ContentCallout emoji="💡">
+<Callout emoji="💡">
   The initial value also serves as the type for the value assigned. If the 
   initial value is a string, then the values set later must be strings too.
   The hook can be created without an initial value as well but a good practice 
   is to always choose and pass in an initial value based on the value type 
   we expect to assign to that variable. 
-</ContentCallout>
+</Callout>
 
 We will revisit these state variables later to see their implementation.
 
@@ -453,9 +453,9 @@ With this setup we can run the `npm run dev` or `yarn dev` command in our consol
 and click the returned link (`http://localhost:portnumber`) to preview our application. 
 This is a good way to debug and see if our code is behaving as expected.
 
-<ContentCallout emoji="💡">
+<Callout emoji="💡">
   Make sure you are in the frontend directory before running the command.
-</ContentCallout>
+</Callout>
 
 The preview should look like this: 
 
@@ -544,10 +544,10 @@ saving Tier SVGs. You can find links for downloading the SVGs here.
 Save them with the same names as shown in the links above for smooth flow
 in the code.
 
-<ContentCallout emoji="💡">
+<Callout emoji="💡">
   Make sure you have downloaded the SVG file and not just saved the URL of
   the file.
-</ContentCallout>
+</Callout>
 
 Now we can render our NFT Cards.
 
@@ -696,7 +696,7 @@ Try minting these NFTs and check your wallet's profile on
 `https://testnets.opensea.io/YOUR_WALLET_ADDRESS`. Refer to the following 
 side drawer for the code written till now if stuck somewhere.
 
-<ContentSideDrawer title="Code so far for index.js">
+<SideDrawer buttonText="Code so far for index.js">
 
 ```jsx
 import Head from 'next/head';
@@ -897,7 +897,7 @@ const modalButton = {
   boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
 }
 ```
-</ContentSideDrawer>
+</SideDrawer>
 <br/>
 
 Take a breather and stretch yourself before we do the last bit of coding.
@@ -1088,7 +1088,7 @@ The final modal should look like this:
 
 If you are stuck somewhere, please refer to the code side drawer below.
 
-<ContentSideDrawer title="Final Code for index.js">
+<SideDrawer buttonText="Final Code for index.js">
 ```jsx
 import Head from 'next/head';
 import Image from 'next/image';
@@ -1353,7 +1353,7 @@ const modalButton = {
   cursor: 'pointer',
 }
 ```
-</ ContentSideDrawer>
+</ SideDrawer>
 <br/>
 <br/>
 
