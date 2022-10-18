@@ -37,15 +37,8 @@ export default function Footer() {
               Feedback
             </Link>
           </NextLink>
-          <NextLink
-            href={
-              'https://github.com/Developer-DAO/academy/blob/main/CONTRIBUTING.md'
-            }
-            passHref
-          >
-            <Link isExternal textDecoration="underline">
-              Contribute
-            </Link>
+          <NextLink href={'/docs'} passHref>
+            <Link textDecoration="underline">Contribute</Link>
           </NextLink>
         </Stack>
         <Stack direction={'row'} spacing={6}>
