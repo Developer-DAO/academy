@@ -24,13 +24,12 @@ function SideDrawer(props: any) {
         onClick={onOpen}
         aria-label="Open Drawer"
         variant="ghost"
-        fontSize="xl"
+        fontSize="0.85rem"
         fontWeight="bold"
         bg="gray.700"
         mt="1em"
         height={[`${buttonText.length > 30 ? '3.75rem' : '2.5rem'}`, '2.5rem']}
         style={{
-          whiteSpace: 'normal',
           wordWrap: 'break-word',
         }}
         rightIcon={<ArrowRightIcon />}
