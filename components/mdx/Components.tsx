@@ -4,6 +4,7 @@ import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { CopyToClipboard } from '../CopyToClipboard'
 import SideDrawer from './SideDrawer'
 import Callout from './Callout'
+import Form from './Form'
 
 const Components = {
   code: (props: any) => {
@@ -41,6 +42,7 @@ const Components = {
   ),
   SideDrawer,
   Callout,
+  Form,
 }
 
 export default Components
