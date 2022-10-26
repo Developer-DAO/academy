@@ -3,8 +3,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { CopyToClipboard } from '../CopyToClipboard'
 import SideDrawer from './SideDrawer'
-import Callout from './Callout'
 import Form from './Form'
+import Callout from './Callout'
 
 const Components = {
   code: (props: any) => {
