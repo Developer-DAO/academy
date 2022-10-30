@@ -1,0 +1,20 @@
+{
+  "title": "Quiz: Lesson 1",
+  "questions": [
+    {
+      "question": "❓ Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
+      "options": [
+        {
+          "answer": "Transactions"
+        },
+        {
+          "answer": "Smart contracts",
+          "correct": true
+        },
+        {
+          "answer": "Just user wallets have an address"
+        }
+      ]
+    }
+  ]
+}
