@@ -104,6 +104,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       <Button
         colorScheme="yellow"
         backgroundColor="yellow.600"
+        color="white"
         display="flex"
         margin="auto"
         onClick={() => setShowQuiz(true)}
