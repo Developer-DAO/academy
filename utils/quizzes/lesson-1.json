@@ -2,7 +2,7 @@
   "title": "Quiz: Lesson 1",
   "questions": [
     {
-      "question": "❓ Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
+      "question": "Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
       "options": [
         {
           "answer": "Transactions"
@@ -10,9 +10,30 @@
         {
           "answer": "Smart contracts",
           "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is the use of the pragma solidity statement in our smart contract?",
+      "options": [
+        {
+          "answer": "Defines that the file has Solidity code"
         },
         {
-          "answer": "Just user wallets have an address"
+          "answer": "Defines the Solidity version for the compiler",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What can we use a smart contract for?",
+      "options": [
+        {
+          "answer": "Store or transfer value",
+          "correct": true
+        },
+        {
+          "answer": "Make a breakfast"
         }
       ]
     }
