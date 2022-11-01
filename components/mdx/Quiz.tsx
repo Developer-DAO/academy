@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  useToast,
 } from '@chakra-ui/react'
 import React, { FC, useState } from 'react'
 
@@ -41,6 +42,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
   const [showQuiz, setShowQuiz] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
+  const toast = useToast()
 
   const nextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -73,24 +75,56 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
     return 'gray.600'
   }
 
+  const quizNotAnswered = () => {
+    toast({
+      title: '!answers',
+      description: 'Please answer all the questions',
+      status: 'warning',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
+  const quizFailedToast = (wrongAnswersCounter: number) => {
+    toast({
+      title: 'Quiz failed',
+      description: `You have ${wrongAnswersCounter} wrong answers :(`,
+      status: 'error',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
+  const quizSuccessToast = () => {
+    toast({
+      title: 'Amazing!',
+      description: 'You have passed the lesson!',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
+  }
+
   const submit = () => {
     if (quiz.questions.length != Object.keys(answers).length) {
-      return alert('You must answer all the questions!')
+      return quizNotAnswered()
     }
 
     let hasWrongAnswers = false
+    let wrongAnswersCounter = 0
 
     quiz.questions.forEach((q, index) => {
       if (!q.options[answers[index]].correct) {
         hasWrongAnswers = true
+        wrongAnswersCounter++
       }
     })
 
     if (hasWrongAnswers) {
-      return alert('Test not passed :(')
+      return quizFailedToast(wrongAnswersCounter)
     }
 
-    return alert('Test passed :D')
+    return quizSuccessToast(wrongAnswersCounter)
   }
 
   const cancelQuiz = () => {
