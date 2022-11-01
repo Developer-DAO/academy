@@ -124,7 +124,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       return quizFailedToast(wrongAnswersCounter)
     }
 
-    return quizSuccessToast(wrongAnswersCounter)
+    return quizSuccessToast()
   }
 
   const cancelQuiz = () => {
