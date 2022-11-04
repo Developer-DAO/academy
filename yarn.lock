@@ -4861,6 +4861,11 @@
   resolved "https://registry.npmjs.org/@vanilla-extract/sprinkles/-/sprinkles-1.4.1.tgz"
   integrity sha512-aW6CfMMToX4a+baLuVxwcT0FSACjX3xrNt8wdi/3LLRlLAfhyue8OK7kJxhcYNZfydBeWTP59aRy8p5FUTIeew==
 
+"@vercel/analytics@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-0.1.3.tgz#7d0b7a35a692f16b823f2d22fdd95a955893420b"
+  integrity sha512-zJuEwzvi0bBmWrMrj9jvyMS+X6iUdW3m/y5P7aOLwJQKHsJyfpdINo/4Rv+wxubz3gl4nRqIQdtOFCe1P1ErXQ==
+
 "@wagmi/core@^0.3.8":
   version "0.3.8"
   resolved "https://registry.npmjs.org/@wagmi/core/-/core-0.3.8.tgz"

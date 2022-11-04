@@ -9,6 +9,7 @@ import ConsentBanner from '../components/ConsentBanner'
 import { DefaultSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Components from '../components/mdx/Components'
+import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -79,6 +80,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </MDXProvider>
           <Footer />
           <ConsentBanner />
+          <Analytics />
         </Box>
       </WalletProvider>
     </ChakraProvider>
