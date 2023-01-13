@@ -15,10 +15,6 @@ interface Question {
   ]
 }
 
-interface Answers {
-  [index: string]: number
-}
-
 const Question: FC<QuestionProps> = (props: QuestionProps) => {
   const question: Question = require(`../../utils/questions/${props.question}.json`)
   const [optionSelected, setOptionSelected]: [
