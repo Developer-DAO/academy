@@ -1,0 +1,12 @@
+{
+  "question": "Do state variables stay permanently on the blockchain?",
+  "options": [
+    {
+      "answer": "Yes",
+      "correct": true
+    },
+    {
+      "answer": "No"
+    }
+  ]
+}
