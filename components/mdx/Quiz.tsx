@@ -42,6 +42,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
   const [showQuiz, setShowQuiz] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
+  const [correctAnswers, setCorrectAnswers] = useState<number[] | null>(null)
   const toast = useToast()
 
   const nextQuestion = () => {
@@ -69,6 +70,15 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
   }
 
   const getQuestionBackground = (optionIndex: number) => {
+    if (
+      correctAnswers &&
+      correctAnswers.indexOf(currentQuestionIndex) !== -1 &&
+      quiz.questions[currentQuestionIndex].options[optionIndex].correct &&
+      answers[currentQuestionIndex] === optionIndex
+    ) {
+      return 'green.500'
+    }
+
     if (answers[currentQuestionIndex] == optionIndex) {
       return 'yellow.600'
     }
@@ -113,12 +123,18 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
     let hasWrongAnswers = false
     let wrongAnswersCounter = 0
 
+    const newCorrectAnswers: number[] = []
+
     quiz.questions.forEach((q, index) => {
       if (!q.options[answers[index]].correct) {
         hasWrongAnswers = true
         wrongAnswersCounter++
+      } else {
+        newCorrectAnswers.push(index)
       }
     })
+
+    setCorrectAnswers(newCorrectAnswers)
 
     if (hasWrongAnswers) {
       return quizFailedToast(wrongAnswersCounter)
