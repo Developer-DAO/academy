@@ -3,6 +3,8 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
 import { CopyToClipboard } from '../CopyToClipboard'
 import SideDrawer from './SideDrawer'
+import Quiz from './Quiz'
+import Question from './Question'
 import Callout from './Callout'
 
 const Components = {
@@ -41,6 +43,8 @@ const Components = {
   ),
   SideDrawer,
   Callout,
+  Quiz,
+  Question,
 }
 
 export default Components
