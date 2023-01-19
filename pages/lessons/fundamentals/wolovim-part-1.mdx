@@ -147,7 +147,7 @@ In [3]: Web3.from_wei(500000000, 'gwei')
 Out[3]: Decimal('0.5')
 ```
 
-Other utility methods on the Web3 module include data format converters (e.g., `[to_hex](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.toHex)`), address helpers (e.g., `[is_address](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.isAddress)`), and hash functions (e.g., `[keccak](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.keccak)`). Many of these will be covered later in the series. To view all the available methods and properties, utilize IPython’s auto-complete by typing `Web3.` and hitting the tab key twice after the period.
+Other utility methods on the Web3 module include data format converters (e.g., [to_hex](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.toHex) ), address helpers (e.g., [is_address](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.isAddress) ), and hash functions (e.g., [keccak](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.keccak) ). Many of these will be covered later in the series. To view all the available methods and properties, utilize IPython’s auto-complete by typing `Web3.` and hitting the tab key twice after the period.
 
 ### **Talk to the chain**
 
@@ -166,7 +166,7 @@ While this is one “real” way to do it, the syncing process takes hours and i
 
 The EthereumTesterProvider connects to a simulated node and is handy for quick development environments.
 
-That simulated node is called **[eth-tester](https://github.com/ethereum/eth-tester)** and we installed it as part of the `pip install "web3[tester]"` command. Configuring Web3.py to use this tester provider is as simple as:
+That simulated node is called [**eth-tester**](https://github.com/ethereum/eth-tester) and we installed it as part of the `pip install "web3[tester]"` command. Configuring Web3.py to use this tester provider is as simple as:
 
 ```python
 In [4]: w3 = Web3(Web3.EthereumTesterProvider())
@@ -249,7 +249,7 @@ In [10]: tx_hash = w3.eth.send_transaction({
 
 This is typically the point where you’d wait for several seconds for your transaction to get included in a new block. The full process goes something like this:
 
-1. Submit a transaction and hold on to the transaction hash. Until it's included, the transaction is “pending.”`tx_hash = w3.eth.send_transaction({ … })`
+1. Submit a transaction and hold on to the transaction hash. Until it's included, the transaction is “pending.”`tx_hash = w3.eth.send_transaction({ ... })`
 2. Wait for the transaction to be included:`w3.eth.wait_for_transaction_receipt(tx_hash)`
 3. To view the successful transaction:`w3.eth.get_transaction(tx_hash)`
 
@@ -282,8 +282,9 @@ Out[13]: 1000003000000000000000000
 
 The latter looks good! The balance went from 1,000,000 to 1,000,003 ether. But what happened to the first account? It appears to have lost slightly more than three ether. Alas, nothing in life is free, and using the Ethereum public network requires that you compensate your peers for their supporting role. A small transaction fee was deducted from the account making the transaction to the tune of 21000 wei.
 
-> Note: On the public network, transaction fees are variable based on network demand and how quickly you'd like a transaction to be processed.
-> 
+<Callout emoji='💡' size='md' variant='info'>
+**Note**: On the public network, transaction fees are variable based on network demand and how quickly you'd like a transaction to be processed.
+</Callout> 
 
 ### **And breathe**
 
