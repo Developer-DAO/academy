@@ -24,7 +24,7 @@ const Question: FC<QuestionProps> = (props: QuestionProps) => {
   const toast = useToast()
 
   const selectAnswer = (optionIndex: number) => {
-    if (optionsSelected.indexOf(optionIndex) !== -1) {
+    if (optionsSelected.includes(optionIndex)) {
       return setOptionsSelected(
         optionsSelected.filter((o) => o !== optionIndex),
       )
@@ -36,7 +36,7 @@ const Question: FC<QuestionProps> = (props: QuestionProps) => {
   }
 
   const getOptionBackground = (optionIndex: number) => {
-    if (optionsSelected.indexOf(optionIndex) !== -1) {
+    if (optionsSelected.includes(optionIndex)) {
       return 'yellow.600'
     }
     return 'gray.600'
@@ -73,7 +73,7 @@ const Question: FC<QuestionProps> = (props: QuestionProps) => {
   }
 
   const submit = () => {
-    if (optionsSelected.indexOf(-1) !== -1) {
+    if (optionsSelected.includes(-1)) {
       return quizNotAnswered()
     }
 
