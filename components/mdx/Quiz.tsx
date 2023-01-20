@@ -12,7 +12,11 @@ import {
   ModalCloseButton,
   useToast,
 } from '@chakra-ui/react'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
+import {
+  getCorrectAnswersIndexes,
+  haveSameElements,
+} from '../../utils/QuizHelpers'
 
 interface QuizProps {
   quiz: string
@@ -131,24 +135,16 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       return quizNotAnswered()
     }
 
-    let hasWrongAnswers = false
     let wrongAnswersCounter = 0
 
     const newCorrectAnswers: number[] = []
 
-    quiz.questions.forEach((q, index) => {
-      let correctAnswersIndexes = q.options
-        .filter((option) => option.correct)
-        .map((correctOption) => q.options.indexOf(correctOption))
+    quiz.questions.forEach((question, index) => {
+      let correctAnswersIndexes = getCorrectAnswersIndexes(question)
 
-      for (let i = 0; i < answers[index].length; i++) {
-        if (answers[index].length >= 2)
-          answers[index] = answers[index].sort((a, b) => a - b)
-        if (correctAnswersIndexes[i] !== answers[index][i]) {
-          hasWrongAnswers = true
-          wrongAnswersCounter++
-          return
-        }
+      if (!haveSameElements(answers[index], correctAnswersIndexes)) {
+        wrongAnswersCounter++
+        return
       }
 
       newCorrectAnswers.push(index)
@@ -156,7 +152,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
 
     setCorrectAnswers(newCorrectAnswers)
 
-    if (hasWrongAnswers) {
+    if (wrongAnswersCounter >= 1) {
       return quizFailedToast(wrongAnswersCounter)
     }
 
