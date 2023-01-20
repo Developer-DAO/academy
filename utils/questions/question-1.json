@@ -1,15 +1,16 @@
 {
-  "question": "Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
+  "question": "Which of these properties does Ethereum have?",
   "options": [
     {
-      "answer": "Transactions"
+      "answer": "Permissioned"
     },
     {
-      "answer": "Smart contracts",
+      "answer": "Trustless",
       "correct": true
     },
     {
-      "answer": "NFTs"
+      "answer": "Decentralized",
+      "correct": true
     }
   ]
 }

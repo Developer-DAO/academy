@@ -2,81 +2,6 @@
   "title": "Quiz: Lesson 1",
   "questions": [
     {
-      "question": "In order to shut down a blockchain you would have to:",
-      "options": [
-        {
-          "answer": "Disconnect the master node"
-        },
-        {
-          "answer": "Initiate a 51% attack"
-        },
-        {
-          "answer": "It's not possible",
-          "correct": true
-        }
-      ]
-    },
-    {
-      "question": "Ethereum’s upgrade on bitcoin technology to allow:",
-      "options": [
-        {
-          "answer": "Logic processing via smart contracts",
-          "correct": true
-        },
-        {
-          "answer": "Decentralization and transparency"
-        },
-        {
-          "answer": "Consensus mechanisms"
-        }
-      ]
-    },
-    {
-      "question": "How many parameters can we have in an event?",
-      "options": [
-        {
-          "answer": "As many as we want"
-        },
-        {
-          "answer": "As many as we want with indexed parameters, but non-indexed parameters are limited to three"
-        },
-        {
-          "answer": "As many as we want with non-indexed parameters, but indexed parameters are limited to three if they are named, and four if they’re anonymous",
-          "correct": true
-        }
-      ]
-    },
-    {
-      "question": "What can we use to find a past event?",
-      "options": [
-        {
-          "answer": "A filter on an indexed parameter",
-          "correct": true
-        },
-        {
-          "answer": "It's not possible"
-        },
-        {
-          "answer": "Writing a smart contract"
-        }
-      ]
-    },
-    {
-      "question": "Ethereum uses something for transaction fees. What's it called?",
-      "options": [
-        {
-          "answer": "Gas",
-          "correct": true
-        },
-        {
-          "answer": "Turbo"
-        },
-        {
-          "answer": "Oil"
-        }
-      ]
-    },
-    {
       "question": "Where do the values for event parameters get stored?",
       "options": [
         {
@@ -92,13 +17,17 @@
       ]
     },
     {
-      "question": "What is the use of the pragma solidity statement in our smart contract?",
+      "question": "Which of these properties does Ethereum have?",
       "options": [
         {
-          "answer": "Defines that the file has Solidity code"
+          "answer": "Permissioned"
         },
         {
-          "answer": "It lets the Solidity compiler know which version of Solidity we are using",
+          "answer": "Trustless",
+          "correct": true
+        },
+        {
+          "answer": "Decentralized",
           "correct": true
         }
       ]
