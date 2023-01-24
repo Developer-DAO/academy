@@ -89,7 +89,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       correctAnswers &&
       correctAnswers.indexOf(currentQuestionIndex) !== -1 &&
       quiz.questions[currentQuestionIndex].options[optionIndex].correct &&
-      answers[currentQuestionIndex].includes(optionIndex)
+      answers[currentQuestionIndex]?.includes(optionIndex)
     ) {
       return 'green.500'
     }
@@ -162,6 +162,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
   const cancelQuiz = () => {
     setAnswers({})
     setShowQuiz(false)
+    setCorrectAnswers(null)
     setCurrentQuestionIndex(0)
   }
 
