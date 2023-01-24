@@ -1,5 +1,5 @@
 import { Box, VStack, Text, Button, useToast } from '@chakra-ui/react'
-import React, { FC, useState } from 'react'
+import React, { FC, useState, Dispatch, SetStateAction } from 'react'
 
 interface QuestionProps {
   question: string
@@ -17,19 +17,26 @@ interface Question {
 
 const Question: FC<QuestionProps> = (props: QuestionProps) => {
   const question: Question = require(`../../utils/questions/${props.question}.json`)
-  const [optionSelected, setOptionSelected]: [
-    number,
-    React.Dispatch<React.SetStateAction<number>>,
-  ] = useState(-1)
-  const [answersSubmitted, setAnswersSubmitted] = useState(false)
+  const [optionsSelected, setOptionsSelected]: [
+    number[],
+    Dispatch<SetStateAction<number[]>>,
+  ] = useState([-1])
   const toast = useToast()
 
   const selectAnswer = (optionIndex: number) => {
-    setOptionSelected(optionIndex)
+    if (optionsSelected.includes(optionIndex)) {
+      return setOptionsSelected(
+        optionsSelected.filter((o) => o !== optionIndex),
+      )
+    }
+
+    setOptionsSelected(
+      [...optionsSelected, optionIndex].filter((o) => o !== -1), // Remove the -1 of the state initialization
+    )
   }
 
   const getOptionBackground = (optionIndex: number) => {
-    if (optionSelected == optionIndex) {
+    if (optionsSelected.includes(optionIndex)) {
       return 'yellow.600'
     }
     return 'gray.600'
@@ -66,13 +73,23 @@ const Question: FC<QuestionProps> = (props: QuestionProps) => {
   }
 
   const submit = () => {
-    if (optionSelected === -1) {
+    if (optionsSelected.includes(-1)) {
       return quizNotAnswered()
     }
 
-    if (question.options[optionSelected].correct) {
-      return quizSuccessToast()
-    }
+    const correctAnswers = question.options.filter((o) => o.correct).length
+
+    let success = true
+    let correctAnswersCount = 0
+
+    optionsSelected.forEach((o) => {
+      if (!question.options[o].correct) success = false
+      correctAnswersCount++
+    })
+
+    if (correctAnswers !== correctAnswersCount) success = false
+
+    if (success) return quizSuccessToast()
 
     return quizFailedToast()
   }

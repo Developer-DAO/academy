@@ -1,0 +1,51 @@
+{
+  "title": "Quiz: Lesson 1",
+  "questions": [
+    {
+      "question": "Where do the values for event parameters get stored?",
+      "options": [
+        {
+          "answer": "In the transaction data"
+        },
+        {
+          "answer": "In transaction logs",
+          "correct": true
+        },
+        {
+          "answer": "They are not stored"
+        }
+      ]
+    },
+    {
+      "question": "Which of these properties does Ethereum have?",
+      "options": [
+        {
+          "answer": "Permissioned"
+        },
+        {
+          "answer": "Trustless",
+          "correct": true
+        },
+        {
+          "answer": "Decentralized",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What can we use a smart contract for?",
+      "options": [
+        {
+          "answer": "Store or transfer value or services without the need of a central authority",
+          "correct": true
+        },
+        {
+          "answer": "Make a breakfast"
+        },
+        {
+          "answer": "Verifying the authenticity of documents and information."
+        }
+      ]
+    }
+  ]
+}

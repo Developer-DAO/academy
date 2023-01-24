@@ -13,6 +13,10 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import React, { FC, useState } from 'react'
+import {
+  getCorrectAnswersIndexes,
+  haveSameElements,
+} from '../../utils/QuizHelpers'
 
 interface QuizProps {
   quiz: string
@@ -34,7 +38,7 @@ interface Quiz {
 }
 
 interface Answers {
-  [index: string]: number
+  [index: string]: number[]
 }
 
 const Quiz: FC<QuizProps> = (props: QuizProps) => {
@@ -65,7 +69,18 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
 
   const selectAnswer = (answerIndex: number) => {
     let newAnswers: Answers = { ...answers }
-    newAnswers[currentQuestionIndex.toString()] = answerIndex
+
+    if (newAnswers[currentQuestionIndex]?.includes(answerIndex)) {
+      newAnswers[currentQuestionIndex.toString()] = newAnswers[
+        currentQuestionIndex
+      ]?.filter((a) => a !== answerIndex)
+    } else {
+      newAnswers[currentQuestionIndex.toString()] = [
+        ...(answers[currentQuestionIndex] || []),
+        answerIndex,
+      ]
+    }
+
     setAnswers(newAnswers)
   }
 
@@ -74,12 +89,12 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       correctAnswers &&
       correctAnswers.indexOf(currentQuestionIndex) !== -1 &&
       quiz.questions[currentQuestionIndex].options[optionIndex].correct &&
-      answers[currentQuestionIndex] === optionIndex
+      answers[currentQuestionIndex]?.includes(optionIndex)
     ) {
       return 'green.500'
     }
 
-    if (answers[currentQuestionIndex] == optionIndex) {
+    if (answers[currentQuestionIndex]?.includes(optionIndex)) {
       return 'yellow.600'
     }
     return 'gray.600'
@@ -120,23 +135,24 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
       return quizNotAnswered()
     }
 
-    let hasWrongAnswers = false
     let wrongAnswersCounter = 0
 
     const newCorrectAnswers: number[] = []
 
-    quiz.questions.forEach((q, index) => {
-      if (!q.options[answers[index]].correct) {
-        hasWrongAnswers = true
+    quiz.questions.forEach((question, index) => {
+      let correctAnswersIndexes = getCorrectAnswersIndexes(question)
+
+      if (!haveSameElements(answers[index], correctAnswersIndexes)) {
         wrongAnswersCounter++
-      } else {
-        newCorrectAnswers.push(index)
+        return
       }
+
+      newCorrectAnswers.push(index)
     })
 
     setCorrectAnswers(newCorrectAnswers)
 
-    if (hasWrongAnswers) {
+    if (wrongAnswersCounter >= 1) {
       return quizFailedToast(wrongAnswersCounter)
     }
 
@@ -146,6 +162,7 @@ const Quiz: FC<QuizProps> = (props: QuizProps) => {
   const cancelQuiz = () => {
     setAnswers({})
     setShowQuiz(false)
+    setCorrectAnswers(null)
     setCurrentQuestionIndex(0)
   }
 
