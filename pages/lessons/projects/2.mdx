@@ -256,7 +256,7 @@ delegates to transfer them, etc).
 </SideDrawer>
 
 All of it is pretty much for our project, but luckily OpenZeppelin has developed
-a lot of contracts that implements these standards and more, they are widely
+a lot of contracts that implement these standards and more, they are widely
 used and audited and, the thing we love about them, they are open-source and we
 can use them to leverage our learning process. With that in our heads, we are
 going to use them inside our contract.
@@ -401,7 +401,7 @@ So, to let our inherited contract know where our NFTs will be stored, we have to
 you look into OpenZeppelin's documentation. There’s a good reason for
 everything. Well, lots of things. And this is one of them!
 
-Here's the modifications we will add and i'll explain them below:
+Here's the modifications we will add and I'll explain them below:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -506,7 +506,7 @@ collection to have as NFTs. Each of them will have as a minimum a “name”,
 
 As you see in the example, under “image” we have a link to a file on the web,
 which we will refer to as Web2. So, if this website were to go down, our NFTs
-would loose their images, showing us the limitations of the centralization of
+would lose their images, showing us the limitations of the centralization of
 web2 data storage.
 
 ![nft.pepe.jpeg](/assets/lessons/2/img_11.jpeg)
@@ -518,7 +518,7 @@ going to have to go to the moon…
 
 Literally.
 
-There are many services that lets us store files in a decentralized manner. We
+There are many services that let us store files in a decentralized manner. We
 are using the one called IPFS. Inter-Planetary File System. Yep, no joke.
 
 ![ipfs.jpeg](/assets/lessons/2/img_12.jpeg)
@@ -540,7 +540,7 @@ To ease our path into the IPFS network, services for *pinning* content (e.g.
 Pinata) offer paid and free tiers that ensure that the files we upload are
 *pinned* in IPFS.
 
-So, go ahead and grab yourself a free pinata account in this
+So, go ahead and grab yourself a free pinata account at this
 [link](https://www.pinata.cloud/).
 
 One of the peculiarities of IPFS is that files, or better called ‘content’, are
@@ -828,7 +828,7 @@ password (the one you use to open it, NOT your seed phrase). It also shows you a
 notice so you know that you are entering the danger zone. Confirm and you'll be
 able to copy your private key. Paste it in to our `hardhat.config.js`
 
-Please, if your are already a developer and you plan to use git to store your
+Please, if you are already a developer and you plan to use git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
@@ -852,7 +852,7 @@ This is the output i got in my console:
 ![deploy.rinkeby.png](/assets/lessons/2/img_19.png)
 
 Remember we are deploying to the actual blockchain, a testnet, but a blockchain
-none the less.
+nonetheless.
 
 Now that we have run the deploy script, delete the private key and the RPC API
 key from `hardhat.config.js` to minimize the handling of the wallet. In the next
@@ -869,4 +869,4 @@ and [Opensea](https://testnets.opensea.io/collection/d-d-academy)
 ![opensea.png](/assets/lessons/2/img_20.png)
 
 And that's it! You have created your own NFT collection from scratch! What a
-super star!!
+superstar!!
