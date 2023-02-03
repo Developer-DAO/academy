@@ -1,15 +1,11 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "True or False: In order to access and information to a public blockchain you need to have permission from the owner",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "True"
     },
     {
-      "answer": "Trustless",
-      "correct": true
-    },
-    {
-      "answer": "Decentralized",
+      "answer": "False",
       "correct": true
     }
   ]
