@@ -5,7 +5,6 @@ import { WalletProvider } from '../components/WalletProvider'
 import { theme } from '../theme'
 import Header from '../components/Header'
 import Footer from '../components/footer/Footer'
-import ConsentBanner from '../components/ConsentBanner'
 import { DefaultSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Components from '../components/mdx/Components'
@@ -79,7 +78,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </MDXProvider>
           <Footer />
-          <ConsentBanner />
           <Analytics />
         </Box>
       </WalletProvider>
