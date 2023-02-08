@@ -1,7 +1,7 @@
 import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { minute, second } from '../lib/time'
-import { PomodoroTimer } from './PomodoroTimer'
+import { minute, second } from '@lib/time'
+import { PomodoroTimer } from '@components/PomodoroTimer'
 
 beforeEach(() => {
   jest.useFakeTimers()

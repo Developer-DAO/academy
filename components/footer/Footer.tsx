@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { FaTwitter, FaGithub } from 'react-icons/fa'
-import { SocialButton } from './SocialButton'
+import { SocialButton } from '@components/footer/SocialButton'
 
 export default function Footer() {
   return (

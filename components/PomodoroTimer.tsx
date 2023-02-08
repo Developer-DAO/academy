@@ -23,7 +23,7 @@ import {
   MdVideogameAsset,
   MdOutlineCheck,
 } from 'react-icons/md'
-import { formatTime, minute, second } from '../lib/time'
+import { formatTime, minute, second } from '@lib/time'
 
 export interface TimerState {
   status: TimerStatus

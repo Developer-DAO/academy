@@ -1,5 +1,5 @@
 import React from 'react'
-import { PomodoroTimer } from './PomodoroTimer'
+import { PomodoroTimer } from '@components/PomodoroTimer'
 
 export default {
   component: PomodoroTimer,

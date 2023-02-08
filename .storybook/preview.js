@@ -1,6 +1,6 @@
 import * as NextImage from 'next/image'
-import { WalletProvider } from '../components/WalletProvider'
-import { theme } from '../theme'
+import { WalletProvider } from '@components/WalletProvider'
+import { theme } from '@theme'
 
 // de-optimize Image component
 const OriginalNextImage = NextImage.default

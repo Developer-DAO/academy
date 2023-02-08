@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import type { NextPage } from 'next'
-import Hero from '../components/Hero'
+import Hero from '@components/Hero'
 
 const Home: NextPage = () => {
   return (

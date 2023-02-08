@@ -1,13 +1,13 @@
 import { ChakraProvider, Box } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { WalletProvider } from '../components/WalletProvider'
-import { theme } from '../theme'
-import Header from '../components/Header'
-import Footer from '../components/footer/Footer'
+import { WalletProvider } from '@components/WalletProvider'
+import { theme } from '@theme'
+import Header from '@components/Header'
+import Footer from '@components/footer/Footer'
 import { DefaultSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
-import Components from '../components/mdx/Components'
+import Components from '@components/mdx/Components'
 import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
