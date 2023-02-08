@@ -18,14 +18,13 @@ export default function Footer() {
     >
       <Container
         as={Stack}
-        maxW={'6xl'}
+        maxW={'2xl'}
         py={4}
         direction={{ base: 'column', md: 'row' }}
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
       >
-        <Text>Developer DAO Foundation © {new Date().getFullYear()}</Text>
         <Stack direction={'row'} spacing={3}>
           <NextLink
             href={
@@ -58,6 +57,7 @@ export default function Footer() {
       </Container>
 
       <Container maxW={'6xl'} py={4} centerContent>
+        <Text>Developer DAO Foundation © {new Date().getFullYear()}</Text>
         <Text align="center">
           Website content licensed under{' '}
           <NextLink
@@ -81,6 +81,16 @@ export default function Footer() {
             </Link>
           </NextLink>
           .
+        </Text>
+        <Text>
+          <NextLink
+            href={'https://www.developerdao.com/privacy-policy'}
+            passHref
+          >
+            <Link isExternal textDecoration="underline">
+              Privacy Policy
+            </Link>
+          </NextLink>
         </Text>
       </Container>
     </Box>
