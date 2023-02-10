@@ -16,7 +16,7 @@ interface Question {
 }
 
 const Question: FC<QuestionProps> = (props: QuestionProps) => {
-  const question: Question = require(`../../utils/questions/${props.question}.json`)
+  const question: Question = require(`@utils/questions/${props.question}.json`)
   const [optionsSelected, setOptionsSelected]: [
     number[],
     Dispatch<SetStateAction<number[]>>,

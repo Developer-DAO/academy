@@ -2,8 +2,8 @@ import { Flex, Stack, Heading, Box } from '@chakra-ui/react'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { ContentBanner } from '../../components/ContentBanner'
-import { CONTENT_PATH } from '../../lib/constants'
+import { ContentBanner } from '@components/ContentBanner'
+import { CONTENT_PATH } from '@lib/constants'
 
 interface Lesson {
   path: string

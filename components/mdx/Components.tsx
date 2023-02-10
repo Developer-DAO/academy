@@ -1,11 +1,11 @@
 import { Box, Code, Heading, Image, Text } from '@chakra-ui/react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
-import { CopyToClipboard } from '../CopyToClipboard'
-import SideDrawer from './SideDrawer'
-import Quiz from './Quiz'
-import Question from './Question'
-import Callout from './Callout'
+import { CopyToClipboard } from '@components/CopyToClipboard'
+import SideDrawer from '@components/mdx/SideDrawer'
+import Quiz from '@components/mdx/Quiz'
+import Question from '@components/mdx/Question'
+import Callout from '@components/mdx/Callout'
 
 const Components = {
   code: (props: any) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import SchoolOfCodeLogo from './SchoolOfCodeLogo'
+import SchoolOfCodeLogo from '@components/SchoolOfCodeLogo'
 
 export default {
   component: SchoolOfCodeLogo,

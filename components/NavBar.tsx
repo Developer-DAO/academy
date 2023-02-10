@@ -12,9 +12,9 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react'
-import HamburgerIcon from './HamburgerIcon'
-import SchoolOfCodeLogo from './SchoolOfCodeLogo'
-import { PomodoroTimer } from './PomodoroTimer'
+import HamburgerIcon from '@components/HamburgerIcon'
+import SchoolOfCodeLogo from '@components/SchoolOfCodeLogo'
+import { PomodoroTimer } from '@components/PomodoroTimer'
 // import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 function NavBar() {

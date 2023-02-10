@@ -13,10 +13,7 @@ import {
   useToast,
 } from '@chakra-ui/react'
 import React, { FC, useState } from 'react'
-import {
-  getCorrectAnswersIndexes,
-  haveSameElements,
-} from '../../utils/QuizHelpers'
+import { getCorrectAnswersIndexes, haveSameElements } from '@utils/QuizHelpers'
 
 interface QuizProps {
   quiz: string
@@ -42,7 +39,7 @@ interface Answers {
 }
 
 const Quiz: FC<QuizProps> = (props: QuizProps) => {
-  const quiz: Quiz = require(`../../utils/quizzes/${props.quiz}.json`)
+  const quiz: Quiz = require(`@utils/quizzes/${props.quiz}.json`)
   const [showQuiz, setShowQuiz] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})

@@ -15,7 +15,7 @@ import {
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { CONTENT_PATH } from '../../lib/constants'
+import { CONTENT_PATH } from '@lib/constants'
 
 interface LessonProps {
   lessons: {
