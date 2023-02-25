@@ -133,13 +133,11 @@ const TimeRemaining = ({ time }: { time: number }) => (
 )
 
 export const PomodoroTimer = (props: any) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const { isRunning, status, timeRemaining } = state
-
-  const { variant, ...rest } = props
   const [isBigScreenMediaQuery] = useMediaQuery('(min-width: 62em)')
   const [isBigScreen, setIsBigScreen] = useState(false)
   const [maxPopoverWidth, setMaxPopoverWidth] = useState('14rem')
+  const { variant, ...rest } = props
+  const iconStyle = useStyleConfig('PomodoroIcon', { variant })
 
   useEffect(() => {
     setIsBigScreen(isBigScreenMediaQuery)
@@ -149,8 +147,32 @@ export const PomodoroTimer = (props: any) => {
     setMaxPopoverWidth(isBigScreen ? '14rem' : '11rem')
   }, [isBigScreen])
 
+  return (
+    <Popover trigger="hover" placement={isBigScreen ? 'bottom' : 'bottom-end'}>
+      <PopoverTrigger>
+        <Box __css={iconStyle} display="inline-flex">
+          <IconButton
+            icon={<IoTimerOutline />}
+            variant="pomodoroIcon"
+            aria-label="Pomodoro Timer"
+          />
+        </Box>
+      </PopoverTrigger>
+      <PopoverContent maxWidth={maxPopoverWidth}>
+        <PopoverArrow />
+
+        <PomodoroTimerInternal {...props} />
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+export const PomodoroTimerInternal = (props: any) => {
+  const [state, dispatch] = useReducer(reducer, initialState)
+  const { isRunning, status, timeRemaining } = state
+  const { variant, isBigScreen, ...rest } = props
+
   const timerStyle = useStyleConfig('PomodoroTimer', { variant })
-  const iconStyle = useStyleConfig('PomodoroIcon', { variant })
 
   const getButton = (
     data: TimerEventData,
@@ -163,19 +185,24 @@ export const PomodoroTimer = (props: any) => {
           key={idx}
           onClick={() => dispatch(data.event)}
           leftIcon={data.eventIcon}
+          aria-label={data.eventDesc}
         >
           {data.eventDesc}
         </Button>
       ) : (
         <IconButton
+          aria-label={data.eventDesc}
           key={idx}
           onClick={() => dispatch(data.event)}
           icon={data.eventIcon}
-          aria-label={data.eventDesc}
         />
       )
     ) : (
-      <Button key={idx} onClick={() => dispatch(data.event)}>
+      <Button
+        key={idx}
+        onClick={() => dispatch(data.event)}
+        aria-label={data.eventDesc}
+      >
         {data.eventDesc}
       </Button>
     )
@@ -186,32 +213,16 @@ export const PomodoroTimer = (props: any) => {
     status: string | undefined,
     time: number,
     events: TimerEventData[],
+    isBigScreen: boolean,
   ) => {
     return (
-      <Popover
-        trigger="hover"
-        placement={isBigScreen ? 'bottom' : 'bottom-end'}
-      >
-        <PopoverTrigger>
-          <Box __css={iconStyle} display="inline-flex">
-            <IconButton
-              icon={mainIcon}
-              variant="pomodoroIcon"
-              aria-label="Pomodoro Timer"
-            />
-          </Box>
-        </PopoverTrigger>
-        <PopoverContent maxWidth={maxPopoverWidth}>
-          <PopoverArrow />
-          <Stack direction="column" align="center" __css={timerStyle}>
-            {status ? <Status>{status}</Status> : <Status>&nbsp;</Status>}
-            <TimeRemaining time={time} />
-            <ButtonGroup variant="pomodoroControl" size="sm" gap="0" isAttached>
-              {events.map((e, idx) => getButton(e, idx, isBigScreen))}
-            </ButtonGroup>
-          </Stack>
-        </PopoverContent>
-      </Popover>
+      <Stack direction="column" align="center" __css={timerStyle}>
+        {status ? <Status>{status}</Status> : <Status>&nbsp;</Status>}
+        <TimeRemaining time={time} />
+        <ButtonGroup variant="pomodoroControl" size="sm" gap="0" isAttached>
+          {events.map((e, idx) => getButton(e, idx, isBigScreen))}
+        </ButtonGroup>
+      </Stack>
     )
   }
 
@@ -219,39 +230,75 @@ export const PomodoroTimer = (props: any) => {
 
   switch (status) {
     case TimerStatus.Idle:
-      return buildPomodoroUI(<IoTimerOutline />, '', timeRemaining, [
-        { event: 'study', eventDesc: 'Study', eventIcon: <FaGraduationCap /> },
-      ])
+      return buildPomodoroUI(
+        <IoTimerOutline />,
+        '',
+        timeRemaining,
+        [
+          {
+            event: 'study',
+            eventDesc: 'Study',
+            eventIcon: <FaGraduationCap />,
+          },
+        ],
+        isBigScreen,
+      )
 
     case TimerStatus.Studying:
-      return buildPomodoroUI(<FaGraduationCap />, 'Studying', timeRemaining, [
-        { event: 'pause', eventDesc: 'Pause', eventIcon: <MdPause /> },
-        {
-          event: 'reset',
-          eventDesc: 'Reset',
-          eventIcon: <MdReplay />,
-        },
-      ])
+      return buildPomodoroUI(
+        <FaGraduationCap />,
+        'Studying',
+        timeRemaining,
+        [
+          { event: 'pause', eventDesc: 'Pause', eventIcon: <MdPause /> },
+          {
+            event: 'reset',
+            eventDesc: 'Reset',
+            eventIcon: <MdReplay />,
+          },
+        ],
+        isBigScreen,
+      )
 
     case TimerStatus.StudyingPaused:
-      return buildPomodoroUI(<MdPause />, 'Studying Paused', timeRemaining, [
-        { event: 'resume', eventDesc: 'Resume', eventIcon: <MdPlayArrow /> },
-        {
-          event: 'reset',
-          eventDesc: 'Reset',
-          eventIcon: <MdReplay />,
-        },
-      ])
+      return buildPomodoroUI(
+        <MdPause />,
+        'Studying Paused',
+        timeRemaining,
+        [
+          { event: 'resume', eventDesc: 'Resume', eventIcon: <MdPlayArrow /> },
+          {
+            event: 'reset',
+            eventDesc: 'Reset',
+            eventIcon: <MdReplay />,
+          },
+        ],
+        isBigScreen,
+      )
 
     case TimerStatus.StudyingComplete:
-      return buildPomodoroUI(<MdOutlineCheck />, 'Studying Complete', 0, [
-        { event: 'break', eventDesc: 'Break', eventIcon: <MdVideogameAsset /> },
-      ])
+      return buildPomodoroUI(
+        <MdOutlineCheck />,
+        'Studying Complete',
+        0,
+        [
+          {
+            event: 'break',
+            eventDesc: 'Break',
+            eventIcon: <MdVideogameAsset />,
+          },
+        ],
+        isBigScreen,
+      )
 
     case TimerStatus.Break:
-      return buildPomodoroUI(<MdVideogameAsset />, 'On Break', timeRemaining, [
-        { event: 'skip', eventDesc: 'Skip', eventIcon: <MdFastForward /> },
-      ])
+      return buildPomodoroUI(
+        <MdVideogameAsset />,
+        'On Break',
+        timeRemaining,
+        [{ event: 'skip', eventDesc: 'Skip', eventIcon: <MdFastForward /> }],
+        isBigScreen,
+      )
 
     case TimerStatus.BreakComplete:
       return buildPomodoroUI(
@@ -265,6 +312,7 @@ export const PomodoroTimer = (props: any) => {
             eventIcon: <FaGraduationCap />,
           },
         ],
+        isBigScreen,
       )
 
     default:
