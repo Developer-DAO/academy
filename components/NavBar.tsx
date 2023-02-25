@@ -22,7 +22,7 @@ function NavBar() {
   return (
     <Box>
       <Flex justify="left" alignItems="center">
-        <Link variant="logo" href={'/'}>
+        <Link as={NextLink} variant="logo" href={'/'}>
           {router.pathname.endsWith('/[slug]') ? (
             <SchoolOfCodeLogo />
           ) : (
@@ -53,43 +53,46 @@ function NavBar() {
               />
               <MenuList backgroundColor={'soc.vividViolet'}>
                 <MenuItem>
-                  <NextLink href="/" passHref>
-                    <Link
-                      variant={
-                        router.pathname === '/'
-                          ? 'top-navigation-active'
-                          : 'top-navigation'
-                      }
-                    >
-                      Home
-                    </Link>
-                  </NextLink>
+                  <Link
+                    as={NextLink}
+                    href="/"
+                    passHref
+                    variant={
+                      router.pathname === '/'
+                        ? 'top-navigation-active'
+                        : 'top-navigation'
+                    }
+                  >
+                    Home
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <NextLink href="/getting-started" passHref>
-                    <Link
-                      variant={
-                        router.pathname.startsWith('/getting-started')
-                          ? 'top-navigation-active'
-                          : 'top-navigation'
-                      }
-                    >
-                      GET STARTED
-                    </Link>
-                  </NextLink>
+                  <Link
+                    as={NextLink}
+                    href="/getting-started"
+                    passHref
+                    variant={
+                      router.pathname.startsWith('/getting-started')
+                        ? 'top-navigation-active'
+                        : 'top-navigation'
+                    }
+                  >
+                    GET STARTED
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <NextLink href="/lessons" passHref>
-                    <Link
-                      variant={
-                        router.pathname.startsWith('/lessons')
-                          ? 'top-navigation-active'
-                          : 'top-navigation'
-                      }
-                    >
-                      Tracks
-                    </Link>
-                  </NextLink>
+                  <Link
+                    as={NextLink}
+                    href="/lessons"
+                    passHref
+                    variant={
+                      router.pathname.startsWith('/lessons')
+                        ? 'top-navigation-active'
+                        : 'top-navigation'
+                    }
+                  >
+                    Tracks
+                  </Link>
                 </MenuItem>
               </MenuList>
             </Menu>
@@ -103,41 +106,44 @@ function NavBar() {
             alignItems="center"
             display={{ base: 'none', md: 'none', lg: 'block' }}
           >
-            <NextLink href="/" passHref>
-              <Link
-                variant={
-                  router.pathname === '/'
-                    ? 'top-navigation-active'
-                    : 'top-navigation'
-                }
-              >
-                Home
-              </Link>
-            </NextLink>
+            <Link
+              as={NextLink}
+              href="/"
+              passHref
+              variant={
+                router.pathname === '/'
+                  ? 'top-navigation-active'
+                  : 'top-navigation'
+              }
+            >
+              Home
+            </Link>
 
-            <NextLink href="/getting-started" passHref>
-              <Link
-                variant={
-                  router.pathname.startsWith('/getting-started')
-                    ? 'top-navigation-active'
-                    : 'top-navigation'
-                }
-              >
-                Get Started
-              </Link>
-            </NextLink>
+            <Link
+              as={NextLink}
+              href="/getting-started"
+              passHref
+              variant={
+                router.pathname.startsWith('/getting-started')
+                  ? 'top-navigation-active'
+                  : 'top-navigation'
+              }
+            >
+              Get Started
+            </Link>
 
-            <NextLink href="/lessons" passHref>
-              <Link
-                variant={
-                  router.pathname.startsWith('/lessons')
-                    ? 'top-navigation-active'
-                    : 'top-navigation'
-                }
-              >
-                Tracks
-              </Link>
-            </NextLink>
+            <Link
+              as={NextLink}
+              href="/lessons"
+              passHref
+              variant={
+                router.pathname.startsWith('/lessons')
+                  ? 'top-navigation-active'
+                  : 'top-navigation'
+              }
+            >
+              Tracks
+            </Link>
 
             {/* <Button colorScheme="gray" variant="solid">
               <ConnectButton chainStatus="icon" showBalance={false} />

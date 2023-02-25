@@ -105,25 +105,24 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
                       maxW="40vw"
                       margin="0 auto"
                     >
-                      <NextLink
+                      <Link
+                        as={NextLink}
                         href={`/lessons/${lesson.path}/${lesson.slug}`}
                         passHref
                       >
-                        <Link>
-                          <Button
-                            height="auto"
-                            style={{
-                              whiteSpace: 'normal',
-                              wordWrap: 'break-word',
-                              padding: '0.5rem',
-                              width: '100%',
-                              fontSize: 'xl',
-                            }}
-                          >
-                            {lesson.frontMatter.title}
-                          </Button>
-                        </Link>
-                      </NextLink>
+                        <Button
+                          height="auto"
+                          style={{
+                            whiteSpace: 'normal',
+                            wordWrap: 'break-word',
+                            padding: '0.5rem',
+                            width: '100%',
+                            fontSize: 'xl',
+                          }}
+                        >
+                          {lesson.frontMatter.title}
+                        </Button>
+                      </Link>
                     </ListItem>
                   ))}
                 </>
@@ -150,16 +149,17 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
                   feedback
                 </Text>{' '}
                 about this project and our current lessons.{' '}
-                <NextLink
+                <Link
+                  as={NextLink}
                   href={
                     'https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
                   }
                   passHref
+                  isExternal
+                  textDecoration="underline"
                 >
-                  <Link isExternal textDecoration="underline">
-                    Submit your suggestion or bug report.
-                  </Link>
-                </NextLink>
+                  Submit your suggestion or bug report.
+                </Link>
               </ListItem>
               <ListItem>
                 We&apos;re also looking for{' '}

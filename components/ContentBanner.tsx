@@ -1,5 +1,5 @@
 import { Flex, Heading, Wrap, WrapItem } from '@chakra-ui/react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import Image from 'next/image'
 
 interface LessonProps {
@@ -27,7 +27,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
 
   return (
     <>
-      <Link key={slug} href={`/lessons/${path}/${slug}`} passHref>
+      <NextLink key={slug} href={`/lessons/${path}/${slug}`} passHref>
         <Flex direction="column" bg="gray.800" p={5} rounded={5}>
           <Flex
             direction="row"
@@ -77,7 +77,7 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
             {description}
           </Flex>
         </Flex>
-      </Link>
+      </NextLink>
     </>
   )
 }
