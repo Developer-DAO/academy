@@ -1,5 +1,4 @@
 import * as NextImage from 'next/image'
-import { WalletProvider } from '@components/WalletProvider'
 import { theme } from '@theme'
 
 // de-optimize Image component
@@ -15,10 +14,4 @@ export const parameters = {
   },
 }
 
-export const decorators = [
-  (Story) => (
-    <WalletProvider>
-      <Story />
-    </WalletProvider>
-  ),
-]
+export const decorators = [(Story) => <Story />]
