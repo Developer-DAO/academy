@@ -15,7 +15,6 @@ import {
 import HamburgerIcon from '@components/HamburgerIcon'
 import SchoolOfCodeLogo from '@components/SchoolOfCodeLogo'
 import { PomodoroTimer } from '@components/PomodoroTimer'
-// import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 function NavBar() {
   const router = useRouter()

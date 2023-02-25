@@ -20,17 +20,14 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/inter": "^4.5.15",
-    "@rainbow-me/rainbowkit": "^0.11.0",
     "@vercel/analytics": "^0.1.10",
-    "ethers": "5.x",
     "framer-motion": "^10.0.0",
     "next": "13.2.1",
     "next-i18next": "^13.1.5",
     "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.7.1",
-    "wagmi": "^0.11.7"
+    "react-icons": "^4.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
