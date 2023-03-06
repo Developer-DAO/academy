@@ -382,9 +382,13 @@ We can think of entering the house as `minting` new tokens or increasing the
 total supply, and leaving the house as `burning` tokens or decreasing the total
 supply. But this doors doesn't exist in our contract just yet.
 
-> If you are planning on leaving a fixed total supply like the `initialSupply` we
-> used recently, that's also a valid approach and you don't need to create a
-> `mint` or `burn` function.
+<Callout emoji='💡' size='md' variant='info'>
+
+If you are planning on leaving a fixed total supply like the `initialSupply` we
+used recently, that's also a valid approach and you don't need to create a
+`mint` or `burn` function.
+
+</Callout>
 
 We need to create public facing functions to achieve this:
 
@@ -680,13 +684,17 @@ My output:
 Now we can use this value when we need to deploy. To deploy our contract we will
 use the `forge create` tool.
 
-> We **don't** have to copy our private key in the command! That's one of the
-> reasons to use the `.env` file: we know exactly where our private key is and
-> we are responsible to not publish this file anywhere. We can even delete it
-> after we deploy the contract.
-> If you write your private key in a command on the terminal, all the things you
-> type in the terminal get stored in the terminal's history, which could be in a
-> publicly accesible file in your computer. That's why we are using an env file.
+<Callout emoji='⚠️' size='md' variant='info'>
+
+We **don't** have to copy our private key in the command! That's one of the
+reasons to use the `.env` file: we know exactly where our private key is and
+we are responsible to not publish this file anywhere. We can even delete it
+after we deploy the contract.
+If you write your private key in a command on the terminal, all the things you
+type in the terminal get stored in the terminal's history, which could be in a
+publicly accesible file in your computer. That's why we are using an `.env` file.
+
+</Callout>
 
 Notice aside, this is the command we can use to finally deploy our contract:
 
@@ -697,8 +705,13 @@ forge create src/MyToken.sol:MyToken \
     --private-key $RAW_PRIVATE_KEY
 ```
 
-> Remember that if you used a different name for your token and your `.sol`
-> file, you'll need to adjust this command.
+<Callout emoji='💡' size='md' variant='info'>
+
+Remember that if you used a different name for your token and your `.sol`
+file, you'll need to adjust this command.
+
+</Callout>
+
 
 Do you see how we used the value that `cast` gave us as a parameter after the
 `--constructor-args` modifier? We are passing down arguments to our solidity
