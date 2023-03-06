@@ -1,12 +1,11 @@
 ---
 i18n: 'erc20'
-title: Your own Token w/Foundry
+title: Your own Token with Foundry
 description:
   Create and deploy an ERC20 Token (UNI, MKR, DAI, etc.) using the Foundry
   toolkit.
 icons:
   [
-    'git',
     'solidity',
     'foundry',
     'openzeppelin',
@@ -63,10 +62,7 @@ Some basic functionality that our tokens need to provide are:
 - Approve an amount of tokens from an account to be spent by a third-party
   account
 
-<!-- Side Drawer -->
-
-<details>
-<summary>More info on the ERC20 Standard</summary>
+<SideDrawer buttonText="More info on the ERC20 Standard">
 
 To achive the functionality needed for an ERC20 token, the standard requires us
 to implement 9 methods and 2 events.
@@ -94,15 +90,13 @@ event Approval(address indexed _owner, address indexed _spender, uint256 _value)
 You can check the details in the full EIP-20 titled
 [ERC-20: Token Standard](https://eips.ethereum.org/EIPS/eip-20#token)
 
-</details>
+</SideDrawer>
 
 ## Has someone created a battle-tested library for the standard?
 
 Yes. OpenZeppelin (among others) has created an implementation we can inherit to
 create
 our own tokens easily.
-
-<!-- Open Zeppelin Side Drawer / Callout -->
 
 ## Let's code, but first...
 
@@ -112,11 +106,11 @@ project's structure and what do we want to achieve?
 Since we are _BUIDLING_, i'd like to think of our project, or smart contract,
 the same way as we would _roughly_ build a house:
 
-- 1. Foundations
-- 2. Structure: Framing, Walls and Roof
-- 3. Doors and Windows
-- 4. Security
-- 5. Final touches
+    * 1 - Foundations
+    * 2 - Structure: Framing, Walls and Roof
+    * 3 - Doors and Windows
+    * 4 - Security
+    * 5 - Final touches
 
 Before we build, we need a stable, leveled surface to place our foundations so
 we can build on top.
@@ -504,10 +498,7 @@ locked (only) for intruders!
 
 Congratulations! We have built a fully functioning token!
 
-<!-- Side Drawer -->
-
-<details>
-<summary>Here's my final Solidity code</summary>
+<SideDrawer buttonText="Here's my final Solidity code">
 
 Here we have our fully functioning house, I mean... token:
 
@@ -542,7 +533,7 @@ contract MyToken is ERC20, AccessControl {
 }
 ```
 
-</details>
+</SideDrawer>
 
 Given that we have our house completed, you might want to add a personalized
 detail to it, like a special furniture, wall paint, or make it a smart home.
@@ -787,4 +778,4 @@ be live and kicking.
 
 Now that we have built our house and it's has been accepted in the real estate
 register, we can invite our friends by transferring them some MTK, or **even**
-minting them some tokens, even if that affects your tokenomics :wink:
+minting them some tokens, even if that affects your tokenomics 😉
