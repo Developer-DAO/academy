@@ -33,7 +33,7 @@ token is Ether (or ETH), in Polygon its MATIC, and so on.
 Let's focus on the Ethereum blockchain for the sake of clarity.
 
 Every _other_ Token or "Crypto" you see, use or interact with in Ethereum is
-basically a smart contract that lets you send this tokens, receive them and
+basically a smart contract that lets you send these tokens, receive them and
 check your balance.
 
 Stablecoins like **DAI**, Tether (**USDT**), USD Coin (**USDC**) or tokens from
@@ -667,6 +667,14 @@ that does the same (Tip: [envsource fish function](https://gist.github.com/nikoh
 Once we have those values in our environment, our Foundry tool to deploy will
 know what wallet to deploy from, what node or RPC in the blockchain to connect
 to and what chain do we want to deploy to.
+
+<Callout emoji='💡' size='md' variant='info'>
+
+Remember that if you close your terminal session, all these variables with your
+private keys gets wiped from memory, so you need to run this command again if
+you want to continue the lesson at a later date.
+
+</Callout>
 
 We also need to pass our constructor 1 argument, our token's initial allocation.
 All the foundry tools expect values to be passed in `wei`, so we are going to
