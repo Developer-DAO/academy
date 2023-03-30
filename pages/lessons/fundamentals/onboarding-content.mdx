@@ -1,0 +1,102 @@
+# Onboarding content to Academy’s repository
+
+By **`john-mac` `maeve` `@7i7o` `piablo`**
+
+### Contents
+
+We are creating a process where we receive educational content from DAO members, or sponsors, in whatever form, transfer it to Notion and then to a Github branch where we will format it into an .mdx file - the native file type for content in Academy. 
+
+The final process will be done ‘remotely’ on the Github site, so that users don’t need to learn any developer tools/skills. From there, it can be submitted for review. And all being well, finally merged to the live/production Academy site for the world to enjoy.
+
+### A basic overview of a few whats, wheres and whys before we get started
+
+The educational content you have created and compiled could be in any number of places e.g. published in a Hashnode article, or in document locally on your machine. So we want to make transferring it on to D_D Academy as seamless as possible. Here is the rationale around some of the choices we made.
+
+We chose Chromium based Brave browser ⇒ Notion workspace ⇒ Github for text and images. Brave rendered images and rich text very nicely. Firefox caused us some rendering issues. And hey, Brave has been web3 friendly since the get-go. Larger files e.g. video material will need to be stored on a web3 hosting platform. We will make it as ‘novice friendly’ for you as we can.
+
+Making commits in Github has some standard etiquette. Since we are working in an open source project, we want our fellow contributors to easily understand at a glance the actions we have taken. So when we create a message to affirm those actions, we use a simple verb form and succinct and meaningful message headers. Github also allows us to add extra descriptions, if we need more detail. 
+
+You will be storing your content in two main directories in the Academy repository. The main text body of your lesson will be in *.mdx* file format and stored under the **pages** directory. Any images you have will be stored as *assets* under the **public** directory. You will simply create a *file path* to these *assets* from **public** to **pages** in the *.mdx* file. It’s really straightforward. 
+
+If larger files are stored in the same way on Github they will take ages to load when someone opens your content on the live Academy platform. And we don’t want that. We will give web3 solutions on how and where to store video and larger files. 
+
+### **Let’s get started!**
+
+### 1.  Steps for adding educational content to Github -
+
+✅ **your steps as you go**.
+
+**Copy your content to a Notion document**
+
+- [ ]  **Sign up** for Notion for free: [https://www.notion.so/](https://www.notion.so/)
+- [ ]  Create a new Notion page *`+ Add a page`*
+- [ ]  Copy your content and paste it into your new page.
+- [ ]  Check your new Notion copy and fix any irregularities.
+
+Now everything is ready to be pasted into Github. Please don’t be tempted to bypass Notion and paste directly into Github. It’s not worth the hassle. 
+
+- [ ]  **Create a Github account if you don’t have one already**: [https://github.com/join](https://github.com/join)
+
+**Create a ‘branch’ in your own Github to store your content**
+
+- [ ]  Open the Academy Github homepage: [https://github.com/Developer-DAO/academy](https://github.com/Developer-DAO/academy)
+- [ ]  Find the **`*Fork*`** menu and `***Create a new fork***` of the repo. This will be your own copy of the repository in your own Github user account.
+    
+    ![Create a new fork 2023-03-22 01-27-45.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ae83b865-4204-4a41-a9ab-ef9147ce7c1b/Create_a_new_fork_2023-03-22_01-27-45.png)
+    
+- [ ]  Choose a name for your repository e.g. **`my-name-academy`**, and click on **`*Create fork*`**
+- [ ]  Locate and open the `**main**` branch menu on your forked repo. Then you’ll see **`*Find or create a branch*`**, Name your new branch in there. In our test case, we named it “wolovim-part-2”. Click on 🎋`***Create branch***`.
+
+![Locate-Open-create-branch 2023-03-25 02-23-36.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e7a79632-ef9b-480d-9897-7b64003ec166/Locate-Open-create-branch_2023-03-25_02-23-36.png)
+
+- [ ]  Scroll down and from the list of folders and files, select `**pages**` folder → `**lessons**` . Determine which type of content you are submitting, and choose the appropriate folder - either `**fundamentals**` or `**projects**`. Click on `***Add File***` on the mid-upper right toolbar → choose `***Create new file***` → create `**name-of-lesson.mdx**`. In our case we named our file `**wolovim-part-2.mdx**`. Don’t save any changes just yet.
+
+**Transfer Notion document to .mdx file in Github remote**
+
+- [ ]  Go back to the Notion document where you pasted in your content article. Use mouse and cursor to highlight the entire article including any images, then use *`CTRL + C`* to copy. ***Note***: simply using *`CTRL +A`* to highlight the text might not work here as it might not pick up that crucial formatting we want from your Notion doc.
+- [ ]  At the top of the file on line 1, use `*CTRL + V*` to paste the content in your your newly-created, blank `**.mdx**` file on Github.
+
+Once the content has been added, you can click on the `***Preview***` button (top of page) to check the content in real time to see if it has rendered the way you want it. 
+
+- [ ]  If you’re satisfied with the changes, scroll down and create a meaningful commit message header. We say meaningful, so that our fellow contributors can later easily understand the action you took. Github allows a commit message header of maximum 50 characters. `Add wolovim-part-2.mdx lesson to Fundamentals` was appropriate in our case. You can ***`Add an optional extended description`*** in the field below it, if you need to.
+- [ ]  Now you are ready to select the green `***Commit New File***` button. Congratulations, you committed your lesson! But we still have some work to do 😆
+- [ ]  Note: If adding video content, it might be helpful to upload the video to IPFS using a service such as [akord.com](http://akord.com), pinata.cloud, or [nft.storage](http://nft.storage) and use the resulting IPFS hash/URL to your `.mdx` code which will be covered below.
+
+**Realising where our media actually lives in Github**
+
+Your ***`lessons`*** i.e. **`.mdx`** files, will be stored in sub-directories of the `**academy/pages**` directory and any **`*assets*`**, such as images or video will be in sub-directories of the **`academy/public`** directory.
+
+Open your new **`name-of-lesson.mdx`** file from the list. You can inspect and edit the raw code by clicking on `***Raw***` on the toolbar just above the content. Let’s do that. We see in our `.mdx` code that the image below is being pulled from an external server or source: `https://snakecharmers.ethereum.org/content/images/size/w100/2022/02/wolf-head-smol.png` Over time, the addresses of these images may be changed due to reorganization of the website or archiving of content. This will lead to the image “breaking”, since it can no longer render or find the image. To solve this problem, we will want to download the image from the Notion doc to our machine and then add it to our Github repo, so that it will live perpetually in the repo and will always be rendered. 
+
+## 💫**Adding image assets to repo or IPFS hashes to your `.mdx` file still needs done**✨
+
+**Steps to download and save image to our repo**:
+
+- [ ]  In the Notion doc, right click on the image and choose `*Download*` from the choices in the menu, name the file (in our case `wolovim-wolf.png`) and save it to a local directory such as “Pictures” or “Documents”. Repeat for any other images.
+
+Github will not allow you to simply add an empty folder. To create one, we’ll first add a .gitkeep file as a placeholder in that folder as the home for our downloaded image. 
+
+- [ ]  In the Github UI, return to the root directory **`my-name-academy`** of your new branch and click on the `**public**` directory → `**assets**` → `**lessons**` . In the right-hand section of the mid-toolbar, choose `**Add file**` then `**Create new file**` . In the input box, type `name-of-lesson/.gitkeep` , we input `wolovim-part-2/.gitkeep` . Then scroll down, add a commit message header and `**Commit new file**` . Now we can upload any images from the local directory where we saved them.
+- [ ]  To add our image, click again on ***`Add file`*** → ***`Upload files`*** → ***`choose your files`***. Add your files/images from your local directory. Add a commit message header below and ***`Commit changes`***.
+
+Hang in there. We’re almost there! 🙌
+
+4. **Add image file path to our `.mdx` file**. 
+
+Let’s go back to our new `name-of-lesson.mdx` file. Remember, it’s in a sub-directory under **`pages`**. If you inspect your raw `.mdx` file, you will see code that represents the external URL for the website to look something like this:
+`![https://snakecharmers.ethereum.org/content/images/size/w100/2022/02/wolf-head-smol.png](https://snakecharmers.ethereum.org/content/images/size/w100/2022/02/wolf-head-smol.png)` We want to adjust this code so that it points to the path in the repo where we stored the image, instead of to this URL. 
+
+- [ ]  Please click back to the `**public**` folder in the repo, then `**assets**` → `**lessons**` → `**new-lesson-folder**` → `**new-image.png**`. Look above the image on Github, you will see the path that you need, which should look something like this:
+
+![path-to-image.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33609667-3f59-4782-98f9-3cce1c81a364/path-to-image.png)
+
+Let’s use this code as an example. We need to write our new code, so that .mdx can properly render the image. It should be in the form below:
+`![name-of-image](/assets/lessons/my-new-lesson/new-lesson-image.png)` . We purposely leave out `**academy/public**` because .mdx already knows to look in the `**public**` folder for all stored images. 
+
+- [ ]  Now you copy your file path.
+- [ ]  Let’s navigate back to our `.mdx` file and inspect the code: `**pages**` → `**lessons**` → `**fundamentals**` → `**new-lesson.mdx**` → click on ✏️ pencil icon to `**Edit this file**`  and replace the old external URL code with the new code created in the last step.  The path code for my image looked like this:`![wolovim-wolf.png](/assets/lessons/wolovim-part-2/wolovim-wolf.png)` Scroll down to input a commit message e.g.`Add wolovim-wolf.png path to .mdx` and click `***Commit changes***` .
+- [ ]  If you have more images, you can include them at this stage, or repeat the process from step *Add image file path to our `.mdx`  file*. by grabbing the path for each new image.
+- [ ]  If your images now render as the description you gave them e.g. `wolovim-wolf.png` you’re looking good!!
+- [ ]  someone needs to ***`Compare and pull request`*** ……
+
+**Phew! You made it to the end of the tutorial and successfully uploaded your amazing content to the Academy platform!! Congratulations!!** 🙌 🎉
