@@ -17,4 +17,13 @@ export const contributors: ContributorLookup = {
     about:
       'Brian has been a member of the DeveloperDAO since November 2021, and enjoys building Web3 user experiences and smart contracts. Also active with Next.js, React and Serverless.',
   },
+  piablo: {
+    displayName: 'piablo',
+  },
+  georgemac510: {
+    displayName: 'georgemac510',
+  },
+  lorem: {
+    displayName: 'Lorem Ipsum',
+  },
 }
