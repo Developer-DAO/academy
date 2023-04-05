@@ -1,5 +1,5 @@
 import { Box, Text, VStack } from '@chakra-ui/react'
-import { Author } from '@components/mdx/Author'
+import { Contributor } from '@components/mdx/Contributor'
 
 interface ContributorFooterProps {
   authors: string[]
@@ -27,7 +27,7 @@ export function ContributorFooter({
           </Text>
           <VStack spacing={4} alignItems="left">
             {authors.map((contrib) => {
-              return <Author handle={contrib} avatarSize="2xl" />
+              return <Contributor handle={contrib} avatarSize="2xl" />
             })}
           </VStack>
         </Box>
@@ -40,7 +40,7 @@ export function ContributorFooter({
           </Text>
           <VStack spacing={4} alignItems="left">
             {reviewers.map((contrib) => {
-              return <Author handle={contrib} avatarSize="lg" />
+              return <Contributor handle={contrib} avatarSize="lg" />
             })}
           </VStack>
         </Box>
@@ -55,7 +55,7 @@ export function ContributorFooter({
           </Text>
           <VStack spacing={4} alignItems="left">
             {contributors.map((contrib) => {
-              return <Author handle={contrib} avatarSize="lg" />
+              return <Contributor handle={contrib} avatarSize="lg" />
             })}
           </VStack>
         </Box>

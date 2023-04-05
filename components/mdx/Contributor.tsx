@@ -2,14 +2,14 @@ import { Box, Text, Link, HStack, Avatar, Center } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { contributors } from '@data/contributors'
 
-interface AuthorProps {
+interface ContributorProps {
   handle: string
   avatarSize?: string
 }
 
-export function Author({ handle, avatarSize }: AuthorProps) {
-  const author = contributors[handle]
-  if (!author) {
+export function Contributor({ handle, avatarSize }: ContributorProps) {
+  const contrib = contributors[handle]
+  if (!contrib) {
     return null
   }
 
@@ -18,27 +18,27 @@ export function Author({ handle, avatarSize }: AuthorProps) {
       <Center width={40}>
         <Avatar
           size={avatarSize}
-          name={author.displayName}
-          src={author.avatarUrl}
+          name={contrib.displayName}
+          src={contrib.avatarUrl}
         />
       </Center>
       <Box>
-        {author.moreInfoUrl && (
+        {contrib.moreInfoUrl && (
           <Link
             as={NextLink}
-            href={author.moreInfoUrl}
+            href={contrib.moreInfoUrl}
             passHref
             isExternal
             textDecoration="underline"
           >
-            <Text fontSize={18}>{author.displayName}</Text>
+            <Text fontSize={18}>{contrib.displayName}</Text>
           </Link>
         )}
-        {!author.moreInfoUrl && <Text>{author.displayName}</Text>}
+        {!contrib.moreInfoUrl && <Text>{contrib.displayName}</Text>}
 
-        {author.about && (
+        {contrib.about && (
           <Box mt={2} maxWidth="xl">
-            <Text fontSize={14}>{author.about}</Text>
+            <Text fontSize={14}>{contrib.about}</Text>
           </Box>
         )}
       </Box>
