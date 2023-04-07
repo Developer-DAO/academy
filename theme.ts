@@ -133,15 +133,6 @@ const components = {
       },
     },
   },
-  LessonHeader: {
-    baseStyle: {
-      mt: '1.5em',
-      fontWeight: 'bold',
-      fontSize: '1.875rem',
-      letterSpacing: '-.025em',
-      color: 'yellow.300',
-    },
-  },
 }
 
 export const theme = extendTheme({
