@@ -16,14 +16,30 @@ export function Contributor({ handle, avatarSize }: ContributorProps) {
   return (
     <HStack paddingX={2} columnGap={4}>
       <Center width={40}>
-        <Avatar
-          size={avatarSize}
-          name={contrib.displayName}
-          src={contrib.avatarUrl}
-        />
+        {contrib.moreInfoUrl ? (
+          <Link
+            as={NextLink}
+            href={contrib.moreInfoUrl}
+            passHref
+            isExternal
+            textDecoration="underline"
+          >
+            <Avatar
+              size={avatarSize}
+              name={contrib.displayName}
+              src={contrib.avatarUrl}
+            />
+          </Link>
+        ) : (
+          <Avatar
+            size={avatarSize}
+            name={contrib.displayName}
+            src={contrib.avatarUrl}
+          />
+        )}
       </Center>
       <Box>
-        {contrib.moreInfoUrl && (
+        {contrib.moreInfoUrl ? (
           <Link
             as={NextLink}
             href={contrib.moreInfoUrl}
@@ -33,8 +49,9 @@ export function Contributor({ handle, avatarSize }: ContributorProps) {
           >
             <Text fontSize={18}>{contrib.displayName}</Text>
           </Link>
+        ) : (
+          <Text>{contrib.displayName}</Text>
         )}
-        {!contrib.moreInfoUrl && <Text>{contrib.displayName}</Text>}
 
         {contrib.about && (
           <Box mt={2} maxWidth="xl">
