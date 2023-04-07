@@ -2,9 +2,9 @@ import { Box, Text, VStack } from '@chakra-ui/react'
 import { Contributor } from '@components/mdx/Contributor'
 
 interface ContributorFooterProps {
-  authors: string[]
-  reviewers: string[]
-  contributors: string[]
+  authors?: string[]
+  reviewers?: string[]
+  contributors?: string[]
 }
 
 export function ContributorFooter({
@@ -20,7 +20,7 @@ export function ContributorFooter({
       borderTopWidth="thin"
       borderColor="gray"
     >
-      {authors && authors.length > 0 && (
+      {authors && Array.isArray(authors) && authors.length > 0 && (
         <Box>
           <Text fontSize={26} marginTop={8} marginBottom={4}>
             {authors.length > 1 ? 'Authors' : 'Author'}
@@ -33,7 +33,7 @@ export function ContributorFooter({
         </Box>
       )}
 
-      {reviewers && reviewers.length > 0 && (
+      {reviewers && Array.isArray(reviewers) && reviewers.length > 0 && (
         <Box>
           <Text fontSize={20} marginTop={8} marginBottom={4}>
             {reviewers.length > 1 ? 'Reviewers' : 'Reviewer'}
@@ -46,20 +46,22 @@ export function ContributorFooter({
         </Box>
       )}
 
-      {contributors && contributors.length > 0 && (
-        <Box>
-          <Text fontSize={20} marginTop={8} marginBottom={4}>
-            {contributors.length > 1
-              ? 'Additional Contributors'
-              : 'Additional Contributor'}
-          </Text>
-          <VStack spacing={4} alignItems="left">
-            {contributors.map((contrib) => {
-              return <Contributor handle={contrib} avatarSize="lg" />
-            })}
-          </VStack>
-        </Box>
-      )}
+      {contributors &&
+        Array.isArray(contributors) &&
+        contributors.length > 0 && (
+          <Box>
+            <Text fontSize={20} marginTop={8} marginBottom={4}>
+              {contributors.length > 1
+                ? 'Additional Contributors'
+                : 'Additional Contributor'}
+            </Text>
+            <VStack spacing={4} alignItems="left">
+              {contributors.map((contrib) => {
+                return <Contributor handle={contrib} avatarSize="lg" />
+              })}
+            </VStack>
+          </Box>
+        )}
     </Box>
   )
 }
