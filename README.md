@@ -193,6 +193,10 @@ the content, Reviewer(s) edited the content, and Contributor(s) later made
 updates or fixed issues.
 
 ```jsx
+import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+```
+
+```jsx
 <ContributorFooter
   authors={['brianfive']}
   reviewers={['piablo', 'georgemac510']}
