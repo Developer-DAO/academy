@@ -178,3 +178,38 @@ from the creators of Next.js.
 Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
 details.
+
+## How do I add/edit contributors for a lesson?
+
+First make sure you add your information to `./data/contributors.ts`. Minimally
+you need a unique handle (a single lowercase name such as `brianfive`) which
+will be used to look up your information.
+
+Then add a component in your `.mdx` file at the bottom like this, using various
+handles defined above.
+
+You can add a contributor as an author, reviewer of contributor. Author(s) wrote
+the content, Reviewer(s) edited the content, and Contributor(s) later made
+updates or fixed issues.
+
+```jsx
+<ContributorFooter
+  authors={['brianfive']}
+  reviewers={['piablo', 'georgemac510']}
+  contributors={[]}
+/>
+```
+
+## How do I add a specific forum link in a lesson's header?
+
+Make sure the `<LessonHeader />` component has the `discussionUrl` attribute
+like this:
+
+```jsx
+<LessonHeader
+  title="Lesson 4: Testing your TierNFT"
+  discussionUrl="https://developerdao.peeranha.io/discussions/1372/testing-solidity-contracts"
+/>
+```
+
+Without `discussionUrl` the link will default to the home page of Peeranha.

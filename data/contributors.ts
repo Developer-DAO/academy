@@ -9,6 +9,10 @@ export interface ContributorLookup {
   [key: string]: ContributorDetails
 }
 
+/**
+ * This is a mapping of handles to contributor details. The handle key will be used
+ * in the <ContributorFooter /> component to look up the details.
+ */
 export const contributors: ContributorLookup = {
   brianfive: {
     displayName: 'Brian Gershon',
@@ -22,8 +26,5 @@ export const contributors: ContributorLookup = {
   },
   georgemac510: {
     displayName: 'georgemac510',
-  },
-  lorem: {
-    displayName: 'Lorem Ipsum',
   },
 }
