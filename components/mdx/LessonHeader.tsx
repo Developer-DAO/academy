@@ -26,14 +26,7 @@ export function LessonHeader({ title, discussionUrl }: LessonHeaderProps) {
         </Text>
       </Box>
       {forumLink && (
-        <HStack
-          borderWidth="thin"
-          borderColor="gray"
-          padding={4}
-          marginY={8}
-          columnGap={2}
-          maxWidth="xl"
-        >
+        <HStack marginY={6} columnGap={2} maxWidth="xl">
           <Box>
             <QuestionIcon w={8} h={8} />
           </Box>
