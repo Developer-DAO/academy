@@ -2,11 +2,11 @@
   "question": "Which statement is true?",
   "options": [
     {
-      "answer": "It’s important to test your code rigorously because once deployed it resides on the Blockchain forever",
+      "answer": "It’s important to test your code rigorously, because once deployed it resides on the Blockchain forever.",
       "correct": true
     },
     {
-      "answer": "The great thing about the blockchain is if you need to make corrections to buggy code you can just upload fixes which will automatically overwrite previous versions seamlessly"
+      "answer": "The great thing about the blockchain is if you need to make corrections to buggy code, you can just upload fixes, which will automatically overwrite previous versions seamlessly."
     }
   ]
 }
