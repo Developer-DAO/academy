@@ -1,0 +1,18 @@
+{
+  "question": "What is the purpose of the \"setMessage\" function in the smart contract? ",
+  "options": [
+    {
+      "answer": "To deploy the contract to the blockchain."
+    },
+    {
+      "answer": "To create a new message and emit an event.",
+      "correct": true
+    },
+    {
+      "answer": "To increment the message count."
+    },
+    {
+      "answer": "To retrieve the current message stored in the contract."
+    }
+  ]
+}

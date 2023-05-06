@@ -8,6 +8,12 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 <LessonHeader title="Lesson 1: Intro to Smart Contract Development" />
 
+## About this lesson
+
+Welcome to our introductory lesson on smart contract development,  blockchain fundamentals and your first taste of coding with the Solidity language. For this lesson, you don’t really need to have development experience, although we expect you to have a ‘technical mindset’ to be able to proceed. We would recommend *Build a basic NFT* as a subsequent lesson for getting familiar with more advanced concepts and developer tooling. But first things first.
+
+We have some questions for you throughout the lesson for testing your previous knowledge, predicting next steps in the lesson, and letting you see for yourself how well you're absorbing the new content. There's also a quiz at the end, of course, so make sure you're checking out all the side-drawers for a deeper dive of the new concepts. To complete the lesson, expect somewhere between one and four hours depending on your previous experience and the need to learn new ideas.  Please set the pomodoro timer regularly in the menu header to ensure you’re taking regular breaks to 'go touch some grass’.
+
 ## What are we building?
 
 We’re going to build a **smart contract**, but what on Jupiter is a smart
@@ -20,11 +26,13 @@ Let's pause here for a couple questions to give you a taste of what's to come
 and give yourself a chance to test what you already know.
 
 <SideDrawer buttonText="Warm-up questions" title="Warm-up questions">
-    <Question question="question-1" />
-    <Question question="question-2" />
+    <Question question="intro-Q1" />
+    <Question question="intro-Q2" />
+    <Question question="intro-Q3" />
 </SideDrawer>
 <br/>
-<br/>
+
+Did you set the pomodoro?
 
 How was that? No stress if the answers didn't come naturally. We're here to fill
 in the gaps! If you're interested in more context before moving along to the
@@ -51,7 +59,7 @@ _money trail_. And this was one of the main intentions of blockchains.
 Transparency. There are ever-growing use cases for the types of transactions,
 financial and non-financial. Let’s move on. The blocks are secured to each other
 with cryptography. A similar type of encryption that is used to secure the
-Signal or Telegram apps on your smartphone. (Any other examples?) If someone
+Signal or Telegram apps on your smartphone. If someone
 did try to change any information on the chain, the alarm bells would go off.
 
 So how is all this permission**lessness** possible? Can’t someone shut this
@@ -125,18 +133,21 @@ easier to remember alias for their address e.g.
 [imsoeasy.](http://imsoeasy.xyz)eth!
 
 </SideDrawer>
-<br/>
+
 <SideDrawer buttonText="What is a smart contract?">
 
 A smart contract, as it suggests is a contract, but written into computer code
-and stored and executed on a blockchain. What does it let us do? In simple
-terms, it allows two parties to buy and sell something and confirm their
-signatures to close the sale. Until now, buying and selling of crypto tokens,
+and stored and executed on a blockchain. But what does it let us do? In simple terms, 
+it allows two parties to buy and sell something and confirm their signatures to close the sale. 
+
+Until now, buying and selling of crypto tokens,
 and more recently NFTs, have seen most of the ‘on-chain’ activity and news
-coverage, but there is much, much more and the use cases for them on and
+coverage, but there is much, much more and the use cases for smart contracts on and
 off-chain is growing at an exponential rate, therefore the development of them
-couldn’t be more exciting. Humans have been buying, selling and signing
-contracts for millennia, what is new here? We don’t need a third party, central
+couldn’t be more exciting. 
+
+Humans have been buying, selling and signing
+contracts for millennia, so what is new here? We don’t need a third party, central
 authority or any kind of legal system to verify the transaction. The contract is
 in the code, the users sign it and the contract ‘smartly’ self-executes, in
 other words permissionlessly. Because the blockchains that we are learning about
@@ -220,6 +231,16 @@ folders in our workspace. We want to start fresh. Create a new folder named
 `contracts` and in it create a new file named `WAGMI.sol`.
 
 The extension `.sol` is used for files in the Solidity language.
+
+<SideDrawer buttonText="Check-point questions" title="Blockchain and Solidity smart contracts">
+    <Question question="tooling-Q1" />
+    <Question question="tooling-Q2" />
+    <Question question="tooling-Q3" />
+    <Question question="tooling-Q4" />
+</SideDrawer>
+<br/>
+
+Go touch some grass and set pomodoro when you return
 
 ## **Now we begin writing our code**
 
@@ -461,6 +482,16 @@ since we are using the Ethereum blockchain. As we progress on our learning
 journey we will hear a lot more about Gas and Fees, but that’s also for future
 lessons.
 
+<SideDrawer buttonText="Check-point questions" title="Variables and Functions">
+        <Question question="varsFunctions-Q1" />
+        <Question question="varsFunctions-Q2" />
+        <Question question="varsFunctions-Q3" /> 
+        <Question question="varsFunctions-Q4" />
+</SideDrawer>
+<br/>
+
+Go touch some grass and set pomodoro when you return
+
 ## Events and dealing with on-chain storage
 
 So far, we’ve learned to how make our contract store a message on the
@@ -592,6 +623,16 @@ in future lessons, so no worries!
 
 </SideDrawer>
 
+<SideDrawer buttonText="Check-point questions" title="All about events">
+         <Question question="events-Q1" />
+         <Question question="events-Q2" />
+         <Question question="events-Q3" />
+         {/* <Question question="events-Q4" />  */}
+</SideDrawer>
+<br/>
+
+Go touch some grass and set pomodoro when you return
+
 ## Compile & Deploy
 
 Now that we have written our smart contract in full, we can compile it and
@@ -600,15 +641,11 @@ tools in the sidebar for this. Here’s a brief description of the tools icons:
 
 ![Remix Menu](/assets/lessons/1/img_3.png)
 
-At the top, the logo links us to the Home (and Help links) of Remix
-
-Then, we have our File Explorer
-
-The magnifying glass icon is for searching in files
-
-Highlighted in red, the Solidity Compiler (our next step)
-
-Highlighted in red, the Solidity Compiler (our next step)
+- At the top, the logo links us to the Home (and help links) of Remix
+- Then, we have our File Explorer
+- The magnifying glass icon is for searching in files
+- Highlighted in red, the Solidity Compiler (our next step)
+- Highlighted in green, Deploy & Run transactions 
 
 To compile our smart contract we should click on the **Solidity Compiler** icon
 in the sidebar (marked in the red box).
@@ -723,10 +760,10 @@ you see the magical spell that is being cast here?
 
 Before you go ahead and tell us **what your future in web3 is**, have a check
 on what you didn’t know a little while ago, and what you know now!
-
+<br /><br />
 <Quiz quiz="quiz-1"/>
-<br />
+<br /><br />
 
 Now, go to the community in
 [developerdao.peeranha.io](https://developerdao.peeranha.io) to share your new
-Open Sourcerer powers!
+Open Sourcerer powers! And then get started on the *Build a basic NFT* lesson. 

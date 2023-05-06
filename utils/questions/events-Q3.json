@@ -1,0 +1,18 @@
+{
+  "question": "What is the purpose of the transaction log in the blockchain?",
+  "options": [
+    {
+      "answer": "To provide access to the blockchain's transaction history."
+    },
+    {
+      "answer": "To record the execution steps of smart contract functions."
+    },
+    {
+      "answer": "To store the event parameters emitted by smart contracts.",
+      "correct": true
+    },
+    {
+      "answer": "To store the source code of smart contracts."
+    }
+  ]
+}
