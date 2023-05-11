@@ -10,9 +10,21 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 ## About this lesson
 
-Welcome to our introductory lesson on smart contract development,  blockchain fundamentals and your first taste of coding with the Solidity language. For this lesson, you don’t really need to have development experience, although we expect you to have a ‘technical mindset’ to be able to proceed. We would recommend *Build a basic NFT* as a subsequent lesson for getting familiar with more advanced concepts and developer tooling. But first things first.
+Welcome to our introductory lesson on smart contract development, blockchain
+fundamentals and your first taste of coding with the Solidity language. For this
+lesson, you don’t really need to have development experience, although we expect
+you to have a ‘technical mindset’ to be able to proceed. We would recommend
+_Build a basic NFT_ as a subsequent lesson for getting familiar with more
+advanced concepts and developer tooling. But first things first.
 
-We have some questions for you throughout the lesson for testing your previous knowledge, predicting next steps in the lesson, and letting you see for yourself how well you're absorbing the new content. There's also a quiz at the end, of course, so make sure you're checking out all the side-drawers for a deeper dive of the new concepts. To complete the lesson, expect somewhere between one and four hours depending on your previous experience and the need to learn new ideas.  Please set the pomodoro timer regularly in the menu header to ensure you’re taking regular breaks to 'go touch some grass’.
+We have some questions for you throughout the lesson for testing your previous
+knowledge, predicting next steps in the lesson, and letting you see for yourself
+how well you're absorbing the new content. There's also a quiz at the end, of
+course, so make sure you're checking out all the side-drawers for a deeper dive
+of any new concepts. To complete the lesson, expect somewhere between one and
+four hours depending on your previous experience and the need to learn new
+ideas. Remember your well-being and set the pomodoro timer in the menu header to ensure
+you’re taking regular breaks, and please do go outside and 'touch some grass’.
 
 ## What are we building?
 
@@ -25,20 +37,18 @@ blockchain, well not at first. Hang on!
 Let's pause here for a couple questions to give you a taste of what's to come
 and give yourself a chance to test what you already know.
 
-<SideDrawer buttonText="Warm-up questions" title="Warm-up questions">
-    <Question question="intro-Q1" />
-    <Question question="intro-Q2" />
-    <Question question="intro-Q3" />
+<SideDrawer buttonText="Warm-up Questions" title="Warm-up Questions">
+  <Question question="lesson-1/intro-Q1" />
+  <Question question="lesson-1/intro-Q2" />
+  <Question question="lesson-1/intro-Q3" />
 </SideDrawer>
-<br/>
-
-Did you set the pomodoro?
+<br />
 
 How was that? No stress if the answers didn't come naturally. We're here to fill
 in the gaps! If you're interested in more context before moving along to the
 lesson, check out the explainers below.
 
-<SideDrawer buttonText="What is a blockchain?">
+<SideDrawer buttonText="What is a Blockchain?">
 A blockchain has quite a few layers to let function, but it basically gives us
 a place to do computation, and store information. So in one sense it functions
 as a database. Think about this: to get access to all of the information on a
@@ -59,8 +69,8 @@ _money trail_. And this was one of the main intentions of blockchains.
 Transparency. There are ever-growing use cases for the types of transactions,
 financial and non-financial. Let’s move on. The blocks are secured to each other
 with cryptography. A similar type of encryption that is used to secure the
-Signal or Telegram apps on your smartphone. If someone
-did try to change any information on the chain, the alarm bells would go off.
+Signal or Telegram apps on your smartphone. If someone did try to change any
+information on the chain, the alarm bells would go off.
 
 So how is all this permission**lessness** possible? Can’t someone shut this
 blockchain down? Simply put, no. A public blockchain actually runs on a network
@@ -134,40 +144,41 @@ easier to remember alias for their address e.g.
 
 </SideDrawer>
 
-<SideDrawer buttonText="What is a smart contract?">
+<SideDrawer buttonText="What is a Smart Contract?">
 
 A smart contract, as it suggests is a contract, but written into computer code
-and stored and executed on a blockchain. But what does it let us do? In simple terms, 
-it allows two parties to buy and sell something and confirm their signatures to close the sale. 
+and stored and executed on a blockchain. But what does it let us do? In simple
+terms, it allows two parties to buy and sell something and confirm their
+signatures to close the sale.
 
-Until now, buying and selling of crypto tokens,
-and more recently NFTs, have seen most of the ‘on-chain’ activity and news
-coverage, but there is much, much more and the use cases for smart contracts on and
-off-chain is growing at an exponential rate, therefore the development of them
-couldn’t be more exciting. 
+Until now, buying and selling of crypto tokens, and more recently NFTs, have
+seen most of the ‘on-chain’ activity and news coverage, but there is much, much
+more and the use cases for smart contracts on and off-chain is growing at an
+exponential rate, therefore the development of them couldn’t be more exciting.
 
-Humans have been buying, selling and signing
-contracts for millennia, so what is new here? We don’t need a third party, central
-authority or any kind of legal system to verify the transaction. The contract is
-in the code, the users sign it and the contract ‘smartly’ self-executes, in
-other words permissionlessly. Because the blockchains that we are learning about
-are heavily decentralised, it makes this all possible. And there are many more
-benefits to this decentralised model as we’ll continue to see.
+Humans have been buying, selling and signing contracts for millennia, so what is
+new here? We don’t need a third party, central authority or any kind of legal
+system to verify the transaction. The contract is in the code, the users sign it
+and the contract ‘smartly’ self-executes, in other words permissionlessly.
+Because the blockchains that we are learning about are heavily decentralised, it
+makes this all possible. And there are many more benefits to this decentralised
+model as we’ll continue to see.
 
 </SideDrawer>
+Did you set the pomodoro? ⌛😊
 
 ## What are we going to do?
 
 By the end of this lesson we’ll have learned a lot. A simple breakdown of the
 steps to get there is:
 
--   Set up our work environment
--   Create a Smart Contract
--   Learn basic Solidity concepts
--   Define variables
--   Create a function
--   Learn about events on the blockchain
--   Deploy our Smart Contract in Remix
+- Set up our work environment
+- Create a Smart Contract
+- Learn basic Solidity concepts
+- Define variables
+- Create a function
+- Learn about events on the blockchain
+- Deploy our Smart Contract in Remix
 
 At the end of the project, we’re really going to test your knowledge with a
 quiz, so take in whatever you can. We might even have some questions along the
@@ -232,15 +243,18 @@ folders in our workspace. We want to start fresh. Create a new folder named
 
 The extension `.sol` is used for files in the Solidity language.
 
-<SideDrawer buttonText="Check-point questions" title="Blockchain and Solidity smart contracts">
-    <Question question="tooling-Q1" />
-    <Question question="tooling-Q2" />
-    <Question question="tooling-Q3" />
-    <Question question="tooling-Q4" />
+<SideDrawer
+  buttonText="Check-point Questions"
+  title="Blockchain and Solidity Smart Contracts"
+>
+  <Question question="lesson-1/tooling-Q1" />
+  <Question question="lesson-1/tooling-Q2" />
+  <Question question="lesson-1/tooling-Q3" />
+  <Question question="lesson-1/tooling-Q4" />
 </SideDrawer>
-<br/>
+<br />
 
-Go touch some grass and set pomodoro when you return
+Go touch some grass ⌛😊
 
 ## **Now we begin writing our code**
 
@@ -385,7 +399,7 @@ function functionName(uint256 value) public returns(bool) {
 We want to be able to read both the message and the count, so we are going to
 create a function to get the value for each variable. Later on we can set
 (store) the values, but first let’s retrieve them. We have to add two new
-functions below our state variable definitions. Do not delete our messageand
+functions below our state variable definitions. Do not delete our message and
 messageCount variables and please pay attention to all the { } ; and ( )
 symbols:
 
@@ -406,7 +420,7 @@ contract WAGMI {
 }
 ```
 
-Yes, there are some new keywords up there e.g. return, returns, view, etc, but
+Yes, there are some new keywords up there e.g. **return**, **returns**, **view**, etc, but
 don’t panic:
 
 `public` defines the **visibility** of our function and means it can be called
@@ -422,7 +436,7 @@ information from a contract, such as an account balance.
 `memory` tells us where the variable lives (for some types we have to tell
 solidity if a variable is in `memory`, `storage`or `calldata`). We can leave
 these concepts for future lessons, or if you can’t wait that long, you can read
-some more about them in **Variables** and **Functions**.
+some more about them in **More on Functions**.
 
 <SideDrawer buttonText="More on Functions">
     
@@ -473,24 +487,24 @@ function setMessage(string calldata newMessage) public {
 }
 ```
 
-If you noticed, this function, unlike the previous ones, does not have the view
+If you noticed, this function, unlike the previous ones, does not have the **view**
 visibility keyword and it does indeed modify the state of our contract and the
 blockchain. Therefore, whenever someone calls this function in the future, their
 wallet is going to ask them to confirm a transaction on the blockchain. That
-means it will use some gas, which is a transaction fee of a small amount of eth,
+means it will use some *gas*, which is a transaction fee of a small amount of eth,
 since we are using the Ethereum blockchain. As we progress on our learning
-journey we will hear a lot more about Gas and Fees, but that’s also for future
+journey we will hear a lot more about gas and fees, but that’s also for future
 lessons.
 
-<SideDrawer buttonText="Check-point questions" title="Variables and Functions">
-        <Question question="varsFunctions-Q1" />
-        <Question question="varsFunctions-Q2" />
-        <Question question="varsFunctions-Q3" /> 
-        <Question question="varsFunctions-Q4" />
+<SideDrawer buttonText="Check-point Questions" title="Variables and Functions">
+  <Question question="lesson-1/varsFunctions-Q1" />
+  <Question question="lesson-1/varsFunctions-Q2" />
+  <Question question="lesson-1/varsFunctions-Q3" />
+  <Question question="lesson-1/varsFunctions-Q4" />
 </SideDrawer>
-<br/>
+<br />
 
-Go touch some grass and set pomodoro when you return
+Go touch some grass and set the pomodoro when you return ⌛😊
 
 ## Events and dealing with on-chain storage
 
@@ -513,8 +527,7 @@ user facing front-end app, we will be able to read them from any Ethereum
 To create a transaction log, we need to **define** an `event` in the contract,
 and then we can make one of our functions **emit** that event to the blockchain
 nodes. The values used in the event’s **parameters** will be stored in the
-transaction logs.…. **Definition of parameter here….or in the Indexed Events
-Parameter dropdown.**
+transaction logs.
 
 We usually define our events near the top of the contract, under the state
 variables. The basic syntax for defining an event with 3 parameters would be:
@@ -557,11 +570,10 @@ above we can write:
 emit EventName(2, false, 'Hello World!');
 ```
 
-There’s a lot to unpack, so we’ll leave it there for now! Let’s create an event
-to log all the future messages sent to our smart contract and check the fortunes
-to see if the sent messages are worthy of “making it” in the web3 world. 😉
+There’s a lot to unpack, so we’ll leave it there for now! 
 
-After our state variables, we can define our new event as:
+Let’s create an event to log all the future messages sent to our smart contract and check the fortunes
+to see if the sent messages are worthy of “making it” in the web3 world. 😉 After our state variables, we can define our new event as:
 
 ```solidity
 // We add this line after our 'message' and 'messageCount' definitions
@@ -569,8 +581,8 @@ event web3Future(uint256 indexed messageIndex, address indexed author, string me
 ```
 
 Notice that our second parameter is defined with a new type: `address`. We use
-this type for Ethereum addresses, whether they’re user **wallet** addresses or
-addresses of other **smart contracts**. Yes, that is also for another lesson 😉
+this type for Ethereum addresses, whether they’re user **wallet** addresses, or
+addresses of other **smart contracts**. Yes, that is too for another lesson 😉
 
 Inside our `setMessage` function, we should emit the event. But before that,
 let’s decide if the message is GMI or NGMI:
@@ -600,12 +612,12 @@ function setMessage(string calldata newMessage) public {
 }
 ```
 
-If you were wondering what msg.sender is, we can simplify it as the Ethereum
+If you were wondering what **msg.sender** is, we can simplify it as the Ethereum
 address that called the function. You also probably noticed how we compare
 newMessage with ‘gm’. That’s because Solidity doesn’t have a way to easily
-compare two strings of text, so with a little bit of encoding and decoding, we
-are using abi.encodePacked() to convert the string into bytes and then using the
-hashing function keccak256() to compare the two “hashes”, and if they are equal,
+compare two strings of text. But with a little bit of encoding and decoding, we
+can use abi.encodePacked() to convert the string into bytes and then use the
+hashing function keccak256() to compare the two **hashes**. And if *they* are equal,
 the strings are equal too 🙌. You can be sure that we’ll be deep diving on these
 in future lessons, so no worries!
 
@@ -623,15 +635,15 @@ in future lessons, so no worries!
 
 </SideDrawer>
 
-<SideDrawer buttonText="Check-point questions" title="All about events">
-         <Question question="events-Q1" />
-         <Question question="events-Q2" />
-         <Question question="events-Q3" />
-         {/* <Question question="events-Q4" />  */}
+<SideDrawer buttonText="Check-point Questions" title="All about Events">
+  <Question question="lesson-1/events-Q1" />
+  <Question question="lesson-1/events-Q2" />
+  <Question question="lesson-1/events-Q3" />
+  {/* <Question question="events-Q4" />  */}
 </SideDrawer>
-<br/>
+<br />
 
-Go touch some grass and set pomodoro when you return
+Go touch some grass ⌛😊
 
 ## Compile & Deploy
 
@@ -645,10 +657,10 @@ tools in the sidebar for this. Here’s a brief description of the tools icons:
 - Then, we have our File Explorer
 - The magnifying glass icon is for searching in files
 - Highlighted in red, the Solidity Compiler (our next step)
-- Highlighted in green, Deploy & Run transactions 
+- Highlighted in green, Deploy & Run transactions
 
 To compile our smart contract we should click on the **Solidity Compiler** icon
-in the sidebar (marked in the red box).
+in the sidebar.
 
 Leave all the settings in their default, manually select our contract in the
 drop down menu and click on the **Compile WAGMI.sol** button.
@@ -660,7 +672,7 @@ drop down menu and click on the **Compile WAGMI.sol** button.
 After compiling, we should see a green check mark on top of the Solidity
 Compiler sidebar icon.
 
-<SideDrawer buttonText="Problems at Compile time">
+<SideDrawer buttonText="Problems at Compile Time?">
     
     First, check that you have selected a compiler compatible with our version (0.8.4 or any higher inside the 0.8 version).
     
@@ -705,27 +717,27 @@ Compiler sidebar icon.
 
 </SideDrawer>
 
-Now we are ready to deploy our contract. We can now head to the Deploy & Run
-transactions icon in the sidebar (marked in the green box). Below we can see a
+Now we are ready to deploy our contract. We can now head to the **Deploy & Run**
+transactions icon in the sidebar. Below we can see a
 message that says ‘Currently you have no contract instances to interact with’,
 so we haven’t deployed anything yet.
 
 ![Contract Instance Warning](/assets/lessons/1/img_6.png)
 
-Again, we are leaving all options to default for now (we’ll be learning how to
-deploy to a testnet later on). Click on the **Deploy** button!
+Again, we are leaving all options to default for now. We’ll be learning how to
+deploy to a testnet later on. Click on the **Deploy** button!
 
 Once deployment finishes, we are going to see our shiny new deployed contract
 instance below.
 
-Open the dropdown under ‘Deployed Contracts’, to see our function tabs:
+Open the dropdown under **Deployed Contracts**, to see our function tabs:
 
--   the blue ones are our “**view**” functions that doesn’t modify our state
--   the orange one lets us trigger the setMessage function which will change the
-    state. Be sure to click on the little drop down menu on the right. From here
-    on, we can interact with our contract. Feel free to test the functions.
-    Click on the getMessage and messageCount tabs before and after setting a new
-    message. modify data on our contract.
+- the blue ones are our **view** functions that don’t modify our state
+- the orange one lets us trigger the setMessage function which will change the
+  state. Be sure to click on the little drop down menu on the right. From here
+  on, we can interact with our contract. Feel free to test the functions. Click
+  on the getMessage and messageCount tabs before and after setting a new
+  message to modify data on our contract.
 
 ![Available Interactive Options once Contract is Deployed](/assets/lessons/1/img_7.png)
 
@@ -736,34 +748,40 @@ setting a new message.
 On the right hand side, below our contract code, there’s a bar on the bottom. If
 it hasn’t opened automatically, we can open the console from here to see any
 transactions with the green check mark. The first transaction is the deployment
-of our contract. Click it to open it.ons with the green check mark. The first
-transaction is the deployment of our contract. Click it to open it.
+of our contract. Click it to open it.
 
 ![Button to Minimise and Maximise Console](/assets/lessons/1/img_8.png)
 
 Once you set a new message, you’ll see again, that the transaction has a green
-check mark, open it and look for the “logs”. Here’s my info after setting the
+check mark, open it and look for the **logs**. Here’s my info after setting the
 message to “My first smart contract”:
 
 ![Complete Transaction Log of Deployed Contract](/assets/lessons/1/img_9.png)
 
-If you look closely, inside the “logs” part, our smart contract predicted a
-“future” for us.
+If you look closely, inside the **logs** part, our smart contract predicted a
+'future' for us.
 
 What if you try out setting the message to `gm` and look at the logs again. Can
 you see the magical spell that is being cast here?
 
 <br />
 <p align="center">
-    <img src="/assets/lessons/1/img_11.png" width="300" alt="Genie Girl holds Ethereum Crystal Ball" />
+  <img
+    src="/assets/lessons/1/img_11.png"
+    width="300"
+    alt="Genie Girl holds Ethereum Crystal Ball"
+  />
 </p>
 
-Before you go ahead and tell us **what your future in web3 is**, have a check
-on what you didn’t know a little while ago, and what you know now!
-<br /><br />
-<Quiz quiz="quiz-1"/>
-<br /><br />
+Before you go ahead and tell us **what your future in web3 is**, have a check on
+what you didn’t know a little while ago, and what you know now!
+
+<br />
+<br />
+<Quiz quiz="quiz-lesson-1" />
+<br />
+<br />
 
 Now, go to the community in
 [developerdao.peeranha.io](https://developerdao.peeranha.io) to share your new
-Open Sourcerer powers! And then get started on the *Build a basic NFT* lesson. 
+Open Sourcerer powers! And afterwards get started on our _Build a basic NFT_ lesson. See you soon!

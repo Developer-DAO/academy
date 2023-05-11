@@ -8,7 +8,7 @@
       "answer": "It stores the event parameters in the data portion of the log."
     },
     {
-      "answer": "It enables efficient searching and filtering of events.",
+      "answer": "It enables efficient searching and filtering of logged events.",
       "correct": true
     }
   ]

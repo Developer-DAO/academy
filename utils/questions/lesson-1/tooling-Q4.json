@@ -1,5 +1,5 @@
 {
-  "question": "Which version pragma indicates compatibility with Solidity 0.8.4 and higher?",
+  "question": "Guess which of the following version of pragma indicates compatibility with Solidity 0.8.4 and higher",
   "options": [
     {
       "answer": "pragma solidity <=0.8.4;"
