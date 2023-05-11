@@ -1,16 +1,23 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Choose what NFTs can do? Multiple answers possible.",
   "options": [
     {
-      "answer": "Permissioned"
-    },
-    {
-      "answer": "Trustless",
+      "answer": "Give access to a DAO",
       "correct": true
     },
     {
-      "answer": "Decentralized",
+      "answer": "Do the dishes"
+    },
+    {
+      "answer": "Represent a concert ticket",
       "correct": true
+    },
+    {
+      "answer": "Point to storage of an album",
+      "correct": true
+    },
+    {
+      "answer": "Replicate one NFT with another"
     }
   ]
 }
