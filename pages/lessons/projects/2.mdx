@@ -29,13 +29,18 @@ Welcome to this lesson on creating a series of NFTs using Solidity smart contrac
 
 We have some checkpoint questions for you throughout the lesson for testing either your previous knowledge, predicting next steps in the lesson, or letting you see for yourself how well you're absorbing the new content. Needless to say, there's a quiz at the end, so make sure you're checking out all the side-drawers for a deeper dive of the new concepts. To complete the lesson, expect somewhere between two and six hours depending on your previous experience and the need to learn new ideas. Let's make developing enjoyable, so take care of your well-being - we have a pomodoro timer ⌛ for you in the menu header to let you ensure you’re taking regular breaks, and please *do* go outside and 'touch some grass'😊. Nature is the source of our well-being.
 
+PART 1 INTRO
 ## What are we buidling?
 
 In this project we will build a basic NFT smart contract, that will serve us as
 the backbone or foundation for almost any future NFT project. 
 
-<SideDrawer buttonText="What do you already know about NFTs?" title="Build on your previous knowledge">
-    <Question question="question-1" />
+<SideDrawer buttonText="Previous knowledge + prediction for parts 1 and 2" title="Build on your previous knowledge">
+      <Question question="lesson-2/1-intro/Q1" />
+      <Question question="lesson-2/1-intro/Q2" />
+      <Question question="lesson-2/1-intro/Q3" />
+      <Question question="lesson-2/1-intro/Q4" />
+      <Question question="lesson-2/1-intro/Q5" />
 </SideDrawer>
 <br/>
 
@@ -74,6 +79,7 @@ By the end of this lesson we are going to learn a lot of things. A simple breakd
 - *Mint*, i.e. create our very own NFT
 - See our NFT in a public marketplace
 
+PART 2 TOOLS/ENVIRONMENT
 ## Set up your environment
 
 Like the pros. For that we are going to set up our working environment in our
@@ -223,12 +229,16 @@ widely used and fully tested and audited.
 </SideDrawer>
 <br/>
 
-Just before you go ..... 
-<SideDrawer buttonText="What's your opinion?" title="Coding is cool, but we want our contracts water tight">
-    <Question question="question-2"/>
+<SideDrawer buttonText="Assessment of part 1 and 2 and prediction of 3" title="Assessment of part 1 and 2 and prediction of 3">
+      <Question question="lesson-2/2-tools-environment/Q1" />
+      <Question question="lesson-2/2-tools-environment/Q2" />
+      <Question question="lesson-2/2-tools-environment/Q3" />
+      <Question question="lesson-2/2-tools-environment/Q4" />
+      <Question question="lesson-2/2-tools-environment/Q5" />
 </SideDrawer>
 <br/>
 
+PART 3 SOLIDITY/TOKEN STANDARDS
 ## Let’s start coding!
 
 With our project folder ready, we can now fire up our Code Editor.
@@ -275,12 +285,12 @@ delegates to transfer them, etc).
 </SideDrawer>
 
 All of it is pretty much for our project, but luckily OpenZeppelin has developed
-a lot of contracts that implement these standards and more, they are widely
-used and audited and, the thing we love about them, they are open-source and we
+a lot of contracts that implement these standards and more. They are widely
+used and audited, and the thing we love about them, they are open-source and we
 can use them to leverage our learning process. With that in our heads, we are
 going to use them inside our contract.
 
-## Standing in the shoulder of giants
+## Standing on the shoulder of giants
 
 For this we are going to ‘inherit’ (think of _using the properties of_ or
 _extending_ for now) the ERC721 contract from OpenZeppelin. In the same way you
@@ -346,6 +356,18 @@ contract ProjectNFT is ERC721 {
 We made our totalSupply variable private and it will store exactly how many NFTs
 have been minted so far. In the next step we will use this variable to identify
 each new NFT that’s created.
+
+
+<SideDrawer buttonText="Assessment of part 3 and prediction of 4" title="Assessment of part 3 and prediction of 4">
+      <Question question="lesson-2/3-sol-erc/Q1" />
+      <Question question="lesson-2/3-sol-erc/Q2" />
+      <Question question="lesson-2/3-sol-erc/Q3" />
+      <Question question="lesson-2/3-sol-erc/Q4" />
+      <Question question="lesson-2/3-sol-erc/Q5" />
+</SideDrawer>
+<br/>
+
+PART 4. NFT IDENTITY
 
 ## Mint… Feels Good
 
@@ -474,14 +496,24 @@ experience.
 We have most of our smart contract ready, so we are going to focus on the media
 that we want on our NFTs.
 
-We propose a "Choose your own adventure" for this part of the project:
+We propose a *choose your own adventure* for this part of the project:
 
 - If you want to go quickly into deploying the contract, you can use the images
 and files that we prepared, and move on to the next section.
 
-- If you want to create your own images and have an NFT of your own, you'll have
-to take the winding road and learn a little about the standard used to identify NFTs
+- If you want to create your own images and have an NFT of your own, why not take the winding road and learn a little about the standard used to identify NFTs
 and a solution to store files in a decentralized way.
+
+<SideDrawer buttonText="Assessment of part 4 and prediction of 6" title="Assessment of part 4 and prediction of 6">
+      <Question question="lesson-2/4-nft-id/Q1" />
+      <Question question="lesson-2/4-nft-id/Q2" />
+      <Question question="lesson-2/4-nft-id/Q3" />
+      <Question question="lesson-2/4-nft-id/Q4" />
+      <Question question="lesson-2/4-nft-id/Q5" />
+</SideDrawer>
+<br/>
+
+PART 5 JSON/IPFS (SEPARATE SIDE DRAWER QUIZ)
 
 <SideDrawer buttonText="Longer Path (learn about JSON and IPFS)">
 ## JSON
@@ -612,14 +644,26 @@ an IPFS service will surely help you get ahead in your learning.
 
 Have your json files folder IPFS link saved (the full link, that links to all
 the files), for we will use it in our next step.
+<SideDrawer buttonText="Assessment of part 5 and prediction of 6" title="Assessment of part 5 and prediction of 6">
+      <Question question="lesson-2/5-sidedrawer-json-ipfs/Q1" />
+      <Question question="lesson-2/5-sidedrawer-json-ipfs/Q2" />
+      <Question question="lesson-2/5-sidedrawer-json-ipfs/Q3" />
+      <Question question="lesson-2/5-sidedrawer-json-ipfs/Q4" />
+      <Question question="lesson-2/5-sidedrawer-json-ipfs/Q5" />
+</SideDrawer>
+<br/>
+Good for you for taking on this extra adventure 🧙🏾
+<br/><br/>
 </SideDrawer>
 
-## Deploy! (back to Solidity, kind of)
+
+PART 6 SCRIPTS AND COMPILE
+## Deploy! Back to Solidity... kind of...
 
 You might remember this from the previous project, when we used Remix. Once we
-have our contract ready, we can compile and deploy. In remix, we had a bunch of
-buttons in the web interface, but now we are getting pro (a.k.a. doing it all
-ourselves, with the console).
+have our contract ready, we can compile and deploy. In Remix, we had a bunch of
+buttons in the web interface, but now we are getting pro, a.k.a. doing it all
+ourselves, with the console.
 
 Why did we deviate from Solidity? Because of the way we set our contract up.
 When we deploy we tell our contract where our files are stored. Therefore we had
@@ -750,6 +794,17 @@ Let's run the script again and see what it tells us! Here's my output:
 We got the URI of the token, right? So, now we know we can deploy it (and mint)
 to a real blockchain!
 
+<SideDrawer buttonText="Assessment of part 6 and prediction of 7" title="Assessment of part 6 and prediction of 7">
+      <Question question="lesson-2/6-scripts-compile/Q1" />
+      <Question question="lesson-2/6-scripts-compile/Q2" />
+      <Question question="lesson-2/6-scripts-compile/Q3" />
+      <Question question="lesson-2/6-scripts-compile/Q4" />
+      <Question question="lesson-2/6-scripts-compile/Q5" />
+</SideDrawer>
+<br/>
+
+PART 7 DEPLOY. TESTNETS. WALLETS. OPENSEA
+
 ## Things just got real!
 
 For us to get our contract out of our computers and into the real world, we are
@@ -851,6 +906,17 @@ Please, if you are already a developer and you plan to use git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
+<SideDrawer buttonText="Assessment of part 7 and prediction of 8" title="Assessment of part 7 and prediction of 8">
+      <Question question="lesson-2/7-connect-real-world/Q1" />
+      <Question question="lesson-2/7-connect-real-world/Q2" />
+      <Question question="lesson-2/7-connect-real-world/Q3" />
+      <Question question="lesson-2/7-connect-real-world/Q4" />
+      <Question question="lesson-2/7-connect-real-world/Q5" />
+</SideDrawer>
+<br/>
+
+PART 8 DEPLOY TO TESTNET
+
 Ok. We are ready, let's deploy to the Goerli testnet!
 
 Now we need to run our deploy.js script and the deployment is going to cost us
@@ -892,7 +958,7 @@ Wow, you have created your own NFT collection from scratch. What a superstar! Yo
 But first, we want you to go and 'touch some grass'. So why don't you scroll to the top and set the pomodoro timer, and when you come back after your well earned rest, take the quiz. Breathe and enjoy.  
 
 <br/>
-<Quiz quiz="quiz-lesson-2" />
+<Quiz quiz="lesson-2-quiz" />
 <br/>
 
 Congratulations on your results. You're now a supreme open-sourcerer! See you in the next lesson, where you will be adding to your knowledge of creating ERC721s, by creating *tiered NFTs*. See you there....
