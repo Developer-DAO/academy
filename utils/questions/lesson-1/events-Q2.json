@@ -1,18 +1,18 @@
 {
-  "question": "What is the purpose of defining an event in a Solidity contract? Multiple answers possible",
+  "question": "What is the purpose of defining an event in a Solidity contract?",
   "options": [
     {
-      "answer": "It creates a transaction log where information can be stored more cheaply than on the blockchain."
+      "answer": "It increases the security of your smart contract."
     },
     {
-      "answer": "It triggers a specific action when called.",
+      "answer": "It helps you monitor specific activities that occur on-chain.",
       "correct": true
     },
     {
       "answer": "It facilitates communication between smart contracts."
     },
     {
-      "answer": "It allows the contract to store data on the blockchain.",
+      "answer": "It provides an efficient way to log data without using block space.",
       "correct": true
     }
   ]

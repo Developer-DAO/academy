@@ -1,5 +1,5 @@
 {
-  "question": "What is the purpose of the public keyword in a Solidity function? ",
+  "question": "What is the purpose of the public keyword in a Solidity function?",
   "options": [
     {
       "answer": "It restricts the function's access only to the defined smart contract."

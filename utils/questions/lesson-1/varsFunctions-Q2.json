@@ -6,7 +6,7 @@
       "correct": true
     },
     {
-      "answer": "By directly accessing the variable using its name."
+      "answer": "By sending a transaction to the constructor function."
     },
     {
       "answer": "By emitting an event with the variable's value."

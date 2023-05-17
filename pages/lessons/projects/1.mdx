@@ -23,8 +23,9 @@ how well you're absorbing the new content. There's also a quiz at the end, of
 course, so make sure you're checking out all the side-drawers for a deeper dive
 of any new concepts. To complete the lesson, expect somewhere between one and
 four hours depending on your previous experience and the need to learn new
-ideas. Remember your well-being and set the pomodoro timer in the menu header to ensure
-you’re taking regular breaks, and please do go outside and 'touch some grass’.
+ideas. Remember your well-being and set the pomodoro timer in the menu header to
+ensure you’re taking regular breaks, and please do go outside and 'touch some
+grass’.
 
 ## What are we building?
 
@@ -139,8 +140,7 @@ means of communication on and with any blockchain. Not only does a user have an
 address like this, but all the smart contracts on the blockchain have one as
 well, and use them as a means of communication too. Like phone numbers, or
 emails blockchain style! It’s becoming more common that a user will have an
-easier to remember alias for their address e.g.
-[imsoeasy.](http://imsoeasy.xyz)eth!
+easier to remember alias for their address, e.g., imsoeasy.eth!
 
 </SideDrawer>
 
@@ -244,7 +244,7 @@ folders in our workspace. We want to start fresh. Create a new folder named
 The extension `.sol` is used for files in the Solidity language.
 
 <SideDrawer
-  buttonText="Check-point Questions"
+  buttonText="Checkpoint Questions"
   title="Blockchain and Solidity Smart Contracts"
 >
   <Question question="lesson-1/tooling-Q1" />
@@ -254,7 +254,7 @@ The extension `.sol` is used for files in the Solidity language.
 </SideDrawer>
 <br />
 
-Go touch some grass ⌛😊
+Well done! Now, go touch some grass! ⌛😊
 
 ## **Now we begin writing our code**
 
@@ -420,8 +420,8 @@ contract WAGMI {
 }
 ```
 
-Yes, there are some new keywords up there e.g. **return**, **returns**, **view**, etc, but
-don’t panic:
+Yes, there are some new keywords up there e.g. **return**, **returns**,
+**view**, etc, but don’t panic:
 
 `public` defines the **visibility** of our function and means it can be called
 from anywhere e.g. directly calling it with our externally owned address (e.g.
@@ -487,16 +487,16 @@ function setMessage(string calldata newMessage) public {
 }
 ```
 
-If you noticed, this function, unlike the previous ones, does not have the **view**
-visibility keyword and it does indeed modify the state of our contract and the
-blockchain. Therefore, whenever someone calls this function in the future, their
-wallet is going to ask them to confirm a transaction on the blockchain. That
-means it will use some *gas*, which is a transaction fee of a small amount of eth,
-since we are using the Ethereum blockchain. As we progress on our learning
-journey we will hear a lot more about gas and fees, but that’s also for future
-lessons.
+If you noticed, this function, unlike the previous ones, does not have the
+**view** visibility keyword and it does indeed modify the state of our contract
+and the blockchain. Therefore, whenever someone calls this function in the
+future, their wallet is going to ask them to confirm a transaction on the
+blockchain. That means it will use some _gas_, which is a transaction fee of a
+small amount of eth, since we are using the Ethereum blockchain. As we progress
+on our learning journey we will hear a lot more about gas and fees, but that’s
+also for future lessons.
 
-<SideDrawer buttonText="Check-point Questions" title="Variables and Functions">
+<SideDrawer buttonText="Checkpoint Questions" title="Variables and Functions">
   <Question question="lesson-1/varsFunctions-Q1" />
   <Question question="lesson-1/varsFunctions-Q2" />
   <Question question="lesson-1/varsFunctions-Q3" />
@@ -570,10 +570,11 @@ above we can write:
 emit EventName(2, false, 'Hello World!');
 ```
 
-There’s a lot to unpack, so we’ll leave it there for now! 
+There’s a lot to unpack, so we’ll leave it there for now!
 
-Let’s create an event to log all the future messages sent to our smart contract and check the fortunes
-to see if the sent messages are worthy of “making it” in the web3 world. 😉 After our state variables, we can define our new event as:
+Let’s create an event to log all the future messages sent to our smart contract
+and check the fortunes to see if the sent messages are worthy of “making it” in
+the web3 world. 😉 After our state variables, we can define our new event as:
 
 ```solidity
 // We add this line after our 'message' and 'messageCount' definitions
@@ -617,9 +618,9 @@ address that called the function. You also probably noticed how we compare
 newMessage with ‘gm’. That’s because Solidity doesn’t have a way to easily
 compare two strings of text. But with a little bit of encoding and decoding, we
 can use abi.encodePacked() to convert the string into bytes and then use the
-hashing function keccak256() to compare the two **hashes**. And if *they* are equal,
-the strings are equal too 🙌. You can be sure that we’ll be deep diving on these
-in future lessons, so no worries!
+hashing function keccak256() to compare the two **hashes**. And if _they_ are
+equal, the strings are equal too 🙌. You can be sure that we’ll be deep diving
+on these in future lessons, so no worries!
 
 <SideDrawer buttonText="More on Events">
     
@@ -635,7 +636,7 @@ in future lessons, so no worries!
 
 </SideDrawer>
 
-<SideDrawer buttonText="Check-point Questions" title="All about Events">
+<SideDrawer buttonText="Checkpoint Questions" title="All about Events">
   <Question question="lesson-1/events-Q1" />
   <Question question="lesson-1/events-Q2" />
   <Question question="lesson-1/events-Q3" />
@@ -718,9 +719,9 @@ Compiler sidebar icon.
 </SideDrawer>
 
 Now we are ready to deploy our contract. We can now head to the **Deploy & Run**
-transactions icon in the sidebar. Below we can see a
-message that says ‘Currently you have no contract instances to interact with’,
-so we haven’t deployed anything yet.
+transactions icon in the sidebar. Below we can see a message that says
+‘Currently you have no contract instances to interact with’, so we haven’t
+deployed anything yet.
 
 ![Contract Instance Warning](/assets/lessons/1/img_6.png)
 
@@ -736,8 +737,8 @@ Open the dropdown under **Deployed Contracts**, to see our function tabs:
 - the orange one lets us trigger the setMessage function which will change the
   state. Be sure to click on the little drop down menu on the right. From here
   on, we can interact with our contract. Feel free to test the functions. Click
-  on the getMessage and messageCount tabs before and after setting a new
-  message to modify data on our contract.
+  on the getMessage and messageCount tabs before and after setting a new message
+  to modify data on our contract.
 
 ![Available Interactive Options once Contract is Deployed](/assets/lessons/1/img_7.png)
 
@@ -784,4 +785,5 @@ what you didn’t know a little while ago, and what you know now!
 
 Now, go to the community in
 [developerdao.peeranha.io](https://developerdao.peeranha.io) to share your new
-Open Sourcerer powers! And afterwards get started on our _Build a basic NFT_ lesson. See you soon!
+Open Sourcerer powers! And afterwards get started on our _Build a basic NFT_
+lesson. See you soon!
