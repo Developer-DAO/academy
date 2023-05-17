@@ -34,8 +34,11 @@ export const contributors: ContributorLookup = {
   wolovim: {
     displayName: 'wolovim',
   },
-  tito: {
-    displayName: 'tito',
+  _7i7o: {
+    displayName: '7i7o',
+    moreInfoUrl: 'https://github.com/7i7o',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/84824996?v=4',
+    about: '7i7o has been a member of the DeveloperDAO since October 2021.',
   },
   mveve: {
     displayName: 'mveve',
