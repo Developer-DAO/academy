@@ -23,8 +23,21 @@ export const contributors: ContributorLookup = {
   },
   piablo: {
     displayName: 'piablo',
+    moreInfoUrl: 'https://twitter.com/Skruffster',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/40469149?v=4',
+    about:
+      'Piablo joined Developer_DAO in October 2021 where his primary focus is on education, with D_D Academy and D_D Mentorship. He is passionate about regenerating our planet back to a liveable state for all life forms in a fully equitable and sustainable manner.',
   },
   georgemac510: {
     displayName: 'georgemac510',
+  },
+  wolovim: {
+    displayName: 'wolovim',
+  },
+  tito: {
+    displayName: 'tito',
+  },
+  mveve: {
+    displayName: 'mveve',
   },
 }
