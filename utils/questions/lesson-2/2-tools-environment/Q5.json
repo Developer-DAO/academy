@@ -1,5 +1,5 @@
 {
-  "question": "What do you think the ```code .``` command in your console is going to do? ",
+  "question": "What do you think the 'code .' command in your console is going to do? ",
   "options": [
     {
       "answer": "Create an empty file named ProjectNFT.sol. "
