@@ -5,7 +5,7 @@
       "answer": "Tells us we can't mint any more NFTs"
     },
     {
-      "answer": "Stores the number of NFTs that have been minted so far ",
+      "answer": "Stores the current number of minted NFTs",
       "correct": true
     },
     {

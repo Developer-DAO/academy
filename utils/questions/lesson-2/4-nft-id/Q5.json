@@ -1,12 +1,14 @@
 {
-  "question": "",
+  "question": "Why do you think it is extremely important to use a separate wallet for developing? ",
   "options": [
     {
-      "answer": ""
+      "answer": "Because it looks more professional"
     },
     {
-      "answer": "",
-      "correct": true
+      "answer": "Because you need to keep your personal assets separate from your development funds"
+    },
+    {
+      "answer": "Every milisecond counts for a dev, and separate wallets are faster to connect to the blockchain"
     }
   ]
 }

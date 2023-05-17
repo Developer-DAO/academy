@@ -1,5 +1,5 @@
 {
-  "question": "What is the purpose of the --save-dev flag when installing dependencies with npm? ",
+  "question": "What is the --save-dev flag for when installing dependencies with npm? ",
   "options": [
     {
       "answer": "It specifies the version of the dependency to install."

@@ -1,11 +1,14 @@
 {
-  "question": "",
+  "question": "What is the goal of 'pinning' content in IPFS? ",
   "options": [
     {
-      "answer": ""
+      "answer": "To move files and pin them to another node"
     },
     {
-      "answer": "",
+      "answer": "To make content available more permanently"
+    },
+    {
+      "answer": "To create a hole where a file once was therefore deleting it from the network",
       "correct": true
     }
   ]

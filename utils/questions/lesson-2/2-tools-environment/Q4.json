@@ -1,5 +1,5 @@
 {
-  "question": "We will learn later, but what do you think the purpose of the .gitignore file created by Hardhat is?",
+  "question": "We will cover this later, but what do you think the purpose of the .gitignore file created by Hardhat is?",
   "options": [
     {
       "answer": "To hide your project's dependencies."
@@ -8,7 +8,7 @@
       "answer": "To store your project's source code in a private Github repository."
     },
     {
-      "answer": "To ignore certain files from being committed to version control",
+      "answer": "To ensure that certain files not tracked by Git remain untracked",
       "correct": true
     }
   ]

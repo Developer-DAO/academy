@@ -1,12 +1,24 @@
 {
-  "question": "",
+  "question": "Who should you trust with your wallet's private key?",
   "options": [
     {
-      "answer": ""
+      "answer": "No-one",
+      "correct": true
     },
     {
-      "answer": "",
+      "answer": "Nobody",
       "correct": true
+    },
+    {
+      "answer": "Not a soul ",
+      "correct": true
+    },
+    {
+      "answer": "All of the above",
+      "correct": true
+    },
+    {
+      "answer": "Please don't forget this"
     }
   ]
 }
