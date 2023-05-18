@@ -1,0 +1,19 @@
+{
+  "question": "What is the purpose of defining an event in a Solidity contract?",
+  "options": [
+    {
+      "answer": "It increases the security of your smart contract."
+    },
+    {
+      "answer": "It helps you monitor specific activities that occur on-chain.",
+      "correct": true
+    },
+    {
+      "answer": "It facilitates communication between smart contracts."
+    },
+    {
+      "answer": "It provides an efficient way to log data without using block space.",
+      "correct": true
+    }
+  ]
+}

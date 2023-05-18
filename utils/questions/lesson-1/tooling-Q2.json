@@ -1,0 +1,15 @@
+{
+  "question": "What is the main purpose of rigorously testing a smart contract?",
+  "options": [
+    {
+      "answer": "To ensure it can be updated easily in the future."
+    },
+    {
+      "answer": "To prevent compromises and vulnerabilities.",
+      "correct": true
+    },
+    {
+      "answer": "To increase transparency in contract execution."
+    }
+  ]
+}

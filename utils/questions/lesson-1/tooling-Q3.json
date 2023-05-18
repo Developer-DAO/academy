@@ -1,0 +1,15 @@
+{
+  "question": "What is the purpose of creating a new file with the extension \".sol\" in the contracts folder?",
+  "options": [
+    {
+      "answer": "To debug code quickly and easily."
+    },
+    {
+      "answer": "To emulate a blockchain stack in Remix IDE."
+    },
+    {
+      "answer": "To write Solidity code for smart contracts.",
+      "correct": true
+    }
+  ]
+}

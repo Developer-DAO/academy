@@ -5,7 +5,7 @@
       "question": "Where do the values for event parameters get stored?",
       "options": [
         {
-          "answer": "In the transaction data"
+          "answer": "In the block data"
         },
         {
           "answer": "In transaction logs",
@@ -33,17 +33,17 @@
       ]
     },
     {
-      "question": "What can we use a smart contract for?",
+      "question": "What can we use an Ethereum smart contract for?",
       "options": [
         {
-          "answer": "Store or transfer value or services without the need of a central authority",
+          "answer": "Storing or transfering value without the need of a central authority",
           "correct": true
         },
         {
-          "answer": "Make a breakfast"
+          "answer": "Making breakfast"
         },
         {
-          "answer": "Verifying the authenticity of documents and information."
+          "answer": "Sending untraceable transactions"
         }
       ]
     }

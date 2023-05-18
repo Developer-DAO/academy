@@ -1,0 +1,15 @@
+{
+  "question": "What is the purpose of the msg.sender variable in Solidity?",
+  "options": [
+    {
+      "answer": "It represents the address that called the function.",
+      "correct": true
+    },
+    {
+      "answer": "It stores the current block number."
+    },
+    {
+      "answer": "It represents the address of the smart contract itself."
+    }
+  ]
+}

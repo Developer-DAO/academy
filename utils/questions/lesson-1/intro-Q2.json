@@ -1,0 +1,12 @@
+{
+  "question": "Which statement is true?",
+  "options": [
+    {
+      "answer": "It’s important to test your code rigorously, because once deployed it resides on the blockchain forever.",
+      "correct": true
+    },
+    {
+      "answer": "If you need to make corrections to buggy smart contract code, you can just upload fixes, which will overwrite previous versions seamlessly."
+    }
+  ]
+}

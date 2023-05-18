@@ -1,0 +1,18 @@
+{
+  "question": "How can you retrieve the value of a state variable in a Solidity smart contract?",
+  "options": [
+    {
+      "answer": "By calling a view function that returns the variable's value.",
+      "correct": true
+    },
+    {
+      "answer": "By sending a transaction to the constructor function."
+    },
+    {
+      "answer": "By emitting an event with the variable's value."
+    },
+    {
+      "answer": "By querying the transaction log."
+    }
+  ]
+}

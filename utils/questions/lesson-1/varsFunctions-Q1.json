@@ -1,0 +1,18 @@
+{
+  "question": "What is the purpose of the public keyword in a Solidity function?",
+  "options": [
+    {
+      "answer": "It restricts the function's access only to the defined smart contract."
+    },
+    {
+      "answer": "It allows the function to be called from anywhere, including other contracts and externally owned addresses.",
+      "correct": true
+    },
+    {
+      "answer": "It indicates that the function doesn't modify the blockchain state."
+    },
+    {
+      "answer": "It specifies that the function can receive funds (ETH)."
+    }
+  ]
+}

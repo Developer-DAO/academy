@@ -1,0 +1,18 @@
+{
+  "question": "What is the key characteristic of a decentralized blockchain network?",
+  "options": [
+    {
+      "answer": "Limited transparency of transactions."
+    },
+    {
+      "answer": "Central authority controlling the network."
+    },
+    {
+      "answer": "Absence of a single controlling entity.",
+      "correct": true
+    },
+    {
+      "answer": "High collaboration among nodes."
+    }
+  ]
+}

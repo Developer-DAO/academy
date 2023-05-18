@@ -1,0 +1,12 @@
+{
+  "question": "True or False: In order to access information on a public blockchain you need to have permission from the owner.",
+  "options": [
+    {
+      "answer": "True"
+    },
+    {
+      "answer": "False",
+      "correct": true
+    }
+  ]
+}

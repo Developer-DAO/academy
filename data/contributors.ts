@@ -23,8 +23,24 @@ export const contributors: ContributorLookup = {
   },
   piablo: {
     displayName: 'piablo',
+    moreInfoUrl: 'https://twitter.com/Skruffster',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/40469149?v=4',
+    about:
+      'Piablo joined Developer_DAO in October 2021 where his primary focus is on education, with D_D Academy and D_D Mentorship. He is passionate about regenerating our planet back to a liveable state for all life forms in a fully equitable and sustainable manner.',
   },
   georgemac510: {
     displayName: 'georgemac510',
+  },
+  wolovim: {
+    displayName: 'wolovim',
+  },
+  _7i7o: {
+    displayName: '7i7o',
+    moreInfoUrl: 'https://github.com/7i7o',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/84824996?v=4',
+    about: '7i7o has been a member of the DeveloperDAO since October 2021.',
+  },
+  mveve: {
+    displayName: 'mveve',
   },
 }
