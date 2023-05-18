@@ -67,7 +67,7 @@ This has created huge opportunities for individuals, marketplaces and platforms 
 
 Now that we know they can be much more than just an image, what are we waiting for!
 
-By the end of this lesson we are going to learn a lot of things. A simple breakdown of the steps to get there is:
+By the end of this lesson we'll have learnd a lot. A simple breakdown of the steps to get there is:
 
 - Set up our environment to work
   - Install dependencies
@@ -88,12 +88,12 @@ deploy smart contracts.
 
 ![expectations.reality.jpeg](/assets/lessons/2/img_2.jpeg)
 
-To begin our project, we should open a console (command line interface). Check your Operating System
+To begin our project, we should open a command line interface, a.k.a. console. Check your Operating System
 options on how to use one below. We will be using `npm`, the package manager from Node, and its command `npx`that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
 PLEASE HELP ME FIND CLI-LESSON PATH FOR SIDE-DRAWER COMPONENT:
-<SideDrawer title=" " buttonText="Getting Started with the command line interface">
+<SideDrawer title=" " buttonText="Getting Started with the Command Line Interface">
   <InstallNpm/>
 </SideDrawer>
 <SideDrawer title=" " buttonText="How to install NPM on your system">
@@ -483,7 +483,7 @@ What have we done?
 
 Internally, when someone needs to consult an NFT's info, they call the
 OpenZeppelin's `tokenURI` function. That function only joins the return
-***value*** of our newly `_baseURI`function with the ID of the token requested.
+***value*** of our new `_baseURI` function with the ID of the token requested.
 
 With that we can see the power of inheritance and overriding. We can inherit a
 whole set of functionalities and change only what we need to create a different
@@ -504,6 +504,7 @@ and files that we prepared, and move on to the next section.
 - If you want to create your own images and have an NFT of your own, why not take the winding road and learn a little about the standard used to identify NFTs
 and a solution to store files in a decentralized way.
 
+PART 5 JSON/IPFS (SEPARATE SIDE DRAWER QUIZ)
 <SideDrawer buttonText="Assessment of part 4 and prediction of 6" title="Assessment of part 4 and prediction of 6">
       <Question question="lesson-2/4-nft-id/Q1" />
       <Question question="lesson-2/4-nft-id/Q2" />
@@ -511,9 +512,7 @@ and a solution to store files in a decentralized way.
       <Question question="lesson-2/4-nft-id/Q4" />
       <Question question="lesson-2/4-nft-id/Q5" />
 </SideDrawer>
-<br/>
 
-PART 5 JSON/IPFS (SEPARATE SIDE DRAWER QUIZ)
 
 <SideDrawer buttonText="Longer Path (learn about JSON and IPFS)">
 ## JSON
@@ -662,11 +661,11 @@ PART 6 SCRIPTS AND COMPILE
 
 You might remember this from the previous project, when we used Remix. Once we
 have our contract ready, we can compile and deploy. In Remix, we had a bunch of
-buttons in the web interface, but now we are getting pro, a.k.a. doing it all
-ourselves, with the console.
+buttons in the web interface, but now we are going pro, a.k.a. doing it all
+ourselves in the console.
 
-Why did we deviate from Solidity? Because of the way we set our contract up.
-When we deploy we tell our contract where our files are stored. Therefore we had
+Why are we deviating from Solidity? Because of the way we set our contract up.
+When we deploy, we tell our contract where our files are stored. Therefore we have
 to store the files somewhere to get the address we need to run the deployment.
 
 So, now that we have our media and JSONs uploaded, we can deploy our NFT
@@ -674,12 +673,12 @@ contract!
 
 ![deploy.jpeg](/assets/lessons/2/img_15.jpeg)
 
-Remember that scripts folder at the beginning of our project? That's where we
+Remember the scripts folder at the beginning of our project? That's where we
 are going to create our script to tell Hardhat the set of instructions to
 follow. We can create one for deploy, another one to mint or call functions of
-our contract. Hardhat uses javascript for this.
+our contract. Hardhat uses Javascript for this.
 
-So, let's create a `deploy.js` under the `scripts/` folder and copy this code:
+So, let's create a `deploy.js` under the `scripts/` folder and copy this in:
 
 ```jsx
 // import Hardhat to use it inside our script
@@ -791,7 +790,7 @@ Let's run the script again and see what it tells us! Here's my output:
 
 ![deploy.output.2.png](/assets/lessons/2/img_17.png)
 
-We got the URI of the token, right? So, now we know we can deploy it (and mint)
+We got the URI of the token, right? So, now we know we can deploy it, and mint
 to a real blockchain!
 
 <SideDrawer buttonText="Assessment of part 6 and prediction of 7" title="Assessment of part 6 and prediction of 7">
@@ -962,4 +961,12 @@ But first, we want you to go and 'touch some grass'. So why don't you scroll to 
 <br/>
 
 Congratulations on your results. You're now a supreme open-sourcerer! See you in the next lesson, where you will be adding to your knowledge of creating ERC721s, by creating *tiered NFTs*. See you there....
-<br/><br/><br/>
+
+
+import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+
+<ContributorFooter
+  authors={['_7i7o', 'piablo']}
+  reviewers={['georgemac510']}
+  contributors={['mveve']}
+/>

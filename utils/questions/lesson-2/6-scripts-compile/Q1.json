@@ -1,11 +1,19 @@
 {
-  "question": "",
+  "question": "What info should we provide in deploy.js to get our NFT contract on the blockchain?",
   "options": [
     {
-      "answer": ""
+      "answer": "Solidity version used in the contract"
     },
     {
-      "answer": "",
+      "answer": "IPFS base URI for the NFT files",
+      "correct": true
+    },
+    {
+      "answer": "Symbol of the NFT collection",
+      "correct": true
+    },
+    {
+      "answer": "Name of the NFT collection",
       "correct": true
     }
   ]

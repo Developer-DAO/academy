@@ -1,12 +1,22 @@
 {
-  "question": "",
+  "question": "What should you never, ever share with anyone?",
   "options": [
     {
-      "answer": ""
+      "answer": "Your wallet's public address"
     },
     {
-      "answer": "",
+      "answer": "Your API Key from an Ethereum RPC Node Provider"
+    },
+    {
+      "answer": "Your seed phrase",
       "correct": true
+    },
+    {
+      "answer": "Your wallet's private key",
+      "correct": true
+    },
+    {
+      "answer": "Don't forget it :)"
     }
   ]
 }
