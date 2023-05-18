@@ -33,26 +33,7 @@
       ]
     },
     {
-<<<<<<< HEAD:utils/quizzes/quiz-test.json
-      "question": "What can we use an Ethereum smart contract for?",
-=======
-      "question": "What would you say is the most important aspect of OpenZeppelin contracts?",
-      "options": [
-        {
-          "answer": "Their team did an amazing job with them"
-        },
-        {
-          "answer": "They have been rigorously audited",
-          "correct": true
-        },
-        {
-          "answer": "Most of the original and best known Ethereum protocols use them "
-        }
-      ]
-    },
-    {
       "question": "What can we use a smart contract for?",
->>>>>>> Add mini-quiz file path placeholders + 40% of mini-quiz content:utils/quizzes/template-quiz.json
       "options": [
         {
           "answer": "Storing or transfering value without the need of a central authority",
