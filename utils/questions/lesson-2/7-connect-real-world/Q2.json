@@ -1,11 +1,17 @@
 {
-  "question": "",
+  "question": "What is the most sensitive data of the project?",
   "options": [
     {
-      "answer": ""
+      "answer": "API key from an Ethereum RPC node provider"
     },
     {
-      "answer": "",
+      "answer": "Your score in the last mini-quiz"
+    },
+    {
+      "answer": "Your Ethereum address"
+    },
+    {
+      "answer": "Your wallet's private key",
       "correct": true
     }
   ]

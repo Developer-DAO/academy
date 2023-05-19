@@ -2,7 +2,7 @@
   "question": "In Solidity, what does the ^ symbol represent when specifying the compiler version?",
   "options": [
     {
-      "answer": "It denotes an exclusive range of compiler versions"
+      "answer": "It denotes an exclusive compiler version"
     },
     {
       "answer": "It indicates a fallback function"

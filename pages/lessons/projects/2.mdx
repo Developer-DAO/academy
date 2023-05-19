@@ -20,6 +20,7 @@ import DecentralizedStorage from '../fundamentals/decentralized-storage.mdx'
 import InstallNpm from '../fundamentals/install-npm.mdx'
 import TokenStandards from '../fundamentals/token-standards.mdx'
 import { LessonHeader } from '../../../components/mdx/LessonHeader'
+import CliLesson from '../fundamentals/cli_lesson.mdx'
 
 <LessonHeader title="Lesson 2: Build a Basic NFT" />
 
@@ -27,22 +28,26 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 Welcome to this lesson on creating a series of NFTs using Solidity smart contracts with a range of developer tools. If you are new to programming, we recommend you first complete our *Getting Started with Smart Contract Development* project, where you can learn the basics of Solidity and the some of the concepts we use in this lesson. We alst have a series of follow-up projects to this one, the next one being *TierNFTs*, but let's not get ahead of ourselves just yet.
 
-We have some checkpoint questions for you throughout the lesson for testing either your previous knowledge, predicting next steps in the lesson, or letting you see for yourself how well you're absorbing the new content. Needless to say, there's a quiz at the end, so make sure you're checking out all the side-drawers for a deeper dive of the new concepts. To complete the lesson, expect somewhere between one and six hours depending on your previous experience and the need to learn new ideas. Let's make developing enjoyable, by taking care of our well-being. We have a pomodoro timer ⌛ for you to set in the menu header so you can take regular breaks, and please *do* go outside and 'touch some grass'😊. Nature is the source of much of our well-being.
+We have some checkpoint questions for you throughout the lesson for testing either your previous knowledge, predicting next steps in the lesson, or letting you see for yourself how well you're absorbing the new content. Needless to say, there's a quiz at the end, so make sure you're checking out all the side-drawers for a deeper dive of the new concepts. To complete the lesson, expect somewhere between one and six hours depending on your previous experience and the need to learn new ideas. Let's make developing enjoyable, by taking care of our well-being. We have a pomodoro timer ⌛ for you to set in the menu header so you can take regular breaks, and please *do* go outside and 'touch some grass'. 😊 Nature is the source of much of our well-being 🌱
 
-PART 1 INTRO
+
 ## What are we buidling?
 
 In this project we will build a basic NFT smart contract, that will serve us as
 the backbone or foundation for almost any future NFT project. 
 
-<SideDrawer buttonText="Previous knowledge + prediction for parts 1 and 2" title="Build on your previous knowledge">
+But let's pause quickly for a few questions to see what you already know, and give you a flavour of what's to come.
+
+<SideDrawer buttonText="Warm-up Questions" title="Some previous knowledge, some prediction">
       <Question question="lesson-2/1-intro/Q1" />
       <Question question="lesson-2/1-intro/Q2" />
       <Question question="lesson-2/1-intro/Q3" />
       <Question question="lesson-2/1-intro/Q4" />
       <Question question="lesson-2/1-intro/Q5" />
-</SideDrawer>
-<br/>
+</SideDrawer> 
+How did you find that? No worries if the answers didn't come easily. We're here to fill
+in the gaps! Set your pomodoro ⌛😊
+
 
 ![thatd.be.great.jpeg](/assets/lessons/2/img_1.jpeg)
 
@@ -79,7 +84,7 @@ By the end of this lesson we'll have learnd a lot. A simple breakdown of the ste
 - *Mint*, i.e. create our very own NFT
 - See our NFT in a public marketplace
 
-PART 2 TOOLS/ENVIRONMENT
+
 ## Set up your environment
 
 Like the pros. For that we are going to set up our working environment in our
@@ -92,13 +97,14 @@ To begin our project, we should open a command line interface, a.k.a. console. C
 options on how to use one below. We will be using `npm`, the package manager from Node, and its command `npx`that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
-PLEASE HELP ME FIND CLI-LESSON PATH FOR SIDE-DRAWER COMPONENT:
 <SideDrawer title=" " buttonText="Getting Started with the Command Line Interface">
-  <InstallNpm/>
+  <CliLesson/>
 </SideDrawer>
+
 <SideDrawer title=" " buttonText="How to install NPM on your system">
   <InstallNpm/>
 </SideDrawer>
+
 Let’s create and `cd` into our D_D Academy projects folder, and create a
 folder for our NFT project:
 
@@ -133,10 +139,7 @@ Once we have our environment set up, we need to create a project.
 We run the `npx hardhat` command to create a basic project:
 
 <SideDrawer buttonText="What on Earth is Hardhat?">
-  Since we’re flying to Jupiter, we need safety apparel! That’s what Hardhat is.
-
-  It provides a blockchain for us along the way, where we can have lots of value
-  on it, and we can waste as much as we want and get hit on the head with
+  Since we’re flying to Jupiter, we need safety apparel! And that’s what Hardhat is. It provides a blockchain for us along the way, where we can have lots of ETH in our wallet, and we can waste as much as we want, and get hit on the head with
   asteroids without getting any scars.
   
   Hardhat lets us do all the things we did in Remix, but instead of clicking
@@ -229,7 +232,7 @@ widely used and fully tested and audited.
 </SideDrawer>
 <br/>
 
-<SideDrawer buttonText="Assessment of part 1 and 2 and prediction of 3" title="Assessment of part 1 and 2 and prediction of 3">
+<SideDrawer buttonText="Checkpoint Questions" title="Creating a Robust Development Environment">
       <Question question="lesson-2/2-tools-environment/Q1" />
       <Question question="lesson-2/2-tools-environment/Q2" />
       <Question question="lesson-2/2-tools-environment/Q3" />
@@ -238,7 +241,7 @@ widely used and fully tested and audited.
 </SideDrawer>
 <br/>
 
-PART 3 SOLIDITY/TOKEN STANDARDS
+
 ## Let’s start coding!
 
 With our project folder ready, we can now fire up our Code Editor.
@@ -358,16 +361,15 @@ have been minted so far. In the next step we will use this variable to identify
 each new NFT that’s created.
 
 
-<SideDrawer buttonText="Assessment of part 3 and prediction of 4" title="Assessment of part 3 and prediction of 4">
+<SideDrawer buttonText="Checkpoint Questions" title="Solidity and Contracts in Context">
       <Question question="lesson-2/3-sol-erc/Q1" />
       <Question question="lesson-2/3-sol-erc/Q2" />
       <Question question="lesson-2/3-sol-erc/Q3" />
       <Question question="lesson-2/3-sol-erc/Q4" />
       <Question question="lesson-2/3-sol-erc/Q5" />
 </SideDrawer>
+Don't forget the pomodoro ⌛😊
 <br/>
-
-PART 4. NFT IDENTITY
 
 ## Mint… Feels Good
 
@@ -406,11 +408,11 @@ new item to be added to our ProjectNFT contract.
 
 As you can see, OpenZeppelin implementation takes care of all the heavy lifting,
 but later in our learning journey we will be able to understand how it all works
-inside the hood.
+under the hood.
 
 ## Ok but, what does it do?
 
-We can create unique NFTs by now, but we didn't add any media or utility to them
+We can create unique NFTs by now, but we haven't added any media or utility to them
 just yet.
 
 ![cmon.do.something.nft.jpeg](/assets/lessons/2/img_8.jpeg)
@@ -504,8 +506,7 @@ and files that we prepared, and move on to the next section.
 - If you want to create your own images and have an NFT of your own, why not take the winding road and learn a little about the standard used to identify NFTs
 and a solution to store files in a decentralized way.
 
-PART 5 JSON/IPFS (SEPARATE SIDE DRAWER QUIZ)
-<SideDrawer buttonText="Assessment of part 4 and prediction of 6" title="Assessment of part 4 and prediction of 6">
+<SideDrawer buttonText="Checkpoint Questions" title="Creating NFT ID with the Power of Inheritence">
       <Question question="lesson-2/4-nft-id/Q1" />
       <Question question="lesson-2/4-nft-id/Q2" />
       <Question question="lesson-2/4-nft-id/Q3" />
@@ -516,6 +517,7 @@ PART 5 JSON/IPFS (SEPARATE SIDE DRAWER QUIZ)
 
 <SideDrawer buttonText="Longer Path (learn about JSON and IPFS)">
 ## JSON
+Go touch some grass, and set your pomodoro when you get back ⌛😊
 
 We have most of our smart contract ready, so we are going to focus on the media
 that we want on our NFTs.
@@ -643,7 +645,7 @@ an IPFS service will surely help you get ahead in your learning.
 
 Have your json files folder IPFS link saved (the full link, that links to all
 the files), for we will use it in our next step.
-<SideDrawer buttonText="Assessment of part 5 and prediction of 6" title="Assessment of part 5 and prediction of 6">
+<SideDrawer buttonText="Checkpoint Questions" title="Web3 File Storage and Good Practices">
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q1" />
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q2" />
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q3" />
@@ -656,7 +658,6 @@ Good for you for taking on this extra adventure 🧙🏾
 </SideDrawer>
 
 
-PART 6 SCRIPTS AND COMPILE
 ## Deploy! Back to Solidity... kind of...
 
 You might remember this from the previous project, when we used Remix. Once we
@@ -793,7 +794,7 @@ Let's run the script again and see what it tells us! Here's my output:
 We got the URI of the token, right? So, now we know we can deploy it, and mint
 to a real blockchain!
 
-<SideDrawer buttonText="Assessment of part 6 and prediction of 7" title="Assessment of part 6 and prediction of 7">
+<SideDrawer buttonText="Checkpoint Questions" title="Testing our Configurations with Scripts">
       <Question question="lesson-2/6-scripts-compile/Q1" />
       <Question question="lesson-2/6-scripts-compile/Q2" />
       <Question question="lesson-2/6-scripts-compile/Q3" />
@@ -801,8 +802,7 @@ to a real blockchain!
       <Question question="lesson-2/6-scripts-compile/Q5" />
 </SideDrawer>
 <br/>
-
-PART 7 DEPLOY. TESTNETS. WALLETS. OPENSEA
+Set your pomodoro ⌛😊
 
 ## Things just got real!
 
@@ -849,8 +849,8 @@ they can take full control of the wallet, and empty it of all that is in it!
 To be able to deploy our contract, we are going to use that number, that's why
 we recommend, yet again, to use a separate wallet for developing.
 
-We need to inform Hardhat what node are we using to connect to the
-blockchain/network
+We need to inform Hardhat which node we are using to connect to the
+blockchain/network.
 
 Once you have your wallet funded with test eth, you need sign up for one of the
 Ethereum RPC Node Providers. Alchemy and Infura are the most used, Ankr has a "community endpoint" without signing up that is not dedicated, to list a few options.
@@ -905,7 +905,7 @@ Please, if you are already a developer and you plan to use git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
-<SideDrawer buttonText="Assessment of part 7 and prediction of 8" title="Assessment of part 7 and prediction of 8">
+<SideDrawer buttonText="Checkpoint Questions" title="Adopting Wise Developer Practices">
       <Question question="lesson-2/7-connect-real-world/Q1" />
       <Question question="lesson-2/7-connect-real-world/Q2" />
       <Question question="lesson-2/7-connect-real-world/Q3" />
@@ -913,8 +913,6 @@ private key there.
       <Question question="lesson-2/7-connect-real-world/Q5" />
 </SideDrawer>
 <br/>
-
-PART 8 DEPLOY TO TESTNET
 
 Ok. We are ready, let's deploy to the Goerli testnet!
 

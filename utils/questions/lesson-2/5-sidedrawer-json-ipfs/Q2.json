@@ -5,11 +5,11 @@
       "answer": "To move files and pin them to another node"
     },
     {
-      "answer": "To make content available more permanently"
+      "answer": "To make content available more permanently",
+      "correct": true
     },
     {
-      "answer": "To create a hole where a file once was therefore deleting it from the network",
-      "correct": true
+      "answer": "To create a hole where a file once was therefore deleting it from the network"
     }
   ]
 }

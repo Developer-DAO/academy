@@ -1,11 +1,20 @@
 {
-  "question": "",
+  "question": "Which command do we use to run the deploy.js script for our testnet? ",
   "options": [
     {
-      "answer": ""
+      "answer": "npx run deploy.js"
     },
     {
-      "answer": "",
+      "answer": "npx hardhat deploy.js"
+    },
+    {
+      "answer": "npx hardhat run scripts/deploy.js"
+    },
+    {
+      "answer": "npx run scripts/deploy.js"
+    },
+    {
+      "answer": "npx hardhat run scripts/deploy.js --network sepolia",
       "correct": true
     }
   ]

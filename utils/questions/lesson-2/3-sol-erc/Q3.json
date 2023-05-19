@@ -5,11 +5,11 @@
       "answer": "Defines the copyright license "
     },
     {
-      "answer": "Declares the version of Solidity being used",
-      "correct": true
+      "answer": "Declares the version of Solidity being used"
     },
     {
-      "answer": "Assigns a name and symbol to the NFT being created"
+      "answer": "Assigns a name and symbol to the NFT being created",
+      "correct": true
     }
   ]
 }

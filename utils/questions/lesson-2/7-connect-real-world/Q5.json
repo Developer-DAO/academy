@@ -1,11 +1,11 @@
 {
-  "question": "",
+  "question": "What's your guess? You'll keep your private key in the hardhat.config.js",
   "options": [
     {
-      "answer": ""
+      "answer": "True"
     },
     {
-      "answer": "",
+      "answer": "False",
       "correct": true
     }
   ]
