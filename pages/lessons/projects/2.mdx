@@ -36,7 +36,7 @@ We have some checkpoint questions for you throughout the lesson for testing eith
 In this project we will build a basic NFT smart contract, that will serve us as
 the backbone or foundation for almost any future NFT project. 
 
-But let's pause quickly for a few questions to see what you already know, and give you a flavour of what's to come.
+But let's pause quickly for a few questions to see what you already know, and give you a flavour of what's to come. First set your pomodoro ⌛😊
 
 <SideDrawer buttonText="Warm-up Questions" title="Some previous knowledge, some prediction">
       <Question question="lesson-2/1-intro/Q1" />
@@ -46,7 +46,7 @@ But let's pause quickly for a few questions to see what you already know, and gi
       <Question question="lesson-2/1-intro/Q5" />
 </SideDrawer> 
 How did you find that? No worries if the answers didn't come easily. We're here to fill
-in the gaps! Set your pomodoro ⌛😊
+in the gaps! 
 
 
 ![thatd.be.great.jpeg](/assets/lessons/2/img_1.jpeg)
@@ -72,29 +72,42 @@ This has created huge opportunities for individuals, marketplaces and platforms 
 
 Now that we know they can be much more than just an image, what are we waiting for!
 
-By the end of this lesson we'll have learnd a lot. A simple breakdown of the steps to get there is:
+**By the end of this lesson we'll have learnd a lot. A simple breakdown of the steps to get there is:**
 
-- Set up our environment to work
-  - Install dependencies
-  - Create a project
-- Create a Smart Contract using a code editor
-- Use images and files for our NFTs
-  - (Optional) Create your own images and files and store them in a decentralized way
-- Deploy our Smart Contract to a Testnet Blockchain
-- *Mint*, i.e. create our very own NFT
-- See our NFT in a public marketplace
+- set up our environment to work
+  - install dependencies
+  - create a project template
+- create a smart contract using a code editor
+- use images and files for our NFTs
+  - optional - create your own images and files, and store them in a decentralized way
+- deploy our smart contract to a testnet blockchain
+- *mint*, i.e. create our very own NFT
+- see our NFT in a public marketplace
+
+**To achieve this, we'll need diverse developer tools. We'll also need to open a couple of 
+accounts as we progress from one development environment to the next. We'll be using:**
+
+- a console
+- an IDE
+- optional - a Pinata account for web3 storage of content
+- a web3 wallet for testing
+- some test ETH
+- an API key from an RPC provider
+  - optional - an account for that provider
+
+Lots of fun! And no worries, we'll give you all those steps in due course.  
 
 
 ## Set up your environment
 
-Like the pros. For that we are going to set up our working environment in our
+Just like the pros! For that we are going to set up our working environment on our
 computer, making sure we have all the necessary tools to create, debug and
 deploy smart contracts.
 
 ![expectations.reality.jpeg](/assets/lessons/2/img_2.jpeg)
 
-To begin our project, we should open a command line interface, a.k.a. console. Check your Operating System
-options on how to use one below. We will be using `npm`, the package manager from Node, and its command `npx`that allows us to run or execute a package or one of its scripts. If you are
+To begin our project, we should open a command line interface, a.k.a. a console. Check your operating system
+options below on how to use one. We will also be using `npm`, the package manager from Node, and its command `npx`that allows us to run or execute a package or one of its scripts. If you are
 comfortable with another package manager, feel free to use it.
 
 <SideDrawer title=" " buttonText="Getting Started with the Command Line Interface">
@@ -126,7 +139,7 @@ npm install --save-dev hardhat
 
 <Callout emoji='💡' size='md' variant='info'>
 The `--save-dev` flag used in the last command, lets the project know it's a
-development dependency (not needed in production). You can view what
+development dependency, i.e. not needed in production. You can view what
 dependencies are needed in the `package.json` file in the root of the project.
 </Callout>
 
@@ -164,7 +177,7 @@ are those ten lines and what is?
 // 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
 // 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
 
-👷 Welcome to Hardhat v2.11.1 👷
+👷 Welcome to Hardhat v2.14.0 👷
 
 ? What do you want to do? … 
 ❯ Create a JavaScript project
@@ -173,7 +186,7 @@ are those ten lines and what is?
   Quit
 ```
 
-We choose `Create a Javascript project` and hardhat will create an example
+We choose `Create a Javascript project` and Hardhat will create an example
 project for us. It will give us 3 prompts for options. Choosing the defaults is
 ok for us. Here's what mine asked me:
 
@@ -184,12 +197,12 @@ ok for us. Here's what mine asked me:
 ✔ Do you want to install this sample project's dependencies with npm (@nomicfoundation/hardhat-toolbox)? (Y/n) · y
 ```
 
-- **Hardhat project root** → Hit enter (this is the folder where we want to create the project)
+- **Hardhat project root** → Hit Enter - this is the folder where we want to create the project.
 - **Do you want to add a .gitignore?** → Select 'y'. If you are patient to
-  finish the lesson, you'll learn what it's for
+  finish the lesson, you'll learn what it's for.
 - **Do you want to install this sample project's dependencies with npm (…)?** →
   Select 'y'. These are packages (programs) that our project needs to be able to
-  run.
+  run. 
 
 <Callout emoji='💡' size='md' variant='info'>
 The project asked us to install `@nomicfoundation/hardhat-toolbox` in the
@@ -201,7 +214,16 @@ npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation
 ```
 </Callout>
 
-We delete some files so we start fresh:
+ - After these selections, you can expect to see some messages regarding vulnerabilities, npm warnings for deprecated files and prompts to audit. No need to worry, this is to be expected in development, and we all got a shock the first time too! However, if you get messages that say 'ERROR', then jump into the forum and ask for guidance.
+
+In a Hardhat project, the default folders are:
+
+
+- `contracts/` where the source files for your contracts should be.
+- `scripts/` where simple automation scripts go.
+- `test/` where your tests should go.
+
+We need to delete some files inside those folders so we can start our own project afresh:
 
 ```bash
 rm contracts/*.sol
@@ -209,13 +231,6 @@ rm scripts/*.js
 rm test/*.js
 ```
 
-In a Hardhat project, the default folders are supposed to be for:
-
-default paths
-
-- `contracts/` is where the source files for your contracts should be.
-- `scripts/` is where simple automation scripts go.
-- `test/` is where your tests should go.
 
 We now need to add our last dependency (OpenZeppelin contracts):
 
@@ -230,7 +245,7 @@ widely used and fully tested and audited.
 <SideDrawer buttonText="More on Open Zeppelin">
   <OpenZeppelin/>
 </SideDrawer>
-<br/>
+
 
 <SideDrawer buttonText="Checkpoint Questions" title="Creating a Robust Development Environment">
       <Question question="lesson-2/2-tools-environment/Q1" />
@@ -247,9 +262,9 @@ widely used and fully tested and audited.
 With our project folder ready, we can now fire up our Code Editor.
 
 <Callout emoji='💡' size='md' variant='info'>
-We are using VSCode for this one (we think it has a good balance of costs vs.
-benefits) but you can use whatever you feel comfortable with. A few of the more
-popular code editors are VSCode, Atom, Sublime, Vim, emacs, and many more.
+We are using [VS Code](https://code.visualstudio.com/download) for this project, we think it has a good balance of costs vs.
+benefits. But you can use whatever you feel comfortable with. A few of the more
+popular code editors are Atom, Sublime, Vim, Emacs, and many more.
 
 </Callout>
 
@@ -277,11 +292,10 @@ copyright license, the second one defines the solidity version we are going to
 be using for this contract and the last two lines are how we declare a smart
 contract in solidity.
 
-With an empty project, now we can start adding what we need to create our
-awesome NFT collection. In particular, ERC721 (the
-formal specification to follow for NFTs) have a lot of requirements to meet
-(they should have a numbered ID, functions to transfer them, approve others as
-delegates to transfer them, etc).
+With an empty project, we can now start adding what we need to create our
+awesome NFT collection. ERC721, the
+formal specification to follow for NFTs, has a lot of requirements to meet. For example NFTs should have a numbered ID, functions to transfer them, and the ability to approve others as
+delegates to transfer them, etc.
 
 <SideDrawer title=" " buttonText="More about Token Standards">
   <TokenStandards/>
@@ -296,8 +310,8 @@ going to use them inside our contract.
 ## Standing on the shoulder of giants
 
 For this we are going to ‘inherit’ (think of _using the properties of_ or
-_extending_ for now) the ERC721 contract from OpenZeppelin. In the same way you
-_inherit_ the DNA and characteristics from your family/relatives.
+_extending_ for now) the ERC721 contract from OpenZeppelin. Or the same way you
+_inherit_ the DNA and characteristics from your relatives.
 
 ![standing.in.the.shoulder.of.giants.nft.jpeg](/assets/lessons/2/img_5.jpeg)
 
@@ -609,7 +623,7 @@ Once you got your account, try to upload a few images for our first NFTs.
 Ok, now that you have uploaded the images, videos, audio or whatever you want
 your NFTs to point at, you need to create the `.json` files in your preferred
 text editor. We must name them as numbers (1,2,3,…) without extension, so our
-solidity function `tokenURI` works. It will work somewhat like this:
+Solidity function `tokenURI` works. It will work somewhat like this:
 
 ![ipfs explained.2x.png](/assets/lessons/2/img_13.png)
 
@@ -622,29 +636,30 @@ and
 [here](https://gateway.pinata.cloud/ipfs/Qma2rLNBm4cQ2RXxYt75cRJ42NJHPXXyCZPi9p3Wi4n9et).
 
 Pay special attention to the json files folder, when you add `/1` to the end of
-the link, it opens the 1st json file, and does the same for the rest of the ids.
+the link, it opens the 1st json file, and does the same for the rest of the IDs.
 To achieve this, you need to add the json files all at the same time, as a
 **folder** into pinata, and then you get a CID for the folder, which you can
 reference with the filenames at the end for each file.
 
 Remember `_baseURI` function in our solidity contract? The one that was used to
-create the NFT tokenURI? There's where we are going to get the pinata link with
+create the NFT tokenURI? There's where we are going to get the Pinata link with
 the CID to our folder.
 
 And, if we filled our JSON files correctly, each with the corresponding CID of
 our media, we should be good to go.
 
-Here is a screenshot of how we have set up our files in pinata for this project:
+Here is a screenshot of how we have set up our files in Pinata for this project:
 
 ![Pinata Setup.png](/assets/lessons/2/img_14.png)
 
-You could use our CID for your project (remember the files are there, just like
-when you publish an image in imgur or any other web2, only ours is
-decentralized). However, we feel that getting your feet wet and interacting with
+You could use our CID for your project, since the files are there already, just like
+when you've published an image on Imgur or any other web2 service, only ours is
+decentralized. However, we feel that getting your feet wet and interacting with
 an IPFS service will surely help you get ahead in your learning.
 
 Have your json files folder IPFS link saved (the full link, that links to all
 the files), for we will use it in our next step.
+
 <SideDrawer buttonText="Checkpoint Questions" title="Web3 File Storage and Good Practices">
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q1" />
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q2" />
@@ -653,7 +668,7 @@ the files), for we will use it in our next step.
       <Question question="lesson-2/5-sidedrawer-json-ipfs/Q5" />
 </SideDrawer>
 <br/>
-Good for you for taking on this extra adventure 🧙🏾
+p.s. Good for you for taking on this extra adventure! 🧙🏾
 <br/><br/>
 </SideDrawer>
 
@@ -810,35 +825,36 @@ For us to get our contract out of our computers and into the real world, we are
 going to run the deploy again, but this time to a testnet.
 
 What is a testnet? It is a basically a whole running blockchain, but it runs
-only so people can try stuff out. On it, you have eth, tokens, NFTs, but they have no monetary value. This way, you can develop and test your contracts without fear of losing real money. For the moment, we are choosing to do this on the Goerli (it's one of the many Ethereum testnets)
+only so people can try stuff out. On it, you have ETH, NFTs, other tokens, etc but they have no monetary value. This way, you can develop and test your contracts without fear of losing anything valuable. For the moment, we are choosing to do this on *Sepolia*. It's one of the many of Ethereum testnets.
 
-Before we go any further, let's take an extra step for precaution, until the
-next project where we are going to learn how to use collaborative tools to store
-our projects. But until then, let's open our main folder's `.gitignore` file an
+Before we go any further, let's take an extra step for precaution. In the
+next project we'll learn how to use collaborative tools to store
+our projects, but for now, let's open our root directory's `.gitignore` file an
 add this line anywhere:
 
 ```bash
 hardhat.config.js
 ```
 
-In order to do this we need:
+In order to deploy to a real testnet we'll need:
 
-- An ethereum wallet that can connect to Goerli.
-  [Metamask](https://metamask.io/) is the most used.
-- Some Goerli-Eth. You can ask for some in a faucet, it's free, although
-  some are faster than others! Options: [#1](https://goerlifaucet.com/),
-  [#2](https://faucets.chain.link/goerli), [#3](https://faucet.paradigm.xyz/)
-- An API Key from an Ethereum RPC Node Provider
-([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
-[Ankr](https://rpc.ankr.com/eth_goerli))
-- A minor change in the Hardhat Configuration file
+- An Ethereum wallet that can connect to Sepolia
+  [Metamask](https://metamask.io/) is often used
+- Some Sepolia-ETH. You can ask for some in a faucet, it's free, although
+  some are faster than others! Options: [#1](https://faucet.sepolia.dev/),
+  [#2](https://www.infura.io/faucet/sepolia), [#3](https://faucet.quicknode.com/ethereum/sepolia)
+- An API Key from an Ethereum RPC Node Provider e.g. [Infura](https://app.infura.io/), or
+[Ankr](https://www.ankr.com/rpc/eth/eth_sepolia/).
+- A minor change in the Hardhat configuration file
 
-First and foremost, **security**. We are exploring new grounds, experimenting
-and by doing so, we could make mistakes that we don't want to happen where we
-have our money.
+First and foremost, **security**. We are exploring new grounds, experimenting,
+and by doing so, we could make mistakes that we wouldn't want to happen where we
+have any assets of value.
 
 We **strongly** recommend you use a separate wallet for developing, completely
-independent from the one that holds your personal assets on the blockchain, if you have any.
+independent from the one that holds any personal assets you might have on the blockchain.
+For example, you could create a new profile for yourself in your favourite browser, and create
+your developer wallet in there. 
 
 Wallets have a special number, called a private key. You should **never**,
 **ever** share your private keys with **anyone**. If anyone has that number,
@@ -846,23 +862,23 @@ they can take full control of the wallet, and empty it of all that is in it!
 
 ![keys.jpeg](/assets/lessons/2/img_18.jpeg)
 
-To be able to deploy our contract, we are going to use that number, that's why
-we recommend, yet again, to use a separate wallet for developing.
+To be able to deploy our contract, we are going to use that private key, that's why
+we recommend, yet again, to use a separate wallet  containing only test tokens for developing.
 
 We need to inform Hardhat which node we are using to connect to the
 blockchain/network.
 
-Once you have your wallet funded with test eth, you need sign up for one of the
-Ethereum RPC Node Providers. Alchemy and Infura are the most used, Ankr has a "community endpoint" without signing up that is not dedicated, to list a few options.
+Once you have your wallet funded with test ETH, you'll need sign up for one of the
+Ethereum RPC Node Providers. Alchemy and Infura are the most used. And Ankr has a 'community endpoint' which doesn't require a dedicated sign up, to list a few options.
 
 Once you sign up, you'll be asked to create an App, be sure to select the
-Goerli network there.
+Sepolia network there.
 
 When the app is created, you'll see a "View Key" button, or similar. Press it
 and copy the HTTP link, we'll use it in our next step.
 
-Once you have funded your wallet with fake eth, we can go ahead and change our
-Hardhat configuration file. Go into your main project's folder and open
+Once you have funded your wallet with fake ETH, we can go ahead and change our
+Hardhat configuration file. Go into your project's main directory and open
 `hardhat.config.js`.
 
 We are going to replace our file with this:
@@ -881,7 +897,7 @@ const RPC_API_KEY = 'YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY'
 module.exports = {
   solidity: '0.8.12',
   networks: {
-    goerli: {
+    sepolia: {
       url: RPC_API_KEY,
       accounts: [WALLET_PRIVATE_KEY],
     },
@@ -926,7 +942,7 @@ deploy, delete all the lines we added to test the minting.
 Run:
 
 ```bash
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/deploy.js --network sepolia
 ```
 
 This is the output i got in my console:
@@ -938,7 +954,7 @@ nonetheless.
 
 Now that we have run the deploy script, delete the private key and the RPC API
 key from `hardhat.config.js` to minimize the handling of the wallet. In the next
-project we will learn about tools to collaborate and store your projects online
+project we will learn about tools to collaborate and store your projects online.
 
 So now we can go and explore the chain to find your contract (and mine too!).
 Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
