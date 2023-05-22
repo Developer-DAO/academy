@@ -95,7 +95,7 @@ accounts as we progress from one development environment to the next. We'll be u
 - an API key from an RPC provider
   - optional - an account for that provider
 
-Lots of fun! And no worries, we'll give you all those steps in due course.  
+Lots of fun to come! And no worries, we'll give you all those steps in due course.  
 
 
 ## Set up your environment
@@ -118,8 +118,8 @@ comfortable with another package manager, feel free to use it.
   <InstallNpm/>
 </SideDrawer>
 
-Let’s create and `cd` into our D_D Academy projects folder, and create a
-folder for our NFT project:
+Let’s create and `cd` into a D_D Academy projects folder, and create a
+folder for our NFT project and `cd` into that too:
 
 ```bash
 # create a folder for all our D_D Academy projects
@@ -145,27 +145,13 @@ dependencies are needed in the `package.json` file in the root of the project.
 
 ## Create your project
 
-Once we have our environment set up, we need to create a project.
+Once we have our environment set up, we need to set up a project.
 
 ![you.shall.not.pass.jpeg](/assets/lessons/2/img_3.jpeg)
 
-We run the `npx hardhat` command to create a basic project:
+We run the `npx hardhat` command to generate a basic project:
 
-<SideDrawer buttonText="What on Earth is Hardhat?">
-  Since we’re flying to Jupiter, we need safety apparel! And that’s what Hardhat is. It provides a blockchain for us along the way, where we can have lots of ETH in our wallet, and we can waste as much as we want, and get hit on the head with
-  asteroids without getting any scars.
-  
-  Hardhat lets us do all the things we did in Remix, but instead of clicking
-  ‘Deploy’ and ‘Compile’ buttons, or reading our logs from inside the browser
-  IDE, we will be writing our commands in the console and debugging our errors
-  from a code editor on our ‘local’ computer.
 
-  Hardhat is simply a set of tools that includes a local mini blockchain that
-  can run on your machine.
-</SideDrawer>
-
-After you enter your `npx hardhat` command, what information can you see? What
-are those ten lines and what is?
 
 ```less
 // 888    888                      888 888               888
@@ -185,6 +171,19 @@ are those ten lines and what is?
   Create an empty hardhat.config.js
   Quit
 ```
+
+<SideDrawer buttonText="What on Earth is Hardhat?">
+  Since we’re flying to Jupiter, we need safety apparel! And that’s what Hardhat is. It provides a blockchain for us along the way, where we can have lots of ETH in our wallet, and we can waste as much as we want, and get hit on the head with
+  asteroids without getting any scars.
+  
+  Hardhat lets us do all the things we did in Remix, but instead of clicking
+  ‘Deploy’ and ‘Compile’ buttons, or reading our logs from inside the browser
+  IDE, we will be writing our commands in the console and debugging our errors
+  from a code editor on our ‘local’ computer.
+
+  Hardhat is simply a set of tools that includes a local mini blockchain that
+  can run on your machine.
+</SideDrawer>
 
 We choose `Create a Javascript project` and Hardhat will create an example
 project for us. It will give us 3 prompts for options. Choosing the defaults is
@@ -214,7 +213,7 @@ npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation
 ```
 </Callout>
 
- - After these selections, you can expect to see some messages regarding vulnerabilities, npm warnings for deprecated files and prompts to audit. No need to worry, this is to be expected in development, and we all got a shock the first time too! However, if you get messages that say 'ERROR', then jump into the forum and ask for guidance.
+ - After these selections, you can expect to see some messages regarding vulnerabilities, npm warnings for deprecated files and prompts to audit. No need to worry or take action, this is to be expected in development, and we all got a shock the first time too! However, if you get messages that say 'ERROR', then jump into the forum and ask for guidance.
 
 In a Hardhat project, the default folders are:
 
@@ -370,8 +369,8 @@ contract ProjectNFT is ERC721 {
 }
 ```
 
-We made our totalSupply variable private and it will store exactly how many NFTs
-have been minted so far. In the next step we will use this variable to identify
+We made our totalSupply variable private and it will store the exact number of NFTs
+that have been minted. In the next step we will use this variable to identify
 each new NFT that’s created.
 
 
@@ -432,15 +431,12 @@ just yet.
 ![cmon.do.something.nft.jpeg](/assets/lessons/2/img_8.jpeg)
 
 We are missing the last piece of the puzzle. For now they are just a numbered
-proof of ownership from our contract, stored on the blockchain. So here is where
-the magic starts.
-
-We can make our NFT collection about anything we want: text, images, music,
+proof of ownership from our contract stored on the blockchain. So here is where
+the magic starts. We can make our NFT collection about anything we want: text, images, music,
 videos, anything you want. But how?
 
-The `ERC721` implementation we inherited has a function to store a `tokenURI`.
-
-What is this black magic? This is just a unique URI, a web address if you prefer,
+The `ERC721` implementation we inherited has a function to store a `tokenURI`. But what 
+is this strange magic? This is just a unique URI (Uniform Resource Identifier), a web address if you prefer,
 that points to something on the internet, whatever we want it to be. e.g. a video,
 an image.
 
@@ -449,7 +445,7 @@ IDs of the NFTs. It gives a way to define a base path for a web address and just
 attaches the token ID at the end of it. So, if you wanted, you could upload your
 NFT info (we'll look at how we store that later) to any web address, say
 `www.my-site.com/my-nft-collection`
-and number each info file with the corresponding ID (1, 2, 3, 4…).
+and number each file with the corresponding ID (1, 2, 3, 4…).
 
 We are not going to limit the size of our collection for this project.
 
@@ -573,7 +569,7 @@ collection to have as NFTs. Each of them will have as a minimum a “name”,
 As you see in the example, under “image” we have a link to a file on the web,
 which we will refer to as Web2. So, if this website were to go down, our NFTs
 would lose their images, showing us the limitations of the centralization of
-web2 data storage.
+Web2 data storage.
 
 ![nft.pepe.jpeg](/assets/lessons/2/img_11.jpeg)
 
@@ -602,17 +598,17 @@ computer that downloads a file using IPFS, also shares that file with others for
 a limited amount of time. You can make content available more permanently by
 *pinning* it, until you decide to *unpin* it.
 
-To ease our path into the IPFS network, services for *pinning* content (e.g.
-Pinata) offer paid and free tiers that ensure that the files we upload are
+To ease our path into the IPFS network, services for *pinning* content, e.g.
+Pinata, offer paid and free tiers that ensure that the files we upload are
 *pinned* in IPFS.
 
-So, go ahead and grab yourself a free pinata account at this
+So, go ahead and grab yourself a free Pinata account at this
 [link](https://www.pinata.cloud/).
 
 One of the peculiarities of IPFS is that files, or better called ‘content’, are
-not referenced by name but by its 'CID'. It stands for Content IDentifier, and
+not referenced by name but by its CID. It stands for Content IDentifier, and
 that's because that jumble of letters is a hash of the content. Instead of being
-location-based, IPFS addresses a file by *what's in it*, i.e. its *content*. The
+location-based, IPFS addresses a file by *what's in it*, i.e. its content. The
 content identifier is a *unique cryptographic hash* of the content at that
 address.
 
@@ -638,7 +634,7 @@ and
 Pay special attention to the json files folder, when you add `/1` to the end of
 the link, it opens the 1st json file, and does the same for the rest of the IDs.
 To achieve this, you need to add the json files all at the same time, as a
-**folder** into pinata, and then you get a CID for the folder, which you can
+**folder** into Pinata, and then you get a CID for the folder, which you can
 reference with the filenames at the end for each file.
 
 Remember `_baseURI` function in our solidity contract? The one that was used to
@@ -703,11 +699,11 @@ const hre = require('hardhat')
 // We define a variable with the name of our contract
 const CONTRACT_NAME = 'ProjectNFT'
 
-// The 3 parameters for our smart contract's constructor (CHANGE THIS!!!)
+// The 3 parameters for our smart contract's constructor (CHANGE THESE to your own NFT name and description)
 const NFT_NAME = 'Academy'
 const NFT_DESCRIPTION = 'D_D Academy Basic NFT Collection'
 
-// Change this if you created your own images/JSONs:
+// CHANGE THIS if you created your own images/JSONs:
 const NFT_BASE_URI = 'https://gateway.pinata.cloud/ipfs/QmSCNdaA5JBT5D6V5FbivfZonKjdsMPeZeTyTWzq1D3yrJ/'
 
 // We define a function with all we want Hardhat to run
@@ -767,7 +763,7 @@ This is the output i got:
 
 ![deploy.output.png](/assets/lessons/2/img_16.png)
 
-Notice that ‘Compiled 10 Solidity files successfully’? But we only wrote 1
+Notice that ‘Compiled 11 Solidity files successfully’? But we only wrote 1
 Solidity file!
 
 Well, we are actually inheriting some of OpenZeppelin's implementations, so the
@@ -799,7 +795,6 @@ placeholder before in our deploy.js file:
   // We print out the tokenURI
   console.log(`NFT 1 tokenURI: ${tokenURI}`)
 
-}
 ```
 
 Let's run the script again and see what it tells us! Here's my output:
@@ -843,8 +838,8 @@ In order to deploy to a real testnet we'll need:
 - Some Sepolia-ETH. You can ask for some in a faucet, it's free, although
   some are faster than others! Options: [#1](https://faucet.sepolia.dev/),
   [#2](https://www.infura.io/faucet/sepolia), [#3](https://faucet.quicknode.com/ethereum/sepolia)
-- An API Key from an Ethereum RPC Node Provider e.g. [Infura](https://app.infura.io/), or
-[Ankr](https://www.ankr.com/rpc/eth/eth_sepolia/).
+- An API Key from an Ethereum RPC Node Provider e.g. [Infura](https://app.infura.io/),
+[Ankr](https://www.ankr.com/rpc/eth/eth_sepolia/), or [Alchemy](https://dashboard.alchemy.com/)
 - A minor change in the Hardhat configuration file
 
 First and foremost, **security**. We are exploring new grounds, experimenting,
@@ -866,18 +861,14 @@ To be able to deploy our contract, we are going to use that private key, that's 
 we recommend, yet again, to use a separate wallet  containing only test tokens for developing.
 
 We need to inform Hardhat which node we are using to connect to the
-blockchain/network.
-
-Once you have your wallet funded with test ETH, you'll need sign up for one of the
+blockchain network. Once you have your wallet funded with test ETH, you'll need sign up for one of the
 Ethereum RPC Node Providers. Alchemy and Infura are the most used. And Ankr has a 'community endpoint' which doesn't require a dedicated sign up, to list a few options.
 
-Once you sign up, you'll be asked to create an App, be sure to select the
-Sepolia network there.
-
-When the app is created, you'll see a "View Key" button, or similar. Press it
+After signing up, you'll be asked to create an App. Be sure to select the
+Sepolia network there. When the app is created, you'll see a 'View Key' button, or similar. Press it
 and copy the HTTP link, we'll use it in our next step.
 
-Once you have funded your wallet with fake ETH, we can go ahead and change our
+With our wallet funded fake ETH, we can go ahead and change our
 Hardhat configuration file. Go into your project's main directory and open
 `hardhat.config.js`.
 
@@ -917,7 +908,7 @@ password (the one you use to open it, NOT your seed phrase). It also shows you a
 notice so you know that you are entering the danger zone. Confirm and you'll be
 able to copy your private key. Paste it in to our `hardhat.config.js`
 
-Please, if you are already a developer and you plan to use git to store your
+Please, if you are already a developer and you plan to use Git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
@@ -930,11 +921,11 @@ private key there.
 </SideDrawer>
 <br/>
 
-Ok. We are ready, let's deploy to the Goerli testnet!
+Ok. We are ready, let's deploy to the Sepolia testnet!
 
 Now we need to run our deploy.js script and the deployment is going to cost us
-some eth (test eth, don't worry) from our wallet, since we are storing
-information (i.e. our contract) in the blockchain. We only have to add 2 words
+some ETH - test ETH, don't worry - from our wallet, since we are storing
+information, i.e. our contract on the blockchain. We only have to add 2 words
 to the command to let Hardhat know we are doing the real thing now. Remember
 our deploy script will create our contract AND mint one NFT. If you only want to
 deploy, delete all the lines we added to test the minting.
@@ -952,29 +943,29 @@ This is the output i got in my console:
 Remember we are deploying to the actual blockchain, a testnet, but a blockchain
 nonetheless.
 
-Now that we have run the deploy script, delete the private key and the RPC API
-key from `hardhat.config.js` to minimize the handling of the wallet. In the next
+Now that we have run the deploy script, **delete the private key and the RPC API
+key from `hardhat.config.js`** to minimize the handling of the wallet. In the next
 project we will learn about tools to collaborate and store your projects online.
 
 So now we can go and explore the chain to find your contract (and mine too!).
-Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
+Just go to [Sepolia Etherscan](https://sepolia.etherscan.io/) (or
 [Opensea](https://testnets.opensea.io/)) and search for the address of our
 deployed contract.
 
-You can view my links as an example on [Etherscan](https://goerli.etherscan.io/address/0x166A82F7cD8F7BA9D8C10b2cc792C1A20084564d)
+You can view my links as an example on [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xc2c2Ae7Ba222384352ED022D8D1b53Ee7edc52AB)
 and [Opensea](https://testnets.opensea.io/collection/d-d-academy)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
 
 Wow, you have created your own NFT collection from scratch. What a superstar! You have learned tonnes of new concepts and code - that is really impressive! And now you're almost ready to test yourself a little bit more. 
 
-But first, we want you to go and 'touch some grass'. So why don't you scroll to the top and set the pomodoro timer, and when you come back after your well earned rest, take the quiz. Breathe and enjoy.  
+But first, we want you to breathe and enjoy. So go and 'touch some grass', and when you come back after your well earned rest, take the quiz.  <br/>
 
 <br/>
 <Quiz quiz="lesson-2-quiz" />
 <br/>
 
-Congratulations on your results. You're now a supreme open-sourcerer! See you in the next lesson, where you will be adding to your knowledge of creating ERC721s, by creating *tiered NFTs*. See you there....
+Congratulations on your results. You're now a supreme open-sourcerer! In the next lesson *tiered NFTs*, you will be building on top of what you did here, adding more functionality to your contracts and to your knowledge of creating ERC721s. After that we'll be doing some automated testing, and to wrap up, we'll be connecting everything up to a front end, so a user can easily interact with your creations. Lots of fun in the pipeline! See you in the next one and in our community [developerdao.peeranha.io](https://developerdao.peeranha.io)!
 
 
 import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
