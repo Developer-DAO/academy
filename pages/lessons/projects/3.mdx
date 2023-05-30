@@ -31,6 +31,7 @@ differentiate between different levels or categories in that service. Think of s
 streaming services out there such as Netflix, Disney+, etc. Some have different levels
 of access depending on the subscription. We want to let users access different
 services depending on the NFT they mint and own.
+I'M NOT AT ALL SURE WHAT WE ARE BUILDING..... MAKE SURE WE ADD THAT WE'LL BE INHERITING A FEW MORE OZ CONTRACTS ThIS TIME. MAYBE A NUDGE TO LEARNER TO READ SOME OF THE OZ CODE?
 
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
@@ -38,14 +39,14 @@ services depending on the NFT they mint and own.
 
 Before we start coding, we need to create our project template. We are going to follow
 the same steps as in previous lessons. Using our package manager (npm, yarn,
-etc) we create a Hardhat project and remove unnecessary files.
+etc)WE ARE ONLY USING ONE we create a Hardhat project and remove unnecessary files.
 
 If you’ve done our previous lesson, it’s the exact same process. Make a note of
 remembering these steps and what they do, for we will use them a lot in
 the future.
 
-Let’s first open a console and cd into our `d_d_academy` folder, or create it
-first if you don't have it. Then let's create a folder for our NFT project:
+Let’s first open a console and `cd` into our `d_d_academy` folder, or create it
+first if you don't have it. Then let's create a folder for our NFT project and make sure to `cd` into it too:
 
 ```bash
 ## (OPTIONAL) create a folder for our D_D Academy projects
@@ -100,8 +101,13 @@ install them manually with:
 npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
 </Callout>
+In a Hardhat project, the default folders are supposed to be for:
 
-We delete some files so we start fresh:
+- `contracts/` is where the source files for your contracts should be.
+- `scripts/` is where simple automation scripts go.
+- `test/` is where your tests should go.
+
+We want to delete some of the default files so we start fresh, e.g. we will create our own .sol file for our contract, etc:
 
 ```bash
 rm contracts/*.sol
@@ -109,13 +115,8 @@ rm scripts/*.js
 rm test/*.js
 ```
 
-In a Hardhat project, the default folders are supposed to be for:
 
-- `contracts/` is where the source files for your contracts should be.
-- `scripts/` is where simple automation scripts go.
-- `test/` is where your tests should go.
-
-We now need to add our last dependency (OpenZeppelin contracts):
+We now need to add our last dependency. The OpenZeppelin contracts:
 
 ```bash
 npm install @openzeppelin/contracts
@@ -135,7 +136,7 @@ Fire up your code editor and let’s start hacking. I’m using VSCode, so I run
 `code .` in my terminal.
 
 Let’s create an empty file named `TierNFT.sol` inside the `contracts/` folder
-and copy this code inside:
+and following the contract and file naming convention, create a contract of the same name:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -145,19 +146,18 @@ contract TierNFT {
 }
 ```
 
-Now that we have our License, the version of solidity we are using and the
+Now that we have our license, the version of Solidity we are using and the
 contract set up, we can add the logic and the variables we need to store.
 
-## What do we need?
+## What do we need? 
+### we sort of need this 'intro' at the start of the lesson......
 
 As we are creating tiers for the categories of our NFTs, we need to also store
-information about tiers in our contracts.
-
-We'll write our smart contract step by step in four stages.
+information about tiers in our contracts. We'll write our smart contract step by step in four stages.
 
 ### Inheriting OpenZeppelin ERC721 and adding a Mint Function
 
-Let’s get started with a simple contract, inheriting OpenZeppelin ERC721 like we did last time.
+Let’s get started by inheriting OpenZeppelin's ERC721.sol like we did last time. We add a constructor to our contract, which will mirror the one from ERC721.sol. 
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -173,9 +173,8 @@ contract TierNFT is ERC721 {
 }
 ```
 
-We add a constructor to our contract, which will mirror the one inherited from ERC721.sol. If we had no constructor, the compiler would throw errors.
 
-Now let’s go ahead and add a mint function that only uses `_safeMint` **i don't understand 'only uses'....as opposed to what?**'
+Now let’s go ahead and add a mint function which will call `_safeMint` from the inherited contract, and we'll make it `payable`. We'll see why shortly. Can you remember what `++` does to our total supply?
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -201,7 +200,7 @@ contract TierNFT is ERC721 {
 
 ### Adding Tiers and Using Them in the Mint Function
 
-Now add the tiers and assign their values, where each one represents a service subscription.
+Now to make our code neat and easily readable, just before the contract declaration, add the tiers, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like - the values won't change, which in turn cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -234,9 +233,9 @@ contract TierNFT is ERC721 {
 }
 ````
 
-We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store what tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`.
+We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store which tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`. Mappings are widely used in Solidity, having many advantages. For example, they are a great way to store batches of data and access them efficiently and therefore cheaply through 'key: value' pairs.
 
-Now we need to modify the mint function for the tier NFTs:
+Now we need to modify the mint function with logic to be able to actually access the three tiers of the NFTs separately. We use a 'conditional' `if/else if` statement to achieve this. If you know Javascript, you know `if`, and you know `else`!
 
 ```solidity
     // constructor part of the code...
