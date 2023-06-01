@@ -22,6 +22,7 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 <LessonHeader title="Lesson 3: Tier NFTs" />
 
 ## What are we building?
+PART ONE: INTRO AND CONTENTS
 
 We are going to build on-chain NFTs, that have different Tiers and prices.
 
@@ -33,13 +34,15 @@ of access depending on the subscription. We want to let users access different
 services depending on the NFT they mint and own.
 I'M NOT AT ALL SURE WHAT WE ARE BUILDING..... MAKE SURE WE ADD THAT WE'LL BE INHERITING A FEW MORE OZ CONTRACTS ThIS TIME. MAYBE A NUDGE TO LEARNER TO READ SOME OF THE OZ CODE?
 
+WARM-UP QUESTIONS ⁉️
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
+PART 2  ASSERTIONS AND DATA TYPES e.g. MAPPINGS
 ## First things first 👷‍♂️
 
 Before we start coding, we need to create our project template. We are going to follow
-the same steps as in previous lessons. Using our package manager (npm, yarn,
-etc)WE ARE ONLY USING ONE we create a Hardhat project and remove unnecessary files.
+the same steps as in previous lessons. Using `npm` as our package manager, we'll create 
+a Hardhat project and remove the default files we don't need.
 
 If you’ve done our previous lesson, it’s the exact same process. Make a note of
 remembering these steps and what they do, for we will use them a lot in
@@ -132,11 +135,11 @@ widely used and fully tested and audited.
 
 ### Let’s start coding!
 
-Fire up your code editor and let’s start hacking. I’m using VSCode, so I run
+Fire up your code editor and let’s start hacking. I’m using VSCode, so I just need to run
 `code .` in my terminal.
 
-Let’s create an empty file named `TierNFT.sol` inside the `contracts/` folder
-and following the contract and file naming convention, create a contract of the same name:
+Let’s create an empty file named `TierNFT.sol` inside the `contracts/` folder,
+and by following the contract and file naming convention, create a contract of the same name:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -146,8 +149,8 @@ contract TierNFT {
 }
 ```
 
-Now that we have our license, the version of Solidity we are using and the
-contract set up, we can add the logic and the variables we need to store.
+Now that we have our license, Solidity version and the
+contract defined, we can add the logic and the variables we need to store.
 
 ## What do we need? 
 ### we sort of need this 'intro' at the start of the lesson......
@@ -200,7 +203,7 @@ contract TierNFT is ERC721 {
 
 ### Adding Tiers and Using Them in the Mint Function
 
-Now to make our code neat and easily readable, just before the contract declaration, add the tiers, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like - the values won't change, which in turn cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
+Next, to make our code neat and easily readable, just before the contract declaration, add the tiers, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -233,12 +236,17 @@ contract TierNFT is ERC721 {
 }
 ````
 
-We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store which tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`. Mappings are widely used in Solidity, having many advantages. For example, they are a great way to store batches of data and access them efficiently and therefore cheaply through 'key: value' pairs.
+We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store the tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`. Mappings are widely used in Solidity, having many advantages. They are a great way to organise and access data efficiently, and therefore cheaply through 'key: value' pairs e.g. an address to a balance. We can also use nested mappings to allow for more complex data structures. 
 
-Now we need to modify the mint function with logic to be able to actually access the three tiers of the NFTs separately. We use a 'conditional' `if/else if` statement to achieve this. If you know Javascript, you know `if`, and you know `else`!
+Now we need to modify the mint function with logic that can access the three NFT tiers separately. We use a 'conditional' `if/else if` statement to achieve this. If you've done any coding before now, you'll probably know `if`, and if so, you'll definitely know `if else`!
 
 ```solidity
-    // constructor part of the code...
+    // state variables and contract definition...
+
+    uint256 public totalSupply;
+    mapping(uint256 => uint256) public tokenTier;
+
+    // constructor...
 
 		function mint() public payable {
         require(
@@ -259,7 +267,11 @@ Now we need to modify the mint function with logic to be able to actually access
 }
 ```
 
-The mint function selects tiers based on the amount of native token value it receives. If it doesn't get enough for tier 0,it will give a message telling us, "Not enough value for the minimum Tier". Otherwise we can select the tier we want..... as long as we can afford it! 
+The mint function selects tiers based on the amount of native token it receives stored in `msg.value`. 
+
+The `require` statement is a simple and powerful function modifier you'll be using a lot in the future, which also helps ensure code we write is 'predictable'. In our case, if we give the function zero token value for TIER_VALUE_0, it will 'revert' with a message telling us, "Not enough value for the minimum Tier", and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
+
+We already have two `uint256` variables declared. You might wonder which one is which inside the `tokenTier` mapping? See if you can track through the code and find out - DEFO NEED A QUESTION OR TWO ON THIS - TO GET THAT ANSWER! AND ALSO TO CHECK ON STATE AND LOCAL VARIABLES e.g. `tierId` is declared  with `0`. 
 
 <br/>
 <details>
@@ -305,6 +317,9 @@ contract TierNFT is ERC721 {
 ````
 </details>
 <br/>
+
+CHECKPOINT QUESTIONS ⁉️ <br />
+PART 3 
 
 ### Create a (simple) tokenURI function
 
