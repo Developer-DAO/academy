@@ -203,7 +203,7 @@ contract TierNFT is ERC721 {
 
 ### Adding Tiers and Using Them in the Mint Function
 
-Next, to make our code neat and easily readable, just before the contract declaration, add the tiers, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
+Next, to make our code neat and easily readable, just before the contract declaration add the tier Name and Value state variables, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -269,7 +269,7 @@ Now we need to modify the mint function with logic that can access the three NFT
 
 The mint function selects tiers based on the amount of native token it receives stored in `msg.value`. 
 
-The `require` statement is a simple and powerful function modifier you'll be using a lot in the future, which also helps ensure code we write is 'predictable'. In our case, if we give the function zero token value for TIER_VALUE_0, it will 'revert' with a message telling us, "Not enough value for the minimum Tier", and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
+The `require` statement is a simple and powerful built-in function of Solidity you'll be using a lot in the future. It checks if the 1st parameter is true or false. On true, it does nothing, allowing execution to continue normally, but on false it throws an exception that reverts everything we modified in the transaction. In our case, if we send the function zero token value, it will 'revert' with a "Not enough value for the minimum Tier" message, and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
 
 We already have two `uint256` variables declared. You might wonder which one is which inside the `tokenTier` mapping? See if you can track through the code and find out - DEFO NEED A QUESTION OR TWO ON THIS - TO GET THAT ANSWER! AND ALSO TO CHECK ON STATE AND LOCAL VARIABLES e.g. `tierId` is declared  with `0`. 
 
@@ -323,7 +323,7 @@ PART 3
 
 ### Create a (simple) tokenURI function
 
-When we inherited Open Zeppelin's ERC721, it gave us a function for `tokenURI` where we can store an image, or a video, or much more. With the help of this ERC721 contract we have the ability to define **a base path** for creating an
+When we inherited Open Zeppelin's ERC721, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this ERC721 contract we have the ability to define **a base path** for creating a
 unique URI which adds the token ID to the end of it.
 
 ```solidity
