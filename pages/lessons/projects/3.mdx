@@ -21,24 +21,52 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 <LessonHeader title="Lesson 3: Tier NFTs" />
 
+## About this lesson
+
+Welcome to this tutorial, where you will learn how to create tiered NFTs using Solidity smart contracts and expand the capabilities of your NFT projects. This tutorial builds upon the knowledge gained from our previous *Getting Started with Smart Contract Development* and *Build a Basic NFT* lessons. If you haven't already, we recommend you complete them to familiarise yourself with the fundamentals of Solidity and the concepts we will be building upon in this lesson. 
+
+
+Throughout this tutorial, we will provide you with checkpoint questions to test your previous knowledge, predict upcoming steps in the lesson, and allow you to gauge how well you are soaking up the new content. Be sure to check out all the side-drawers for a deeper dive into the concepts, as there will be a quiz at the end of the lesson. We estimage between one and six hours to complete the lesson, depending on your previous experience and your need to learn new ideas. Remember to take regular breaks and enjoy the process of development. We even have a pomodoro timer ⌛ in the menu header to help you pace yourself and remind you to 'touch some grass' and appreciate nature's contribution to our well-being. 🌱
+
 ## What are we building?
-PART ONE: INTRO AND CONTENTS
+{/* PART ONE: INTRO AND CONTENTS */}
 
-We are going to build on-chain NFTs, that have different Tiers and prices.
+In the previous lesson, we talked about NFTs and their use cases. Unlike traditional NFTs that may represent a single unique use-case, such as a login to a web page, or access to a service, tiered NFTs introduce a hierarchy of functionality, e.g. differentiating between different categories of a service. Think of some streaming services out there such as Netflix, or Disney+ and the different levels of access the subscription offers. By assigning tiers to different levels of rarity or attributes, we can create a more dynamic and engaging NFT ecosystem. This opens up new possibilities for collectors, artists, and many other interested parties. In this project, we will create a tiered NFT smart contract that will serve as a foundational framework for a variety of your future NFT ventures, unlocking a multitude of possibilities. That's pretty rad!
 
-In the previous lesson, we talked about NFTs and their use cases. If we can use
-an NFT to login to a web page, or to access a service, we can use them to
-differentiate between different levels or categories in that service. Think of some
-streaming services out there such as Netflix, Disney+, etc. Some have different levels
-of access depending on the subscription. We want to let users access different
-services depending on the NFT they mint and own.
-I'M NOT AT ALL SURE WHAT WE ARE BUILDING..... MAKE SURE WE ADD THAT WE'LL BE INHERITING A FEW MORE OZ CONTRACTS ThIS TIME. MAYBE A NUDGE TO LEARNER TO READ SOME OF THE OZ CODE?
-
-WARM-UP QUESTIONS ⁉️
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
-PART 2  ASSERTIONS AND DATA TYPES e.g. MAPPINGS
+{/* WARM-UP QUESTIONS */}
+<SideDrawer buttonText="Warm-up Questions" title="Some previous knowledge, some prediction">
+      <Question question="lesson-2/1-intro/Q1" />
+      <Question question="lesson-2/1-intro/Q2" />
+      <Question question="lesson-2/1-intro/Q3" />
+      <Question question="lesson-2/1-intro/Q4" />
+      <Question question="lesson-2/1-intro/Q5" />
+</SideDrawer> 
+<br/>
+**Now that we have set the stage, it's time to dive into the exciting world of tiered NFTs and uncover the unique superpowers they possess. By the end of this tutorial, you will have gained a wealth of knowledge and accomplished the following steps**:
+
+- Setting up the development environment
+- Writing and deploying a Solidity smart contract
+- Creating tiered NFTs with varying levels of rarity and attributes
+- Write scripts for deployment
+- Exploring additional functionalities and possibilities with tiered NFTs ..... in the smart contract!
+- Showcasing and trading your tiered NFTs on a public marketplace
+
+**Throughout this journey, we will leverage a range of developer tools and open accounts to transition seamlessly between different development environments. These tools include**:
+
+- a CLI/console 
+- an IDE 
+- optional decentralized storage accounts 
+- a web3 wallet for testing 
+- some test ETH 
+- an API key from an RPC provider. 
+
+We will guide you through each step, ensuring a fun and comprehensive learning experience. Let's get started on this exciting journey into the world of tiered NFTs, and unleash the endless possibilities they hold!
+
+
 ## First things first 👷‍♂️
+{/* PART 2  ASSERTIONS AND DATA TYPES e.g. MAPPINGS */}
 
 Before we start coding, we need to create our project template. We are going to follow
 the same steps as in previous lessons. Using `npm` as our package manager, we'll create 
