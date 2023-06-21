@@ -44,6 +44,7 @@ In the previous lesson, we talked about NFTs and their use cases. Unlike traditi
       <Question question="lesson-2/1-intro/Q5" />
 </SideDrawer> 
 <br/>
+
 **Now that we have set the stage, it's time to dive into the exciting world of tiered NFTs and uncover the unique superpowers they possess. By the end of this tutorial, you will have gained a wealth of knowledge and accomplished the following steps**:
 
 - Setting up the development environment
@@ -68,16 +69,15 @@ We will guide you through each step, ensuring a fun and comprehensive learning e
 ## First things first 👷‍♂️
 {/* PART 2  ASSERTIONS AND DATA TYPES e.g. MAPPINGS */}
 
-Before we start coding, we need to create our project template. We are going to follow
-the same steps as in previous lessons. Using `npm` as our package manager, we'll create 
+Before we start coding, we need to create our project template by following
+the same steps as in the previous *Build a Basic NFT* lesson. Make a note of
+these steps and what they do, for you will use them a lot in
+the future. Using `npm` as our package manager, we'll create 
 a Hardhat project and remove the default files we don't need.
 
-If you’ve done our previous lesson, it’s the exact same process. Make a note of
-remembering these steps and what they do, for we will use them a lot in
-the future.
 
 Let’s first open a console and `cd` into our `d_d_academy` folder, or create it
-first if you don't have it. Then let's create a folder for our NFT project and make sure to `cd` into it too:
+first if you haven't already. Then create a folder for our TierNFT project and make sure to `cd` into it too:
 
 ```bash
 ## (OPTIONAL) create a folder for our D_D Academy projects
@@ -132,13 +132,13 @@ install them manually with:
 npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
 ```
 </Callout>
-In a Hardhat project, the default folders are supposed to be for:
+In a Hardhat project, some of the default folders are:
 
-- `contracts/` is where the source files for your contracts should be.
-- `scripts/` is where simple automation scripts go.
-- `test/` is where your tests should go.
+- `contracts/` where the source files for your contracts should be.
+- `scripts/` where simple automation scripts go.
+- `test/` where your tests should go.
 
-We want to delete some of the default files so we start fresh, e.g. we will create our own .sol file for our contract, etc:
+We want to delete the default files inside the folders so we start afresh, i.e. we will create our own .sol file for our own contract, etc:
 
 ```bash
 rm contracts/*.sol
@@ -178,15 +178,15 @@ contract TierNFT {
 ```
 
 Now that we have our license, Solidity version and the
-contract defined, we can add the logic and the variables we need to store.
+contract defined, we can add the logic and the variables we need to store. As we are creating tiers for the categories of our NFTs, we need to also store information about tiers in our contracts. We'll write our smart contract step by step in five stages:
 
-## What do we need? 
-### we sort of need this 'intro' at the start of the lesson......
+- add mint function
+- add tiers to utilise in mint function
+- create basic TokenURI function
+- enhance TokenURI function with SVG file
+- add withdraw function
 
-As we are creating tiers for the categories of our NFTs, we need to also store
-information about tiers in our contracts. We'll write our smart contract step by step in four stages.
-
-### Inheriting OpenZeppelin ERC721 and adding a Mint Function
+### Add a Mint Function
 
 Let’s get started by inheriting OpenZeppelin's ERC721.sol like we did last time. We add a constructor to our contract, which will mirror the one from ERC721.sol. 
 
@@ -229,9 +229,9 @@ contract TierNFT is ERC721 {
 
 ```
 
-### Adding Tiers and Using Them in the Mint Function
+### Add Tiers
 
-Next, to make our code neat and easily readable, just before the contract declaration add the tier Name and Value state variables, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into 'gas optimisation' for you in a future lesson.
+Next, to make our code neat and easily readable, just before the contract declaration add the tier Name and Value state variables, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into **gas optimisation** for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -264,9 +264,9 @@ contract TierNFT is ERC721 {
 }
 ````
 
-We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store the tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`. Mappings are widely used in Solidity, having many advantages. They are a great way to organise and access data efficiently, and therefore cheaply through 'key: value' pairs e.g. an address to a balance. We can also use nested mappings to allow for more complex data structures. 
+We have added `Basic`, `Medium` and `Premium` as tiers and assigned their values. We store the tier each NFT holds in `mapping(uint256 => uint256) public tokenTier;`. Mappings are widely used in Solidity, having many advantages. They are a great way to organise and access data efficiently, and therefore cheaply through **key: value** pairs e.g. a balance **value** maps to an address **key**. We can also use nested mappings to allow for more complex data structures. 
 
-Now we need to modify the mint function with logic that can access the three NFT tiers separately. We use a 'conditional' `if/else if` statement to achieve this. If you've done any coding before now, you'll probably know `if`, and if so, you'll definitely know `if else`!
+Now we need to modify the mint function with logic that can access the three NFT tiers separately. We use a **conditional** `if/else if` statement to achieve this. If you've done any coding before now, you'll probably know `if`, and if so, you'll definitely know `if else`!
 
 ```solidity
     // state variables and contract definition...
@@ -297,9 +297,10 @@ Now we need to modify the mint function with logic that can access the three NFT
 
 The mint function selects tiers based on the amount of native token it receives stored in `msg.value`. 
 
-The `require` statement is a simple and powerful built-in function of Solidity you'll be using a lot in the future. It checks if the 1st parameter is true or false. On true, it does nothing, allowing execution to continue normally, but on false it throws an exception that reverts everything we modified in the transaction. In our case, if we send the function zero token value, it will 'revert' with a "Not enough value for the minimum Tier" message, and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
+The `require` statement is a simple and powerful built-in function of Solidity you'll be using a lot in the future. It checks if the 1st parameter is true or false. On true, it does nothing, allowing execution to continue normally, but on false it throws an exception that reverts everything we modified in the transaction. In our case, if we send the function zero token value, it will **revert** with a "Not enough value for the minimum Tier" message, and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
 
-We already have two `uint256` variables declared. You might wonder which one is which inside the `tokenTier` mapping? See if you can track through the code and find out - DEFO NEED A QUESTION OR TWO ON THIS - TO GET THAT ANSWER! AND ALSO TO CHECK ON STATE AND LOCAL VARIABLES e.g. `tierId` is declared  with `0`. 
+We already have two `uint256` variables declared. You might wonder which one is which inside the `tokenTier` mapping? See if you can track through the code and find out.
+ {/* DEFO NEED A QUESTION OR TWO ON THIS - TO GET THAT ANSWER! AND ALSO TO CHECK ON STATE AND LOCAL VARIABLES  e.g. `tierId` is declared  with `0`.  */}
 
 <br/>
 <details>
@@ -346,7 +347,6 @@ contract TierNFT is ERC721 {
 </details>
 <br/>
 
-CHECKPOINT QUESTIONS ⁉️ <br />
 <SideDrawer buttonText="Checkpoint Questions" title="Creating a Robust Development Environment">
       <Question question="lesson-3/<# of section block+section name/Q1" />
       <Question question="lesson-3//Q2" />
@@ -358,7 +358,7 @@ CHECKPOINT QUESTIONS ⁉️ <br />
 
 PART 3 
 
-### Create a (simple) tokenURI function
+### Create tokenURI function
 
 When we inherited Open Zeppelin's ERC721, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this ERC721 contract we have the ability to define **a base path** for creating a
 unique URI which adds the token ID to the end of it.
@@ -373,7 +373,7 @@ Next, we import `Base64.sol` which encodes the tokenURI so it can return a JSON 
 
 Remember how we talked about this token ID at the end of the URI? `Strings.sol` will write it as a string inside the JSON file. Go ahead and import the magic of these two files to your contract.
 
-For this lesson we won’t be creating a separate JSON file. We will actually code it into the contract.
+For this lesson we won’t be creating a separate JSON file. We will actually code it into the contract. Nifty, eh?
 
 ```solidity
     // mint function part of the code...
@@ -416,9 +416,9 @@ Let’s stop to break it down and examine it a little.
   function we'll use, since we are not creating a separate JSON file to store images or other services, but creating it right here in the contract.
 - We also added `require(_exists(tokenId). "Nonexistent token");` . According to ERC721 specification, it is required to throw an error if the NFT doesn't exist.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit later.
-- `Base64.encode` is for encoding the JSON into Base64 so browsers can translate
+- `Base64.encode` is for encoding the JSON into Base64, so browsers can translate
   it into a file much in the same way as a file attached to an email.
-- `string( abi.encodePacked () )` concatenates the string in a similar way to our previous lessons.
+- `string( abi.encodePacked () )` concatenates (joins together) the string in a similar way to in our *Getting Started...* lesson.
 
 This is the JSON format of our metadata:
 
@@ -515,9 +515,9 @@ uint256) public tokenTier;
 </details>
 <br/>
 
-### Complete TokenURI function with our SVG
+### Complete TokenURI function with SVG
 
-Okay. We've done a bunch of things with our contract and now we're going to do some scalable vector graphic magic!
+Okay. We've done a bunch of things with our contract, and now we're going to do some scalable vector graphic magic!
 
 Add these lines right above the other constants defined for the tiers:
 
@@ -527,8 +527,7 @@ string constant SVG_END = "</text></g></svg>";
 // string constant TIER_NAME = ...
 ````
 
-Here, we prepared the start and end of our SVG. We can test this out by joining
-the start and end of the SVG into this [online svg editor](https://editsvgcode.com/).
+Here, we prepared the start and end of our SVG. We can test this out by replacing the code in [online svg editor](https://editsvgcode.com/) with the start and end values we have provided above.
 
 And now some more modifications. Inside the tokenURI function, right below `require(…)`, add these lines:
 
@@ -654,7 +653,7 @@ contract TierNFT is ERC721 {
 </details>
 <br/>
 
-### Where are all our funds???  We need a withdraw Function!
+### Where are all our funds?  Add withdraw Function
 
 We need to find a way to actually withdraw any funds our contract generates, otherwise they'll get stuck **in the contract** .... that we created!
 
