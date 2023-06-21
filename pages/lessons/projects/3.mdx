@@ -653,16 +653,17 @@ contract TierNFT is ERC721 {
 </details>
 <br/>
 
-### Where are all our funds?  Add withdraw Function
+### Where are all our funds?  Let's add a withdraw Function!
 
-We need to find a way to actually withdraw any funds our contract generates, otherwise they'll get stuck **in the contract** .... that we created!
+We need to find a way to actually withdraw any funds our contract generates, otherwise they'll get stuck **in the contract** .... that **we** created! Let's import `Ownable.sol`, to get those permissions, so that only **we** can withdraw those funds, and not anyone else. Clever, eh?
 
 ```solidity
 // Place this next to the other imports at the top:
 import "@openzeppelin/contracts/access/Ownable.sol";
 ````
 
-We import `Ownable.sol`, so that only *we* can withdraw those funds, and not anyone else. Clever, eh?
+
+And inherit `Ownable` from the Open Zeppelin contract into our own.
 
 ```solidity
 // Modify the contract definition, by adding 'Ownable' at the end of the line:
@@ -674,7 +675,6 @@ contract TierNFT is ERC721, Ownable {
 }
 ```
 
-We inherit `Ownable` from the Open Zeppelin contract into ours.
 
 If your phone is ringing, or someone is knocking at your door right now, ignore all of it! Let’s get this withdraw function coded in here!!
 
@@ -697,15 +697,15 @@ If your phone is ringing, or someone is knocking at your door right now, ignore 
 }
 ```
 
-- `onlyOwner` - You're going to see this modifier a lot. It comes from the Ownable contract we just imported.  It's very powerful. It makes
-  sure that only the account that deployed the contract (owner is assigned on its
-  constructor) can execute the function that it appears in.
+- `onlyOwner` - you're going to see this modifier a lot. It comes from the *Ownable* contract we just imported.  It's very powerful. It makes sure that only the account that deployed the contract, i.e. the owner is assigned on its
+  constructor, can execute the function that it appears in.
+- In Solidity, `this` refers to the current contract instance. `address(this)` gets the contract's address, and `.balance` grabs the current balance, which gets stored in `uint256 balance`.
 - By checking `uint256 balance = address(this).balance` against `require(balance > 0, "Balance should be > 0");`, we can see if we actually have something to withdraw. And we would hope so, as the function consumes gas. And, as you've probably guessed, it will throw an error otherwise.
-- `(bool success, ) = payable(owner()).call{value: balance}("")` - is an actual
+- `(bool success, ) = payable(owner()).call{value: balance}("")` is an actual
   transfer of funds which uses the whole balance that we checked in the previous
-  instruction. 
+  instruction. The `owner`'s address can allow the transfer thanks to the `payable()` function. We can leave the `("")` data parameter blank in our case.
 - `require(success, "Withdraw failed")` - This is a good practice because
-  `call` doesn’t revert. With this practice we can make sure that the transfer
+  the `.call()` function doesn’t revert. With this practice we can make sure that the transfer
   occurred and throw an error if it doesn’t.
 
 <br/>
@@ -812,7 +812,7 @@ contract TierNFT is ERC721, Ownable {
 
 We need a script so we can get our smart contract deployed. Let’s write that.
 
-Create a new javascript file named `deploy.js` in the `scripts` folder with this
+Create a new Javascript file named `deploy.js` in the `scripts` folder with this
 code:
 
 ```jsx
@@ -843,22 +843,22 @@ main().catch((error) => {
 ```
 
 - `CONTRACT_NAME = "TierNFT"` - is the name of our contract, which
-  will tell Hardhat exactly *what* to deploy.
+  will tell Hardhat exactly **what** to deploy.
 - With `const COLLECTION_NAME = "TierNFT"` and
-  `const COLLECTION_SYMBOL = "Tier"` - we define the Name and Symbol to pass to the constructor for the deployment.
+  `const COLLECTION_SYMBOL = "Tier"` - we define the *name* and *symbol* to pass to the constructor for the deployment.
 - `hre.ethers.getContractFactory(CONTRACT_NAME)` - this asks Hardhat Runtime
-  Environment to get us a contract factory for our contract.
-- `contractFactory.deploy` - We are asking the contract factory to deploy our
+  Environment to get us a contract factory for our contract specified by `CONTRACT_NAME`. A contract factory is a template that allows us to deploy instances of that contract.
+- `contractFactory.deploy` - we are asking the contract factory to deploy an instance of our
   contract. This is the deploy transaction!
-- `COLLECTION_NAME, COLLECTION_SYMBOL` - These are the parameters for our
-  contract's constructor function.
-- `await contract.deployed()` - It waits for the transaction to be approved and our
-  contract is finished deploying.
-- The `main().catch( … )` at the very end makes sure that all the previous
-  code is executed when this script is run, and also prints any errors to the console.
+- `COLLECTION_NAME, COLLECTION_SYMBOL` - these are the parameters for our
+  contract's constructor function to set up its initial state.
+- `await contract.deployed()` - waits for the transaction to be approved and our
+  contract to be finished deploying.
+- Running the `main().catch( … )` script at the very end makes sure that all the previous
+  code is executed, and also logs any errors, and prints them to the console.
 
 
-### Time to DEPLOY but also some changes
+### Time to deploy, but first some changes
 
 Now the time has come for us to deploy our smart contract. But before we can do
 that, we need to modify the code in `hardhat.config.js` placed in our root folder to this:
