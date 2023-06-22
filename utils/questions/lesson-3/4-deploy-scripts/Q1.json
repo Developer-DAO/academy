@@ -1,0 +1,16 @@
+{
+  "question": "Which of these properties does Ethereum have?",
+  "options": [
+    {
+      "answer": "Permissioned"
+    },
+    {
+      "answer": "Trustless",
+      "correct": true
+    },
+    {
+      "answer": "Decentralized",
+      "correct": true
+    }
+  ]
+}
