@@ -63,7 +63,7 @@ In the previous lesson, we talked about NFTs and their use cases. Unlike traditi
 - an IDE 
 - optional decentralized storage accounts 
 - a web3 wallet for testing 
-- some test ETH 
+- some test MATIC
 - an API key from an RPC provider. 
 
 We will guide you through each step, ensuring a fun and comprehensive learning experience. Let's get started on this exciting journey into the world of tiered NFTs, and unleash the endless possibilities they hold!
@@ -234,7 +234,7 @@ contract TierNFT is ERC721 {
 
 ### Add Tiers
 
-Next, to make our code neat and easily readable, just before the contract declaration add the tier Name and Value state variables, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into **gas optimisation** for you in a future lesson.
+Next, to make our code neat and easily readable, just before the contract declaration add the tier *NAME* and *VALUE* state variables, and assign their values, where each one represents a service subscription. Note that we assign the `constant` keyword, which is what it sounds like, meaning the values won't change, which also cuts down a lot on gas costs. Always good to know, but we'll go into **gas optimisation** for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -302,8 +302,8 @@ The mint function selects tiers based on the amount of native token it receives 
 
 The `require` statement is a simple and powerful built-in function of Solidity you'll be using a lot in the future. It checks if the 1st parameter is true or false. On true, it does nothing, allowing execution to continue normally, but on false it throws an exception that reverts everything we modified in the transaction. In our case, if we send the function zero token value, it will **revert** with a "Not enough value for the minimum Tier" message, and stop executing. Otherwise we can select the tier we want..... as long as we can afford it! 
 
-We already have two `uint256` variables declared. You might wonder which one is which inside the `tokenTier` mapping? See if you can track through the code and find out.
- {/* DEFO NEED A QUESTION OR TWO ON THIS - TO GET THAT ANSWER! AND ALSO TO CHECK ON STATE AND LOCAL VARIABLES  e.g. `tierId` is declared  with `0`.  */}
+We already have two `uint256` variables declared. You might wonder which is the *key* and which the *value* inside the `tokenTier` mapping? See if you can track through the code and find out.
+
 
 <br/>
 <details>
@@ -372,11 +372,9 @@ import "@openzeppelin/contracts/utils/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 ````
 
-Next, we import `Base64.sol` which encodes the tokenURI so it can return a JSON file needed for the tier NFTs.
+Next, we import `Base64.sol` which encodes the tokenURI so it can return a JSON file needed for the tier NFTs. And how do we add this token ID at the end of the URI? `Strings.sol` will write it as a string inside the JSON file. Go ahead and import the magic of these two files to your contract.
 
-Remember how we talked about this token ID at the end of the URI? `Strings.sol` will write it as a string inside the JSON file. Go ahead and import the magic of these two files to your contract.
-
-For this lesson we won’t be creating a separate JSON file. We will actually code it into the contract. Nifty, eh?
+For this lesson we won’t be creating a separate JSON file. We will actually code it into the contract! Nifty, eh?
 
 ```solidity
     // mint function part of the code...
@@ -421,7 +419,7 @@ Let’s stop to break it down and examine it a little.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit later.
 - `Base64.encode` is for encoding the JSON into Base64, so browsers can translate
   it into a file much in the same way as a file attached to an email.
-- `string( abi.encodePacked () )` concatenates (joins together) the string in a similar way to in our *Getting Started...* lesson.
+- `string( abi.encodePacked () )` concatenates the string.
 
 This is the JSON format of our metadata:
 
@@ -432,7 +430,7 @@ This is the JSON format of our metadata:
 '"}'
 ```
 
-The part `data:image/svg+xml;base64` tells the browser that the code after the comma is a string of text written in Base64, so the browser
+The `data:image/svg+xml;base64` part tells the browser that the code after the comma is a string of text written in Base64, so the browser
 can decode it back into our SVG file format. For example, if our
 collection `TierNFT`, and the TokenID were `3`, our JSON would end up look
 something like this:
@@ -550,7 +548,7 @@ string memory tierName = tokenTier[tokenId] == 2
 // string memory imageSVG = string(...
 ```
 
-- `tierName` will store the type of tierNFT we are getting.
+- `tierName` will store the type of tierNFT we are getting. Its variable declaration with the series of `?` and `:` following it is a *ternary operator*, another type of *conditional* to check and assign the appropriate tier name based on the value of `tokenTier[tokenId]`. Is it *2*? Assign *TIER_NAME_2*, etc.
 - `imageSVG` is to create an SVG image with the corresponding tier type inside it.
 
 For marketplaces to recognize our NFT assets, we need to add some JSON attributes. We
@@ -850,7 +848,7 @@ main().catch((error) => {
 - With `const COLLECTION_NAME = "TierNFT"` and
   `const COLLECTION_SYMBOL = "Tier"` - we define the *name* and *symbol* to pass to the constructor for the deployment.
 - `hre.ethers.getContractFactory(CONTRACT_NAME)` - this asks Hardhat Runtime
-  Environment to get us a contract factory for our contract specified by `CONTRACT_NAME`. A contract factory is a template that allows us to deploy instances of that contract.
+  Environment to get us a contract factory for our contract specified by `CONTRACT_NAME`. A contract factory is a template that allows us to deploy instances of that contract, which allows many advantages.
 - `contractFactory.deploy` - we are asking the contract factory to deploy an instance of our
   contract. This is the deploy transaction!
 - `COLLECTION_NAME, COLLECTION_SYMBOL` - these are the parameters for our
@@ -884,7 +882,7 @@ module.exports = {
 
 
 
-Do you remember in *Build a Basic NFT* we looked at Ethereum RPC (remote procedure call) node providers? What we are doing is adding the RPC and network configuration to the config file. This will let you, as the deployer, connect **your** wallet to the testnet. Now we need to add some testnet tokens, so we can actually **pay** for the deployment of the contract!
+Do you remember in *Build a Basic NFT* we looked at Ethereum RPC (remote procedure call) node providers? What we are doing is adding the RPC and network configuration to the *config file*. This will let you, as the deployer, connect **your** wallet to the testnet. Now we need to add some testnet tokens, so we can actually **pay** for the deployment of the contract!
 
 ### Adding the testnet network
 
@@ -906,16 +904,14 @@ performance, fix bugs and other network failures without having to worry about b
 We get testnet tokens from faucets. A faucet is a website, which on request, will **drip** a small amount of testnet tokens onto your address, and sometimes require completion of small tasks before doing so.
 some testnet on the wallets.
 Note: Testnet and mainnet are separate networks. You can't for example send tokens from a testnet to a mainnet. Let's head over and get some on this
-[website](https://faucet.paradigm.xyz/).
+[website](https://faucet.paradigm.xyz/). If you complete the required tasks, you can get tokens for multiple testnets.
 
 ![3_faucet.png](/assets/lessons/3/3_faucet.png)
 
-If you complete the required tasks, you can get tokens for multiple testnets.
+### Personal Security
+Take your time to understand the *good practices* in this section. Before we deploy, we need to add a `.env` file to our root folder to make sure we are **not pushing and therefore exposing our private keys in public repositories**. 
 
-
-Before we deploy, we need to add a `.env` file to our root folder to make sure we are **not pushing and therefore exposing our private keys in public repositories**. 
-
-For your wallet's private key, the most sensitive data of the project, you need to open Metamask. Click on the three dots next to your Account Name, and then on Account Details, click on Export Private Key. It will ask for your Metamask password, the one you use to log in to your wallet each session, not your seed phrase. It also shows you a
+For your wallet's private key, the most sensitive data of the project, you need to open Metamask. Click on the three dots next to your *Account Name*, and then on *Account Details*, click on *Export Private Key*. It will ask for your Metamask password, the one you use to log in to your wallet each session, not your seed phrase. It also shows you a
 notice so you know that you are entering the *danger zone*. Confirm and you'll be able to copy your private key. Add your private key into the `.env` file like so:
 
 ```bash
@@ -939,9 +935,9 @@ This takes care of loading our environment variables from the `.env` file, so we
 don’t have to store sensitive information, such as private keys, to standard
 configuration files, which may need uploaded to a project's repo.
 
-Remember to always **protect your private keys, and your recovery seed phrases** to keep your wallet safe and unwanted guests out.
+Remember to always **protect your private keys, and your recovery seed phrases** to keep your wallet safe and **unwanted guests out**.
 
-### It’s Time
+### It’s Time . . . .
 
 We will deploy our smart contract by using this command:
 
@@ -953,7 +949,7 @@ We specify the network where we want the contract to be deployed using the --net
 
 ![4_deploy.png](/assets/lessons/3/4_deploy.png)
 
-**Woohoo!** Finally we deployed our contract! And a contract address, which we will need in a bit.
+**Woohoo!** Finally we deployed our contract! And got a contract address, which we will need in a bit.
 
 ### Create a Script to Mint our tier NFTs
 
@@ -1017,12 +1013,12 @@ main().catch((error) => {
   Hardhat to use the contract addresss we just deployed to the testnet.
 - `let txn = await contract.mint(...` is calling the mint function.
 - `value: hre.ethers.utils.parseEther(VALUE_TIER_0)` - defines the value that we
-  want to send to the mint function. This defines which Tier we get.
-- `ethers.utils.parseEther` - here we use Ethers to translate the value into wei i.e. multiply it with 10\*\*18  
+  want to send to the mint function. This defines which *Tier* we get.
+- `ethers.utils.parseEther` - here we use *Ethers* to translate the value into wei i.e. multiply it with 10\*\*18  
 - `let totalSupply = await contract.totalSupply()` - is calling the
   `totalSupply()` function to check if the 3 NFTs minted correctly.
 
-### Let’s MINT
+### Let’s mint!
 
 To mint our tier NFTs we will run the following command.
 
@@ -1036,26 +1032,27 @@ If we look at our terminal we will see something like this.
 
 You have just minted 3 NFTs - with different Tiers!
 
-Let’s go ahead and view them on the Opensea marketplace. This could take a few
-minutes to appear, don't panic. You can search  in
+Let’s go ahead and view them on the Opensea marketplace. They could take a few
+minutes to appear,  no need to panic 😎 You can search in
 [https://testnets.opensea.io/](https://testnets.opensea.io/) for your newly created collection
 with your contract address, or with the name that you chose.
 <br/>
 ![6_tierNFTs.png](/assets/lessons/3/6_tierNFTs.png)
 
 Of course we already have a couple up there, but you will be able to
-view the three NFTs of your own, which you so diligently minted. You're an artist!
-Now let's see what you have learned along the way with a little quiz.
+view the three NFTs of your own, which you so diligently minted, the artist that you are!
+
+😊 Now let's see what you have learned along the way with a little quiz 😉
 <br/><br/>
 
 <Quiz quiz="quiz-lesson-3"/>
 
 <br/><br/>
 How did you enjoy that? We hope you had fun. And what's next? We're going to bring your 
-dev skills to the level - you ain't seen nothin' yet! We're **goin' a testin'** together. Building 
+dev skills to the level. You ain't seen nothin' yet - we're going testing together. Building 
 culture in web3 is the substrate for the infrastructure we create, and learning to test 
-what we build with real awareness is crucial for creating a safe and sustainable environment. We're 
-looking forward to seeing you in our *Write Automated Tests for your TierNFT* project next.
+what we build with real awareness, just like anywhere else, is crucial for creating a safe and sustainable environment. So we're 
+looking forward to seeing you in our *Write Automated Tests for your TierNFT* project next!
 
 In the mean time, jump into the forum and share your experiences with your peers!
 
@@ -1066,6 +1063,6 @@ import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
 
 <ContributorFooter
   authors={['meowy', '_7i7o', 'piablo']}
-  reviewers={['georgemac510', 'piablo']}
+  reviewers={['georgemac510']}
   contributors={['mveve']}
 />
