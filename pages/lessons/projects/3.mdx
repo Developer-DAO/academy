@@ -19,7 +19,10 @@ icons:
 import OpenZeppelin from '../fundamentals/open_zeppelin.mdx'
 import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
-<LessonHeader title="Lesson 3: Tier NFTs" />
+<LessonHeader 
+title="Lesson 3: Tier NFTs" 
+discussionUrl="https://developerdao.peeranha.io/discussions"
+/>
 
 ## About this lesson
 
@@ -881,17 +884,17 @@ module.exports = {
 
 
 
-What we are doing is adding the RPC and the network to the config file. Now we need to
-connect our wallet to the testnet and add some testnet tokens, so we can actually pay for the deployment of the contract.
+Do you remember in *Build a Basic NFT* we looked at Ethereum RPC (remote procedure call) node providers? What we are doing is adding the RPC and network configuration to the config file. This will let you, as the deployer, connect **your** wallet to the testnet. Now we need to add some testnet tokens, so we can actually **pay** for the deployment of the contract!
 
 ### Adding the testnet network
 
-To add the Polygon Mumbai network head over to the
+This time we're using Polygon Mumbai test network. Head over to the
 [Chainlist](https://chainlist.org/) page and connect your wallet. Make sure you toggle
 the testnet button, otherwise no testnets will show up, and search for Mumbai. You will see the testnet network
-with chainID 80001. Add it to your wallet.
-Note: **Always make sure to use a separate browser profile, with a separate wallet, holding only testnet tokens, for any tutorials. See our section on Wallets for background on your security, your private keys and your recovery seed phrases!**
-
+with chainID 80001. Add it to your wallet. 
+<br/>
+Note: **Always make sure to use a separate browser profile, with a separate wallet, holding only testnet tokens, for any tutorials. See our Fundamental on *Introduction to web3 Wallets* for background on your security, your private keys and your recovery seed phrases!**
+<br/>
 ![2_faucet.png](/assets/lessons/3/2_faucet.png)
 
 ### Getting Some Testnet Funds
@@ -900,7 +903,7 @@ A testnet is a sandbox environment where developers
 can test, create and modify functionalities, monitor and simulate a mainnet blockchain's network
 performance, fix bugs and other network failures without having to worry about breaking a main chain, and paying in real crypto coins to do so! Mainnets cost - testnets generally don't. 
 
-We get testnet tokens from faucets. A faucet is a website, which on request, will *drip* a small amount of testnet tokens onto your address, and sometimes require completion of small tasks before doing so.
+We get testnet tokens from faucets. A faucet is a website, which on request, will **drip** a small amount of testnet tokens onto your address, and sometimes require completion of small tasks before doing so.
 some testnet on the wallets.
 Note: Testnet and mainnet are separate networks. You can't for example send tokens from a testnet to a mainnet. Let's head over and get some on this
 [website](https://faucet.paradigm.xyz/).
@@ -910,17 +913,17 @@ Note: Testnet and mainnet are separate networks. You can't for example send toke
 If you complete the required tasks, you can get tokens for multiple testnets.
 
 
-Before we deploy, we need to add a `.env` file to our root folder to make sure we are **not pushing our private keys into public repositories**. 
+Before we deploy, we need to add a `.env` file to our root folder to make sure we are **not pushing and therefore exposing our private keys in public repositories**. 
 
-For your wallet's private key, the most sensitive data of the project, you need to open Metamask, click on the three dots next to your Account Name, and then on Account Details, then click on Export Private Key. It will ask for your Metamask password, the one you use to open it, NOT your seed phrase. It also shows you a
-notice so you know that you are entering the danger zone. Confirm and you'll be able to copy your private key. Add your private key into the `.env` file like so:
+For your wallet's private key, the most sensitive data of the project, you need to open Metamask. Click on the three dots next to your Account Name, and then on Account Details, click on Export Private Key. It will ask for your Metamask password, the one you use to log in to your wallet each session, not your seed phrase. It also shows you a
+notice so you know that you are entering the *danger zone*. Confirm and you'll be able to copy your private key. Add your private key into the `.env` file like so:
 
 ```bash
 PRIVATE_KEY=f8abc629b....
 ```
 
 <Callout emoji='💡' size='md' variant='info'>
-Also, make sure you have a line that says `.env` in the `.gitignore` file in our
+Also, make sure you have a line that says `.env` in the `.gitignore` file in your
 root folder. If this file doesn't exist, create it and add that line! This makes
 sure we don't accidentally upload our `.env` file to our public repositories by
 mistake.
@@ -946,8 +949,7 @@ We will deploy our smart contract by using this command:
 npx hardhat run scripts/deploy.js --network mumbai
 ```
 
-We specify where we want the contract to be deployed in the `—-network` part
-of the command.
+We specify the network where we want the contract to be deployed using the --network option.
 
 ![4_deploy.png](/assets/lessons/3/4_deploy.png)
 
@@ -959,7 +961,7 @@ Without a new script we won’t be able to mint any of our NFTs.
 
 The mint function will run three times to mint each different Tier.
 
-The code for what we want is below, but we need a home for it. So let's go back to the `/scripts` directory and create a `mint.js` file and paste in the code below. When we're done, we can grab our shiny new contract address from the command line and paste it after `const CONTRACT_ADDRESS =` in the file:
+The code for what we want is below, but we need a home for it. So let's go back to the `/scripts` directory and create a `mint.js` file. Copy in the following code. When we're done, we can grab our shiny new contract address from the command line, and paste it in after `const CONTRACT_ADDRESS =`.
 
 ```jsx
 const hre = require('hardhat')
@@ -1032,18 +1034,38 @@ If we look at our terminal we will see something like this.
 
 ![5_mint.png](/assets/lessons/3/5_mint.png)
 
-We have just minted 3 NFTs with different Tiers!
+You have just minted 3 NFTs - with different Tiers!
 
 Let’s go ahead and view them on the Opensea marketplace. This could take a few
-minutes to appear, don't panic. You can search your newly created collection
-with your contract address or with the name that you chose in
-[https://testnets.opensea.io/](https://testnets.opensea.io/)
-
+minutes to appear, don't panic. You can search  in
+[https://testnets.opensea.io/](https://testnets.opensea.io/) for your newly created collection
+with your contract address, or with the name that you chose.
+<br/>
 ![6_tierNFTs.png](/assets/lessons/3/6_tierNFTs.png)
 
 Of course we already have a couple up there, but you will be able to
 view the three NFTs of your own, which you so diligently minted. You're an artist!
+Now let's see what you have learned along the way with a little quiz.
+<br/><br/>
 
 <Quiz quiz="quiz-lesson-3"/>
 
+<br/><br/>
+How did you enjoy that? We hope you had fun. And what's next? We're going to bring your 
+dev skills to the level - you ain't seen nothin' yet! We're **goin' a testin'** together. Building 
+culture in web3 is the substrate for the infrastructure we create, and learning to test 
+what we build with real awareness is crucial for creating a safe and sustainable environment. We're 
+looking forward to seeing you in our *Write Automated Tests for your TierNFT* project next.
+
+In the mean time, jump into the forum and share your experiences with your peers!
+
 ## Woohoo ✨ Now it’s time to celebrate.
+<br/><br/>
+
+import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+
+<ContributorFooter
+  authors={['meowy', '_7i7o', 'piablo']}
+  reviewers={['georgemac510', 'piablo']}
+  contributors={['mveve']}
+/>
