@@ -23,8 +23,8 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 title="Lesson 3: Tier NFTs" 
 discussionUrl="https://developerdao.peeranha.io/discussions"
 />
-
 ## About this lesson
+PART 1
 
 Welcome to this tutorial, where you will learn how to create tiered NFTs using Solidity smart contracts and expand the capabilities of your NFT projects. This tutorial builds upon the knowledge gained from our previous *Getting Started with Smart Contract Development* and *Build a Basic NFT* lessons. If you haven't already, we recommend you complete them to familiarise yourself with the fundamentals of Solidity and the concepts we will be building upon in this lesson. 
 
@@ -38,7 +38,8 @@ In the previous lesson, we talked about NFTs and their use cases. Unlike traditi
 
 ![1_diagram.png](/assets/lessons/3/1_diagram.png)
 
-{/* WARM-UP QUESTIONS */}
+Let's pause here for a few questions to give you a taste of what's to come, and remind, or check yourself on some prior knowledge.
+
 <SideDrawer buttonText="Warm-up Questions" title="Some previous knowledge, some prediction">
       <Question question="lesson-2/1-intro/Q1" />
       <Question question="lesson-2/1-intro/Q2" />
@@ -47,8 +48,15 @@ In the previous lesson, we talked about NFTs and their use cases. Unlike traditi
       <Question question="lesson-2/1-intro/Q5" />
 </SideDrawer> 
 <br/>
+How did that go? No pressure if there were some gaps. We're here to bridge them together! 
 
-**Now that we have set the stage, it's time to dive into the exciting world of tiered NFTs and uncover the unique superpowers they possess. By the end of this tutorial, you will have gained a wealth of knowledge and accomplished the following steps**:
+Did you set the pomodoro yet? ⌛😊
+
+PART 2
+
+### Lesson breakdown
+
+Now that we have set the stage, it's time to dive into the exciting world of tiered NFTs and uncover the unique superpowers they possess. By the end of this tutorial, you will have gained a wealth of knowledge and accomplished the following steps:
 
 - Setting up the development environment
 - Writing and deploying a Solidity smart contract
@@ -57,7 +65,9 @@ In the previous lesson, we talked about NFTs and their use cases. Unlike traditi
 - Exploring additional functionalities and possibilities with tiered NFTs ..... in the smart contract!
 - Showcasing and trading your tiered NFTs on a public marketplace
 
-**Throughout this journey, we will leverage a range of developer tools and open accounts to transition seamlessly between different development environments. These tools include**:
+### Developer tooling
+
+Throughout this journey, we will leverage a range of developer tools and open accounts to transition seamlessly between different development environments. These tools include:
 
 - a CLI/console 
 - an IDE 
@@ -358,6 +368,8 @@ contract TierNFT is ERC721 {
       <Question question="lesson-3/-/Q5" />
 </SideDrawer>
 <br/>
+
+Pomodoro ⌛😊
 
 PART 3 
 
@@ -809,6 +821,17 @@ contract TierNFT is ERC721, Ownable {
 </details>
 <br/>
 
+<SideDrawer buttonText="Checkpoint Questions" title="Creating a Robust Development Environment">
+      <Question question="lesson-3/<# of section block+section name/Q1" />
+      <Question question="lesson-3//Q2" />
+      <Question question="lesson-3//Q3" />
+      <Question question="lesson-3//Q4" />
+      <Question question="lesson-3/-/Q5" />
+</SideDrawer>
+<br/>
+⌛ Pomodoro 😊
+PART 4
+
 ### Time for our Deploy Script
 
 We need a script so we can get our smart contract deployed. Let’s write that.
@@ -1017,7 +1040,18 @@ main().catch((error) => {
 - `ethers.utils.parseEther` - here we use *Ethers* to translate the value into wei i.e. multiply it with 10\*\*18  
 - `let totalSupply = await contract.totalSupply()` - is calling the
   `totalSupply()` function to check if the 3 NFTs minted correctly.
+<br/>
+<SideDrawer buttonText="Checkpoint Questions" title="Creating a Robust Development Environment">
+      <Question question="lesson-3/<# of section block+section name/Q1" />
+      <Question question="lesson-3//Q2" />
+      <Question question="lesson-3//Q3" />
+      <Question question="lesson-3//Q4" />
+      <Question question="lesson-3/-/Q5" />
+</SideDrawer>
+<br/>
 
+PART 5
+⌛ Pomodoro 😊
 ### Let’s mint!
 
 To mint our tier NFTs we will run the following command.
@@ -1059,10 +1093,11 @@ In the mean time, jump into the forum and share your experiences with your peers
 ## Woohoo ✨ Now it’s time to celebrate.
 <br/><br/>
 
+
 import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
 
 <ContributorFooter
-  authors={['meowy', '_7i7o', 'piablo']}
+  authors={['_7i7o', 'meowy', 'piablo']}
   reviewers={['georgemac510']}
   contributors={['mveve']}
 />
