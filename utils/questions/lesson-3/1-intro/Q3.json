@@ -1,15 +1,12 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Which of the following describes a URI?",
   "options": [
     {
-      "answer": "Permissioned"
-    },
-    {
-      "answer": "Trustless",
+      "answer": "A Uniform Resource Identifier.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
+      "answer": "A web address that points to content and information.",
       "correct": true
     }
   ]

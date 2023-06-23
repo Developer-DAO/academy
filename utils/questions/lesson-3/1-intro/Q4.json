@@ -1,16 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Which of the following go into hardhat.config.js in an NFT project?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "NFT_NAME."
     },
     {
-      "answer": "Trustless",
+      "answer": "RPC_API_KEY.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "tokenURI."
+    },
+    {
+      "answer": "All of the above."
     }
   ]
 }

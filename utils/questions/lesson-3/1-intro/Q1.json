@@ -1,15 +1,17 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Which steps are needed to code a basic smart contract for deployment?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Create a smart contract using a code editor."
     },
     {
-      "answer": "Trustless",
-      "correct": true
+      "answer": "Create a project template."
     },
     {
-      "answer": "Decentralized",
+      "answer": "Install dependencies."
+    },
+    {
+      "answer": "All of the above.",
       "correct": true
     }
   ]

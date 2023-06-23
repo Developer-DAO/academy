@@ -1,16 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the term 'gas' refer to in the context of Ethereum?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Digital currency used for transactions."
     },
     {
-      "answer": "Trustless",
+      "answer": "Unit of measure for computational effort.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "A poisonous fossil fuel."
+    },
+    {
+      "answer": "Encryption algorithm used in smart contracts."
     }
   ]
 }

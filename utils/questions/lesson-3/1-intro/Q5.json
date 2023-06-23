@@ -1,15 +1,11 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Which answer is truthier?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "We need a .json file to store our NFT data."
     },
     {
-      "answer": "Trustless",
-      "correct": true
-    },
-    {
-      "answer": "Decentralized",
+      "answer": "We can store NFT data in a smart contract.",
       "correct": true
     }
   ]

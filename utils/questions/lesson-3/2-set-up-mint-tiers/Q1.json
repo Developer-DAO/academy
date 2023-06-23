@@ -1,16 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Which contract does the TierNFT contract inherit from?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "ERC20"
     },
     {
-      "answer": "Trustless",
+      "answer": "ERC721",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "SafeMath"
+    },
+    {
+      "answer": "OpenZeppelin"
     }
   ]
 }

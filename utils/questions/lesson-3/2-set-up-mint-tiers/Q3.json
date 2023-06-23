@@ -1,16 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the tokenTier mapping do?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Store the total supply of each tier."
     },
     {
-      "answer": "Trustless",
+      "answer": " It maps the token ID to its corresponding tier.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "It maps tierId to the public."
+    },
+    {
+      "answer": "It maps tokenTier to the totalSupply."
     }
   ]
 }
