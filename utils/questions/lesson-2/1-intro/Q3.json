@@ -1,5 +1,5 @@
 {
-  "question": "In Solidity, what does the ^ symbol represent when specifying the compiler version?",
+  "question": "In Solidity, what does the ^ (caret) symbol represent when specifying the compiler version?",
   "options": [
     {
       "answer": "It denotes an exclusive compiler version"
