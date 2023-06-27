@@ -1,0 +1,18 @@
+{
+  "question": "To make sure out contract compiles and deploys properly to the blockchain, we update our Solidity version in:",
+  "options": [
+    {
+      "answer": "deploy.js"
+    },
+    {
+      "answer": "solidity.js"
+    },
+    {
+      "answer": "scripts.js"
+    },
+    {
+      "answer": "hardhat.config.js",
+      "correct": true
+    }
+  ]
+}

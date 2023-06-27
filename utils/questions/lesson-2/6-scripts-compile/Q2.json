@@ -1,0 +1,22 @@
+{
+  "question": "Why do we add a mint call in our deploy script?",
+  "options": [
+    {
+      "answer": "To test that the contract is working properly after deployment",
+      "correct": true
+    },
+    {
+      "answer": "To wait for the transaction to finish"
+    },
+    {
+      "answer": "For printing the contract's address to the console"
+    },
+    {
+      "answer": "For creating a single NFT after deployment",
+      "correct": true
+    },
+    {
+      "answer": "None of the above"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "question": "Which of the following steps are included in building a basic NFT smart contract?",
+  "options": [
+    {
+      "answer": "Install dependencies."
+    },
+    {
+      "answer": "Create a project."
+    },
+    {
+      "answer": "Create a smart contract using a code editor."
+    },
+    {
+      "answer": "All of the above",
+      "correct": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "question": "What is the --save-dev flag for when installing dependencies with npm? ",
+  "options": [
+    {
+      "answer": "It specifies the version of the dependency to install."
+    },
+    {
+      "answer": "It tells npm to save the dependencies in a development environment.",
+      "correct": true
+    },
+    {
+      "answer": "It tells npm to save the dependencies in a production environment"
+    }
+  ]
+}

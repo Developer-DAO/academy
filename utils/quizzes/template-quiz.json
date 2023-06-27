@@ -33,7 +33,7 @@
       ]
     },
     {
-      "question": "What can we use an Ethereum smart contract for?",
+      "question": "What can we use a smart contract for?",
       "options": [
         {
           "answer": "Storing or transfering value without the need of a central authority",
