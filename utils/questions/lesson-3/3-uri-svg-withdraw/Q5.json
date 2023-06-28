@@ -1,15 +1,14 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does address(this).balance represent in the code?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "The balance of the contract owner's address."
     },
     {
-      "answer": "Trustless",
-      "correct": true
+      "answer": "The balance of the caller's address."
     },
     {
-      "answer": "Decentralized",
+      "answer": "The balance of the contract's Ethereum address.",
       "correct": true
     }
   ]

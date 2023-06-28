@@ -1,15 +1,14 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the `hre.ethers.getContractFactory(CONTRACT_NAME)` function do?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Configures the correct RPC node provider."
     },
     {
-      "answer": "Trustless",
-      "correct": true
+      "answer": "Deploys an instance of the specified contract."
     },
     {
-      "answer": "Decentralized",
+      "answer": "Fetches a contract factory for the specified contract.",
       "correct": true
     }
   ]

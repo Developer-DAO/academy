@@ -1,5 +1,5 @@
 {
-  "question": "Which contract does the TierNFT contract inherit from?",
+  "question": "Which contract does the `TierNFT` contract inherit from?",
   "options": [
     {
       "answer": "ERC20"

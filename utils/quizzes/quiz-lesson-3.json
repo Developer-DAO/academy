@@ -56,43 +56,43 @@
       ]
     },
     {
-      "question": "What does msg.value hold in a function call?",
+      "question": "What does `msg.value` hold in a function call?",
       "options": [
         {
           "answer": "A message passed to a function from the sender account"
         },
         {
-          "answer": "The native token balance of the account that called a payable function"
+          "answer": "The native token balance of the account that called a `payable` function"
         },
         {
           "answer": "The address of the message sender account"
         },
         {
-          "answer": "The amount of native token sent to a payable function",
+          "answer": "The amount of native token sent to a `payable` function",
           "correct": true
         }
       ]
     },
     {
-      "question": "What does msg.sender hold in a function call?",
+      "question": "What does `msg.sender` hold in a function call?",
       "options": [
         {
           "answer": "A message passed to a function from the sender account"
         },
         {
-          "answer": "The native token balance of the account that called a payable function"
+          "answer": "The native token balance of the account that called a `payable` function"
         },
         {
           "answer": "The address of the account that called a function",
           "correct": true
         },
         {
-          "answer": "The amount of native token sent to a payable function"
+          "answer": "The amount of native token sent to a `payable` function"
         }
       ]
     },
     {
-      "question": "In a smart contract, override is a keyword to …",
+      "question": "In a smart contract, `override` is a keyword to …",
       "options": [
         {
           "answer": "… tell the EVM you need to change a read-only or constant state variable"
@@ -102,21 +102,21 @@
           "correct": true
         },
         {
-          "answer": "… replace a specific value from a variable in memory"
+          "answer": "… replace a specific value from a variable in `memory`"
         },
         {
-          "answer": "… replace a specific value from a variable in storage"
+          "answer": "… replace a specific value from a variable in `storage`"
         }
       ]
     },
     {
-      "question": "What if the memory keyword used for?",
+      "question": "What is the `memory` keyword used for?",
       "options": [
         {
           "answer": "To tell the EVM we need to allocate an exact number of slot from memory"
         },
         {
-          "answer": "To specify a parameter or local variable is stored in memory instead of storage",
+          "answer": "To specify a parameter or local variable is stored in `memory` instead of `storage``",
           "correct": true
         },
         {
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "question": "What is require( ... ) used for?",
+      "question": "What is `require( ... )` used for?",
       "options": [
         {
           "answer": "To tell solidity all the libraries our contract requires"
@@ -141,15 +141,15 @@
           "correct": true
         },
         {
-          "answer": "It is a way to declare how much native tokens a function requires to work"
+          "answer": "It is a way to declare how much native token a function requires to work"
         }
       ]
     },
     {
-      "question": "What is the word payable used for?",
+      "question": "What is the word `payable` used for?",
       "options": [
         {
-          "answer": "A modifier for addresses variable to use the .transfer() and .send() functions with them"
+          "answer": "A modifier for addresses variable to use the `.transfer()` and `.send()` functions with them"
         },
         {
           "answer": "A keyword in a function declaration to let the function receive native tokens"
@@ -173,7 +173,7 @@
           "answer": "A key to access private variables in a smart contract"
         },
         {
-          "answer": "A key that gives total access to whomever holds it to have **full control** of an account and its assets",
+          "answer": "A key that gives total access to whomever holds it to have 'full control' of an account and its assets",
           "correct": true
         },
         {
@@ -194,7 +194,7 @@
           "answer": "Only when I login into a webpage or service"
         },
         {
-          "answer": "**Never**, **absolutely never**, **to no-one**. I acknowledge that if I share my private key, whomever gets it can withdraw absolutely every asset from my address and sign documents on my behalf ",
+          "answer": "'Never', 'absolutely never', 'to no-one'. I acknowledge that if I share my private key, whomever gets it can withdraw absolutely every asset from my address and sign documents on my behalf ",
           "correct": true
         }
       ]

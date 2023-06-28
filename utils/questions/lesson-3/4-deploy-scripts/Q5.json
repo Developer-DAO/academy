@@ -1,15 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "Why do we add a `.env` file to the root folder of the project?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": " Hardcode private keys directly in the source code."
     },
     {
-      "answer": "Trustless",
+      "answer": "To store sensitive information like private keys and API credentials.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
+      "answer": "To make the project's repository smaller in size."
+    },
+    {
+      "answer": "To ensure easy collaboration with other developers.",
       "correct": true
     }
   ]

@@ -1,15 +1,14 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the `tokenURI` function in the contract do?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Mint a new token."
     },
     {
-      "answer": "Trustless",
-      "correct": true
+      "answer": " Store an image in the token."
     },
     {
-      "answer": "Decentralized",
+      "answer": " Create an identifier for the token.",
       "correct": true
     }
   ]

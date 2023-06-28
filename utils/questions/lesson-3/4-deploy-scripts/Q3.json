@@ -1,16 +1,12 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What change should be made in the `hardhat.config.js` file to specify the network for deployment?",
   "options": [
     {
-      "answer": "Permissioned"
-    },
-    {
-      "answer": "Trustless",
+      "answer": "Add the RPC URL and private key for the network",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "Set the value of the `accounts` property"
     }
   ]
 }

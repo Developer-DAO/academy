@@ -1,16 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the `tierName` variable store?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "The name of the contract."
     },
     {
-      "answer": "Trustless",
+      "answer": "Token ID in string format.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
-      "correct": true
+      "answer": "Tier type of the NFT."
+    },
+    {
+      "answer": "The description of the collection"
     }
   ]
 }

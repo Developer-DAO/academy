@@ -1,5 +1,5 @@
 {
-  "question": "What is the totalSupply variable for in the contract?",
+  "question": "What is the `totalSupply` variable for in the contract?",
   "options": [
     {
       "answer": "Storing the value of the current tier."

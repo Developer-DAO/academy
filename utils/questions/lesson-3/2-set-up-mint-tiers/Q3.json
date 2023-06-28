@@ -1,5 +1,5 @@
 {
-  "question": "What does the tokenTier mapping do?",
+  "question": "What does the `tokenTier` mapping do?",
   "options": [
     {
       "answer": "Store the total supply of each tier."
@@ -9,10 +9,10 @@
       "correct": true
     },
     {
-      "answer": "It maps tierId to the public."
+      "answer": "It maps `tierId` to the public."
     },
     {
-      "answer": "It maps tokenTier to the totalSupply."
+      "answer": "It maps `tokenTier` to the `totalSupply`."
     }
   ]
 }

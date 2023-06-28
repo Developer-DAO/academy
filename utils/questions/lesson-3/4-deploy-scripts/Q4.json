@@ -1,15 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What use-cases of the testnet do we have in the deployment process?",
   "options": [
     {
-      "answer": "Permissioned"
-    },
-    {
-      "answer": "Trustless",
+      "answer": "Simulating the mainnet blockchain performance.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
+      "answer": "Paying for the deployment of the contract with crypto."
+    },
+    {
+      "answer": "To ensure we have interoperability with different networks."
+    },
+    {
+      "answer": "To test and modify functionalities without breaking the main chain.",
       "correct": true
     }
   ]

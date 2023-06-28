@@ -1,5 +1,5 @@
 {
-  "question": "What additional functionality do you think we will add to this tierNFT contract?",
+  "question": "What additional functionality do you think we will add to this `tierNFT` contract?",
   "options": [
     {
       "answer": "Integration with a decentralized exchange for trading TierNFTs."

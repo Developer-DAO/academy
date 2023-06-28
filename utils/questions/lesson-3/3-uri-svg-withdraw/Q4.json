@@ -1,15 +1,17 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does `attributes` field in the JSON metadata do?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": "Specify the tier value of the NFT."
     },
     {
-      "answer": "Trustless",
-      "correct": true
+      "answer": "Encrypt the metadata for security reasons."
     },
     {
-      "answer": "Decentralized",
+      "answer": " Define the image format for the `tokenURI`."
+    },
+    {
+      "answer": "Provide additional details about the token.",
       "correct": true
     }
   ]

@@ -1,15 +1,18 @@
 {
-  "question": "Which of these properties does Ethereum have?",
+  "question": "What does the `await contract.deployed()` line do in the code?",
   "options": [
     {
-      "answer": "Permissioned"
+      "answer": " It deploys the contract to the blockchain."
     },
     {
-      "answer": "Trustless",
+      "answer": " It retrieves the contract's deployed instance for use.",
       "correct": true
     },
     {
-      "answer": "Decentralized",
+      "answer": "It initializes the contract with the provided parameters."
+    },
+    {
+      "answer": " It waits for the contract deployment to complete.",
       "correct": true
     }
   ]

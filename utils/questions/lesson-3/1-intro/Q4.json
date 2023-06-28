@@ -1,5 +1,5 @@
 {
-  "question": "Which of the following go into hardhat.config.js in an NFT project?",
+  "question": "Which of the following go into `hardhat.config.js` in an NFT project?",
   "options": [
     {
       "answer": "NFT_NAME."

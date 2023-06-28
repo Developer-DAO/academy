@@ -50,8 +50,6 @@ Let's pause here for a few questions to give you a taste of what's to come, and 
 <br/>
 How did that go? No pressure if there were some gaps. We're here to bridge them together! ⌛ And have you set your pomodoro yet? 😊 🌱
 
-PART
-
 ### Lesson breakdown
 
 Now that we have set the stage, it's time to dive into the exciting world of tiered NFTs and uncover the unique superpowers they possess. By the end of this tutorial, you will have gained a wealth of knowledge and accomplished the following steps:
@@ -78,7 +76,6 @@ We will guide you through each step, ensuring a fun and comprehensive learning e
 
 
 ## First things first 👷‍♂️
-{/* ASSERTIONS AND DATA TYPES e.g. MAPPINGS */}
 
 Before we start coding, we need to create our project template by following
 the same steps as in the previous *Build a Basic NFT* lesson. Make a note of
@@ -817,12 +814,13 @@ contract TierNFT is ERC721, Ownable {
 </details>
 <br/>
 
-<SideDrawer buttonText="Checkpoint Questions" title="Giving Colour and Access to our Tokens">
+<SideDrawer buttonText="Checkpoint Questions" title="Giving Personality and Access to our Tokens">
       <Question question="lesson-3/3-uri-svg-withdraw/Q1" />
       <Question question="lesson-3/3-uri-svg-withdraw/Q2" />
       <Question question="lesson-3/3-uri-svg-withdraw/Q3" />
       <Question question="lesson-3/3-uri-svg-withdraw/Q4" />
       <Question question="lesson-3/3-uri-svg-withdraw/Q5" />
+      <Question question="lesson-3/3-uri-svg-withdraw/Q6" />
 </SideDrawer>
 ⌛ Pomodoro? 😊 🌱
 <br/>
@@ -871,8 +869,7 @@ main().catch((error) => {
   contract. This is the deploy transaction!
 - `COLLECTION_NAME, COLLECTION_SYMBOL` - these are the parameters for our
   contract's constructor function to set up its initial state.
-- `await contract.deployed()` - waits for the transaction to be approved and our
-  contract to be finished deploying.
+- `await contract.deployed()` - waits for the transaction to be approved by the network validators, and confirms that the deployment of the contract was successful, telling us that it's ready for use on the blockchain.
 - Running the `main().catch( … )` script at the very end makes sure that all the previous
   code is executed, and also logs any errors, and prints them to the console.
 
@@ -909,7 +906,7 @@ This time we're using Polygon Mumbai test network. Head over to the
 the testnet button, otherwise no testnets will show up, and search for Mumbai. You will see the testnet network
 with chainID 80001. Add it to your wallet. 
 <br/>
-Note: **Always make sure to use a separate browser profile, with a separate wallet, holding only testnet tokens, for any tutorials. See our Fundamental on *Introduction to web3 Wallets* for background on your security, your private keys and your recovery seed phrases!**
+Note: **Always make sure to use a separate browser profile, with a separate wallet, holding only testnet tokens, for any tutorials. See our Fundamental on** *Introduction to web3 Wallets* **for background on your security, your private keys and your recovery seed phrases!**
 <br/>
 ![2_faucet.png](/assets/lessons/3/2_faucet.png)
 
