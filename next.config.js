@@ -17,4 +17,8 @@ export default withMDX({
   reactStrictMode: true,
   // Append the default value with md extensions
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, net: false, tls: false }
+    return config
+  },
 })
