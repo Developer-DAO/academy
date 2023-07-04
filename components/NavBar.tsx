@@ -11,16 +11,18 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Stack,
 } from '@chakra-ui/react'
 import HamburgerIcon from '@components/HamburgerIcon'
 import SchoolOfCodeLogo from '@components/SchoolOfCodeLogo'
 import { PomodoroTimer } from '@components/PomodoroTimer'
+import LoginButton from './LoginButton'
 
 function NavBar() {
   const router = useRouter()
   return (
-    <Box>
-      <Flex justify="left" alignItems="center">
+    <Box as="header">
+      <Flex justify="space-between" alignItems="center">
         <Link as={NextLink} variant="logo" href={'/'}>
           {router.pathname.endsWith('/[slug]') ? (
             <SchoolOfCodeLogo />
@@ -28,12 +30,12 @@ function NavBar() {
             <SchoolOfCodeLogo autoStart={true} loop={true} />
           )}
         </Link>
-        <Spacer />
+        {/* <Spacer /> */}
         {/*
                 POMODORO TIMER
           */}
         {router.pathname.startsWith('/lessons') ? <PomodoroTimer /> : ''}
-        <Box>
+        <Flex minWidth={'full'} justify="flex-end">
           {/*
                 MOBILE / HAMBURGER MENU
           */}
@@ -104,6 +106,7 @@ function NavBar() {
             mt="6"
             alignItems="center"
             display={{ base: 'none', md: 'none', lg: 'block' }}
+            minW="xl"
           >
             <Link
               as={NextLink}
@@ -143,12 +146,9 @@ function NavBar() {
             >
               Tracks
             </Link>
-
-            {/* <Button colorScheme="gray" variant="solid">
-              <ConnectButton chainStatus="icon" showBalance={false} />
-            </Button> */}
+            <LoginButton />
           </Flex>
-        </Box>
+        </Flex>
       </Flex>
     </Box>
   )

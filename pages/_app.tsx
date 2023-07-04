@@ -1,13 +1,52 @@
+import '@rainbow-me/rainbowkit/styles.css'
+
 import { ChakraProvider, Box } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { theme } from '@theme'
-import Header from '@components/Header'
+import Topbar from '@components/Topbar'
 import Footer from '@components/footer/Footer'
 import { DefaultSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Components from '@components/mdx/Components'
 import { Analytics } from '@vercel/analytics/react'
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import {
+  RainbowKitProvider,
+  connectorsForWallets,
+} from '@rainbow-me/rainbowkit'
+import {
+  GetSiweMessageOptions,
+  RainbowKitSiweNextAuthProvider,
+} from '@rainbow-me/rainbowkit-siwe-next-auth'
+import { publicProvider } from 'wagmi/providers/public'
+import { polygonMumbai } from 'wagmi/chains'
+import { SessionProvider } from 'next-auth/react'
+import { injectedWallet, coinbaseWallet } from '@rainbow-me/rainbowkit/wallets'
+
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [polygonMumbai],
+  [publicProvider()],
+)
+
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      injectedWallet({ chains }),
+      coinbaseWallet({ chains, appName: 'Developer DAO Academy' }),
+    ],
+  },
+])
+
+const wagmiClient = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+})
+const getSiweMessageOptions: GetSiweMessageOptions = () => ({
+  statement: 'Sign in to Developer DAO Academy',
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -70,14 +109,28 @@ function MyApp({ Component, pageProps }: AppProps) {
           },
         ]}
       />
-      <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
-        <Header />
-        <MDXProvider components={Components}>
-          <Component {...pageProps} />
-        </MDXProvider>
-        <Footer />
-        <Analytics />
-      </Box>
+      <SessionProvider session={pageProps.session}>
+        <WagmiConfig config={wagmiClient}>
+          <RainbowKitSiweNextAuthProvider
+            getSiweMessageOptions={getSiweMessageOptions}
+          >
+            <RainbowKitProvider chains={chains}>
+              <Box
+                p="1.25em"
+                px="5%"
+                mx={{ base: '2rem', md: '6rem', lg: '10rem' }}
+              >
+                <Topbar />
+                <MDXProvider components={Components}>
+                  <Component {...pageProps} />
+                </MDXProvider>
+                <Footer />
+                <Analytics />
+              </Box>
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
+        </WagmiConfig>
+      </SessionProvider>
     </ChakraProvider>
   )
 }
