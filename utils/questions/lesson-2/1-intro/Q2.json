@@ -1,8 +1,8 @@
 {
-  "question": "What is Hardhat? ",
+  "question": "What is Hardhat?",
   "options": [
     {
-      "answer": "A set of tools that includes a local mini blockchain that can run on your machine",
+      "answer": "A set of tools that includes a local test blockchain that can run on your machine",
       "correct": true
     },
     {

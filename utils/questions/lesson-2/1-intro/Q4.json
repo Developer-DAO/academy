@@ -1,5 +1,5 @@
 {
-  "question": "Which address does the msg.sender variable represent in Solidity?",
+  "question": "Which address does the `msg.sender` variable represent in Solidity?",
   "options": [
     {
       "answer": "The contract owner"
