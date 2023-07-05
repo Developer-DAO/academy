@@ -23,6 +23,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import { polygonMumbai } from 'wagmi/chains'
 import { SessionProvider } from 'next-auth/react'
 import { injectedWallet, coinbaseWallet } from '@rainbow-me/rainbowkit/wallets'
+import { Session } from 'next-auth'
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
@@ -48,7 +49,12 @@ const getSiweMessageOptions: GetSiweMessageOptions = () => ({
   statement: 'Sign in to Developer DAO Academy',
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{
+  session: Session
+}>) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
@@ -109,8 +115,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           },
         ]}
       />
-      <SessionProvider session={pageProps.session}>
-        <WagmiConfig config={wagmiClient}>
+      <WagmiConfig config={wagmiClient}>
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
           <RainbowKitSiweNextAuthProvider
             getSiweMessageOptions={getSiweMessageOptions}
           >
@@ -129,8 +135,8 @@ function MyApp({ Component, pageProps }: AppProps) {
               </Box>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
-        </WagmiConfig>
-      </SessionProvider>
+        </SessionProvider>
+      </WagmiConfig>
     </ChakraProvider>
   )
 }

@@ -2,10 +2,11 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { getCsrfToken } from 'next-auth/react'
 import { SiweMessage } from 'siwe'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
-export default async function auth(req: any, res: any) {
+export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   const providers = [
     CredentialsProvider({
       name: 'Ethereum',
@@ -46,7 +47,7 @@ export default async function auth(req: any, res: any) {
   ]
 
   const isDefaultSigninPage =
-    req.method === 'GET' && req.query.nextauth.includes('signin')
+    req.method === 'GET' && req.query.nextauth?.includes('signin')
 
   // Hide Sign-In with Ethereum from default sign page
   if (isDefaultSigninPage) {
