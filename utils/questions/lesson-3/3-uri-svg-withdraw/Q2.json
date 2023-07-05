@@ -1,0 +1,18 @@
+{
+  "question": "The SVG image created by:",
+  "options": [
+    {
+      "answer": "Fetching it from an external source."
+    },
+    {
+      "answer": "Storing it as a separate file in the contract."
+    },
+    {
+      "answer": "Creating it dynamically using Solidity code",
+      "correct": true
+    },
+    {
+      "answer": "Storing it as a separate file in the contract"
+    }
+  ]
+}

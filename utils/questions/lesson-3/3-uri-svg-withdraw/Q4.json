@@ -1,0 +1,18 @@
+{
+  "question": "What does `attributes` field in the JSON metadata do?",
+  "options": [
+    {
+      "answer": "Specify the tier value of the NFT."
+    },
+    {
+      "answer": "Encrypt the metadata for security reasons."
+    },
+    {
+      "answer": " Define the image format for the `tokenURI`."
+    },
+    {
+      "answer": "Provide additional details about the token.",
+      "correct": true
+    }
+  ]
+}
