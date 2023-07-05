@@ -1,0 +1,15 @@
+{
+  "question": "Which of the following describes what a CID in IPFS is?",
+  "options": [
+    {
+      "answer": "It's a URL of the file in the IPFS network"
+    },
+    {
+      "answer": "It's a hash of the file name "
+    },
+    {
+      "answer": "It's a hash of the file content ",
+      "correct": true
+    }
+  ]
+}

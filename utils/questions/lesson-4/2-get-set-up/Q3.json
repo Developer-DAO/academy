@@ -1,0 +1,18 @@
+{
+  "question": "What is the benefit of using Open Zeppelin contracts in smart contract development?",
+  "options": [
+    {
+      "answer": "They reduce the amount of code we write"
+    },
+    {
+      "answer": "They provide rigorously audited and safe contracts"
+    },
+    {
+      "answer": "They allow for easier human collaboration and technical interoperability"
+    },
+    {
+      "answer": "All of the above",
+      "correct": true
+    }
+  ]
+}

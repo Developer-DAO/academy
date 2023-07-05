@@ -1,0 +1,15 @@
+{
+  "question": "When setting up dependencies, what is relevant to our testing environment? ",
+  "options": [
+    {
+      "answer": "bla bla bla."
+    },
+    {
+      "answer": "It tells npm to save the dependencies in a development environment.",
+      "correct": true
+    },
+    {
+      "answer": "It tells npm to save the dependencies in a production environment"
+    }
+  ]
+}

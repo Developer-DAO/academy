@@ -22,6 +22,17 @@ Here you'll:
 - Walk away with many practical tests for smart contracts
 - Nibble on some food for thought about test-driven development
 
+<SideDrawer buttonText="Warm-up Questions" title="Some previous knowledge, some prediction">
+      <Question question="lesson-4/1-intro/Q1" />
+      <Question question="lesson-4/1-intro/Q2" />
+      <Question question="lesson-4/1-intro/Q3" />
+      <Question question="lesson-4/1-intro/Q4" />
+      <Question question="lesson-4/1-intro/Q5" />
+</SideDrawer> 
+
+PART 1
+
+
 ## Why automated testing?
 
 Testing can:
@@ -199,6 +210,14 @@ module.exports = {
   solidity: '0.8.12',
 }
 ```
+<SideDrawer buttonText="Checkpoint Questions" title="Setting up our Environment">
+      <Question question="lesson-4/2-get-set-up/Q1" />
+      <Question question="lesson-4/2-get-set-up/Q2" />
+      <Question question="lesson-4/2-get-set-up/Q3" />
+      <Question question="lesson-4/2-get-set-up/Q4" />
+      <Question question="lesson-4/2-get-set-up/Q5" />
+</SideDrawer> 
+PART 2
 
 ## What do we want to test on our TierNFT contract?
 
@@ -397,6 +416,16 @@ failure looks like:
       +Anita
 ```
 
+<SideDrawer buttonText="Checkpoint Questions" title="General Testing Concepts">
+      <Question question="lesson-4/3-general-concepts/Q1" />
+      <Question question="lesson-4/3-general-concepts/Q2" />
+      <Question question="lesson-4/3-general-concepts/Q3" />
+      <Question question="lesson-4/3-general-concepts/Q4" />
+      <Question question="lesson-4/3-general-concepts/Q5" />
+</SideDrawer> 
+
+PART 3
+
 ### Let's add tests for mint()
 
 Now is time to add tests for our `mint()` method. We'll group these new tests
@@ -571,6 +600,16 @@ of additional highlights:
   funds are withdrawn. Ok, yes we do have two `expect()` lines in one test that
   breaks our rule of one expect per test, but as long as the test is kept
   simple, we can choose what makes sense for what we're trying to test.
+
+<SideDrawer buttonText="Checkpoint Questions" title="Mint and Withdraw">
+      <Question question="lesson-4/4-mint-withdraw/Q1" />
+      <Question question="lesson-4/4-mint-withdraw/Q2" />
+      <Question question="lesson-4/4-mint-withdraw/Q3" />
+      <Question question="lesson-4/4-mint-withdraw/Q4" />
+      <Question question="lesson-4/4-mint-withdraw/Q5" />
+</SideDrawer> 
+
+PART 4
 
 ### Testing tokenURI()
 
@@ -856,6 +895,16 @@ while refactoring to make sure we didn't break things along the way, and it's
 helpful at the end to ensure the `tokenURI()` method continues to work without
 fail when code changes.
 
+<SideDrawer buttonText="Checkpoint Questions" title="Testing the SVG">
+      <Question question="lesson-4/5-SVG-test/Q1" />
+      <Question question="lesson-4/5-SVG-test/Q2" />
+      <Question question="lesson-4/5-SVG-test/Q3" />
+      <Question question="lesson-4/5-SVG-test/Q4" />
+      <Question question="lesson-4/5-SVG-test/Q5" />
+</SideDrawer> 
+
+OUTRO
+
 ## Food for Thought
 
 With all the helpfulness of tests, why didn't we start with them before we wrote
@@ -888,6 +937,10 @@ With TDD:
 
   Bolting on tests after the fact can be painful and boring, and you lose the
   potential code improvements you can make when you test as you go.
+
+<br/>
+<Quiz quiz="lesson-4-quiz" />
+<br/>
 
 Go forth, test, and prosper knowing you have confidence in the code you're
 deploying into the world.

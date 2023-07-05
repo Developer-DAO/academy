@@ -1,0 +1,18 @@
+{
+  "question": "Why do we want our ProjectNFT contract to import ERC721.sol from OpenZeppelin? ",
+  "options": [
+    {
+      "answer": "To declare a smart contract in Solidity"
+    },
+    {
+      "answer": "Because Led Zeppelin's discography has automatic customs clearance"
+    },
+    {
+      "answer": "To keep track of the total supply of NFTs "
+    },
+    {
+      "answer": "To inherit the properties of ERC721 into the ProjectNFT contract ",
+      "correct": true
+    }
+  ]
+}
