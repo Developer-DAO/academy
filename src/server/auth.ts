@@ -109,12 +109,13 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
   //     return decode({ token, secret })
   //   }
   // },
-  // session: { // Credentials defaults to this strategy
-  //   strategy: 'jwt',
-  //   maxAge: 2592000,
-  //   updateAge: 86400,
-  //   generateSessionToken: () => 'SomeValue'
-  // },
+  session: {
+    // Credentials defaults to this strategy
+    strategy: "jwt",
+    //   maxAge: 2592000,
+    //   updateAge: 86400,
+    //   generateSessionToken: () => 'SomeValue'
+  },
   // events: { // Callback events
   //   signIn: async (message: {
   //     user: User
@@ -195,13 +196,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
                 type: "credentials",
                 provider: "Ethereum",
                 providerAccountId: fields.address,
-              },
-            });
-
-            // create student profile
-            await prisma.student.create({
-              data: {
-                accountId: account.id,
               },
             });
           }
