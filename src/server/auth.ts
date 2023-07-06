@@ -13,7 +13,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
 import type { Session } from "next-auth";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 // Types
 // ========================================================
@@ -56,6 +55,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
         user: {
           ...session.user,
           id: token.sub,
+          image: "https://www.fillmurray.com/128/128",
         },
       } as Session & { user: { id: string } }),
     // OTHER CALLBACKS to take advantage of but not needed
