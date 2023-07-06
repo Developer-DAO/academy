@@ -1,0 +1,18 @@
+{
+  "question": "What is the `totalSupply` variable for in the contract?",
+  "options": [
+    {
+      "answer": "Storing the value of the current tier."
+    },
+    {
+      "answer": "It determines the price of each NFT"
+    },
+    {
+      "answer": "Tracking the total number of NFTs minted",
+      "correct": true
+    },
+    {
+      "answer": "To calculate the total value of all NFTs"
+    }
+  ]
+}

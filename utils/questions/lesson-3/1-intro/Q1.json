@@ -1,0 +1,18 @@
+{
+  "question": "Which steps are needed to code a basic smart contract for deployment?",
+  "options": [
+    {
+      "answer": "Create a smart contract using a code editor."
+    },
+    {
+      "answer": "Create a project template."
+    },
+    {
+      "answer": "Install dependencies."
+    },
+    {
+      "answer": "All of the above.",
+      "correct": true
+    }
+  ]
+}
