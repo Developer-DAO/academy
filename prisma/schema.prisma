@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+    // Further reading:
+    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+    url      = env("DATABASE_URL")
+}
+
+// Revised Example table
+model Todo {
+    id        String   @id @default(cuid())
+    task      String
+    userId    String
+    completed Boolean  @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Student   Student? @relation(fields: [studentId], references: [id])
+    studentId String?
+}
+
+// Necessary for Next auth
+model Account {
+    id                String    @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? // @db.Text
+    access_token      String? // @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? // @db.Text
+    session_state     String?
+    user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Student           Student[]
+
+    @@unique([provider, providerAccountId])
+}
+
+model User {
+    id            String    @id @default(cuid())
+    name          String?
+    // New address
+    address       String?   @unique
+    email         String?   @unique
+    emailVerified DateTime?
+    image         String?
+    accounts      Account[]
+    todos         Todo[]
+}
+
+model Student {
+    id          String  @id @default(cuid())
+    account     Account @relation(fields: [accountId], references: [id])
+    accountId   String
+    bio         String? @unique
+    twitter_url String?
+    github_url  String?
+    image       String?
+    Todo        Todo[]
+    Quizzes     Quiz[]
+}
+
+model Quiz {
+    id                String   @id @default(cuid())
+    studentId         String
+    Student           Student  @relation(fields: [studentId], references: [id])
+    correct_answers   Int
+    incorrect_answers Int
+    score             Int
+    started_at        DateTime
+    ended_at          DateTime
+    completed         Boolean  @default(false)
+}

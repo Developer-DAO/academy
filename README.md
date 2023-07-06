@@ -1,219 +1,112 @@
-## Developer DAO Academy
+# Create T3 App With Sign-In With Ethereum
 
-`Developer DAO Academy` is an open-source education platform created by the
-Developer DAO Foundation.
+An implementation of [T3 Stack](https://create.t3.gg/) with [Sign-In With Ethereum](https://login.xyz).
 
-Live site is at <https://academy.developerdao.com>.
+!["T3-Stack-SIWE"](/README/t3-siwe-screenshot.png)
 
-Find us on Twitter at <https://twitter.com/devdao_academy>.
+## Tutorials
 
-![Academy Homepage Screenshot](./public/landing-page-screenshot.png)
+📘 Full walkthrough article on how to [Combine Sign-In With Ethereum With Create-T3-App](https://codingwithmanny.medium.com/combine-sign-in-with-ethereum-with-create-t3-app-8f54604caeeb).
 
-## What license applies to this site's content and code?
+<a href="https://codingwithmanny.medium.com/combine-sign-in-with-ethereum-with-create-t3-app-8f54604caeeb">![Combine Sign-In With Ethereum With Create-T3-App](README/t3-siwe-medium.jpg)</a>
 
-- All Developer DAO Academy website content © 2022 by Developer DAO Foundation
-  licensed under
-  [Attribution-NonCommercial 4.0 International](http://creativecommons.org/licenses/by-nc/4.0/).
-- Developer DAO Academy website code © 2022 by Developer DAO Foundation licensed
-  under [MIT](./LICENSE).
+---
 
-## How do I get started?
+## Requirement
 
-Please read our [CONTRIBUTING Guide](CONTRIBUTING.md) to get started. We ask
-that you are a member of Developer DAO to contribute, since our project uses
-various Developer DAO planning and communication tools, such as Discord.
+- NVM or Node `v18.15.0`
 
-## How to contribute code
+---
 
-If you're new to the project, see below for setup instructions.
+## next-auth@4.21.1 Fix
 
-### Considerations as you write code
+With the latest version of `next-auth@4.21.1` it drops the headers which doesn't allow the nonce to be read from the csrf cookie.
 
-As you're working on code, some things to think about:
+The solution to this can be found in this branch:
 
-- PRs should be as small as possible so they are easy to review
-- There are strategies you can use to keep PRs small, even if your feature is
-  big.
-  [How to Split Pull Requests – Good Practices, Methods and Git Strategies](https://www.thedroidsonroids.com/blog/splitting-pull-request)
+[fix/next-auth-4.21.1](https://github.com/codingwithmanny/t3-app-siwe/tree/fix/next-auth-4.21.1)
 
-### What should I do before submitting the PR?
+---
 
-- Run `yarn confirm` which will make sure your files are consistently formatted,
-  lint the code base looking for problems and then actually building the site
-  locally to ensure no build problems
-- If you see warnings or errors please fix.
-- Also, this step runs Prettier so some files may have changed and need to be
-  checked in.
+## Getting Started
 
-Now you're ready to submit your PR.
+Follow all these steps to get up and running locally.
 
-Assume no one knows what your PR is about. So helpful to:
-
-- writing a description in the PR to explain what you're fixing/adding and how
-  to test.
-- if your work is based on a GitHub issue, add that in the description, though
-  make sure you use the exact words of "Closes #123" since this will
-  automatically close the issue when the PR is merged. Using "this refers to
-  #123" won't do that.
-- send a signal that your PR is ready for review, such as asking someone to
-  review your PR
-
-### How do I review a PR?
-
-It's also important that people review PRs -- a great learning experience and
-important for an open-source project.
-
-Some helpful things when reviewing PRs:
-
-- **ALWAYS** download and run the code you're reviewing. Never eyeball it in the
-  PR and approve it.
-- when you review a PR, please add yourself as a reviewer in GitHub so we know
-  someone is reviewing
-- go through the formal GitHub review process of starting a review and then
-  finishing with "approved" or "needs changes"
-
-### Who should merge the PR?
-
-Once a PR is reviewed, the author of the PR should merge, and the author should
-run through the live site and make sure the code is performing as expected.
-
-## Project Setup
-
-**Prerequisites:**
-
-    node --version 16.x
-
-Refer to the `node` and `npm` installation with `nvm` guide in Lesson 2. A link
-to the guide can be found
-[here](https://www.notion.so/How-to-install-node-js-and-npm-67b2ab1f76f148f49f547b9156aeaf28):
-
-**Fork this repo, clone forked repo locally and `cd` into the repo:**
-
-    git clone https://github.com/[YOUR GITHUB HANDLE HERE]/academy.git
-    cd academy/
-
-**Installation and run:**
-
-    yarn install
-    yarn dev
-
-This will create a local instance of the app running and can be viewed at
-`http://localhost:3000` in your browser.
-
-Also it's handy to install the Prettier plugin for your browser. You can then
-use it to automatically format files. It helps keep the code base tidy, for
-Typescript, MDX and Markdown files.
-
-**VSCode Remote Containers (alternative setup)**
-
-If you use VSCode for development, we already have the configuration files for
-you to use
-[Remote Containers](https://code.visualstudio.com/docs/remote/containers) (make
-sure that you check the link to install the requirements to use it) to easily
-create an isolated development environment for your fork. After installing the
-minimum requirements, you can start using it following this
-[quickstart](https://code.visualstudio.com/docs/remote/containers#_quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume).
-
-**For Windows Users**
-
-You may run into setup problems if using Windows Powershell. We suggest you use
-WSL.
-
-## Grabbing latest version of the code
-
-**Since this is a work in progress, your local version of the app can be updated
-with the following commands:**
-
-Stop the locally running app with:
-
-    Ctrl + C
-
-Use `git pull` for the most up-to-date version:
-
-    git pull
-
-Reinstall with `yarn`:
-
-    yarn install
-
-Run the updated app:
-
-    yarn dev
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out
-[the Next.js GitHub repository](https://github.com/vercel/next.js/) - your
-feedback and contributions are welcome!
-
-## Storybook
-
-This project uses [Storybook](https://storybook.js.org/). Storybook allows us to
-develop components in isolation from our app.
-
-Stories are loaded from `*.stories.(mdx|js|jsx|ts|tsx)` files in any directory.
-
-To use Storybook, run the `storybook` script:
+### Dependencies
 
 ```bash
-yarn storybook
+# FROM: ./
+
+pnpm install; # npm install;
 ```
 
-To learn more about how to write Storybook stories, check out the official
-[Intro to Storybook](https://storybook.js.org/tutorials/intro-to-storybook/)
-tutorial.
+### Environment Variable File
 
-## Deploy on Vercel
+```bash
+# FROM: ./
 
-The easiest way to deploy your Next.js app is to use the
-[Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
-from the creators of Next.js.
-
-Check out our
-[Next.js deployment documentation](https://nextjs.org/docs/deployment) for more
-details.
-
-## How do I add/edit contributors for a lesson?
-
-First make sure you add your information to `./data/contributors.ts`. Minimally
-you need a unique handle (a single lowercase name such as `brianfive`) which
-will be used to look up your information.
-
-Then add a component in your `.mdx` file at the bottom like this, using various
-handles defined above.
-
-You can add a contributor as an author, reviewer of contributor. Author(s) wrote
-the content, Reviewer(s) edited the content, and Contributor(s) later made
-updates or fixed issues.
-
-```jsx
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+cp .env.example .env;
 ```
 
-```jsx
-<ContributorFooter
-  authors={['brianfive']}
-  reviewers={['piablo', 'georgemac510']}
-  contributors={[]}
-/>
+**File:** `.env`
+
+```toml
+# When adding additional environment variables, the schema in "/src/env.mjs"
+# should be updated accordingly.
+
+# Prisma
+# https://www.prisma.io/docs/reference/database-reference/connection-urls#env
+DATABASE_URL="file:./db.sqlite"
+
+# Next Auth
+# You can generate a new secret on the command line with:
+# openssl rand -base64 32
+# https://next-auth.js.org/configuration/options#secret
+NEXTAUTH_SECRET="A-REALLY-LONG-SECRET-PASSWORD-32"
+NEXTAUTH_URL="http://localhost:3000"
+
+# Next Auth Discord Provider
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
 ```
 
-## How do I add a specific forum link in a lesson's header?
+### Database Migration
 
-Make sure the `<LessonHeader />` component has the `discussionUrl` attribute
-like this:
+```bash
+# FROM: ./
 
-```jsx
-<LessonHeader
-  title="Lesson 4: Testing your TierNFT"
-  discussionUrl="https://developerdao.peeranha.io/discussions/1372/testing-solidity-contracts"
-/>
+npx prisma migrate dev;
 ```
 
-Without `discussionUrl` the link will default to the home page of Peeranha.
+### Local Development
+
+```bash
+# FROM: ./
+
+pnpm dev; # npm run dev;
+
+# Expected Output:
+# > test-t3-app@0.1.0 dev /Users/username/path/to/t3-app-siwe
+# > next dev
+
+# ready - started server on 0.0.0.0:3000, url: http://localhost:3000
+```
+
+### Database Client (Prisma Studio)
+
+```bash
+# FROM: ./
+
+npx prisma studio;
+
+# Expected Output:
+# Environment variables loaded from .env
+# Prisma schema loaded from prisma/schema.prisma
+# Prisma Studio is up on http://localhost:5555
+```
+
+---
+
+built by [@codingwithmanny](https://twitter.com/codingwithmanny)
+
+
