@@ -12,16 +12,11 @@ import { publicProvider } from "wagmi/providers/public";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
 import Topbar from "@/components/Topbar";
-//Raimbow Kit
-import "@rainbow-me/rainbowkit/styles.css";
-import {
-  connectorsForWallets,
-  RainbowKitProvider,
-} from "@rainbow-me/rainbowkit";
-import { injectedWallet, coinbaseWallet } from "@rainbow-me/rainbowkit/wallets";
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
-import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 
 // Config
 // ========================================================
@@ -33,28 +28,29 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()]
 );
 
-const connectors = connectorsForWallets([
-  {
-    groupName: "Recommended",
-    wallets: [
-      injectedWallet({ chains }),
-      coinbaseWallet({ chains, appName: "Developer DAO Academy" }),
-    ],
-  },
-]);
-
 /**
  * Configure publicProvider and allow for auto wallet connection
  */
 const config = createConfig({
   autoConnect: true,
-  connectors,
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: "Injected",
+        shimDisconnect: true,
+      },
+    }),
+    new CoinbaseWalletConnector({
+      chains,
+      options: {
+        appName: "Developer DAO Academy",
+      },
+    }),
+  ],
   publicClient,
   webSocketPublicClient,
-});
-
-const getSiweMessageOptions = () => ({
-  statement: "Sign in to Developer DAO Academy",
 });
 
 // App Wrapper Component
@@ -65,26 +61,20 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <ChakraProvider theme={theme}>
-      <SessionProvider session={session} refetchInterval={0}>
-        <WagmiConfig config={config}>
-          <RainbowKitSiweNextAuthProvider
-            getSiweMessageOptions={getSiweMessageOptions}
+      <WagmiConfig config={config}>
+        <SessionProvider session={session} refetchInterval={0}>
+          <Box
+            p="1.25em"
+            px="5%"
+            mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
           >
-            <RainbowKitProvider chains={chains}>
-              <Box
-                p="1.25em"
-                px="5%"
-                mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
-              >
-                <Topbar />
-                <MDXProvider components={Components}>
-                  <Component {...pageProps} />{" "}
-                </MDXProvider>
-              </Box>
-            </RainbowKitProvider>
-          </RainbowKitSiweNextAuthProvider>
-        </WagmiConfig>
-      </SessionProvider>
+            <Topbar />
+            <MDXProvider components={Components}>
+              <Component {...pageProps} />{" "}
+            </MDXProvider>
+          </Box>
+        </SessionProvider>
+      </WagmiConfig>
     </ChakraProvider>
   );
 };
