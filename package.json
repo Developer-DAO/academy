@@ -53,6 +53,8 @@
     "eslint": "^8.43.0",
     "eslint-config-next": "^13.4.7",
     "gray-matter": "^4.0.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
@@ -64,5 +66,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.10.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,md,json,yml}": "prettier --write"
   }
 }
