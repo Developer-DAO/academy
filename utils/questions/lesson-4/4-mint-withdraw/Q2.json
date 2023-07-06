@@ -1,18 +1,22 @@
 {
-  "question": "What does the override modifier do?",
+  "question": "",
   "options": [
     {
-      "answer": "It indicates that this function creates a different experience"
-    },
-    {
-      "answer": "It adds a state variable to the contract"
-    },
-    {
-      "answer": "It lets a variable convert to a more human readable name"
-    },
-    {
-      "answer": "It lets a function replace one inside the inherited contract",
+      "answer": "",
       "correct": true
+    },
+    {
+      "answer": ""
+    },
+    {
+      "answer": "",
+      "correct": true
+    },
+    {
+      "answer": ""
+    },
+    {
+      "answer": ""
     }
   ]
 }

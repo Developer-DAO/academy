@@ -1,23 +1,22 @@
 {
-  "question": "Choose what NFTs can do? Multiple answers possible.",
+  "question": "",
   "options": [
     {
-      "answer": "Give access to a DAO",
+      "answer": "",
       "correct": true
     },
     {
-      "answer": "Do the dishes"
+      "answer": ""
     },
     {
-      "answer": "Represent a concert ticket",
+      "answer": "",
       "correct": true
     },
     {
-      "answer": "Point to storage of an album",
-      "correct": true
+      "answer": ""
     },
     {
-      "answer": "Replicate one NFT with another"
+      "answer": ""
     }
   ]
 }

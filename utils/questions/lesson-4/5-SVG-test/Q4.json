@@ -1,18 +1,22 @@
 {
-  "question": "Where can we find the Pinata link with the CID to the JSON files folder?",
+  "question": "",
   "options": [
     {
-      "answer": "In the Pinata setup screenshot"
-    },
-    {
-      "answer": "In the IPFS documentation"
-    },
-    {
-      "answer": "In the solidity contract's _baseURI function",
+      "answer": "",
       "correct": true
     },
     {
-      "answer": "Inside the pinata, which can be broken open with a light saber"
+      "answer": ""
+    },
+    {
+      "answer": "",
+      "correct": true
+    },
+    {
+      "answer": ""
+    },
+    {
+      "answer": ""
     }
   ]
 }

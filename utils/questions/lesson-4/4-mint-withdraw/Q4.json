@@ -1,18 +1,22 @@
 {
-  "question": "What does the ipfsBaseURI state variable do?",
+  "question": "",
   "options": [
     {
-      "answer": "It stores the unique URI of an NFT"
-    },
-    {
-      "answer": "It stores the base of the URI for the NFTs",
+      "answer": "",
       "correct": true
     },
     {
-      "answer": "It stores the media for the NFTs"
+      "answer": ""
     },
     {
-      "answer": "It stores the total supply of NFTs in the contract"
+      "answer": "",
+      "correct": true
+    },
+    {
+      "answer": ""
+    },
+    {
+      "answer": ""
     }
   ]
 }

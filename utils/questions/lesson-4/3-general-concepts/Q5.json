@@ -1,12 +1,22 @@
 {
-  "question": "ETH is an ERC token",
+  "question": "",
   "options": [
     {
-      "answer": "True"
+      "answer": "",
+      "correct": true
     },
     {
-      "answer": "False",
+      "answer": ""
+    },
+    {
+      "answer": "",
       "correct": true
+    },
+    {
+      "answer": ""
+    },
+    {
+      "answer": ""
     }
   ]
 }
