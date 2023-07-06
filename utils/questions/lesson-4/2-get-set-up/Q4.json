@@ -1,15 +1,18 @@
 {
-  "question": "We will cover this later, but what do you think the purpose of the .gitignore file created by Hardhat is?",
+  "question": "Why should we verify the Solidity version in the hardhat.config.js file?",
   "options": [
     {
-      "answer": "To hide your project's dependencies."
+      "answer": " To check for any updates to the Solidity version"
     },
     {
-      "answer": "To store your project's source code in a private Github repository."
-    },
-    {
-      "answer": "To ensure that certain files not tracked by Git remain untracked",
+      "answer": "To ensure compatibility with the contract being tested.",
       "correct": true
+    },
+    {
+      "answer": "a) and b)"
+    },
+    {
+      "answer": "neither a) nor b)"
     }
   ]
 }

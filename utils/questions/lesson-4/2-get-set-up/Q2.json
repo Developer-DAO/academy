@@ -1,15 +1,18 @@
 {
-  "question": "When setting up dependencies, what is relevant to our testing environment? ",
+  "question": "How does the tokenURI function generate the token metadata?",
   "options": [
     {
-      "answer": "bla bla bla."
+      "answer": "By reading from an external file"
     },
     {
-      "answer": "It tells npm to save the dependencies in a development environment.",
+      "answer": "By using a predefined JSON template"
+    },
+    {
+      "answer": "By dynamically generating SVG image and JSON data",
       "correct": true
     },
     {
-      "answer": "It tells npm to save the dependencies in a production environment"
+      "answer": "By querying an off-chain API"
     }
   ]
 }
