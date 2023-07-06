@@ -1,16 +1,16 @@
-import { Box, Text, Link, HStack } from '@chakra-ui/react'
-import NextLink from 'next/link'
-import { QuestionIcon } from '@chakra-ui/icons'
+import { Box, Text, Link, HStack } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { QuestionIcon } from "@chakra-ui/icons";
 
 interface LessonHeaderProps {
-  title: string
-  discussionUrl?: string
+  title: string;
+  discussionUrl?: string;
 }
 
-const DEFAULT_DISCUSSION_URL = 'https://developerdao.peeranha.io/'
+const DEFAULT_DISCUSSION_URL = "https://developerdao.peeranha.io/";
 
 export function LessonHeader({ title, discussionUrl }: LessonHeaderProps) {
-  let forumLink = discussionUrl || DEFAULT_DISCUSSION_URL
+  const forumLink = discussionUrl || DEFAULT_DISCUSSION_URL;
 
   return (
     <Box>
@@ -31,7 +31,7 @@ export function LessonHeader({ title, discussionUrl }: LessonHeaderProps) {
             <QuestionIcon w={8} h={8} />
           </Box>
           <Box>
-            If you get stuck or have questions please visit our{' '}
+            If you get stuck or have questions please visit our{" "}
             <Link
               as={NextLink}
               href={forumLink}
@@ -46,5 +46,5 @@ export function LessonHeader({ title, discussionUrl }: LessonHeaderProps) {
         </HStack>
       )}
     </Box>
-  )
+  );
 }

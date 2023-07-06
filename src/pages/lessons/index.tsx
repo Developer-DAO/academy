@@ -25,7 +25,8 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
       // initial an array of lessons for a given track
       acc[curr.path] = [];
     }
-    acc[curr.path].push(curr);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    acc[curr.path]!.push(curr);
     return acc;
   }, {});
 
@@ -61,7 +62,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
 
 export default Lessons;
 
-export const getStaticProps = async () => {
+export const getStaticProps = () => {
   const contentDir = path.join(CONTENT_PATH);
   const directories = fs.readdirSync(path.join(contentDir));
   const lessons: Lesson[] = [];

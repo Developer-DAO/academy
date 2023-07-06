@@ -61,6 +61,8 @@ export default function WithSubnavigation() {
   const { disconnect } = useDisconnect();
   const { chain } = useNetwork();
 
+  console.log({ address, isConnected });
+
   // Functions
   /**
    * Attempts SIWE and establish session

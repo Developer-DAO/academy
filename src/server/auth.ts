@@ -160,7 +160,9 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
               (credentials?.message as string) ?? "{}"
             ) as Partial<SiweMessage>
           );
-          const nonce = await getCsrfToken({ req });
+
+          const nonce = await getCsrfToken({ req: { headers: req?.headers } });
+          // const nonce = await getCsrfToken({ req });
 
           const verified = await siwe.verify({
             signature: credentials?.signature || "",

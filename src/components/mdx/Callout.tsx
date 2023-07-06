@@ -1,5 +1,5 @@
 import { Box, HStack, useStyleConfig } from "@chakra-ui/react";
-import React, { type FC } from "react";
+import React from "react";
 
 interface CalloutProps {
   size?: string;

@@ -65,8 +65,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <ChakraProvider theme={theme}>
-      <WagmiConfig config={config}>
-        <SessionProvider session={session} refetchInterval={0}>
+      <SessionProvider session={session} refetchInterval={0}>
+        <WagmiConfig config={config}>
           <RainbowKitSiweNextAuthProvider
             getSiweMessageOptions={getSiweMessageOptions}
           >
@@ -83,8 +83,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
               </Box>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
-        </SessionProvider>
-      </WagmiConfig>
+        </WagmiConfig>
+      </SessionProvider>
     </ChakraProvider>
   );
 };
