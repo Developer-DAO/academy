@@ -31,50 +31,56 @@ export default function WithSubnavigation() {
   const router = useRouter()
 
   return (
-    <Box>
-      <Flex
-        // bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'95px'}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        // borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}
-      >
+    <>
+      <Box>
         <Flex
-          flex={{ base: 1, md: 'auto' }}
-          ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}
-        >
-          <IconButton
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
-        </Flex>
-        <Flex
+          // bg={useColorModeValue('white', 'gray.800')}
+          color={useColorModeValue('gray.600', 'white')}
           minH={'95px'}
-          flex={{ base: 1 }}
-          justify={{ base: 'center', md: 'start' }}
+          py={{ base: 2 }}
+          px={{ base: 4 }}
+          // borderBottom={1}
+          borderStyle={'solid'}
+          borderColor={useColorModeValue('gray.200', 'gray.900')}
+          align={'center'}
         >
-          <Link
-            as={NextLink}
-            variant="logo"
-            href={'/'}
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+          <Flex
+            flex={{ base: 1, md: 'auto' }}
+            ml={{ base: -2 }}
+            display={{ base: 'flex', md: 'none' }}
           >
-            {router.pathname.endsWith('/[slug]') ? (
-              <SchoolOfCodeLogo />
-            ) : (
-              <SchoolOfCodeLogo autoStart={true} loop={true} />
-            )}
-          </Link>
-          {/* <Text
+            <IconButton
+              onClick={onToggle}
+              icon={
+                isOpen ? (
+                  <CloseIcon w={3} h={3} />
+                ) : (
+                  <HamburgerIcon w={5} h={5} />
+                )
+              }
+              variant={'solid'}
+              aria-label={'Toggle Navigation'}
+            />
+          </Flex>
+          <Flex
+            minH={'95px'}
+            flex={{ base: 1 }}
+            justify={{ base: 'center', md: 'start' }}
+            display={{ base: 'none', md: 'flex' }}
+          >
+            <Link
+              as={NextLink}
+              variant="logo"
+              href={'/'}
+              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            >
+              {router.pathname.endsWith('/[slug]') ? (
+                <SchoolOfCodeLogo />
+              ) : (
+                <SchoolOfCodeLogo autoStart={true} loop={true} />
+              )}
+            </Link>
+            {/* <Text
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
@@ -82,25 +88,26 @@ export default function WithSubnavigation() {
             Logo
           </Text> */}
 
-          <Flex
-            justify={'flex-end'}
-            alignItems="center"
-            display={{ base: 'none', md: 'flex' }}
-            ml={10}
-            width={'full'}
-          >
-            <DesktopNav />
+            <Flex
+              justify={'flex-end'}
+              alignItems="center"
+              display={{ base: 'none', md: 'flex' }}
+              ml={10}
+              width={'full'}
+            >
+              <DesktopNav />
+            </Flex>
           </Flex>
-        </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}
-          minW={'10rem'}
-        >
-          {/* <Button
+          <Stack
+            // display={{ base: 'none', md: 'flex' }}
+            flex={{ base: 1, md: 0 }}
+            justify={'flex-end'}
+            direction={'row'}
+            spacing={6}
+            minW={'10rem'}
+          >
+            {/* <Button
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
@@ -123,24 +130,42 @@ export default function WithSubnavigation() {
           >
             Sign Up
           </Button> */}
-          <ConnectButton
-            label="Connect wallet"
-            showBalance={false}
-            accountStatus="address"
-          />
-        </Stack>
-      </Flex>
+            <ConnectButton
+              label="Connect wallet"
+              showBalance={false}
+              accountStatus="address"
+            />
+          </Stack>
+        </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
-    </Box>
+        <Collapse in={isOpen} animateOpacity>
+          <MobileNav />
+        </Collapse>
+      </Box>
+      <Flex
+        minH={'95px'}
+        flex={{ base: 1 }}
+        justify={{ base: 'center', md: 'start' }}
+        display={{ base: 'flex', md: 'none' }}
+      >
+        <Link
+          as={NextLink}
+          variant="logo"
+          href={'/'}
+          textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+        >
+          {router.pathname.endsWith('/[slug]') ? (
+            <SchoolOfCodeLogo />
+          ) : (
+            <SchoolOfCodeLogo autoStart={true} loop={true} />
+          )}
+        </Link>
+      </Flex>
+    </>
   )
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
   const router = useRouter()
 
