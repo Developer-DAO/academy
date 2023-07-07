@@ -1,0 +1,18 @@
+{
+  "question": "What does the `tokenTier` mapping do?",
+  "options": [
+    {
+      "answer": "Store the total supply of each tier."
+    },
+    {
+      "answer": " It maps the token ID to its corresponding tier.",
+      "correct": true
+    },
+    {
+      "answer": "It maps `tierId` to the public."
+    },
+    {
+      "answer": "It maps `tokenTier` to the `totalSupply`."
+    }
+  ]
+}

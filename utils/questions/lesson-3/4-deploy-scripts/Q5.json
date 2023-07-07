@@ -1,0 +1,19 @@
+{
+  "question": "Why do we add a `.env` file to the root folder of the project?",
+  "options": [
+    {
+      "answer": " Hardcode private keys directly in the source code."
+    },
+    {
+      "answer": "To store sensitive information like private keys and API credentials.",
+      "correct": true
+    },
+    {
+      "answer": "To make the project's repository smaller in size."
+    },
+    {
+      "answer": "To ensure easy collaboration with other developers.",
+      "correct": true
+    }
+  ]
+}
