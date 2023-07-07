@@ -18,8 +18,8 @@ export function haveSameElements(arr1: number[], arr2: number[]): boolean {
   if (arr1.length !== arr2.length) {
     return false;
   }
-  let arr1Sorted = arr1.sort();
-  let arr2Sorted = arr2.sort();
+  const arr1Sorted = arr1.sort();
+  const arr2Sorted = arr2.sort();
   for (let i = 0; i < arr1Sorted.length; i++) {
     if (arr1Sorted[i] !== arr2Sorted[i]) {
       return false;
