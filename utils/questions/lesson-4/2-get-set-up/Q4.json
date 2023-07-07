@@ -2,7 +2,7 @@
   "question": "Why should we verify the Solidity version in the hardhat.config.js file?",
   "options": [
     {
-      "answer": " To check for any updates to the Solidity version"
+      "answer": "So it can check for any updates to the Solidity version"
     },
     {
       "answer": "To ensure compatibility with the contract being tested.",

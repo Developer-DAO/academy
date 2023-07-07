@@ -1,22 +1,18 @@
 {
-  "question": "",
+  "question": "What do you imagine one of the first steps is in this lesson?",
   "options": [
     {
-      "answer": "",
+      "answer": "Add your private key to the .gitignore file!"
+    },
+    {
+      "answer": "Harmonise Solidity versions across the project",
       "correct": true
     },
     {
-      "answer": ""
+      "answer": "Add a new line of code to the contract to signal we can test it"
     },
     {
-      "answer": "",
-      "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
+      "answer": "Add a console.log line to the contract code so we can see the output of the tests"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "question": "Which part of the contract do you think will present us with some extra work to do?",
+  "question": "Which part of the contract do you think will present us with some extra work?",
   "options": [
     {
       "answer": "Testing the mint() function, because if the network is down, we won't see the tokens on a marketplace"

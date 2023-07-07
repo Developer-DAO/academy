@@ -8,14 +8,14 @@
       "answer": "Help write more modular code"
     },
     {
-      "answer": "Ensure code doesn't break when changes are made"
-    },
-    {
-      "answer": "Only a) and c)"
+      "answer": "Ensure a fixed bug stays fixed"
     },
     {
       "answer": "All of the above",
       "correct": true
+    },
+    {
+      "answer": "Only a) and c)"
     }
   ]
 }
