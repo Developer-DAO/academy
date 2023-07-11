@@ -107,7 +107,6 @@ export default function Footer() {
             href={
               'https://vercel.com?utm_source=[developer-dao]&utm_campaign=oss'
             }
-            passHref
             isExternal
           >
             <Image
