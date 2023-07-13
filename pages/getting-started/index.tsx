@@ -189,7 +189,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Heading>
           <Box alignSelf="center">
             <Image
-              src="/assets/getting-started/img_1.png"
+              src="https://arweave.net/hH9yIZMBsV8uY1ep5p9CY4OGUGizGUhv1u_lqLrak_Y"
               alt="highlights of resources"
               w="40em"
             />
@@ -207,7 +207,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Heading>
           <Box alignSelf="center" pb="1.25rem">
             <Image
-              src="/assets/getting-started/img_2.png"
+              src="https://arweave.net/2f63b009-f3d6-47d4-8c33-8c9f0c0b443a"
               alt="3 month roadmap"
               w="40em"
               borderRadius="0.875rem"
