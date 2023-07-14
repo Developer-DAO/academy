@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import Topbar from "./Topbar";
+import Footer from "./footer/Footer";
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export default function Layout({ children }: Props) {
       >
         {children}
       </Box>
+      <Footer />
     </>
   );
 }
