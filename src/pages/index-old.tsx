@@ -3,11 +3,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import { api } from "@/utils/api";
-import { renderDataURI } from "@codingwithmanny/blockies";
+// import { renderDataURI } from "@codingwithmanny/blockies";
 // SIWE Integration
 import { SiweMessage } from "siwe";
 import {
@@ -93,19 +93,19 @@ const AuthShowcase: React.FC = () => {
           {sessionData ? (
             <div className="mb-4">
               <label className="mb-2 block text-white/80">Logged in as</label>
-              {sessionData?.user?.id ? (
+              {/* {sessionData?.user?.id ? (
                 <Image
                   width={"80"}
                   height={"80"}
                   alt={`${sessionData.user.id}`}
                   className="mx-auto my-4 border-8 border-white/30"
-                  src={`${renderDataURI({
-                    seed: sessionData.user.id,
-                    size: 10,
-                    scale: 8,
-                  })}`}
+                  // src={`${renderDataURI({
+                  //   seed: sessionData.user.id,
+                  //   size: 10,
+                  //   scale: 8,
+                  // })}`}
                 />
-              ) : null}
+              ) : null} */}
               <code className="block rounded bg-black/20 p-4 text-white">
                 {JSON.stringify(sessionData)}
               </code>

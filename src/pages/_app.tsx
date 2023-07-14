@@ -9,14 +9,14 @@ import "@/styles/globals.css";
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
-import Topbar from "@/components/Topbar";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
+import Layout from "@/components/Layout";
 
 // Config
 // ========================================================
@@ -63,16 +63,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <ChakraProvider theme={theme}>
       <WagmiConfig config={config}>
         <SessionProvider session={session} refetchInterval={0}>
-          {/* <Box
-            p="1.25em"
-            px="5%"
-            mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
-          > */}
-          {/* <Topbar /> */}
           <MDXProvider components={Components}>
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </MDXProvider>
-          {/* </Box> */}
         </SessionProvider>
       </WagmiConfig>
     </ChakraProvider>
