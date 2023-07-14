@@ -63,16 +63,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <ChakraProvider theme={theme}>
       <WagmiConfig config={config}>
         <SessionProvider session={session} refetchInterval={0}>
-          <Box
+          {/* <Box
             p="1.25em"
             px="5%"
             mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
-          >
-            <Topbar />
-            <MDXProvider components={Components}>
-              <Component {...pageProps} />{" "}
-            </MDXProvider>
-          </Box>
+          > */}
+          {/* <Topbar /> */}
+          <MDXProvider components={Components}>
+            <Component {...pageProps} />
+          </MDXProvider>
+          {/* </Box> */}
         </SessionProvider>
       </WagmiConfig>
     </ChakraProvider>

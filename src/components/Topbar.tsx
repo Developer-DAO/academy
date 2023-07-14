@@ -39,7 +39,7 @@ import {
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useEffect, useState } from "react";
 
-export default function WithSubnavigation() {
+export default function Topbar() {
   const { isOpen, onToggle } = useDisclosure();
   const router = useRouter();
 
@@ -109,7 +109,12 @@ export default function WithSubnavigation() {
   }, []);
 
   return (
-    <Box>
+    <Box
+      as="header"
+      p="1.25em"
+      px="5%"
+      mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
+    >
       <Flex
         // bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue("gray.600", "white")}

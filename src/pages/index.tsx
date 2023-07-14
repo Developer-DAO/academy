@@ -1,14 +1,12 @@
-import { Box } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Hero from "@/components/Hero";
+import Layout from "@/components/Layout";
 
 const Home: NextPage = () => {
   return (
-    <main>
-      <Box as="main">
-        <Hero />
-      </Box>
-    </main>
+    <Layout>
+      <Hero />
+    </Layout>
   );
 };
 

@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import { ContentBanner } from "@/components/ContentBanner";
 import { CONTENT_PATH } from "@/lib/constants";
+import Layout from "@/components/Layout";
 
 interface Lesson {
   path: string;
@@ -31,8 +32,8 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
   }, {});
 
   return (
-    <>
-      <Flex as="main" py={5} px={[4, 10, 16]} direction="column" minH="90vh">
+    <Layout>
+      <Flex py={5} px={[4, 10, 16]} direction="column" minH="90vh">
         <Stack spacing={5} direction="column">
           <>
             {Object.entries(result).map((track, idx: number) => {
@@ -56,7 +57,7 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
           </>
         </Stack>
       </Flex>
-    </>
+    </Layout>
   );
 };
 

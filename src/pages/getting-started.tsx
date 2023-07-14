@@ -22,6 +22,7 @@ import path from "path";
 import matter from "gray-matter";
 import { CONTENT_PATH } from "@/lib/constants";
 import { useEffect, useState } from "react";
+import Layout from "@/components/Layout";
 
 interface Lesson {
   frontMatter: any;
@@ -52,9 +53,9 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
   }, [lessons]);
 
   return (
-    <>
+    <Layout>
       <Flex
-        as="main"
+        // as="main"
         py={5}
         px={[4, 10, 16]}
         direction="column"
@@ -234,7 +235,7 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
           </Box>
         </Stack>
       </Flex>
-    </>
+    </Layout>
   );
 };
 
