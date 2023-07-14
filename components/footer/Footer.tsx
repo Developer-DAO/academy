@@ -104,14 +104,17 @@ export default function Footer() {
         </Text>
         <Box>
           <Link
+            as={NextLink}
             href={
               'https://vercel.com?utm_source=[developer-dao]&utm_campaign=oss'
             }
             isExternal
           >
             <Image
-              src="https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg"
+              src="/powered-by-vercel.svg"
               alt="Powered by Vercel"
+              width="64"
+              height="64"
             />
           </Link>
         </Box>
