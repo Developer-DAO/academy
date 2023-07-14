@@ -7,6 +7,7 @@ import { CONTENT_PATH } from "@/lib/constants";
 
 interface Lesson {
   path: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   frontMatter: any;
   slug: string;
 }
@@ -31,32 +32,30 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
   }, {});
 
   return (
-    <>
-      <Flex as="main" py={5} px={[4, 10, 16]} direction="column" minH="90vh">
-        <Stack spacing={5} direction="column">
-          <>
-            {Object.entries(result).map((track, idx: number) => {
-              const trackName = track[0].toUpperCase();
-              const lessons = track[1];
-              return (
-                <Box key={idx}>
-                  <Heading size="lg" color="yellow.300">
-                    {trackName}
-                  </Heading>
-                  {lessons.map((lesson: Lesson, idx: number) => {
-                    return (
-                      <Box marginTop="4" key={idx}>
-                        <ContentBanner lesson={lesson} idx={idx} />
-                      </Box>
-                    );
-                  })}
-                </Box>
-              );
-            })}
-          </>
-        </Stack>
-      </Flex>
-    </>
+    <Flex py={5} px={[4, 10, 16]} direction="column" minH="90vh">
+      <Stack spacing={5} direction="column">
+        <>
+          {Object.entries(result).map((track, idx: number) => {
+            const trackName = track[0].toUpperCase();
+            const lessons = track[1];
+            return (
+              <Box key={idx}>
+                <Heading size="lg" color="yellow.300">
+                  {trackName}
+                </Heading>
+                {lessons.map((lesson: Lesson, idx: number) => {
+                  return (
+                    <Box marginTop="4" key={idx}>
+                      <ContentBanner lesson={lesson} idx={idx} />
+                    </Box>
+                  );
+                })}
+              </Box>
+            );
+          })}
+        </>
+      </Stack>
+    </Flex>
   );
 };
 
