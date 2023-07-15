@@ -26,7 +26,6 @@ import SchoolOfCodeLogo from "./SchoolOfCodeLogo";
 import { useRouter } from "next/router";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 import { api } from "@/utils/api";
-// import { renderDataURI } from "@codingwithmanny/blockies";
 // SIWE Integration
 import { SiweMessage } from "siwe";
 import {
@@ -38,6 +37,28 @@ import {
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useEffect, useState } from "react";
+
+interface NavItem {
+  label: string;
+  subLabel?: string;
+  children?: Array<NavItem>;
+  href?: string;
+}
+
+const NAV_ITEMS: Array<NavItem> = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Get Started",
+    href: "/getting-started",
+  },
+  {
+    label: "Tracks",
+    href: "/lessons",
+  },
+];
 
 export default function Topbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -60,8 +81,6 @@ export default function Topbar() {
   });
   const { disconnect } = useDisconnect();
   const { chain } = useNetwork();
-
-  console.log({ address, isConnected });
 
   // Functions
   /**
@@ -157,14 +176,6 @@ export default function Topbar() {
               <SchoolOfCodeLogo autoStart={true} loop={true} />
             )}
           </Link>
-          {/* <Text
-                textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                fontFamily={'heading'}
-                color={useColorModeValue('gray.800', 'white')}
-              >
-                Logo
-              </Text> */}
-
           <Flex
             justify={"flex-end"}
             alignItems="center"
@@ -394,25 +405,3 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
     </Stack>
   );
 };
-
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: "Home",
-    href: "/",
-  },
-  {
-    label: "Get Started",
-    href: "/getting-started",
-  },
-  {
-    label: "Tracks",
-    href: "/lessons",
-  },
-];

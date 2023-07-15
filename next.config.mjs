@@ -20,7 +20,16 @@ const withMDX = nextMDX({
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.developerdao.com",
+        port: "",
+        pathname: "D_D_logo-dark.svg",
+      },
+    ],
+  },
   /**
    * If you have the "experimental: { appDir: true }" setting enabled, then you
    * must comment the below `i18n` config out.

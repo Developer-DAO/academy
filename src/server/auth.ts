@@ -26,6 +26,7 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      image: string;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -55,7 +56,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
         user: {
           ...session.user,
           id: token.sub,
-          image: "https://www.fillmurray.com/128/128",
         },
       } as Session & { user: { id: string } }),
     // OTHER CALLBACKS to take advantage of but not needed
@@ -133,6 +133,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
   //   }) => {},
   //   session: async (message: { session: Session; token: JWT }) => {}
   // },
+  // debug: true, // For debugging
   providers: [
     CredentialsProvider({
       // ! Don't add this
@@ -187,10 +188,11 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
             user = await prisma.user.create({
               data: {
                 address: fields.address,
+                image: "https://www.developerdao.com/D_D_logo-dark.svg",
               },
             });
             // create account
-            const account = await prisma.account.create({
+            await prisma.account.create({
               data: {
                 userId: user.id,
                 type: "credentials",
@@ -203,7 +205,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           return {
             // Pass user id instead of address
             // id: fields.address
-            id: user.id,
+            // id: user.id,
+            ...user,
           };
         } catch (error) {
           // Uncomment or add logging if needed
