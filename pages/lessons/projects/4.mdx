@@ -817,6 +817,7 @@ Ok, here are some tests for these helpers!
     it('should error if token does not exist', async function () {
       await expect(contract.tokenURI(0)).to.be.revertedWith('Nonexistent token')
     })
+  })
   
     describe('tierNameOf', async function () {
       it('should return proper tier name for Tier 0', async function () {

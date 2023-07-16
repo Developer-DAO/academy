@@ -1,22 +1,19 @@
 {
-  "question": "",
+  "question": "Choose the reasons for using automated tests:",
   "options": [
     {
-      "answer": "",
+      "answer": "Give us insurance if we upgrade code later ",
       "correct": true
     },
     {
-      "answer": ""
+      "answer": "So we don’t have to use manual tests"
     },
     {
-      "answer": "",
+      "answer": "Give us the chance to utilise code modularly",
       "correct": true
     },
     {
-      "answer": ""
-    },
-    {
-      "answer": ""
+      "answer": "All of the above"
     }
   ]
 }

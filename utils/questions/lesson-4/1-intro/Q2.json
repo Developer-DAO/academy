@@ -1,15 +1,17 @@
 {
-  "question": "Choose reasons for using automated tests:",
+  "question": "What is the role of a Testnet in smart contract development?",
   "options": [
     {
-      "answer": "Give us insurance if we upgrade code later ",
-      "correct": true
+      "answer": "It helps to deploy smart contracts to the Ethereum mainnet."
     },
     {
-      "answer": "So we don’t have to use manual tests"
+      "answer": "To airdrop free Ether to devs because testing gets the eco-system a good name."
     },
     {
-      "answer": "Give us the chance to utilise code modularly",
+      "answer": "It's used to interact with smart contracts using that real Ether."
+    },
+    {
+      "answer": "It's a network that is used for testing smart contracts.",
       "correct": true
     }
   ]

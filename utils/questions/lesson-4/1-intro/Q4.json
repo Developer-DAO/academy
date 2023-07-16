@@ -1,22 +1,18 @@
 {
-  "question": "",
+  "question": "When writing unit tests for a smart contract, what should we be testing?",
   "options": [
     {
-      "answer": "",
+      "answer": "Functionality that only involves external contracts."
+    },
+    {
+      "answer": "Only private functions that aren't externally accessible."
+    },
+    {
+      "answer": "All functions and possible edge cases that the contract may encounter.",
       "correct": true
     },
     {
-      "answer": ""
-    },
-    {
-      "answer": "",
-      "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
+      "answer": "Just the constructor function to ensure the contract gets deployed properly."
     }
   ]
 }
