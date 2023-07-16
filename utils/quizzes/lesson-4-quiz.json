@@ -2,48 +2,76 @@
   "title": "Quiz: Lesson 4",
   "questions": [
     {
-      "question": "Where do the values for event parameters get stored?",
+      "question": "Which testing approach is recommended for ensuring a secure smart contract?",
       "options": [
         {
-          "answer": "In the block data"
+          "answer": "Only manual testing with thorough code review."
         },
         {
-          "answer": "In transaction logs",
+          "answer": "Automated testing using unit tests exclusively."
+        },
+        {
+          "answer": "A combination of manual testing, automated testing, and code auditing.",
           "correct": true
         },
         {
-          "answer": "They are not stored"
+          "answer": "Skipping testing to expedite the deployment process."
         }
       ]
     },
     {
-      "question": "Which of these properties does Ethereum have?",
+      "question": "What can automated testing of smart contracts help achieve?",
       "options": [
         {
-          "answer": "Permissioned"
+          "answer": "Faster development and deployment process."
         },
         {
-          "answer": "Trustless",
+          "answer": "Finding every possible bug and vulnerability."
+        },
+        {
+          "answer": "Improving the overall code quality.",
           "correct": true
         },
         {
-          "answer": "Decentralized",
+          "answer": "Ensuring the smart contract is free of errors.",
           "correct": true
         }
       ]
     },
     {
-      "question": "What can we use a smart contract for?",
+      "question": "Which best describes 'gas' in the context of smart contracts?",
       "options": [
         {
-          "answer": "Storing or transfering value without the need of a central authority",
+          "answer": "The cost of deploying a smart contract on the blockchain."
+        },
+        {
+          "answer": "The unit of currency used in smart contract transactions."
+        },
+        {
+          "answer": "A measure of the computational effort required to execute a transaction or contract.",
           "correct": true
         },
         {
-          "answer": "Making breakfast"
+          "answer": "The reward given to validators for running a validator node."
+        }
+      ]
+    },
+    {
+      "question": "What are some potential risks of deploying a smart contract without proper testing?",
+      "options": [
+        {
+          "answer": "Loss of funds",
+          "correct": true
         },
         {
-          "answer": "Sending untraceable transactions"
+          "answer": "Security vulnerabilities",
+          "correct": true
+        },
+        {
+          "answer": "Lengthy deployment process"
+        },
+        {
+          "answer": "Inefficient gas usage"
         }
       ]
     }
