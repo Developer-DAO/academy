@@ -437,6 +437,7 @@ into a new `describe` section.
 
 Where exactly do we add this `describe` block?
 
+{/* I think we could do this more cleanly with the following // commented line and its explanation */}
 Currently the end of our `tier-nft.test.js` looks like this, with just one
 additional comment line I added that says
 `// this is where existing describe section ends`:
@@ -460,6 +461,7 @@ additional comment line I added that says
 Our new `describe` section shown below will replace that line that says
 `// this is where existing describe section ends`.
 
+{/* The sentence in the callout below is a bit messy. Could do with an update */}
 <Callout emoji="💡" size="md" variant="info">
   Make sure you keep that last line `})` which is the very end of the block of
   code that holds **all** of the `describe` blocks you're adding in this whole
@@ -605,7 +607,7 @@ of additional highlights:
   breaks our rule of one expect per test, but as long as the test is kept
   simple, we can choose what makes sense for what we're trying to test.
 
-<SideDrawer buttonText="Checkpoint Questions" title="Mint and Withdraw">
+<SideDrawer buttonText="Checkpoint Questions" title="Cross-checking Logic from Tests to Contract">
       <Question question="lesson-4/4-mint-withdraw/Q1" />
       <Question question="lesson-4/4-mint-withdraw/Q2" />
       <Question question="lesson-4/4-mint-withdraw/Q3" />
