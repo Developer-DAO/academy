@@ -457,7 +457,7 @@ additional comment line I added that says
 })
 ```
 
-Our new `describe` section show below will replace that line that says
+Our new `describe` section shown below will replace that line that says
 `// this is where existing describe section ends`.
 
 <Callout emoji="💡" size="md" variant="info">
@@ -527,7 +527,7 @@ the proper amount of Eth is not provided. This happens here:
 ```javascript
 await expect(
   contract.mint({
-    value: hre.ethers.utils.parseEther('0.001'),
+    value: hre.ethers.parseEther('0.001'),
   }),
 ).to.be.revertedWith('Not enough value for the minimum Tier')
 ```

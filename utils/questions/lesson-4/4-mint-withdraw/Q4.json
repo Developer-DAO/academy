@@ -1,22 +1,18 @@
 {
-  "question": "",
+  "question": "In the 'withdraw()' tests, why is the line 'await contract.connect(otherUser).withdraw()' used?",
   "options": [
     {
-      "answer": "",
+      "answer": "To ensure the contract owner can withdraw the entire contract balance."
+    },
+    {
+      "answer": "To verify that the 'withdraw()' function updates the contract balance correctly.",
       "correct": true
     },
     {
-      "answer": ""
+      "answer": "To check if the contract is functioning correctly for non-owner users."
     },
     {
-      "answer": "",
-      "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
+      "answer": "To confirm the contract has sufficient funds before withdrawing."
     }
   ]
 }
