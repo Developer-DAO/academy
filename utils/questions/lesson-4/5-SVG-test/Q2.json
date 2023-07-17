@@ -1,22 +1,18 @@
 {
-  "question": "",
+  "question": "Why is the 'imageSVGOf()' method is easy to test?",
   "options": [
     {
-      "answer": "",
+      "answer": "Because it doesn't perform any concatenation."
+    },
+    {
+      "answer": "It simply calls other helper methods."
+    },
+    {
+      "answer": "It just returns the image of the SVG."
+    },
+    {
+      "answer": "It only concatenates three values into a string.",
       "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": "",
-      "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
     }
   ]
 }

@@ -665,7 +665,7 @@ be tested and understood by humans writing these tests.
   Easy to test!
 - `imageSVGOf()` just concatenates three values into a string. Also easy to
   test.
-- `finalJSON` also just concatenates multiple values into a string, and like the
+- `finalJSON()` also just concatenates multiple values into a string, and like the
   method says, it creates a string that represents the final JSON blob.
 - Notice that none of these methods does the Base64 encoding, which immediately
   makes it impossible for a human to interpret the results and that makes for a
@@ -902,7 +902,7 @@ while refactoring to make sure we didn't break things along the way, and it's
 helpful at the end to ensure the `tokenURI()` method continues to work without
 fail when code changes.
 
-<SideDrawer buttonText="Checkpoint Questions" title="Testing the SVG">
+<SideDrawer buttonText="Checkpoint Questions" title="Refactoring Code and Testing SVG">
       <Question question="lesson-4/5-SVG-test/Q1" />
       <Question question="lesson-4/5-SVG-test/Q2" />
       <Question question="lesson-4/5-SVG-test/Q3" />

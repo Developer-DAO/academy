@@ -1,22 +1,19 @@
 {
-  "question": "",
+  "question": "Refactoring the original 'tokenURI()' method into helper functions improves:",
   "options": [
     {
-      "answer": "",
+      "answer": "code readability",
       "correct": true
     },
     {
-      "answer": ""
+      "answer": "performance optimization"
     },
     {
-      "answer": "",
+      "answer": "maintaining backward compatibility"
+    },
+    {
+      "answer": "ease of testing",
       "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
     }
   ]
 }

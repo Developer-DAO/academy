@@ -1,22 +1,18 @@
 {
-  "question": "",
+  "question": "What do 'tierNameOf()', 'imageSVGOf()', and 'finalJSON()' methods do?",
   "options": [
     {
-      "answer": "",
+      "answer": "Break down the contract deployment into stages"
+    },
+    {
+      "answer": "Handle token minting more easily"
+    },
+    {
+      "answer": "Generate SVG images and token metadata",
       "correct": true
     },
     {
-      "answer": ""
-    },
-    {
-      "answer": "",
-      "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": ""
+      "answer": "Create a token wallet"
     }
   ]
 }
