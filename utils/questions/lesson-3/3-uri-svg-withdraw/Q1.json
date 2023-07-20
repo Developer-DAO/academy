@@ -1,0 +1,15 @@
+{
+  "question": "What does the `tokenURI` function in the contract do?",
+  "options": [
+    {
+      "answer": "Mint a new token."
+    },
+    {
+      "answer": " Store an image in the token."
+    },
+    {
+      "answer": " Create an identifier for the token.",
+      "correct": true
+    }
+  ]
+}

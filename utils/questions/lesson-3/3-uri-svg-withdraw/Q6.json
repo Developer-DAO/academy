@@ -1,0 +1,18 @@
+{
+  "question": "How does the payable(owner()).call{value: balance}(\"\") line transfer funds?",
+  "options": [
+    {
+      "answer": " It makes the contract's balance `payable` to the caller's address."
+    },
+    {
+      "answer": "It returns the contract's balance to the Ethereum network."
+    },
+    {
+      "answer": " It makes the gas fees `payable` to the contract's owner."
+    },
+    {
+      "answer": " It sends the contract's balance to a specified recipient.",
+      "correct": true
+    }
+  ]
+}

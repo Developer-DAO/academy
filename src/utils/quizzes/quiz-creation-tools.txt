@@ -1,0 +1,44 @@
+Here is the super quiz editor that our very own @Chiin created!
+
+https://quiz-editor.vercel.app/
+
+Why not check it out to create your questions and quizzes? 
+
+See /quizzes/template-quiz.json on what the syntax for a full quiz looks like.....or just use the app to create one and see for yourself
+
+A single question with ONE correct answer looks like this and the app will give you the following code. You can copy your own manually from the app:
+
+{
+  "question": "Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
+  "options": [
+    {
+      "answer": "Transactions"
+    },
+    {
+      "answer": "Smart contracts",
+      "correct": true
+    },
+    {
+      "answer": "NFTs"
+    }
+  ]
+}
+
+TWO correct answers looks like this and you will need to add ", correct": true' yourself if you want multiple correct answers:
+
+{
+  "question": "Apart from a user wallet, what else uses a blockchain (Ethereum) address?",
+  "options": [
+    {
+      "answer": "Transactions"
+    },
+    {
+      "answer": "Smart contracts",
+      "correct": true
+    },
+    {
+      "answer": "NFTs",
+      "correct": true
+    }
+  ]
+}

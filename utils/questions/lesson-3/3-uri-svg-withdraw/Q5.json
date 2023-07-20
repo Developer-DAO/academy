@@ -1,0 +1,15 @@
+{
+  "question": "What does address(this).balance represent in the code?",
+  "options": [
+    {
+      "answer": "The balance of the contract owner's address."
+    },
+    {
+      "answer": "The balance of the caller's address."
+    },
+    {
+      "answer": "The balance of the contract's Ethereum address.",
+      "correct": true
+    }
+  ]
+}

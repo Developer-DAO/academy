@@ -1,0 +1,18 @@
+{
+  "question": "What additional functionality do you think we will add to this `tierNFT` contract?",
+  "options": [
+    {
+      "answer": "Integration with a decentralized exchange for trading TierNFTs."
+    },
+    {
+      "answer": "Introduction of a staking feature for earning additional rewards."
+    },
+    {
+      "answer": "Ability to define a base path for creating unique URIs for each token.",
+      "correct": true
+    },
+    {
+      "answer": "None of the above."
+    }
+  ]
+}

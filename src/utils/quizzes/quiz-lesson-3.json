@@ -1,0 +1,203 @@
+{
+  "title": "Quiz: Lesson 3",
+  "questions": [
+    {
+      "question": "As well as console, which of the following are also known as a CLI?",
+      "options": [
+        {
+          "answer": "a terminal "
+        },
+        {
+          "answer": "a command line"
+        },
+        {
+          "answer": "a command prompt"
+        },
+        {
+          "answer": "all of them",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What has Open Zeppelin created?",
+      "options": [
+        {
+          "answer": "A No-Code smart contracts solution called Kashmir"
+        },
+        {
+          "answer": "A library of open-source smart contracts, widely tested and audited, to inherit by other developers",
+          "correct": true
+        },
+        {
+          "answer": "Stairway: an NFT marketplace called for everyone to trade their assets"
+        },
+        {
+          "answer": "Led by a web3 founder, they created a lot of hard rock anthems"
+        }
+      ]
+    },
+    {
+      "question": "What line should we use to declare a smart contract called Animals in solidity?",
+      "options": [
+        {
+          "answer": "pragma solidity contract Animals {"
+        },
+        {
+          "answer": "smart contract Animals {"
+        },
+        {
+          "answer": "contract Animals {",
+          "correct": true
+        },
+        {
+          "answer": "solidity 0.8.12 contract Animals {"
+        }
+      ]
+    },
+    {
+      "question": "What does `msg.value` hold in a function call?",
+      "options": [
+        {
+          "answer": "A message passed to a function from the sender account"
+        },
+        {
+          "answer": "The native token balance of the account that called a `payable` function"
+        },
+        {
+          "answer": "The address of the message sender account"
+        },
+        {
+          "answer": "The amount of native token sent to a `payable` function",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What does `msg.sender` hold in a function call?",
+      "options": [
+        {
+          "answer": "A message passed to a function from the sender account"
+        },
+        {
+          "answer": "The native token balance of the account that called a `payable` function"
+        },
+        {
+          "answer": "The address of the account that called a function",
+          "correct": true
+        },
+        {
+          "answer": "The amount of native token sent to a `payable` function"
+        }
+      ]
+    },
+    {
+      "question": "In a smart contract, `override` is a keyword to …",
+      "options": [
+        {
+          "answer": "… tell the EVM you need to change a read-only or constant state variable"
+        },
+        {
+          "answer": "… replace a function from an inherited contract",
+          "correct": true
+        },
+        {
+          "answer": "… replace a specific value from a variable in `memory`"
+        },
+        {
+          "answer": "… replace a specific value from a variable in `storage`"
+        }
+      ]
+    },
+    {
+      "question": "What is the `memory` keyword used for?",
+      "options": [
+        {
+          "answer": "To tell the EVM we need to allocate an exact number of slot from memory"
+        },
+        {
+          "answer": "To specify a parameter or local variable is stored in `memory` instead of `storage``",
+          "correct": true
+        },
+        {
+          "answer": "It is a keyword to let the EVM memorize a specific value we will be using frequently"
+        },
+        {
+          "answer": "To specify the total amount of memory our contract will be using"
+        }
+      ]
+    },
+    {
+      "question": "What is `require( ... )` used for?",
+      "options": [
+        {
+          "answer": "To tell solidity all the libraries our contract requires"
+        },
+        {
+          "answer": "It is a keyword to list all the requirements a parameter must meet to be valid"
+        },
+        {
+          "answer": "It is a solidity function to throw an exception if a certain condition is not met",
+          "correct": true
+        },
+        {
+          "answer": "It is a way to declare how much native token a function requires to work"
+        }
+      ]
+    },
+    {
+      "question": "What is the word `payable` used for?",
+      "options": [
+        {
+          "answer": "A modifier for addresses variable to use the `.transfer()` and `.send()` functions with them"
+        },
+        {
+          "answer": "A keyword in a function declaration to let the function receive native tokens"
+        },
+        {
+          "answer": "A keyword for functions and addresses so they can receive native tokens into the contract"
+        },
+        {
+          "answer": "All of the above",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is a private key?",
+      "options": [
+        {
+          "answer": "A secret key that has privilege access to certain functions in a contract"
+        },
+        {
+          "answer": "A key to access private variables in a smart contract"
+        },
+        {
+          "answer": "A key that gives total access to whomever holds it to have 'full control' of an account and its assets",
+          "correct": true
+        },
+        {
+          "answer": "A key that is not accessible from another contract"
+        }
+      ]
+    },
+    {
+      "question": "In which cases can we share our private key or seed phrase?",
+      "options": [
+        {
+          "answer": "Anytime, they are not important as long as i have my address"
+        },
+        {
+          "answer": "Only to friends and/or family"
+        },
+        {
+          "answer": "Only when I login into a webpage or service"
+        },
+        {
+          "answer": "'Never', 'absolutely never', 'to no-one'. I acknowledge that if I share my private key, whomever gets it can withdraw absolutely every asset from my address and sign documents on my behalf ",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
