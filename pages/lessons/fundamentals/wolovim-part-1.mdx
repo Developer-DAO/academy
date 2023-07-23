@@ -45,8 +45,9 @@ There are many ways to describe Ethereum, but at its heart is a blockchain. Bloc
 
 Each block has a reference to the block that came before it; the `parentHash` is simply the hash of the previous block.
 
-> Note: Ethereum makes regular use of hash functions to produce fixed-size values (“hashes”). Hashes play an important role in Ethereum, but you can safely think of them as unique IDs for now.
-> 
+<Callout emoji='💡' size='md' variant='info'>
+**Note:** Ethereum makes regular use of hash functions to produce fixed-size values (“hashes”). Hashes play an important role in Ethereum, but you can safely think of them as unique IDs for now.
+</Callout>
 
 ![https://cdn-images-1.medium.com/max/2400/1*WfNXz5Svsxk9yB-PEIM9BQ.png](https://cdn-images-1.medium.com/max/2400/1*WfNXz5Svsxk9yB-PEIM9BQ.png)
 
@@ -60,18 +61,19 @@ The only way for the blockchain to verify that asset was truly sent from one use
 
 This new decentralized tech stack has spawned new developer tools. Such tools exist in many programming languages, but we’ll be looking through the Python lens. To reiterate: even if Python isn’t your language of choice, it shouldn’t be much trouble to follow along.
 
-Python developers that want to interact with Ethereum are likely to reach for **[Web3.py](https://web3py.readthedocs.io/)**. Web3.py is a library that greatly simplifies the way you connect to an Ethereum node, then send and receive data from it.
+Python developers that want to interact with Ethereum are likely to reach for **[web3.py](https://web3py.readthedocs.io/)**. web3.py is a library that greatly simplifies the way you connect to an Ethereum node, then send and receive data from it.
 
-> Note: “Ethereum node” and “Ethereum client” are often used interchangeably. In either case, it refers to the software that a participant in the Ethereum network runs. This software can read block data, receive updates when new blocks are added to the chain, broadcast new transactions, and more.
-> 
+<Callout emoji='💡' size='md' variant='info'>
+**Note:** “Ethereum node” and “Ethereum client” are often used interchangeably. In either case, it refers to the software that a participant in the Ethereum network runs. This software can read block data, receive updates when new blocks are added to the chain, broadcast new transactions, and more.
+</Callout>
 
-Ethereum clients can be configured to be reachable by [IPC](https://en.wikipedia.org/wiki/Inter-process_communication), HTTP, or Websockets. Web3.py refers to these connection options as **providers**. You’ll want to choose one of the three providers to configure so that Web3.py knows how to communicate with your node.
+Ethereum clients can be configured to be reachable by [IPC](https://en.wikipedia.org/wiki/Inter-process_communication), HTTP, or Websockets. web3.py refers to these connection options as **providers**. You’ll want to choose one of the three providers to configure so that web3.py knows how to communicate with your node.
 
 ![https://cdn-images-1.medium.com/max/1600/1*OrElsXOF45w-AgBuezCqjQ.png](https://cdn-images-1.medium.com/max/1600/1*OrElsXOF45w-AgBuezCqjQ.png)
 
-Configure the Ethereum node and Web3.py to communicate via the same protocol, e.g., IPC in this diagram.
+Configure the Ethereum node and web3.py to communicate via the same protocol, e.g., IPC in this diagram.
 
-Once Web3.py is properly configured, you can begin to interact with the blockchain. Here’s a couple of Web3.py usage examples as a preview of what’s to come:
+Once web3.py is properly configured, you can begin to interact with the blockchain. Here’s a couple of web3.py usage examples as a preview of what’s to come:
 
 ```python
 # read block data:
@@ -85,19 +87,20 @@ w3.eth.send_transaction({'from': ..., 'to': ..., 'value': ...})
 
 In this walkthrough, we’ll just be working within a Python interpreter. We won't be creating any directories, files, classes or functions.
 
-> Note: In the examples below, commands that begin with $ are intended to be run in the terminal. (Do not type the $, it just signifies the start of the line.)
-> 
+<Callout emoji='💡' size='md' variant='info'>
+**Note:** In the examples below, commands that begin with `$` are intended to be run in the terminal. (Do not type the `$`, it just signifies the start of the line.)
+</Callout>
 
-First, install [IPython](https://ipython.org/) for a user-friendly environment to explore in. IPython offers tab completion, among other features, making it much easier to see what’s possible within Web3.py.
+First, install [IPython](https://ipython.org/) for a user-friendly environment to explore in. IPython offers tab completion, among other features, making it much easier to see what’s possible within web3.py.
 
 ```bash
 $ pip install ipython
 ```
 
-Web3.py is published under the name `web3`. Install the latest version like so:
+web3.py is published under the name `web3`. Install the latest version like so:
 
 ```bash
-$ pip install web3==6.0.0b8
+$ pip install web3
 ```
 
 One more thing – we're going to simulate a blockchain later, which requires a couple more dependencies. You can install those via:
@@ -134,8 +137,13 @@ Besides being a gateway to Ethereum, the [Web3](https://web3py.readthedocs.io/e
 
 In an Ethereum application, you will commonly need to convert currency denominations. The Web3 module provides a couple of helper methods just for this: [from_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.fromWei) and [to_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.toWei).
 
-> Note: Computers are notoriously bad at handling decimal math. To get around this, developers often store dollar amounts in cents. For example, an item with a price of $5.99 may be stored in the database as 599.A similar pattern is used when handling transactions in ether. However, instead of two decimal points, ether has 18! The smallest denomination of ether is called wei, so that’s the value specified when sending transactions.1 ether = 1000000000000000000 wei1 wei = 0.000000000000000001 ether
-> 
+<Callout emoji='💡' size='md' variant='info'>
+**Note:** Computers are notoriously bad at handling decimal math. To get around this, developers often store dollar amounts in cents. For example, an item with a price of $5.99 may be stored in the database as 599. A similar pattern is used when handling transactions in ether. However, instead of two decimal points, ether has 18! The smallest denomination of ether is called *wei*, so that’s the value specified when sending transactions.
+
+1 ether = 1000000000000000000 wei
+
+1 wei = 0.000000000000000001 ether
+</Callout>
 
 Try converting some values to and from wei. Note that there are [names for many of the denominations](https://web3py.readthedocs.io/en/stable/examples.html#converting-currency-denominations) in between ether and wei. One of the better known among them is **gwei**, as it’s often how transaction fees are represented.
 
@@ -151,22 +159,22 @@ Other utility methods on the Web3 module include data format converters (e.g., 
 
 ### **Talk to the chain**
 
-The convenience methods are lovely, but let’s move on to the blockchain. The next step is to configure Web3.py to communicate with an Ethereum node. Here we have the option to use the IPC, HTTP, or Websocket providers.
+The convenience methods are lovely, but let’s move on to the blockchain. The next step is to configure web3.py to communicate with an Ethereum node. Here we have the option to use the IPC, HTTP, or Websocket providers.
 
 We won't be going down this path, but an example of a complete workflow using the HTTP Provider might look something like this:
 
 - Download an Ethereum node, e.g., [Geth](https://geth.ethereum.org/).
 - Start Geth in one terminal window and wait for it to sync the network. The default HTTP port is `8545`, but is configurable.
-- Tell Web3.py to connect to the node via HTTP, on `localhost:8545`.`w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))`
+- Tell web3.py to connect to the node via HTTP, on `localhost:8545`.`w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:8545'))`
 - Use the `w3` instance to interact with the node.
 
-While this is one “real” way to do it, the syncing process takes hours and is unnecessary if you just want a development environment. Web3.py exposes a fourth provider for this purpose, the **EthereumTesterProvider**. This tester provider links to a simulated Ethereum node with relaxed permissions and fake currency to play with.
+While this is one “real” way to do it, the syncing process takes hours and is unnecessary if you just want a development environment. web3.py exposes a fourth provider for this purpose, the **EthereumTesterProvider**. This tester provider links to a simulated Ethereum node with relaxed permissions and fake currency to play with.
 
 ![https://snakecharmers.ethereum.org/content/images/2020/08/Screen-Shot-2020-08-31-at-2.38.23-PM.png](https://snakecharmers.ethereum.org/content/images/2020/08/Screen-Shot-2020-08-31-at-2.38.23-PM.png)
 
 The EthereumTesterProvider connects to a simulated node and is handy for quick development environments.
 
-That simulated node is called [**eth-tester**](https://github.com/ethereum/eth-tester) and we installed it as part of the `pip install "web3[tester]"` command. Configuring Web3.py to use this tester provider is as simple as:
+That simulated node is called [**eth-tester**](https://github.com/ethereum/eth-tester) and we installed it as part of the `pip install "web3[tester]"` command. Configuring web3.py to use this tester provider is as simple as:
 
 ```python
 In [4]: w3 = Web3(Web3.EthereumTesterProvider())
@@ -284,7 +292,7 @@ The latter looks good! The balance went from 1,000,000 to 1,000,003 ether. But w
 
 <Callout emoji='💡' size='md' variant='info'>
 **Note**: On the public network, transaction fees are variable based on network demand and how quickly you'd like a transaction to be processed.
-</Callout> 
+</Callout>
 
 ### **And breathe**
 
