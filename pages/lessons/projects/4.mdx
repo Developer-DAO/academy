@@ -14,11 +14,13 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 ## About this lesson
 
-Welcome to this lesson where we’ll be adding automated tests for our *TierNFT* smart contract created in the previous tutorial. If you haven’t completed it already, we have a fast-track guide below to that project set-up - assuming you’re already confident with Solidity and a professional development environment. If not, we’d recommend completing the earlier tutorials in this track. 
+Welcome to this lesson where we’ll be adding automated tests for our *TierNFT* smart contract created in the previous tutorial. In case you haven’t completed it already, we have a fast-track guide below to that project set-up - assuming you’re confident with Solidity and a professional development environment. If you're not, we’d recommend completing the tutorials in this track before this one, before moving on to *Connecting your TierNFT Smart Contract to a Frontend*, our project series finalé. 
 
-Over here, you’ll learn about the benefits of writing automated tests, general testing concepts and best practices. You’ll walk away with many practical tests for smart contracts and nibble on some food for thought about test-driven development. 
+Back here, you’ll learn about the benefits of writing automated tests, general testing concepts and best practices. You’ll walk away with many practical tests for smart contracts and nibble on some food for thought about test-driven development. 
 
-As you dive in to the lesson, you'll come across some thought-provoking checkpoint questions designed to test your existing knowledge, measure how well you're absorbing the fresh content, and maybe ask you to predict next steps in the lesson. And to wrap up, a final quiz awaits. To complete this adventure might take anywhere from one to six hours. That all depends on your previous experience and how much new ground you need to cover. But enjoy the journey and remember to take regular breaks along the way. We care about your well-being and have even included a nifty pomodoro timer ⌛ in the menu header. Let it remind you to appreciate nature's gifts and "go touch some grass" for a while. 🌱 Embrace the process, and let's set sail!
+As you dive in to the lesson, you'll come across some thought-provoking checkpoint questions designed to test your existing knowledge, measure how well you're absorbing the fresh content, and we might even ask you to predict next steps in the lesson. And to wrap up, a final quiz awaits. To complete this adventure might take anywhere from one to four hours. That all depends on your previous experience and how much new ground you need to cover. But enjoy the journey and remember to take regular breaks along the way. We care about your well-being and have even included a nifty pomodoro timer ⌛ in the menu header. Let it remind you to appreciate nature's gifts and "go touch some grass" for a while. 🌱 Embrace the process.
+
+Let's raise the sails to catch the wind of what's to come:
 
 <SideDrawer buttonText="Warm-up Questions" title="Check out Your Previous Knowledge">
       <Question question="lesson-4/1-intro/Q1" />
@@ -28,8 +30,7 @@ As you dive in to the lesson, you'll come across some thought-provoking checkpoi
       <Question question="lesson-4/1-intro/Q5" />
 </SideDrawer> 
 
-PART 1
-
+And set sail . . .
 
 ## Why automated testing?
 
@@ -44,29 +45,31 @@ Testing can:
 - give you a safety net when you make improvements to the code later
 
 Tests are a tool for writing your code and making sure it keeps working as
-expected when changes are made.
-
-Automated tests don't fully replace manually testing your smart contract but
+expected when changes are made. Automated tests don't fully replace manually testing your smart contract but
 it's an important tool to ensuring your contract will work as expected.
+
+
+### Quick breakdown of lesson steps
+- Set up our local development environment 
+- Write unit tests
+- Test NFT contract initialisation, mint and withdrawl functions
+- Refactor tokenURI() function and test new helper methods:
+- Summary: understanding the concept of Test-Driven Development (TDD)
+
+### Developer tools and libraries we'll be using
+- Hardhat development environment
+- Mocha JavaScript framework for writing units tests 
+- Chai, an assertion library compatible with Mocha
+- OpenZeppelin libraries will help bring clarity to testing our contract 
 
 ## Let's Get Started
 
 ### Setting up our project dependencies
-
 If you have an existing project from your previous work on the TierNFT lesson,
-you have all the Hardhat dependencies installed.
-
-Otherwise let's create a new Hardhat project and copy in the contract which
-we'll be testing.
-
-To create a new project, please refer to _Lesson 3 - Tier NFTs_ and search for
+you have all the Hardhat dependencies installed. {/* @wolovim , would we need to comment out the deployment script if we were to use that 'already set up' project? I mean, would that script give us bother each time we ran the tests in this lesson? */} Otherwise let's create a new Hardhat project and copy in the contract which
+we'll be testing. To create a new project, please refer to _Lesson 3 - Tier NFTs_ and search for
 the “First things first 👷‍♂️" section to get your project going. Follow the steps
-until "Let’s start coding”, then open up your code editor.
-
-
-_If you are using VSCode, type `code .` in your terminal to open VSCode._
-
-After running through that section you'll have a working Hardhat project for the
+until "Let’s start coding”, then open up your code editor. If you are using VSCode, type `code .` in your terminal to open VSCode. After running through that section you'll have a working Hardhat project for the
 next steps.
 
 ### Add test command for running tests
@@ -216,7 +219,7 @@ module.exports = {
       <Question question="lesson-4/2-get-set-up/Q4" />
       <Question question="lesson-4/2-get-set-up/Q5" />
 </SideDrawer> 
-PART 2
+⌛ Pomodoro? 😊 🌱
 
 ## What do we want to test on our TierNFT contract?
 
@@ -423,7 +426,6 @@ failure looks like:
       <Question question="lesson-4/3-general-concepts/Q5" />
 </SideDrawer> 
 
-PART 3
 
 ### Let's add tests for mint()
 
@@ -609,8 +611,8 @@ of additional highlights:
       <Question question="lesson-4/4-mint-withdraw/Q4" />
       <Question question="lesson-4/4-mint-withdraw/Q5" />
 </SideDrawer> 
+⌛ Pomodoro? 😊 🌱
 
-PART 4
 
 ### Testing tokenURI()
 
@@ -905,16 +907,13 @@ fail when code changes.
       <Question question="lesson-4/5-SVG-test/Q5" />
 </SideDrawer> 
 
-OUTRO
 
 ## Food for Thought
 
 With all the helpfulness of tests, why didn't we start with them before we wrote
-any of the contract implementation?
-
-The main reason was trying to minimize all the things you needed to learn to get
+any of the contract implementation? The main reason was trying to minimize all the things you needed to learn to get
 started, but the methodology of writing tests first is called "Test Driven
-Development" (TDD).
+Development" (TDD). 
 
 TDD is a very powerful methodology which goes like this:
 
@@ -938,11 +937,13 @@ With TDD:
   version that outputs a long base64 string because it's not testable.
 
   Bolting on tests after the fact can be painful and boring, and you lose the
-  potential code improvements you can make when you test as you go.
+  potential code improvements you can make when you test as you go. And speaking of testing as you go, why not take the quiz 😊
 
 <br/><br/>
 <Quiz quiz="lesson-4-quiz" />
 <br/><br/>
+
+You just did some amazing work, and you will do a great service to the web3 ecosystem by being conscious of the value of writing solid code. There’s lots more to explore in Academy, and we’re looking forward to seeing you in our final project in this ERC721 track where you’ll be *Connecting your TierNFT Smart Contract to a Frontend*. Why not dive into the forum in the mean time, and share your new found wisdom with our community.
 
 Go forth, test, and prosper knowing you have confidence in the code you're
 deploying into the world.
@@ -951,8 +952,8 @@ import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
 
 
 <ContributorFooter
-  authors={['brianfive']}
-  reviewers={['piablo', 'georgemac510']}
+  authors={['brianfive', 'piablo']}
+  reviewers={['georgemac510', 'wolovim']}
   contributors={[]} 
 />
 
