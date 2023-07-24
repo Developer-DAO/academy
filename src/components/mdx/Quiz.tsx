@@ -18,6 +18,7 @@ import {
   getCorrectAnswersIndexes,
   haveSameElements,
 } from "@/utils/QuizHelpers";
+import { api } from "@/utils/api";
 
 interface QuizProps {
   quiz: string;
@@ -123,7 +124,18 @@ const Quiz = (props: QuizProps): JSX.Element => {
     });
   };
 
+  // - Add
+  const { mutate: quizzesAddMutate, isLoading: quizzesAddIsLoading } =
+    api.completedQuizzes.add.useMutation({
+      onSuccess: () => {
+        return quizSuccessToast();
+      },
+    });
+
   const quizSuccessToast = () => {
+    // api.completedQuizzes.add.useMutation({
+    //   lesson: props.quiz,
+    // });
     toast({
       title: "Amazing!",
       description: "You have passed the lesson!",
@@ -159,7 +171,11 @@ const Quiz = (props: QuizProps): JSX.Element => {
       return quizFailedToast(wrongAnswersCounter);
     }
 
-    return quizSuccessToast();
+    // return quizSuccessToast();
+
+    quizzesAddMutate({
+      lesson: props.quiz,
+    });
   };
 
   const cancelQuiz = () => {
@@ -254,6 +270,7 @@ const Quiz = (props: QuizProps): JSX.Element => {
               colorScheme="green"
               backgroundColor="green.400"
               onClick={submit}
+              isLoading={quizzesAddIsLoading}
             >
               Submit
             </Button>
