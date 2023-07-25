@@ -5,17 +5,17 @@
       "question": "Choose those which automated testing of smart contracts can help achieve?",
       "options": [
         {
-          "answer": "Faster development and deployment process."
+          "answer": "Faster deployment process"
         },
         {
-          "answer": "Finding every possible bug and vulnerability."
+          "answer": "Finding every possible bug and vulnerability"
         },
         {
-          "answer": "Improving the overall code quality.",
+          "answer": "Improving the overall code quality",
           "correct": true
         },
         {
-          "answer": "Ensuring the smart contract is free of errors.",
+          "answer": "Ensuring the smart contract is free of errors",
           "correct": true
         }
       ]
@@ -24,17 +24,17 @@
       "question": "Which testing approach is recommended for ensuring a secure smart contract?",
       "options": [
         {
-          "answer": "Only manual testing with thorough code review."
+          "answer": "Only manual testing with thorough code review"
         },
         {
-          "answer": "Automated testing using unit tests exclusively."
+          "answer": "Automated testing using unit tests exclusively"
         },
         {
-          "answer": "A combination of manual testing, automated testing, and code auditing.",
+          "answer": "A combination of manual testing, automated testing, and code auditing",
           "correct": true
         },
         {
-          "answer": "Skipping testing to expedite the deployment process."
+          "answer": "Skipping testing to expedite the deployment process"
         }
       ]
     },
@@ -42,13 +42,13 @@
       "question": "Which three variables did we define with the 'let' keyword to use in our test suite?",
       "options": [
         {
-          "answer": "tokenTier, tierID, onlyOwner."
+          "answer": "tokenTier, tierID, onlyOwner"
         },
         {
-          "answer": "symbol, collection, provider."
+          "answer": "symbol, collection, provider"
         },
         {
-          "answer": "otherUser, contract, owner.",
+          "answer": "otherUser, contract, owner",
           "correct": true
         }
       ]
@@ -166,7 +166,7 @@
           "answer": "To decrease the number of transactions"
         },
         {
-          "answer": "To ensure the correctness and reliability of the smart contract's behavior.",
+          "answer": "To improve the correctness and reliability of all the smart contract's behavior",
           "correct": true
         },
         {
@@ -196,10 +196,11 @@
       "question": "Why is it essential to ensure that tests fail before they pass?",
       "options": [
         {
-          "answer": "To verify that the test environment is set up correctly."
+          "answer": "To verify that the test environment is configured correctly.",
+          "correct": true
         },
         {
-          "answer": "To identify potential bugs in the smart contract code.",
+          "answer": "To confirm that your contract is actually being interacted with.",
           "correct": true
         },
         {

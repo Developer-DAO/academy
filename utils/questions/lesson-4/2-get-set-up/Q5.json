@@ -5,14 +5,14 @@
       "answer": "Testing the mint() function, because if the network is down, we won't see the tokens on a marketplace"
     },
     {
-      "answer": "Testing constructor() because it inherits from another contract"
+      "answer": "Testing constructor(), because it inherits from another contract"
     },
     {
-      "answer": "Testing tokenURI() because the SVG file is in the contract and not in a separate .json file",
+      "answer": "Testing tokenURI(), because the SVG file is in the contract and not in a separate .json file",
       "correct": true
     },
     {
-      "answer": "Testing withdraw() because it involves more than one party for a transaction"
+      "answer": "Testing withdraw(), because it involves more than one party for a transaction"
     }
   ]
 }

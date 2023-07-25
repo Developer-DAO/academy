@@ -2,10 +2,7 @@
   "question": "Why is it essential to ensure that tests fail before they pass?",
   "options": [
     {
-      "answer": "To verify that the test environment is set up correctly."
-    },
-    {
-      "answer": "To identify potential bugs in the smart contract code.",
+      "answer": "To verify that the test environment is configured correctly.",
       "correct": true
     },
     {
@@ -15,7 +12,7 @@
       "answer": "To confirm that the contract owner can withdraw funds."
     },
     {
-      "answer": "To verify that the test is correctly checking the expected result.",
+      "answer": "To confirm that your contract is actually being interacted with.",
       "correct": true
     }
   ]
