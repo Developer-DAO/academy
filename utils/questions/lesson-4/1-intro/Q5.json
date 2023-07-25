@@ -1,0 +1,18 @@
+{
+  "question": "What do you imagine one of the first steps is in this lesson?",
+  "options": [
+    {
+      "answer": "To add your private key to the .gitignore file"
+    },
+    {
+      "answer": "To harmonise Solidity versions across the project",
+      "correct": true
+    },
+    {
+      "answer": "To make sure to add an extra line of code to the contract to signal to Hardhat that we can test it"
+    },
+    {
+      "answer": "To create a console.log line to the contract code so we can see the output of the tests"
+    }
+  ]
+}

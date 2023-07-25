@@ -1,0 +1,18 @@
+{
+  "question": "The '.provider.getBalance(contract.getAddress())).to.equal()' lines in the tests:",
+  "options": [
+    {
+      "answer": "verify the contract owner can provide an airdrop to an equal number of addresses."
+    },
+    {
+      "answer": "check the contract balance to be greater than zero."
+    },
+    {
+      "answer": "ensure the contract balance is updated correctly after a function call.",
+      "correct": true
+    },
+    {
+      "answer": "confirm that the contract has sufficient funds before proceeding with the test."
+    }
+  ]
+}

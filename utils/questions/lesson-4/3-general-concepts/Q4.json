@@ -1,0 +1,19 @@
+{
+  "question": "In the context of testing, which roles does 'describe' play?",
+  "options": [
+    {
+      "answer": "To create and define a new test case.",
+      "correct": true
+    },
+    {
+      "answer": "To organize and group related tests together based on functionalities or components.",
+      "correct": true
+    },
+    {
+      "answer": "To handle asynchronous operations in the test suite."
+    },
+    {
+      "answer": "To validate the correctness of the test results."
+    }
+  ]
+}

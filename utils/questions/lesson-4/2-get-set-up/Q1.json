@@ -1,0 +1,21 @@
+{
+  "question": "Which of the following can we achieve with automated testing?",
+  "options": [
+    {
+      "answer": "Prove code actually works"
+    },
+    {
+      "answer": "Help write more modular code"
+    },
+    {
+      "answer": "Ensure a fixed bug stays fixed"
+    },
+    {
+      "answer": "All of the above",
+      "correct": true
+    },
+    {
+      "answer": "Only a) and c)"
+    }
+  ]
+}

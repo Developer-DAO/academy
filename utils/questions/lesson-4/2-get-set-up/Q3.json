@@ -1,0 +1,18 @@
+{
+  "question": "What should be added to the scripts section of package.json to run tests using Hardhat?",
+  "options": [
+    {
+      "answer": "\"scripts\": { \"test\": \"hardhat test\" }"
+    },
+    {
+      "answer": "\"scripts\": { \"runTests\": \"hardhat test\" }"
+    },
+    {
+      "answer": " \"scripts\": { \"test\": \"hardhat test --network hardhat\" }",
+      "correct": true
+    },
+    {
+      "answer": "\"scripts\": { \"runTests\": \"hardhat test --network hardhat\" }"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "question": "What is the purpose of the 'require' statement in Solidity?",
+  "options": [
+    {
+      "answer": "For specifying the visibility of a variable or function."
+    },
+    {
+      "answer": "To be able to easily define a new modifier in the contract whenever we need it."
+    },
+    {
+      "answer": "For declaring a new function in the contract."
+    },
+    {
+      "answer": "To perform a conditional check, and revert the transaction if it fails.",
+      "correct": true
+    }
+  ]
+}

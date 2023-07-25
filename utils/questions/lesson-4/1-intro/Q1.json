@@ -1,0 +1,19 @@
+{
+  "question": "Choose the reasons for using automated tests:",
+  "options": [
+    {
+      "answer": "Warns of regressions if we upgrade code later",
+      "correct": true
+    },
+    {
+      "answer": "So we don’t have to use manual tests"
+    },
+    {
+      "answer": "Build confidence in each component of our code",
+      "correct": true
+    },
+    {
+      "answer": "All of the above"
+    }
+  ]
+}
