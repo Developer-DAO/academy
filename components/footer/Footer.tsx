@@ -5,11 +5,11 @@ import {
   Text,
   Link,
   useColorModeValue,
-  Image,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { FaTwitter, FaGithub } from 'react-icons/fa'
 import { SocialButton } from '@components/footer/SocialButton'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
