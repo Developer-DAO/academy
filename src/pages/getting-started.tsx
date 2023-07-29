@@ -122,41 +122,11 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
         else project.completed = false;
         return project;
       });
-      // setFormattedLessons({ ...result, projects: completedQuizzes });
-
-      console.log({ completedQuizzes });
 
       setFormattedLessons({ ...result, projects: completedQuizzes });
       setFetchNow(false);
     }
   }, [completedQuizzesAllData, fetchNow, lessons]);
-
-  // useMemo(() => {
-  //   // get the slug of each completedQuizzesAllData from name
-  //   if (!completedQuizzesAllIsLoading) {
-  //     const completedQuizzesSlugsResult =
-  //       completedQuizzesAllData?.map((quiz: any) =>
-  //         quiz.lesson.replace("quiz-lesson-", "")
-  //       ) || [];
-  //     setCompletedQuizzesSlugs(completedQuizzesSlugsResult);
-  //   }
-  // }, [completedQuizzesAllData, completedQuizzesAllIsLoading]);
-
-  // useMemo(() => {
-  //   if (formattedLessons?.projects.length && completedQuizzesSlugs.length > 0) {
-  //     const completedQuizzes = formattedLessons?.projects?.map(
-  //       (project: Project) => {
-  //         if (completedQuizzesSlugs.includes(project.slug))
-  //           project.completed = true;
-  //         else project.completed = false;
-  //         return project;
-  //       }
-  //     );
-  //     setFormattedLessons({ ...formattedLessons, projects: completedQuizzes });
-  //   }
-  // }, [completedQuizzesSlugs, formattedLessons]);
-
-  // console.log({ f: formattedLessons, completedQuizzesAllData });
 
   return (
     <Flex
