@@ -16,40 +16,147 @@ import {
   Link,
   Divider,
   Box,
+  Badge,
 } from "@chakra-ui/react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { CONTENT_PATH } from "@/lib/constants";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
+import { api } from "@/utils/api";
+import { useSession } from "next-auth/react";
 
-interface Lesson {
+export interface Lesson {
   frontMatter: any;
   slug: string;
   path: string;
+  completed?: boolean;
 }
-interface LessonProps {
+export interface Lessons {
   lessons: {
     frontMatter: any;
     slug: string;
   }[];
 }
 
-const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
-  const [formattedLessons, setFormattedLessons] = useState<LessonProps>({
-    lessons: [],
-  });
+export interface LessonProps {
+  projects: Project[];
+  fundamentals: Fundamental[];
+}
 
-  useEffect(() => {
-    const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
-      if (!acc[curr.path]) acc[curr.path] = [];
+export interface Fundamental {
+  path: Path;
+  frontMatter: FundamentalFrontMatter;
+  slug: string;
+}
 
-      acc[curr.path].push(curr);
-      return acc;
-    }, {});
+export interface FundamentalFrontMatter {
+  title: string;
+  description: string;
+  icons: string[];
+  authors?: string[];
+  i18n?: string;
+  author?: string[] | string;
+}
 
-    setFormattedLessons(result);
-  }, [lessons]);
+export enum Path {
+  Fundamentals = "fundamentals",
+}
+
+export interface Project {
+  path: string;
+  frontMatter: ProjectFrontMatter;
+  slug: string;
+  completed: boolean;
+}
+
+export interface ProjectFrontMatter {
+  title: string;
+  description: string;
+  icons: string[];
+  i18n?: string;
+  author?: string;
+}
+
+const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
+  const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
+  const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
+    []
+  );
+
+  const [fetchNow, setFetchNow] = useState<boolean>(true);
+  const { data: sessionData } = useSession();
+
+  // Requests
+  // - All
+  const {
+    data: completedQuizzesAllData,
+    isLoading: completedQuizzesAllIsLoading,
+    // refetch: completedQuizzesAllRefetch,
+  } = api.completedQuizzes.all.useQuery(
+    undefined, // no input
+    {
+      // Disable request if no session data
+      enabled: sessionData?.user !== undefined && fetchNow,
+      onSuccess: () => {
+        // setNewTodo(""); // reset input form
+      },
+    }
+  );
+
+  useMemo(() => {
+    if (completedQuizzesAllData?.length && fetchNow) {
+      const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
+        if (!acc[curr.path]) acc[curr.path] = [];
+
+        acc[curr.path].push(curr);
+        return acc;
+      }, {});
+
+      let completedQuizzes: Project[] = [];
+      const completedSlugs: string[] = completedQuizzesAllData?.map(
+        (quiz: any) => quiz.lesson.replace("quiz-lesson-", "") || []
+      );
+      completedQuizzes = result?.projects?.map((project: Project) => {
+        if (completedSlugs.includes(project.slug)) project.completed = true;
+        else project.completed = false;
+        return project;
+      });
+      // setFormattedLessons({ ...result, projects: completedQuizzes });
+
+      console.log({ completedQuizzes });
+
+      setFormattedLessons({ ...result, projects: completedQuizzes });
+      setFetchNow(false);
+    }
+  }, [completedQuizzesAllData, fetchNow, lessons]);
+
+  // useMemo(() => {
+  //   // get the slug of each completedQuizzesAllData from name
+  //   if (!completedQuizzesAllIsLoading) {
+  //     const completedQuizzesSlugsResult =
+  //       completedQuizzesAllData?.map((quiz: any) =>
+  //         quiz.lesson.replace("quiz-lesson-", "")
+  //       ) || [];
+  //     setCompletedQuizzesSlugs(completedQuizzesSlugsResult);
+  //   }
+  // }, [completedQuizzesAllData, completedQuizzesAllIsLoading]);
+
+  // useMemo(() => {
+  //   if (formattedLessons?.projects.length && completedQuizzesSlugs.length > 0) {
+  //     const completedQuizzes = formattedLessons?.projects?.map(
+  //       (project: Project) => {
+  //         if (completedQuizzesSlugs.includes(project.slug))
+  //           project.completed = true;
+  //         else project.completed = false;
+  //         return project;
+  //       }
+  //     );
+  //     setFormattedLessons({ ...formattedLessons, projects: completedQuizzes });
+  //   }
+  // }, [completedQuizzesSlugs, formattedLessons]);
+
+  // console.log({ f: formattedLessons, completedQuizzesAllData });
 
   return (
     <Flex
@@ -96,44 +203,65 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
         >
           Current Lessons
         </Heading>
-        {Object.entries(formattedLessons).map((track: any, idx: number) => {
-          return (
-            <UnorderedList
-              listStyleType="none"
-              textAlign="center"
-              as="div"
-              key={idx}
-            >
-              <Heading size="md" color="yellow.300">
-                {track[0].toUpperCase()}
-              </Heading>
-              <>
-                {track[1].map((lesson: Lesson, idx: number) => (
-                  <ListItem key={idx} my="2" py="2" maxW="40vw" margin="0 auto">
-                    <Link
-                      as={NextLink}
-                      href={`/lessons/${lesson.path}/${lesson.slug}`}
-                      passHref
-                    >
-                      <Button
-                        height="auto"
-                        style={{
-                          whiteSpace: "normal",
-                          wordWrap: "break-word",
-                          padding: "0.5rem",
-                          width: "100%",
-                          fontSize: "xl",
-                        }}
+        {formattedLessons
+          ? Object.entries(formattedLessons).map((track: any, idx: number) => {
+              return (
+                <UnorderedList
+                  listStyleType="none"
+                  textAlign="center"
+                  as="div"
+                  key={idx}
+                >
+                  <Heading size="md" color="yellow.300">
+                    {track[0].toUpperCase()}
+                  </Heading>
+                  <>
+                    {track[1].map((lesson: Lesson, idx: number) => (
+                      <ListItem
+                        key={idx}
+                        my="2"
+                        py="2"
+                        maxW="40vw"
+                        margin="0 auto"
                       >
-                        {lesson.frontMatter.title}
-                      </Button>
-                    </Link>
-                  </ListItem>
-                ))}
-              </>
-            </UnorderedList>
-          );
-        })}
+                        <Link
+                          as={NextLink}
+                          href={`/lessons/${lesson.path}/${lesson.slug}`}
+                          passHref
+                        >
+                          <Button
+                            height="auto"
+                            style={{
+                              whiteSpace: "normal",
+                              wordWrap: "break-word",
+                              padding: "0.5rem",
+                              width: "100%",
+                              fontSize: "xl",
+                            }}
+                          >
+                            {lesson.frontMatter.title}
+                            {lesson &&
+                            lesson.completed &&
+                            lesson.completed === true ? (
+                              <Badge
+                                ml="1"
+                                alignItems={"flex-end"}
+                                colorScheme="green"
+                                position="absolute"
+                                right={3}
+                              >
+                                Completed
+                              </Badge>
+                            ) : null}
+                          </Button>
+                        </Link>
+                      </ListItem>
+                    ))}
+                  </>
+                </UnorderedList>
+              );
+            })
+          : null}
         <Divider />
 
         <Heading apply="mdx.h3" as="h3" fontSize="2xl" textAlign="center" p={5}>
@@ -205,8 +333,6 @@ const GettingStarted: React.FC<LessonProps> = ({ lessons }) => {
   );
 };
 
-export default GettingStarted;
-
 export const getStaticProps = () => {
   const contentDir = path.join(CONTENT_PATH);
   const directories = fs.readdirSync(path.resolve(contentDir));
@@ -221,18 +347,30 @@ export const getStaticProps = () => {
           );
 
           const { data: frontMatter } = matter(markdownWithMeta);
-          lessons.push({
-            path: folder,
-            frontMatter,
-            slug: file.replace(".mdx", ""),
-          });
+          if (folder === "fundamentals") {
+            lessons.push({
+              path: folder,
+              frontMatter,
+              slug: file.replace(".mdx", ""),
+            });
+          } else {
+            lessons.push({
+              path: folder,
+              frontMatter,
+              slug: file.replace(".mdx", ""),
+              completed: false,
+            });
+          }
         }
       });
     }
   });
+
   return {
     props: {
       lessons,
     },
   };
 };
+
+export default GettingStarted;
