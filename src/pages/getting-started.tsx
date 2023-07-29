@@ -115,7 +115,11 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
 
       let completedQuizzes: Project[] = [];
       const completedSlugs: string[] = completedQuizzesAllData?.map(
-        (quiz: any) => quiz.lesson.replace("quiz-lesson-", "") || []
+        (quiz: any) =>
+          quiz.lesson
+            .replace("quiz-lesson-", "")
+            .replace("lesson-", "")
+            .replace("-quiz", "") || []
       );
       completedQuizzes = result?.projects?.map((project: Project) => {
         if (completedSlugs.includes(project.slug)) project.completed = true;
