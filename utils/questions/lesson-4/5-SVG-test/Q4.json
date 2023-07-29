@@ -1,0 +1,15 @@
+{
+  "question": "What could happen if tests were not run after refactoring the contract?",
+  "options": [
+    {
+      "answer": "The contract would consume more gas"
+    },
+    {
+      "answer": "Undetected bugs and issues could be introduced",
+      "correct": true
+    },
+    {
+      "answer": "The contract would be reverted to a previous state"
+    }
+  ]
+}

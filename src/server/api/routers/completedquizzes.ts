@@ -20,4 +20,16 @@ export const completedQuizzesRouter = createTRPCRouter({
         },
       });
     }),
+
+  /**
+   * All completed quizzes belonging to the session user
+   */
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const completedQuizzes = await ctx.prisma.completedQuizzes.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
+    });
+    return completedQuizzes;
+  }),
 });

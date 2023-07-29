@@ -1,0 +1,15 @@
+{
+  "question": "What's the benefit of using the 'beforeEach()' code in 'tier-nft.test.js'?",
+  "options": [
+    {
+      "answer": "To speed up the execution of individual tests."
+    },
+    {
+      "answer": "To combine multiple tests together for more concise code."
+    },
+    {
+      "answer": "To reuse contract deployment and setup code for all the tests.",
+      "correct": true
+    }
+  ]
+}
