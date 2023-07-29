@@ -1,0 +1,14 @@
+{
+  "question": "Syntax errors: is your final '})' syntax matching the opening 'describe('TierNFT', function () {' every time you add new tests?",
+  "options": [
+    {
+      "answer": "Yes"
+    },
+    {
+      "answer": "No? It's easy to run into syntax errors with the smallest things. We all do it. Take your time to read the error messages."
+    },
+    {
+      "answer": "There is no right or wrong option with this question.....it's just a gentle reminder :-)"
+    }
+  ]
+}

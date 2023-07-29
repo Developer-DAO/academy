@@ -1,0 +1,19 @@
+{
+  "question": "Why is it essential to ensure that tests fail before they pass?",
+  "options": [
+    {
+      "answer": "To verify that the test environment is configured correctly.",
+      "correct": true
+    },
+    {
+      "answer": "To make the process of writing tests faster and more efficient."
+    },
+    {
+      "answer": "To confirm that the contract owner can withdraw funds."
+    },
+    {
+      "answer": "To confirm that your contract is actually being interacted with.",
+      "correct": true
+    }
+  ]
+}

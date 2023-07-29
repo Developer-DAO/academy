@@ -1,0 +1,18 @@
+{
+  "question": "What is the purpose of 'await' in our tests?",
+  "options": [
+    {
+      "answer": "To pause the code execution until a condition is met."
+    },
+    {
+      "answer": "To handle exceptions and errors in asynchronous code."
+    },
+    {
+      "answer": "To run the code synchronously and improve performance."
+    },
+    {
+      "answer": "To allow an asynchronous operation to finish executing and get its result, before continuing.",
+      "correct": true
+    }
+  ]
+}

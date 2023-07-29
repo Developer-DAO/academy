@@ -1,0 +1,18 @@
+{
+  "question": "What happens if any of the functions in the contract are broken?",
+  "options": [
+    {
+      "answer": "The contract becomes useless and cannot be deployed."
+    },
+    {
+      "answer": "The contract may not be able to mint NFTs, render art correctly, or allow fund withdrawal.",
+      "correct": true
+    },
+    {
+      "answer": "The contract owner loses their ownership privileges."
+    },
+    {
+      "answer": "The contract gets automatically self-destructed."
+    }
+  ]
+}

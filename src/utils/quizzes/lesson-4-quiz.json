@@ -1,0 +1,215 @@
+{
+  "title": "Quiz: Lesson 4",
+  "questions": [
+    {
+      "question": "Choose those which automated testing of smart contracts can help achieve?",
+      "options": [
+        {
+          "answer": "Faster deployment process"
+        },
+        {
+          "answer": "Finding every possible bug and vulnerability"
+        },
+        {
+          "answer": "Improving the overall code quality",
+          "correct": true
+        },
+        {
+          "answer": "Ensuring the smart contract is free of errors",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Which testing approach is recommended for ensuring a secure smart contract?",
+      "options": [
+        {
+          "answer": "Only manual testing with thorough code review"
+        },
+        {
+          "answer": "Automated testing using unit tests exclusively"
+        },
+        {
+          "answer": "A combination of manual testing, automated testing, and code auditing",
+          "correct": true
+        },
+        {
+          "answer": "Skipping testing to expedite the deployment process"
+        }
+      ]
+    },
+    {
+      "question": "Which three variables did we define with the 'let' keyword to use in our test suite?",
+      "options": [
+        {
+          "answer": "tokenTier, tierID, onlyOwner"
+        },
+        {
+          "answer": "symbol, collection, provider"
+        },
+        {
+          "answer": "otherUser, contract, owner",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "During testing, which role does the 'beforeEach' function serve in the test suite?",
+      "options": [
+        {
+          "answer": "It deploys a new instance of the contract before executing each test case."
+        },
+        {
+          "answer": "It sets up the testing environment, and initializes contract variables once before all test cases.",
+          "correct": true
+        },
+        {
+          "answer": "It performs cleanup tasks after each test case is executed."
+        },
+        {
+          "answer": "It executes the contract's constructor function before running any tests."
+        }
+      ]
+    },
+    {
+      "question": "In the context of our testing, what role does 'describe' play?",
+      "options": [
+        {
+          "answer": "It describes the purpose of the smart contract."
+        },
+        {
+          "answer": "It organises and groups related tests together.",
+          "correct": true
+        },
+        {
+          "answer": "It handles asynchronous operations in the test suite."
+        }
+      ]
+    },
+    {
+      "question": "The role of the 'it' function in a test suite is to:",
+      "options": [
+        {
+          "answer": "organise and group related tests together."
+        },
+        {
+          "answer": "irritate the knights formerly known as The Knights of Ni"
+        },
+        {
+          "answer": "define an individual test case or scenario.",
+          "correct": true
+        },
+        {
+          "answer": "handle asynchronous operations in the test suite."
+        }
+      ]
+    },
+    {
+      "question": "How is 'expect' used to verify test results?",
+      "options": [
+        {
+          "answer": "It waits for the test cases for the entire suite of tests."
+        },
+        {
+          "answer": "It groups multiple tests together under one description."
+        },
+        {
+          "answer": "It waits for an asynchronous call to complete, and returns the result."
+        },
+        {
+          "answer": "It compares the actual result with the anticipated outcome to check if they match.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In the 'withdraw()' tests, what do the 'await contract.mint()' calls before each test ensure?",
+      "options": [
+        {
+          "answer": "The contract owner's wallet balance is increased.",
+          "correct": true
+        },
+        {
+          "answer": "The 'withdraw()' function can be executed successfully."
+        },
+        {
+          "answer": "The contract has enough Ether to allow withdrawal."
+        },
+        {
+          "answer": "The contract has at least one minted TierNFT.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is the purpose of refactoring the original 'tokenURI()' method into helper functions?",
+      "options": [
+        {
+          "answer": "To optimize contract performance."
+        },
+        {
+          "answer": "To maintain backward compatibility."
+        },
+        {
+          "answer": "To make the tokenURI() method more testable and maintainable.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Why is it beneficial to have tests for the helper functions?",
+      "options": [
+        {
+          "answer": "To receive gas refunds"
+        },
+        {
+          "answer": "To decrease the number of transactions"
+        },
+        {
+          "answer": "To improve the correctness and reliability of all the smart contract's behavior",
+          "correct": true
+        },
+        {
+          "answer": "To optimize the contract deployment process"
+        }
+      ]
+    },
+    {
+      "question": "Why is it essential to test the original 'tokenURI()' method before and after refactoring?",
+      "options": [
+        {
+          "answer": "To verify that the helper functions are working correctly"
+        },
+        {
+          "answer": "To ensure that the refactoring did not introduce bugs or alter functionality",
+          "correct": true
+        },
+        {
+          "answer": "To test cross-browser compatibility"
+        },
+        {
+          "answer": "To measure performance improvements"
+        }
+      ]
+    },
+    {
+      "question": "Why is it essential to ensure that tests fail before they pass?",
+      "options": [
+        {
+          "answer": "To verify that the test environment is configured correctly.",
+          "correct": true
+        },
+        {
+          "answer": "To confirm that your contract is actually being interacted with.",
+          "correct": true
+        },
+        {
+          "answer": "To make the process of writing tests faster and more efficient."
+        },
+        {
+          "answer": "To confirm that the contract owner can withdraw funds."
+        }
+      ]
+    }
+  ]
+}
