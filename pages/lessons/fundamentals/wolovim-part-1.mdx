@@ -15,6 +15,15 @@ icons:
 
 So, you’ve heard about this [Ethereum](https://ethereum.org/) thing and are ready to venture down the rabbit hole? This post will quickly cover some blockchain basics, then get you interacting with a simulated Ethereum node – reading block data, checking account balances, and sending transactions. Along the way, we’ll highlight the differences between traditional ways of building apps and this new decentralized paradigm.
 
+<SideDrawer buttonText="Warm-up Questions" title="TODO">
+      <Question question="eth-intro-1/1-intro/Q1" />
+      <Question question="eth-intro-1/1-intro/Q2" />
+      <Question question="eth-intro-1/1-intro/Q3" />
+      <Question question="eth-intro-1/1-intro/Q4" />
+      <Question question="eth-intro-1/1-intro/Q5" />
+</SideDrawer> 
+<br/>
+
 ### **(Soft) prerequisites**
 
 This post aspires to be accessible to a wide range of developers. Python tools will be involved, but they are just a vehicle for the ideas – no problem if you are not a Python developer. I will, however, be making just a few assumptions about what you already know, so we can quickly move on the Ethereum-specific bits.
@@ -30,7 +39,7 @@ Again, if any of these are untrue, or you don’t plan to reproduce the code in 
 
 ### **Blockchains, briefly**
 
-There are many ways to describe Ethereum, but at its heart is a blockchain. Blockchains are made up of a series of blocks, so let’s start there. In the simplest terms, each block on the Ethereum blockchain is just some metadata and a list of transactions. In JSON format, that looks something like this:
+There are many ways to describe Ethereum, but at its heart is a blockchain. Blockchains are made up of a series of blocks, so let’s start there. In the simplest terms, each block on the Ethereum blockchain is some metadata and a list of transactions. In JSON format, that looks something like this:
 
 ```python
 {
@@ -83,6 +92,15 @@ w3.eth.get_block('latest')
 w3.eth.send_transaction({'from': ..., 'to': ..., 'value': ...})
 ```
 
+<SideDrawer buttonText="Check-in 1" title="TODO">
+      <Question question="eth-intro-1/1-intro/Q1" />
+      <Question question="eth-intro-1/1-intro/Q2" />
+      <Question question="eth-intro-1/1-intro/Q3" />
+      <Question question="eth-intro-1/1-intro/Q4" />
+      <Question question="eth-intro-1/1-intro/Q5" />
+</SideDrawer> 
+<br/>
+
 ### **Installation**
 
 In this walkthrough, we’ll just be working within a Python interpreter. We won't be creating any directories, files, classes or functions.
@@ -125,7 +143,7 @@ This will print out some information about the versions of Python and IPython yo
 In [1]:
 ```
 
-You’re looking at an interactive Python shell now. Essentially, its a sandbox to play in. If you’ve made it this far, its time to import Web.py:
+You’re looking at an interactive Python shell now. Essentially, its a sandbox to play in. If you’ve made it this far, its time to import web3.py:
 
 ```python
 In [1]: from web3 import Web3
@@ -179,6 +197,17 @@ That simulated node is called [**eth-tester**](https://github.com/ethereum/eth-
 ```python
 In [4]: w3 = Web3(Web3.EthereumTesterProvider())
 ```
+
+Before we move on, does all that make sense? Test yourself:
+
+<SideDrawer buttonText="Check-in 2" title="TODO">
+      <Question question="eth-intro-1/1-intro/Q1" />
+      <Question question="eth-intro-1/1-intro/Q2" />
+      <Question question="eth-intro-1/1-intro/Q3" />
+      <Question question="eth-intro-1/1-intro/Q4" />
+      <Question question="eth-intro-1/1-intro/Q5" />
+</SideDrawer> 
+<br/>
 
 Now you’re ready to surf the chain! That’s not a thing people say. I just made that up. Let’s take a quick tour.
 
@@ -293,6 +322,8 @@ The latter looks good! The balance went from 1,000,000 to 1,000,003 ether. But w
 <Callout emoji='💡' size='md' variant='info'>
 **Note**: On the public network, transaction fees are variable based on network demand and how quickly you'd like a transaction to be processed.
 </Callout>
+
+<Quiz quiz="eth-intro-1-quiz" />
 
 ### **And breathe**
 
