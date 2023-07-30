@@ -16,33 +16,62 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 <LessonHeader title="Lesson 5: Connecting to a Frontend" />
 
-If you've been through the previous lessons we learnt how to write smart contracts, 
-use token standards, and test driven development, as well. But to create a full stack 
-decentralised application, we also need a frontend for users to interact with. 
-In this lesson that is exactly what we're going to create.
+## About this lesson
 
-We shall use:
-- [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
+Welcome to this final tutorial in a series on smart contract development of the ERC721 standard, a.k.a. NFTs. Throughout the previous lessons we learnt how to write smart contracts, use token standards, and utilise test driven development as well. But to create a full stack decentralised application, we also need a UI, or frontend for users to interact with. In this lesson that is exactly what we're going to create.
+
+You can expect our familiar checkpoint questions throughout the tutorial for testing your previous knowledge, how well you’re picking up the new material, and even some on predicting upcoming steps in the lesson. They all help with critical thinking and active engagement. You'll find the updated code in side-drawers too as you progress, handy for identifying any pesky syntax errors you might come across. And of course, there is a final quiz waiting for you on completion. 
+
+Expect somewhere from one to six hours to complete the lesson, depending on your prior experience and the need to grasp new concepts. To help you maintain a steady pace and encourage breaks for rejuvenation, you'll find our pomodoro timer ⌛ in the menu header. It'll remind you to "go touch grass" and appreciate nature's role in enhancing our well-being. 🌱 Relish your journey in development in a good state of mind and body.
+
+## What are we building
+
+In the first in this track of tutorials, you created a basic smart contract using Remix, you then shifted to a dedicated developer's environment and created and deployed an NFT contract to an actual test network. In lesson 3 you added tiers to your NFTs and finally learnt to make your contracts airtight using tests in lesson 4. Now we're going use all of this knowledge and connect it to a frontend for users to see and interact with.
+
+
+
+We'll create a basic **NFT minting application** that displays the three tiers of NFTs
+created in our smart contract and gives users a one-click option to mint them. Once minted, users will be redirected to a page that displays information of their mint. We'll need some extra magic to make that all happen. For handling wallet connections to our application, we'll be introducing you to *RainbowKit*. And using the provided *hooks* from *WAGMI*, we can check the connection to the wallet and call functions from our smart contract through the frontend. *RainbowKit* and *WAGMI* are just another couple of shining examples of open source public goods. We love open source at *Developer_DAO*. Public goods are goood!
+
+
+{/* - [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
 wallet management (i.e. Handling wallet connections to our application).
 - [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
-functions from our smart contract through the frontend using the provided *hooks*.
+functions from our smart contract through the frontend using the provided *hooks*. */}
 
-and create a basic **NFT minting application** that displays the three tiers of NFTs
-created in our smart contract and gives users a one-click option to mint them. Once
-minted, users will be redirected to a page that displays information of their mint.
+
+{/* the following are headers from previous 4 lessons */}
+{/* ## What are we going to do?
+**By the end of this lesson we'll have learned a lot.**
+### Lesson breakdown
+### Quick breakdown of lesson steps */}
+## Lesson steps
+-
+-
+-
+-
+-
+
+
+<br/><br/>
+{/* **lesson 1 has no separate header. 'Tooling' incoorporated in breakdown**
+**To achieve this, we'll need diverse developer tools.**
+### Developer tooling
+### Developer tools and libraries we'll be using */}
+## Tools to get the job done
+- [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library for out-of-the-box 
+wallet management
+- [WAGMI](https://wagmi.sh/) is a collection of React hooks that allow us to work effectively with Ethereum
+-
+-
+-
 
 Let's dive in!
-<br/>
+<br/><br/>
 
 ---
 
 ## Getting started
-
-In the past, you've created a smart contract using Remix, you've shifted 
-to a dedicated code editor environment and deployed to an actual test network. 
-In lesson 3 you added tiers to your NFTs and finally learnt to make your contracts 
-airtight using tests in lesson 4. Now we're going use all of this knowledge and 
-connect it to a frontend for users to see and interact with.
 
 We're going to start where we left off in lesson 4. Open your code editor and 
 `cd` into the **`TierNFT`** project directory. 
