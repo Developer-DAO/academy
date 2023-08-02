@@ -26,12 +26,12 @@ Expect somewhere from one to six hours to complete the lesson, depending on your
 
 ## What are we building
 
-In the first in this track of tutorials, you created a basic smart contract using Remix, you then shifted to a dedicated developer's environment and created and deployed an NFT contract to an actual test network. In lesson 3 you added tiers to your NFTs and finally learnt to make your contracts airtight using tests in lesson 4. Now we're going use all of this knowledge and connect it to a frontend for users to see and interact with.
+In the first in this track of tutorials, you created a basic smart contract using Remix. Then your shift to a dedicated developer's environment to create and deploy an NFT contract to an actual test network. In lesson 3 you added tiers to your NFTs. And you finally learnt to make your contracts airtight by building your own automated tests in the fourth in the series. Now we're going use all of this knowledge and connect it to a frontend for users to see and interact with.
 
 
 
 We'll create a basic **NFT minting application** that displays the three tiers of NFTs
-created in our smart contract and gives users a one-click option to mint them. Once minted, users will be redirected to a page that displays information of their mint. We'll need some extra magic to make that all happen. For handling wallet connections to our application, we'll be introducing you to *RainbowKit*. And using the provided *hooks* from *WAGMI*, we can check the connection to the wallet and call functions from our smart contract through the frontend. *RainbowKit* and *WAGMI* are just another couple of shining examples of open source public goods. We love open source at *Developer_DAO*. Public goods are goood!
+created in our smart contract and gives users a one-click option to mint them. Once minted, users will be redirected to a page that displays information of their mint. We'll need some extra magic to make that all happen. For handling wallet connections to our application, we'll be introducing you to *RainbowKit*. And using the provided *hooks* from *WAGMI*, we can check the connection to the wallet and call functions from our smart contract through the frontend. *RainbowKit* and *WAGMI* are just another couple of shining examples of open source public goods. We love open source at *Developer_DAO*. And public goods are gooood!
 
 
 {/* - [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
@@ -46,11 +46,13 @@ functions from our smart contract through the frontend using the provided *hooks
 ### Lesson breakdown
 ### Quick breakdown of lesson steps */}
 ## Lesson steps
--
--
--
--
--
+- Set up our development environment with TierNFT project
+- initialise a nextJS app 
+- Install RainbowKit, WAGMI and Ethers to create main application
+  - import dependencies
+- Create an Index page as main entry point for displaying the app content.
+- Create NFT cards
+- Enable minting of NFTs in the application.
 
 
 <br/><br/>
@@ -59,12 +61,15 @@ functions from our smart contract through the frontend using the provided *hooks
 ### Developer tooling
 ### Developer tools and libraries we'll be using */}
 ## Tools to get the job done
+- [nextJS](https://nextjs.org/) - a React framework for building a full-stack app
 - [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library for out-of-the-box 
 wallet management
-- [WAGMI](https://wagmi.sh/) is a collection of React hooks that allow us to work effectively with Ethereum
+- [ethers](https://docs.ethers.org/v6/) is a compact JavaScript library for interacting with the Ethereum eco-system
+- [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to work effectively with Ethereum
+- [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app connect to the blockchain
 -
 -
--
+**always make sure you access up-to-date release notes and documentation*
 
 Let's dive in!
 <br/><br/>
@@ -73,33 +78,62 @@ Let's dive in!
 
 ## Getting started
 
-We're going to start where we left off in lesson 4. Open your code editor and 
-`cd` into the **`TierNFT`** project directory. 
+We're going to start where we left off in *Write Automated Tests for your TierNFT*. 
 
-For all things related to our frontend we are going to create a new sub-directory
-within our project's root directory to maintain good practice, keep our code clean, 
-and easy to locate and read.
-
-The first step is to initiate a [nextJS](https://nextjs.org/) application inside the 
-project's root directory by running the following command.
+Open your code editor and `cd` into the **`TierNFT`** project directory. For all things related to our frontend we are going to create a new sub-directory within our project's root directory to maintain good practice, keep our code clean, and be easy to locate and read. The first step is to initiate a *nextJS* application.
 
 <Callout emoji="💡">
-  Make sure you are in your root directory before running the command.
+  Make sure you are in your project's root directory before continuing.
 </Callout>
 
-The command creates a sub-directory named `frontend` inside our root directory
+The next command creates a sub-directory named `frontend` inside our root directory
 and sets up all the necessary files and folders within it. The `create-next-app` command
-uses the `yarn` package manager by default. *But be careful...*
+uses the `yarn` package manager by default. **So be careful and choose your command accordingly**.  We have been using `npm` as our package manager for all our previous builds, so we'll choose the `--use-npm` flags:
 
-There is a chance that a different package manager has been used for your previous project 
-set up, so check that out and choose your command accordingly:
 
 ```bash
-# default for yarn 
-npx create-next-app frontend
-
-# possible alternative for npm
+# choose the following for npm
 npx create-next-app frontend --use-npm
+
+# careful, this is the default for yarn 
+npx create-next-app frontend
+```
+{/* I'm assuming the following default steps are correct: */}
+Choose 'No' to all the options to create a default JavaScript project:
+
+```bash
+paul@pcpiablo:~/D_D/d_d_academy/tierNFT$ npx create-next-app frontend --use-npm
+Need to install the following packages:
+  create-next-app@13.4.12
+Ok to proceed? (y) y
+✔ Would you like to use TypeScript? … No / Yes
+✔ Would you like to use ESLint? … No / Yes
+✔ Would you like to use Tailwind CSS? … No / Yes
+✔ Would you like to use `src/` directory? … No / Yes
+✔ Would you like to use App Router? (recommended) … No / Yes
+✔ Would you like to customize the default import alias? … No / Yes
+Creating a new Next.js app in /home/paul/D_D/d_d_academy/tierNFT/frontend.
+
+Using npm.
+
+Initializing project with template: default 
+
+
+Installing dependencies:
+- react
+- react-dom
+- next
+
+
+added 24 packages, and audited 25 packages in 12s
+
+4 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+Initialized a git repository.
+
+Success! Created frontend at /home/paul/D_D/d_d_academy/tierNFT/frontend
 ```
 
 Once the setup is complete, we open the `frontend` directory and get cracking.
@@ -114,27 +148,25 @@ cd frontend
 ## The Frontend
 
 For users to easily interact with our smart contract and mint the NFTs we must
-provide an interface. A simple process that is easily accessible.
-
-Let's start by creating a way to handle wallet connections.
+provide an interface. A simple process that is easily accessible. Let's start by creating a way to handle wallet connections.
 
 ### The Main Application
-
+{/*I don't think we need all these links all through the lesson*/}
 We will use [RainbowKit](https://www.rainbowkit.com/docs/introduction) for handling
 the wallet connections. It provides us the ability to handle wallet connections, 
 support for numerous wallets and a customisable `ConnectButton` out-of-the-box among 
-other features. It relies on the [WAGMI](https://wagmi.sh/) and [ethers](https://docs.ethers.io/v5/)
+other features. It relies on the [WAGMI](https://wagmi.sh/) and [ethers](https://docs.ethers.org/v6/)
 libraries for interoperability between various chains and wallet providers and 
 thus needs some configurations.
 
 But first we need to install the necessary dependencies.
 
 ```bash
-yarn add @rainbow-me/rainbowkit wagmi ethers
-
-# or 
-
 npm install @rainbow-me/rainbowkit wagmi ethers
+
+# or if you have chosen to use yarn:
+
+yarn add @rainbow-me/rainbowkit wagmi ethers
 ```
 
 To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
@@ -185,6 +217,7 @@ of our choice along with some other customisations.
 for the providers we will be using. In our app we are using an `alchemyProvider` along
 with a fall back `publicProvider`. A provider allows our application to communicate with 
 a blockchain.
+{/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. */}
 - `useEffect` and `useState` are react hooks that help us perform side effects and
 capture the state, respectively. More on [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/) 
 and the [useEffect](https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/) hook.
@@ -226,6 +259,7 @@ be added simply using the following syntax: `chain.chain_name`.
 For custom providers, like the `alchemyProvider` we can pass in our private
 `apiKey` as well. 
 
+{/* Only the API key? Or the whole URL?: */}
 Set your API Key in a new file named `.env` inside our `frontend` directory 
 as follows:
 
