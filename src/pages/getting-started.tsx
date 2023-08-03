@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import NextLink from "next/link";
+import NextLink from 'next/link'
 import {
   Heading,
   Flex,
@@ -17,79 +17,78 @@ import {
   Divider,
   Box,
   Badge,
-} from "@chakra-ui/react";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { CONTENT_PATH } from "@/lib/constants";
-import { useMemo, useState } from "react";
-import { api } from "@/utils/api";
-import { useSession } from "next-auth/react";
+} from '@chakra-ui/react'
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { CONTENT_PATH } from '@/lib/constants'
+import { useMemo, useState } from 'react'
+import { api } from '@/utils/api'
+import { useSession } from 'next-auth/react'
 
 export interface Lesson {
-  frontMatter: any;
-  slug: string;
-  path: string;
-  completed?: boolean;
+  frontMatter: any
+  slug: string
+  path: string
+  completed?: boolean
 }
 export interface Lessons {
   lessons: {
-    frontMatter: any;
-    slug: string;
-  }[];
+    frontMatter: any
+    slug: string
+  }[]
 }
 
 export interface LessonProps {
-  projects: Project[];
-  fundamentals: Fundamental[];
+  projects: Project[]
+  fundamentals: Fundamental[]
 }
 
 export interface Fundamental {
-  path: Path;
-  frontMatter: FundamentalFrontMatter;
-  slug: string;
+  path: Path
+  frontMatter: FundamentalFrontMatter
+  slug: string
 }
 
 export interface FundamentalFrontMatter {
-  title: string;
-  description: string;
-  icons: string[];
-  authors?: string[];
-  i18n?: string;
-  author?: string[] | string;
+  title: string
+  description: string
+  icons: string[]
+  authors?: string[]
+  i18n?: string
+  author?: string[] | string
 }
 
 export enum Path {
-  Fundamentals = "fundamentals",
+  Fundamentals = 'fundamentals',
 }
 
 export interface Project {
-  path: string;
-  frontMatter: ProjectFrontMatter;
-  slug: string;
-  completed: boolean;
+  path: string
+  frontMatter: ProjectFrontMatter
+  slug: string
+  completed: boolean
 }
 
 export interface ProjectFrontMatter {
-  title: string;
-  description: string;
-  icons: string[];
-  i18n?: string;
-  author?: string;
+  title: string
+  description: string
+  icons: string[]
+  i18n?: string
+  author?: string
 }
 
 const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
-  const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
+  const [formattedLessons, setFormattedLessons] = useState<LessonProps>()
 
-  const [fetchNow, setFetchNow] = useState<boolean>(true);
-  const { data: sessionData } = useSession();
+  const [fetchNow, setFetchNow] = useState<boolean>(true)
+  const { data: sessionData } = useSession()
 
   // Requests
   // - All
   const {
     data: completedQuizzesAllData,
-    isLoading: completedQuizzesAllIsLoading,
-    // refetch: completedQuizzesAllRefetch,
+    // isLoading: completedQuizzesAllIsLoading,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
@@ -98,36 +97,36 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
       onSuccess: () => {
         // setNewTodo(""); // reset input form
       },
-    }
-  );
+    },
+  )
 
   useMemo(() => {
     if (completedQuizzesAllData?.length && fetchNow) {
       const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
-        if (!acc[curr.path]) acc[curr.path] = [];
+        if (!acc[curr.path]) acc[curr.path] = []
 
-        acc[curr.path].push(curr);
-        return acc;
-      }, {});
+        acc[curr.path].push(curr)
+        return acc
+      }, {})
 
-      let completedQuizzes: Project[] = [];
+      let completedQuizzes: Project[] = []
       const completedSlugs: string[] = completedQuizzesAllData?.map(
         (quiz: any) =>
           quiz.lesson
-            .replace("quiz-lesson-", "")
-            .replace("lesson-", "")
-            .replace("-quiz", "") || []
-      );
+            .replace('quiz-lesson-', '')
+            .replace('lesson-', '')
+            .replace('-quiz', '') || [],
+      )
       completedQuizzes = result?.projects?.map((project: Project) => {
-        if (completedSlugs.includes(project.slug)) project.completed = true;
-        else project.completed = false;
-        return project;
-      });
+        if (completedSlugs.includes(project.slug)) project.completed = true
+        else project.completed = false
+        return project
+      })
 
-      setFormattedLessons({ ...result, projects: completedQuizzes });
-      setFetchNow(false);
+      setFormattedLessons({ ...result, projects: completedQuizzes })
+      setFetchNow(false)
     }
-  }, [completedQuizzesAllData, fetchNow, lessons]);
+  }, [completedQuizzesAllData, fetchNow, lessons])
 
   return (
     <Flex
@@ -157,10 +156,10 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
           created by the Developer DAO.
         </Text>
         <Text apply="mdx.p" as="p" fontSize="xl" textAlign="center">
-          We seek to{" "}
+          We seek to{' '}
           <Text fontWeight="bold" as="strong" color="#F96C9D">
             empower learners
-          </Text>{" "}
+          </Text>{' '}
           with knowledge and tools that can be applied to real-world projects
           while promoting a healthy learning environment.
         </Text>
@@ -203,11 +202,11 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
                           <Button
                             height="auto"
                             style={{
-                              whiteSpace: "normal",
-                              wordWrap: "break-word",
-                              padding: "0.5rem",
-                              width: "100%",
-                              fontSize: "xl",
+                              whiteSpace: 'normal',
+                              wordWrap: 'break-word',
+                              padding: '0.5rem',
+                              width: '100%',
+                              fontSize: 'xl',
                             }}
                           >
                             {lesson.frontMatter.title}
@@ -216,7 +215,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
                             lesson.completed === true ? (
                               <Badge
                                 ml="1"
-                                alignItems={"flex-end"}
+                                alignItems={'flex-end'}
                                 colorScheme="green"
                                 position="absolute"
                                 right={3}
@@ -230,7 +229,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
                     ))}
                   </>
                 </UnorderedList>
-              );
+              )
             })
           : null}
         <Divider />
@@ -242,15 +241,15 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
         <Text apply="mdx.div" as="div" fontSize="xl" textAlign="center">
           <UnorderedList listStyleType="none">
             <ListItem>
-              We&apos;re looking for{" "}
+              We&apos;re looking for{' '}
               <Text fontWeight="bold" as="strong" color="#F96C9D">
                 feedback
-              </Text>{" "}
-              about this project and our current lessons.{" "}
+              </Text>{' '}
+              about this project and our current lessons.{' '}
               <Link
                 as={NextLink}
                 href={
-                  "https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title="
+                  'https://github.com/Developer-DAO/academy/issues/new?assignees=&labels=needs+triage%2C+bug&template=bug_report.md&title='
                 }
                 passHref
                 isExternal
@@ -260,16 +259,16 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
               </Link>
             </ListItem>
             <ListItem>
-              We&apos;re also looking for{" "}
+              We&apos;re also looking for{' '}
               <Text fontWeight="bold" as="strong" color="#F96C9D">
                 Developer DAO members
-              </Text>{" "}
+              </Text>{' '}
               who are interested in writing lesson content, or building website
               and blockchain features. The team can be found in the Developer
-              DAO Discord{" "}
+              DAO Discord{' '}
               <Text fontWeight="bold" as="strong">
                 #d_d-academy
-              </Text>{" "}
+              </Text>{' '}
               channel.
             </ListItem>
           </UnorderedList>
@@ -301,47 +300,47 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
         </Box>
       </Stack>
     </Flex>
-  );
-};
+  )
+}
 
 export const getStaticProps = () => {
-  const contentDir = path.join(CONTENT_PATH);
-  const directories = fs.readdirSync(path.resolve(contentDir));
-  const lessons: object[] = [];
+  const contentDir = path.join(CONTENT_PATH)
+  const directories = fs.readdirSync(path.resolve(contentDir))
+  const lessons: object[] = []
   directories.reverse().map((folder) => {
     if (fs.lstatSync(path.join(contentDir, folder)).isDirectory()) {
       fs.readdirSync(path.join(contentDir, folder)).map((file) => {
         if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
           const markdownWithMeta = fs.readFileSync(
             path.join(contentDir, folder, file),
-            "utf-8"
-          );
+            'utf-8',
+          )
 
-          const { data: frontMatter } = matter(markdownWithMeta);
-          if (folder === "fundamentals") {
+          const { data: frontMatter } = matter(markdownWithMeta)
+          if (folder === 'fundamentals') {
             lessons.push({
               path: folder,
               frontMatter,
-              slug: file.replace(".mdx", ""),
-            });
+              slug: file.replace('.mdx', ''),
+            })
           } else {
             lessons.push({
               path: folder,
               frontMatter,
-              slug: file.replace(".mdx", ""),
+              slug: file.replace('.mdx', ''),
               completed: false,
-            });
+            })
           }
         }
-      });
+      })
     }
-  });
+  })
 
   return {
     props: {
       lessons,
     },
-  };
-};
+  }
+}
 
-export default GettingStarted;
+export default GettingStarted

@@ -1,19 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Box, Code, Heading, Image, Text } from "@chakra-ui/react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import dracula from "react-syntax-highlighter/dist/cjs/styles/prism/dracula";
-import { CopyToClipboard } from "@/components/CopyToClipboard";
-import SideDrawer from "@/components/mdx/SideDrawer";
-import Quiz from "@/components/mdx/Quiz";
-import Question from "@/components/mdx/Question";
-import Callout from "@/components/mdx/Callout";
-import QuizStatusChecker from "./QuizStatusChecker";
+import { Box, Code, Heading, Image, Text } from '@chakra-ui/react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import dracula from 'react-syntax-highlighter/dist/cjs/styles/prism/dracula'
+import { CopyToClipboard } from '@/components/CopyToClipboard'
+import SideDrawer from '@/components/mdx/SideDrawer'
+import Quiz from '@/components/mdx/Quiz'
+import Question from '@/components/mdx/Question'
+import Callout from '@/components/mdx/Callout'
+import QuizStatusChecker from './QuizStatusChecker'
 
 const Components = {
   code: (props: any) => {
     const [, language] =
-      (props.className as string)?.match(/language-(\w+)/) ?? [];
+      (props.className as string)?.match(/language-(\w+)/) ?? []
 
     if (language) {
       return (
@@ -21,10 +22,10 @@ const Components = {
           <SyntaxHighlighter language={language} {...props} style={dracula} />
           <CopyToClipboard {...props} />
         </Box>
-      );
+      )
     }
 
-    return <Code fontSize="md" wordBreak="break-all" {...props} />;
+    return <Code fontSize="md" wordBreak="break-all" {...props} />
   },
   h1: (props: any) => (
     <Heading as="h1" apply="mdx.h1" fontSize="4xl" {...props} />
@@ -49,6 +50,6 @@ const Components = {
   Quiz,
   QuizStatusChecker,
   Question,
-};
+}
 
-export default Components;
+export default Components
