@@ -54,6 +54,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.43.0",
     "eslint-config-next": "^13.4.7",
+    "eslint-plugin-mdx": "^2.1.0",
     "gray-matter": "^4.0.3",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
