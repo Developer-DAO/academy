@@ -80,9 +80,6 @@ export interface ProjectFrontMatter {
 
 const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
-  const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
-    []
-  );
 
   const [fetchNow, setFetchNow] = useState<boolean>(true);
   const { data: sessionData } = useSession();

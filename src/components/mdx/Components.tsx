@@ -8,6 +8,7 @@ import SideDrawer from "@/components/mdx/SideDrawer";
 import Quiz from "@/components/mdx/Quiz";
 import Question from "@/components/mdx/Question";
 import Callout from "@/components/mdx/Callout";
+import QuizStatusChecker from "./QuizStatusChecker";
 
 const Components = {
   code: (props: any) => {
@@ -46,6 +47,7 @@ const Components = {
   SideDrawer,
   Callout,
   Quiz,
+  QuizStatusChecker,
   Question,
 };
 
