@@ -26,7 +26,7 @@ const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined }
+    { enabled: sessionData?.user !== undefined },
   );
   // State
   const [showConnection, setShowConnection] = useState(false);

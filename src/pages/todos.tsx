@@ -30,7 +30,7 @@ const Todos: NextPage = () => {
       onSuccess: () => {
         setNewTodo(""); // reset input form
       },
-    }
+    },
   );
   // - Add
   const { mutate: todosAddMutate, isLoading: todosAddIsLoading } =

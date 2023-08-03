@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { CopyIcon } from '@chakra-ui/icons'
-import { Box, Button } from '@chakra-ui/react'
+import { CopyIcon } from "@chakra-ui/icons";
+import { Box, Button } from "@chakra-ui/react";
 
 type Props = {
-  children: string
-}
+  children: string;
+};
 
 export const CopyToClipboard = ({ children }: Props) => {
   return (
@@ -22,5 +22,5 @@ export const CopyToClipboard = ({ children }: Props) => {
         <CopyIcon />
       </Button>
     </Box>
-  )
-}
+  );
+};

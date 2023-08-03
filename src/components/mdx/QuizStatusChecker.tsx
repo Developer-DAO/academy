@@ -24,7 +24,7 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
     {
       // Disable request if no session data
       enabled: sessionData?.user !== undefined && fetchNow,
-    }
+    },
   );
 
   useMemo(() => {
@@ -33,7 +33,7 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
         quiz.lesson
           .replace("quiz-lesson-", "")
           .replace("lesson-", "")
-          .replace("-quiz", "")
+          .replace("-quiz", ""),
       );
 
       const actualSlugNumber = quiz

@@ -1,8 +1,8 @@
-export const millisecond = 1
+export const millisecond = 1;
 
-export const second = millisecond * 1000
+export const second = millisecond * 1000;
 
-export const minute = second * 60
+export const minute = second * 60;
 
 /**
  * Converts milliseconds into the 'HH:MM' format
@@ -16,9 +16,9 @@ export const minute = second * 60
  * formatTime(10 * minute + 1 * second) // '10:01'
  */
 export function formatTime(ms: number) {
-  const minutes = Math.floor(ms / minute)
-  const seconds = Math.floor((ms % minute) / second)
-  return `${minutes.toString().padStart(2, '0')}:${seconds
+  const minutes = Math.floor(ms / minute);
+  const seconds = Math.floor((ms % minute) / second);
+  return `${minutes.toString().padStart(2, "0")}:${seconds
     .toString()
-    .padStart(2, '0')}`
+    .padStart(2, "0")}`;
 }

@@ -52,7 +52,7 @@ export const todosRouter = createTRPCRouter({
         id: z.string(),
         task: z.string().optional(),
         completed: z.boolean().optional(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       console.log({ input });

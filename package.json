@@ -70,6 +70,9 @@
   "ct3aMetadata": {
     "initVersion": "7.10.3"
   },
+  "lint-staged": {
+    "*.{js,ts,tsx,md,json,yml}": "prettier --write"
+  },
   "engines": {
     "node": ">=18",
     "npm": "please-use-yarn",

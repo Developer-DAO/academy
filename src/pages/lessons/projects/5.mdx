@@ -1,12 +1,12 @@
 ---
-i18n: 'smart-contracts'
+i18n: "smart-contracts"
 title: Connecting to a Frontend
 description: Connect your smart contract to a UI for people to interact with.
-icons: ['rainbowkit', 'wagmi', 'ethers']
-author: 'ropats16'
+icons: ["rainbowkit", "wagmi", "ethers"]
+author: "ropats16"
 ---
 
-import { LessonHeader } from '../../../components/mdx/LessonHeader'
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 <LessonHeader title="Lesson 5: Connecting to a Frontend" />
 
@@ -112,25 +112,25 @@ To get this setup we need to start working on the `_app.js` file in the
 initial setup.
 
 ```jsx
-import '../styles/globals.css'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;
 ```
 
 We need to add some additional imports to create our configurations.
 
 ```jsx
 // previous imports...
-import '@rainbow-me/rainbowkit/styles.css'
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
-import { chain, configureChains, createClient, WagmiConfig } from 'wagmi'
-import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { publicProvider } from 'wagmi/providers/public'
-import { useEffect, useState } from 'react'
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+import { useEffect, useState } from "react";
 
 // function MyApp code...
 ```
@@ -170,18 +170,18 @@ of `wagmiClient` using them.
 const { chains, provider } = configureChains(
   [chain.polygonMumbai],
   [alchemyProvider({ apiKey: process.env.API_KEY }), publicProvider()],
-)
+);
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: "My RainbowKit App",
   chains,
-})
+});
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
-})
+});
 
 // function MyApp code...
 ```
@@ -212,10 +212,10 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
 ```
 
 Now that we have our application setup, we can edit the Index Page.
@@ -231,9 +231,9 @@ after deleting all the _children_ within the `<main>` element and completely
 deleting the `<footer>`.
 
 ```jsx
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -245,7 +245,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}></main>
     </div>
-  )
+  );
 }
 ```
 
@@ -354,12 +354,12 @@ Moving onto imports.
 ```jsx
 // prev imports...
 
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useAccount, useContractRead, useContractWrite } from 'wagmi'
-import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json'
-import styles from '../styles/Home.module.css'
-import { ethers } from 'ethers'
-import { useEffect, useState } from 'react'
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import TierABI from "../../artifacts/contracts/TierNFT.sol/TierNFT.json";
+import styles from "../styles/Home.module.css";
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
 
 // function Home() code...
 ```
@@ -431,7 +431,7 @@ export default function Home() {
 
       {/* <main> element */}
     </div>
-  )
+  );
 }
 
 // styling code...
@@ -471,8 +471,8 @@ export default function Home() {
   } = useContractWrite({
     addressOrName: CONTRACT_ADDRESS,
     contractInterface: TierABI.abi,
-    functionName: 'mint',
-  })
+    functionName: "mint",
+  });
 
   // return statement for rendering...
 }
@@ -503,13 +503,13 @@ const mintToken = async (e) => {
       recklesslySetUnpreparedOverrides: {
         value: ethers.utils.parseEther(e.target.value),
       },
-    })
-    await mintTxn.wait()
-    console.log('This is the mint data', mintData)
+    });
+    await mintTxn.wait();
+    console.log("This is the mint data", mintData);
   } catch (error) {
-    console.log('Error minting NFT', error.message)
+    console.log("Error minting NFT", error.message);
   }
-}
+};
 
 // function Home() code...
 ```
@@ -633,11 +633,11 @@ setting setting its value in our `isUserConnected` state.
 
 useEffect(() => {
   try {
-    setIsUserConnected(isConnected)
+    setIsUserConnected(isConnected);
   } catch (error) {
-    console.log('Error connecting to user', error.message)
+    console.log("Error connecting to user", error.message);
   }
-}, [isConnected])
+}, [isConnected]);
 
 // function Home() code...
 ```
@@ -657,7 +657,7 @@ Then we can wrap the `<main>` element as follows:
     <main className={styles.main}>
       <div>Please connect your wallet.</div>
     </main>
-  )
+  );
 }
 
 // closing <div> and styling consts...
@@ -982,21 +982,21 @@ minted. This is how the mintToken function should look now:
 
 const mintToken = async (e) => {
   try {
-    setIsMinting(true)
-    setModalShow(true)
+    setIsMinting(true);
+    setModalShow(true);
     let mintTxn = await mint({
       recklesslySetUnpreparedOverrides: {
         value: ethers.utils.parseEther(e.target.value),
       },
-    })
-    await mintTxn.wait()
-    console.log('This is the mint data', mintData)
-    refetchTokenData()
-    setIsMinting(false)
+    });
+    await mintTxn.wait();
+    console.log("This is the mint data", mintData);
+    refetchTokenData();
+    setIsMinting(false);
   } catch (error) {
-    console.log('Error minting NFT', error.message)
+    console.log("Error minting NFT", error.message);
   }
-}
+};
 
 // return statement...
 ```
@@ -1118,6 +1118,7 @@ setIsMinting(false); } catch (error) { console.log("Error minting NFT",
 error.message); } };
 
 return ( <div className={styles.container}> <Head> <title>NFT Minter</title>
+
 <meta name="description" content="Generated by create next app" />
 <link rel="icon" href="/favicon.ico" /> </Head> <header style={header}>
 <h1>TierNFTs</h1> <ConnectButton /> </header> {isUserConnected ?

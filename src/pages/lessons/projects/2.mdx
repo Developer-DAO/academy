@@ -5,22 +5,22 @@ description:
   Lesson 1.
 icons:
   [
-    'npm',
-    'solidity',
-    'hardhat',
-    'openzeppelin',
-    'ethereum',
-    'etherscan',
-    'opensea',
+    "npm",
+    "solidity",
+    "hardhat",
+    "openzeppelin",
+    "ethereum",
+    "etherscan",
+    "opensea",
   ]
 ---
 
-import OpenZeppelin from '../fundamentals/open_zeppelin.mdx'
-import DecentralizedStorage from '../fundamentals/decentralized-storage.mdx'
-import InstallNpm from '../fundamentals/install-npm.mdx'
-import TokenStandards from '../fundamentals/token-standards.mdx'
-import { LessonHeader } from '../../../components/mdx/LessonHeader'
-import CliLesson from '../fundamentals/cli_lesson.mdx'
+import OpenZeppelin from "../fundamentals/open_zeppelin.mdx";
+import DecentralizedStorage from "../fundamentals/decentralized-storage.mdx";
+import InstallNpm from "../fundamentals/install-npm.mdx";
+import TokenStandards from "../fundamentals/token-standards.mdx";
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import CliLesson from "../fundamentals/cli_lesson.mdx";
 
 <LessonHeader title="Lesson 2: Build a Basic NFT" />
 
@@ -64,7 +64,7 @@ what's to come. First, did you set your pomodoro? ⌛😊
   <Question question="lesson-2/1-intro/Q5" />
 </SideDrawer>
 How did you find that? No worries if the answers didn't come easily. We're here to
-fill in the gaps!{' '}
+fill in the gaps!{" "}
 
 ![thatd.be.great.jpeg](/assets/lessons/2/img_1.jpeg)
 
@@ -731,36 +731,36 @@ So, let's create a `deploy.js` under the `scripts/` folder and copy this in:
 
 ```jsx
 // import Hardhat to use it inside our script
-const hre = require('hardhat')
+const hre = require("hardhat");
 
 // We define a variable with the name of our contract
-const CONTRACT_NAME = 'ProjectNFT'
+const CONTRACT_NAME = "ProjectNFT";
 
 // The 3 parameters for our smart contract's constructor (CHANGE THESE to your own NFT name and description)
-const NFT_NAME = 'Academy'
-const NFT_DESCRIPTION = 'D_D Academy Basic NFT Collection'
+const NFT_NAME = "Academy";
+const NFT_DESCRIPTION = "D_D Academy Basic NFT Collection";
 
 // CHANGE THIS if you created your own images/JSONs:
 const NFT_BASE_URI =
-  'https://gateway.pinata.cloud/ipfs/QmSCNdaA5JBT5D6V5FbivfZonKjdsMPeZeTyTWzq1D3yrJ/'
+  "https://gateway.pinata.cloud/ipfs/QmSCNdaA5JBT5D6V5FbivfZonKjdsMPeZeTyTWzq1D3yrJ/";
 
 // We define a function with all we want Hardhat to run
 async function main() {
   // We get the contract factory from Hardhat
-  const ContractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME)
+  const ContractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME);
 
   // We deploy the contract (notice we pass 3 parameters that our contract's constructor needs)
   const contract = await ContractFactory.deploy(
     NFT_NAME,
     NFT_DESCRIPTION,
     NFT_BASE_URI,
-  )
+  );
 
   // We wait for it to be deployed to the blockchain
-  await contract.deployed()
+  await contract.deployed();
 
   // We print the contract's address to the console
-  console.log(`${CONTRACT_NAME} deployed to: ${contract.address}`)
+  console.log(`${CONTRACT_NAME} deployed to: ${contract.address}`);
 
   // --> ( We'll add more stuff here later ) <--
 }
@@ -769,9 +769,9 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
+    console.error(error);
+    process.exit(1);
+  });
 ```
 
 The code has comments outlining what each section does, but it basically has 1
@@ -822,17 +822,17 @@ placeholder before in our deploy.js file:
 // --> ( We'll add more stuff here later ) <--
 
 // We call the contract to mint 1 NFT
-const tx = await contract.mint()
+const tx = await contract.mint();
 
 // We wait for the transaction to finish
-await tx.wait()
+await tx.wait();
 
 // We ask for the tokenURI of the recently minted NFT
 // (we assume 1 is the tokenId  since we only minted one)
-const tokenURI = await contract.tokenURI(1)
+const tokenURI = await contract.tokenURI(1);
 
 // We print out the tokenURI
-console.log(`NFT 1 tokenURI: ${tokenURI}`)
+console.log(`NFT 1 tokenURI: ${tokenURI}`);
 ```
 
 Let's run the script again and see what it tells us! Here's my output:
@@ -928,25 +928,25 @@ configuration file. Go into your project's main directory and open
 We are going to replace our file with this:
 
 ```jsx
-require('@nomicfoundation/hardhat-chai-matchers')
-require('@nomiclabs/hardhat-ethers')
+require("@nomicfoundation/hardhat-chai-matchers");
+require("@nomiclabs/hardhat-ethers");
 
-const WALLET_PRIVATE_KEY = 'YOUR-PRIVATE-KEY-DONT-SHARE'
+const WALLET_PRIVATE_KEY = "YOUR-PRIVATE-KEY-DONT-SHARE";
 
-const RPC_API_KEY = 'YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY'
+const RPC_API_KEY = "YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY";
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: '0.8.12',
+  solidity: "0.8.12",
   networks: {
     goerli: {
       url: RPC_API_KEY,
       accounts: [WALLET_PRIVATE_KEY],
     },
   },
-}
+};
 ```
 
 And you need to fill those 2 global variables with your own for hardhat to
@@ -1035,10 +1035,10 @@ so a user can easily interact with your creations. Lots of fun in the pipeline!
 See you in the next one and in our community
 [developerdao.peeranha.io](https://developerdao.peeranha.io)!
 
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 
 <ContributorFooter
-  authors={['_7i7o', 'piablo']}
-  reviewers={['georgemac510']}
-  contributors={['mveve']}
+  authors={["_7i7o", "piablo"]}
+  reviewers={["georgemac510"]}
+  contributors={["mveve"]}
 />

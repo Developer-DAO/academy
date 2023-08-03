@@ -4,7 +4,7 @@ interface Question {
     {
       answer: string;
       correct?: boolean;
-    }
+    },
   ];
 }
 

@@ -2,10 +2,10 @@
 title: Write Automated Tests for your TierNFT
 description:
   Prove your TierNFT contract works! Builds on knowledge from Lesson 3.
-icons: ['solidity', 'hardhat', 'openzeppelin']
+icons: ["solidity", "hardhat", "openzeppelin"]
 ---
 
-import { LessonHeader } from '../../../components/mdx/LessonHeader'
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 <LessonHeader
   title="Lesson 4: Testing your TierNFT"
@@ -231,12 +231,12 @@ with that of your contract.
 For example, since our contract is using Solidity `0.8.12`:
 
 ```javascript
-require('@nomicfoundation/hardhat-toolbox')
-require('dotenv').config()
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 module.exports = {
-  solidity: '0.8.12',
-}
+  solidity: "0.8.12",
+};
 ```
 
 <SideDrawer
@@ -287,40 +287,40 @@ all the other tests too.
 Please add the following code to your new `tier-nft.test.js` file:
 
 ```javascript
-const { expect } = require('chai')
+const { expect } = require("chai");
 
-const CONTRACT_NAME = 'TierNFT'
-const COLLECTION_NAME = 'TierNFT'
-const COLLECTION_SYMBOL = 'Tier'
+const CONTRACT_NAME = "TierNFT";
+const COLLECTION_NAME = "TierNFT";
+const COLLECTION_SYMBOL = "Tier";
 
-describe('TierNFT', function () {
-  let contract
-  let owner
-  let otherUser
+describe("TierNFT", function () {
+  let contract;
+  let owner;
+  let otherUser;
 
   beforeEach(async function () {
-    const Contract = await hre.ethers.getContractFactory(CONTRACT_NAME)
+    const Contract = await hre.ethers.getContractFactory(CONTRACT_NAME);
 
-    const [_owner, _otherUser] = await hre.ethers.getSigners()
-    owner = _owner
-    otherUser = _otherUser
+    const [_owner, _otherUser] = await hre.ethers.getSigners();
+    owner = _owner;
+    otherUser = _otherUser;
 
-    contract = await Contract.deploy(COLLECTION_NAME, COLLECTION_SYMBOL)
-    await contract.waitForDeployment()
-  })
+    contract = await Contract.deploy(COLLECTION_NAME, COLLECTION_SYMBOL);
+    await contract.waitForDeployment();
+  });
 
-  describe('constructor', async () => {
-    it('set proper collection name', async function () {
-      const name = await contract.name()
-      expect(name).to.equal('TierNFT')
-    })
+  describe("constructor", async () => {
+    it("set proper collection name", async function () {
+      const name = await contract.name();
+      expect(name).to.equal("TierNFT");
+    });
 
-    it('set proper collection symbol', async function () {
-      const symbol = await contract.symbol()
-      expect(symbol).to.equal('Tier')
-    })
-  })
-})
+    it("set proper collection symbol", async function () {
+      const symbol = await contract.symbol();
+      expect(symbol).to.equal("Tier");
+    });
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -340,9 +340,9 @@ Now let's walk through the test code we've pasted in and explain what it does.
 At the top we see constants with the name and symbol of the NFT collection:
 
 ```javascript
-const CONTRACT_NAME = 'TierNFT'
-const COLLECTION_NAME = 'TierNFT'
-const COLLECTION_SYMBOL = 'Tier'
+const CONTRACT_NAME = "TierNFT";
+const COLLECTION_NAME = "TierNFT";
+const COLLECTION_SYMBOL = "Tier";
 ```
 
 Next is a `describe('TierNFT', function () { ...` line. What's cool about
@@ -382,15 +382,15 @@ throughout all our tests.
 Finally we then come across our first two actual tests:
 
 ```javascript
-it('set proper collection name', async function () {
-  const name = await contract.name()
-  expect(name).to.equal('TierNFT')
-})
+it("set proper collection name", async function () {
+  const name = await contract.name();
+  expect(name).to.equal("TierNFT");
+});
 
-it('set proper collection symbol', async function () {
-  const symbol = await contract.symbol()
-  expect(symbol).to.equal('Tier')
-})
+it("set proper collection symbol", async function () {
+  const symbol = await contract.symbol();
+  expect(symbol).to.equal("Tier");
+});
 ```
 
 They each call a method and verify the results. "Is the contract name really
@@ -496,44 +496,44 @@ Our new `describe` section shown below will replace that line that says
 </Callout>
 
 ```javascript
-describe('mint', async () => {
-  it('should not mint if value is below the minimum tier', async function () {
+describe("mint", async () => {
+  it("should not mint if value is below the minimum tier", async function () {
     await expect(
       contract.mint({
-        value: hre.ethers.parseEther('0.001'),
+        value: hre.ethers.parseEther("0.001"),
       }),
-    ).to.be.revertedWith('Not enough value for the minimum Tier')
-    await expect(await contract.totalSupply()).to.equal(0)
-  })
+    ).to.be.revertedWith("Not enough value for the minimum Tier");
+    await expect(await contract.totalSupply()).to.equal(0);
+  });
 
-  it('should increase total supply', async function () {
+  it("should increase total supply", async function () {
     await contract.mint({
-      value: hre.ethers.parseEther('0.01'),
-    })
-    await expect(await contract.totalSupply()).to.equal(1)
-  })
+      value: hre.ethers.parseEther("0.01"),
+    });
+    await expect(await contract.totalSupply()).to.equal(1);
+  });
 
-  it('should mint Tier 0', async function () {
+  it("should mint Tier 0", async function () {
     await contract.mint({
-      value: hre.ethers.parseEther('0.01'),
-    })
-    await expect(await contract.tokenTier(1)).to.equal(0)
-  })
+      value: hre.ethers.parseEther("0.01"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(0);
+  });
 
-  it('should mint Tier 1', async function () {
+  it("should mint Tier 1", async function () {
     await contract.mint({
-      value: hre.ethers.parseEther('0.02'),
-    })
-    await expect(await contract.tokenTier(1)).to.equal(1)
-  })
+      value: hre.ethers.parseEther("0.02"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(1);
+  });
 
-  it('should mint Tier 2', async function () {
+  it("should mint Tier 2", async function () {
     await contract.mint({
-      value: hre.ethers.parseEther('0.05'),
-    })
-    await expect(await contract.tokenTier(1)).to.equal(2)
-  })
-})
+      value: hre.ethers.parseEther("0.05"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(2);
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -556,9 +556,9 @@ the proper amount of Eth is not provided. This happens here:
 ```javascript
 await expect(
   contract.mint({
-    value: hre.ethers.parseEther('0.001'),
+    value: hre.ethers.parseEther("0.001"),
   }),
-).to.be.revertedWith('Not enough value for the minimum Tier')
+).to.be.revertedWith("Not enough value for the minimum Tier");
 ```
 
 We're expecting the call to be reverted when not sending enough payment, along
@@ -585,32 +585,32 @@ test, you just have one token, the first one.
 Let's look at testing `withdraw()` next with these 3 tests:
 
 ```javascript
-describe('withdrawal', async () => {
-  it('should error if not owner', async function () {
+describe("withdrawal", async () => {
+  it("should error if not owner", async function () {
     await expect(contract.connect(otherUser).withdraw()).to.be.revertedWith(
-      'Ownable: caller is not the owner',
-    )
-  })
+      "Ownable: caller is not the owner",
+    );
+  });
 
-  it('should error if balance is zero', async function () {
+  it("should error if balance is zero", async function () {
     await expect(contract.withdraw()).to.be.revertedWith(
-      'Balance should be > 0',
-    )
-  })
+      "Balance should be > 0",
+    );
+  });
 
-  it('should success if owner', async function () {
+  it("should success if owner", async function () {
     await contract.mint({
-      value: hre.ethers.parseEther('0.01'),
-    })
+      value: hre.ethers.parseEther("0.01"),
+    });
     expect(
       await hre.ethers.provider.getBalance(contract.getAddress()),
-    ).to.equal(hre.ethers.parseEther('0.01'))
-    await contract.withdraw()
+    ).to.equal(hre.ethers.parseEther("0.01"));
+    await contract.withdraw();
     expect(
       await hre.ethers.provider.getBalance(contract.getAddress()),
-    ).to.equal(hre.ethers.parseEther('0'))
-  })
-})
+    ).to.equal(hre.ethers.parseEther("0"));
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -670,14 +670,14 @@ test will help us discover that. We can then toss this test at the end.
 Here's an example of what that looks like:
 
 ```javascript
-it('should return base64-encoded data for tokenURI for Tier 0', async function () {
+it("should return base64-encoded data for tokenURI for Tier 0", async function () {
   await contract.mint({
-    value: hre.ethers.parseEther('0.01'),
-  })
+    value: hre.ethers.parseEther("0.01"),
+  });
   await expect(await contract.tokenURI(1)).to.equal(
-    'data:application/json;base64,eyJuYW1lIjogIlRpZXJORlQgIzEiLCAiZGVzY3JpcHRpb24iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRBd0lpQm1hV3hzUFNKdWIyNWxJaUJtYjI1MExXWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1JsWm5NK1BHWnBiSFJsY2lCcFpEMGlRU0lnWTI5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBaWEp6UFNKelVrZENJaUJtYVd4MFpYSlZibWwwY3owaWRYTmxjbE53WVdObFQyNVZjMlVpSUdobGFXZG9kRDBpTlRBd0lpQjNhV1IwYUQwaU5UQXdJajQ4Wm1WRWNtOXdVMmhoWkc5M0lHUjRQU0l4SWlCa2VUMGlNaUlnYzNSa1JHVjJhV0YwYVc5dVBTSTRJaUJtYkc5dlpDMXZjR0ZqYVhSNVBTSXVOamNpSUhkcFpIUm9QU0l5TURBbElpQm9aV2xuYUhROUlqSXdNQ1VpSUM4K1BDOW1hV3gwWlhJK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSkNJaUI0TVQwaU1DSWdlVEU5SWpBaUlIZ3lQU0l4TlRBd01DSWdlVEk5SWpBaUlHZHlZV1JwWlc1MFZXNXBkSE05SW5WelpYSlRjR0ZqWlU5dVZYTmxJajQ4YzNSdmNDQnZabVp6WlhROUlpNHdOU0lnYzNSdmNDMWpiMnh2Y2owaUkyRmtNREJtWmlJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0eU15SWdjM1J2Y0MxamIyeHZjajBpSXpSbE1EQmxZeUlnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQwTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlptTURCbU5TSWdMejQ4YzNSdmNDQnZabVp6WlhROUlpNDFPU0lnYzNSdmNDMWpiMnh2Y2owaUkyVXdaVEJsTUNJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0M055SWdjM1J2Y0MxamIyeHZjajBpSTJabVpEZ3hNQ0lnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQ1TlNJZ2MzUnZjQzFqYjJ4dmNqMGlJMkZrTURCbVppSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQanhzYVc1bFlYSkhjbUZrYVdWdWRDQnBaRDBpUXlJZ2VERTlJakFpSUhreFBTSTJNQ0lnZURJOUlqQWlJSGt5UFNJeE1UQWlJR2R5WVdScFpXNTBWVzVwZEhNOUluVnpaWEpUY0dGalpVOXVWWE5sSWo0OGMzUnZjQ0J6ZEc5d0xXTnZiRzl5UFNJalpEQTBNR0k0SWlBdlBqeHpkRzl3SUc5bVpuTmxkRDBpTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlV3WlRCbE1DSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQand2WkdWbWN6NDhjR0YwYUNCbWFXeHNQU0oxY213b0kwSXBJaUJrUFNKTk1DQXdhREUxTURBd2RqVXdNRWd3ZWlJK1BHRnVhVzFoZEdWVWNtRnVjMlp2Y20wZ1lYUjBjbWxpZFhSbFRtRnRaVDBpZEhKaGJuTm1iM0p0SWlCaGRIUnlhV0oxZEdWVWVYQmxQU0pZVFV3aUlIUjVjR1U5SW5SeVlXNXpiR0YwWlNJZ1puSnZiVDBpTUNBd0lpQjBiejBpTFRFME5UQXdJREFpSUdSMWNqMGlNVFp6SWlCeVpYQmxZWFJEYjNWdWREMGlhVzVrWldacGJtbDBaU0lnTHo0OEwzQmhkR2crUEdOcGNtTnNaU0JtYVd4c1BTSWpNV1F4WlRJd0lpQmplRDBpTVRBd0lpQmplVDBpT1RBaUlISTlJalExSWlCbWFXeDBaWEk5SW5WeWJDZ2pRU2tpSUM4K1BIUmxlSFFnZUQwaU1UQXhJaUI1UFNJNU9TSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWTJ4aGMzTTlJbTVtZEV4dloyOGlJR1p2Ym5RdGMybDZaVDBpTXpKd2VDSWdabWxzYkQwaWRYSnNLQ05ES1NJZ1ptbHNkR1Z5UFNKMWNtd29JMEVwSWo1RVgwUThZVzVwYldGMFpWUnlZVzV6Wm05eWJTQmhkSFJ5YVdKMWRHVk9ZVzFsUFNKMGNtRnVjMlp2Y20waUlHRjBkSEpwWW5WMFpWUjVjR1U5SWxoTlRDSWdkSGx3WlQwaWNtOTBZWFJsSWlCbWNtOXRQU0l3SURFd01DQTVNQ0lnZEc4OUlqTTJNQ0F4TURBZ09UQWlJR1IxY2owaU5YTWlJSEpsY0dWaGRFTnZkVzUwUFNKcGJtUmxabWx1YVhSbElpQXZQand2ZEdWNGRENDhaeUJtYjI1MExYTnBlbVU5SWpNeUlpQm1hV3hzUFNJalptWm1JaUJtYVd4MFpYSTlJblZ5YkNnalFTa2lQangwWlhoMElIZzlJakkxTUNJZ2VUMGlNamd3SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElpQmpiR0Z6Y3owaWRHbGxjazVoYldVaVBrSmhjMmxqUEM5MFpYaDBQand2Wno0OEwzTjJaejQ9IiwiYXR0cmlidXRlcyI6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVlIjogIkJhc2ljIiB9XX0=',
-  )
-})
+    "data:application/json;base64,eyJuYW1lIjogIlRpZXJORlQgIzEiLCAiZGVzY3JpcHRpb24iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRBd0lpQm1hV3hzUFNKdWIyNWxJaUJtYjI1MExXWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1JsWm5NK1BHWnBiSFJsY2lCcFpEMGlRU0lnWTI5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBaWEp6UFNKelVrZENJaUJtYVd4MFpYSlZibWwwY3owaWRYTmxjbE53WVdObFQyNVZjMlVpSUdobGFXZG9kRDBpTlRBd0lpQjNhV1IwYUQwaU5UQXdJajQ4Wm1WRWNtOXdVMmhoWkc5M0lHUjRQU0l4SWlCa2VUMGlNaUlnYzNSa1JHVjJhV0YwYVc5dVBTSTRJaUJtYkc5dlpDMXZjR0ZqYVhSNVBTSXVOamNpSUhkcFpIUm9QU0l5TURBbElpQm9aV2xuYUhROUlqSXdNQ1VpSUM4K1BDOW1hV3gwWlhJK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSkNJaUI0TVQwaU1DSWdlVEU5SWpBaUlIZ3lQU0l4TlRBd01DSWdlVEk5SWpBaUlHZHlZV1JwWlc1MFZXNXBkSE05SW5WelpYSlRjR0ZqWlU5dVZYTmxJajQ4YzNSdmNDQnZabVp6WlhROUlpNHdOU0lnYzNSdmNDMWpiMnh2Y2owaUkyRmtNREJtWmlJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0eU15SWdjM1J2Y0MxamIyeHZjajBpSXpSbE1EQmxZeUlnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQwTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlptTURCbU5TSWdMejQ4YzNSdmNDQnZabVp6WlhROUlpNDFPU0lnYzNSdmNDMWpiMnh2Y2owaUkyVXdaVEJsTUNJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0M055SWdjM1J2Y0MxamIyeHZjajBpSTJabVpEZ3hNQ0lnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQ1TlNJZ2MzUnZjQzFqYjJ4dmNqMGlJMkZrTURCbVppSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQanhzYVc1bFlYSkhjbUZrYVdWdWRDQnBaRDBpUXlJZ2VERTlJakFpSUhreFBTSTJNQ0lnZURJOUlqQWlJSGt5UFNJeE1UQWlJR2R5WVdScFpXNTBWVzVwZEhNOUluVnpaWEpUY0dGalpVOXVWWE5sSWo0OGMzUnZjQ0J6ZEc5d0xXTnZiRzl5UFNJalpEQTBNR0k0SWlBdlBqeHpkRzl3SUc5bVpuTmxkRDBpTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlV3WlRCbE1DSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQand2WkdWbWN6NDhjR0YwYUNCbWFXeHNQU0oxY213b0kwSXBJaUJrUFNKTk1DQXdhREUxTURBd2RqVXdNRWd3ZWlJK1BHRnVhVzFoZEdWVWNtRnVjMlp2Y20wZ1lYUjBjbWxpZFhSbFRtRnRaVDBpZEhKaGJuTm1iM0p0SWlCaGRIUnlhV0oxZEdWVWVYQmxQU0pZVFV3aUlIUjVjR1U5SW5SeVlXNXpiR0YwWlNJZ1puSnZiVDBpTUNBd0lpQjBiejBpTFRFME5UQXdJREFpSUdSMWNqMGlNVFp6SWlCeVpYQmxZWFJEYjNWdWREMGlhVzVrWldacGJtbDBaU0lnTHo0OEwzQmhkR2crUEdOcGNtTnNaU0JtYVd4c1BTSWpNV1F4WlRJd0lpQmplRDBpTVRBd0lpQmplVDBpT1RBaUlISTlJalExSWlCbWFXeDBaWEk5SW5WeWJDZ2pRU2tpSUM4K1BIUmxlSFFnZUQwaU1UQXhJaUI1UFNJNU9TSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWTJ4aGMzTTlJbTVtZEV4dloyOGlJR1p2Ym5RdGMybDZaVDBpTXpKd2VDSWdabWxzYkQwaWRYSnNLQ05ES1NJZ1ptbHNkR1Z5UFNKMWNtd29JMEVwSWo1RVgwUThZVzVwYldGMFpWUnlZVzV6Wm05eWJTQmhkSFJ5YVdKMWRHVk9ZVzFsUFNKMGNtRnVjMlp2Y20waUlHRjBkSEpwWW5WMFpWUjVjR1U5SWxoTlRDSWdkSGx3WlQwaWNtOTBZWFJsSWlCbWNtOXRQU0l3SURFd01DQTVNQ0lnZEc4OUlqTTJNQ0F4TURBZ09UQWlJR1IxY2owaU5YTWlJSEpsY0dWaGRFTnZkVzUwUFNKcGJtUmxabWx1YVhSbElpQXZQand2ZEdWNGRENDhaeUJtYjI1MExYTnBlbVU5SWpNeUlpQm1hV3hzUFNJalptWm1JaUJtYVd4MFpYSTlJblZ5YkNnalFTa2lQangwWlhoMElIZzlJakkxTUNJZ2VUMGlNamd3SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElpQmpiR0Z6Y3owaWRHbGxjazVoYldVaVBrSmhjMmxqUEM5MFpYaDBQand2Wno0OEwzTjJaejQ9IiwiYXR0cmlidXRlcyI6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVlIjogIkJhc2ljIiB9XX0=",
+  );
+});
 ```
 
 First, here's the new contract that now contains a bunch of new helper methods
@@ -991,10 +991,10 @@ in the mean time, and share your new found wisdom with our community.
 Go forth, test, and prosper knowing you have confidence in the code you're
 deploying into the world.
 
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 
 <ContributorFooter
-  authors={['brianfive', 'piablo']}
-  reviewers={['georgemac510', 'wolovim']}
+  authors={["brianfive", "piablo"]}
+  reviewers={["georgemac510", "wolovim"]}
   contributors={[]}
 />
