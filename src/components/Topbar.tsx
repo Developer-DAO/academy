@@ -25,7 +25,7 @@ import NextLink from "next/link";
 import SchoolOfCodeLogo from "./SchoolOfCodeLogo";
 import { useRouter } from "next/router";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
-import { api } from "@/utils/api";
+// import { api } from '@/utils/api'
 // SIWE Integration
 import { SiweMessage } from "siwe";
 import {
@@ -66,10 +66,10 @@ export default function Topbar() {
 
   // Hooks
   const { data: sessionData } = useSession();
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+  // const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+  //   undefined, // no input
+  //   { enabled: sessionData?.user !== undefined }
+  // );
   // State
   const [showConnection, setShowConnection] = useState(false);
 

@@ -161,7 +161,7 @@ export const PomodoroTimer = (props: any) => {
   const getButton = (
     data: TimerEventData,
     idx: number,
-    isBigScreen: boolean
+    isBigScreen: boolean,
   ) => {
     return data.eventIcon ? (
       isBigScreen ? (
@@ -191,7 +191,7 @@ export const PomodoroTimer = (props: any) => {
     mainIcon: ReactElement,
     status: string | undefined,
     time: number,
-    events: TimerEventData[]
+    events: TimerEventData[],
   ) => {
     return (
       <Popover
@@ -270,7 +270,7 @@ export const PomodoroTimer = (props: any) => {
             eventDesc: "Study",
             eventIcon: <FaGraduationCap />,
           },
-        ]
+        ],
       );
 
     default:

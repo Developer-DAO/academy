@@ -71,7 +71,7 @@ export const getStaticProps = () => {
         if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
           const markdownWithMeta = fs.readFileSync(
             path.join(contentDir, folder, file),
-            "utf-8"
+            "utf-8",
           );
 
           const { data: frontMatter } = matter(markdownWithMeta);

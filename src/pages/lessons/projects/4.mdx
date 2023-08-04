@@ -2,10 +2,10 @@
 title: Write Automated Tests for your TierNFT
 description:
   Prove your TierNFT contract works! Builds on knowledge from Lesson 3.
-icons: ['solidity', 'hardhat', 'openzeppelin']
+icons: ["solidity", "hardhat", "openzeppelin"]
 ---
 
-import { LessonHeader } from '../../../components/mdx/LessonHeader'
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 <LessonHeader
   title="Lesson 4: Testing your TierNFT"
@@ -14,21 +14,42 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 ## About this lesson
 
-Welcome to this lesson where we’ll be adding automated tests for our *TierNFT* smart contract created in the previous tutorial. In case you haven’t completed it already, we have a fast-track guide below to that project set-up - assuming you’re confident with Solidity and a professional development environment. If you're not, we’d recommend completing the tutorials in this track before this one, before moving on to *Connecting your TierNFT Smart Contract to a Frontend*, our project series finalé. 
+Welcome to this lesson where we’ll be adding automated tests for our _TierNFT_
+smart contract created in the previous tutorial. In case you haven’t completed
+it already, we have a fast-track guide below to that project set-up - assuming
+you’re confident with Solidity and a professional development environment. If
+you're not, we’d recommend completing the tutorials in this track before this
+one, before moving on to _Connecting your TierNFT Smart Contract to a Frontend_,
+our project series finalé.
 
-Back here, you’ll learn about the benefits of writing automated tests, general testing concepts and best practices. You’ll walk away with many practical tests for smart contracts and nibble on some food for thought about test-driven development. 
+Back here, you’ll learn about the benefits of writing automated tests, general
+testing concepts and best practices. You’ll walk away with many practical tests
+for smart contracts and nibble on some food for thought about test-driven
+development.
 
-As you dive in to the lesson, you'll come across some thought-provoking checkpoint questions designed to test your existing knowledge, measure how well you're absorbing the fresh content, and we might even ask you to predict next steps in the lesson. And to wrap up, a final quiz awaits. To complete this adventure might take anywhere from one to four hours. That all depends on your previous experience and how much new ground you need to cover. But enjoy the journey and remember to take regular breaks along the way. We care about your well-being and have even included a nifty pomodoro timer ⌛ in the menu header. Let it remind you to appreciate nature's gifts and "go touch some grass" for a while. 🌱 Embrace the process.
+As you dive in to the lesson, you'll come across some thought-provoking
+checkpoint questions designed to test your existing knowledge, measure how well
+you're absorbing the fresh content, and we might even ask you to predict next
+steps in the lesson. And to wrap up, a final quiz awaits. To complete this
+adventure might take anywhere from one to four hours. That all depends on your
+previous experience and how much new ground you need to cover. But enjoy the
+journey and remember to take regular breaks along the way. We care about your
+well-being and have even included a nifty pomodoro timer ⌛ in the menu header.
+Let it remind you to appreciate nature's gifts and "go touch some grass" for a
+while. 🌱 Embrace the process.
 
 Let's raise the sails to catch the wind of what's to come:
 
-<SideDrawer buttonText="Warm-up Questions" title="Check out Your Previous Knowledge">
-      <Question question="lesson-4/1-intro/Q1" />
-      <Question question="lesson-4/1-intro/Q2" />
-      <Question question="lesson-4/1-intro/Q3" />
-      <Question question="lesson-4/1-intro/Q4" />
-      <Question question="lesson-4/1-intro/Q5" />
-</SideDrawer> 
+<SideDrawer
+  buttonText="Warm-up Questions"
+  title="Check out Your Previous Knowledge"
+>
+  <Question question="lesson-4/1-intro/Q1" />
+  <Question question="lesson-4/1-intro/Q2" />
+  <Question question="lesson-4/1-intro/Q3" />
+  <Question question="lesson-4/1-intro/Q4" />
+  <Question question="lesson-4/1-intro/Q5" />
+</SideDrawer>
 
 And set sail . . .
 
@@ -45,32 +66,37 @@ Testing can:
 - give you a safety net when you make improvements to the code later
 
 Tests are a tool for writing your code and making sure it keeps working as
-expected when changes are made. Automated tests don't fully replace manually testing your smart contract but
-it's an important tool to ensuring your contract will work as expected.
-
+expected when changes are made. Automated tests don't fully replace manually
+testing your smart contract but it's an important tool to ensuring your contract
+will work as expected.
 
 ### Quick breakdown of lesson steps
-- Set up our local development environment 
+
+- Set up our local development environment
 - Write unit tests
 - Test NFT contract initialisation, mint and withdrawl functions
 - Refactor tokenURI() function and test new helper methods:
 - Summary: understanding the concept of Test-Driven Development (TDD)
 
 ### Developer tools and libraries we'll be using
+
 - Hardhat development environment
-- Mocha JavaScript framework for writing units tests 
+- Mocha JavaScript framework for writing units tests
 - Chai, an assertion library compatible with Mocha
-- OpenZeppelin libraries will help bring clarity to testing our contract 
+- OpenZeppelin libraries will help bring clarity to testing our contract
 
 ## Let's Get Started
 
 ### Setting up our project dependencies
+
 If you have an existing project from your previous work on the TierNFT lesson,
-you have all the Hardhat dependencies installed. Otherwise let's create a new Hardhat project and copy in the contract which
-we'll be testing. To create a new project, please refer to _Lesson 3 - Tier NFTs_ and search for
-the “First things first 👷‍♂️" section to get your project going. Follow the steps
-until "Let’s start coding”, then open up your code editor. If you are using VSCode, type `code .` in your terminal to open VSCode. After running through that section you'll have a working Hardhat project for the
-next steps.
+you have all the Hardhat dependencies installed. Otherwise let's create a new
+Hardhat project and copy in the contract which we'll be testing. To create a new
+project, please refer to _Lesson 3 - Tier NFTs_ and search for the “First things
+first 👷‍♂️" section to get your project going. Follow the steps until "Let’s start
+coding”, then open up your code editor. If you are using VSCode, type `code .`
+in your terminal to open VSCode. After running through that section you'll have
+a working Hardhat project for the next steps.
 
 ### Add test command for running tests
 
@@ -205,20 +231,24 @@ with that of your contract.
 For example, since our contract is using Solidity `0.8.12`:
 
 ```javascript
-require('@nomicfoundation/hardhat-toolbox')
-require('dotenv').config()
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
 module.exports = {
-  solidity: '0.8.12',
-}
+  solidity: "0.8.12",
+};
 ```
-<SideDrawer buttonText="Checkpoint Questions" title="Understanding our Environment">
-      <Question question="lesson-4/2-get-set-up/Q1" />
-      <Question question="lesson-4/2-get-set-up/Q2" />
-      <Question question="lesson-4/2-get-set-up/Q3" />
-      <Question question="lesson-4/2-get-set-up/Q4" />
-      <Question question="lesson-4/2-get-set-up/Q5" />
-</SideDrawer> 
+
+<SideDrawer
+  buttonText="Checkpoint Questions"
+  title="Understanding our Environment"
+>
+  <Question question="lesson-4/2-get-set-up/Q1" />
+  <Question question="lesson-4/2-get-set-up/Q2" />
+  <Question question="lesson-4/2-get-set-up/Q3" />
+  <Question question="lesson-4/2-get-set-up/Q4" />
+  <Question question="lesson-4/2-get-set-up/Q5" />
+</SideDrawer>
 ⌛ Pomodoro? 😊 🌱
 
 ## What do we want to test on our TierNFT contract?
@@ -257,40 +287,40 @@ all the other tests too.
 Please add the following code to your new `tier-nft.test.js` file:
 
 ```javascript
-const { expect } = require('chai')
+const { expect } = require("chai");
 
-const CONTRACT_NAME = 'TierNFT'
-const COLLECTION_NAME = 'TierNFT'
-const COLLECTION_SYMBOL = 'Tier'
+const CONTRACT_NAME = "TierNFT";
+const COLLECTION_NAME = "TierNFT";
+const COLLECTION_SYMBOL = "Tier";
 
-describe('TierNFT', function () {
-  let contract
-  let owner
-  let otherUser
+describe("TierNFT", function () {
+  let contract;
+  let owner;
+  let otherUser;
 
   beforeEach(async function () {
-    const Contract = await hre.ethers.getContractFactory(CONTRACT_NAME)
+    const Contract = await hre.ethers.getContractFactory(CONTRACT_NAME);
 
-    const [_owner, _otherUser] = await hre.ethers.getSigners()
-    owner = _owner
-    otherUser = _otherUser
+    const [_owner, _otherUser] = await hre.ethers.getSigners();
+    owner = _owner;
+    otherUser = _otherUser;
 
-    contract = await Contract.deploy(COLLECTION_NAME, COLLECTION_SYMBOL)
-    await contract.waitForDeployment()
-  })
+    contract = await Contract.deploy(COLLECTION_NAME, COLLECTION_SYMBOL);
+    await contract.waitForDeployment();
+  });
 
-  describe('constructor', async () => {
-    it('set proper collection name', async function () {
-      const name = await contract.name()
-      expect(name).to.equal('TierNFT')
-    })
+  describe("constructor", async () => {
+    it("set proper collection name", async function () {
+      const name = await contract.name();
+      expect(name).to.equal("TierNFT");
+    });
 
-    it('set proper collection symbol', async function () {
-      const symbol = await contract.symbol()
-      expect(symbol).to.equal('Tier')
-    })
-  })
-})
+    it("set proper collection symbol", async function () {
+      const symbol = await contract.symbol();
+      expect(symbol).to.equal("Tier");
+    });
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -310,9 +340,9 @@ Now let's walk through the test code we've pasted in and explain what it does.
 At the top we see constants with the name and symbol of the NFT collection:
 
 ```javascript
-const CONTRACT_NAME = 'TierNFT'
-const COLLECTION_NAME = 'TierNFT'
-const COLLECTION_SYMBOL = 'Tier'
+const CONTRACT_NAME = "TierNFT";
+const COLLECTION_NAME = "TierNFT";
+const COLLECTION_SYMBOL = "Tier";
 ```
 
 Next is a `describe('TierNFT', function () { ...` line. What's cool about
@@ -352,15 +382,15 @@ throughout all our tests.
 Finally we then come across our first two actual tests:
 
 ```javascript
-it('set proper collection name', async function () {
-  const name = await contract.name()
-  expect(name).to.equal('TierNFT')
-})
+it("set proper collection name", async function () {
+  const name = await contract.name();
+  expect(name).to.equal("TierNFT");
+});
 
-it('set proper collection symbol', async function () {
-  const symbol = await contract.symbol()
-  expect(symbol).to.equal('Tier')
-})
+it("set proper collection symbol", async function () {
+  const symbol = await contract.symbol();
+  expect(symbol).to.equal("Tier");
+});
 ```
 
 They each call a method and verify the results. "Is the contract name really
@@ -419,13 +449,12 @@ failure looks like:
 ```
 
 <SideDrawer buttonText="Checkpoint Questions" title="General Testing Concepts">
-      <Question question="lesson-4/3-general-concepts/Q1" />
-      <Question question="lesson-4/3-general-concepts/Q2" />
-      <Question question="lesson-4/3-general-concepts/Q3" />
-      <Question question="lesson-4/3-general-concepts/Q4" />
-      <Question question="lesson-4/3-general-concepts/Q5" />
-</SideDrawer> 
-
+  <Question question="lesson-4/3-general-concepts/Q1" />
+  <Question question="lesson-4/3-general-concepts/Q2" />
+  <Question question="lesson-4/3-general-concepts/Q3" />
+  <Question question="lesson-4/3-general-concepts/Q4" />
+  <Question question="lesson-4/3-general-concepts/Q5" />
+</SideDrawer>
 
 ### Let's add tests for mint()
 
@@ -459,6 +488,7 @@ Our new `describe` section shown below will replace that line that says
 `// this is where existing describe section ends`.
 
 {/* The sentence in the callout below is a bit messy. Could do with an update */}
+
 <Callout emoji="💡" size="md" variant="info">
   Make sure you keep that last line `})` which is the very end of the block of
   code that holds **all** of the `describe` blocks you're adding in this whole
@@ -466,44 +496,44 @@ Our new `describe` section shown below will replace that line that says
 </Callout>
 
 ```javascript
-describe('mint', async () => {
-    it('should not mint if value is below the minimum tier', async function () {
-      await expect(
-        contract.mint({
-          value: hre.ethers.parseEther('0.001'),
-        }),
-      ).to.be.revertedWith('Not enough value for the minimum Tier')
-      await expect(await contract.totalSupply()).to.equal(0)
-    })
-  
-    it('should increase total supply', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.01'),
-      })
-      await expect(await contract.totalSupply()).to.equal(1)
-    })
-  
-    it('should mint Tier 0', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.01'),
-      })
-      await expect(await contract.tokenTier(1)).to.equal(0)
-    })
-  
-    it('should mint Tier 1', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.02'),
-      })
-      await expect(await contract.tokenTier(1)).to.equal(1)
-    })
-  
-    it('should mint Tier 2', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.05'),
-      })
-      await expect(await contract.tokenTier(1)).to.equal(2)
-    })
-  })
+describe("mint", async () => {
+  it("should not mint if value is below the minimum tier", async function () {
+    await expect(
+      contract.mint({
+        value: hre.ethers.parseEther("0.001"),
+      }),
+    ).to.be.revertedWith("Not enough value for the minimum Tier");
+    await expect(await contract.totalSupply()).to.equal(0);
+  });
+
+  it("should increase total supply", async function () {
+    await contract.mint({
+      value: hre.ethers.parseEther("0.01"),
+    });
+    await expect(await contract.totalSupply()).to.equal(1);
+  });
+
+  it("should mint Tier 0", async function () {
+    await contract.mint({
+      value: hre.ethers.parseEther("0.01"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(0);
+  });
+
+  it("should mint Tier 1", async function () {
+    await contract.mint({
+      value: hre.ethers.parseEther("0.02"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(1);
+  });
+
+  it("should mint Tier 2", async function () {
+    await contract.mint({
+      value: hre.ethers.parseEther("0.05"),
+    });
+    await expect(await contract.tokenTier(1)).to.equal(2);
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -526,9 +556,9 @@ the proper amount of Eth is not provided. This happens here:
 ```javascript
 await expect(
   contract.mint({
-    value: hre.ethers.parseEther('0.001'),
+    value: hre.ethers.parseEther("0.001"),
   }),
-).to.be.revertedWith('Not enough value for the minimum Tier')
+).to.be.revertedWith("Not enough value for the minimum Tier");
 ```
 
 We're expecting the call to be reverted when not sending enough payment, along
@@ -555,32 +585,32 @@ test, you just have one token, the first one.
 Let's look at testing `withdraw()` next with these 3 tests:
 
 ```javascript
-describe('withdrawal', async () => {
-    it('should error if not owner', async function () {
-      await expect(contract.connect(otherUser).withdraw()).to.be.revertedWith(
-        'Ownable: caller is not the owner',
-      )
-    })
-  
-    it('should error if balance is zero', async function () {
-      await expect(contract.withdraw()).to.be.revertedWith(
-        'Balance should be > 0',
-      )
-    })
-  
-    it('should success if owner', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.01'),
-      })
-      expect(await hre.ethers.provider.getBalance(contract.getAddress())).to.equal(
-        hre.ethers.parseEther('0.01'),
-      )
-      await contract.withdraw()
-      expect(await hre.ethers.provider.getBalance(contract.getAddress())).to.equal(
-        hre.ethers.parseEther('0'),
-      )
-    })
-  })
+describe("withdrawal", async () => {
+  it("should error if not owner", async function () {
+    await expect(contract.connect(otherUser).withdraw()).to.be.revertedWith(
+      "Ownable: caller is not the owner",
+    );
+  });
+
+  it("should error if balance is zero", async function () {
+    await expect(contract.withdraw()).to.be.revertedWith(
+      "Balance should be > 0",
+    );
+  });
+
+  it("should success if owner", async function () {
+    await contract.mint({
+      value: hre.ethers.parseEther("0.01"),
+    });
+    expect(
+      await hre.ethers.provider.getBalance(contract.getAddress()),
+    ).to.equal(hre.ethers.parseEther("0.01"));
+    await contract.withdraw();
+    expect(
+      await hre.ethers.provider.getBalance(contract.getAddress()),
+    ).to.equal(hre.ethers.parseEther("0"));
+  });
+});
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -604,15 +634,17 @@ of additional highlights:
   breaks our rule of one expect per test, but as long as the test is kept
   simple, we can choose what makes sense for what we're trying to test.
 
-<SideDrawer buttonText="Checkpoint Questions" title="Cross-checking Logic from Tests to Contract">
-      <Question question="lesson-4/4-mint-withdraw/Q1" />
-      <Question question="lesson-4/4-mint-withdraw/Q2" />
-      <Question question="lesson-4/4-mint-withdraw/Q3" />
-      <Question question="lesson-4/4-mint-withdraw/Q4" />
-      <Question question="lesson-4/4-mint-withdraw/Q5" />
-</SideDrawer> 
+<SideDrawer
+  buttonText="Checkpoint Questions"
+  title="Cross-checking Logic from Tests to Contract"
+>
+  <Question question="lesson-4/4-mint-withdraw/Q1" />
+  <Question question="lesson-4/4-mint-withdraw/Q2" />
+  <Question question="lesson-4/4-mint-withdraw/Q3" />
+  <Question question="lesson-4/4-mint-withdraw/Q4" />
+  <Question question="lesson-4/4-mint-withdraw/Q5" />
+</SideDrawer>
 ⌛ Pomodoro? 😊 🌱
-
 
 ### Testing tokenURI()
 
@@ -638,14 +670,14 @@ test will help us discover that. We can then toss this test at the end.
 Here's an example of what that looks like:
 
 ```javascript
-    it('should return base64-encoded data for tokenURI for Tier 0', async function () {
-      await contract.mint({
-        value: hre.ethers.parseEther('0.01'),
-      })
-      await expect(await contract.tokenURI(1)).to.equal(
-          'data:application/json;base64,eyJuYW1lIjogIlRpZXJORlQgIzEiLCAiZGVzY3JpcHRpb24iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRBd0lpQm1hV3hzUFNKdWIyNWxJaUJtYjI1MExXWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1JsWm5NK1BHWnBiSFJsY2lCcFpEMGlRU0lnWTI5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBaWEp6UFNKelVrZENJaUJtYVd4MFpYSlZibWwwY3owaWRYTmxjbE53WVdObFQyNVZjMlVpSUdobGFXZG9kRDBpTlRBd0lpQjNhV1IwYUQwaU5UQXdJajQ4Wm1WRWNtOXdVMmhoWkc5M0lHUjRQU0l4SWlCa2VUMGlNaUlnYzNSa1JHVjJhV0YwYVc5dVBTSTRJaUJtYkc5dlpDMXZjR0ZqYVhSNVBTSXVOamNpSUhkcFpIUm9QU0l5TURBbElpQm9aV2xuYUhROUlqSXdNQ1VpSUM4K1BDOW1hV3gwWlhJK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSkNJaUI0TVQwaU1DSWdlVEU5SWpBaUlIZ3lQU0l4TlRBd01DSWdlVEk5SWpBaUlHZHlZV1JwWlc1MFZXNXBkSE05SW5WelpYSlRjR0ZqWlU5dVZYTmxJajQ4YzNSdmNDQnZabVp6WlhROUlpNHdOU0lnYzNSdmNDMWpiMnh2Y2owaUkyRmtNREJtWmlJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0eU15SWdjM1J2Y0MxamIyeHZjajBpSXpSbE1EQmxZeUlnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQwTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlptTURCbU5TSWdMejQ4YzNSdmNDQnZabVp6WlhROUlpNDFPU0lnYzNSdmNDMWpiMnh2Y2owaUkyVXdaVEJsTUNJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0M055SWdjM1J2Y0MxamIyeHZjajBpSTJabVpEZ3hNQ0lnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQ1TlNJZ2MzUnZjQzFqYjJ4dmNqMGlJMkZrTURCbVppSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQanhzYVc1bFlYSkhjbUZrYVdWdWRDQnBaRDBpUXlJZ2VERTlJakFpSUhreFBTSTJNQ0lnZURJOUlqQWlJSGt5UFNJeE1UQWlJR2R5WVdScFpXNTBWVzVwZEhNOUluVnpaWEpUY0dGalpVOXVWWE5sSWo0OGMzUnZjQ0J6ZEc5d0xXTnZiRzl5UFNJalpEQTBNR0k0SWlBdlBqeHpkRzl3SUc5bVpuTmxkRDBpTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlV3WlRCbE1DSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQand2WkdWbWN6NDhjR0YwYUNCbWFXeHNQU0oxY213b0kwSXBJaUJrUFNKTk1DQXdhREUxTURBd2RqVXdNRWd3ZWlJK1BHRnVhVzFoZEdWVWNtRnVjMlp2Y20wZ1lYUjBjbWxpZFhSbFRtRnRaVDBpZEhKaGJuTm1iM0p0SWlCaGRIUnlhV0oxZEdWVWVYQmxQU0pZVFV3aUlIUjVjR1U5SW5SeVlXNXpiR0YwWlNJZ1puSnZiVDBpTUNBd0lpQjBiejBpTFRFME5UQXdJREFpSUdSMWNqMGlNVFp6SWlCeVpYQmxZWFJEYjNWdWREMGlhVzVrWldacGJtbDBaU0lnTHo0OEwzQmhkR2crUEdOcGNtTnNaU0JtYVd4c1BTSWpNV1F4WlRJd0lpQmplRDBpTVRBd0lpQmplVDBpT1RBaUlISTlJalExSWlCbWFXeDBaWEk5SW5WeWJDZ2pRU2tpSUM4K1BIUmxlSFFnZUQwaU1UQXhJaUI1UFNJNU9TSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWTJ4aGMzTTlJbTVtZEV4dloyOGlJR1p2Ym5RdGMybDZaVDBpTXpKd2VDSWdabWxzYkQwaWRYSnNLQ05ES1NJZ1ptbHNkR1Z5UFNKMWNtd29JMEVwSWo1RVgwUThZVzVwYldGMFpWUnlZVzV6Wm05eWJTQmhkSFJ5YVdKMWRHVk9ZVzFsUFNKMGNtRnVjMlp2Y20waUlHRjBkSEpwWW5WMFpWUjVjR1U5SWxoTlRDSWdkSGx3WlQwaWNtOTBZWFJsSWlCbWNtOXRQU0l3SURFd01DQTVNQ0lnZEc4OUlqTTJNQ0F4TURBZ09UQWlJR1IxY2owaU5YTWlJSEpsY0dWaGRFTnZkVzUwUFNKcGJtUmxabWx1YVhSbElpQXZQand2ZEdWNGRENDhaeUJtYjI1MExYTnBlbVU5SWpNeUlpQm1hV3hzUFNJalptWm1JaUJtYVd4MFpYSTlJblZ5YkNnalFTa2lQangwWlhoMElIZzlJakkxTUNJZ2VUMGlNamd3SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElpQmpiR0Z6Y3owaWRHbGxjazVoYldVaVBrSmhjMmxqUEM5MFpYaDBQand2Wno0OEwzTjJaejQ9IiwiYXR0cmlidXRlcyI6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVlIjogIkJhc2ljIiB9XX0=',
-        )
-      })
+it("should return base64-encoded data for tokenURI for Tier 0", async function () {
+  await contract.mint({
+    value: hre.ethers.parseEther("0.01"),
+  });
+  await expect(await contract.tokenURI(1)).to.equal(
+    "data:application/json;base64,eyJuYW1lIjogIlRpZXJORlQgIzEiLCAiZGVzY3JpcHRpb24iOiAiVGllck5GVHMgY29sbGVjdGlvbiIsICJpbWFnZSI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNREFpSUdobGFXZG9kRDBpTlRBd0lpQm1hV3hzUFNKdWIyNWxJaUJtYjI1MExXWmhiV2xzZVQwaWMyRnVjeTF6WlhKcFppSStQR1JsWm5NK1BHWnBiSFJsY2lCcFpEMGlRU0lnWTI5c2IzSXRhVzUwWlhKd2IyeGhkR2x2YmkxbWFXeDBaWEp6UFNKelVrZENJaUJtYVd4MFpYSlZibWwwY3owaWRYTmxjbE53WVdObFQyNVZjMlVpSUdobGFXZG9kRDBpTlRBd0lpQjNhV1IwYUQwaU5UQXdJajQ4Wm1WRWNtOXdVMmhoWkc5M0lHUjRQU0l4SWlCa2VUMGlNaUlnYzNSa1JHVjJhV0YwYVc5dVBTSTRJaUJtYkc5dlpDMXZjR0ZqYVhSNVBTSXVOamNpSUhkcFpIUm9QU0l5TURBbElpQm9aV2xuYUhROUlqSXdNQ1VpSUM4K1BDOW1hV3gwWlhJK1BHeHBibVZoY2tkeVlXUnBaVzUwSUdsa1BTSkNJaUI0TVQwaU1DSWdlVEU5SWpBaUlIZ3lQU0l4TlRBd01DSWdlVEk5SWpBaUlHZHlZV1JwWlc1MFZXNXBkSE05SW5WelpYSlRjR0ZqWlU5dVZYTmxJajQ4YzNSdmNDQnZabVp6WlhROUlpNHdOU0lnYzNSdmNDMWpiMnh2Y2owaUkyRmtNREJtWmlJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0eU15SWdjM1J2Y0MxamIyeHZjajBpSXpSbE1EQmxZeUlnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQwTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlptTURCbU5TSWdMejQ4YzNSdmNDQnZabVp6WlhROUlpNDFPU0lnYzNSdmNDMWpiMnh2Y2owaUkyVXdaVEJsTUNJZ0x6NDhjM1J2Y0NCdlptWnpaWFE5SWk0M055SWdjM1J2Y0MxamIyeHZjajBpSTJabVpEZ3hNQ0lnTHo0OGMzUnZjQ0J2Wm1aelpYUTlJaTQ1TlNJZ2MzUnZjQzFqYjJ4dmNqMGlJMkZrTURCbVppSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQanhzYVc1bFlYSkhjbUZrYVdWdWRDQnBaRDBpUXlJZ2VERTlJakFpSUhreFBTSTJNQ0lnZURJOUlqQWlJSGt5UFNJeE1UQWlJR2R5WVdScFpXNTBWVzVwZEhNOUluVnpaWEpUY0dGalpVOXVWWE5sSWo0OGMzUnZjQ0J6ZEc5d0xXTnZiRzl5UFNJalpEQTBNR0k0SWlBdlBqeHpkRzl3SUc5bVpuTmxkRDBpTVNJZ2MzUnZjQzFqYjJ4dmNqMGlJMlV3WlRCbE1DSWdMejQ4TDJ4cGJtVmhja2R5WVdScFpXNTBQand2WkdWbWN6NDhjR0YwYUNCbWFXeHNQU0oxY213b0kwSXBJaUJrUFNKTk1DQXdhREUxTURBd2RqVXdNRWd3ZWlJK1BHRnVhVzFoZEdWVWNtRnVjMlp2Y20wZ1lYUjBjbWxpZFhSbFRtRnRaVDBpZEhKaGJuTm1iM0p0SWlCaGRIUnlhV0oxZEdWVWVYQmxQU0pZVFV3aUlIUjVjR1U5SW5SeVlXNXpiR0YwWlNJZ1puSnZiVDBpTUNBd0lpQjBiejBpTFRFME5UQXdJREFpSUdSMWNqMGlNVFp6SWlCeVpYQmxZWFJEYjNWdWREMGlhVzVrWldacGJtbDBaU0lnTHo0OEwzQmhkR2crUEdOcGNtTnNaU0JtYVd4c1BTSWpNV1F4WlRJd0lpQmplRDBpTVRBd0lpQmplVDBpT1RBaUlISTlJalExSWlCbWFXeDBaWEk5SW5WeWJDZ2pRU2tpSUM4K1BIUmxlSFFnZUQwaU1UQXhJaUI1UFNJNU9TSWdkR1Y0ZEMxaGJtTm9iM0k5SW0xcFpHUnNaU0lnWTJ4aGMzTTlJbTVtZEV4dloyOGlJR1p2Ym5RdGMybDZaVDBpTXpKd2VDSWdabWxzYkQwaWRYSnNLQ05ES1NJZ1ptbHNkR1Z5UFNKMWNtd29JMEVwSWo1RVgwUThZVzVwYldGMFpWUnlZVzV6Wm05eWJTQmhkSFJ5YVdKMWRHVk9ZVzFsUFNKMGNtRnVjMlp2Y20waUlHRjBkSEpwWW5WMFpWUjVjR1U5SWxoTlRDSWdkSGx3WlQwaWNtOTBZWFJsSWlCbWNtOXRQU0l3SURFd01DQTVNQ0lnZEc4OUlqTTJNQ0F4TURBZ09UQWlJR1IxY2owaU5YTWlJSEpsY0dWaGRFTnZkVzUwUFNKcGJtUmxabWx1YVhSbElpQXZQand2ZEdWNGRENDhaeUJtYjI1MExYTnBlbVU5SWpNeUlpQm1hV3hzUFNJalptWm1JaUJtYVd4MFpYSTlJblZ5YkNnalFTa2lQangwWlhoMElIZzlJakkxTUNJZ2VUMGlNamd3SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElpQmpiR0Z6Y3owaWRHbGxjazVoYldVaVBrSmhjMmxqUEM5MFpYaDBQand2Wno0OEwzTjJaejQ9IiwiYXR0cmlidXRlcyI6W3sidHJhaXRfdHlwZSI6ICJUaWVyIiwgInZhbHVlIjogIkJhc2ljIiB9XX0=",
+  );
+});
 ```
 
 First, here's the new contract that now contains a bunch of new helper methods
@@ -662,8 +694,8 @@ be tested and understood by humans writing these tests.
   Easy to test!
 - `imageSVGOf()` just concatenates three values into a string. Also easy to
   test.
-- `finalJSON()` also just concatenates multiple values into a string, and like the
-  method says, it creates a string that represents the final JSON blob.
+- `finalJSON()` also just concatenates multiple values into a string, and like
+  the method says, it creates a string that represents the final JSON blob.
 - Notice that none of these methods does the Base64 encoding, which immediately
   makes it impossible for a human to interpret the results and that makes for a
   bad test.
@@ -817,7 +849,7 @@ Ok, here are some tests for these helpers!
       await expect(contract.tokenURI(0)).to.be.revertedWith('Nonexistent token')
     })
   })
-  
+
     describe('tierNameOf', async function () {
       it('should return proper tier name for Tier 0', async function () {
         await expect(await contract.tierNameOf(0)).to.equal('Basic')
@@ -832,7 +864,7 @@ Ok, here are some tests for these helpers!
         await expect(await contract.tierNameOf(999)).to.equal('Premium')
       })
     })
-  
+
     describe('imageSVGOf', async function () {
       it('should return proper imageSVG for Tier 0', async function () {
         await expect(await contract.imageSVGOf(0)).to.equal(
@@ -850,7 +882,7 @@ Ok, here are some tests for these helpers!
         )
       })
     })
-  
+
     describe('finalJSON', async function () {
       it('should return proper finalJSON for Tier 0', async function () {
         await expect(
@@ -859,7 +891,7 @@ Ok, here are some tests for these helpers!
           '{"name": "TierNFT #111", "description": "TierNFTs collection", "image": "data:image/svg+xml;base64,IMAGE_SVG_BASE64_HERE","attributes":[{"trait_type": "Tier", "value": "Basic" }]}',
         )
       })
-  
+
       it('should return proper finalJSON for Tier 1', async function () {
         await expect(
           await contract.finalJSON('TierNFT', 222, 'IMAGE_SVG_BASE64_HERE', 1),
@@ -867,7 +899,7 @@ Ok, here are some tests for these helpers!
           '{"name": "TierNFT #222", "description": "TierNFTs collection", "image": "data:image/svg+xml;base64,IMAGE_SVG_BASE64_HERE","attributes":[{"trait_type": "Tier", "value": "Medium" }]}',
         )
       })
-  
+
       it('should return proper finalJSON for Tier 2', async function () {
         await expect(
           await contract.finalJSON('TierNFT', 333, 'IMAGE_SVG_BASE64_HERE', 2),
@@ -876,7 +908,7 @@ Ok, here are some tests for these helpers!
         )
       })
     })
-  
+
     it('should return base64-encoded data for tokenURI for Tier 0', async function () {
       await contract.mint({
         value: hre.ethers.parseEther('0.01'),
@@ -899,21 +931,23 @@ while refactoring to make sure we didn't break things along the way, and it's
 helpful at the end to ensure the `tokenURI()` method continues to work without
 fail when code changes.
 
-<SideDrawer buttonText="Checkpoint Questions" title="Refactoring Code and Testing SVG">
-      <Question question="lesson-4/5-SVG-test/Q1" />
-      <Question question="lesson-4/5-SVG-test/Q2" />
-      <Question question="lesson-4/5-SVG-test/Q3" />
-      <Question question="lesson-4/5-SVG-test/Q4" />
-      <Question question="lesson-4/5-SVG-test/Q5" />
-</SideDrawer> 
-
+<SideDrawer
+  buttonText="Checkpoint Questions"
+  title="Refactoring Code and Testing SVG"
+>
+  <Question question="lesson-4/5-SVG-test/Q1" />
+  <Question question="lesson-4/5-SVG-test/Q2" />
+  <Question question="lesson-4/5-SVG-test/Q3" />
+  <Question question="lesson-4/5-SVG-test/Q4" />
+  <Question question="lesson-4/5-SVG-test/Q5" />
+</SideDrawer>
 
 ## Food for Thought
 
 With all the helpfulness of tests, why didn't we start with them before we wrote
-any of the contract implementation? The main reason was trying to minimize all the things you needed to learn to get
-started, but the methodology of writing tests first is called "Test Driven
-Development" (TDD). 
+any of the contract implementation? The main reason was trying to minimize all
+the things you needed to learn to get started, but the methodology of writing
+tests first is called "Test Driven Development" (TDD).
 
 TDD is a very powerful methodology which goes like this:
 
@@ -937,23 +971,30 @@ With TDD:
   version that outputs a long base64 string because it's not testable.
 
   Bolting on tests after the fact can be painful and boring, and you lose the
-  potential code improvements you can make when you test as you go. And speaking of testing as you go, why not take the quiz 😊
+  potential code improvements you can make when you test as you go. And speaking
+  of testing as you go, why not take the quiz 😊
 
-<br/><br/>
-<Quiz quiz="lesson-4-quiz" />
-<br/><br/>
+<br />
+<br />
+<QuizStatusChecker quiz="lesson-4-quiz" />
+<br />
+<br />
 
-You just did some amazing work, and you will do a great service to the web3 ecosystem by being conscious of the value of writing solid code. There’s lots more to explore in Academy, and we’re looking forward to seeing you in our final project in this ERC721 track where you’ll be *Connecting your TierNFT Smart Contract to a Frontend*. Why not dive into the [forum](https://developerdao.peeranha.io/discussions/1372/testing-solidity-contracts) in the mean time, and share your new found wisdom with our community.
+You just did some amazing work, and you will do a great service to the web3
+ecosystem by being conscious of the value of writing solid code. There’s lots
+more to explore in Academy, and we’re looking forward to seeing you in our final
+project in this ERC721 track where you’ll be _Connecting your TierNFT Smart
+Contract to a Frontend_. Why not dive into the
+[forum](https://developerdao.peeranha.io/discussions/1372/testing-solidity-contracts)
+in the mean time, and share your new found wisdom with our community.
 
 Go forth, test, and prosper knowing you have confidence in the code you're
 deploying into the world.
 
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
-
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 
 <ContributorFooter
-  authors={['brianfive', 'piablo']}
-  reviewers={['georgemac510', 'wolovim']}
-  contributors={[]} 
+  authors={["brianfive", "piablo"]}
+  reviewers={["georgemac510", "wolovim"]}
+  contributors={[]}
 />
-

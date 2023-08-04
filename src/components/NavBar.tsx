@@ -17,7 +17,7 @@ import HamburgerIcon from "@/components/HamburgerIcon";
 import SchoolOfCodeLogo from "@/components/SchoolOfCodeLogo";
 import { PomodoroTimer } from "@/components/PomodoroTimer";
 import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
-import { api } from "@/utils/api";
+// import { api } from '@/utils/api'
 // import { renderDataURI } from "@codingwithmanny/blockies";
 // SIWE Integration
 import { SiweMessage } from "siwe";
@@ -34,10 +34,10 @@ function NavBar() {
   const router = useRouter();
   // Hooks
   const { data: sessionData } = useSession();
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+  // const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+  //   undefined, // no input
+  //   { enabled: sessionData?.user !== undefined }
+  // );
   // State
   const [showConnection, setShowConnection] = useState(false);
 

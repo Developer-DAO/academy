@@ -1,4 +1,4 @@
-import { Icon } from '@chakra-ui/react'
+import { Icon } from "@chakra-ui/react";
 
 const HamburgerIcon = () => (
   <Icon
@@ -18,6 +18,6 @@ const HamburgerIcon = () => (
     <rect y="24" width="6" height="6" />
     <rect x="12" y="24" width="6" height="6" />
   </Icon>
-)
+);
 
-export default HamburgerIcon
+export default HamburgerIcon;

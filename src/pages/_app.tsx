@@ -25,7 +25,7 @@ import Layout from "@/components/Layout";
  */
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [polygonMumbai],
-  [publicProvider()]
+  [publicProvider()],
 );
 
 /**

@@ -159,8 +159,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
         try {
           const siwe = new SiweMessage(
             JSON.parse(
-              (credentials?.message as string) ?? "{}"
-            ) as Partial<SiweMessage>
+              (credentials?.message as string) ?? "{}",
+            ) as Partial<SiweMessage>,
           );
 
           const nonce = await getCsrfToken({ req: { headers: req?.headers } });

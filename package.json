@@ -71,5 +71,10 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx,md,json,yml}": "prettier --write"
+  },
+  "engines": {
+    "node": ">=18",
+    "npm": "please-use-yarn",
+    "yarn": ">=1.22"
   }
 }

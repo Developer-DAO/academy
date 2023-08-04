@@ -3,7 +3,11 @@
 import { CopyIcon } from "@chakra-ui/icons";
 import { Box, Button } from "@chakra-ui/react";
 
-export const CopyToClipboard = (props: any) => {
+type Props = {
+  children: string;
+};
+
+export const CopyToClipboard = ({ children }: Props) => {
   return (
     <Box
       position="absolute"
@@ -14,9 +18,7 @@ export const CopyToClipboard = (props: any) => {
       border="1px solid silver"
       borderRadius="5px"
     >
-      <Button
-        onClick={() => void navigator.clipboard.writeText(props.children)}
-      >
+      <Button onClick={() => void navigator.clipboard.writeText(children)}>
         <CopyIcon />
       </Button>
     </Box>

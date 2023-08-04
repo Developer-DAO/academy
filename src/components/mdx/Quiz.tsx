@@ -33,9 +33,9 @@ interface Quiz {
         {
           answer: string;
           correct?: boolean;
-        }
+        },
       ];
-    }
+    },
   ];
 }
 

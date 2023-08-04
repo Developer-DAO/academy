@@ -80,9 +80,6 @@ export interface ProjectFrontMatter {
 
 const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
-  const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
-    []
-  );
 
   const [fetchNow, setFetchNow] = useState<boolean>(true);
   const { data: sessionData } = useSession();
@@ -91,8 +88,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   // - All
   const {
     data: completedQuizzesAllData,
-    isLoading: completedQuizzesAllIsLoading,
-    // refetch: completedQuizzesAllRefetch,
+    // isLoading: completedQuizzesAllIsLoading,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
@@ -101,7 +97,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
       onSuccess: () => {
         // setNewTodo(""); // reset input form
       },
-    }
+    },
   );
 
   useMemo(() => {
@@ -119,7 +115,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
           quiz.lesson
             .replace("quiz-lesson-", "")
             .replace("lesson-", "")
-            .replace("-quiz", "") || []
+            .replace("-quiz", "") || [],
       );
       completedQuizzes = result?.projects?.map((project: Project) => {
         if (completedSlugs.includes(project.slug)) project.completed = true;
@@ -317,7 +313,7 @@ export const getStaticProps = () => {
         if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
           const markdownWithMeta = fs.readFileSync(
             path.join(contentDir, folder, file),
-            "utf-8"
+            "utf-8",
           );
 
           const { data: frontMatter } = matter(markdownWithMeta);

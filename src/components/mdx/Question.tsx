@@ -11,7 +11,7 @@ interface Question {
     {
       answer: string;
       correct?: boolean;
-    }
+    },
   ];
 }
 
@@ -20,19 +20,19 @@ const Question = (props: QuestionProps): JSX.Element => {
   const question: Question = require(`@/utils/questions/${props.question}.json`);
   const [optionsSelected, setOptionsSelected]: [
     number[],
-    Dispatch<SetStateAction<number[]>>
+    Dispatch<SetStateAction<number[]>>,
   ] = useState([-1]);
   const toast = useToast();
 
   const selectAnswer = (optionIndex: number) => {
     if (optionsSelected.includes(optionIndex)) {
       return setOptionsSelected(
-        optionsSelected.filter((o) => o !== optionIndex)
+        optionsSelected.filter((o) => o !== optionIndex),
       );
     }
 
     setOptionsSelected(
-      [...optionsSelected, optionIndex].filter((o) => o !== -1) // Remove the -1 of the state initialization
+      [...optionsSelected, optionIndex].filter((o) => o !== -1), // Remove the -1 of the state initialization
     );
   };
 

@@ -262,7 +262,7 @@ const SchoolOfCodeLogo: NextPage<SchoolOfCodeLogoProps> = ({
   const logoClicked = () => {
     logMessage(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `Logo Clicked | click: ${clickToStart} | isAnim: ${isAnimating}`
+      `Logo Clicked | click: ${clickToStart} | isAnim: ${isAnimating}`,
     );
     if (clickToStart && !isAnimating) startAnimation();
   };
