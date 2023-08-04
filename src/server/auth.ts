@@ -60,12 +60,12 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
     //       id: token.sub,
     //     },
     //   } as Session & { user: { id: string } }),
-    session: ({ session, user }) =>
+    session: ({ session, token }) =>
       ({
         ...session,
         user: {
           ...session.user,
-          id: user.id,
+          id: token.sub,
         },
       } as Session & { user: { id: string } }),
     // OTHER CALLBACKS to take advantage of but not needed
@@ -219,8 +219,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           return {
             // Pass user id instead of address
             // id: fields.address
-            id: user.id,
-            // ...user,
+            // id: user.id,
+            ...user,
           };
         } catch (error) {
           // Uncomment or add logging if needed
