@@ -3,7 +3,7 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
+  // Button,
   Stack,
   Collapse,
   Icon,
@@ -24,19 +24,19 @@ import {
 import NextLink from "next/link";
 import SchoolOfCodeLogo from "./SchoolOfCodeLogo";
 import { useRouter } from "next/router";
-import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
+// import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
 // import { api } from '@/utils/api'
 // SIWE Integration
-import { SiweMessage } from "siwe";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useSignMessage,
-  useNetwork,
-} from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { useEffect, useState } from "react";
+// import { SiweMessage } from "siwe";
+// import {
+// useAccount,
+// useConnect,
+// useDisconnect,
+// useSignMessage,
+// useNetwork,
+// } from "wagmi";
+// import { InjectedConnector } from "wagmi/connectors/injected";
+// import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface NavItem {
@@ -66,67 +66,67 @@ export default function Topbar() {
   const router = useRouter();
 
   // Hooks
-  const { data: sessionData } = useSession();
+  // const { data: sessionData } = useSession();
   // const { data: secretMessage } = api.example.getSecretMessage.useQuery(
   //   undefined, // no input
   //   { enabled: sessionData?.user !== undefined }
   // );
   // State
-  const [showConnection, setShowConnection] = useState(false);
+  // const [showConnection, setShowConnection] = useState(false);
 
   // Wagmi Hooks
-  const { signMessageAsync } = useSignMessage();
-  const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  const { disconnect } = useDisconnect();
-  const { chain } = useNetwork();
+  // const { signMessageAsync } = useSignMessage();
+  // const { address, isConnected } = useAccount();
+  // const { connect } = useConnect({
+  //   connector: new InjectedConnector(),
+  // });
+  // const { disconnect } = useDisconnect();
+  // const { chain } = useNetwork();
 
   // Functions
   /**
    * Attempts SIWE and establish session
    */
-  const onClickSignIn = async () => {
-    try {
-      const message = new SiweMessage({
-        domain: window.location.host,
-        address: address,
-        statement: "Sign in with Ethereum to the app.",
-        uri: window.location.origin,
-        version: "1",
-        chainId: chain?.id,
-        // nonce is used from CSRF token
-        nonce: await getCsrfToken(),
-      });
-      const signature = await signMessageAsync({
-        message: message.prepareMessage(),
-      });
-      await signIn("credentials", {
-        message: JSON.stringify(message),
-        redirect: false,
-        signature,
-      });
-    } catch (error) {
-      window.alert(error);
-    }
-  };
+  // const onClickSignIn = async () => {
+  //   try {
+  //     const message = new SiweMessage({
+  //       domain: window.location.host,
+  //       address: address,
+  //       statement: "Sign in with Ethereum to the app.",
+  //       uri: window.location.origin,
+  //       version: "1",
+  //       chainId: chain?.id,
+  //       // nonce is used from CSRF token
+  //       nonce: await getCsrfToken(),
+  //     });
+  //     const signature = await signMessageAsync({
+  //       message: message.prepareMessage(),
+  //     });
+  //     await signIn("credentials", {
+  //       message: JSON.stringify(message),
+  //       redirect: false,
+  //       signature,
+  //     });
+  //   } catch (error) {
+  //     window.alert(error);
+  //   }
+  // };
 
   /**
    * Sign user out
    */
-  const onClickSignOut = async () => {
-    await signOut();
-  };
+  // const onClickSignOut = async () => {
+  //   await signOut();
+  // };
 
   // Hooks
   /**
    * Handles hydration issue
    * only show after the window has finished loading
    */
-  useEffect(() => {
-    setShowConnection(true);
-  }, []);
+  // useEffect(() => {
+  //   setShowConnection(true);
+  // }, []);
 
   return (
     <Box

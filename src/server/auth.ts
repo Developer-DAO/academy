@@ -14,7 +14,7 @@ import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
 import type { Session } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { env } from "@/env.mjs";
+// import { env } from "@/env.mjs";
 
 // Types
 // ========================================================
@@ -169,11 +169,11 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           const nonce = await getCsrfToken({ req: { headers: req?.headers } });
           // const nonce = await getCsrfToken({ req });
 
-          const nextAuthUrl = new URL(env.NEXTAUTH_URL);
+          // const nextAuthUrl = new URL(env.NEXTAUTH_URL);
 
           const verified = await siwe.verify({
             signature: credentials?.signature || "",
-            domain: nextAuthUrl.host,
+            // domain: nextAuthUrl.host,
             nonce,
           });
           console.log({ verified });
