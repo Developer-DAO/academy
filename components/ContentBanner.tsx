@@ -1,4 +1,4 @@
-import { Flex, Heading, Wrap, WrapItem } from '@chakra-ui/react'
+import { Badge, Flex, Heading, Wrap, WrapItem } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import Image from 'next/image'
 
@@ -73,8 +73,16 @@ export const ContentBanner: React.FC<LessonProps> = (props: LessonProps) => {
                 ))}
             </Wrap>
           </Flex>
-          <Flex fontSize={[10, 10, 12, 14]} pt={4}>
-            {description}
+          <Flex
+            fontSize={[10, 10, 12, 14]}
+            pt={4}
+            justifyContent={'space-between'}
+          >
+            <div>{description}</div>
+
+            <Badge variant="solid" px={4} py={2} colorScheme="green">
+              Completed
+            </Badge>
           </Flex>
         </Flex>
       </NextLink>
