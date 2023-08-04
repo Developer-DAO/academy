@@ -13,6 +13,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
 import type { Session } from "next-auth";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { env } from "@/env.mjs";
 
 // Types
 // ========================================================
@@ -50,12 +52,20 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
 }) => ({
   callbacks: {
     // token.sub will refer to the id of the wallet address
-    session: ({ session, token }) =>
+    // session: ({ session, token }) =>
+    //   ({
+    //     ...session,
+    //     user: {
+    //       ...session.user,
+    //       id: token.sub,
+    //     },
+    //   } as Session & { user: { id: string } }),
+    session: ({ session, user }) =>
       ({
         ...session,
         user: {
           ...session.user,
-          id: token.sub,
+          id: user.id,
         },
       } as Session & { user: { id: string } }),
     // OTHER CALLBACKS to take advantage of but not needed
@@ -66,7 +76,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
     //   profile?: Profile
     //   // Not user
     //   email?: {
-    //     verificationRequest?: boolean
     //   }
     //   /** If Credentials provider is used, it contains the user credentials */
     //   credentials?: Record<string, CredentialInput>
@@ -95,8 +104,9 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
     // }
   },
   // OTHER OPTIONS (not needed)
+  session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET, // in case you want pass this along for other functionality
-  // adapter: PrismaAdapter(prisma), // Not meant for type 'credentials' (used for db sessions)
+  adapter: PrismaAdapter(prisma), // Not meant for type 'credentials' (used for db sessions)
   // jwt: { // Custom functionlaity for jwt encoding/decoding
   //   encode: async ({ token, secret, maxAge }: JWTEncodeParams) => {
   //     return encode({
@@ -109,13 +119,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
   //     return decode({ token, secret })
   //   }
   // },
-  session: {
-    // Credentials defaults to this strategy
-    strategy: "jwt",
-    //   maxAge: 2592000,
-    //   updateAge: 86400,
-    //   generateSessionToken: () => 'SomeValue'
-  },
   // events: { // Callback events
   //   signIn: async (message: {
   //     user: User
@@ -166,8 +169,11 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           const nonce = await getCsrfToken({ req: { headers: req?.headers } });
           // const nonce = await getCsrfToken({ req });
 
+          const nextAuthUrl = new URL(env.NEXTAUTH_URL);
+
           const verified = await siwe.verify({
             signature: credentials?.signature || "",
+            domain: nextAuthUrl.host,
             nonce,
           });
 
@@ -205,8 +211,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           return {
             // Pass user id instead of address
             // id: fields.address
-            // id: user.id,
-            ...user,
+            id: user.id,
+            // ...user,
           };
         } catch (error) {
           // Uncomment or add logging if needed
