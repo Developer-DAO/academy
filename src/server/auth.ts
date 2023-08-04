@@ -176,6 +176,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
             domain: nextAuthUrl.host,
             nonce,
           });
+          console.log({ verified });
 
           if (!verified.success) {
             throw new Error("Verification failed");
@@ -183,12 +184,16 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
 
           const { data: fields } = verified;
 
+          console.log({ fields });
+
           // Check if user exists
           let user = await prisma.user.findUnique({
             where: {
               address: fields.address,
             },
           });
+
+          console.log("1 ", { user });
           // Create new user if doesn't exist
           if (!user) {
             user = await prisma.user.create({
@@ -197,8 +202,10 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
                 image: "https://www.developerdao.com/D_D_logo-dark.svg",
               },
             });
+
+            console.log("2 ", { user });
             // create account
-            await prisma.account.create({
+            const newAccount = await prisma.account.create({
               data: {
                 userId: user.id,
                 type: "credentials",
@@ -206,6 +213,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
                 providerAccountId: fields.address,
               },
             });
+            console.log({ newAccount });
           }
 
           return {
