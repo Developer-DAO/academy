@@ -169,22 +169,16 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
           const nonce = await getCsrfToken({ req: { headers: req?.headers } });
           // const nonce = await getCsrfToken({ req });
 
-          // const nextAuthUrl = new URL(env.NEXTAUTH_URL);
-
           const verified = await siwe.verify({
             signature: credentials?.signature || "",
-            // domain: nextAuthUrl.host,
             nonce,
           });
-          console.log({ verified });
 
           if (!verified.success) {
             throw new Error("Verification failed");
           }
 
           const { data: fields } = verified;
-
-          console.log({ fields });
 
           // Check if user exists
           let user = await prisma.user.findUnique({
@@ -193,7 +187,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
             },
           });
 
-          console.log("1 ", { user });
           // Create new user if doesn't exist
           if (!user) {
             user = await prisma.user.create({
@@ -203,9 +196,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
               },
             });
 
-            console.log("2 ", { user });
-            // create account
-            const newAccount = await prisma.account.create({
+            // if new then create account
+            await prisma.account.create({
               data: {
                 userId: user.id,
                 type: "credentials",
@@ -213,7 +205,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
                 providerAccountId: fields.address,
               },
             });
-            console.log({ newAccount });
           }
 
           return {
