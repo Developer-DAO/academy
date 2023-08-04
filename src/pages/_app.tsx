@@ -30,7 +30,7 @@ import { env } from "@/env.mjs";
 /**
  * Configure chains supported
  */
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const { chains, publicClient } = configureChains(
   [polygonMumbai],
   [publicProvider()],
 );
@@ -45,7 +45,6 @@ const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
   publicClient,
-  webSocketPublicClient,
 });
 
 // App Wrapper Component
