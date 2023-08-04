@@ -37,6 +37,7 @@ import {
 } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useEffect, useState } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface NavItem {
   label: string;
@@ -194,51 +195,7 @@ export default function Topbar() {
           spacing={6}
           minW={"10rem"}
         >
-          {sessionData ? (
-            <div className="mb-4 text-center">
-              <button
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                onClick={onClickSignOut as () => void}
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : showConnection ? (
-            <div className="mb-4">
-              {/* {chain?.unsupported ? (
-                  <button onClick={() => switchNetwork?.()}>
-                    {`Switch to ${polygonMumbai.name}`}
-                    {isLoading &&
-                      pendingChainId === polygonMumbai.id &&
-                      " (switching)"}
-                  </button> */}
-              {isConnected ? (
-                <button
-                  className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                  onClick={onClickSignIn as () => void}
-                >
-                  Sign In
-                </button>
-              ) : null}
-            </div>
-          ) : null}
-          {showConnection ? (
-            <div className="text-center">
-              {address ? (
-                <p className="mb-4">
-                  <code className="block rounded bg-black/20 p-4 text-white">
-                    {address}
-                  </code>
-                </p>
-              ) : null}
-              <Button
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                onClick={() => (!isConnected ? connect() : disconnect())}
-              >
-                {!isConnected ? "Connect Wallet" : "Disconnect"}
-              </Button>
-            </div>
-          ) : null}
+          <ConnectButton />
         </Stack>
       </Flex>
 

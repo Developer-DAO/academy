@@ -1,22 +1,29 @@
 // Imports
 // ========================================================
+import React from "react";
+
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { api } from "@/utils/api";
+
 import "@/styles/globals.css";
+
+import "@rainbow-me/rainbowkit/styles.css";
+
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import Layout from "@/components/Layout";
+import { env } from "@/env.mjs";
 
 // Config
 // ========================================================
@@ -28,27 +35,15 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
   [publicProvider()],
 );
 
-/**
- * Configure publicProvider and allow for auto wallet connection
- */
-const config = createConfig({
+const { connectors } = getDefaultWallets({
+  appName: "D_D Academy",
+  projectId: env.NEXT_PUBLIC_WALLET_CONNECT_ID,
+  chains,
+});
+
+const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({ chains }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Injected",
-        shimDisconnect: true,
-      },
-    }),
-    new CoinbaseWalletConnector({
-      chains,
-      options: {
-        appName: "Developer DAO Academy",
-      },
-    }),
-  ],
+  connectors,
   publicClient,
   webSocketPublicClient,
 });
@@ -61,13 +56,19 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <ChakraProvider theme={theme}>
-      <WagmiConfig config={config}>
-        <SessionProvider session={session} refetchInterval={0}>
-          <MDXProvider components={Components}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </MDXProvider>
+      <WagmiConfig config={wagmiConfig}>
+        <SessionProvider refetchInterval={0} session={session}>
+          <RainbowKitSiweNextAuthProvider>
+            <RainbowKitProvider chains={chains}>
+              <React.StrictMode>
+                <MDXProvider components={Components}>
+                  <Layout>
+                    <Component {...pageProps} />
+                  </Layout>
+                </MDXProvider>
+              </React.StrictMode>
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
         </SessionProvider>
       </WagmiConfig>
     </ChakraProvider>
