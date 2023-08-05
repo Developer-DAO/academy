@@ -12,7 +12,16 @@ import "@/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  connectorsForWallets,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import {
+  ledgerWallet,
+  trustWallet,
+  zerionWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
@@ -24,6 +33,7 @@ import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
 import Layout from "@/components/Layout";
 import { env } from "@/env.mjs";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Config
 // ========================================================
@@ -35,11 +45,25 @@ const { chains, publicClient } = configureChains(
   [publicProvider()],
 );
 
-const { connectors } = getDefaultWallets({
+const projectId = env.NEXT_PUBLIC_WALLET_CONNECT_ID;
+
+const { wallets } = getDefaultWallets({
   appName: "D_D Academy",
-  projectId: env.NEXT_PUBLIC_WALLET_CONNECT_ID,
+  projectId,
   chains,
 });
+
+const connectors = connectorsForWallets([
+  ...wallets,
+  {
+    groupName: "Other",
+    wallets: [
+      zerionWallet({ projectId, chains }),
+      trustWallet({ projectId, chains }),
+      ledgerWallet({ projectId, chains }),
+    ],
+  },
+]);
 
 const wagmiConfig = createConfig({
   autoConnect: true,
@@ -51,21 +75,22 @@ const wagmiConfig = createConfig({
 // ========================================================
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps,
 }) => {
   return (
     <ChakraProvider theme={theme}>
       <WagmiConfig config={wagmiConfig}>
-        <SessionProvider refetchInterval={0} session={session}>
+        <SessionProvider refetchInterval={0} session={pageProps.session}>
           <RainbowKitSiweNextAuthProvider>
-            <RainbowKitProvider chains={chains}>
-              <React.StrictMode>
-                <MDXProvider components={Components}>
-                  <Layout>
+            <RainbowKitProvider chains={chains} initialChain={polygonMumbai}>
+              <MDXProvider components={Components}>
+                <Layout>
+                  <>
                     <Component {...pageProps} />
-                  </Layout>
-                </MDXProvider>
-              </React.StrictMode>
+                    <ReactQueryDevtools />
+                  </>
+                </Layout>
+              </MDXProvider>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
         </SessionProvider>

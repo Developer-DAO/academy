@@ -120,7 +120,7 @@ export default function Topbar() {
           spacing={6}
           minW={"10rem"}
         >
-          <ConnectButton />
+          <ConnectButton accountStatus="address" />
         </Stack>
       </Flex>
 
