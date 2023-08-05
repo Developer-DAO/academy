@@ -81,7 +81,7 @@ run through the live site and make sure the code is performing as expected.
 
 **Prerequisites:**
 
-    node --version 16.x
+    node --version 18.x
 
 Refer to the `node` and `npm` installation with `nvm` guide in Lesson 2. A link
 to the guide can be found

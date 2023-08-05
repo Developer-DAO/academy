@@ -39,6 +39,7 @@ model Account {
 
 model User {
   id               String             @id @default(cuid())
+  password         String?
   name             String?
   address          String?            @unique
   email            String?            @unique
