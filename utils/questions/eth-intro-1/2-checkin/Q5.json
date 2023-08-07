@@ -1,12 +1,18 @@
 {
-  "question": "TODO",
+  "question": "The native currency of Ethereum is called:",
   "options": [
     {
-      "answer": "True"
+      "answer": "Ethereum"
     },
     {
-      "answer": "False",
+      "answer": "Bitcoin"
+    },
+    {
+      "answer": "ether",
       "correct": true
+    },
+    {
+      "answer": "frogcoin"
     }
   ]
 }

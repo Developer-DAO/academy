@@ -1,11 +1,15 @@
 {
-  "question": "TODO",
+  "question": "What is in a block?",
   "options": [
     {
-      "answer": "True"
+      "answer": "The email address of the block creator"
     },
     {
-      "answer": "False",
+      "answer": "Data about the transactions in that block",
+      "correct": true
+    },
+    {
+      "answer": "A reference to the previous block",
       "correct": true
     }
   ]

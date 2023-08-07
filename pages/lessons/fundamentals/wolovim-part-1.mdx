@@ -15,15 +15,6 @@ icons:
 
 So, you’ve heard about this [Ethereum](https://ethereum.org/) thing and are ready to venture down the rabbit hole? This post will quickly cover some blockchain basics, then get you interacting with a simulated Ethereum node – reading block data, checking account balances, and sending transactions. Along the way, we’ll highlight the differences between traditional ways of building apps and this new decentralized paradigm.
 
-<SideDrawer buttonText="Warm-up Questions" title="TODO">
-      <Question question="eth-intro-1/1-intro/Q1" />
-      <Question question="eth-intro-1/1-intro/Q2" />
-      <Question question="eth-intro-1/1-intro/Q3" />
-      <Question question="eth-intro-1/1-intro/Q4" />
-      <Question question="eth-intro-1/1-intro/Q5" />
-</SideDrawer> 
-<br/>
-
 ### **(Soft) prerequisites**
 
 This post aspires to be accessible to a wide range of developers. Python tools will be involved, but they are just a vehicle for the ideas – no problem if you are not a Python developer. I will, however, be making just a few assumptions about what you already know, so we can quickly move on the Ethereum-specific bits.
@@ -35,7 +26,7 @@ Assumptions:
 - Python version 3.7 or greater is installed on your machine (use of a [virtual environment](https://realpython.com/effective-python-environment/#virtual-environments) is strongly encouraged), and
 - you’ve used `pip`, Python’s package installer.
 
-Again, if any of these are untrue, or you don’t plan to reproduce the code in this article, you can likely still follow along just fine.
+Again, if any of these are untrue, or you don’t plan to reproduce the code in this article, just follow along conceptually.
 
 ### **Blockchains, briefly**
 
@@ -46,7 +37,6 @@ There are many ways to describe Ethereum, but at its heart is a blockchain. Bloc
    "number": 1234567,
    "hash": "0xabc123...",
    "parentHash": "0xdef456...",
-   "miner": "0xa1b2c3...",
    ...,
    "transactions": [...]
 }
@@ -76,11 +66,11 @@ Python developers that want to interact with Ethereum are likely to reach for *
 **Note:** “Ethereum node” and “Ethereum client” are often used interchangeably. In either case, it refers to the software that a participant in the Ethereum network runs. This software can read block data, receive updates when new blocks are added to the chain, broadcast new transactions, and more.
 </Callout>
 
-Ethereum clients can be configured to be reachable by [IPC](https://en.wikipedia.org/wiki/Inter-process_communication), HTTP, or Websockets. web3.py refers to these connection options as **providers**. You’ll want to choose one of the three providers to configure so that web3.py knows how to communicate with your node.
+Ethereum clients can be configured to be reachable by IPC, HTTP, or Websockets. web3.py refers to these connection options as **providers**. You’ll want to choose one of the three providers to configure so that web3.py knows how to communicate with your node.
 
 ![https://cdn-images-1.medium.com/max/1600/1*OrElsXOF45w-AgBuezCqjQ.png](https://cdn-images-1.medium.com/max/1600/1*OrElsXOF45w-AgBuezCqjQ.png)
 
-Configure the Ethereum node and web3.py to communicate via the same protocol, e.g., IPC in this diagram.
+The Ethereum node and web3.py need to be configured to communicate via the same protocol, e.g., IPC in this diagram.
 
 Once web3.py is properly configured, you can begin to interact with the blockchain. Here’s a couple of web3.py usage examples as a preview of what’s to come:
 
@@ -92,12 +82,13 @@ w3.eth.get_block('latest')
 w3.eth.send_transaction({'from': ..., 'to': ..., 'value': ...})
 ```
 
-<SideDrawer buttonText="Check-in 1" title="TODO">
-      <Question question="eth-intro-1/1-intro/Q1" />
-      <Question question="eth-intro-1/1-intro/Q2" />
-      <Question question="eth-intro-1/1-intro/Q3" />
-      <Question question="eth-intro-1/1-intro/Q4" />
-      <Question question="eth-intro-1/1-intro/Q5" />
+<SideDrawer buttonText="Did you get all that?" title="Comprehension Check">
+      <Question question="eth-intro-1/2-checkin/Q1" />
+      <Question question="eth-intro-1/2-checkin/Q2" />
+      <Question question="eth-intro-1/2-checkin/Q3" />
+      <Question question="eth-intro-1/2-checkin/Q4" />
+      <Question question="eth-intro-1/2-checkin/Q5" />
+      <Question question="eth-intro-1/2-checkin/Q6" />
 </SideDrawer> 
 <br/>
 
@@ -200,12 +191,12 @@ In [4]: w3 = Web3(Web3.EthereumTesterProvider())
 
 Before we move on, does all that make sense? Test yourself:
 
-<SideDrawer buttonText="Check-in 2" title="TODO">
-      <Question question="eth-intro-1/1-intro/Q1" />
-      <Question question="eth-intro-1/1-intro/Q2" />
-      <Question question="eth-intro-1/1-intro/Q3" />
-      <Question question="eth-intro-1/1-intro/Q4" />
-      <Question question="eth-intro-1/1-intro/Q5" />
+<SideDrawer buttonText="Keeping up? Test yourself." title="Comprehension Check">
+      <Question question="eth-intro-1/3-checkin/Q1" />
+      <Question question="eth-intro-1/3-checkin/Q2" />
+      <Question question="eth-intro-1/3-checkin/Q3" />
+      <Question question="eth-intro-1/3-checkin/Q4" />
+      <Question question="eth-intro-1/3-checkin/Q5" />
 </SideDrawer> 
 <br/>
 
@@ -268,7 +259,7 @@ Out[9]: AttributeDict({
 
 A lot of information gets returned about a block, but just a couple things to point out here:
 
-1. The block number is zero — no matter how long ago you configured the tester provider. Unlike the real Ethereum network, which mines a new block roughly every 15 seconds, this simulation will wait until you give it some work to do.
+1. The block number is zero — no matter how long ago you configured the tester provider. Unlike the real Ethereum network, which includes a new block every 13 seconds, this simulation will wait until you give it some work to do.
 2. `transactions` is an empty list, for the same reason: we haven’t done anything yet. This first block is an **empty block**, just to kick off the chain.
 3. Notice that the `parentHash` is just a bunch of empty bytes. This signifies that it's the first block in the chain, also known as the **genesis** **block**.
 

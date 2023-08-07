@@ -2,212 +2,164 @@
   "title": "Quiz: Intro to Ethereum, Pt. 1",
   "questions": [
     {
-      "question": "Choose those which automated testing of smart contracts can help achieve?",
+      "question": "What is in a block?",
       "options": [
         {
-          "answer": "Faster deployment process"
-        },
-        {
-          "answer": "Finding every possible bug and vulnerability"
-        },
-        {
-          "answer": "Improving the overall code quality",
+          "answer": "The hash of each transaction in that block",
           "correct": true
         },
         {
-          "answer": "Ensuring the smart contract is free of errors",
+          "answer": "The email address of the block creator"
+        },
+        {
+          "answer": "A reference to the previous block",
           "correct": true
         }
       ]
     },
     {
-      "question": "Which testing approach is recommended for ensuring a secure smart contract?",
+      "question": "What is novel about blockchains?",
       "options": [
         {
-          "answer": "Only manual testing with thorough code review"
+          "answer": "Their efficiency as a data storage solution."
         },
         {
-          "answer": "Automated testing using unit tests exclusively"
+          "answer": "A high number of transactions per second."
         },
         {
-          "answer": "A combination of manual testing, automated testing, and code auditing",
-          "correct": true
-        },
-        {
-          "answer": "Skipping testing to expedite the deployment process"
-        }
-      ]
-    },
-    {
-      "question": "Which three variables did we define with the 'let' keyword to use in our test suite?",
-      "options": [
-        {
-          "answer": "tokenTier, tierID, onlyOwner"
-        },
-        {
-          "answer": "symbol, collection, provider"
-        },
-        {
-          "answer": "otherUser, contract, owner",
+          "answer": "The ability to be governed without a central authority.",
           "correct": true
         }
       ]
     },
     {
-      "question": "During testing, which role does the 'beforeEach' function serve in the test suite?",
+      "question": "The native currency of Ethereum is called:",
       "options": [
         {
-          "answer": "It deploys a new instance of the contract before executing each test case."
+          "answer": "Bitcoin"
         },
         {
-          "answer": "It sets up the testing environment, and initializes contract variables once before all test cases.",
+          "answer": "ether",
           "correct": true
         },
         {
-          "answer": "It performs cleanup tasks after each test case is executed."
+          "answer": "Ripple"
         },
         {
-          "answer": "It executes the contract's constructor function before running any tests."
+          "answer": "Ethereum"
         }
       ]
     },
     {
-      "question": "In the context of our testing, what role does 'describe' play?",
+      "question": "The smallest denomination of Ethereum's currency is called:",
       "options": [
         {
-          "answer": "It describes the purpose of the smart contract."
+          "answer": "gwei"
         },
         {
-          "answer": "It organises and groups related tests together.",
+          "answer": "finney"
+        },
+        {
+          "answer": "wei",
           "correct": true
         },
         {
-          "answer": "It handles asynchronous operations in the test suite."
+          "answer": "satoshi"
         }
       ]
     },
     {
-      "question": "The role of the 'it' function in a test suite is to:",
+      "question": "While developing your application, you should:",
       "options": [
         {
-          "answer": "organise and group related tests together."
-        },
-        {
-          "answer": "irritate the knights formerly known as The Knights of Ni"
-        },
-        {
-          "answer": "define an individual test case or scenario.",
+          "answer": "connect to a local test network for faster development cycles",
           "correct": true
         },
         {
-          "answer": "handle asynchronous operations in the test suite."
+          "answer": "connect to Ethereum mainnet and spend real ether until you get it right"
+        },
+        {
+          "answer": "publish your private key on GitHub"
         }
       ]
     },
     {
-      "question": "How is 'expect' used to verify test results?",
+      "question": "A local test network provides you with:",
       "options": [
         {
-          "answer": "It waits for the test cases for the entire suite of tests."
-        },
-        {
-          "answer": "It groups multiple tests together under one description."
-        },
-        {
-          "answer": "It waits for an asynchronous call to complete, and returns the result."
-        },
-        {
-          "answer": "It compares the actual result with the anticipated outcome to check if they match.",
+          "answer": "transactions instantly included in new block",
           "correct": true
+        },
+        {
+          "answer": "accounts populated with test ether",
+          "correct": true
+        },
+        {
+          "answer": "deployed sample smart contracts"
         }
       ]
     },
     {
-      "question": "In the 'withdraw()' tests, what do the 'await contract.mint()' calls before each test ensure?",
+      "question": "What does a basic transaction include?",
       "options": [
         {
-          "answer": "The contract owner's wallet balance is increased.",
-          "correct": true
+          "answer": "coinbase, miner, gas"
         },
         {
-          "answer": "The 'withdraw()' function can be executed successfully."
+          "answer": "sender, block number, amount"
         },
         {
-          "answer": "The contract has enough Ether to allow withdrawal."
-        },
-        {
-          "answer": "The contract has at least one minted TierNFT.",
+          "answer": "from, to, value",
           "correct": true
         }
       ]
     },
     {
-      "question": "What is the purpose of refactoring the original 'tokenURI()' method into helper functions?",
+      "question": "Sending ether from one account to another requires how much gas?",
       "options": [
         {
-          "answer": "To optimize contract performance."
+          "answer": "2300"
         },
         {
-          "answer": "To maintain backward compatibility."
+          "answer": "10000"
         },
         {
-          "answer": "To make the tokenURI() method more testable and maintainable.",
+          "answer": "20000"
+        },
+        {
+          "answer": "21000",
           "correct": true
         }
       ]
     },
     {
-      "question": "Why is it beneficial to have tests for the helper functions?",
+      "question": "What are transaction fees in Ethereum?",
       "options": [
         {
-          "answer": "To receive gas refunds"
-        },
-        {
-          "answer": "To decrease the number of transactions"
-        },
-        {
-          "answer": "To improve the correctness and reliability of all the smart contract's behavior",
+          "answer": "An incentive for nodes to include your transaction in a block",
           "correct": true
         },
         {
-          "answer": "To optimize the contract deployment process"
+          "answer": "A fee paid to the Ethereum Foundation"
+        },
+        {
+          "answer": "The cost of executing your transaction on the network",
+          "correct": true
         }
       ]
     },
     {
-      "question": "Why is it essential to test the original 'tokenURI()' method before and after refactoring?",
+      "question": "A sent transaction is in a pending state, meaning what?",
       "options": [
         {
-          "answer": "To verify that the helper functions are working correctly"
-        },
-        {
-          "answer": "To ensure that the refactoring did not introduce bugs or alter functionality",
+          "answer": "The transaction isn't executed until a node includes it in a valid block.",
           "correct": true
         },
         {
-          "answer": "To test cross-browser compatibility"
+          "answer": "The sender has a limited opportunity to spend double the amount."
         },
         {
-          "answer": "To measure performance improvements"
-        }
-      ]
-    },
-    {
-      "question": "Why is it essential to ensure that tests fail before they pass?",
-      "options": [
-        {
-          "answer": "To verify that the test environment is configured correctly.",
-          "correct": true
-        },
-        {
-          "answer": "To confirm that your contract is actually being interacted with.",
-          "correct": true
-        },
-        {
-          "answer": "To make the process of writing tests faster and more efficient."
-        },
-        {
-          "answer": "To confirm that the contract owner can withdraw funds."
+          "answer": "The sender needs to be authorized before the transaction is valid."
         }
       ]
     }

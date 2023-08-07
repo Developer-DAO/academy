@@ -1,12 +1,15 @@
 {
-  "question": "TODO",
+  "question": "What is novel about blockchains?",
   "options": [
     {
-      "answer": "True"
+      "answer": "They can be governed without a central authority.",
+      "correct": true
     },
     {
-      "answer": "False",
-      "correct": true
+      "answer": "They store data more efficiently than a database."
+    },
+    {
+      "answer": "Transaction throughput is unrivaled."
     }
   ]
 }

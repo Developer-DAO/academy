@@ -1,11 +1,15 @@
 {
-  "question": "TODO",
+  "question": "A local test network provides you with:",
   "options": [
     {
-      "answer": "True"
+      "answer": "deployed sample smart contracts"
     },
     {
-      "answer": "False",
+      "answer": "accounts populated with test ether",
+      "correct": true
+    },
+    {
+      "answer": "transactions instantly included in new block",
       "correct": true
     }
   ]

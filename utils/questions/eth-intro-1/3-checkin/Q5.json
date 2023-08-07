@@ -1,12 +1,15 @@
 {
-  "question": "TODO",
+  "question": "What fields does a basic transaction contain?",
   "options": [
     {
-      "answer": "True"
+      "answer": "from, to, value",
+      "correct": true
     },
     {
-      "answer": "False",
-      "correct": true
+      "answer": "sender, receiver, amount"
+    },
+    {
+      "answer": "coinbase, miner, gas"
     }
   ]
 }
