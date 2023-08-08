@@ -92,7 +92,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const {
     data: completedQuizzesAllData,
     isLoading: completedQuizzesAllIsLoading,
-    refetch: refetchCompletedQuizzesAll,
+    // refetch: refetchCompletedQuizzesAll,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
@@ -153,7 +153,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   console.log({ address });
 
   // useEffect(() => {
-  //   if (address) {
+  //   if (address) { // DEV_NOTE: Trying to update the list of completed quizzes when the user changes their wallet address
   //     console.log("Refetch");
   //     refetchCompletedQuizzesAll();
   //   }
