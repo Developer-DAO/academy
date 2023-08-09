@@ -29,7 +29,6 @@ model Account {
 
 model User {
   id               String             @id @default(cuid())
-  password         String?
   name             String?
   address          String?            @unique
   email            String?            @unique
@@ -51,6 +50,6 @@ model CompletedQuizzes {
 }
 
 model Lessons {
-  id           String   @id @default(cuid())
-  quizFileName String   @unique 
+  id        String   @id
+  quizFileName      String
 }
