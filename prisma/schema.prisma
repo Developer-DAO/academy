@@ -50,6 +50,7 @@ model CompletedQuizzes {
 }
 
 model Lessons {
-  id        String   @id
+  id        String   @id @default(cuid())
+  lessonNumber Int   @unique @default(autoincrement())
   quizFileName      String
 }
