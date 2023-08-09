@@ -8,7 +8,6 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
-
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
