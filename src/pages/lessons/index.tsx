@@ -4,6 +4,9 @@ import path from "path";
 import matter from "gray-matter";
 import { ContentBanner } from "@/components/ContentBanner";
 import { CONTENT_PATH } from "@/lib/constants";
+import { type NextPageWithLayout } from "../_app";
+import { type ReactElement } from "react";
+import Layout from "@/components/Layout";
 
 interface Lesson {
   path: string;
@@ -20,7 +23,11 @@ interface LessonTrackMap {
   [key: string]: Lesson[];
 }
 
-const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
+const LessonsPage: NextPageWithLayout<LessonProps> = ({
+  lessons,
+}: {
+  lessons: Lesson[];
+}) => {
   const result = lessons.reduce((acc: LessonTrackMap, curr) => {
     if (!acc[curr.path]) {
       // initial an array of lessons for a given track
@@ -59,7 +66,18 @@ const Lessons: React.FC<LessonProps> = ({ lessons }: { lessons: Lesson[] }) => {
   );
 };
 
-export default Lessons;
+LessonsPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout
+    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
+    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+    >
+      {page}
+    </Layout>
+  );
+};
+
+export default LessonsPage;
 
 export const getStaticProps = () => {
   const contentDir = path.join(CONTENT_PATH);

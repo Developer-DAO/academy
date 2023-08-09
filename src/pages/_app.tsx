@@ -1,8 +1,9 @@
 // Imports
 // ========================================================
-import React from "react";
+import React, { type ReactElement, type ReactNode } from "react";
+import { type NextPage } from "next";
+import { type AppProps } from "next/app";
 
-import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { api } from "@/utils/api";
@@ -30,9 +31,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
-import Layout from "@/components/Layout";
 import { env } from "@/env.mjs";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Config
 // ========================================================
@@ -70,31 +69,37 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout<P> = AppProps<P> & {
+  Component: NextPageWithLayout<P>;
+};
+
 // App Wrapper Component
 // ========================================================
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp = ({
   Component,
   pageProps,
-}) => {
+}: AppPropsWithLayout<{ session: Session }>) => {
+  const getLayout = Component.getLayout || ((page) => page);
+
   return (
-    <ChakraProvider theme={theme}>
-      <WagmiConfig config={wagmiConfig}>
+    <WagmiConfig config={wagmiConfig}>
+      <ChakraProvider theme={theme}>
         <SessionProvider refetchInterval={0} session={pageProps.session}>
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider chains={chains} initialChain={polygonMumbai}>
               <MDXProvider components={Components}>
-                <Layout>
-                  <>
-                    <Component {...pageProps} />
-                    <ReactQueryDevtools />
-                  </>
-                </Layout>
+                {getLayout(<Component {...pageProps} />)}
               </MDXProvider>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
         </SessionProvider>
-      </WagmiConfig>
-    </ChakraProvider>
+      </ChakraProvider>
+    </WagmiConfig>
   );
 };
 

@@ -22,9 +22,11 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { CONTENT_PATH } from "@/lib/constants";
-import { useEffect, useState } from "react";
+import { type ReactElement, useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
+import Layout from "@/components/Layout";
+import { type NextPageWithLayout } from "./_app";
 
 export interface Lesson {
   frontMatter: any;
@@ -78,7 +80,7 @@ export interface ProjectFrontMatter {
   author?: string;
 }
 
-const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
+const GettingStartedPage: NextPageWithLayout<Lessons> = ({ lessons }) => {
   const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
 
   const [fetchNow, setFetchNow] = useState(true);
@@ -98,6 +100,8 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
     },
   );
 
+  console.log({ completedQuizzesAllData });
+
   useEffect(() => {
     const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
       if (!acc[curr.path]) acc[curr.path] = [];
@@ -108,11 +112,7 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
 
     if (sessionData?.user !== undefined && !!completedQuizzesAllData) {
       const completedSlugs: string[] = completedQuizzesAllData?.map(
-        (quiz: any) =>
-          quiz.lesson
-            .replace("quiz-lesson-", "")
-            .replace("lesson-", "")
-            .replace("-quiz", "") || [],
+        (quiz: any) => quiz.lesson,
       );
 
       const completedQuizzes: Project[] = result?.projects?.map(
@@ -354,4 +354,15 @@ export const getStaticProps = () => {
   };
 };
 
-export default GettingStarted;
+GettingStartedPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout
+    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
+    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+    >
+      {page}
+    </Layout>
+  );
+};
+
+export default GettingStartedPage;
