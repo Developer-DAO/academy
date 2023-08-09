@@ -9,16 +9,6 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Todo {
-  id        String   @id @default(cuid())
-  task      String
-  userId    String
-  completed Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -47,7 +37,6 @@ model User {
   image            String?
   createdAt        DateTime           @default(now())
   accounts         Account[]
-  Todo             Todo[]
   CompletedQuizzes CompletedQuizzes[]
 }
 
@@ -59,4 +48,9 @@ model CompletedQuizzes {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Lessons {
+  id           String   @id @default(cuid())
+  quizFileName String   @unique 
 }

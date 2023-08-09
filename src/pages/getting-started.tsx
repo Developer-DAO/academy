@@ -25,7 +25,6 @@ import { CONTENT_PATH } from "@/lib/constants";
 import { useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
-import { useAccount } from "wagmi";
 
 export interface Lesson {
   frontMatter: any;
@@ -85,13 +84,11 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const [fetchNow, setFetchNow] = useState(true);
   const { data: sessionData } = useSession();
 
-  const { address } = useAccount();
-
   // Requests
   // - All
   const {
     data: completedQuizzesAllData,
-    isLoading: completedQuizzesAllIsLoading,
+    // isLoading: completedQuizzesAllIsLoading,
     // refetch: refetchCompletedQuizzesAll,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
@@ -110,15 +107,6 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
     }, {});
 
     if (sessionData?.user !== undefined && !!completedQuizzesAllData) {
-      console.log(
-        "1 ",
-        { completedQuizzesAllData },
-        {
-          a: !completedQuizzesAllIsLoading,
-          b: !!completedQuizzesAllData,
-        },
-      );
-
       const completedSlugs: string[] = completedQuizzesAllData?.map(
         (quiz: any) =>
           quiz.lesson
@@ -137,20 +125,11 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
 
       setFormattedLessons({ ...result, projects: completedQuizzes });
       setFetchNow(false);
-      console.log("1");
     } else {
       setFormattedLessons(result);
       // setFetchNow(false);
-      console.log("2");
     }
-  }, [
-    completedQuizzesAllData,
-    completedQuizzesAllIsLoading,
-    lessons,
-    sessionData,
-  ]);
-
-  console.log({ address });
+  }, [completedQuizzesAllData, lessons, sessionData]);
 
   // useEffect(() => {
   //   if (address) { // DEV_NOTE: Trying to update the list of completed quizzes when the user changes their wallet address

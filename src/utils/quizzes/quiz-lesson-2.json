@@ -1,0 +1,234 @@
+{
+  "title": "Quiz: Lesson 2",
+  "questions": [
+    {
+      "question": "How do you create a new folder in a CLI?",
+      "options": [
+        {
+          "answer": "touch"
+        },
+        {
+          "answer": "rmdir"
+        },
+        {
+          "answer": "mkdir",
+          "correct": true
+        },
+        {
+          "answer": "mv"
+        }
+      ]
+    },
+    {
+      "question": "What is Hardhat?",
+      "options": [
+        {
+          "answer": "An alternative for Remix"
+        },
+        {
+          "answer": " A local blockchain for developing smart contracts",
+          "correct": true
+        },
+        {
+          "answer": " A browser IDE"
+        },
+        {
+          "answer": "Safety apparel"
+        }
+      ]
+    },
+    {
+      "question": "Which command do you use to navigate in a CLI console?",
+      "options": [
+        {
+          "answer": "pwd"
+        },
+        {
+          "answer": "cp"
+        },
+        {
+          "answer": "cd",
+          "correct": true
+        },
+        {
+          "answer": "ls"
+        }
+      ]
+    },
+    {
+      "question": "What makes dependencies important for development?",
+      "options": [
+        {
+          "answer": "They let us transfer information from one server to another"
+        },
+        {
+          "answer": " They provide support when we get errors in our code"
+        },
+        {
+          "answer": "They give us code that we don’t already have in our codebase, but we need to run it",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What purpose do import statements serve in a Solidity smart contract?",
+      "options": [
+        {
+          "answer": "pulls the contract into the next produced block in the blockchain"
+        },
+        {
+          "answer": "connects the contract to the front-end via web3"
+        },
+        {
+          "answer": "references libraries or contracts stored in other locations",
+          "correct": true
+        },
+        {
+          "answer": "imports fine wine and cheeses from the Bourdeaux region of France"
+        }
+      ]
+    },
+    {
+      "question": "What are the ‘security’ advantages of using OpenZeppelin contracts?",
+      "options": [
+        {
+          "answer": "Reduce the amount of code we write ourselves"
+        },
+        {
+          "answer": "Reduce the surface area of code to potentially hack in our contracts",
+          "correct": true
+        },
+        {
+          "answer": "Make it easier for humans to collaborate on security"
+        },
+        {
+          "answer": "Make contracts more interoperable"
+        }
+      ]
+    },
+    {
+      "question": "In the contract declaration statement, what is ERC20 or ERC 721 referring to?",
+      "options": [
+        {
+          "answer": "determines the type of token being created, in the case of ERC20, it is a token with functions allowing it to be exchanged as a digital asset",
+          "correct": true
+        },
+        {
+          "answer": "the Ethereum Records Communication feature to communicate with the blockchain"
+        },
+        {
+          "answer": "determines which blockchain the token will be deployed to (i.e. Ethereum mainnet, Polygon, zkSync, etc.)"
+        },
+        {
+          "answer": "the auto-delete function and which path the command is sent to"
+        }
+      ]
+    },
+    {
+      "question": "What does the OpenZeppelin Wizard do?",
+      "options": [
+        {
+          "answer": " Lets you mint and burn tokens"
+        },
+        {
+          "answer": "Lets you choose modular contracts",
+          "correct": true
+        },
+        {
+          "answer": "Gives you a range of access permissions"
+        }
+      ]
+    },
+    {
+      "question": "What is the function of a smart contract constructor?",
+      "options": [
+        {
+          "answer": "acts as the erector of the contract transferred to a chain deployer"
+        },
+        {
+          "answer": "the constructor adds parameters to the contract such as its 'name', 'symbol', 'baseURI' or 'totalSupply'",
+          "correct": true
+        },
+        {
+          "answer": "allows the Hardhat tooling protocol to design the contract for EVM approval"
+        },
+        {
+          "answer": "sets safety guidelines for smart contract development"
+        }
+      ]
+    },
+    {
+      "question": "What does the 'ipfsBaseURI' refer to?",
+      "options": [
+        {
+          "answer": "a node on the IPFS network that holds the keys to the network"
+        },
+        {
+          "answer": "the IPFS hash address where the image for the NFT is stored",
+          "correct": true
+        },
+        {
+          "answer": "a playground on the IPFS network where NFT minters can interact with their NFTs"
+        },
+        {
+          "answer": "the fire base node for the IPFS network"
+        }
+      ]
+    },
+    {
+      "question": "Who or what is msg.sender in initiating transactions?",
+      "options": [
+        {
+          "answer": "the sender node in the IPFS network"
+        },
+        {
+          "answer": "the postal service in the IPFS metaverse"
+        },
+        {
+          "answer": "the amount of ETH gas sent to initiate a transaction"
+        },
+        {
+          "answer": "the account address that calls a function",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Name two examples of dependencies",
+      "options": [
+        {
+          "answer": "ethers.js",
+          "correct": true
+        },
+        {
+          "answer": "npm"
+        },
+        {
+          "answer": "OpenZeppelin",
+          "correct": true
+        },
+        {
+          "answer": "node.js"
+        }
+      ]
+    },
+    {
+      "question": "In our package.json file, which three keys can we find from the key/value pairs?",
+      "options": [
+        {
+          "answer": "ISC, keywords, index"
+        },
+        {
+          "answer": "author, echo, [ ]"
+        },
+        {
+          "answer": "license, main, version",
+          "correct": true
+        },
+        {
+          "answer": "description, name, projectnft"
+        }
+      ]
+    }
+  ]
+}
