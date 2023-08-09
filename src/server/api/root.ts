@@ -1,6 +1,6 @@
 import { createTRPCRouter } from "@/server/api/trpc";
 import { exampleRouter } from "@/server/api/routers/example";
-import { todosRouter } from "@/server/api/routers/todos";
+// import { todosRouter } from "@/server/api/routers/todos";
 import { completedQuizzesRouter } from "@/server/api/routers/completedquizzes";
 
 /**
@@ -10,7 +10,7 @@ import { completedQuizzesRouter } from "@/server/api/routers/completedquizzes";
  */
 export const appRouter = createTRPCRouter({
   example: exampleRouter,
-  todos: todosRouter,
+  // todos: todosRouter,
   completedQuizzes: completedQuizzesRouter,
 });
 
