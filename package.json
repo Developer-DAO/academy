@@ -27,6 +27,7 @@
     "framer-motion": "^10.12.17",
     "next": "^13.4.7",
     "next-auth": "^4.22.1",
+    "next-seo": "^6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
