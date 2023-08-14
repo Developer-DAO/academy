@@ -2,11 +2,12 @@ import { ChakraProvider, Box } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { theme } from '@theme'
-import Header from '@components/Header'
-import Footer from '@components/footer/Footer'
+import Layout from '@components/Layout'
 import { MDXProvider } from '@mdx-js/react'
 import Components from '@components/mdx/Components'
 import { Analytics } from '@vercel/analytics/react'
+import { type NextPage } from 'next'
+import { type ReactNode, type ReactElement } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -40,14 +41,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#000000" />
       </Head>
-      <Box p="1.25em" px="5%" mx={{ base: '2rem', md: '6rem', lg: '10rem' }}>
-        <Header />
-        <MDXProvider components={Components}>
+      <MDXProvider components={Components}>
+        <Layout>
           <Component {...pageProps} />
-        </MDXProvider>
-        <Footer />
+        </Layout>
         <Analytics />
-      </Box>
+      </MDXProvider>
     </ChakraProvider>
   )
 }

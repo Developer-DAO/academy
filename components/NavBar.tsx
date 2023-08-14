@@ -19,7 +19,12 @@ import { PomodoroTimer } from '@components/PomodoroTimer'
 function NavBar() {
   const router = useRouter()
   return (
-    <Box>
+    <Box
+      p="1.25em"
+      px="5%"
+      mx={{ base: '2rem', md: '6rem', lg: '10rem' }}
+      as="header"
+    >
       <Flex justify="left" alignItems="center">
         <Link as={NextLink} variant="logo" href={'/'}>
           {router.pathname.endsWith('/[slug]') ? (

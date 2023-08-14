@@ -14,6 +14,10 @@ export default function Footer() {
   return (
     <Box
       // bg={useColorModeValue('#00000f', '#1d1e20')}
+      p="1.25em"
+      px="5%"
+      mx={{ base: '2rem', md: '6rem', lg: '10rem' }}
+      as="footer"
       color={useColorModeValue('gray.700', 'gray.200')}
     >
       <Container

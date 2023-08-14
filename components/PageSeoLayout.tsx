@@ -40,9 +40,8 @@ const PageSeoLayout = ({
             href: '/favicon/favicon.ico',
           },
         ]}
-      >
-        {children}
-      </NextSeo>
+      />
+      {children}
     </>
   )
 }
