@@ -6,8 +6,6 @@ import Layout from '@components/Layout'
 import { MDXProvider } from '@mdx-js/react'
 import Components from '@components/mdx/Components'
 import { Analytics } from '@vercel/analytics/react'
-import { type NextPage } from 'next'
-import { type ReactNode, type ReactElement } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
