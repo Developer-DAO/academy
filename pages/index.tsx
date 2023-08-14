@@ -1,16 +1,13 @@
 import { Box } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Hero from '@components/Hero'
+import PageSeoLayout from '@components/PageSeoLayout'
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <main>
-        <Box as="main">
-          <Hero />
-        </Box>
-      </main>
-    </div>
+    <PageSeoLayout title="test" description="test">
+      <Hero />
+    </PageSeoLayout>
   )
 }
 
