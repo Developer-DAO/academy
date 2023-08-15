@@ -37,7 +37,10 @@ const GettingStarted: NextPage<LessonProps> = ({ lessons }) => {
 
   return (
     <React.Fragment>
-      <PageSeoLayout title="Getting Started" description="Getting Started">
+      <PageSeoLayout
+        title="Getting Started"
+        description="D_D Academy is an open-source education platform created by the Developer DAO."
+      >
         <Flex
           as="main"
           py={5}

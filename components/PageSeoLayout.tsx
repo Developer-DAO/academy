@@ -14,11 +14,13 @@ const PageSeoLayout = ({
   return (
     <>
       <NextSeo
+        title={`Developer DAO Academy | ${title}`}
+        description={description}
         openGraph={{
           type: 'website',
           locale: 'en_US',
           url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
-          site_name: 'Developer DAO Academy',
+          site_name: `Developer DAO Academy`,
           title: `Developer DAO Academy | ${title}`,
           description: `${description}`,
           images: [

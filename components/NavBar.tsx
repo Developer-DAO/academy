@@ -84,7 +84,7 @@ function NavBar() {
                     GET STARTED
                   </Link>
                 </MenuItem>
-                <MenuItem>
+                {/* <MenuItem>
                   <Link
                     as={NextLink}
                     href="/lessons"
@@ -97,7 +97,7 @@ function NavBar() {
                   >
                     Tracks
                   </Link>
-                </MenuItem>
+                </MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
@@ -136,7 +136,7 @@ function NavBar() {
               Get Started
             </Link>
 
-            <Link
+            {/* <Link
               as={NextLink}
               href="/lessons"
               passHref
@@ -147,7 +147,7 @@ function NavBar() {
               }
             >
               Tracks
-            </Link>
+            </Link> */}
 
             {/* <Button colorScheme="gray" variant="solid">
               <ConnectButton chainStatus="icon" showBalance={false} />
