@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo'
 interface PageSeoLayoutProps {
   title: string
   description?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const PageSeoLayout = ({
