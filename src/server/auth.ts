@@ -13,6 +13,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
 import type { Session } from "next-auth";
+// import { PrismaAdapter } from "@next-auth/prisma-adapter";
+// import { env } from "@/env.mjs";
 
 // Types
 // ========================================================
@@ -50,6 +52,14 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
 }) => ({
   callbacks: {
     // token.sub will refer to the id of the wallet address
+    // session: ({ session, token }) =>
+    //   ({
+    //     ...session,
+    //     user: {
+    //       ...session.user,
+    //       id: token.sub,
+    //     },
+    //   } as Session & { user: { id: string } }),
     session: ({ session, token }) =>
       ({
         ...session,
@@ -66,7 +76,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
     //   profile?: Profile
     //   // Not user
     //   email?: {
-    //     verificationRequest?: boolean
     //   }
     //   /** If Credentials provider is used, it contains the user credentials */
     //   credentials?: Record<string, CredentialInput>
@@ -95,6 +104,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
     // }
   },
   // OTHER OPTIONS (not needed)
+  session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET, // in case you want pass this along for other functionality
   // adapter: PrismaAdapter(prisma), // Not meant for type 'credentials' (used for db sessions)
   // jwt: { // Custom functionlaity for jwt encoding/decoding
@@ -109,13 +119,6 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
   //     return decode({ token, secret })
   //   }
   // },
-  session: {
-    // Credentials defaults to this strategy
-    strategy: "jwt",
-    //   maxAge: 2592000,
-    //   updateAge: 86400,
-    //   generateSessionToken: () => 'SomeValue'
-  },
   // events: { // Callback events
   //   signIn: async (message: {
   //     user: User
@@ -183,6 +186,7 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
               address: fields.address,
             },
           });
+
           // Create new user if doesn't exist
           if (!user) {
             user = await prisma.user.create({
@@ -191,7 +195,8 @@ export const authOptions: (ctxReq: CtxOrReq) => NextAuthOptions = ({
                 image: "https://www.developerdao.com/D_D_logo-dark.svg",
               },
             });
-            // create account
+
+            // if new then create account
             await prisma.account.create({
               data: {
                 userId: user.id,

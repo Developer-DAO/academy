@@ -3,7 +3,7 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
+  // Button,
   Stack,
   Collapse,
   Icon,
@@ -24,19 +24,8 @@ import {
 import NextLink from "next/link";
 import SchoolOfCodeLogo from "./SchoolOfCodeLogo";
 import { useRouter } from "next/router";
-import { getCsrfToken, signIn, signOut, useSession } from "next-auth/react";
-// import { api } from '@/utils/api'
-// SIWE Integration
-import { SiweMessage } from "siwe";
-import {
-  useAccount,
-  useConnect,
-  useDisconnect,
-  useSignMessage,
-  useNetwork,
-} from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { useEffect, useState } from "react";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface NavItem {
   label: string;
@@ -63,69 +52,6 @@ const NAV_ITEMS: Array<NavItem> = [
 export default function Topbar() {
   const { isOpen, onToggle } = useDisclosure();
   const router = useRouter();
-
-  // Hooks
-  const { data: sessionData } = useSession();
-  // const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-  //   undefined, // no input
-  //   { enabled: sessionData?.user !== undefined }
-  // );
-  // State
-  const [showConnection, setShowConnection] = useState(false);
-
-  // Wagmi Hooks
-  const { signMessageAsync } = useSignMessage();
-  const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  const { disconnect } = useDisconnect();
-  const { chain } = useNetwork();
-
-  // Functions
-  /**
-   * Attempts SIWE and establish session
-   */
-  const onClickSignIn = async () => {
-    try {
-      const message = new SiweMessage({
-        domain: window.location.host,
-        address: address,
-        statement: "Sign in with Ethereum to the app.",
-        uri: window.location.origin,
-        version: "1",
-        chainId: chain?.id,
-        // nonce is used from CSRF token
-        nonce: await getCsrfToken(),
-      });
-      const signature = await signMessageAsync({
-        message: message.prepareMessage(),
-      });
-      await signIn("credentials", {
-        message: JSON.stringify(message),
-        redirect: false,
-        signature,
-      });
-    } catch (error) {
-      window.alert(error);
-    }
-  };
-
-  /**
-   * Sign user out
-   */
-  const onClickSignOut = async () => {
-    await signOut();
-  };
-
-  // Hooks
-  /**
-   * Handles hydration issue
-   * only show after the window has finished loading
-   */
-  useEffect(() => {
-    setShowConnection(true);
-  }, []);
 
   return (
     <Box
@@ -194,51 +120,7 @@ export default function Topbar() {
           spacing={6}
           minW={"10rem"}
         >
-          {sessionData ? (
-            <div className="mb-4 text-center">
-              <button
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                onClick={onClickSignOut as () => void}
-              >
-                Sign Out
-              </button>
-            </div>
-          ) : showConnection ? (
-            <div className="mb-4">
-              {/* {chain?.unsupported ? (
-                  <button onClick={() => switchNetwork?.()}>
-                    {`Switch to ${polygonMumbai.name}`}
-                    {isLoading &&
-                      pendingChainId === polygonMumbai.id &&
-                      " (switching)"}
-                  </button> */}
-              {isConnected ? (
-                <button
-                  className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                  onClick={onClickSignIn as () => void}
-                >
-                  Sign In
-                </button>
-              ) : null}
-            </div>
-          ) : null}
-          {showConnection ? (
-            <div className="text-center">
-              {address ? (
-                <p className="mb-4">
-                  <code className="block rounded bg-black/20 p-4 text-white">
-                    {address}
-                  </code>
-                </p>
-              ) : null}
-              <Button
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-                onClick={() => (!isConnected ? connect() : disconnect())}
-              >
-                {!isConnected ? "Connect Wallet" : "Disconnect"}
-              </Button>
-            </div>
-          ) : null}
+          <ConnectButton accountStatus="address" />
         </Stack>
       </Flex>
 

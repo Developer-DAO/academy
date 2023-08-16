@@ -1,16 +1,24 @@
 // Imports
 // ========================================================
 import type { NextApiRequest, NextApiResponse } from "next";
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
+import { type NextAuthOptions } from "next-auth";
 import { authOptions } from "@/server/auth";
 
 // Auth
 // ========================================================
-const Auth = (req: NextApiRequest, res: NextApiResponse) => {
+const Auth = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log("In [...nextauth].ts");
+
   const authOpts: NextAuthOptions = authOptions({ req });
 
+  if (!Array.isArray(req.query.nextauth)) {
+    res.status(400).send("Bad request");
+    return;
+  }
+
   const isDefaultSigninPage =
-    req.method === "GET" && req?.query?.nextauth?.includes("signin");
+    req.method === "GET" && req.query.nextauth?.includes("signin");
 
   // Hide Sign-In with Ethereum from default sign page
   if (isDefaultSigninPage) {
@@ -18,7 +26,7 @@ const Auth = (req: NextApiRequest, res: NextApiResponse) => {
     authOpts.providers.pop();
   }
 
-  return NextAuth(req, res, authOpts) as typeof NextAuth;
+  return (await NextAuth(req, res, authOpts)) as typeof NextAuth;
 };
 
 // Exports

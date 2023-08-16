@@ -22,7 +22,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { CONTENT_PATH } from "@/lib/constants";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
 
@@ -81,7 +81,7 @@ export interface ProjectFrontMatter {
 const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
 
-  const [fetchNow, setFetchNow] = useState<boolean>(true);
+  const [fetchNow, setFetchNow] = useState(true);
   const { data: sessionData } = useSession();
 
   // Requests
@@ -89,27 +89,24 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   const {
     data: completedQuizzesAllData,
     // isLoading: completedQuizzesAllIsLoading,
+    // refetch: refetchCompletedQuizzesAll,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
       // Disable request if no session data
       enabled: sessionData?.user !== undefined && fetchNow,
-      onSuccess: () => {
-        // setNewTodo(""); // reset input form
-      },
     },
   );
 
-  useMemo(() => {
-    if (completedQuizzesAllData?.length && fetchNow) {
-      const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
-        if (!acc[curr.path]) acc[curr.path] = [];
+  useEffect(() => {
+    const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
+      if (!acc[curr.path]) acc[curr.path] = [];
 
-        acc[curr.path].push(curr);
-        return acc;
-      }, {});
+      acc[curr.path].push(curr);
+      return acc;
+    }, {});
 
-      let completedQuizzes: Project[] = [];
+    if (sessionData?.user !== undefined && !!completedQuizzesAllData) {
       const completedSlugs: string[] = completedQuizzesAllData?.map(
         (quiz: any) =>
           quiz.lesson
@@ -117,16 +114,30 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
             .replace("lesson-", "")
             .replace("-quiz", "") || [],
       );
-      completedQuizzes = result?.projects?.map((project: Project) => {
-        if (completedSlugs.includes(project.slug)) project.completed = true;
-        else project.completed = false;
-        return project;
-      });
+
+      const completedQuizzes: Project[] = result?.projects?.map(
+        (project: Project) => {
+          if (completedSlugs.includes(project.slug)) project.completed = true;
+          else project.completed = false;
+          return project;
+        },
+      );
 
       setFormattedLessons({ ...result, projects: completedQuizzes });
       setFetchNow(false);
+    } else {
+      setFormattedLessons(result);
+      // setFetchNow(false);
     }
-  }, [completedQuizzesAllData, fetchNow, lessons]);
+  }, [completedQuizzesAllData, lessons, sessionData]);
+
+  // useEffect(() => {
+  //   if (address) { // DEV_NOTE: Trying to update the list of completed quizzes when the user changes their wallet address
+  //     console.log("Refetch");
+  //     refetchCompletedQuizzesAll();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [address]);
 
   return (
     <Flex

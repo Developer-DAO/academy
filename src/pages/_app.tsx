@@ -1,73 +1,97 @@
 // Imports
 // ========================================================
+import React from "react";
+
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { api } from "@/utils/api";
+
 import "@/styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
+
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import {
+  connectorsForWallets,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
+import {
+  ledgerWallet,
+  trustWallet,
+  zerionWallet,
+} from "@rainbow-me/rainbowkit/wallets";
+
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
-import { InjectedConnector } from "wagmi/connectors/injected";
-import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import Layout from "@/components/Layout";
+import { env } from "@/env.mjs";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // Config
 // ========================================================
 /**
  * Configure chains supported
  */
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const { chains, publicClient } = configureChains(
   [polygonMumbai],
   [publicProvider()],
 );
 
-/**
- * Configure publicProvider and allow for auto wallet connection
- */
-const config = createConfig({
+const projectId = env.NEXT_PUBLIC_WALLET_CONNECT_ID;
+
+const { wallets } = getDefaultWallets({
+  appName: "D_D Academy",
+  projectId,
+  chains,
+});
+
+const connectors = connectorsForWallets([
+  ...wallets,
+  {
+    groupName: "Other",
+    wallets: [
+      zerionWallet({ projectId, chains }),
+      trustWallet({ projectId, chains }),
+      ledgerWallet({ projectId, chains }),
+    ],
+  },
+]);
+
+const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: [
-    new MetaMaskConnector({ chains }),
-    new InjectedConnector({
-      chains,
-      options: {
-        name: "Injected",
-        shimDisconnect: true,
-      },
-    }),
-    new CoinbaseWalletConnector({
-      chains,
-      options: {
-        appName: "Developer DAO Academy",
-      },
-    }),
-  ],
+  connectors,
   publicClient,
-  webSocketPublicClient,
 });
 
 // App Wrapper Component
 // ========================================================
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps,
 }) => {
   return (
     <ChakraProvider theme={theme}>
-      <WagmiConfig config={config}>
-        <SessionProvider session={session} refetchInterval={0}>
-          <MDXProvider components={Components}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </MDXProvider>
+      <WagmiConfig config={wagmiConfig}>
+        <SessionProvider refetchInterval={0} session={pageProps.session}>
+          <RainbowKitSiweNextAuthProvider>
+            <RainbowKitProvider chains={chains} initialChain={polygonMumbai}>
+              <MDXProvider components={Components}>
+                <Layout>
+                  <>
+                    <Component {...pageProps} />
+                    <ReactQueryDevtools />
+                  </>
+                </Layout>
+              </MDXProvider>
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
         </SessionProvider>
       </WagmiConfig>
     </ChakraProvider>

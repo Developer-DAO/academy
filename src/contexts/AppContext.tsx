@@ -1,3 +1,4 @@
+import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
 import { createContext, useState } from "react";
 
@@ -18,8 +19,23 @@ export const AppContext = createContext(initialState);
 function Context({ children }: ContextProps) {
   const [message, setMessage] = useState("");
   const { data: sessionData } = useSession();
+  const [fetchNow, setFetchNow] = useState(true);
 
   console.log({ sessionData });
+
+  // Requests
+  // - All
+  const {
+    // data: completedQuizzesAllData,
+    // isLoading: completedQuizzesAllIsLoading,
+    // refetch: refetchCompletedQuizzesAll,
+  } = api.completedQuizzes.all.useQuery(
+    undefined, // no input
+    {
+      // Disable request if no session data
+      enabled: sessionData?.user !== undefined && fetchNow,
+    },
+  );
 
   return (
     <AppContext.Provider value={{ message, setMessage }}>
