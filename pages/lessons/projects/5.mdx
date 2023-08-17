@@ -84,6 +84,7 @@ The next command creates a sub-directory named `frontend` inside our root direct
 and sets up all the necessary files and folders within it. The `create-next-app` command
 uses the `yarn` package manager by default. **So be careful and choose your command accordingly**.  We have been using `npm` as our package manager for all our previous builds, so we'll choose the `--use-npm` flags:
 
+{/* We need to check the following commands and flags are up-to-date, and for a Javascript project, if we prefer to stick to JS over TypeScript: */}
 
 ```bash
 # choose the following for npm
@@ -92,8 +93,8 @@ npx create-next-app frontend --use-npm
 # careful, this is the default for yarn 
 npx create-next-app frontend
 ```
-{/* I'm assuming the following default steps are correct. Can you check that @wolovim?: */}
-Choose 'No' to *TypeScript*, because we want to create a *JavaScript* project, but choose 'Yes' to all the other options:
+{/* I'm not sure if the following steps are correct, but having this information in the lesson, can be a great guide (Rohit was under pressure to get it out, so might have overlooked adding it then) I'll comment it out for now, and we can update it accordingly: */}
+{/* Choose 'No' to *TypeScript*, because we want to create a *JavaScript* project, but choose 'Yes' to all the other options:
 
 ```bash
 Need to install the following packages:
@@ -106,7 +107,7 @@ Ok to proceed? (y) y
 ✔ Would you like to use App Router? (recommended) … No / Yes
 ✔ Would you like to customize the default import alias? … No / Yes
 Creating a new Next.js app in ../../d_d_academy/tierNFT/frontend.
-```
+``` */}
 
 Once the setup is complete, we open the `frontend` directory and get cracking.
 
