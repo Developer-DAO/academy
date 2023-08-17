@@ -20,7 +20,8 @@ import { LessonHeader } from '../../../components/mdx/LessonHeader'
 
 Welcome to this final tutorial in a series on smart contract development of the ERC721 standard, a.k.a. NFTs. Throughout the previous lessons we learnt how to write smart contracts, use token standards, and utilise test driven development as well. But to create a full stack decentralised application, we also need a UI, or frontend for users to interact with. In this lesson that is exactly what we're going to create.
 
-You can expect our familiar checkpoint questions throughout the tutorial for testing your previous knowledge, how well you’re picking up the new material, and even some on predicting upcoming steps in the lesson. They all help with critical thinking and active engagement. You'll find the updated code in side-drawers too as you progress, handy for identifying any pesky syntax errors you might come across. And of course, there is a final quiz waiting for you on completion. 
+{/* We may as well comment out the following paragraph for this first PR of July/August 2023, since without any quizzes, it's not yet relevant: */}
+{/* You can expect our familiar checkpoint questions throughout the tutorial for testing your previous knowledge, how well you’re picking up the new material, and even some on predicting upcoming steps in the lesson. They all help with critical thinking and active engagement. You'll find the updated code in side-drawers too as you progress, handy for identifying any pesky syntax errors you might come across. And of course, there is a final quiz waiting for you on completion.  */}
 
 Expect somewhere from one to six hours to complete the lesson, depending on your prior experience and the need to grasp new concepts. To help you maintain a steady pace and encourage breaks for rejuvenation, you'll find our pomodoro timer ⌛ in the menu header. It'll remind you to "go touch grass" and appreciate nature's role in enhancing our well-being. 🌱 Relish your journey in development in a good state of mind and body.
 
@@ -40,12 +41,8 @@ wallet management (i.e. Handling wallet connections to our application).
 functions from our smart contract through the frontend using the provided *hooks*. */}
 
 
-{/* the following are headers from previous 4 lessons */}
-{/* ## What are we going to do?
-**By the end of this lesson we'll have learned a lot.**
-### Lesson breakdown
-### Quick breakdown of lesson steps */}
-## Lesson steps
+{/* We could do with a oneliner for each to  describe what index.js and app.js are for */}
+## Let's breakdown the lesson
 - Set up our development environment with TierNFT project
 - initialise a nextJS app 
 - Install RainbowKit, WAGMI and Ethers to create main application
@@ -54,27 +51,24 @@ functions from our smart contract through the frontend using the provided *hooks
 - Create NFT cards
 - Enable minting of NFTs in the application.
 
+<br/>
 
-<br/><br/>
-{/* **lesson 1 has no separate header. 'Tooling' incoorporated in breakdown**
-**To achieve this, we'll need diverse developer tools.**
-### Developer tooling
-### Developer tools and libraries we'll be using */}
 ## Tools to get the job done
 - [nextJS](https://nextjs.org/) - a React framework for building a full-stack app
 - [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library for out-of-the-box 
 wallet management
+{/* ethers will be getting ejected and viem will get added, I guess: */}
+{/* - [viem](https://viem.sh/docs/getting-started.html) */}
 - [ethers](https://docs.ethers.org/v6/) is a compact JavaScript library for interacting with the Ethereum eco-system
 - [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to work effectively with Ethereum
 - [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app connect to the blockchain
--
--
+
 **always make sure you access up-to-date release notes and documentation*
 
 Let's dive in!
-<br/><br/>
+<br/>
 
----
+{/* --- */}
 
 ## Getting started
 
@@ -98,11 +92,10 @@ npx create-next-app frontend --use-npm
 # careful, this is the default for yarn 
 npx create-next-app frontend
 ```
-{/* I'm assuming the following default steps are correct: */}
-Choose 'No' to all the options to create a default JavaScript project:
+{/* I'm assuming the following default steps are correct. Can you check that @wolovim?: */}
+Choose 'No' to *TypeScript*, because we want to create a *JavaScript* project, but choose 'Yes' to all the other options:
 
 ```bash
-paul@pcpiablo:~/D_D/d_d_academy/tierNFT$ npx create-next-app frontend --use-npm
 Need to install the following packages:
   create-next-app@13.4.12
 Ok to proceed? (y) y
@@ -112,28 +105,7 @@ Ok to proceed? (y) y
 ✔ Would you like to use `src/` directory? … No / Yes
 ✔ Would you like to use App Router? (recommended) … No / Yes
 ✔ Would you like to customize the default import alias? … No / Yes
-Creating a new Next.js app in /home/paul/D_D/d_d_academy/tierNFT/frontend.
-
-Using npm.
-
-Initializing project with template: default 
-
-
-Installing dependencies:
-- react
-- react-dom
-- next
-
-
-added 24 packages, and audited 25 packages in 12s
-
-4 packages are looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
-Initialized a git repository.
-
-Success! Created frontend at /home/paul/D_D/d_d_academy/tierNFT/frontend
+Creating a new Next.js app in ../../d_d_academy/tierNFT/frontend.
 ```
 
 Once the setup is complete, we open the `frontend` directory and get cracking.
@@ -147,6 +119,10 @@ cd frontend
 
 ## The Frontend
 
+{/* We need more of an intro than the following 'The Main Application' as to what 
+app.js is and subsequently we should do the same for index.js (when we get to that
+ section). A little hint of what index.js is here would help - we could use a 
+ prediction question to aid with/actually perform this task before this section: */}
 For users to easily interact with our smart contract and mint the NFTs we must
 provide an interface. A simple process that is easily accessible. Let's start by creating a way to handle wallet connections.
 
@@ -160,6 +136,8 @@ libraries for interoperability between various chains and wallet providers and
 thus needs some configurations.
 
 But first we need to install the necessary dependencies.
+{/* @wolovim should we define version numbers of libraries/dependencies to ensure no breaking 
+changes from future and to give better learner experience   */}
 
 ```bash
 npm install @rainbow-me/rainbowkit wagmi ethers
@@ -268,7 +246,7 @@ API_KEY='YOUR-API-KEY-FROM-PROVIDER'
 ```
 
 Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
-so that have access to their features throughout our application. Our code should 
+so that it can have access to their features throughout our application. Our code should 
 look like this:
 
 ```jsx
@@ -293,6 +271,11 @@ Now that we have our application setup, we can edit the Index Page.
 ---
 
 ### The Index Page
+
+{/* We need an explanation on what 'the Index Page' is about and it's relation to the stack,
+ or as I mentioned preceeding 'The Main Application' section, 
+we could use a prediction question to introduce this. LOng story short, the 
+following 'intro' is not an intro: */}
 
 The `index.js` page in the `/frontend/pages` directory should look like this 
 after deleting all the *children* within the `<main>` element and completely 
@@ -565,6 +548,9 @@ later. For example, the `data` returned is called `mintData`.
 Even though we have this function, we need to pass in custom `message values` 
 i.e. an amount in **ETH**, as defined in our contract. For this we create our 
 own `mintToken` function that calls the `mint` function from WAGMI within it.
+  
+  {/* should be: // 'return statement for rendering...' 
+  and not: // function Home() code... */}
 
 ```jsx
 // WAGMI useContractWrite hook...
