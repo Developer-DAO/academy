@@ -32,7 +32,7 @@ import { theme } from "@/theme";
 import { MDXProvider } from "@mdx-js/react";
 import Components from "@/components/mdx/Components";
 import { env } from "@/env.mjs";
-
+import { AppContextProvider } from "@/contexts/AppContextProvider";
 // Config
 // ========================================================
 /**
@@ -93,7 +93,9 @@ const MyApp = ({
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider chains={chains} initialChain={polygonMumbai}>
               <MDXProvider components={Components}>
-                {getLayout(<Component {...pageProps} />)}
+                <AppContextProvider>
+                  {getLayout(<Component {...pageProps} />)}
+                </AppContextProvider>
               </MDXProvider>
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
