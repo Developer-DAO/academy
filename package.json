@@ -25,7 +25,8 @@
     "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
