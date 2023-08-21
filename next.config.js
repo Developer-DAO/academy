@@ -17,4 +17,8 @@ export default withMDX({
   reactStrictMode: true,
   // Append the default value with md extensions
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 })
