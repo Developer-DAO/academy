@@ -15,13 +15,20 @@ async function main() {
   //   },
   // });
   // console.log({ user });
-
-  const lesson1 = await prisma.lessons.create({
+  // const lesson1 = await prisma.lessons.create({
+  //   data: {
+  //     quizFileName: "lesson-4-quiz.json",
+  //   },
+  // });
+  // console.log({ lesson1 });
+  const completed2 = await prisma.completedQuizzes.create({
     data: {
-      quizFileName: "quiz-lesson-1.json",
+      userId: "cll3hcuim00001wujlay766tk",
+      lesson: "2",
+      completed: true,
     },
   });
-  console.log({ lesson1 });
+  console.log({ completed2 });
 }
 
 main()

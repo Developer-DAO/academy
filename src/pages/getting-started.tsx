@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import NextLink from "next/link";
 import {
   Heading,
@@ -18,126 +16,14 @@ import {
   Box,
   Badge,
 } from "@chakra-ui/react";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import { CONTENT_PATH } from "@/lib/constants";
-import { useEffect, useState } from "react";
-import { api } from "@/utils/api";
-import { useSession } from "next-auth/react";
+import { type ReactElement } from "react";
+import Layout from "@/components/Layout";
+import { type NextPageWithLayout } from "./_app";
+import { type Lessons, type Lesson } from "@/interfaces";
+import { useAppContext } from "@/contexts/AppContext";
 
-export interface Lesson {
-  frontMatter: any;
-  slug: string;
-  path: string;
-  completed?: boolean;
-}
-export interface Lessons {
-  lessons: {
-    frontMatter: any;
-    slug: string;
-  }[];
-}
-
-export interface LessonProps {
-  projects: Project[];
-  fundamentals: Fundamental[];
-}
-
-export interface Fundamental {
-  path: Path;
-  frontMatter: FundamentalFrontMatter;
-  slug: string;
-}
-
-export interface FundamentalFrontMatter {
-  title: string;
-  description: string;
-  icons: string[];
-  authors?: string[];
-  i18n?: string;
-  author?: string[] | string;
-}
-
-export enum Path {
-  Fundamentals = "fundamentals",
-}
-
-export interface Project {
-  path: string;
-  frontMatter: ProjectFrontMatter;
-  slug: string;
-  completed: boolean;
-}
-
-export interface ProjectFrontMatter {
-  title: string;
-  description: string;
-  icons: string[];
-  i18n?: string;
-  author?: string;
-}
-
-const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
-  const [formattedLessons, setFormattedLessons] = useState<LessonProps>();
-
-  const [fetchNow, setFetchNow] = useState(true);
-  const { data: sessionData } = useSession();
-
-  // Requests
-  // - All
-  const {
-    data: completedQuizzesAllData,
-    // isLoading: completedQuizzesAllIsLoading,
-    // refetch: refetchCompletedQuizzesAll,
-  } = api.completedQuizzes.all.useQuery(
-    undefined, // no input
-    {
-      // Disable request if no session data
-      enabled: sessionData?.user !== undefined && fetchNow,
-    },
-  );
-
-  useEffect(() => {
-    const result: LessonProps = lessons.reduce((acc: any, curr: any) => {
-      if (!acc[curr.path]) acc[curr.path] = [];
-
-      acc[curr.path].push(curr);
-      return acc;
-    }, {});
-
-    if (sessionData?.user !== undefined && !!completedQuizzesAllData) {
-      const completedSlugs: string[] = completedQuizzesAllData?.map(
-        (quiz: any) =>
-          quiz.lesson
-            .replace("quiz-lesson-", "")
-            .replace("lesson-", "")
-            .replace("-quiz", "") || [],
-      );
-
-      const completedQuizzes: Project[] = result?.projects?.map(
-        (project: Project) => {
-          if (completedSlugs.includes(project.slug)) project.completed = true;
-          else project.completed = false;
-          return project;
-        },
-      );
-
-      setFormattedLessons({ ...result, projects: completedQuizzes });
-      setFetchNow(false);
-    } else {
-      setFormattedLessons(result);
-      // setFetchNow(false);
-    }
-  }, [completedQuizzesAllData, lessons, sessionData]);
-
-  // useEffect(() => {
-  //   if (address) { // DEV_NOTE: Trying to update the list of completed quizzes when the user changes their wallet address
-  //     console.log("Refetch");
-  //     refetchCompletedQuizzesAll();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [address]);
+const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
+  const { lessonsWithStatus } = useAppContext();
 
   return (
     <Flex
@@ -184,8 +70,8 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
         >
           Current Lessons
         </Heading>
-        {formattedLessons
-          ? Object.entries(formattedLessons).map((track: any, idx: number) => {
+        {lessonsWithStatus
+          ? Object.entries(lessonsWithStatus).map((track: any, idx: number) => {
               return (
                 <UnorderedList
                   listStyleType="none"
@@ -314,44 +200,55 @@ const GettingStarted: React.FC<Lessons> = ({ lessons }) => {
   );
 };
 
-export const getStaticProps = () => {
-  const contentDir = path.join(CONTENT_PATH);
-  const directories = fs.readdirSync(path.resolve(contentDir));
-  const lessons: object[] = [];
-  directories.reverse().map((folder) => {
-    if (fs.lstatSync(path.join(contentDir, folder)).isDirectory()) {
-      fs.readdirSync(path.join(contentDir, folder)).map((file) => {
-        if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
-          const markdownWithMeta = fs.readFileSync(
-            path.join(contentDir, folder, file),
-            "utf-8",
-          );
+// export const getStaticProps = () => {
+//   const contentDir = path.join(CONTENT_PATH);
+//   const directories = fs.readdirSync(path.resolve(contentDir));
+//   const lessons: object[] = [];
+//   directories.reverse().map((folder) => {
+//     if (fs.lstatSync(path.join(contentDir, folder)).isDirectory()) {
+//       fs.readdirSync(path.join(contentDir, folder)).map((file) => {
+//         if (!fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()) {
+//           const markdownWithMeta = fs.readFileSync(
+//             path.join(contentDir, folder, file),
+//             "utf-8",
+//           );
 
-          const { data: frontMatter } = matter(markdownWithMeta);
-          if (folder === "fundamentals") {
-            lessons.push({
-              path: folder,
-              frontMatter,
-              slug: file.replace(".mdx", ""),
-            });
-          } else {
-            lessons.push({
-              path: folder,
-              frontMatter,
-              slug: file.replace(".mdx", ""),
-              completed: false,
-            });
-          }
-        }
-      });
-    }
-  });
+//           const { data: frontMatter } = matter(markdownWithMeta);
+//           if (folder === "fundamentals") {
+//             lessons.push({
+//               path: folder,
+//               frontMatter,
+//               slug: file.replace(".mdx", ""),
+//             });
+//           } else {
+//             lessons.push({
+//               path: folder,
+//               frontMatter,
+//               slug: file.replace(".mdx", ""),
+//               completed: false,
+//             });
+//           }
+//         }
+//       });
+//     }
+//   });
 
-  return {
-    props: {
-      lessons,
-    },
-  };
+//   return {
+//     props: {
+//       lessons,
+//     },
+//   };
+// };
+
+GettingStartedPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout
+    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
+    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+    >
+      {page}
+    </Layout>
+  );
 };
 
-export default GettingStarted;
+export default GettingStartedPage;

@@ -8,8 +8,6 @@ import { authOptions } from "@/server/auth";
 // Auth
 // ========================================================
 const Auth = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("In [...nextauth].ts");
-
   const authOpts: NextAuthOptions = authOptions({ req });
 
   if (!Array.isArray(req.query.nextauth)) {
