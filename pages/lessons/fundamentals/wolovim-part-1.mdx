@@ -11,20 +11,20 @@ icons:
 
 # **A Developer's Guide to Ethereum, Pt. 1**
 
-So, you’ve heard about this [Ethereum](https://ethereum.org/) thing and are ready to venture down the rabbit hole? This post will quickly cover some blockchain basics, then get you interacting with a simulated Ethereum node – reading block data, checking account balances, and sending transactions. Along the way, we’ll highlight the differences between traditional ways of building apps and this new decentralized paradigm.
+So, you’ve heard about this [Ethereum](https://ethereum.org/) thing and are ready to venture down the rabbit hole? This post will quickly cover some blockchain basics, then get you interacting with a simulated Ethereum node – reading block data, checking account balances, and sending transactions. Along the way, we’ll highlight the differences between traditional ways of building apps and this new decentralized paradigm. Some code is included, but the focus is on the concepts, not a final product.
 
 ### **(Soft) prerequisites**
 
-This post aspires to be accessible to a wide range of developers. Python tools will be involved, but they are just a vehicle for the ideas – no problem if you are not a Python developer. I will, however, be making just a few assumptions about what you already know, so we can quickly move on the Ethereum-specific bits.
+This post aspires to be accessible to a wide range of developers. Python tools will be involved, but they are just a vehicle for the ideas. Reproducing the code is not required, but may help the ideas sink in. For those coding along, I'm making just a few assumptions about what you already know, so we can quickly move on the Ethereum-specific bits.
 
-Assumptions:
+Assumptions, if you are going to reproduce the code:
 
 - you can get around in a terminal,
 - you've written a few lines of Python code,
 - Python version 3.7 or greater is installed on your machine (use of a [virtual environment](https://realpython.com/effective-python-environment/#virtual-environments) is strongly encouraged), and
 - you’ve used `pip`, Python’s package installer.
 
-Again, if any of these are untrue, or you don’t plan to reproduce the code in this article, just follow along conceptually.
+Again, if any of these are untrue, just follow along conceptually.
 
 ### **Blockchains, briefly**
 
@@ -142,7 +142,7 @@ In [1]: from web3 import Web3
 
 Besides being a gateway to Ethereum, the [Web3](https://web3py.readthedocs.io/en/stable/overview.html#base-api) module offers a few convenience functions. Let’s explore a couple.
 
-In an Ethereum application, you will commonly need to convert currency denominations. The Web3 module provides a couple of helper methods just for this: [from_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.fromWei) and [to_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.toWei).
+In an Ethereum application, you will commonly need to convert currency denominations. The Web3 module provides a couple of helper methods just for this: [from_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.from_wei) and [to_wei](https://web3py.readthedocs.io/en/stable/web3.main.html#web3.Web3.to_wei).
 
 <Callout emoji='💡' size='md' variant='info'>
 **Note:** Computers are notoriously bad at handling decimal math. To get around this, developers often store dollar amounts in cents. For example, an item with a price of $5.99 may be stored in the database as 599. A similar pattern is used when handling transactions in ether. However, instead of two decimal points, ether has 18! The smallest denomination of ether is called *wei*, so that’s the value specified when sending transactions.
@@ -263,21 +263,21 @@ A lot of information gets returned about a block, but just a couple things to po
 
 ### **Tour stop #3: transactions**
 
-We’re stuck at block zero until there’s a transaction to mine, so let’s give it one. Send a few test ether from one account to another:
+We’re stuck at block zero until there’s a transaction to mine, so let’s give it one. If you wanted to send a few test ether from one account to another that code would look something like this:
 
 ```python
 In [10]: tx_hash = w3.eth.send_transaction({
    'from': w3.eth.accounts[0],
    'to': w3.eth.accounts[1],
-   'value': w3.toWei(3, 'ether')
+   'value': w3.to_wei(3, 'ether')
 })
 ```
 
-This is typically the point where you’d wait for several seconds for your transaction to get included in a new block. The full process goes something like this:
+In the "real" version, this is typically the point where you’d wait for several seconds for your transaction to get included in a new block. The full process goes something like this:
 
-1. Submit a transaction and hold on to the transaction hash. Until it's included, the transaction is “pending.”`tx_hash = w3.eth.send_transaction({ ... })`
-2. Wait for the transaction to be included:`w3.eth.wait_for_transaction_receipt(tx_hash)`
-3. To view the successful transaction:`w3.eth.get_transaction(tx_hash)`
+1. Submit a transaction and hold on to the transaction hash. Until it's included, the transaction is “pending.” `tx_hash = w3.eth.send_transaction({ ... })`
+2. Wait for the transaction to be included: `w3.eth.wait_for_transaction_receipt(tx_hash)`
+3. To view the successful transaction: `w3.eth.get_transaction(tx_hash)`
 
 Our simulated environment will add the transaction in a new block instantly, so we can immediately view the transaction:
 
