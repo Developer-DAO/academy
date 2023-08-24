@@ -1,0 +1,15 @@
+{
+  "question": "What is a blockchain?",
+  "options": [
+    {
+      "answer": "A fast food restaurant concept"
+    },
+    {
+      "answer": "A data structure that is a linked list of blocks",
+      "correct": true
+    },
+    {
+      "answer": "A type of cryptocurrency"
+    }
+  ]
+}
