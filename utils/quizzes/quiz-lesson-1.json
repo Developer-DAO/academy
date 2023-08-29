@@ -35,20 +35,15 @@
       "question": "A blockchain:",
       "options": [
         {
-          "answer": "Runs on a global network of nodes that is accessible to anyone"
+          "answer": "Runs on a global network of nodes that is accessible to anyone",
+          "correct": true
         },
         {
           "answer": "Runs on a global network of nodes with permissions needed to access it"
         },
         {
-          "answer": "Uses cryptography to secure existing data on the chain"
-        },
-        {
-          "answer": "A & C",
+          "answer": "Uses cryptography to secure existing data on the chain",
           "correct": true
-        },
-        {
-          "answer": "All of the above"
         }
       ]
     },
@@ -88,7 +83,7 @@
       ]
     },
     {
-      "question": "A smart contract deployed to the Blockchain:",
+      "question": "A smart contract deployed to the blockchain:",
       "options": [
         {
           "answer": "Can be edited without redeployment once you have the owner’s credentials"
@@ -127,22 +122,15 @@
       "question": "How many parameters can we have in an event?",
       "options": [
         {
-          "answer": "A. multiple non-indexed parameters"
+          "answer": "A. multiple non-indexed parameters",
+          "correct": true
         },
         {
-          "answer": "B. three indexed named parameters"
+          "answer": "B. three indexed named parameters",
+          "correct": true
         },
         {
-          "answer": "C. four indexed anonymous parameters"
-        },
-        {
-          "answer": "only A and B"
-        },
-        {
-          "answer": "only B and C"
-        },
-        {
-          "answer": "A, B and C",
+          "answer": "C. four indexed anonymous parameters",
           "correct": true
         }
       ]
