@@ -90,7 +90,9 @@ assets.
 Now that we know they can be much more than just an image, what are we waiting
 for?
 
-**By the end of this lesson we'll have learned a lot.** A breakdown of the steps
+## Lesson breakdown
+
+By the end of this lesson we'll have learned a lot. A breakdown of the steps
 to get there is:
 
 - set up our development environment
@@ -104,7 +106,9 @@ to get there is:
 - _mint_, i.e. create our very own NFT
 - see our NFT in a public marketplace
 
-**To achieve this, we'll need diverse developer tools.** We'll also need to open
+## Dev tools
+
+To achieve this, we'll need diverse developer tools. We'll also need to open
 a couple of accounts as we progress from one development environment to the
 next. We'll be using:
 
@@ -235,7 +239,7 @@ last prompt. If they didn’t install or we accidentally chose ‘n’, we can a
 install them manually with:
 
 ```bash
-npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox
 ```
 
 </Callout>
@@ -261,7 +265,7 @@ rm scripts/*.js
 rm test/*.js
 ```
 
-We now need to add our last dependency (OpenZeppelin contracts):
+We now need to add our last dependency - OpenZeppelin contracts:
 
 ```bash
 npm install @openzeppelin/contracts
@@ -318,8 +322,8 @@ contract ProjectNFT {
 
 If you’ve been through our [first project](/lessons/projects/1), you’ll remember
 the first lines defines our copyright license, the second one defines the
-solidity version we are going to be using for this contract and the last two
-lines are how we declare a smart contract in solidity.
+Solidity version we are going to be using for this contract and the last two
+lines are how we declare a smart contract in Solidity.
 
 With an empty project, we can now start adding what we need to create our
 awesome NFT collection. ERC721, the formal specification to follow for NFTs, has
@@ -400,7 +404,7 @@ contract ProjectNFT is ERC721 {
 }
 ```
 
-We made our totalSupply variable private and it will store the exact number of
+We made our `totalSupply` variable `private` and it will store the exact number of
 NFTs that have been minted. In the next step we will use this variable to
 identify each new NFT that’s created.
 
@@ -474,7 +478,7 @@ Identifier), a web address if you prefer, that points to something on the
 internet, whatever we want it to be. e.g. a video, an image.
 
 OpenZeppelin ERC721 contract provides us a way to create unique URIs from the
-IDs of the NFTs. It gives a way to define a base path for a web address and just
+IDs of the NFTs. It gives a way to define a 'base path' for a web address and just
 attaches the token ID at the end of it. So, if you wanted, you could upload your
 NFT info (we'll look at how we store that later) to any web address, say
 `www.my-site.com/my-nft-collection` and number each file with the corresponding
@@ -673,7 +677,7 @@ To achieve this, you need to add the json files all at the same time, as a
 **folder** into Pinata, and then you get a CID for the folder, which you can
 reference with the filenames at the end for each file.
 
-Remember `_baseURI` function in our solidity contract? The one that was used to
+Remember `_baseURI` function in our Solidity contract? The one that was used to
 create the NFT tokenURI? There's where we are going to get the Pinata link with
 the CID to our folder.
 
@@ -737,7 +741,7 @@ const hre = require('hardhat')
 const CONTRACT_NAME = 'ProjectNFT'
 
 // The 3 parameters for our smart contract's constructor (CHANGE THESE to your own NFT name and description)
-const NFT_NAME = 'Academy'
+const NFT_NAME = 'D_D Academy'
 const NFT_DESCRIPTION = 'D_D Academy Basic NFT Collection'
 
 // CHANGE THIS if you created your own images/JSONs:
@@ -757,10 +761,10 @@ async function main() {
   )
 
   // We wait for it to be deployed to the blockchain
-  await contract.deployed()
+  await contract.waitForDeployment()
 
   // We print the contract's address to the console
-  console.log(`${CONTRACT_NAME} deployed to: ${contract.address}`)
+  console.log(`${CONTRACT_NAME} deployed to: `, await contract.getAddress())
 
   // --> ( We'll add more stuff here later ) <--
 }
@@ -772,6 +776,7 @@ main()
     console.error(error)
     process.exit(1)
   })
+
 ```
 
 The code has comments outlining what each section does, but it basically has 1
@@ -781,13 +786,13 @@ and a Base URI for our files. With that info set at the top, the script deploys
 the contract, waits for it to be deployed and then prints the address of our
 deployed contract to the console.
 
-Before we run our script, we need to tell Hardhat what solidity version our
+Before we run our script, we need to tell Hardhat what Solidity version our
 contracts are using. For that, we need to go into the `hardhat.config.js` file
-in our root folder. Find the line that says `solidity: '0.8.xx',` and replace
+in our project's root folder. Find the line that says `solidity: '0.8.xx',` and replace
 the `0.8.xx` for the pragma used in our contract: `0.8.12`.
 
-We could have used a range of solidity versions e.g. `^0.8.0` in our contract,
-but we like to promote best practices by choosing a fixed solidity version and
+We could have used a range of Solidity versions e.g. `^0.8.0` in our contract,
+but we like to promote best practices by choosing a fixed Solidity version and
 knowing beforehand nothing is going to change in our bytecode if a new version
 in that range is released.
 
@@ -863,18 +868,13 @@ going to run the deploy again, but this time to a testnet.
 What is a testnet? It is a basically a whole running blockchain, but it runs
 only so people can try stuff out. On it, you have ETH, NFTs, or other tokens but
 they have no monetary value. This way, you can develop and test your contracts
-without fear of losing anything valuable. For the moment, we are choosing to do
-this on \*Goerli\*\* testnet. It's one of the many of Ethereum testnets.
-
-- We had wanted to use the Sepolia testnet, because Goerli is going to be
-  deprecated by the end of 2023, but we're temporarily restricted, because there
-  isn't yet a compatible NFT test hosting site for Sepolia. We will update the
-  lesson accordingly when this availability arrives.
+without fear of losing anything valuable. Ethereum has many testnets, and you might
+notice that we used *Goerli* testnet. But we suggest that you use *Sepolia* testnet, 
+now that it has compatible NFT hosting support, and longevity for app development that *Goerli* won't outlast. 
 
 Before we go any further, let's take an extra step for precaution. In the next
 project we'll learn how to use collaborative tools to store our projects, but
-for now, let's open our root directory's `.gitignore` file an add this line
-anywhere:
+for now, let's open our root directory's `.gitignore` file and add this line:
 
 ```bash
 hardhat.config.js
@@ -882,11 +882,11 @@ hardhat.config.js
 
 In order to deploy to a real testnet we'll need:
 
-- An Ethereum wallet that can connect to Goerli [Metamask](https://metamask.io/)
+- An Ethereum wallet that can connect to Sepolia. [Metamask](https://metamask.io/)
   is often used
-- Some Goerli-ETH. You can ask for some in a faucet, it's free, although some
-  are faster than others! Options: [#1](https://goerlifaucet.com/),
-  [#2](https://faucets.chain.link/goerli), [#3](https://faucet.paradigm.xyz/)
+- Some Sepolia-ETH. You can ask for some in a faucet, it's free, although some
+  are faster than others! Options: [#1](https://sepoliafaucet.com/),
+  [#2](https://testnet-faucet.com/sepolia/), [#3](https://faucet.quicknode.com/ethereum/sepolia)
 - An API Key from an Ethereum RPC Node Provider
   ([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
   [Ankr](https://rpc.ankr.com/eth_goerli))
@@ -917,9 +917,9 @@ one of the Ethereum RPC Node Providers. Alchemy and Infura are the most used.
 And Ankr has a 'community endpoint' which doesn't require a dedicated sign up,
 to list a few options.
 
-After signing up, you'll be asked to create an App. Be sure to select the Goerli
+After signing up, you'll be asked to create an App. Be sure to select the Sepolia
 network there. When the app is created, you'll see a 'View Key' button, or
-similar. Press it and copy the HTTP link, we'll use it in our next step.
+similar. Press it and copy the HTTP link, we'll use it as the API-KEY in our next step.
 
 With our wallet funded fake ETH, we can go ahead and change our Hardhat
 configuration file. Go into your project's main directory and open
@@ -928,8 +928,7 @@ configuration file. Go into your project's main directory and open
 We are going to replace our file with this:
 
 ```jsx
-require('@nomicfoundation/hardhat-chai-matchers')
-require('@nomiclabs/hardhat-ethers')
+require("@nomicfoundation/hardhat-toolbox")
 
 const WALLET_PRIVATE_KEY = 'YOUR-PRIVATE-KEY-DONT-SHARE'
 
@@ -949,19 +948,19 @@ module.exports = {
 }
 ```
 
-And you need to fill those 2 global variables with your own for hardhat to
-communicate correctly to the network.
+And you'll need to set the two global variables using the `const` keyword with your own values 
+for Hardhat to communicate correctly to the network.
 
 We have already gone through how to get your API KEY.
 
 For your wallet's private key, the most sensitive data of the project, you need
-to open Metamask, click on the three dots next to your Account Name, and then on
-Account Details, then click on Export Private Key. It will ask for your Metamask
-password (the one you use to open it, NOT your seed phrase). It also shows you a
-notice so you know that you are entering the danger zone. Confirm and you'll be
-able to copy your private key. Paste it in to our `hardhat.config.js`
+to open Metamask, click on the three dots next to your *Account Name*, and then on
+*Account Details*, then click on *Export Private Key*. It will ask for your Metamask
+password - the one you use to open it, NOT your seed phrase. It also issues a warning to 
+'Never disclose this key'. Confirm and you'll be able to copy your private key. Paste 
+it in to our `hardhat.config.js`
 
-Please, if you are already a developer and you plan to use Git to store your
+Please, if you are already a developer, and you plan to use Git to store your
 project, don't store your `hardhat.config.js` on it, because you will have your
 private key there.
 
@@ -977,7 +976,7 @@ private key there.
 </SideDrawer>
 <br />
 
-Ok. We are ready, let's deploy to the Goerli testnet!
+Ok. We are ready, let's deploy to the Sepolia testnet!
 
 Now we need to run our deploy.js script and the deployment is going to cost us
 some ETH - test ETH, don't worry - from our wallet, since we are storing
@@ -989,7 +988,7 @@ deploy, delete all the lines we added to test the minting.
 Run:
 
 ```bash
-npx hardhat run scripts/deploy.js --network goerli
+npx hardhat run scripts/deploy.js --network sepolia
 ```
 
 This is the output i got in my console:
@@ -1005,7 +1004,7 @@ next project we will learn about tools to collaborate and store your projects
 online.
 
 So now we can go and explore the chain to find your contract (and mine too!).
-Just go to [Goerli Etherscan](https://goerli.etherscan.io/) (or
+Just go to [Sepolia Etherscan](https://sepolia.etherscan.io/) (or
 [Opensea](https://testnets.opensea.io/)) and search for the address of our
 deployed contract.
 
