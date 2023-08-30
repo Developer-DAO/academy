@@ -6,21 +6,15 @@ import path from "path";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const __next__base__dirname = __dirname.split(".next")[0] as string;
-    let contentDir = path.join(CONTENT_PATH);
-    if (process.env.NODE_ENV === "production") {
-      contentDir = path.join(__next__base__dirname, CONTENT_PATH);
-    }
-    const directories = fs.readdirSync(path.join(contentDir));
+    const dir = path.resolve("./", CONTENT_PATH);
+    const directories = fs.readdirSync(dir);
     const lessons: object[] = [];
     directories.reverse().map((folder) => {
-      if (fs.lstatSync(path.join(contentDir, folder)).isDirectory()) {
-        fs.readdirSync(path.join(contentDir, folder)).map((file) => {
-          if (
-            !fs.lstatSync(path.join(contentDir, folder, file)).isDirectory()
-          ) {
+      if (fs.lstatSync(path.join(dir, folder)).isDirectory()) {
+        fs.readdirSync(path.join(dir, folder)).map((file) => {
+          if (!fs.lstatSync(path.join(dir, folder, file)).isDirectory()) {
             const markdownWithMeta = fs.readFileSync(
-              path.join(contentDir, folder, file),
+              path.join(dir, folder, file),
               "utf-8",
             );
 
