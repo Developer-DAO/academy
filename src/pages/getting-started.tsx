@@ -19,7 +19,7 @@ import {
 import { type ReactElement } from "react";
 import Layout from "@/components/Layout";
 import { type NextPageWithLayout } from "./_app";
-import { type Lessons, type Lesson } from "@/interfaces";
+import type { Lessons, Lesson } from "@/interfaces";
 import { useAppContext } from "@/contexts/AppContext";
 
 const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
