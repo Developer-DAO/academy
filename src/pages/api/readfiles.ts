@@ -5,7 +5,11 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 import path from "path";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  const contentDir = path.join(CONTENT_PATH);
+  const __next__base__dirname = __dirname.split(".next")[0] as string;
+  let contentDir = path.join(CONTENT_PATH);
+  if (process.env.NODE_ENV === "production") {
+    contentDir = path.join(__next__base__dirname, CONTENT_PATH);
+  }
   const directories = fs.readdirSync(path.join(contentDir));
   const lessons: object[] = [];
   directories.reverse().map((folder) => {
