@@ -23,8 +23,16 @@ export function AppContextProvider({ children }: IProps) {
   const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
     [],
   );
+  const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
   const { data: sessionData } = useSession();
+
+  useEffect(() => {
+    if (sessionData?.user && sessionData.user !== sessionDataUser) {
+      setSessionDataUser(sessionData.user);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionData]);
 
   // Requests
   // - All
@@ -36,7 +44,8 @@ export function AppContextProvider({ children }: IProps) {
     undefined, // no input
     {
       // Disable request if no session data
-      enabled: sessionData?.user !== undefined,
+      enabled: !!sessionDataUser,
+      refetchOnWindowFocus: false,
     },
   );
 
@@ -73,13 +82,13 @@ export function AppContextProvider({ children }: IProps) {
     if (projects && completedQuizzesSlugs.length !== 0) {
       const projectsWithCompleteStatus = projects.map((lesson) => {
         const completed = completedQuizzesSlugs.includes(lesson.slug);
-        console.log({ completed });
         return { ...lesson, completed };
       });
 
       setProjects(projectsWithCompleteStatus);
     }
-  }, [completedQuizzesSlugs, projects]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completedQuizzesSlugs]);
 
   return (
     <AppContext.Provider
