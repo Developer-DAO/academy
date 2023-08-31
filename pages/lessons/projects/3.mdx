@@ -843,6 +843,7 @@ const CONTRACT_NAME = 'TierNFT'
 const COLLECTION_NAME = 'TierNFT'
 const COLLECTION_SYMBOL = 'Tier'
 
+/** Main deploy function **/
 async function main() {
   const contractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME)
   const contract = await contractFactory.deploy(
