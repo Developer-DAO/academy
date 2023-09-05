@@ -1,0 +1,15 @@
+{
+  "question": "How can you communicate with an Ethereum node?",
+  "options": [
+    {
+      "answer": "Configure a provider within a tool like web3.py or ethers.js",
+      "correct": true
+    },
+    {
+      "answer": "Use a Ouija board and hope for the best"
+    },
+    {
+      "answer": "Email your local node admin"
+    }
+  ]
+}

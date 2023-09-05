@@ -1,0 +1,15 @@
+{
+  "question": "What happens when you send a transaction?",
+  "options": [
+    {
+      "answer": "Somewhere, a banker sneezes."
+    },
+    {
+      "answer": "The transaction is pending until it gets included in a block.",
+      "correct": true
+    },
+    {
+      "answer": "The master node includes the transaction in the next block in the order it was received."
+    }
+  ]
+}

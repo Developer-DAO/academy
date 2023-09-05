@@ -1,0 +1,18 @@
+{
+  "question": "How many decimal points are accounted for with ether?",
+  "options": [
+    {
+      "answer": "3"
+    },
+    {
+      "answer": "9"
+    },
+    {
+      "answer": "12"
+    },
+    {
+      "answer": "18",
+      "correct": true
+    }
+  ]
+}
