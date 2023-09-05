@@ -18,7 +18,11 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
   const { data: sessionData } = useSession();
 
   // Requests
-  // - All
+
+  // - Get All lessons to get the Id's
+  const { data: allLessons } = api.lessons.getAll.useQuery();
+
+  // - All completed
   const { data: completedQuizzesAllData } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
@@ -28,26 +32,22 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
   );
 
   useMemo(() => {
-    if (completedQuizzesAllData?.length && fetchNow) {
-      const completedSlugs = completedQuizzesAllData.map((quiz) =>
-        quiz.lesson
-          .replace("quiz-lesson-", "")
-          .replace("lesson-", "")
-          .replace("-quiz", ""),
-      );
+    if (allLessons?.length && completedQuizzesAllData?.length && fetchNow) {
+      const completedIds = completedQuizzesAllData.map((quiz) => quiz.id);
 
-      const actualSlugNumber = quiz
-        .replace("quiz-lesson-", "")
-        .replace("lesson-", "")
-        .replace("-quiz", "");
+      const actualLessonId = allLessons?.find(
+        (lesson) => lesson.quizFileName === quiz,
+      )?.id;
 
-      if (completedSlugs.includes(actualSlugNumber)) {
+      if (actualLessonId === undefined) return;
+
+      if (completedIds.includes(actualLessonId)) {
         setQuizCompleted(true);
       }
 
       setFetchNow(false);
     }
-  }, [completedQuizzesAllData, fetchNow, quiz]);
+  }, [allLessons, completedQuizzesAllData, fetchNow, quiz]);
 
   if (completedQuizzesAllData === undefined) return null;
 

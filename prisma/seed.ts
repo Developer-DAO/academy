@@ -15,20 +15,22 @@ async function main() {
   //   },
   // });
   // console.log({ user });
-  // const lesson1 = await prisma.lessons.create({
+  // const newLesson = await prisma.lessons.create({
   //   data: {
-  //     quizFileName: "lesson-4-quiz.json",
+  //     quizFileName: "quiz-lesson-4.json",
   //   },
   // });
-  // console.log({ lesson1 });
-  const completed2 = await prisma.completedQuizzes.create({
-    data: {
-      userId: "cll3hcuim00001wujlay766tk",
-      lesson: "2",
-      completed: true,
-    },
-  });
-  console.log({ completed2 });
+  // console.log({ newLesson });
+  // const deletedCompletedLog = await prisma.completedQuizzes.deleteMany({});
+  // console.log({ deletedCompletedLog });
+  // const completed2 = await prisma.completedQuizzes.create({
+  //   data: {
+  //     userId: "cll3hcuim00001wujlay766tk",
+  //     lesson: "2",
+  //     completed: true,
+  //   },
+  // });
+  // console.log({ completed2 });
 }
 
 main()
