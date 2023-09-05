@@ -26,11 +26,9 @@ export function ContributorFooter({
             {authors.length > 1 ? "Authors" : "Author"}
           </Text>
           <VStack spacing={4} alignItems="left">
-            {authors.map((contrib, idx) => {
-              return (
-                <Contributor key={idx} handle={contrib} avatarSize="2xl" />
-              );
-            })}
+            {authors.map((contrib, idx) => (
+              <Contributor key={idx} handle={contrib} avatarSize="2xl" />
+            ))}
           </VStack>
         </Box>
       )}
@@ -41,9 +39,9 @@ export function ContributorFooter({
             {reviewers.length > 1 ? "Reviewers" : "Reviewer"}
           </Text>
           <VStack spacing={4} alignItems="left">
-            {reviewers.map((contrib, idx) => {
-              return <Contributor key={idx} handle={contrib} avatarSize="lg" />;
-            })}
+            {reviewers.map((contrib, idx) => (
+              <Contributor key={idx} handle={contrib} avatarSize="lg" />
+            ))}
           </VStack>
         </Box>
       )}
@@ -58,11 +56,9 @@ export function ContributorFooter({
                 : "Additional Contributor"}
             </Text>
             <VStack spacing={4} alignItems="left">
-              {contributors.map((contrib, idx) => {
-                return (
-                  <Contributor key={idx} handle={contrib} avatarSize="lg" />
-                );
-              })}
+              {contributors.map((contrib, idx) => (
+                <Contributor key={idx} handle={contrib} avatarSize="lg" />
+              ))}
             </VStack>
           </Box>
         )}

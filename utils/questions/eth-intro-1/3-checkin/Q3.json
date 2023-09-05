@@ -1,0 +1,16 @@
+{
+  "question": "A local test network provides you with:",
+  "options": [
+    {
+      "answer": "deployed sample smart contracts"
+    },
+    {
+      "answer": "accounts populated with test ether",
+      "correct": true
+    },
+    {
+      "answer": "transactions instantly included in new block",
+      "correct": true
+    }
+  ]
+}

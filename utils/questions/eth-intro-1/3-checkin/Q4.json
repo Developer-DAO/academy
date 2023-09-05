@@ -1,0 +1,17 @@
+{
+  "question": "The genesis block is:",
+  "options": [
+    {
+      "answer": "the first block in a blockchain",
+      "correct": true
+    },
+    {
+      "answer": "contains no transactions",
+      "correct": true
+    },
+    {
+      "answer": "has an empty parent hash",
+      "correct": true
+    }
+  ]
+}
