@@ -21,7 +21,7 @@ export default function Layout({ children, title, description }: Props) {
           url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
           site_name: `Developer DAO Academy`,
           title: `Developer DAO Academy | ${title}`,
-          description: `${description}`,
+          description: description,
           images: [
             {
               url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
