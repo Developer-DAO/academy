@@ -19,13 +19,17 @@ const PageSeoLayout = ({
         openGraph={{
           type: "website",
           locale: "en_US",
-          url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
+          url: `https://${
+            process.env.NEXT_PUBLIC_VERCEL_URL as string
+          }/landing-page-screenshot.png`,
           site_name: `Developer DAO Academy`,
           title: `Developer DAO Academy | ${title}`,
           description: description,
           images: [
             {
-              url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/landing-page-screenshot.png`,
+              url: `https://${
+                process.env.NEXT_PUBLIC_VERCEL_URL as string
+              }/landing-page-screenshot.png`,
               alt: "Developer DAO Academy",
               type: "image/png",
             },
