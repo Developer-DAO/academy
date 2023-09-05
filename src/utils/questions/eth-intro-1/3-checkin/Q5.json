@@ -1,0 +1,15 @@
+{
+  "question": "What fields does a basic transaction contain?",
+  "options": [
+    {
+      "answer": "from, to, value",
+      "correct": true
+    },
+    {
+      "answer": "sender, receiver, amount"
+    },
+    {
+      "answer": "coinbase, miner, gas"
+    }
+  ]
+}
