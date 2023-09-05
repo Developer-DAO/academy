@@ -49,8 +49,8 @@ const LessonsPage: NextPageWithLayout = () => {
 LessonsPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
-    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
+      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
     >
       {page}
     </Layout>
