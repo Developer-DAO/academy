@@ -1,15 +1,16 @@
-import { Box } from "@chakra-ui/react";
-import Topbar from "./Topbar";
-import Footer from "./footer/Footer";
 import { NextSeo } from "next-seo";
 
-interface Props {
-  children: React.ReactNode;
+interface PageSeoLayoutProps {
   title: string;
   description?: string;
+  children?: React.ReactNode;
 }
 
-export default function Layout({ children, title, description }: Props) {
+const PageSeoLayout = ({
+  title,
+  description,
+  children,
+}: PageSeoLayoutProps) => {
   return (
     <>
       <NextSeo
@@ -46,17 +47,9 @@ export default function Layout({ children, title, description }: Props) {
           },
         ]}
       />
-      <Topbar />
-      <Box
-        as="main"
-        p="1.25em"
-        px="5%"
-        mx={{ base: "2rem", md: "6rem", lg: "10rem" }}
-        minH={{ base: "calc(75vh - 3.5rem)" }}
-      >
-        {children}
-      </Box>
-      <Footer />
+      {children}
     </>
   );
-}
+};
+
+export default PageSeoLayout;

@@ -105,6 +105,4 @@ const MyApp = ({
   );
 };
 
-// Exports
-// ========================================================
 export default api.withTRPC(MyApp);

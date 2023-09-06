@@ -19,11 +19,11 @@ import {
 import { type ReactElement } from "react";
 import Layout from "@/components/Layout";
 import { type NextPageWithLayout } from "./_app";
-import { type Lessons, type Lesson } from "@/interfaces";
+import type { Lessons, Lesson } from "@/interfaces";
 import { useAppContext } from "@/contexts/AppContext";
 
 const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
-  const { lessonsWithStatus } = useAppContext();
+  const { projects, fundamentals } = useAppContext();
 
   return (
     <Flex
@@ -70,66 +70,87 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
         >
           Current Lessons
         </Heading>
-        {lessonsWithStatus
-          ? Object.entries(lessonsWithStatus).map((track: any, idx: number) => {
-              return (
-                <UnorderedList
-                  listStyleType="none"
-                  textAlign="center"
-                  as="div"
-                  key={idx}
+        <UnorderedList listStyleType="none" textAlign="center" as="div">
+          <Heading size="md" color="yellow.300">
+            {`PROJECTS`}
+          </Heading>
+          <>
+            {projects.map((lesson: Lesson, idx: number) => (
+              <ListItem key={idx} my="2" py="2" maxW="40vw" margin="0 auto">
+                <Link
+                  as={NextLink}
+                  href={`/lessons/${lesson.path}/${lesson.slug}`}
+                  passHref
                 >
-                  <Heading size="md" color="yellow.300">
-                    {track[0].toUpperCase()}
-                  </Heading>
-                  <>
-                    {track[1].map((lesson: Lesson, idx: number) => (
-                      <ListItem
-                        key={idx}
-                        my="2"
-                        py="2"
-                        maxW="40vw"
-                        margin="0 auto"
+                  <Button
+                    height="auto"
+                    style={{
+                      whiteSpace: "normal",
+                      wordWrap: "break-word",
+                      padding: "0.5rem",
+                      width: "100%",
+                      fontSize: "xl",
+                    }}
+                  >
+                    {lesson.frontMatter.title}
+                    {lesson && lesson.completed && lesson.completed === true ? (
+                      <Badge
+                        ml="1"
+                        alignItems={"flex-end"}
+                        colorScheme="green"
+                        position="absolute"
+                        right={3}
                       >
-                        <Link
-                          as={NextLink}
-                          href={`/lessons/${lesson.path}/${lesson.slug}`}
-                          passHref
-                        >
-                          <Button
-                            height="auto"
-                            style={{
-                              whiteSpace: "normal",
-                              wordWrap: "break-word",
-                              padding: "0.5rem",
-                              width: "100%",
-                              fontSize: "xl",
-                            }}
-                          >
-                            {lesson.frontMatter.title}
-                            {lesson &&
-                            lesson.completed &&
-                            lesson.completed === true ? (
-                              <Badge
-                                ml="1"
-                                alignItems={"flex-end"}
-                                colorScheme="green"
-                                position="absolute"
-                                right={3}
-                              >
-                                Completed
-                              </Badge>
-                            ) : null}
-                          </Button>
-                        </Link>
-                      </ListItem>
-                    ))}
-                  </>
-                </UnorderedList>
-              );
-            })
-          : null}
+                        Completed
+                      </Badge>
+                    ) : null}
+                  </Button>
+                </Link>
+              </ListItem>
+            ))}
+          </>
+        </UnorderedList>
         <Divider />
+        <UnorderedList listStyleType="none" textAlign="center" as="div">
+          <Heading size="md" color="yellow.300">
+            {`FUNDAMENTALS`}
+          </Heading>
+          <>
+            {fundamentals.map((lesson: Lesson, idx: number) => (
+              <ListItem key={idx} my="2" py="2" maxW="40vw" margin="0 auto">
+                <Link
+                  as={NextLink}
+                  href={`/lessons/${lesson.path}/${lesson.slug}`}
+                  passHref
+                >
+                  <Button
+                    height="auto"
+                    style={{
+                      whiteSpace: "normal",
+                      wordWrap: "break-word",
+                      padding: "0.5rem",
+                      width: "100%",
+                      fontSize: "xl",
+                    }}
+                  >
+                    {lesson.frontMatter.title}
+                    {lesson && lesson.completed && lesson.completed === true ? (
+                      <Badge
+                        ml="1"
+                        alignItems={"flex-end"}
+                        colorScheme="green"
+                        position="absolute"
+                        right={3}
+                      >
+                        Completed
+                      </Badge>
+                    ) : null}
+                  </Button>
+                </Link>
+              </ListItem>
+            ))}
+          </>
+        </UnorderedList>
 
         <Heading apply="mdx.h3" as="h3" fontSize="2xl" textAlign="center" p={5}>
           This project is just getting started.
@@ -243,8 +264,8 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
 GettingStartedPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
-    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
+      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
     >
       {page}
     </Layout>

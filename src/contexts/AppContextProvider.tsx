@@ -5,7 +5,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type ReactNode, useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
-import { type IFormatedLessons } from "@/interfaces";
+import {
+  type Project,
+  type Fundamental,
+  type IFormatedLessons,
+} from "@/interfaces";
 import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
 
@@ -14,19 +18,21 @@ interface IProps {
 }
 
 export function AppContextProvider({ children }: IProps) {
-  const [formattedLessons, setFormattedLessons] = useState<IFormatedLessons>({
-    projects: [],
-    fundamentals: [],
-  });
+  const [fundamentals, setFundamentals] = useState<Fundamental[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
     [],
   );
-  const [lessonsWithStatus, setLessonsWithStatus] = useState<IFormatedLessons>({
-    projects: [],
-    fundamentals: [],
-  });
+  const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
   const { data: sessionData } = useSession();
+
+  useEffect(() => {
+    if (sessionData?.user && sessionData.user !== sessionDataUser) {
+      setSessionDataUser(sessionData.user);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionData]);
 
   // Requests
   // - All
@@ -38,7 +44,8 @@ export function AppContextProvider({ children }: IProps) {
     undefined, // no input
     {
       // Disable request if no session data
-      enabled: sessionData?.user !== undefined,
+      enabled: !!sessionDataUser,
+      refetchOnWindowFocus: false,
     },
   );
 
@@ -63,7 +70,8 @@ export function AppContextProvider({ children }: IProps) {
       {},
     );
 
-    setFormattedLessons(lessonsFormatResult);
+    setFundamentals(lessonsFormatResult.fundamentals);
+    setProjects(lessonsFormatResult.projects);
   };
 
   useEffect(() => {
@@ -71,32 +79,24 @@ export function AppContextProvider({ children }: IProps) {
   }, []);
 
   useEffect(() => {
-    if (
-      sessionData?.user &&
-      formattedLessons.fundamentals &&
-      formattedLessons.projects &&
-      completedQuizzesSlugs.length !== 0
-    ) {
-      const projectsWithCompleteStatus = formattedLessons.projects.map(
-        (lesson) => {
-          const completed = completedQuizzesSlugs.includes(lesson.slug);
-          return { ...lesson, completed };
-        },
-      );
+    if (projects && completedQuizzesSlugs.length !== 0) {
+      const projectsWithCompleteStatus = projects.map((lesson) => {
+        const completed = completedQuizzesSlugs.includes(lesson.slug);
+        return { ...lesson, completed };
+      });
 
-      const obj = {
-        projects: projectsWithCompleteStatus,
-        fundamentals: formattedLessons.fundamentals,
-      };
-
-      setLessonsWithStatus(obj);
+      setProjects(projectsWithCompleteStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completedQuizzesSlugs, formattedLessons]);
+  }, [completedQuizzesSlugs]);
 
   return (
     <AppContext.Provider
-      value={{ formattedLessons, completedQuizzesSlugs, lessonsWithStatus }}
+      value={{
+        completedQuizzesSlugs,
+        projects,
+        fundamentals,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Image from "next/image";
+import NextLink from "next/link";
 
 const Hero = () => {
   return (
@@ -43,6 +44,7 @@ const Hero = () => {
               </Text>
 
               <Link
+                as={NextLink}
                 href={"/getting-started"}
                 alignSelf={{ base: "center", md: "flex-start" }}
               >

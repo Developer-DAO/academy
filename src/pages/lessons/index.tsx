@@ -10,30 +10,36 @@ import { useAppContext } from "@/contexts/AppContext";
 import { type Lesson } from "@/interfaces";
 
 const LessonsPage: NextPageWithLayout = () => {
-  const { lessonsWithStatus } = useAppContext();
+  const { projects, fundamentals } = useAppContext();
 
   return (
     <Flex py={5} px={[4, 10, 16]} direction="column" minH="90vh">
       <Stack spacing={5} direction="column">
         <>
-          {Object.entries(lessonsWithStatus).map((track, idx: number) => {
-            const trackName = track[0].toUpperCase();
-            const lessons = track[1];
-            return (
-              <Box key={idx}>
-                <Heading size="lg" color="yellow.300">
-                  {trackName}
-                </Heading>
-                {lessons.map((lesson: Lesson, idx: number) => {
-                  return (
-                    <Box marginTop="4" key={idx}>
-                      <ContentBanner lesson={lesson} idx={idx} />
-                    </Box>
-                  );
-                })}
-              </Box>
-            );
-          })}
+          <Box>
+            <Heading size="lg" color="yellow.300">
+              {`PROJECTS`}
+            </Heading>
+            {projects.map((lesson: Lesson, idx: number) => {
+              return (
+                <Box marginTop="4" key={idx}>
+                  <ContentBanner lesson={lesson} idx={idx} />
+                </Box>
+              );
+            })}
+          </Box>
+          <Box>
+            <Heading size="lg" color="yellow.300">
+              {`FUNDAMENTALS`}
+            </Heading>
+            {fundamentals.map((lesson: Lesson, idx: number) => {
+              return (
+                <Box marginTop="4" key={idx}>
+                  <ContentBanner lesson={lesson} idx={idx} />
+                </Box>
+              );
+            })}
+          </Box>
         </>
       </Stack>
     </Flex>
@@ -43,8 +49,8 @@ const LessonsPage: NextPageWithLayout = () => {
 LessonsPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-    // title="Dapp Starterkit Marketing Page" // DEV_NOTE: This is for the next-seo per page config
-    // description="A marketing page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
+      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
     >
       {page}
     </Layout>

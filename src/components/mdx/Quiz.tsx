@@ -71,7 +71,6 @@ const Quiz = (props: QuizProps): JSX.Element => {
   };
 
   const selectAnswer = (answerIndex: number) => {
-    console.log("asdasd");
     const newAnswers: Answers = { ...answers };
 
     if (newAnswers[currentQuestionIndex]?.includes(answerIndex)) {
@@ -106,7 +105,7 @@ const Quiz = (props: QuizProps): JSX.Element => {
 
   const quizNotAnswered = () => {
     toast({
-      title: "!answers",
+      title: "Quiz not answered",
       description: "Please answer all the questions",
       status: "warning",
       duration: 9000,
@@ -124,6 +123,9 @@ const Quiz = (props: QuizProps): JSX.Element => {
     });
   };
 
+  // - Get All lessons to get the Id's
+  const { data: allLessons } = api.lessons.getAll.useQuery();
+
   // - Add
   const { mutate: quizzesAddMutate, isLoading: quizzesAddIsLoading } =
     api.completedQuizzes.add.useMutation({
@@ -133,9 +135,6 @@ const Quiz = (props: QuizProps): JSX.Element => {
     });
 
   const quizSuccessToast = () => {
-    // api.completedQuizzes.add.useMutation({
-    //   lesson: props.quiz,
-    // });
     toast({
       title: "Amazing!",
       description: "You have passed the lesson!",
@@ -173,8 +172,14 @@ const Quiz = (props: QuizProps): JSX.Element => {
 
     // return quizSuccessToast();
 
-    quizzesAddMutate({
-      lesson: props.quiz,
+    const lessonIdToSave = allLessons?.find(
+      (lesson) => lesson.quizFileName === `${props.quiz}.json`,
+    )?.id;
+
+    if (lessonIdToSave === undefined) return console.error("Lesson not found");
+
+    return quizzesAddMutate({
+      lesson: lessonIdToSave,
     });
   };
 

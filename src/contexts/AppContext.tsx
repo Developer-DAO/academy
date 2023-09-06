@@ -1,22 +1,20 @@
-import { type IFormatedLessons } from "@/interfaces";
+import {
+  type Project,
+  type IFormatedLessons,
+  type Fundamental,
+} from "@/interfaces";
 import { createContext, useContext } from "react";
 
 interface IAppContext {
-  formattedLessons: IFormatedLessons;
   completedQuizzesSlugs: string[];
-  lessonsWithStatus: IFormatedLessons;
+  projects: Project[];
+  fundamentals: Fundamental[];
 }
 
 export const AppContext = createContext<IAppContext>({
-  formattedLessons: {
-    projects: [],
-    fundamentals: [],
-  },
   completedQuizzesSlugs: [],
-  lessonsWithStatus: {
-    projects: [],
-    fundamentals: [],
-  },
+  projects: [],
+  fundamentals: [],
 });
 
 AppContext.displayName = "AcademyAppContext";

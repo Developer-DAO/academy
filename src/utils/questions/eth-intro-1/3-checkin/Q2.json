@@ -1,0 +1,15 @@
+{
+  "question": "While developing your application,you should:",
+  "options": [
+    {
+      "answer": "connect to a local test network for quicker development cycles",
+      "correct": true
+    },
+    {
+      "answer": "connect to Ethereum mainnet and spend real ether until you get it right"
+    },
+    {
+      "answer": "take out loans to buy NFTs"
+    }
+  ]
+}
