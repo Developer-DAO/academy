@@ -20,9 +20,7 @@ interface IProps {
 export function AppContextProvider({ children }: IProps) {
   const [fundamentals, setFundamentals] = useState<Fundamental[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [completedQuizzesSlugs, setCompletedQuizzesSlugs] = useState<string[]>(
-    [],
-  );
+  const [completedQuizzesIds, setCompletedQuizzesIds] = useState<string[]>([]);
   const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
   const { data: sessionData } = useSession();
@@ -51,8 +49,11 @@ export function AppContextProvider({ children }: IProps) {
 
   useEffect(() => {
     if (completedQuizzesAllData) {
-      const slugs = completedQuizzesAllData.map((quiz: any) => quiz.lesson);
-      if (slugs !== completedQuizzesSlugs) setCompletedQuizzesSlugs(slugs);
+      const completedIds = completedQuizzesAllData.map(
+        (quiz: any) => quiz.lesson,
+      ); // DEV_NOTE: the -lesson- field now is the lessonId
+      if (completedIds !== completedQuizzesIds)
+        setCompletedQuizzesIds(completedIds);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedQuizzesAllData]);
@@ -77,23 +78,34 @@ export function AppContextProvider({ children }: IProps) {
   useEffect(() => {
     void fetchFromDirs();
   }, []);
+  0;
+
+  // - Get All lessons to get the Id's
+  const { data: allLessonsData } = api.lessons.getAll.useQuery();
 
   useEffect(() => {
-    if (projects && completedQuizzesSlugs.length !== 0) {
+    if (allLessonsData && projects && completedQuizzesIds.length !== 0) {
       const projectsWithCompleteStatus = projects.map((lesson) => {
-        const completed = completedQuizzesSlugs.includes(lesson.slug);
+        const currentLessonId = allLessonsData.find(
+          (lessonData) =>
+            lessonData.lessonNumber.toString() === lesson.slug.toString(), // DEV_NOTE: forcing .toString() to avoid type errors
+        )?.id;
+
+        const completed = currentLessonId
+          ? completedQuizzesIds.includes(currentLessonId)
+          : false; // DEV_NOTE: if the lesson is not found, it is not completed
         return { ...lesson, completed };
       });
 
       setProjects(projectsWithCompleteStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completedQuizzesSlugs]);
+  }, [completedQuizzesIds]);
 
   return (
     <AppContext.Provider
       value={{
-        completedQuizzesSlugs,
+        completedQuizzesIds,
         projects,
         fundamentals,
       }}
