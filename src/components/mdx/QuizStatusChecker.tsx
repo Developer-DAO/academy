@@ -33,10 +33,10 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
 
   useMemo(() => {
     if (allLessons?.length && completedQuizzesAllData?.length && fetchNow) {
-      const completedIds = completedQuizzesAllData.map((quiz) => quiz.id);
+      const completedIds = completedQuizzesAllData.map((quiz) => quiz.lesson);
 
       const actualLessonId = allLessons?.find(
-        (lesson) => lesson.quizFileName === quiz,
+        (lesson) => lesson.quizFileName === `${quiz}.json`,
       )?.id;
 
       if (actualLessonId === undefined) return;
