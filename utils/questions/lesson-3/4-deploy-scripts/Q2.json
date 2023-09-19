@@ -1,5 +1,5 @@
 {
-  "question": "What does the `await contract.deployed()` line do in the code?",
+  "question": "What does the `await contract.waitForDeployment()` line do in the code?",
   "options": [
     {
       "answer": " It deploys the contract to the blockchain."
