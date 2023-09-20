@@ -1,10 +1,12 @@
 import NavBar from '@components/NavBar'
 import Footer from '@components/footer/Footer'
 import { Box } from '@chakra-ui/react'
+import Banner from './Banner'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
+      <Banner />
       <NavBar />
       <Box
         p="1.25em"
