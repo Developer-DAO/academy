@@ -1,6 +1,15 @@
 import { Center, Flex, Text, chakra } from '@chakra-ui/react'
+import { CloseIcon } from '@chakra-ui/icons'
 
 const Banner = () => {
+  const dismissBanner = () => {
+    localStorage.setItem('bannerDismissed', 'true')
+    const banner = document.getElementById('banner')
+    if (banner) {
+      banner.style.display = 'none'
+    }
+  }
+
   return (
     <Center
       py="2"
@@ -8,6 +17,7 @@ const Banner = () => {
       bgGradient="linear(to-r,cyan.700, purple.500)"
       color="white"
       textAlign="center"
+      id="banner"
     >
       <Flex align="center" fontSize="sm">
         <Text fontWeight="medium" maxW={{ base: '32ch', md: 'unset' }}>
@@ -28,6 +38,17 @@ const Banner = () => {
         >
           Subscribe now!{' '}
         </chakra.a>
+        <chakra.button
+          onClick={dismissBanner}
+          ms="6"
+          color="whiteAlpha.900"
+          fontWeight="semibold"
+          px="3"
+          py="1"
+          rounded="base"
+        >
+          <CloseIcon />
+        </chakra.button>
       </Flex>
     </Center>
   )
