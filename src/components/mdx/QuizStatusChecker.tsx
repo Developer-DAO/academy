@@ -2,11 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Badge, Text } from "@chakra-ui/react";
+import { Badge, Center, Text } from "@chakra-ui/react";
 import Quiz from "./Quiz";
 import { useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
+import { useAccount } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 type QuizStatusCheckerTye = {
   quiz: string;
@@ -16,6 +18,7 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
   const [fetchNow, setFetchNow] = useState<boolean>(true);
   const [quizCompleted, setQuizCompleted] = useState<boolean>(false);
   const { data: sessionData } = useSession();
+  const { address, isDisconnected } = useAccount();
 
   // Requests
 
@@ -49,9 +52,25 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
     }
   }, [allLessons, completedQuizzesAllData, fetchNow, quiz]);
 
-  if (completedQuizzesAllData === undefined) return null;
-
-  return quizCompleted ? (
+  return isDisconnected || !address ? (
+    <>
+      <Center>
+        <Text
+          fontWeight="bold"
+          fontSize="1.875rem"
+          letterSpacing={-0.025}
+          color="yellow.300"
+          as="u"
+        >
+          Connect your wallet and Sign in to start the quiz
+        </Text>{" "}
+      </Center>
+      <br />
+      <Center>
+        <ConnectButton />
+      </Center>
+    </>
+  ) : quizCompleted ? (
     <Badge
       display="flex"
       margin="auto"
