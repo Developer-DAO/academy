@@ -1,11 +1,11 @@
 // Imports
 // ========================================================
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
 // Router
 // ========================================================
 export const lessonsRouter = createTRPCRouter({
-  getAll: protectedProcedure.query(async ({ ctx }) => {
+  getAll: publicProcedure.query(async ({ ctx }) => {
     const lessons = await ctx.prisma.lessons.findMany();
     return lessons;
   }),

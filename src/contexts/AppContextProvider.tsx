@@ -12,6 +12,7 @@ import {
 } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
+import { useAccount } from "wagmi";
 
 interface IProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ export function AppContextProvider({ children }: IProps) {
   const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
   const { data: sessionData } = useSession();
+  const { address } = useAccount();
 
   useEffect(() => {
     if (sessionData?.user && sessionData.user !== sessionDataUser) {
@@ -42,7 +44,7 @@ export function AppContextProvider({ children }: IProps) {
     undefined, // no input
     {
       // Disable request if no session data
-      enabled: !!sessionDataUser,
+      enabled: !!sessionDataUser && !!address,
       refetchOnWindowFocus: false,
     },
   );
@@ -78,7 +80,6 @@ export function AppContextProvider({ children }: IProps) {
   useEffect(() => {
     void fetchFromDirs();
   }, []);
-  0;
 
   // - Get All lessons to get the Id's
   const { data: allLessonsData } = api.lessons.getAll.useQuery();

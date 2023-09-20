@@ -7,7 +7,12 @@ author: "ropats16"
 ---
 
 import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import Layout from "../../../components/Layout";
 
+<Layout
+    title="Dapp Page" 
+    description="A page for your dapp." 
+>
 <LessonHeader title="Lesson 5: Connecting to a Frontend" />
 
 If you've been through the previous lessons we learnt how to write smart
@@ -347,7 +352,7 @@ const modalButton = {
 ```
 
 </ SideDrawer>
-<br/>
+<br />
 
 Moving onto imports.
 
@@ -880,7 +885,7 @@ const modalButton = {
 ```
 
 </SideDrawer>
-<br/>
+<br />
 
 Take a breather and stretch yourself before we do the last bit of coding.
 
@@ -949,6 +954,7 @@ information about it from our smart contract.
       refetchTokenData();
 
       // catch statement for mintToken function...
+    }
   };
 
   // return statement...
@@ -1011,44 +1017,59 @@ We're there at last! Now we can render our modal.
 ```jsx
 // return statement for rendering...
 
-      {isUserConnected ?
-        <main className={styles.main}>
-          <div style={NFTFlex}>
-
-            {/* NFT Card div code... */}
-
-          </div>
-          {modalShow && (
-            <div style={modal}>
-              {isMinting ?
-                <div style={modalContent}>
-                  <h2>Minting...</h2>
-                </div>
-                :
-                <div style={modalContent}>
-                  <h2>Mint Successful</h2>
-                  <div style={modalBody}>
-                    <h3>{latestNFTMinted.name}</h3>
-                    <Image src={latestNFTMinted.image} height='200px' width='200px' />
-                  </div>
-                  <div style={modalFooter}>
-                    <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
-                        View on OpenSea
-                      </a>
-                    </button>
-                    <button style={modalButton}>
-                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
-                        View on Polygonscan
-                      </a>
-                    </button>
-                    <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
-                  </div>
-                </div>
-              }
+{
+  isUserConnected ? (
+    <main className={styles.main}>
+      <div style={NFTFlex}>{/* NFT Card div code... */}</div>
+      {modalShow && (
+        <div style={modal}>
+          {isMinting ? (
+            <div style={modalContent}>
+              <h2>Minting...</h2>
+            </div>
+          ) : (
+            <div style={modalContent}>
+              <h2>Mint Successful</h2>
+              <div style={modalBody}>
+                <h3>{latestNFTMinted.name}</h3>
+                <Image
+                  src={latestNFTMinted.image}
+                  height="200px"
+                  width="200px"
+                />
+              </div>
+              <div style={modalFooter}>
+                <button style={modalButton}>
+                  <a
+                    href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`}
+                    target="_blank"
+                  >
+                    View on OpenSea
+                  </a>
+                </button>
+                <button style={modalButton}>
+                  <a
+                    href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`}
+                    target="_blank"
+                  >
+                    View on Polygonscan
+                  </a>
+                </button>
+                <button onClick={() => setModalShow(false)} style={modalButton}>
+                  Close
+                </button>
+              </div>
             </div>
           )}
-        </main>
+        </div>
+      )}
+    </main>
+  ) : (
+    <main className={styles.main}>
+      <div>Please connect your wallet.</div>
+    </main>
+  );
+}
 
 // closing <div> and styling consts...
 ```
@@ -1181,13 +1202,14 @@ padding: '20px', justifyContent: 'space-evenly' }
 
 const modalButton = { padding: '10px 20px', backgroundColor: '#fff', color:
 '#666', border: '0', borderRadius: '10px', fontSize: '18px', fontWeight: '700',
-boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0,
-0.19)', cursor: 'pointer', }
+boxShadow:
+`0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)`, cursor:
+'pointer', }
 
 ```
 </ SideDrawer>
-<br/>
-<br/>
+<br />
+<br />
 
 ---
 
@@ -1200,17 +1222,9 @@ solidity to creating a full stack decentralised NFT Minting Application.
 
 **Stay tuned for more!**
 
-<br/>
+<br />
 ---
-<br/>
+<br />
 
-
-
-
-
-
-
-
-
-
+</Layout>
 ```
