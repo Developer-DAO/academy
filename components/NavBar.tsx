@@ -84,20 +84,23 @@ function NavBar() {
                     GET STARTED
                   </Link>
                 </MenuItem>
-                {/* <MenuItem>
+                <MenuItem>
                   <Link
                     as={NextLink}
-                    href="/lessons"
+                    href="https://airtable.com/appDMMIARfSeiovpk/shrZExypPetXEx6Ox"
+                    target="_blank"
                     passHref
                     variant={
-                      router.pathname.startsWith('/lessons')
+                      router.pathname.startsWith(
+                        'https://airtable.com/appDMMIARfSeiovpk/shrZExypPetXEx6Ox',
+                      )
                         ? 'top-navigation-active'
                         : 'top-navigation'
                     }
                   >
-                    Tracks
+                    Partner with us
                   </Link>
-                </MenuItem> */}
+                </MenuItem>
               </MenuList>
             </Menu>
           </Flex>
@@ -136,18 +139,21 @@ function NavBar() {
               Get Started
             </Link>
 
-            {/* <Link
+            <Link
               as={NextLink}
-              href="/lessons"
+              href="https://airtable.com/appDMMIARfSeiovpk/shrZExypPetXEx6Ox"
+              target="_blank"
               passHref
               variant={
-                router.pathname.startsWith('/lessons')
+                router.pathname.startsWith(
+                  'https://airtable.com/appDMMIARfSeiovpk/shrZExypPetXEx6Ox',
+                )
                   ? 'top-navigation-active'
                   : 'top-navigation'
               }
             >
-              Tracks
-            </Link> */}
+              Partner with us
+            </Link>
 
             {/* <Button colorScheme="gray" variant="solid">
               <ConnectButton chainStatus="icon" showBalance={false} />
