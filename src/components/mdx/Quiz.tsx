@@ -19,6 +19,7 @@ import {
   haveSameElements,
 } from "@/utils/QuizHelpers";
 import { api } from "@/utils/api";
+import { useAppContext } from "@/contexts/AppContext";
 
 interface QuizProps {
   quiz: string;
@@ -51,6 +52,7 @@ const Quiz = (props: QuizProps): JSX.Element => {
   const [answers, setAnswers] = useState<Answers>({});
   const [correctAnswers, setCorrectAnswers] = useState<number[] | null>(null);
   const toast = useToast();
+  const { refetchCompletedQuizzesAll, allLessonsData } = useAppContext();
 
   const nextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -123,18 +125,17 @@ const Quiz = (props: QuizProps): JSX.Element => {
     });
   };
 
-  // - Get All lessons to get the Id's
-  const { data: allLessons } = api.lessons.getAll.useQuery();
-
   // - Add
   const { mutate: quizzesAddMutate, isLoading: quizzesAddIsLoading } =
     api.completedQuizzes.add.useMutation({
-      onSuccess: () => {
+      onSuccess: async () => {
+        refetchCompletedQuizzesAll && (await refetchCompletedQuizzesAll());
         return quizSuccessToast();
       },
     });
 
   const quizSuccessToast = () => {
+    cancelQuiz();
     toast({
       title: "Amazing!",
       description: "You have passed the lesson!",
@@ -172,7 +173,9 @@ const Quiz = (props: QuizProps): JSX.Element => {
 
     // return quizSuccessToast();
 
-    const lessonIdToSave = allLessons?.find(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const lessonIdToSave: string = allLessonsData?.find(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       (lesson) => lesson.quizFileName === `${props.quiz}.json`,
     )?.id;
 
