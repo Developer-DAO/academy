@@ -24,8 +24,8 @@ export function AppContextProvider({ children }: IProps) {
   const [completedQuizzesIds, setCompletedQuizzesIds] = useState<string[]>([]);
   const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
-  const { data: sessionData } = useSession();
-  const { address } = useAccount();
+  const { data: sessionData, status: sessionStatus } = useSession();
+  const { address, status: walletStatus } = useAccount();
 
   useEffect(() => {
     if (sessionData?.user && sessionData.user !== sessionDataUser) {
@@ -39,15 +39,26 @@ export function AppContextProvider({ children }: IProps) {
   const {
     data: completedQuizzesAllData,
     // isLoading: completedQuizzesAllIsLoading,
-    // refetch: refetchCompletedQuizzesAll,
+    refetch: refetchCompletedQuizzesAll,
   } = api.completedQuizzes.all.useQuery(
     undefined, // no input
     {
       // Disable request if no session data
-      enabled: !!sessionDataUser && !!address,
+      enabled: sessionDataUser !== null && address !== undefined,
       refetchOnWindowFocus: false,
     },
   );
+
+  useEffect(() => {
+    if (
+      walletStatus === "disconnected" ||
+      sessionStatus === "unauthenticated"
+    ) {
+      setSessionDataUser(null);
+      setCompletedQuizzesIds([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionStatus, walletStatus]);
 
   useEffect(() => {
     if (completedQuizzesAllData) {
@@ -82,7 +93,9 @@ export function AppContextProvider({ children }: IProps) {
   }, []);
 
   // - Get All lessons to get the Id's
-  const { data: allLessonsData } = api.lessons.getAll.useQuery();
+  const { data: allLessonsData } = api.lessons.getAll.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
 
   useEffect(() => {
     if (allLessonsData && projects && completedQuizzesIds.length !== 0) {
@@ -99,6 +112,11 @@ export function AppContextProvider({ children }: IProps) {
       });
 
       setProjects(projectsWithCompleteStatus);
+    } else if (allLessonsData && projects && completedQuizzesIds.length === 0) {
+      const projectsWithCompleteStatus = projects.map((lesson) => {
+        return { ...lesson, completed: false };
+      });
+      setProjects(projectsWithCompleteStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedQuizzesIds]);
@@ -109,6 +127,8 @@ export function AppContextProvider({ children }: IProps) {
         completedQuizzesIds,
         projects,
         fundamentals,
+        allLessonsData: allLessonsData || [],
+        refetchCompletedQuizzesAll,
       }}
     >
       {children}

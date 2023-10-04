@@ -5,52 +5,34 @@
 import { Badge, Center, Text } from "@chakra-ui/react";
 import Quiz from "./Quiz";
 import { useMemo, useState } from "react";
-import { useSession } from "next-auth/react";
-import { api } from "@/utils/api";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAppContext } from "@/contexts/AppContext";
 
 type QuizStatusCheckerTye = {
   quiz: string;
 };
 
 const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
-  const [fetchNow, setFetchNow] = useState<boolean>(true);
   const [quizCompleted, setQuizCompleted] = useState<boolean>(false);
-  const { data: sessionData } = useSession();
   const { address, isDisconnected } = useAccount();
+  const { completedQuizzesIds, allLessonsData } = useAppContext();
 
   // Requests
 
-  // - Get All lessons to get the Id's
-  const { data: allLessons } = api.lessons.getAll.useQuery();
-
-  // - All completed
-  const { data: completedQuizzesAllData } = api.completedQuizzes.all.useQuery(
-    undefined, // no input
-    {
-      // Disable request if no session data
-      enabled: sessionData?.user !== undefined && fetchNow,
-    },
-  );
-
   useMemo(() => {
-    if (allLessons?.length && completedQuizzesAllData?.length && fetchNow) {
-      const completedIds = completedQuizzesAllData.map((quiz) => quiz.lesson);
-
-      const actualLessonId = allLessons?.find(
+    if (allLessonsData?.length && completedQuizzesIds?.length) {
+      const actualLessonId: string = allLessonsData?.find(
         (lesson) => lesson.quizFileName === `${quiz}.json`,
       )?.id;
 
       if (actualLessonId === undefined) return;
 
-      if (completedIds.includes(actualLessonId)) {
+      if (completedQuizzesIds.includes(actualLessonId)) {
         setQuizCompleted(true);
       }
-
-      setFetchNow(false);
     }
-  }, [allLessons, completedQuizzesAllData, fetchNow, quiz]);
+  }, [allLessonsData, completedQuizzesIds, quiz]);
 
   return isDisconnected || !address ? (
     <>
