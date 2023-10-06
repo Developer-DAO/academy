@@ -1,0 +1,15 @@
+{
+  "question": "What does the constructor function do in the contract? ",
+  "options": [
+    {
+      "answer": "Defines the copyright license "
+    },
+    {
+      "answer": "Declares the version of Solidity being used"
+    },
+    {
+      "answer": "Assigns a name and symbol to the NFT being created",
+      "correct": true
+    }
+  ]
+}

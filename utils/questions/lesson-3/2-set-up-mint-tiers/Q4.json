@@ -1,0 +1,18 @@
+{
+  "question": "Which tier does an address belong to if they send a value of 0.03 ether to the mint function?",
+  "options": [
+    {
+      "answer": "Tier 0 (Basic)."
+    },
+    {
+      "answer": " Tier 1 (Medium).",
+      "correct": true
+    },
+    {
+      "answer": "Tier 2 (Premium)."
+    },
+    {
+      "answer": "There is no possible token for 0.03 ether."
+    }
+  ]
+}

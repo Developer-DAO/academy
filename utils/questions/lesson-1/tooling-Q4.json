@@ -1,0 +1,18 @@
+{
+  "question": "Which of the following indicates compatibility with Solidity 0.8.4 and higher?",
+  "options": [
+    {
+      "answer": "pragma solidity <=0.8.4;"
+    },
+    {
+      "answer": "pragma solidity ^0.8.4;",
+      "correct": true
+    },
+    {
+      "answer": "pragma solidity 0.8.4;"
+    },
+    {
+      "answer": "pragma solidity >=0.8.4;"
+    }
+  ]
+}

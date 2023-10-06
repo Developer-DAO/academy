@@ -1,0 +1,18 @@
+{
+  "question": "When using 'expect()' with the 'to.equal()' function, what does the argument passed to 'to.equal()' refer to?",
+  "options": [
+    {
+      "answer": "The expected output of the test case."
+    },
+    {
+      "answer": "The contract function being tested."
+    },
+    {
+      "answer": "The result obtained from an asynchronous operation."
+    },
+    {
+      "answer": "The value returned by an assertion or condition.",
+      "correct": true
+    }
+  ]
+}

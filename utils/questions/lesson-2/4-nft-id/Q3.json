@@ -1,0 +1,21 @@
+{
+  "question": "What is the purpose of the mint function? ",
+  "options": [
+    {
+      "answer": "a. To add a new item to our inherited ERC721 contract. "
+    },
+    {
+      "answer": "b. To increment the total supply of our collection by 1"
+    },
+    {
+      "answer": "c. To create a new NFT and add it to our ProjectNFT contract"
+    },
+    {
+      "answer": "Both a and b"
+    },
+    {
+      "answer": "Both b and c",
+      "correct": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "question": "ETH is an ERC token",
+  "options": [
+    {
+      "answer": "True"
+    },
+    {
+      "answer": "False",
+      "correct": true
+    }
+  ]
+}

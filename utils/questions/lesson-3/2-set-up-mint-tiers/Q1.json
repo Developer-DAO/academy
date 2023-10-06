@@ -1,0 +1,18 @@
+{
+  "question": "Which contract does the `TierNFT` contract inherit from?",
+  "options": [
+    {
+      "answer": "ERC20"
+    },
+    {
+      "answer": "ERC721",
+      "correct": true
+    },
+    {
+      "answer": "SafeMath"
+    },
+    {
+      "answer": "OpenZeppelin"
+    }
+  ]
+}

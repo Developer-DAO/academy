@@ -1,0 +1,15 @@
+{
+  "question": "What is npm?",
+  "options": [
+    {
+      "answer": "A Node.js module that provides a blockchain for running smart contracts"
+    },
+    {
+      "answer": "A package manager for Node.js ",
+      "correct": true
+    },
+    {
+      "answer": "A framework for building web applications "
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "title": "Quiz: Intro to Ethereum, Pt. 1",
+  "questions": [
+    {
+      "question": "What is in a block?",
+      "options": [
+        {
+          "answer": "The hash of each transaction in that block",
+          "correct": true
+        },
+        {
+          "answer": "The email address of the block creator"
+        },
+        {
+          "answer": "A reference to the previous block",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is novel about blockchains?",
+      "options": [
+        {
+          "answer": "Their efficiency as a data storage solution."
+        },
+        {
+          "answer": "A high number of transactions per second."
+        },
+        {
+          "answer": "The ability to be governed without a central authority.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "The native currency of Ethereum is called:",
+      "options": [
+        {
+          "answer": "Bitcoin"
+        },
+        {
+          "answer": "ether",
+          "correct": true
+        },
+        {
+          "answer": "Ripple"
+        },
+        {
+          "answer": "Ethereum"
+        }
+      ]
+    },
+    {
+      "question": "The smallest denomination of Ethereum's currency is called:",
+      "options": [
+        {
+          "answer": "gwei"
+        },
+        {
+          "answer": "finney"
+        },
+        {
+          "answer": "wei",
+          "correct": true
+        },
+        {
+          "answer": "satoshi"
+        }
+      ]
+    },
+    {
+      "question": "While developing your application, you should:",
+      "options": [
+        {
+          "answer": "connect to a local test network for faster development cycles",
+          "correct": true
+        },
+        {
+          "answer": "connect to Ethereum mainnet and spend real ether until you get it right"
+        },
+        {
+          "answer": "publish your private key on GitHub"
+        }
+      ]
+    },
+    {
+      "question": "A local test network provides you with:",
+      "options": [
+        {
+          "answer": "transactions instantly included in new block",
+          "correct": true
+        },
+        {
+          "answer": "accounts populated with test ether",
+          "correct": true
+        },
+        {
+          "answer": "deployed sample smart contracts"
+        }
+      ]
+    },
+    {
+      "question": "What does a basic transaction include?",
+      "options": [
+        {
+          "answer": "coinbase, miner, gas"
+        },
+        {
+          "answer": "sender, block number, amount"
+        },
+        {
+          "answer": "from, to, value",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Sending ether from one account to another requires how much gas?",
+      "options": [
+        {
+          "answer": "2300"
+        },
+        {
+          "answer": "10000"
+        },
+        {
+          "answer": "20000"
+        },
+        {
+          "answer": "21000",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What are transaction fees in Ethereum?",
+      "options": [
+        {
+          "answer": "An incentive for nodes to include your transaction in a block",
+          "correct": true
+        },
+        {
+          "answer": "A fee paid to the Ethereum Foundation"
+        },
+        {
+          "answer": "The cost of executing your transaction on the network",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "A sent transaction is in a pending state, meaning what?",
+      "options": [
+        {
+          "answer": "The transaction isn't executed until a node includes it in a valid block.",
+          "correct": true
+        },
+        {
+          "answer": "The sender has a limited opportunity to spend double the amount."
+        },
+        {
+          "answer": "The sender needs to be authorized before the transaction is valid."
+        }
+      ]
+    }
+  ]
+}

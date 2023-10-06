@@ -1,0 +1,18 @@
+{
+  "question": "What precaution should you take regarding wallets for developing?",
+  "options": [
+    {
+      "answer": "Avoid using wallets altogether during the development phase"
+    },
+    {
+      "answer": "Share the private key of your wallet with trusted individuals"
+    },
+    {
+      "answer": "Use a separate wallet for developing - independent from personal assets",
+      "correct": true
+    },
+    {
+      "answer": "Use the same wallet that holds personal assets on Mainnet"
+    }
+  ]
+}

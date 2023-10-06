@@ -1,0 +1,18 @@
+{
+  "question": "Which address does the `msg.sender` variable represent in Solidity?",
+  "options": [
+    {
+      "answer": "The contract owner"
+    },
+    {
+      "answer": "The Ethereum smart contract"
+    },
+    {
+      "answer": "The Ethereum network"
+    },
+    {
+      "answer": "The caller of the current function",
+      "correct": true
+    }
+  ]
+}

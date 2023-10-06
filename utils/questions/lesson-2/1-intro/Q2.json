@@ -1,0 +1,18 @@
+{
+  "question": "What is Hardhat?",
+  "options": [
+    {
+      "answer": "A set of tools that includes a local test blockchain that can run on your machine",
+      "correct": true
+    },
+    {
+      "answer": "A code editor in the browser "
+    },
+    {
+      "answer": "A security patch for most Linux operating systems"
+    },
+    {
+      "answer": "Safety apparel for space travel "
+    }
+  ]
+}

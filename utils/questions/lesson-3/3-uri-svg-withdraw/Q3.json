@@ -1,0 +1,18 @@
+{
+  "question": "What does the `tierName` variable store?",
+  "options": [
+    {
+      "answer": "The name of the contract."
+    },
+    {
+      "answer": "Token ID in string format.",
+      "correct": true
+    },
+    {
+      "answer": "Tier type of the NFT."
+    },
+    {
+      "answer": "The description of the collection"
+    }
+  ]
+}

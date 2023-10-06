@@ -1,0 +1,19 @@
+{
+  "question": "Which info does our script print to the screen?",
+  "options": [
+    {
+      "answer": "The main function"
+    },
+    {
+      "answer": "Our contract's address",
+      "correct": true
+    },
+    {
+      "answer": "The contract factory"
+    },
+    {
+      "answer": "The URI of our token",
+      "correct": true
+    }
+  ]
+}

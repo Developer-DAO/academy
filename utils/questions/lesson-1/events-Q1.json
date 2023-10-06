@@ -1,0 +1,15 @@
+{
+  "question": "What is the purpose of an indexed event parameter in Solidity? ",
+  "options": [
+    {
+      "answer": "It ensures the event is recorded in the blockchain."
+    },
+    {
+      "answer": "It stores the event parameters in the data portion of the log."
+    },
+    {
+      "answer": "It enables efficient searching and filtering of logged events.",
+      "correct": true
+    }
+  ]
+}

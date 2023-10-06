@@ -1,0 +1,18 @@
+{
+  "question": "What does the totalSupply variable do?",
+  "options": [
+    {
+      "answer": "Tells us we can't mint any more NFTs"
+    },
+    {
+      "answer": "Stores the current number of minted NFTs",
+      "correct": true
+    },
+    {
+      "answer": "Identifies each new NFT created"
+    },
+    {
+      "answer": "It keeps track of the number of functions in the contract"
+    }
+  ]
+}

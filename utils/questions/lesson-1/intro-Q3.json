@@ -1,0 +1,15 @@
+{
+  "question": "Which programming language is commonly used for writing smart contracts on the Ethereum blockchain?",
+  "options": [
+    {
+      "answer": "Python"
+    },
+    {
+      "answer": "Solidity",
+      "correct": true
+    },
+    {
+      "answer": "Java"
+    }
+  ]
+}

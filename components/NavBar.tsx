@@ -19,7 +19,12 @@ import { PomodoroTimer } from '@components/PomodoroTimer'
 function NavBar() {
   const router = useRouter()
   return (
-    <Box>
+    <Box
+      p="1.25em"
+      px="5%"
+      mx={{ base: '2rem', md: '6rem', lg: '10rem' }}
+      as="header"
+    >
       <Flex justify="left" alignItems="center">
         <Link as={NextLink} variant="logo" href={'/'}>
           {router.pathname.endsWith('/[slug]') ? (
@@ -79,7 +84,7 @@ function NavBar() {
                     GET STARTED
                   </Link>
                 </MenuItem>
-                <MenuItem>
+                {/* <MenuItem>
                   <Link
                     as={NextLink}
                     href="/lessons"
@@ -92,7 +97,7 @@ function NavBar() {
                   >
                     Tracks
                   </Link>
-                </MenuItem>
+                </MenuItem> */}
               </MenuList>
             </Menu>
           </Flex>
@@ -131,7 +136,7 @@ function NavBar() {
               Get Started
             </Link>
 
-            <Link
+            {/* <Link
               as={NextLink}
               href="/lessons"
               passHref
@@ -142,7 +147,7 @@ function NavBar() {
               }
             >
               Tracks
-            </Link>
+            </Link> */}
 
             {/* <Button colorScheme="gray" variant="solid">
               <ConnectButton chainStatus="icon" showBalance={false} />

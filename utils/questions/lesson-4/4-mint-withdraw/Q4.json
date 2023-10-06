@@ -1,0 +1,18 @@
+{
+  "question": "In the 'withdraw()' tests, why is the line 'await contract.connect(otherUser).withdraw()' used?",
+  "options": [
+    {
+      "answer": "To ensure the 'otherUser' can withdraw the entire contract balance."
+    },
+    {
+      "answer": "To verify that the 'withdraw()' function updates other balances for the user correctly."
+    },
+    {
+      "answer": "To check if the contract is working correctly for verified callers of the function.",
+      "correct": true
+    },
+    {
+      "answer": "To confirm the contract has sufficient funds before withdrawing."
+    }
+  ]
+}

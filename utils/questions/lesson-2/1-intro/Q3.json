@@ -1,0 +1,18 @@
+{
+  "question": "In Solidity, what does the ^ (caret) symbol represent when specifying the compiler version?",
+  "options": [
+    {
+      "answer": "It denotes an exclusive compiler version"
+    },
+    {
+      "answer": "It indicates a fallback function"
+    },
+    {
+      "answer": "It signifies a dangerous computation"
+    },
+    {
+      "answer": " It specifies a compatible range of compiler versions",
+      "correct": true
+    }
+  ]
+}

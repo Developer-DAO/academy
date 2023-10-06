@@ -1,0 +1,18 @@
+{
+  "question": "Which of the following go into the hardhat.config.js file?",
+  "options": [
+    {
+      "answer": "NFT_NAME"
+    },
+    {
+      "answer": "RPC_API_KEY",
+      "correct": true
+    },
+    {
+      "answer": "tokenURI"
+    },
+    {
+      "answer": "NFT_BASE_URI"
+    }
+  ]
+}

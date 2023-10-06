@@ -1,0 +1,19 @@
+{
+  "question": "What does the `await contract.waitForDeployment()` line do in the code?",
+  "options": [
+    {
+      "answer": " It deploys the contract to the blockchain."
+    },
+    {
+      "answer": " It retrieves the contract's deployed instance for use.",
+      "correct": true
+    },
+    {
+      "answer": "It initializes the contract with the provided parameters."
+    },
+    {
+      "answer": " It waits for the contract deployment to complete.",
+      "correct": true
+    }
+  ]
+}
