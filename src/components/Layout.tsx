@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import Topbar from "./Topbar";
 import Footer from "./footer/Footer";
 import { NextSeo } from "next-seo";
+import Banner from "./Banner";
 
 interface Props {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ export default function Layout({ children, title, description }: Props) {
           },
         ]}
       />
+      <Banner />
       <Topbar />
       <Box
         as="main"
