@@ -43,10 +43,10 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Get Started",
     href: "/getting-started",
   },
-  {
-    label: "Tracks",
-    href: "/lessons",
-  },
+  // {
+  //   label: "Tracks",
+  //   href: "/lessons",
+  // },
 ];
 
 export default function Topbar() {
