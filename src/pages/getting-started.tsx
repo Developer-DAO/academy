@@ -264,8 +264,8 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
 GettingStartedPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
-      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Getting Started"
+      description="D_D Academy is an open-source education platform created by the Developer DAO."
     >
       {page}
     </Layout>
