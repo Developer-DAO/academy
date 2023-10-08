@@ -14,6 +14,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -51,8 +52,12 @@ const NAV_ITEMS: Array<NavItem> = [
 
 export default function Topbar() {
   const { isOpen, onToggle } = useDisclosure();
-  const router = useRouter();
+  const [isMobile] = useMediaQuery("(max-width: 768px)", {
+    ssr: true,
+    fallback: true, // return false on the server, and re-evaluate on the client side
+  });
 
+  const router = useRouter();
   return (
     <Box
       as="header"
@@ -96,12 +101,15 @@ export default function Topbar() {
             href={"/"}
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
           >
-            {router.pathname.endsWith("/[slug]") ? (
-              <SchoolOfCodeLogo />
-            ) : (
-              <SchoolOfCodeLogo autoStart={true} loop={true} />
-            )}
+            {!isMobile ? (
+              router.pathname.endsWith("/[slug]") ? (
+                <SchoolOfCodeLogo />
+              ) : (
+                <SchoolOfCodeLogo autoStart={true} loop={true} />
+              )
+            ) : null}
           </Link>
+
           <Flex
             justify={"flex-end"}
             alignItems="center"
