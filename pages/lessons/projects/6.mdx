@@ -607,13 +607,13 @@ property rights. We can think of this as deploying our contract to a blockchain,
 where our token will be fully functioning for every address that wants to
 interact with it.
 
-We are going to need a small amount of Goerli ETH to be able to pay for the
-transaction to deploy our contract. If you already have some Test ETH in Goerli,
+We are going to need a small amount of Sepolia ETH to be able to pay for the
+transaction to deploy our contract. If you already have some Test ETH in Sepolia,
 you can continue, if you don't you can always ask for some in the many faucets
-that are online. Some options are: [Alchemy](https://goerlifaucet.com/),
-[Goerli Faucet](https://goerlifaucet.org/) or
-[Paradigm](https://faucet.paradigm.xyz/), but you can find more if you search
-for Goerli Faucet in any search engine.
+that are online. Some options are: [Alchemy](https://sepoliafaucet.com/),
+[Sepolia Faucet](https://testnet-faucet.com/sepolia/) or
+[Quicknode](https://faucet.quicknode.com/ethereum/sepolia), but you can find more if you search
+for Sepolia Faucet in any search engine.
 
 We are going to create an `.env` file, where we will store our _secrets_. And
 when we mean _secrets_, we are specially referring to the private key to your
@@ -630,8 +630,8 @@ project's root folder called `.env` and we should fill it with this:
 
 ```env
 RAW_PRIVATE_KEY=REPLACE_THIS_VALUE_WITH_YOUR_PRIVATE_KEY
-ETH_RPC_URL=https://rpc.ankr.com/eth_goerli
-CHAIN=goerli
+ETH_RPC_URL=https://rpc.ankr.com/eth_sepolia
+CHAIN=sepolia
 ETHERSCAN_API_KEY=REPLACE_WITH_ETHERSCAN_API_KEY
 ```
 
@@ -649,7 +649,7 @@ Overview of our values:
   one but you can use your Infura, Alchemy, Quicknode or whatever provider you
   prefer
 - **CHAIN**: The blockchain where we will be deploying out contract. We are using
-  the goerli testnet since this is not intended to be on mainnet.
+  the Sepolia testnet since this is not intended to be on mainnet.
 - **ETHERSCAN_API_KEY**: Here we will use our Etherscan API KEY so we can verify
   our contract for everyone to see the deployed code and foster transparency in
   the web3 space.
@@ -738,22 +738,22 @@ the tool will return an error when trying to verify.
 This is the output I got:
 
 ```less
-[⠢] Compiling...
+[⠒] Compiling...
 No files changed, compilation skipped
-
-Deployer: 0xC53128eAe55d64C2bD70F842247a0E8D27647241
-Deployed to: 0x2778aB7e31C56B73F4d83ABb265c0bEcA8A0655a
-Transaction hash: 0xef9dfa70fa3cc6c5f5f994f00ac46f6c343f378b2135d80b34c6e56bd5f7036e
+Deployer: 0xf4bAFA90241e808461653C17dB0f8669Fa4342a1
+Deployed to: 0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf
+Transaction hash: 0xeb420acc65f54fc3a564db28856e4496acb59615f837d784c75a9c00a0bb96d4
 Starting contract verification...
 Waiting for etherscan to detect contract deployment...
-Start verifying contract `0x2778ab7e31c56b73f4d83abb265c0beca8a0655a` deployed on goerli
+Start verifying contract `0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf` deployed on sepolia
 
-Submitting verification for [src/MyToken.sol:MyToken] "0x2778aB7e31C56B73F4d83ABb265c0bEcA8A0655a".
+Submitting verification for [src/MyToken.sol:MyToken] "0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf".
+
 Submitted contract for verification:
         Response: `OK`
-        GUID: `6mfsxsqsbau8rfsdtmisn2ihq5wh568mr9myxbbgcf66hcspbv`
+        GUID: `fn91mxzy58kyjw5ps1tjid2jtulktj8zhdx583pxbfekthb5jm`
         URL:
-        https://goerli.etherscan.io/address/0x2778ab7e31c56b73f4d83abb265c0beca8a0655a
+        https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
@@ -765,9 +765,9 @@ Contract successfully verified
 
 If we filter out all information, we can pay attention to the second line, where
 the tool tells us what is the address of the deployed contract:
-`0x2778aB7e31C56B73F4d83ABb265c0bEcA8A0655a`.
+`0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf`.
 
-You can go into [Goerli Etherscan](https://goerli.etherscan.io/) block explorer
+You can go into [Sepolia Etherscan](https://sepolia.etherscan.io/) block explorer
 and search for this address that the command returned to check out your very own
 newly deployed smart contract!
 
@@ -775,7 +775,7 @@ newly deployed smart contract!
 
 If you got to verify it, it also gives you a link to see your contract on the
 block explorer, in our case it's the last line the _Submitted contract for
-verification_ section: [Goerli Etherscan](https://goerli.etherscan.io/address/0x2778ab7e31c56b73f4d83abb265c0beca8a0655a) **and** you get to see the code for
+verification_ section: [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf) **and** you get to see the code for
 the contract and all it's libraries right there in the tab named _Contract_ with
 a green checkmark.
 
@@ -800,7 +800,7 @@ our decimals in 18, that would be exactly 1000 MTK.
 
 ## Invite your frens!
 
-That's it! We deployed our contract on the Goerli testnet, and our token should
+That's it! We deployed our contract on the Sepolia testnet, and our token should
 be live and kicking.
 
 Now that we have built our house and it's has been accepted in the real estate
