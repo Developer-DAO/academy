@@ -33,6 +33,8 @@ export const contributors: ContributorLookup = {
   },
   wolovim: {
     displayName: 'wolovim',
+    moreInfoUrl: 'https://twitter.com/wolovim',
+    avatarUrl: 'https://avatars.githubusercontent.com/u/3621728?v=4',
   },
   _7i7o: {
     displayName: '7i7o',
