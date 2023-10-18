@@ -1,21 +1,20 @@
 ---
-i18n: 'erc20'
+i18n: "erc20"
 title: Your own Token with Foundry
 description:
   Create and deploy an ERC20 Token (UNI, MKR, DAI, etc.) using the Foundry
   toolkit.
-icons:
-  [
-    'solidity',
-    'foundry',
-    'openzeppelin',
-    'ethereum',
-    'etherscan',
-  ]
+icons: ["solidity", "foundry", "openzeppelin", "ethereum", "etherscan"]
 ---
 
-import { LessonHeader } from '../../../components/mdx/LessonHeader'
+import Layout from "../../../components/Layout";
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
+<Layout
+    title="Your own Token with Foundry" 
+    description="Create and deploy an ERC20 Token (UNI, MKR, DAI, etc.) using the Foundry
+  toolkit." 
+>
 <LessonHeader
   title="Create your own Tokens using Foundry"
 />
@@ -99,8 +98,7 @@ You can check the details in the full EIP-20 titled
 ## Has someone created a battle-tested library for the standard?
 
 Yes. OpenZeppelin (among others) has created an implementation we can inherit to
-create
-our own tokens easily.
+create our own tokens easily.
 
 ## Let's code, but first...
 
@@ -133,23 +131,21 @@ mkdir d_d_academy
 cd d_d_academy
 ```
 
-You can use whatever tools you feel confident or accostumed to.
-For this example we will be creating a Foundry project, but feel free to use
-Hardhat or Truffle if that's your favourite flavor.
-The main focus of Foundry is that you don't need to use Javascript at all if you
-don't want to.
-All the tools are CLI commands. For tests and scripts, you only need Solidity!
+You can use whatever tools you feel confident or accostumed to. For this example
+we will be creating a Foundry project, but feel free to use Hardhat or Truffle
+if that's your favourite flavor. The main focus of Foundry is that you don't
+need to use Javascript at all if you don't want to. All the tools are CLI
+commands. For tests and scripts, you only need Solidity!
 
 ![foundry-banner.png](/assets/lessons/6/foundry-banner.png)
 
 These instructions are for Linux and MacOS. If you use Windows, we **strongly**
-recommend using
-WSL (Windows Subsystem for Linux), or else you will need to build the tools from
-source. Using WSL
-is an investment in the long term anyway, since most development and Open Source
-work is done inside Unix environments. We encourage you to try it.
-There is also a Docker container if you prefer it. All options are detailed in
-the [Foundry Book](https://book.getfoundry.sh/getting-started/installation)
+recommend using WSL (Windows Subsystem for Linux), or else you will need to
+build the tools from source. Using WSL is an investment in the long term anyway,
+since most development and Open Source work is done inside Unix environments. We
+encourage you to try it. There is also a Docker container if you prefer it. All
+options are detailed in the
+[Foundry Book](https://book.getfoundry.sh/getting-started/installation)
 
 To download foundry, we need to run this command on the console:
 
@@ -170,8 +166,7 @@ foundryup
 ```
 
 If everything goes well, you will have four tools to run in the console:
-`forge`, `cast`, `anvil` & `chisel`.
-Basic overview of each tool:
+`forge`, `cast`, `anvil` & `chisel`. Basic overview of each tool:
 
 - `forge` tests, builds and deploys your smart contracts
 - `cast` an make smart contract calls, send transactions, or retrieve any type
@@ -211,16 +206,15 @@ This command outputs something like this:
 
 The folders in our project are used like this:
 
-- `lib` _dependencies_: Forge uses git submodules instead of Node
-  Packages. This means it works with any GitHub repository that contains smart
-  contracts.
+- `lib` _dependencies_: Forge uses git submodules instead of Node Packages. This
+  means it works with any GitHub repository that contains smart contracts.
 - `script` scripts: automate transactions or deployment or our smart contracts
   (scripts are written in solidity!)
 - `src` source: where our smart contract code will live
 - `test` tests: write tests for our smart contracts (also in solidity!)
 
-The default project includes a basic smart contract. We can build it to
-see how forge commands work:
+The default project includes a basic smart contract. We can build it to see how
+forge commands work:
 
 ```bash
 forge build
@@ -274,8 +268,8 @@ Installing openzeppelin-contracts in "/home/myuser/d_d_academy/my_token/lib/open
 ```
 
 We can now import OpenZeppelin contracts in our smart contracts, but we can go
-the extra-mile to use the same import line we used in Hardhat before.
-We need to create a `remappings.txt` file in the root of our project:
+the extra-mile to use the same import line we used in Hardhat before. We need to
+create a `remappings.txt` file in the root of our project:
 
 ```bash
 forge remappings > remappings.txt
@@ -335,8 +329,8 @@ contract MyToken is ERC20 {
 
 Now that we have the full implementation inherited, we still have to specify a
 few more things before compiling, because the ERC20 constructor **needs** to
-receive 2 parameters, the token's name and symbol, or it will raise an error.
-In order to do that, we will define our constructor and call our inherited
+receive 2 parameters, the token's name and symbol, or it will raise an error. In
+order to do that, we will define our constructor and call our inherited
 contract's constructor:
 
 ```solidity
@@ -356,11 +350,11 @@ One final consideration is adding a Roof above ourselves, to be able to live in
 and finish the structure around us. What good is a house with no roof?
 
 We have all the rooms and functions we needed, but no tokens exist yet. What
-good is a token with no supply?
-We can think of the initial allocation of tokens as the way to put a roof on the
-house and finish the structure. If you choose not to have an initial allocation,
-that's also valid and can skip this, but for our example we'll allocate an
-arbitrary amount of tokens to the deployer of the contract on our constructor:
+good is a token with no supply? We can think of the initial allocation of tokens
+as the way to put a roof on the house and finish the structure. If you choose
+not to have an initial allocation, that's also valid and can skip this, but for
+our example we'll allocate an arbitrary amount of tokens to the deployer of the
+contract on our constructor:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -381,8 +375,8 @@ them to the `msg.sender`'s balance.
 ## Opening Doors to our house
 
 We now have a full structure, with a roof to shelter us from the weather. The
-only problem is that we didn't create any openings for anyone to enter
-or leave the house.
+only problem is that we didn't create any openings for anyone to enter or leave
+the house.
 
 We can think of entering the house as `minting` new tokens or increasing the
 total supply, and leaving the house as `burning` tokens or decreasing the total
@@ -430,8 +424,8 @@ their own tokens by using `msg.sender` as the address to call the internal
 In the special case someone approved us to operate on an amount of their tokens,
 we created a `burnFrom` function to be able to burn within our approved
 allowance from other address. If we try to burn (or transfer) more than our
-approved allowance, the ERC20 implementation from OZ will revert our
-transaction because that's required by the ERC20 standard.
+approved allowance, the ERC20 implementation from OZ will revert our transaction
+because that's required by the ERC20 standard.
 
 We have now created doors to our house, but we haven't put locks in them!
 
@@ -452,8 +446,8 @@ library.
 We can basically define **roles** and assign or un-assign them to any address we
 need.
 
-In our case, we will only create a `MINTER_ROLE` to allow access to our
-`mint` function:
+In our case, we will only create a `MINTER_ROLE` to allow access to our `mint`
+function:
 
 ```solidity
 
@@ -501,8 +495,8 @@ functionality, we gave minter and 'admin' roles to the address that will deploy
 the contract and then restricted access to our `mint` function.
 
 Now any address that doesn't have the `MINTER_ROLE` granted, will revert on any
-transaction that calls our `mint` function. Hooray! Our door is now
-locked (only) for intruders!
+transaction that calls our `mint` function. Hooray! Our door is now locked
+(only) for intruders!
 
 ## Final Touches and details
 
@@ -559,7 +553,7 @@ A few examples could be:
   hodling (tip: you can override functions like `balanceOf` and
   `_beforeTokenTransfer` / `_afterTokenTransfer` from the inherited ERC20)
 - A token that can only be transferred or received if you hold another specific
-token (i.e. an NFT from a specific collection)
+  token (i.e. an NFT from a specific collection)
 - A token that looses the balance if you don't transact or transfer it regularly
 
 The possibilities are endless and we want you to go wild with your imagination.
@@ -608,12 +602,13 @@ where our token will be fully functioning for every address that wants to
 interact with it.
 
 We are going to need a small amount of Sepolia ETH to be able to pay for the
-transaction to deploy our contract. If you already have some Test ETH in Sepolia,
-you can continue, if you don't you can always ask for some in the many faucets
-that are online. Some options are: [Alchemy](https://sepoliafaucet.com/),
+transaction to deploy our contract. If you already have some Test ETH in
+Sepolia, you can continue, if you don't you can always ask for some in the many
+faucets that are online. Some options are:
+[Alchemy](https://sepoliafaucet.com/),
 [Sepolia Faucet](https://testnet-faucet.com/sepolia/) or
-[Quicknode](https://faucet.quicknode.com/ethereum/sepolia), but you can find more if you search
-for Sepolia Faucet in any search engine.
+[Quicknode](https://faucet.quicknode.com/ethereum/sepolia), but you can find
+more if you search for Sepolia Faucet in any search engine.
 
 We are going to create an `.env` file, where we will store our _secrets_. And
 when we mean _secrets_, we are specially referring to the private key to your
@@ -636,20 +631,19 @@ ETHERSCAN_API_KEY=REPLACE_WITH_ETHERSCAN_API_KEY
 ```
 
 Remember to replace the `REPLACE_THIS_VALUE_WITH_YOUR_PRIVATE_KEY` with your
-development wallet's private.
-In the spirit of Open Source Software (OSS) we recommend you to also replace the
-`REPLACE_WITH_ETHERSCAN_API_KEY` with your etherscan API KEY so we can verify
-our contract.
+development wallet's private. In the spirit of Open Source Software (OSS) we
+recommend you to also replace the `REPLACE_WITH_ETHERSCAN_API_KEY` with your
+etherscan API KEY so we can verify our contract.
 
 Overview of our values:
 
 - **RAW_PRIVATE_KEY**: Here we shall paste our development wallet's private key
   after the `=` sign
-- **ETH_RPC_URL**: This is the token from our RPC provider, we are using a public
-  one but you can use your Infura, Alchemy, Quicknode or whatever provider you
-  prefer
-- **CHAIN**: The blockchain where we will be deploying out contract. We are using
-  the Sepolia testnet since this is not intended to be on mainnet.
+- **ETH_RPC_URL**: This is the token from our RPC provider, we are using a
+  public one but you can use your Infura, Alchemy, Quicknode or whatever
+  provider you prefer
+- **CHAIN**: The blockchain where we will be deploying out contract. We are
+  using the Sepolia testnet since this is not intended to be on mainnet.
 - **ETHERSCAN_API_KEY**: Here we will use our Etherscan API KEY so we can verify
   our contract for everyone to see the deployed code and foster transparency in
   the web3 space.
@@ -666,7 +660,8 @@ export $(grep -v '^#' .env | xargs)
 ```
 
 If you are using Fish or other shell, you can search on how to create a function
-that does the same (Tip: [envsource fish function](https://gist.github.com/nikoheikkila/dd4357a178c8679411566ba2ca280fcc)).
+that does the same (Tip:
+[envsource fish function](https://gist.github.com/nikoheikkila/dd4357a178c8679411566ba2ca280fcc)).
 
 Once we have those values in our environment, our Foundry tool to deploy will
 know what wallet to deploy from, what node or RPC in the blockchain to connect
@@ -701,12 +696,12 @@ use the `forge create` tool.
 <Callout emoji='⚠️' size='md' variant='info'>
 
 We **don't** have to copy our private key in the command! That's one of the
-reasons to use the `.env` file: we know exactly where our private key is and
-we are responsible to not publish this file anywhere. We can even delete it
-after we deploy the contract.
-If you write your private key in a command on the terminal, all the things you
-type in the terminal get stored in the terminal's history, which could be in a
-publicly accesible file in your computer. That's why we are using an `.env` file.
+reasons to use the `.env` file: we know exactly where our private key is and we
+are responsible to not publish this file anywhere. We can even delete it after
+we deploy the contract. If you write your private key in a command on the
+terminal, all the things you type in the terminal get stored in the terminal's
+history, which could be in a publicly accesible file in your computer. That's
+why we are using an `.env` file.
 
 </Callout>
 
@@ -721,11 +716,10 @@ forge create src/MyToken.sol:MyToken \
 
 <Callout emoji='💡' size='md' variant='info'>
 
-Remember that if you used a different name for your token and your `.sol`
-file, you'll need to adjust this command.
+Remember that if you used a different name for your token and your `.sol` file,
+you'll need to adjust this command.
 
 </Callout>
-
 
 Do you see how we used the value that `cast` gave us as a parameter after the
 `--constructor-args` modifier? We are passing down arguments to our solidity
@@ -767,19 +761,21 @@ If we filter out all information, we can pay attention to the second line, where
 the tool tells us what is the address of the deployed contract:
 `0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf`.
 
-You can go into [Sepolia Etherscan](https://sepolia.etherscan.io/) block explorer
-and search for this address that the command returned to check out your very own
-newly deployed smart contract!
+You can go into [Sepolia Etherscan](https://sepolia.etherscan.io/) block
+explorer and search for this address that the command returned to check out your
+very own newly deployed smart contract!
 
 ![ERC20-etherscan](/assets/lessons/6/ERC20-etherscan.png)
 
 If you got to verify it, it also gives you a link to see your contract on the
 block explorer, in our case it's the last line the _Submitted contract for
-verification_ section: [Sepolia Etherscan](https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf) **and** you get to see the code for
-the contract and all it's libraries right there in the tab named _Contract_ with
-a green checkmark.
+verification_ section:
+[Sepolia Etherscan](https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf)
+**and** you get to see the code for the contract and all it's libraries right
+there in the tab named _Contract_ with a green checkmark.
 
-If you scroll down, you'll see our code. It was the first file of the set for me:
+If you scroll down, you'll see our code. It was the first file of the set for
+me:
 
 ![ERC20-verified](/assets/lessons/6/ERC20-verified.png)
 
@@ -794,7 +790,7 @@ searching for the `balanceOf` function:
 Copy and paste your wallet's address (the one you used to deploy the contract)
 and click Query. You should have as many wei as you passed to the constructor
 when deploying. In my case it was 1000000000000000000000 wei and since we left
-our decimals in 18, that would be exactly 1000 MTK. 
+our decimals in 18, that would be exactly 1000 MTK.
 
 ![ERC20-1000MTK](/assets/lessons/6/ERC20-1000MTK.png)
 
@@ -807,10 +803,11 @@ Now that we have built our house and it's has been accepted in the real estate
 register, we can invite our friends by transferring them some MTK, or **even**
 minting them some tokens, even if that affects your tokenomics 😉
 
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 
 <ContributorFooter
-  authors={['_7i7o']}
-  reviewers={['piablo', 'georgemac510']}
+  authors={["_7i7o"]}
+  reviewers={["piablo", "georgemac510"]}
   contributors={[]}
 />
+</Layout>
