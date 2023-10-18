@@ -9,6 +9,7 @@ import {
 import NextLink from 'next/link'
 import { FaTwitter, FaGithub } from 'react-icons/fa'
 import { SocialButton } from '@components/footer/SocialButton'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -105,6 +106,22 @@ export default function Footer() {
             Privacy Policy
           </Link>
         </Text>
+        <Box>
+          <Link
+            as={NextLink}
+            href={
+              'https://vercel.com?utm_source=[developer-dao]&utm_campaign=oss'
+            }
+            isExternal
+          >
+            <Image
+              src="/powered-by-vercel.svg"
+              alt="Powered by Vercel"
+              width="64"
+              height="64"
+            />
+          </Link>
+        </Box>
       </Container>
     </Box>
   )
