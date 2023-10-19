@@ -18,11 +18,7 @@ import {
   getDefaultWallets,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
-import {
-  ledgerWallet,
-  trustWallet,
-  zerionWallet,
-} from "@rainbow-me/rainbowkit/wallets";
+import { zerionWallet } from "@rainbow-me/rainbowkit/wallets";
 
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
@@ -62,12 +58,8 @@ const { wallets } = getDefaultWallets({
 const connectors = connectorsForWallets([
   ...wallets,
   {
-    groupName: "Other",
-    wallets: [
-      zerionWallet({ projectId, chains }),
-      trustWallet({ projectId, chains }),
-      ledgerWallet({ projectId, chains }),
-    ],
+    groupName: "Preferred Partner",
+    wallets: [zerionWallet({ projectId, chains })],
   },
 ]);
 
@@ -108,7 +100,7 @@ const MyApp = ({
                 overlayBlur: "small",
               })}
               chains={chains}
-              initialChain={polygonMumbai}
+              initialChain={CURRENT_CHAIN}
             >
               <MDXProvider components={Components}>
                 <AppContextProvider>
