@@ -81,7 +81,7 @@ run through the live site and make sure the code is performing as expected.
 
 **Prerequisites:**
 
-    node --version 16.x
+    node --version 18.x
 
 Refer to the `node` and `npm` installation with `nvm` guide in Lesson 2. A link
 to the guide can be found
@@ -193,13 +193,13 @@ the content, Reviewer(s) edited the content, and Contributor(s) later made
 updates or fixed issues.
 
 ```jsx
-import { ContributorFooter } from '../../../components/mdx/ContributorFooter'
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 ```
 
 ```jsx
 <ContributorFooter
-  authors={['brianfive']}
-  reviewers={['piablo', 'georgemac510']}
+  authors={["brianfive"]}
+  reviewers={["piablo", "georgemac510"]}
   contributors={[]}
 />
 ```
