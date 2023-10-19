@@ -19,7 +19,6 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
   const { completedQuizzesIds, allLessonsData } = useAppContext();
 
   // Requests
-
   useMemo(() => {
     if (allLessonsData?.length && completedQuizzesIds?.length) {
       const actualLessonId: string = allLessonsData?.find(
