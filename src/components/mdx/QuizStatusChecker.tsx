@@ -48,7 +48,11 @@ const QuizStatusChecker = ({ quiz }: QuizStatusCheckerTye) => {
       </Center>
       <br />
       <Center>
-        <ConnectButton />
+        <ConnectButton
+          accountStatus="address"
+          showBalance={false}
+          chainStatus="none"
+        />
       </Center>
     </>
   ) : quizCompleted ? (

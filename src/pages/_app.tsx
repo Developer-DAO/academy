@@ -22,7 +22,7 @@ import { zerionWallet } from "@rainbow-me/rainbowkit/wallets";
 
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
-import { polygon, polygonMumbai } from "wagmi/chains";
+import { polygon /* , polygonMumbai */ } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "@/theme";
@@ -35,12 +35,8 @@ import { AppContextProvider } from "@/contexts/AppContextProvider";
 /**
  * Configure chains supported
  */
-
-const CURRENT_CHAIN =
-  process.env.VERCEL_ENV !== undefined &&
-  process.env.VERCEL_ENV === "production"
-    ? polygon
-    : polygonMumbai;
+const CURRENT_CHAIN = polygon;
+// process.env.VERCEL_ENV !== undefined && process.env.VERCEL_ENV === "production" ? polygon : polygonMumbai;
 
 const { chains, publicClient } = configureChains(
   [CURRENT_CHAIN],
