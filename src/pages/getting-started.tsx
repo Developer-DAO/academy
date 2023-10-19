@@ -145,18 +145,24 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
                       fontSize: "xl",
                     }}
                   >
-                    {lesson.frontMatter.title}
-                    {lesson && lesson.completed && lesson.completed === true ? (
-                      <Badge
-                        ml="1"
-                        alignItems={"flex-end"}
-                        colorScheme="green"
-                        position="absolute"
-                        right={3}
-                      >
-                        Completed
-                      </Badge>
-                    ) : null}
+                    <Flex direction={!isMobile ? "row" : "column"}>
+                      <Box>{lesson.frontMatter.title}</Box>
+                      <Box>
+                        {lesson &&
+                        lesson.completed &&
+                        lesson.completed === true ? (
+                          <Badge
+                            ml="1"
+                            alignItems={"flex-end"}
+                            colorScheme="green"
+                            position="absolute"
+                            right={3}
+                          >
+                            Completed
+                          </Badge>
+                        ) : null}
+                      </Box>
+                    </Flex>
                   </Button>
                 </Link>
               </ListItem>
