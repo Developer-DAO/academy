@@ -14,6 +14,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
 import {
   connectorsForWallets,
+  darkTheme,
   getDefaultWallets,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
@@ -98,7 +99,17 @@ const MyApp = ({
       <ChakraProvider theme={theme}>
         <SessionProvider refetchInterval={0} session={pageProps.session}>
           <RainbowKitSiweNextAuthProvider>
-            <RainbowKitProvider chains={chains} initialChain={polygonMumbai}>
+            <RainbowKitProvider
+              theme={darkTheme({
+                accentColor: "#6f51cf",
+                accentColorForeground: "white",
+                borderRadius: "small",
+                fontStack: "system",
+                overlayBlur: "small",
+              })}
+              chains={chains}
+              initialChain={polygonMumbai}
+            >
               <MDXProvider components={Components}>
                 <AppContextProvider>
                   {getLayout(<Component {...pageProps} />)}
