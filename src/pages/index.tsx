@@ -10,8 +10,8 @@ const Home: NextPageWithLayout = () => {
 Home.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
-      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Learn Web3"
+      description="D_D Academy is on a mission to educate coders to the exciting possibilities of building web3 Open Source."
     >
       {page}
     </Layout>

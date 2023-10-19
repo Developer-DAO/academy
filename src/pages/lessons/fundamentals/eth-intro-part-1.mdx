@@ -4,7 +4,14 @@ description: Introduction to Ethereum with web3.py and Python.
 icons: ["ethereum", "etherscan"]
 ---
 
-# **A Developer's Guide to Ethereum, Pt. 1**
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import Layout from "../../../components/Layout";
+
+<Layout
+    title="A Developer's Guide to Ethereum, Pt. 1" 
+    description="Introduction to Ethereum with web3.py and Python." 
+>
+<LessonHeader title="A Developer's Guide to Ethereum, Pt. 1" />
 
 So, you’ve heard about this [Ethereum](https://ethereum.org/) thing and are
 ready to venture down the rabbit hole? This post will quickly cover some
@@ -425,8 +432,7 @@ the tune of 21000 wei.
   network demand and how quickly you'd like a transaction to be processed.
 </Callout>
 
-<Quiz quiz="eth-intro-1-quiz" />
-
+<QuizStatusChecker quiz="quiz-eth-intro-1" />
 ### **And breathe**
 
 This seems as good a place as any to take a break. The rabbit hole continues on,
@@ -441,3 +447,12 @@ content? Let me know on [Twitter](https://twitter.com/wolovim).
   yet, but can be found in its original
   form [here](https://snakecharmers.ethereum.org/a-developers-guide-to-ethereum-pt-2/).
 </Callout>
+
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
+
+<ContributorFooter
+  authors={["wolovim"]}
+  reviewers={["georgemac510", "piablo"]}
+  contributors={[]}
+/>
+</Layout>

@@ -102,7 +102,8 @@ export function AppContextProvider({ children }: IProps) {
       const projectsWithCompleteStatus = projects.map((lesson) => {
         const currentLessonId = allLessonsData.find(
           (lessonData) =>
-            lessonData.lessonNumber.toString() === lesson.slug.toString(), // DEV_NOTE: forcing .toString() to avoid type errors
+            lessonData.projectLessonNumber?.toString() ===
+            lesson.slug.toString(), // DEV_NOTE: forcing .toString() to avoid type errors
         )?.id;
 
         const completed = currentLessonId
@@ -117,6 +118,35 @@ export function AppContextProvider({ children }: IProps) {
         return { ...lesson, completed: false };
       });
       setProjects(projectsWithCompleteStatus);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completedQuizzesIds]);
+
+  useEffect(() => {
+    if (allLessonsData && fundamentals && completedQuizzesIds.length !== 0) {
+      const fundamentalsWithCompleteStatus = fundamentals.map((lesson) => {
+        const currentLessonId = allLessonsData.find(
+          (lessonData) =>
+            lessonData.fundamentalLessonName?.toString() ===
+            lesson.slug.toString(), // DEV_NOTE: forcing .toString() to avoid type errors
+        )?.id;
+
+        const completed = currentLessonId
+          ? completedQuizzesIds.includes(currentLessonId)
+          : false; // DEV_NOTE: if the lesson is not found, it is not completed
+        return { ...lesson, completed };
+      });
+
+      setFundamentals(fundamentalsWithCompleteStatus);
+    } else if (
+      allLessonsData &&
+      fundamentals &&
+      completedQuizzesIds.length === 0
+    ) {
+      const fundamentalsWithCompleteStatus = fundamentals.map((lesson) => {
+        return { ...lesson, completed: false };
+      });
+      setFundamentals(fundamentalsWithCompleteStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedQuizzesIds]);

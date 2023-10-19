@@ -22,8 +22,8 @@ import { LessonHeader } from "../../../components/mdx/LessonHeader";
 import Layout from "../../../components/Layout";
 
 <Layout
-    title="Dapp Page" 
-    description="A page for your dapp." 
+    title="Multi Tiered NFTs: A User-Friendly Guide to Building ERC721 Collections" 
+    description="Create your first ERC721 tiered NFT collection with an array of dev tools with probing quizzes along the way. Adapt your project for professional use cases." 
 >
 <LessonHeader
   title="Lesson 3: Tier NFTs"
@@ -97,7 +97,8 @@ following steps:
 - Write scripts for deployment
 - Exploring additional functionalities and possibilities with tiered NFTs ... in
   the smart contract!
-- Showcasing and trading your tiered NFTs on a public marketplace
+- Securely manage sensitive environment variables
+- Showcasing your tiered NFTs on a public marketplace
 
 ### Developer tooling
 
@@ -179,7 +180,7 @@ last prompt. If they didn’t install or we accidentally chose ‘n’, we can a
 install them manually with:
 
 ```bash
-npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox @nomicfoundation/hardhat-chai-matchers
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox
 ```
 
 </Callout>
@@ -245,6 +246,8 @@ contracts. We'll write our smart contract step by step in five stages:
 Let’s get started by inheriting OpenZeppelin's ERC721.sol like we did last time.
 We add a constructor to our contract, which will mirror the one from ERC721.sol.
 
+{/* @wolovim optional line?: Unlike in our *Basic NFT* lesson, where we added a third parameter to the constructor for storing the token's baseURI, we will have a different approach this time, which we will come to later. */}
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
@@ -267,7 +270,7 @@ remember what `++` does to our total supply?
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol'
+import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 
 contract TierNFT is ERC721 {
 
@@ -939,11 +942,11 @@ async function main() {
     COLLECTION_NAME,
     COLLECTION_SYMBOL,
   )
-  await contract.deployed()
-  // Print our newly deployed contract address
-  console.log(`Contract deployed to ${contract.address}`)
-}
 
+  await contract.waitForDeployment()
+  // Print our newly deployed contract address
+  console.log("Contract deployed at ", await contract.getAddress())
+}
 /** Run Main function - Do not change **/
 main().catch((error) => {
   console.error(error)
@@ -956,17 +959,17 @@ main().catch((error) => {
 - With `const COLLECTION_NAME = "TierNFT"` and
   `const COLLECTION_SYMBOL = "Tier"` - we define the _name_ and _symbol_ to pass
   to the constructor for the deployment.
-- `hre.ethers.getContractFactory(CONTRACT_NAME)` - this asks Hardhat Runtime
-  Environment to get us a contract factory for our contract specified by
-  `CONTRACT_NAME`. A contract factory is a template that allows us to deploy
+- `hre.ethers.getContractFactory(CONTRACT_NAME)` - this asks `hre` (Hardhat
+  Runtime Environment) to get us a contract factory for our contract specified
+  by `CONTRACT_NAME`. A contract factory is a template that allows us to deploy
   instances of that contract, which allows many advantages.
 - `contractFactory.deploy` - we are asking the contract factory to deploy an
   instance of our contract. This is the deploy transaction!
 - `COLLECTION_NAME, COLLECTION_SYMBOL` - these are the parameters for our
   contract's constructor function to set up its initial state.
-- `await contract.deployed()` - waits for the transaction to be approved by the
-  network validators, and confirms that the deployment of the contract was
-  successful, telling us that it's ready for use on the blockchain.
+- `await contract.waitForDeployment()` - waits for the transaction to be
+  approved by the network validators, and confirms that the deployment of the
+  contract was successful, telling us that it's ready for use on the blockchain.
 - Running the `main().catch( … )` script at the very end makes sure that all the
   previous code is executed, and also logs any errors, and prints them to the
   console.
@@ -1017,6 +1020,8 @@ seed phrases!**
 
 ### Getting Some Testnet Funds
 
+{/* @wolovim, maybe we should give a couple of testnet options, just in case. what do you think? */}
+
 A testnet is a sandbox environment where developers can test, create and modify
 functionalities, monitor and simulate a mainnet blockchain's network
 performance, fix bugs and other network failures without having to worry about
@@ -1035,17 +1040,13 @@ can get tokens for multiple testnets.
 
 ### Personal Security
 
-Take your time to understand the _good practices_ in this section. Before we
-deploy, we need to add a `.env` file to our root folder to make sure we are
-**not pushing and therefore exposing our private keys in public repositories**.
-
 For your wallet's private key, the most sensitive data of the project, you need
 to open Metamask. Click on the three dots next to your _Account Name_, and then
-on _Account Details_, click on _Export Private Key_. It will ask for your
-Metamask password, the one you use to log in to your wallet each session, not
-your seed phrase. It also shows you a notice so you know that you are entering
-the _danger zone_. Confirm and you'll be able to copy your private key. Add your
-private key into the `.env` file like so:
+on _Account Details_, click on _Show Private Key_. It will ask for your Metamask
+password, the one you use to log in to your wallet each session, not your seed
+phrase. It also shows you a warning to 'Never disclose this key'. Confirm and
+you'll be able to copy your private key. Add your private key into the `.env`
+file like so:
 
 ```bash
 PRIVATE_KEY=f8abc629b...
@@ -1113,29 +1114,30 @@ async function main() {
   const contractFactory = await hre.ethers.getContractFactory(CONTRACT_NAME);
   const contract = await contractFactory.attach(CONTRACT_ADDRESS);
   // Print our newly deployed contract address
-  console.log(`Attached contract: ${contract.address}`);
+  console.log("Attached contract ", await contract.getAddress());
 
   // Call the mint function for Tier 0
   let txn = await contract.mint({
-    value: hre.ethers.utils.parseEther(VALUE_TIER_0),
+    value: hre.ethers.parseEther(VALUE_TIER_0),
   });
   await txn.wait(); // Wait for the NFT to be minted
   console.log("Minted a Tier 0 NFT!");
 
   // Call the mint function for Tier 1
   txn = await contract.mint({
-    value: hre.ethers.utils.parseEther(VALUE_TIER_1),
+    value: hre.ethers.parseEther(VALUE_TIER_1),
   });
   await txn.wait(); // Wait for the NFT to be minted
   console.log("Minted a Tier 1 NFT!");
 
   // Call the mint function for Tier 2
   txn = await contract.mint({
-    value: hre.ethers.utils.parseEther(VALUE_TIER_2),
+    value: hre.ethers.parseEther(VALUE_TIER_2),
   });
   await txn.wait(); // Wait for the NFT to be minted
   console.log("Minted a Tier 2 NFT!");
 
+  // Print total number of minted NFTs
   let totalSupply = await contract.totalSupply();
   console.log("Collection's new totalSupply: ", totalSupply);
 }
@@ -1151,10 +1153,10 @@ main().catch((error) => {
   sure that we are not deploying the contract again. Instead we need Hardhat to
   use the contract addresss we just deployed to the testnet.
 - `let txn = await contract.mint(...` is calling the mint function.
-- `value: hre.ethers.utils.parseEther(VALUE_TIER_0)` - defines the value that we
-  want to send to the mint function. This defines which _Tier_ we get.
-- `ethers.utils.parseEther` - here we use _Ethers_ to translate the value into
-  wei i.e. multiply it with 10\*\*18
+- `value: hre.ethers.parseEther(VALUE_TIER_0)` - defines the value that we want
+  to send to the mint function. This defines which _Tier_ we get.
+- `ethers.parseEther` - here we use _Ethers_ to translate the value into wei
+  i.e. multiply it with 10\*\*18
 - `let totalSupply = await contract.totalSupply()` - is calling the
   `totalSupply()` function to check if the 3 NFTs minted correctly.
   <br />

@@ -15,6 +15,7 @@ import {
   Divider,
   Box,
   Badge,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { type ReactElement } from "react";
 import Layout from "@/components/Layout";
@@ -24,7 +25,10 @@ import { useAppContext } from "@/contexts/AppContext";
 
 const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
   const { projects, fundamentals } = useAppContext();
-
+  const [isMobile] = useMediaQuery("(max-width: 768px)", {
+    ssr: true,
+    fallback: true, // return false on the server, and re-evaluate on the client side
+  });
   return (
     <Flex
       py={5}
@@ -92,18 +96,26 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
                       fontSize: "xl",
                     }}
                   >
-                    {lesson.frontMatter.title}
-                    {lesson && lesson.completed && lesson.completed === true ? (
-                      <Badge
-                        ml="1"
-                        alignItems={"flex-end"}
-                        colorScheme="green"
-                        position="absolute"
-                        right={3}
-                      >
-                        Completed
-                      </Badge>
-                    ) : null}
+                    <Flex direction={!isMobile ? "row" : "column"}>
+                      <Box>{lesson.frontMatter.title}</Box>
+                      <Box>
+                        {lesson &&
+                        lesson.completed &&
+                        lesson.completed === true ? (
+                          <>
+                            <Badge
+                              ml="1"
+                              alignItems={"flex-end"}
+                              colorScheme="green"
+                              position={!isMobile ? "absolute" : "relative"}
+                              right={3}
+                            >
+                              Completed
+                            </Badge>
+                          </>
+                        ) : null}
+                      </Box>
+                    </Flex>
                   </Button>
                 </Link>
               </ListItem>
@@ -133,18 +145,24 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
                       fontSize: "xl",
                     }}
                   >
-                    {lesson.frontMatter.title}
-                    {lesson && lesson.completed && lesson.completed === true ? (
-                      <Badge
-                        ml="1"
-                        alignItems={"flex-end"}
-                        colorScheme="green"
-                        position="absolute"
-                        right={3}
-                      >
-                        Completed
-                      </Badge>
-                    ) : null}
+                    <Flex direction={!isMobile ? "row" : "column"}>
+                      <Box>{lesson.frontMatter.title}</Box>
+                      <Box>
+                        {lesson &&
+                        lesson.completed &&
+                        lesson.completed === true ? (
+                          <Badge
+                            ml="1"
+                            alignItems={"flex-end"}
+                            colorScheme="green"
+                            position="absolute"
+                            right={3}
+                          >
+                            Completed
+                          </Badge>
+                        ) : null}
+                      </Box>
+                    </Flex>
                   </Button>
                 </Link>
               </ListItem>
@@ -264,8 +282,8 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
 GettingStartedPage.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout
-      title="Dapp Page" // DEV_NOTE: This is for the next-seo per page config
-      description="A page for your dapp." // DEV_NOTE: This is for the next-seo per page config
+      title="Getting Started"
+      description="D_D Academy is an open-source education platform created by the Developer DAO."
     >
       {page}
     </Layout>
