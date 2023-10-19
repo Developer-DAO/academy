@@ -1,0 +1,18 @@
+{
+  "question": "How does the tokenURI function generate the token metadata?",
+  "options": [
+    {
+      "answer": "By reading from an external file"
+    },
+    {
+      "answer": "By using a predefined JSON template"
+    },
+    {
+      "answer": "By dynamically generating SVG image and JSON data",
+      "correct": true
+    },
+    {
+      "answer": "By querying an off-chain API"
+    }
+  ]
+}

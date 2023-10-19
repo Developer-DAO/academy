@@ -1,0 +1,15 @@
+{
+  "question": "What is the purpose of the 'finalJSON()' method in the refactored contract?",
+  "options": [
+    {
+      "answer": "To concatenate the JSON properties for the final JSON blob.",
+      "correct": true
+    },
+    {
+      "answer": "To encode the SVG strings into the conclusive Base64 format."
+    },
+    {
+      "answer": "To return the complete SVG image with all the final attributes."
+    }
+  ]
+}

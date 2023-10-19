@@ -1,0 +1,18 @@
+{
+  "question": "In the contract, we often use the 'require' statement to enforce certain conditions. In our tests, which Chai function helps us verify if the contract indeed throws an error when a condition is not met?",
+  "options": [
+    {
+      "answer": "expectError"
+    },
+    {
+      "answer": "expectThrow"
+    },
+    {
+      "answer": "expectFailure"
+    },
+    {
+      "answer": "revertedWith",
+      "correct": true
+    }
+  ]
+}

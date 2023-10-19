@@ -1,0 +1,18 @@
+{
+  "question": "What is the role of a testnet in smart contract development?",
+  "options": [
+    {
+      "answer": "It helps to deploy smart contracts to the Ethereum mainnet."
+    },
+    {
+      "answer": "To airdrop free Ether to devs, because testing gives the ecosystem a good name."
+    },
+    {
+      "answer": "It's used to interact with smart contracts using real Ether."
+    },
+    {
+      "answer": "It's a network that is used for testing smart contracts.",
+      "correct": true
+    }
+  ]
+}
