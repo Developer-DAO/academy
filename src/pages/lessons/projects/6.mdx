@@ -21,7 +21,8 @@ import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 ## About this lesson
 
-If you're eager to learn how to create your first ERC20 token, you're in the right place. 
+If you're eager to learn how to create your first ERC20 token, you're in the right place. There are 
+a multitude of uses for the ERC20, and we'll introduce you to some of them.
 We'll be building a smart contract with a range of developer tools, including the use of Foundry. 
 If you are new to coding, we suggest that you first complete our _Getting Started with Smart Contract
 Development_ project, to get to grips with the basics of Solidity you'll need in
@@ -41,41 +42,51 @@ source of much of our well-being. 🌱
 
 ## What are we creating?
 
-At the end of this lesson you will be able to create your own ERC20 tokens, and
-you will be able to change its properties in any way you need.
+By the end of this lesson you will have created your own ERC20 token, and
+you will be able to change its properties in any way you need. 
+But before we go any further, let's check-in and see what building blocks you have already.
 
-## Tokens, Crypto, Coins, ERC20, is it all the same?
+<SideDrawer
+  buttonText="Warm-up Questions"
+  title="Check out Your Previous Knowledge"
+>
+  <Question question="lesson-6/1-intro/Q1" />
+  <Question question="lesson-6/1-intro/Q2" />
+  <Question question="lesson-6/1-intro/Q3" />
+  <Question question="lesson-6/1-intro/Q4" />
+  <Question question="lesson-6/1-intro/Q5" />
+</SideDrawer>
 
-Let's begin with some context, so we all speak the same language.
+We hope that was a little eye-opener for what's to come! 
 
-The Ethereum blockchain (and most EVM-compatible blockchains) has a native token
-that is used to pay for transaction costs, and also to reward validators in
-Proof of Stake, or previously miners in Proof of Work. In Ethereum that native
-token is Ether (or ETH), in Polygon its MATIC, and so on.
 
-Let's focus on the Ethereum blockchain for the sake of clarity.
 
-Every _other_ Token or "Crypto" you see, use or interact with in Ethereum is
+### Tokens, Crypto, Coins, ERC20, is it all the same?
+
+Let's begin with some context, so we all speak the same language. The Ethereum blockchain, and most EVM-compatible blockchains, have a native token that is used to pay for transaction costs, and also to reward validators in
+Proof of Stake (previously miners in Proof of Work). In Ethereum that native
+token is Ether (or ETH), in Polygon its MATIC, and so on. But let's focus on the Ethereum blockchain for the sake of clarity.
+
+Every _other_ Token or "Crypto" you see, use or interact with on Ethereum is
 basically a smart contract that lets you send these tokens, receive them and
-check your balance.
-
-Stablecoins like **DAI**, Tether (**USDT**), USD Coin (**USDC**) or tokens from
+check your balance. Stablecoins like **DAI**, Tether (**USDT**), USD Coin (**USDC**) or tokens from
 projects like Uniswap (**UNI**), MakerDAO (**MKR**), Basic Attention Token
 (**BAT**) are all smart contracts that follow a standard, the ERC20 standard.
 
-## Why do we want to create yet another Token?
+### Why would we want to create yet another Token?
 
-A lot of reasons, but here are some:
+{/* A lot of reasons, but here are some:
 
-- We are learning and we want to know how the ecosystem works
-- We have a project or DAO that needs some means of governance
-- We have a community that wants to be a part, take some ownership or support
+- We are learning, and we want to know how the ecosystem works
+- We have a project, or DAO that needs some means of governance
+- We have a community that wants to be a part of, take some ownership of, or support
   our project
 - We need a token with extra functionality that doesn't exist yet
 
-The possibilities are endless.
+The possibilities are endless.*/}
+A lot of reasons, but here are some. The most fundamental one is that we are learning, and want to know how the ecosystem works. Or we have a project, or DAO that needs some means of governance, or a community that wants take some ownership, be part of, or simply support our project. Maybe we need a token with extra functionality that doesn't even exist yet. The possibilities are endless!
 
-## What do we need to do with our Tokens?
+### What do we need to do with our Tokens?
 
 Some basic functionality that our tokens need to provide are:
 
@@ -85,13 +96,16 @@ Some basic functionality that our tokens need to provide are:
 - Approve an amount of tokens from an account to be spent by a third-party
   account
 
+{/**@7i7o it might be cool to have these sentences to open a paragraph before the side-drawer, instead of on line 132
+ Although I don't know if you want to 'associate' OZ with the actual functions and events you lay out in the side-drawer. */}
+Has someone created a battle-tested library for the standard? Yes. OpenZeppelin, among others, has created an implementation we can inherit to create our own tokens easily. Here is a quick overview of what {/*maybe another word choice for 'what' e.g. 'functionality' or 'the components'*/} a contract needs in order to be called an ERC20 Token
+contract:
+
 <SideDrawer buttonText="More info on the ERC20 Standard">
 
 To achive the functionality needed for an ERC20 token, the standard requires us
 to implement 9 methods and 2 events.
 
-Here is a quick overview of what our contracts needs to be called an ERC20 Token
-contract:
 
 ```solidity
 // Methods:
@@ -115,17 +129,12 @@ You can check the details in the full EIP-20 titled
 
 </SideDrawer>
 
-## Has someone created a battle-tested library for the standard?
-
-Yes. OpenZeppelin (among others) has created an implementation we can inherit to
-create our own tokens easily.
+{/*Has someone created a battle-tested library for the standard? Yes. OpenZeppelin, among others, has created an implementation we can inherit to create our own tokens easily.*/}
 
 ## Let's code, but first...
 
 Before we start hacking away without any structure to follow, what is our
-project's structure and what do we want to achieve?
-
-Since we are _BUIDLING_, i'd like to think of our project, or smart contract,
+project's structure and what do we want to achieve? Since we are _BUIDLING_, I'd like to think of our project, or smart contract,
 the same way as we would _roughly_ build a house:
 
     * 1 - Foundations
@@ -135,9 +144,7 @@ the same way as we would _roughly_ build a house:
     * 5 - Final touches
 
 Before we build, we need a stable, leveled surface to place our foundations so
-we can build on top.
-
-The tools for coding and the project's file/folder structure will be our
+we can build on top. The tools for coding and the project's file/folder structure will be our
 foundations.
 
 ## Setting up Foundations
