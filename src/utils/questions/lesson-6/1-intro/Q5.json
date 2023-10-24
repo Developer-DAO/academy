@@ -1,19 +1,12 @@
 {
-  "question": "",
+  "question": "ETH, the native token of Ethereum is an ERC-20 token.",
   "options": [
     {
-      "answer": "choose me",
+      "answer": "True"
+    },
+    {
+      "answer": "False",
       "correct": true
-    },
-    {
-      "answer": ""
-    },
-    {
-      "answer": "choose me",
-      "correct": true
-    },
-    {
-      "answer": ""
     }
   ]
 }
