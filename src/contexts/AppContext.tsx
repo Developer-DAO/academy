@@ -1,10 +1,11 @@
-import { type Project, type Fundamental } from "@/interfaces";
+import { type Project, type Fundamental, type EthIntro } from "@/interfaces";
 import { createContext, useContext } from "react";
 
 interface IAppContext {
   completedQuizzesIds: string[];
   projects: Project[];
   fundamentals: Fundamental[];
+  ethIntro: EthIntro[];
   allLessonsData: any[];
   refetchCompletedQuizzesAll?: () => Promise<any>;
 }
@@ -13,6 +14,7 @@ export const AppContext = createContext<IAppContext>({
   completedQuizzesIds: [],
   projects: [],
   fundamentals: [],
+  ethIntro: [],
   allLessonsData: [],
   refetchCompletedQuizzesAll: () => Promise.resolve(),
 });

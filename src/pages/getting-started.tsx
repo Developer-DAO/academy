@@ -24,7 +24,7 @@ import type { Lessons, Lesson } from "@/interfaces";
 import { useAppContext } from "@/contexts/AppContext";
 
 const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
-  const { projects, fundamentals } = useAppContext();
+  const { ethIntro, projects, fundamentals } = useAppContext();
   const [isMobile] = useMediaQuery("(max-width: 768px)", {
     ssr: true,
     fallback: true, // return false on the server, and re-evaluate on the client side
@@ -76,7 +76,55 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
         </Heading>
         <UnorderedList listStyleType="none" textAlign="center" as="div">
           <Heading size="md" color="yellow.300">
-            {`PROJECTS`}
+            {`INTRO TO ETHEREUM`}
+          </Heading>
+          <>
+            {ethIntro.map((lesson: Lesson, idx: number) => (
+              <ListItem key={idx} my="2" py="2" maxW="40vw" margin="0 auto">
+                <Link
+                  as={NextLink}
+                  href={`/lessons/${lesson.path}/${lesson.slug}`}
+                  passHref
+                >
+                  <Button
+                    height="auto"
+                    style={{
+                      whiteSpace: "normal",
+                      wordWrap: "break-word",
+                      padding: "0.5rem",
+                      width: "100%",
+                      fontSize: "xl",
+                    }}
+                  >
+                    <Flex direction={!isMobile ? "row" : "column"}>
+                      <Box>{lesson.frontMatter.title}</Box>
+                      <Box>
+                        {lesson &&
+                        lesson.completed &&
+                        lesson.completed === true ? (
+                          <>
+                            <Badge
+                              ml="1"
+                              alignItems={"flex-end"}
+                              colorScheme="green"
+                              position={!isMobile ? "absolute" : "relative"}
+                              right={3}
+                            >
+                              Completed
+                            </Badge>
+                          </>
+                        ) : null}
+                      </Box>
+                    </Flex>
+                  </Button>
+                </Link>
+              </ListItem>
+            ))}
+          </>
+        </UnorderedList>
+        <UnorderedList listStyleType="none" textAlign="center" as="div">
+          <Heading size="md" color="yellow.300">
+            {`PROJECT: BUILD AN NFT COLLECTION`}
           </Heading>
           <>
             {projects.map((lesson: Lesson, idx: number) => (

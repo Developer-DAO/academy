@@ -10,12 +10,24 @@ import { useAppContext } from "@/contexts/AppContext";
 import { type Lesson } from "@/interfaces";
 
 const LessonsPage: NextPageWithLayout = () => {
-  const { projects, fundamentals } = useAppContext();
+  const { projects, fundamentals, ethIntro } = useAppContext();
 
   return (
     <Flex py={5} px={[4, 10, 16]} direction="column" minH="90vh">
       <Stack spacing={5} direction="column">
         <>
+          <Box>
+            <Heading size="lg" color="yellow.300">
+              {`INTRO TO ETHEREUM`}
+            </Heading>
+            {ethIntro.map((lesson: Lesson, idx: number) => {
+              return (
+                <Box marginTop="4" key={idx}>
+                  <ContentBanner lesson={lesson} idx={idx} />
+                </Box>
+              );
+            })}
+          </Box>
           <Box>
             <Heading size="lg" color="yellow.300">
               {`PROJECTS`}

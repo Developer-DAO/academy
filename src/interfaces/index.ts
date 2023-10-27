@@ -15,6 +15,7 @@ export interface Lessons {
 export interface IFormatedLessons {
   projects: Project[];
   fundamentals: Fundamental[];
+  ethIntro: EthIntro[];
 }
 
 export interface Fundamental {
@@ -37,6 +38,13 @@ export enum Path {
 }
 
 export interface Project {
+  path: string;
+  frontMatter: ProjectFrontMatter;
+  slug: string;
+  completed?: boolean;
+}
+
+export interface EthIntro {
   path: string;
   frontMatter: ProjectFrontMatter;
   slug: string;
