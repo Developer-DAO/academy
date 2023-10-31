@@ -1,0 +1,1448 @@
+---
+i18n: 'smart-contracts'
+title: Connecting to a Frontend
+description:
+  Connect your smart contract to a UI for people to interact with.
+icons:
+  [
+    'rainbowkit',
+    'wagmi',
+    'ethers',
+  ]
+author: 'ropats16'
+---
+
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import Layout from "../../../components/Layout";
+
+<Layout
+    title="Connect your Smart Contract to a Front End Application" 
+    description="Learn to seamlessly integrate your smart contracts with a user friendly frontend interface utilising web3 libraries. With engaging quizzes along the way." 
+>
+<LessonHeader title="Lesson 5: Connecting to a Frontend" />
+
+## About this lesson
+
+Welcome to this final tutorial in a series on smart contract development of the ERC721 standard, a.k.a. NFTs. Throughout the previous lessons we learnt how to write smart contracts, use token standards, and utilise test driven development as well. But to create a full stack decentralised application, we also need a UI, or frontend for users to interact with. In this lesson that is exactly what we're going to create.
+
+{/* We may as well comment out the following paragraph for this first PR of July/August 2023, since without any quizzes, it's not yet relevant: */}
+{/* You can expect our familiar checkpoint questions throughout the tutorial for testing your previous knowledge, how well you’re picking up the new material, and even some on predicting upcoming steps in the lesson. They all help with critical thinking and active engagement. You'll find the updated code in side-drawers too as you progress, handy for identifying any pesky syntax errors you might come across. And of course, there is a final quiz waiting for you on completion.  */}
+
+Expect somewhere from one to six hours to complete the lesson, depending on your prior experience and the need to grasp new concepts. To help you maintain a steady pace and encourage breaks for rejuvenation, you'll find our pomodoro timer ⌛ in the menu header. It'll remind you to "go touch grass" and appreciate nature's role in enhancing our well-being. 🌱 Relish your journey in development in a good state of mind and body.
+
+## What are we building
+
+In the first in this track of tutorials, you created a basic smart contract using Remix. Then your shift to a dedicated developer's environment to create and deploy an NFT contract to an actual test network. In lesson 3 you added tiers to your NFTs. And you finally learnt to make your contracts airtight by building your own automated tests in the fourth in the series. Now we're going use all of this knowledge and connect it to a frontend for users to see and interact with.
+
+
+
+We'll create a basic **NFT minting application** that displays the three tiers of NFTs
+created in our smart contract and gives users a one-click option to mint them. Once minted, users will be redirected to a page that displays information of their mint. We'll need some extra magic to make that all happen. For handling wallet connections to our application, we'll be introducing you to *RainbowKit*. And using the provided *hooks* from *WAGMI*, we can check the connection to the wallet and call functions from our smart contract through the frontend. *RainbowKit* and *WAGMI* are just another couple of shining examples of open source public goods. We love open source at *Developer_DAO*. And public goods are gooood!
+
+
+{/* - [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box 
+wallet management (i.e. Handling wallet connections to our application).
+- [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
+functions from our smart contract through the frontend using the provided *hooks*. */}
+
+
+{/* We could do with a oneliner for each to  describe what index.js and app.js are for */}
+## Let's breakdown the lesson
+- Set up our development environment with TierNFT project
+- initialise a nextJS app 
+- Install RainbowKit, WAGMI and Ethers to create main application
+  - import dependencies
+- Create an Index page as main entry point for displaying the app content.
+- Create NFT cards
+- Enable minting of NFTs in the application.
+
+<br/>
+
+## Tools to get the job done
+- [nextJS](https://nextjs.org/) - a React framework for building a full-stack app
+- [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library for out-of-the-box 
+wallet management
+{/* ethers will be getting ejected and viem will get added, I guess: */}
+{/* - [viem](https://viem.sh/docs/getting-started.html) */}
+- [ethers](https://docs.ethers.org/v6/) is a compact JavaScript library for interacting with the Ethereum eco-system
+- [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to work effectively with Ethereum
+- [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app connect to the blockchain
+
+**always make sure you access up-to-date release notes and documentation*
+
+Let's dive in!
+<br/>
+
+{/* --- */}
+
+## Getting started
+
+We're going to start where we left off in *Write Automated Tests for your TierNFT*. 
+
+Open your code editor and `cd` into the **`TierNFT`** project directory. For all things related to our frontend we are going to create a new sub-directory within our project's root directory to maintain good practice, keep our code clean, and be easy to locate and read. The first step is to initiate a *nextJS* application.
+
+<Callout emoji="💡">
+  Make sure you are in your project's root directory before continuing.
+</Callout>
+
+The next command creates a sub-directory named `frontend` inside our root directory
+and sets up all the necessary files and folders within it. The `create-next-app` command
+uses the `yarn` package manager by default. **So be careful and choose your command accordingly**.  We have been using `npm` as our package manager for all our previous builds, so we'll choose the `--use-npm` flags:
+
+{/* We need to check the following commands and flags are up-to-date, and for a Javascript project, if we prefer to stick to JS over TypeScript: */}
+
+```bash
+# choose the following for npm
+npx create-next-app frontend --use-npm
+
+# careful, this is the default for yarn 
+npx create-next-app frontend
+```
+{/* I'm not sure if the following steps are correct, but having this information in the lesson, can be a great guide (Rohit was under pressure to get it out, so might have overlooked adding it then) I'll comment it out for now, and we can update it accordingly: */}
+{/* Choose 'No' to *TypeScript*, because we want to create a *JavaScript* project, but choose 'Yes' to all the other options:
+
+```bash
+Need to install the following packages:
+  create-next-app@13.4.12
+Ok to proceed? (y) y
+✔ Would you like to use TypeScript? … No / Yes
+✔ Would you like to use ESLint? … No / Yes
+✔ Would you like to use Tailwind CSS? … No / Yes
+✔ Would you like to use `src/` directory? … No / Yes
+✔ Would you like to use App Router? (recommended) … No / Yes
+✔ Would you like to customize the default import alias? … No / Yes
+Creating a new Next.js app in ../../d_d_academy/tierNFT/frontend.
+``` */}
+
+Once the setup is complete, we open the `frontend` directory and get cracking.
+
+```bash
+cd frontend
+```
+<br/>
+
+---
+
+## The Frontend
+
+{/* We need more of an intro than the following 'The Main Application' as to what 
+app.js is and subsequently we should do the same for index.js (when we get to that
+ section). A little hint of what index.js is here would help - we could use a 
+ prediction question to aid with/actually perform this task before this section: */}
+For users to easily interact with our smart contract and mint the NFTs we must
+provide an interface. A simple process that is easily accessible. Let's start by creating a way to handle wallet connections.
+
+### The Main Application
+{/*I don't think we need all these links all through the lesson*/}
+We will use [RainbowKit](https://www.rainbowkit.com/docs/introduction) for handling
+the wallet connections. It provides us the ability to handle wallet connections, 
+support for numerous wallets and a customisable `ConnectButton` out-of-the-box among 
+other features. It relies on the [WAGMI](https://wagmi.sh/) and [ethers](https://docs.ethers.org/v6/)
+libraries for interoperability between various chains and wallet providers and 
+thus needs some configurations.
+
+But first we need to install the necessary dependencies.
+{/* @wolovim should we define version numbers of libraries/dependencies to ensure no breaking 
+changes from future and to give better learner experience   */}
+
+```bash
+npm install @rainbow-me/rainbowkit wagmi ethers
+
+# or if you have chosen to use yarn:
+
+yarn add @rainbow-me/rainbowkit wagmi ethers
+```
+
+To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
+directory. The file should look something like this from our initial setup.
+
+```jsx
+import '../styles/globals.css'
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+```
+
+We need to add some additional imports to create our configurations.
+
+```jsx
+// previous imports...
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import {
+  chain,
+  configureChains,
+  createClient,
+  WagmiConfig,
+} from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { useEffect, useState } from 'react';
+
+// function MyApp code...
+```
+
+- `import '@rainbow-me/rainbowkit/styles.css';` gives us some basic styling from
+Rainbowkit.
+- `import { getDefaultWallets, RainbowKitProvider, } from '@rainbow-me/rainbowkit';` returns
+the default wallet provider option and a RainbowKit Provider to "wrap" around our app
+so that we can use its features throughout the app's pages and components.
+- `import { chain, configureChains, createClient, WagmiConfig, } from 'wagmi';` provides
+a way to configure the WagmiConfig wrapper for our app based on the chains and providers
+of our choice along with some other customisations.
+- `import { alchemyProvider } from 'wagmi/providers/alchemy';` and 
+`import { publicProvider } from 'wagmi/providers/public';` give us the provider configs
+for the providers we will be using. In our app we are using an `alchemyProvider` along
+with a fall back `publicProvider`. A provider allows our application to communicate with 
+a blockchain.
+{/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. */}
+- `useEffect` and `useState` are react hooks that help us perform side effects and
+capture the state, respectively. More on [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/) 
+and the [useEffect](https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/) hook.
+
+<Callout emoji="💡">
+  Hooks are JavaScript functions that manage the state's behaviour and side effects by isolating them from a component.
+</Callout>
+
+After importing, we create the configurations we need, and create a new instance of 
+`wagmiClient` using them.
+
+```jsx
+// import statements code...
+
+const { chains, provider } = configureChains(
+  [chain.polygonMumbai],
+  [
+    alchemyProvider({ apiKey: process.env.API_KEY }),
+    publicProvider()
+  ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider
+})
+
+// function MyApp code...
+```
+
+For this application we will continue using the `mumbai` testnet. Other chains can
+be added simply using the following syntax: `chain.chain_name`.
+For custom providers, like the `alchemyProvider` we can pass in our private
+`apiKey` as well. 
+
+{/* Only the API key? Or the whole URL?: */}
+Set your API Key in a new file named `.env` inside our `frontend` directory 
+as follows:
+
+```dotenv
+API_KEY='YOUR-API-KEY-FROM-PROVIDER'
+```
+
+Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
+so that it can have access to their features throughout our application. Our code should 
+look like this:
+
+```jsx
+// import statements and configs code...
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Component {...pageProps} />
+      </RainbowKitProvider >
+    </WagmiConfig >
+  );
+};
+
+export default MyApp
+```
+
+Now that we have our application setup, we can edit the Index Page.
+<br/>
+
+---
+
+### The Index Page
+
+{/* We need an explanation on what 'the Index Page' is about and it's relation to the stack,
+ or as I mentioned preceeding 'The Main Application' section, 
+we could use a prediction question to introduce this. LOng story short, the 
+following 'intro' is not an intro: */}
+
+The `index.js` page in the `/frontend/pages` directory should look like this 
+after deleting all the *children* within the `<main>` element and completely 
+deleting the `<footer>`.
+
+```jsx
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+
+export default function Home() {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Create Next App</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main}>
+      </main>
+    </div>
+  )
+}
+```
+
+Before we dive into the code for our index page, let's copy and paste some 
+styling from the side drawer below, into our file. This is some default styling 
+created for the application, which you can play around with themes, responsiveness, 
+etc., if needed.
+
+<SideDrawer buttonText="Code for default style">
+
+```jsx
+export default function Home() {
+  return (
+    // function code...
+  )
+}
+
+// ======= COPY THE CODE BELOW =======
+
+const header = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}
+
+const NFTFlex = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+  gap: '50px',
+}
+
+const NFTCard = {
+  display: 'flex',
+  flexDirection: 'column',
+  border: '2px solid white',
+  borderRadius: '10px',
+  padding: '20px',
+  alignItems: 'center',
+  gap: '10px',
+  fontWeight: 'bold',
+}
+
+const NFTMint = {
+  fontWeight: '700',
+  padding: '5px 20px',
+  border: '2px solid white',
+  color: 'white',
+  backgroundColor: 'black',
+  borderRadius: '5px',
+  cursor: 'pointer',
+}
+
+const modal = {
+  position: 'fixed',
+  left: '0',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  zIndex: '1',
+}
+
+const modalContent = {
+  backgroundColor: '#fff',
+  padding: '10px 30px',
+  borderRadius: '16px',
+  color: '#000'
+}
+
+const modalBody = {
+  padding: '20px',
+  borderTop: '1px solid #eee',
+  borderBottom: '1px solid #eee',
+}
+
+const modalFooter = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  padding: '20px',
+  justifyContent: 'space-evenly'
+}
+
+const modalButton = {
+  padding: '10px 20px',
+  backgroundColor: '#fff',
+  color: '#666',
+  border: '0',
+  borderRadius: '10px',
+  fontSize: '18px',
+  fontWeight: '700',
+  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
+}
+```
+
+</SideDrawer>
+<br/>
+
+Moving onto imports.
+
+```jsx
+// prev imports...
+
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
+import styles from '../styles/Home.module.css';
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+
+// function Home() code...
+```
+
+- RainbowKit provides us a ready-made `ConnectButton`.
+- We need to use the `useAccount` hook from WAGMI to check account connection 
+and `useContractRead` and `useContractWrite` to interact with our smart 
+contract. We will look into WAGMI and these hooks a little down the line.
+- `TierABI` is our contract's Application Binary Interface (ABI). The ABI 
+helps us interact with the smart contract outside the blockchain or 
+contract-to-contract. You can read more about ABIs 
+[here](https://www.quicknode.com/guides/solidity/what-is-an-abi).
+- The `ethers` library will assist us with some utilities in our code.
+- Once again, `useEffect` and `useState` are react hooks that will help us 
+perform side effects and capture the state, respectively.
+
+```jsx
+export default function Home() {
+  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
+
+  const { isConnected } = useAccount();
+
+  const [isUserConnected, setIsUserConnected] = useState(false);
+  const [latestNFTMinted, setLatestNFTMinted] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
+
+  // More code to come...
+}
+```
+
+We're creating a default function called `Home` that will render our home/
+index page. As you can see , we are required to add the `CONTRACT_ADDRESS`
+which is displayed in your command line when we deploy the contract.
+The `useAccount` hook lets us access account data and check connection status.
+We will use this as a check to provide access to the minting features of our
+app.
+A few `useState`s let us store state information such as whether a user is 
+connected. The general syntax for using the `useState` hook is:
+
+`const [variableName, functionToSetVariable] = useState(intialValue)`
+
+<Callout emoji="💡">
+  The initial value also serves as the type for the value assigned. If the 
+  initial value is a string, then the values set later must be strings too.
+  The hook can be created without an initial value as well but a good practice 
+  is to always choose and pass in an initial value based on the value type 
+  we expect to assign to that variable. 
+</Callout>
+
+We will revisit these state variables later to see their implementation.
+
+### Header
+
+We need a `<header>` that displays our application name and let's us 
+connect our wallet.
+
+```jsx
+export default function Home() {
+  // variable definitions...
+
+  return (
+      <div className={styles.container}>
+        
+        {/* <Head> element... */}
+
+        <header style={header}>
+          <h1>TierNFTs</h1>
+          <ConnectButton />
+        </header>
+
+        {/* <main> element */}
+
+      </div>
+  )
+}
+
+// styling code...
+```
+
+Since we care about accessibility, we ensure we are using only a single `<h1>` 
+element on a page and the correct sub heading elements as well. The `ConnectButton` is 
+a direct import from `RainbowKit` that is generated using the configurations
+setup previously in our Main Application.
+
+With this setup we can run the `npm run dev` or `yarn dev` command in our console 
+and click the returned link (`http://localhost:portnumber`) to preview our application. 
+This is a good way to debug and see if our code is behaving as expected.
+
+<Callout emoji="💡">
+  Make sure you are in the frontend directory before running the command.
+</Callout>
+
+The preview should look like this: 
+
+![App Header Preview](/assets/lessons/5/img_1.png)
+
+### NFT Cards
+
+Next we need to create some cards that display the 3 tiers of NFTs we created
+in our smart contract and provide a way to mint them.
+
+```jsx
+export default function Home() {
+  // variable definitions...
+
+  const {
+      data: mintData,
+      writeAsync: mint,
+      isLoading: isMintLoading,
+    } = useContractWrite({
+      addressOrName: CONTRACT_ADDRESS,
+      contractInterface: TierABI.abi,
+      functionName: "mint",
+    });
+
+ // return statement for rendering... 
+
+}
+```
+
+The [`useContractWrite`](https://wagmi.sh/docs/hooks/useContractWrite) hook 
+from WAGMI let's us pass in the contract address, contract ABI and the 
+function name to return a JavaScript function (that we have called `mint`) 
+that can interact with our smart contract and trigger a `write` function in it. 
+
+How cool is that?!
+
+It also returns some additional features for error handling and checking
+whether the function is running or completed.
+We are assigning well defined names to the returned values for easily calling them 
+later. For example, the `data` returned is called `mintData`.
+
+Even though we have this function, we need to pass in custom `message values` 
+i.e. an amount in **ETH**, as defined in our contract. For this we create our 
+own `mintToken` function that calls the `mint` function from WAGMI within it.
+  
+  {/* should be: // 'return statement for rendering...' 
+  and not: // function Home() code... */}
+
+```jsx
+// WAGMI useContractWrite hook...
+
+const mintToken = async (e) => {
+    try {
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
+      await mintTxn.wait();
+      console.log("This is the mint data", mintData);
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+    }
+  };
+
+// function Home() code...
+```
+
+- We pass in `e` as an argument so that we can pick the amount of ETH 
+associated with a particular Tier. This is passed to the mint function using the 
+`recklesslySetUnpreparedOverrides` override config. Read more about it 
+[here](https://wagmi.sh/docs/hooks/useContractWrite#override-config). 
+- We want to wait for our minting transaction to complete before moving 
+on to other pieces of code so we use `wait()`.
+- After minting is processed we log the returned data to ensure the 
+success of our transaction.
+- Using `try...catch` statements makes our error handling more robust. The 
+compiler runs each line of code and exits in between if an error occurs.
+We can console log this error to easily identify the cause and location 
+of the error with clear comments.
+
+Then we create a new folder named `nfts` in the `/public` directory for 
+saving Tier SVGs. You can find links for downloading the SVGs here.
+
+- [0_basic.svg](https://arweave.net/o9z59y3sDvBaamvBDJGtyX5BGM983n1zwbs-UaZRUM8)
+- [1_medium.svg](https://arweave.net/-sa-soe34iPLridK0T98rWb7XvfHRSTDdBCoXCuwv60)
+- [2_premium.svg](https://arweave.net/AG0bE-GMrUh-7YjtxlY01woT7kbwEPwgREzuPptJZBo)
+
+Save them with the same names as shown in the links above for smooth flow
+in the code.
+
+<Callout emoji="💡">
+  Make sure you have downloaded the SVG file and not just saved the URL of
+  the file.
+</Callout>
+
+Now we can render our NFT Cards.
+
+```jsx
+// return statement for rendering and <header> element...
+
+        <main className={styles.main}>
+          <div style={NFTFlex}>
+            <div style={NFTCard}>
+              Tier 0
+              <Image
+                src='/nfts/0_basic.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.01'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 1
+              <Image
+                src='/nfts/1_medium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.02'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 2
+              <Image
+                src='/nfts/2_premium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.05'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+          </div>
+        </main>
+
+// rest of the code...
+```
+
+Let's see what is happening in each NFT Card by taking `Tier 0` as an 
+example.
+
+```jsx
+<div style={NFTCard}>
+  Tier 0
+  <Image
+    src='/nfts/0_basic.svg'
+    width='200px'
+    height='200px' />
+  <button
+    value='0.01'
+    onClick={(e) => mintToken(e)}
+    style={NFTMint}
+    disabled={isMintLoading}>
+    Mint
+  </button>
+</div>
+```
+
+- We start off by displaying the NFT Tier name.
+- A nextJS `Image` element renders a preview of the NFT Image. Earlier,
+we saved our images in the `/public/nfts` folder. A nextJS app
+automatically detects content from the `/public` directory so we can
+directly reference the source as `/nfts/0_basic.svg`. We also need 
+to pass in the width and height explicitly.
+- A `button` element let's us call the `mintToken` function `onClick` and 
+we send the value associated with the button to that function so that 
+it can be used to mint the specific tier of NFT in the `<button>` element. 
+Make sure you pass in the right value for each tier. Lastly, we want to 
+disable the button when another mint is underway. For this we use the true/ false 
+values received from `isMintLoading`. The button will be disabled when 
+`isMintLoading` is `true`.
+
+Great but anyone can view and call our mint functions in the frontend of our app
+even if their wallet is not connected to the application. This could result in some 
+errors. We must check if a user is connected before we let them 
+interact with our application simply by using the `isConnected` utility
+from Wagmi and setting setting its value in our `isUserConnected` state.
+
+```jsx
+// consts...
+
+  useEffect(() => {
+    try {
+      setIsUserConnected(isConnected);
+    } catch (error) {
+      console.log("Error connecting to user", error.message);
+    }
+  }, [isConnected]);
+
+// function Home() code...
+```
+
+The `useEffect` hook runs the functions within it everytime the value of 
+its dependencies (`isConnected`, in this case) changes.
+
+Then we can wrap the `<main>` element as follows:
+
+```jsx
+// return statement for rendering...
+
+      {isUserConnected ?
+        <main className={styles.main}>
+          
+          {/* NFT Flex div code here... */}
+
+        </main>
+        :
+        <main className={styles.main}>
+          <div>Please connect your wallet.</div>
+        </main>
+      }
+
+// closing <div> and styling consts...
+```
+
+This type of syntax (`condition ? ifTrueDoThis : ifFalseDoThis`) is known
+as a `ternary` operator. It checks whether the condition is `true` or `false`
+and returns one of two values accordingly. In our case, we check if the 
+the user is connected and show them the mint options if `true`, else we ask 
+them to connect their wallet.
+
+Now our preview should look like this once a wallet is connected:
+
+![NFT Cards Preview](/assets/lessons/5/img_2.png)
+
+**Woohoo! You've done a lot so far.** 
+Try minting these NFTs and check your wallet's profile on 
+`https://testnets.opensea.io/YOUR_WALLET_ADDRESS`. Refer to the following 
+side drawer for the code written till now if stuck somewhere.
+
+<SideDrawer buttonText="Code so far for index.js">
+
+```jsx
+import Head from 'next/head';
+import Image from 'next/image';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
+import styles from '../styles/Home.module.css';
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+
+export default function Home() {
+  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
+
+  const { isConnected } = useAccount();
+
+  const [isUserConnected, setIsUserConnected] = useState(false);
+  const [latestNFTMinted, setLatestNFTMinted] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
+
+  const {
+    data: mintData,
+    writeAsync: mint,
+    isLoading: isMintLoading,
+  } = useContractWrite({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "mint",
+  });
+
+  useEffect(() => {
+    try {
+      setIsUserConnected(isConnected);
+    } catch (error) {
+      console.log("Error connecting to user", error.message);
+    }
+  }, [isConnected]);
+
+  const mintToken = async (e) => {
+    try {
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
+      await mintTxn.wait();
+      console.log("This is the mint data", mintData);
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>NFT Minter</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header style={header}>
+        <h1>TierNFTs</h1>
+        <ConnectButton />
+      </header>
+      {isUserConnected ?
+        <main className={styles.main}>
+          <div style={NFTFlex}>
+            <div style={NFTCard}>
+              Tier 0
+              <Image
+                src='/nfts/0_basic.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.01'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 1
+              <Image
+                src='/nfts/1_medium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.02'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 2
+              <Image
+                src='/nfts/2_premium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.05'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+          </div>
+        </main>
+        :
+        <main className={styles.main}>
+          <div>Please connect your wallet</div>
+        </main>
+      }
+    </div>
+  )
+}
+
+const header = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}
+
+const NFTFlex = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+  gap: '50px',
+}
+
+const NFTCard = {
+  display: 'flex',
+  flexDirection: 'column',
+  border: '2px solid white',
+  borderRadius: '10px',
+  padding: '20px',
+  alignItems: 'center',
+  gap: '10px',
+  fontWeight: 'bold',
+}
+
+const NFTMint = {
+  fontWeight: '700',
+  padding: '5px 20px',
+  border: '2px solid white',
+  color: 'white',
+  backgroundColor: 'black',
+  borderRadius: '5px',
+  cursor: 'pointer',
+}
+
+const modal = {
+  position: 'fixed',
+  left: '0',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  zIndex: '1',
+}
+
+const modalContent = {
+  backgroundColor: '#fff',
+  padding: '10px 30px',
+  borderRadius: '16px',
+  color: '#000'
+}
+
+const modalBody = {
+  padding: '20px',
+  borderTop: '1px solid #eee',
+  borderBottom: '1px solid #eee',
+}
+
+const modalFooter = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  padding: '20px',
+  justifyContent: 'space-evenly'
+}
+
+const modalButton = {
+  padding: '10px 20px',
+  backgroundColor: '#fff',
+  color: '#666',
+  border: '0',
+  borderRadius: '10px',
+  fontSize: '18px',
+  fontWeight: '700',
+  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
+}
+```
+</SideDrawer>
+<br/>
+
+Take a breather and stretch yourself before we do the last bit of coding.
+
+### Successful Mint Modal
+
+Doesn't it feel like we are still missing something?
+
+Right! We want our users to see information when they minting. We want 
+them to know when a mint *is in progress* and we want them to see the 
+result once the mint *is successful*.
+
+But what is this *modal*. It is a an element that is usually used as 
+an overlay that provides its own interaction environment separate from 
+the page below it. This interaction environment provides a focus element 
+where only options from this can be selected while it is active.
+
+Okay lets write some code for it.
+
+To be able to display information about our latest mint, we must first
+get information about it from our smart contract.
+
+```jsx
+// imports, consts and WAGMI useContractWrite hook...
+
+  const {
+    data: tokenData,
+    refetch: refetchTokenData,
+  } = useContractRead({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "totalSupply",
+    watch: true,
+  })
+
+  const {
+    data: tokenURI,
+  } = useContractRead({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "tokenURI",
+    args: tokenData,
+    watch: true,
+  })
+
+  // useEffect to check user connection...
+
+  useEffect(() => {
+    try {
+      if (tokenURI) {
+        setLatestNFTMinted(JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(',') + 1))));
+      }
+    } catch (error) {
+      console.log("Error fetching token URI", error.message);
+    }
+  }, [tokenData, tokenURI]);
+
+  const mintToken = async (e) => {
+    try {
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
+      await mintTxn.wait();
+      console.log("This is the mint data", mintData);
+      refetchTokenData();
+      
+      // catch statement for mintToken function...
+  };
+
+  // return statement...
+```
+
+- The first thing we need is the `tokenId` of the latest NFT minted. We 
+can do so by reading the value of the `totalSupply` stored in our smart 
+contract because the `totalSupply` should equal to the latest `tokenId` in
+our case. We can fetch this using the `useContractRead` hook from WAGMI 
+that is configured for reading data from smart contracts. The cool thing about 
+solidity is that it automatically gives us a way to read values of variables 
+that are tagged as `public`, which is why we are able to read the value of 
+`totalSupply`.
+- The `refetchTokenData` function will be called in our `mintToken` function 
+to update the `tokenData` after minting has succeeded. We pass a 
+`watch: true` key-value pair so that the hook keeps an active watch on 
+the value of totalSupply.
+- Then the returned value (tokenData) is passed in as an argument to the 
+`tokenURI` function from our smart contract and we receive a `Base64` 
+encoded string in return.
+- A `useEffect` hook keeps updating this string everytime the `tokenData` 
+or `tokenURI` is updated and stores a decoded JSON format of it in the 
+`latestNFTMinted` variable.
+
+We're almost there. We just need to do two more checks before we actually
+look at our modal. The first is that we must display our modal only when 
+we want it to and the other is to display a loading message until our NFT 
+has successfully minted. This is how the mintToken function should look 
+now:
+
+```jsx 
+// useEffect for tokenURI...
+
+  const mintToken = async (e) => {
+    try {
+      setIsMinting(true);
+      setModalShow(true);
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
+      await mintTxn.wait();
+      console.log("This is the mint data", mintData);
+      refetchTokenData();
+      setIsMinting(false);
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+    }
+  };
+
+// return statement...
+```
+
+When we trigger the `mintToken` function we want to set the state to 
+`isMinting`. Based on this condition, we can inform the users that the 
+mint is in progress. We also want our modal to pop up right after this 
+so we set the value of `modalShow` to `true`.
+
+We're there at last! Now we can render our modal.
+
+```jsx
+// return statement for rendering...
+
+      {isUserConnected ?
+      (
+        
+        <main className={styles.main}>
+          <div style={NFTFlex}>
+
+            {/* NFT Card div code... */}
+
+          </div>
+          {modalShow && (
+            <div style={modal}>
+              {isMinting ?
+                <div style={modalContent}>
+                  <h2>Minting...</h2>
+                </div>
+                :
+                <div style={modalContent}>
+                  <h2>Mint Successful</h2>
+                  <div style={modalBody}>
+                    <h3>{latestNFTMinted.name}</h3>
+                    <Image src={latestNFTMinted.image} height='200px' width='200px' />
+                  </div>
+                  <div style={modalFooter}>
+                    <button style={modalButton}>
+                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                        View on OpenSea
+                      </a>
+                    </button>
+                    <button style={modalButton}>
+                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
+                        View on Polygonscan
+                      </a>
+                    </button>
+                    <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
+                  </div>
+                </div>
+              }
+            </div>
+          )}
+        </main> 
+      ) : (
+    <main className={styles.main}>
+      <div>Please connect your wallet</div>
+    </main>
+  );
+}
+// closing <div> and styling consts...
+```
+
+This may seem like a lot of code but we're going to look at it in bits:
+- We have a heading that tells us our mint is successful.
+- The body shows us the name, id and image of the NFT minted. We fetch 
+from the information stored earlier in the `latestNFTMinted` variable.
+- We have a footer that provides links to view our NFT on OpenSea and to 
+the transaction details on Polygonscan. Additionally we have a **Close** 
+button that changes the state of the `modalShow` to `false` and thus 
+closes the modal modal when we click it.
+
+The final modal should look like this:
+
+![Successful Mint Modal Preview](/assets/lessons/5/img_3.png)
+
+If you are stuck somewhere, please refer to the code side drawer below.
+
+<SideDrawer buttonText="Final Code for index.js">
+
+```jsx
+import Head from 'next/head';
+import Image from 'next/image';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
+import styles from '../styles/Home.module.css';
+import { ethers } from 'ethers';
+import { useEffect, useState } from 'react';
+
+export default function Home() {
+  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
+
+  const { isConnected } = useAccount();
+
+  const [isUserConnected, setIsUserConnected] = useState(false);
+  const [latestNFTMinted, setLatestNFTMinted] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
+
+  const {
+    data: mintData,
+    writeAsync: mint,
+    isLoading: isMintLoading,
+  } = useContractWrite({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "mint",
+  });
+
+  const {
+    data: tokenData,
+    refetch: refetchTokenData,
+  } = useContractRead({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "totalSupply",
+    watch: true,
+  })
+
+  const {
+    data: tokenURI,
+  } = useContractRead({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: TierABI.abi,
+    functionName: "tokenURI",
+    args: tokenData,
+    watch: true,
+  })
+
+  useEffect(() => {
+    try {
+      setIsUserConnected(isConnected);
+    } catch (error) {
+      console.log("Error connecting to user", error.message);
+    }
+  }, [isConnected]);
+
+  useEffect(() => {
+    try {
+      if (tokenURI) {
+        setLatestNFTMinted(JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(',') + 1))));
+      }
+    } catch (error) {
+      console.log("Error fetching token URI", error.message);
+    }
+  }, [tokenData, tokenURI]);
+
+  const mintToken = async (e) => {
+    try {
+      setIsMinting(true);
+      setModalShow(true);
+      let mintTxn = await mint({
+        recklesslySetUnpreparedOverrides: {
+          value: ethers.utils.parseEther(e.target.value),
+        }
+      });
+      await mintTxn.wait();
+      console.log("This is the mint data", mintData);
+      refetchTokenData();
+      setIsMinting(false);
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>NFT Minter</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <header style={header}>
+        <h1>TierNFTs</h1>
+        <ConnectButton />
+      </header>
+      {isUserConnected ?
+        <main className={styles.main}>
+          <div style={NFTFlex}>
+            <div style={NFTCard}>
+              Tier 0
+              <Image
+                src='/nfts/0_basic.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.01'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 1
+              <Image
+                src='/nfts/1_medium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.02'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+            <div style={NFTCard} >
+              Tier 2
+              <Image
+                src='/nfts/2_premium.svg'
+                width='200px'
+                height='200px' />
+              <button
+                value='0.05'
+                onClick={(e) => mintToken(e)}
+                style={NFTMint}
+                disabled={isMintLoading}>
+                Mint
+              </button>
+            </div>
+          </div>
+          {modalShow && (
+            <div style={modal}>
+              {isMinting ?
+                <div style={modalContent}>
+                  <h2>Minting...</h2>
+                </div>
+                :
+                <div style={modalContent}>
+                  <h2>Mint Successful</h2>
+                  <div style={modalBody}>
+                    <h3>{latestNFTMinted.name}</h3>
+                    <Image src={latestNFTMinted.image} height='200px' width='200px' />
+                  </div>
+                  <div style={modalFooter}>
+                    <button style={modalButton}>
+                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                        View on OpenSea
+                      </a>
+                    </button>
+                    <button style={modalButton}>
+                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
+                        View on Polygonscan
+                      </a>
+                    </button>
+                    <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
+                  </div>
+                </div>
+              }
+            </div>
+          )}
+        </main>
+        :
+        <main className={styles.main}>
+          <div>Please connect your wallet</div>
+        </main>
+      }
+    </div>
+  )
+}
+
+const header = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between'
+}
+
+const NFTFlex = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+  gap: '50px',
+}
+
+const NFTCard = {
+  display: 'flex',
+  flexDirection: 'column',
+  border: '2px solid white',
+  borderRadius: '10px',
+  padding: '20px',
+  alignItems: 'center',
+  gap: '10px',
+  fontWeight: 'bold',
+}
+
+const NFTMint = {
+  fontWeight: '700',
+  padding: '5px 20px',
+  border: '2px solid white',
+  color: 'white',
+  backgroundColor: 'black',
+  borderRadius: '5px',
+  cursor: 'pointer',
+}
+
+const modal = {
+  position: 'fixed',
+  left: '0',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  zIndex: '1',
+}
+
+const modalContent = {
+  backgroundColor: '#fff',
+  padding: '10px 30px',
+  borderRadius: '16px',
+  color: '#000'
+}
+
+const modalBody = {
+  padding: '20px',
+  borderTop: '1px solid #eee',
+  borderBottom: '1px solid #eee',
+}
+
+const modalFooter = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  padding: '20px',
+  justifyContent: 'space-evenly'
+}
+
+const modalButton = {
+  padding: '10px 20px',
+  backgroundColor: '#fff',
+  color: '#666',
+  border: '0',
+  borderRadius: '10px',
+  fontSize: '18px',
+  fontWeight: '700',
+  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
+  cursor: 'pointer',
+}
+```
+</SideDrawer>
+<br/>
+<br/>
+
+---
+
+## Fin.
+
+**Hoorah! We've done it. Pat yourselves on the back and get some ice cream!**
+
+Right from learning the basics of smart contract development using 
+solidity to creating a full stack decentralised NFT Minting Application.
+
+**Stay tuned for more!**
+
+<br/>
+---
+<br/>
+</Layout>
+
+
+
+
+
+
+
+
+
