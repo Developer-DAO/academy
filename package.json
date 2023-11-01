@@ -29,6 +29,7 @@
     "@trpc/next": "^10.33.0",
     "@trpc/react-query": "^10.33.0",
     "@trpc/server": "^10.33.0",
+    "@vercel/analytics": "^1.1.1",
     "@vercel/postgres": "^0.4.0",
     "bcryptjs": "^2.4.3",
     "ethers": "^6",
