@@ -21,7 +21,7 @@ const Banner = () => {
     >
       <Flex align="center" fontSize="sm">
         <Text fontWeight="medium" maxW={{ base: "32ch", md: "unset" }}>
-          Acamdey V2 is coming soon 👀... Subscribe to our newsletter for
+          Academy V2 is coming soon 👀... Subscribe to our newsletter for
           updates!
         </Text>
         <chakra.a
