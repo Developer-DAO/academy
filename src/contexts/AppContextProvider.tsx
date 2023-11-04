@@ -88,7 +88,7 @@ export function AppContextProvider({ children }: IProps) {
 
     setFundamentals(lessonsFormatResult.fundamentals);
     setProjects(lessonsFormatResult.projects);
-    setEthIntro(lessonsFormatResult.ethIntro);
+    setEthIntro(lessonsFormatResult["eth-intro"]);
   };
 
   useEffect(() => {
