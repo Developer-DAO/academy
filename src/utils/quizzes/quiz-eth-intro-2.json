@@ -1,0 +1,89 @@
+{
+  "title": "Quiz: Intro to Ethereum, Pt. 2",
+  "questions": [
+    {
+      "question": "What is meant by the term web3?",
+      "options": [
+        {
+          "answer": "The third generation of the Internet, characterized by decentralized systems and native digital assets",
+          "correct": true
+        },
+        {
+          "answer": "The third iteration of the Internet, characterized by the rise of social media and user-generated content"
+        },
+        {
+          "answer": "Something related to radioactive spiders"
+        }
+      ]
+    },
+    {
+      "question": "Who can help you if you lose your private key or seed phrase?",
+      "options": [
+        {
+          "answer": "The Ethereum Foundation support channels"
+        },
+        {
+          "answer": "Your bank"
+        },
+        {
+          "answer": "You alone",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Who can prevent you from creating an Ethereum account?",
+      "options": [
+        {
+          "answer": "No one",
+          "correct": true
+        },
+        {
+          "answer": "Your bank"
+        },
+        {
+          "answer": "The Ethereum Foundation"
+        },
+        {
+          "answer": "Satoshi"
+        }
+      ]
+    },
+    {
+      "question": "Which is the best analogy for a public address?",
+      "options": [
+        {
+          "answer": "Rain on your wedding day"
+        },
+        {
+          "answer": "An account number for your account",
+          "correct": true
+        },
+        {
+          "answer": "A password for your wallet"
+        },
+        {
+          "answer": "A savings account at a bank"
+        }
+      ]
+    },
+    {
+      "question": "Which is the best analogy for a private key?",
+      "options": [
+        {
+          "answer": "Ten thousand spoons when all you need is a knife"
+        },
+        {
+          "answer": "A phone number for your account"
+        },
+        {
+          "answer": "A random number generator"
+        },
+        {
+          "answer": "A password for your account",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
