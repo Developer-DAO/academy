@@ -19,6 +19,7 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { zerionWallet } from "@rainbow-me/rainbowkit/wallets";
+import { Analytics } from "@vercel/analytics/react";
 
 // SIWE Integration
 import { WagmiConfig, createConfig, configureChains } from "wagmi";
@@ -101,6 +102,7 @@ const MyApp = ({
               <MDXProvider components={Components}>
                 <AppContextProvider>
                   {getLayout(<Component {...pageProps} />)}
+                  <Analytics mode={"production"} />;
                 </AppContextProvider>
               </MDXProvider>
             </RainbowKitProvider>
