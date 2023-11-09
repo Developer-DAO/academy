@@ -134,8 +134,7 @@ You can check the details in the full EIP-20 titled
 ## Let's code, but first...
 
 Before we start hacking away without any structure to follow, what is our actual
-project's structure, and what do we want to achieve? Since we are _BUIDLING_, I'd like to think of our project, or smart contract,
-the same way as we would _roughly_ build a house:
+project's structure, and what do we want to achieve? Since we are _BUIDLING_, I'd like to think of our project, or smart contract, roughly the same way as we would build a house:
 
     * 1 - Foundations
     * 2 - Structure: Framing, Walls and Roof
@@ -196,7 +195,7 @@ If everything goes well, you will have four tools to run in the console:
 `forge`, `cast`, `anvil` & `chisel`. Basic overview of each tool:
 
 - `forge` tests, builds and deploys your smart contracts
-- `cast` an make smart contract calls, send transactions, or retrieve any type
+- `cast` can make smart contract calls, send transactions, or retrieve any type
   of chain data
 - `anvil` is a local testnet node shipped with Foundry. You can use it for
   testing your contracts from frontends or for interacting over RPC
@@ -407,7 +406,7 @@ the house.
 
 We can think of entering the house as `minting` new tokens or increasing the
 total supply, and leaving the house as `burning` tokens or decreasing the total
-supply. But this doors doesn't exist in our contract just yet.
+supply. But these doors don't exist in our contract just yet.
 
 <Callout emoji='💡' size='md' variant='info'>
 
@@ -513,6 +512,7 @@ Let's break down our changes in the code:
 - Inside our `constructor`:
   - Granted the `DEFAULT_ADMIN_ROLE` to contract deployer to be able to grant
     roles to others
+    {/*is a part of Access control by default - i.e. it is inherited starting admim role for all roles */}
   - Granted the `MINTER_ROLE` to contract deployer to be able to mint tokens
 - Added the modifier `onlyRole(MINTER_ROLE)` to the `mint` function to restrict
   its access
