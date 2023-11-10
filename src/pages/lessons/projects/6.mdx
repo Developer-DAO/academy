@@ -402,9 +402,7 @@ them to the `msg.sender`'s balance.
 
 We now have a full structure, with a roof to shelter us from the weather. The
 only problem is that we didn't create any openings for anyone to enter or leave
-the house.
-
-We can think of entering the house as `minting` new tokens or increasing the
+the house. We can think of entering the house as `minting` new tokens or increasing the
 total supply, and leaving the house as `burning` tokens or decreasing the total
 supply. But these doors don't exist in our contract just yet.
 
@@ -441,9 +439,7 @@ contract MyToken is ERC20 {
 ```
 
 When we define our `mint` function, we decide who will be the receiver of said
-new tokens.
-
-For the `burn` function on the other hand, we are **only** letting holders burn
+new tokens. For the `burn` function on the other hand, we are **only** letting holders burn
 their own tokens by using `msg.sender` as the address to call the internal
 `_burn` function.
 
@@ -458,21 +454,15 @@ We have now created doors to our house, but we haven't put locks in them!
 ## Lock the Door!
 
 In our present state, our functions for minting and burning can be called by any
-address.
-
-That's ok for `burn` since people can only burn their own tokens (or their
-approved allowances), but we don't want anyone to `mint` tokens and increase the
+address. That's ok for `burn` since people can only burn their own tokens, or their
+approved allowances. But we don't want anyone to `mint` tokens and increase the
 total supply of our new token.
 
 To be able to limit the access to minting tokens, we are going to use a pattern
 that OpenZeppelin calls AccessControl to give granular access to functionality
 within our code. For that we will inherit yet another great contract from the OZ
-library.
-
-We can basically define **roles** and assign or un-assign them to any address we
-need.
-
-In our case, we will only create a `MINTER_ROLE` to allow access to our `mint`
+library. It basically lets us define **roles** and assign or un-assign them to any address we
+need. In our case, we will only create a `MINTER_ROLE` to allow access to our `mint`
 function:
 
 ```solidity
@@ -511,7 +501,7 @@ Let's break down our changes in the code:
 - Created a `bytes32 public constant` variable for the minter role
 - Inside our `constructor`:
   - Granted the `DEFAULT_ADMIN_ROLE` to contract deployer to be able to grant
-    roles to others
+    roles to others. Our contract inherits this by default from Access Control as the starting point for all admin roles.
     {/*is a part of Access control by default - i.e. it is inherited starting admim role for all roles */}
   - Granted the `MINTER_ROLE` to contract deployer to be able to mint tokens
 - Added the modifier `onlyRole(MINTER_ROLE)` to the `mint` function to restrict
