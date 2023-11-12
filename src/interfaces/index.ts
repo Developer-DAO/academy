@@ -15,7 +15,6 @@ export interface Lessons {
 export interface IFormatedLessons {
   projects: Project[];
   fundamentals: Fundamental[];
-  ethIntro: EthIntro[];
 }
 
 export interface Fundamental {

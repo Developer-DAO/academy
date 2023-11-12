@@ -84,6 +84,111 @@
           "correct": true
         }
       ]
+    },
+    {
+      "question": "What can you do with an account?",
+      "options": [
+        {
+          "answer": "Deploy a smart contract",
+          "correct": true
+        },
+        {
+          "answer": "Send and receive ether",
+          "correct": true
+        },
+        {
+          "answer": "Interact with a smart contract",
+          "correct": true
+        },
+        {
+          "answer": "A password for your account",
+          "correct": true
+        },
+        {
+          "answer": "Sign transactions",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In a production environment, web3.py automatically signs and sends your transactions",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "False",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is a nonce?",
+      "options": [
+        {
+          "answer": "The transaction count of an account",
+          "correct": true
+        },
+        {
+          "answer": "A transaction hash"
+        },
+        {
+          "answer": "A block hash"
+        },
+        {
+          "answer": "Random data added to a transaction"
+        }
+      ]
+    },
+    {
+      "question": "A transaction to deploy a new contract omits which value?",
+      "options": [
+        {
+          "answer": "data"
+        },
+        {
+          "answer": "from"
+        },
+        {
+          "answer": "to",
+          "correct": true
+        },
+        {
+          "answer": "nonce"
+        }
+      ]
+    },
+    {
+      "question": "What is true of message signing?",
+      "options": [
+        {
+          "answer": "The signer's private key is revealed"
+        },
+        {
+          "answer": "No gas fee is required to sign a message",
+          "correct": true
+        },
+        {
+          "answer": "The address of the signer can later be proven",
+          "correct": true
+        },
+        {
+          "answer": "Message signing may be used to authenticate a user",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "To build an Ethereum app, your entire technology stack must be open sourced",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "False",
+          "correct": true
+        }
+      ]
     }
   ]
 }

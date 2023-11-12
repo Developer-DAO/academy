@@ -5,7 +5,6 @@ interface IAppContext {
   completedQuizzesIds: string[];
   projects: Project[];
   fundamentals: Fundamental[];
-  ethIntro: EthIntro[];
   allLessonsData: any[];
   refetchCompletedQuizzesAll?: () => Promise<any>;
 }
@@ -14,7 +13,6 @@ export const AppContext = createContext<IAppContext>({
   completedQuizzesIds: [],
   projects: [],
   fundamentals: [],
-  ethIntro: [],
   allLessonsData: [],
   refetchCompletedQuizzesAll: () => Promise.resolve(),
 });

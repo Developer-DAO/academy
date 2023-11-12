@@ -138,7 +138,6 @@ In [8]: tx_hash = w3.eth.send_transaction({
    })
 ```
 
-
 This transaction will execute immediately, but some important details are hidden from view. web3.py is smart enough to know that `EthereumTesterProvider` is managing `acct_one` and that we're using a test environment. For our convenience, `acct_one` is "unlocked," meaning transactions from the account are approved (signed) by default.
 
 So, what does a transaction look like if not from an unlocked account? To find out, let's send some ether from `acct_two` – an account not managed by `EthereumTesterProvider`. This more manual process takes three steps: 1) specify the transaction details, 2) sign the transaction, then 3) broadcast the transaction to the network.
@@ -162,7 +161,7 @@ In[11]: tx_hash = w3.eth.send_raw_transaction(signed.rawTransaction)
 
 Let's break that down. Step 1 defines a Python dictionary with the required transaction fields. We briefly learned about gas (transaction fees) in Part 1, but nonce may be new territory. In Ethereum, a **nonce** is simply the transaction count of the account. The Ethereum protocol keeps track of this value to prevent double-spending.
 
-Since this is the first transaction being made by acct_two, its nonce is zero. If you supply the wrong value, the result is an invalid transaction and is rejected by web3.py:
+Since this is the first transaction being made by `acct_two`, its nonce is zero. If you supply the wrong value, the result is an invalid transaction and is rejected by web3.py:
 
 ```bash
 ValidationError: Invalid transaction nonce: Expected 0, but got 4
@@ -261,22 +260,18 @@ Data mining isn't going away, but this new account ownership model enables a hea
 
 ### New software architectures
 
-An interesting wrinkle in the definition of your business model will be what to handle on-chain vs. off-chain. As we've discussed, message signing requires no on-chain interaction. There's also nothing stopping you from using a private database for some of your data and the Ethereum blockchain for other bits of data or functionality. There are plenty of tradeoffs to consider: usability, cost, transparency, decentralization, privacy, and so on.
+An interesting wrinkle in the definition of your business model will be what to handle onchain vs. offchain. As we've discussed, message signing requires no onchain interaction. There's also nothing stopping you from using a private database for some of your data and the Ethereum blockchain for other bits of data or functionality. There are plenty of tradeoffs to consider: usability, cost, transparency, decentralization, privacy, and so on.
 
 ## And breathe
 
 Did all that sink in? Test yourself:
 
-- How do Ethereum accounts differ from those in Web 2.0?
-- In what ways can Ethereum accounts be used?
-- What are the implications of Ethereum accounts for app developers?
-
-There's no limit to the number of accounts you can generate and you're free to use the same account for several apps or create a new account for every app. This is partly what is meant when a public blockchain is described as **permissionless**: there is no gatekeeper between you and the network. Don't wait for anyone to give you permission to build.
-
 <br />
 <QuizStatusChecker quiz="quiz-eth-intro-2" />
 
-When you're ready to forge ahead, Part 3 introduces the next actor in the system: smart contracts.
+There's no limit to the number of accounts you can generate and you're free to use the same account for several apps or create a new account for every app. This is partly what is meant when a public blockchain is described as **permissionless**: there is no gatekeeper between you and the network. Don't wait for anyone to give you permission to build.
+
+When you're ready to forge ahead, Part 3 more deeply introduces the next actor in the system: smart contracts.
 
 import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 

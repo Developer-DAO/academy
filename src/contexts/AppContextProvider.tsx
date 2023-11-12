@@ -22,7 +22,6 @@ interface IProps {
 export function AppContextProvider({ children }: IProps) {
   const [fundamentals, setFundamentals] = useState<Fundamental[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
-  const [ethIntro, setEthIntro] = useState<EthIntro[]>([]);
   const [completedQuizzesIds, setCompletedQuizzesIds] = useState<string[]>([]);
   const [sessionDataUser, setSessionDataUser] = useState<any>(null);
 
@@ -88,7 +87,6 @@ export function AppContextProvider({ children }: IProps) {
 
     setFundamentals(lessonsFormatResult.fundamentals);
     setProjects(lessonsFormatResult.projects);
-    setEthIntro(lessonsFormatResult["eth-intro"]);
   };
 
   useEffect(() => {
@@ -99,31 +97,6 @@ export function AppContextProvider({ children }: IProps) {
   const { data: allLessonsData } = api.lessons.getAll.useQuery(undefined, {
     refetchOnWindowFocus: false,
   });
-
-  useEffect(() => {
-    if (allLessonsData && ethIntro && completedQuizzesIds.length !== 0) {
-      const lessonsWithCompleteStatus = ethIntro.map((lesson) => {
-        const currentLessonId = allLessonsData.find(
-          (lessonData) =>
-            lessonData.projectLessonNumber?.toString() ===
-            lesson.slug.toString(), // DEV_NOTE: forcing .toString() to avoid type errors
-        )?.id;
-
-        const completed = currentLessonId
-          ? completedQuizzesIds.includes(currentLessonId)
-          : false; // DEV_NOTE: if the lesson is not found, it is not completed
-        return { ...lesson, completed };
-      });
-
-      setEthIntro(lessonsWithCompleteStatus);
-    } else if (allLessonsData && ethIntro && completedQuizzesIds.length === 0) {
-      const lessonsWithCompleteStatus = ethIntro.map((lesson) => {
-        return { ...lesson, completed: false };
-      });
-      setEthIntro(lessonsWithCompleteStatus);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completedQuizzesIds]);
 
   useEffect(() => {
     if (allLessonsData && projects && completedQuizzesIds.length !== 0) {
@@ -185,7 +158,6 @@ export function AppContextProvider({ children }: IProps) {
         completedQuizzesIds,
         projects,
         fundamentals,
-        ethIntro,
         allLessonsData: allLessonsData || [],
         refetchCompletedQuizzesAll,
       }}
