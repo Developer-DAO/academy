@@ -1,0 +1,210 @@
+---
+title: A Developer's Guide to Ethereum, Pt. 3
+description: Introduction to Ethereum with web3.py and Python.
+icons: ["ethereum"]
+---
+
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import Layout from "../../../components/Layout";
+
+<Layout
+    title="A Developer's Guide to Ethereum, Pt. 3"
+    description="Introduction to Ethereum with web3.py and Python."
+>
+<LessonHeader title="A Developer's Guide to Ethereum, Pt. 3" />
+
+Welcome to Part 3 in the saga! Part 1 covered blockchain fundamentals. Part 2 continued on to examine Ethereum accounts and how they enable participation in the network. Part 3 will build on those concepts with the introduction of smart contracts.
+
+## Smart contracts, an introduction
+
+The Ethereum blockchain has a great deal of value flowing through it. In previous articles, we discussed the flow of **ether** from one user to another via transactions. However, the network is capable of more sophisticated interactions, and those use cases are enabled by smart contracts.
+
+Let's start with a simple definition: a **smart contract** is code (i.e., a computer program) deployed to the blockchain. As for the buzzword name, _contract_ conveys the relative permanence of these programs as they determine how assets can change hands and _smart_ is a nod to their programmability. For brevity, they're commonly referred to as just contracts, and we'll follow suit.
+
+It may be helpful to think of contracts and individual accounts as the two types of actors within this system. With their programmed instructions, contracts can interact with the blockchain in much the same way as individual accounts: by sending and receiving ether or by interacting with other contracts. Contracts can go a step further by managing some internal state – a concept we'll explore shortly. 
+
+<Callout emoji="💡" size="md" variant="info">
+Note: Over the years, individual accounts have been described in a variety of ways. **Externally owned account** (EOA) is the original term as defined in the [Ethereum Whitepaper](https://ethereum.org/en/whitepaper/). You are likely to see that acronym again.
+</Callout>
+
+A contract can be as complex or as simple as you need it to be. You can leave the contract open for the world to use, restrict its usage to only your account, or require a certain balance or the ownership of a particular asset to interact with it. Either way, if your contract is deployed to Ethereum Mainnet, that code is public!
+
+## Public source code?
+
+In this paradigm, that's a requirement. Users (or other contracts) may utilize your contract to move real value around. They need to be able to trust that your contract does what you say it does, and in order to do that, they need to be able to read it for themselves.
+
+In reality, most users aren't reading the source code of each smart contract they interact with, but most wisely won't touch a contract if that source code isn't verified (e.g., on [sourcify](https://sourcify.dev/) or [Etherscan](https://etherscan.io/)) and vetted (e.g., audited) by industry veterans.
+
+Consider the alternative: if contracts are black boxes, there's nothing to stop a bad actor from publishing a contract that appears innocuous, but actually grants themselves the ability to move your assets. Today, bad actors can deploy such a contract and try to lure users in via social engineering, but often wallet interfaces will warn users when code is unverified and to proceed with caution.
+
+## What about my business model?
+
+Are you wondering how to preserve your competitive edge if all your smart contract code is open source? Public blockchains do force you to get creative here.
+
+It's not necessarily a more restrictive landscape though. Because each contract is open source, you have the ability to build a platform that others can build on top of, or you can build on top of what others have already done. [Safe](https://safe.global/), for example, is an open source [multisig](https://ethereum.org/en/developers/docs/smart-contracts/) wallet with a rich ecosystem of auxiliary financial tools being built around it. Anyone can build a product that's compatible with a Safe, without any sort of permission from the Safe team.
+
+Open source licenses also vary widely. Another prominent player in the industry, Uniswap, introduced a product with a unique time-delayed [license](https://blog.uniswap.org/uniswap-v3?ref=snakecharmers.ethereum.org#license). Their code was instantly available as open source software, but restricted in its commercial reuse for two years. Creative licensing will surely continue to be explored in this domain.
+
+## What does a contract look like?
+
+Ethereum smart contracts can be written in a handful of programming languages, each specially created for the purpose. Each have tradeoffs, but any will do the trick; in the end, the code just needs to compile down to bytecode that the [EVM](https://ethereum.org/en/developers/docs/evm/) (Ethereum Virtual Machine) can read. Popular language options include [Solidity](https://soliditylang.org/), [Vyper](https://docs.vyperlang.org/en/stable/), and a newcomer, [Fe](https://fe-lang.org/).
+
+Each language is worth a look, but below is a "Hello, World"-style example written in Solidity, the most established of the languages. This example contract is titled `Billboard`, stores a single message, and contains one function to update that message. As written, anyone has the unrestricted ability to update that message.
+
+You can imagine that a website might display whatever message is stored and provide an input to type in a new message, replacing the current one. The combination of a smart contract and its user interface is what's referred to as a decentralized application, or "[dapp](https://ethereum.org/en/dapps/)" for short.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+contract Billboard {
+    string public message;
+    
+    constructor(string memory _message) {
+        message = _message;
+    }
+    
+    function writeBillboard(string memory _message) public {
+        message = _message;
+    }
+}
+```
+
+If you're familiar with object-oriented programming, a contract will look an awful lot like the concept of a class. In effect, when a contract is deployed, a single instance becomes available for all the world to use — analogous to a "singleton" class. 
+
+For all users, a deployed contract has a particular state at any given block. In other words, the Billboard's `message` is always the same for everyone. A contract's state can keep track of all manner of things; within a token contract, for example, the state might include who owns how many of which assets.
+
+In a Solidity contract, the `constructor` method is executed only once, when the contract is first deployed. Continuing the class analogy, the `constructor` might remind you of the `__init__` method within a Python class or similar initialization methods in other languages. So, whoever deploys this contract gets to determine the starting billboard message.
+
+You may have noticed the JavaScript-like syntax of Solidity, including the use of camelCasing, semicolons, and inline comments. A few notable differences exist as well: the type system, a compiler version declaration, and new keywords. Hopefully this example was simple enough to convey the concepts, but the intricacies of the language are beyond the scope of this article. You'll find links to more learning resources at the end.
+
+## How does a contract get on the blockchain?
+
+Earlier in this blog series, you may recall reading that the only way to make changes to the state of the Ethereum blockchain is via transactions. That remains true for deploying new contracts.
+
+While a contract is being written, developers will frequently compile their code for manual or automated testing. The output of each compilation is the contract's **bytecode**.
+
+To deploy a contract, one needs only to send a transaction with that contract's bytecode in the `data` field of the transaction and omit the `to` address. The EVM will take care of the rest. Once the transaction has been included in a block, the transaction receipt contains the deployed contract's address where it can be interacted with.
+
+```python
+tx = {
+    "from": your_account,
+    "data": "0x60abc...",
+    ...
+} 
+
+w3.eth.send_transaction(tx)
+```
+
+Tools like [web3.py](https://web3py.readthedocs.io/en/stable/) offer slightly more human-friendly ways to go about this. One of the other outputs of a compilation is the contract's **ABI**, and some additional metadata.
+
+<Callout emoji="💡" size="md" variant="info">
+**Note**: ABI stands for **Application Binary Interface**. An ABI is a machine-readable data blob that conveys how a contract can be interacted with – which functions are available and expected data types. It's some JSON that you pass into an Ethereum library (e.g., web3.py, ethers.js, etc.), so that it can provide you with a human-friendly interface. Does the name make sense now? An ABI communicates the interface for your application's bytecode.
+</Callout>
+
+Once web3.py is aware of a contract's ABI and bytecode (or, if already deployed, the contract address), the library can give you a more intuitive interface for interacting with the contract.
+
+```python
+# Instantiate a contract factory:
+Billboard = w3.eth.contract(abi=abi, bytecode=bytecode)
+
+# Deploy an instance of the contract:
+tx_hash = Billboard.constructor("eth very wow").transact()
+
+# Wait for the transaction to be included and get the receipt:
+tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+
+# Retrieve the deployed contract instance:
+billboard = w3.eth.contract(
+    address=tx_receipt.contractAddress,
+    abi=abi
+)
+
+# Interact with the contract instance:
+billboard.functions.message().call()
+# eth very wow
+
+billboard.functions.writeBillboard("sneks everywhere").transact()
+
+billboard.functions.message().call()
+# sneks everywhere
+```
+
+## How far can a contract go?
+
+So long as we're talking about the management of digital assets, you can program nearly anything. Physical assets have been tokenized on the blockchain too, but that's another rabbit hole.
+
+Over the years, standards for various digital assets have proposed, debated, and agreed upon, providing some foundational building blocks for more complex contracts. Among the most notable are the ERC-20 token standard (i.e., fungible tokens) and the ERC-721 standard (i.e., non-fungible tokens or "NFTs").
+
+<Callout emoji="💡" size="md" variant="info">
+**Note**: To save you the Google search, _fungible_ means interchangeable or indistinguishable. In other words, if you own 100 fungible tokens, it doesn't make any difference which 100 tokens they are. NFTs, on the other hand, may each have unique qualities, so the particular token you own is significant.
+</Callout>
+
+To demystify those standards: the different token types are simply smart contract patterns that anyone can make use of. The [ERC-20 standard](https://eips.ethereum.org/EIPS/eip-20) specifies which functions your fungible token contract must include, but at its core, the contract simply maintains list of public addresses and how many tokens each one owns, represented by an integer.
+
+The [ERC-721 standard](https://eips.ethereum.org/EIPS/eip-721) overlaps with ERC-20, but importantly introduces a unique token ID and some metadata for each token.
+
+These two standards are brought up to illustrate their compounding effect. As more of these building blocks are standardized, the easier it gets to quickly stack them in creative ways and innovate at the fringes.
+
+## Contracts within contracts
+
+Continuing the comparison to object-oriented classes, _inheritance_ is another concept you will commonly find in contracts. Well-trusted organizations like [OpenZeppelin](https://www.openzeppelin.com/contracts) implement token standard contracts, for example, so that contract developers can simply import and inherit that functionality.
+
+Within Solidity, inheritance is declared using the `is` keyword:
+
+```solidity
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract MyToken is ERC20 {
+    constructor() ERC20("ExampleToken", "XMPL") { ... }
+}
+```
+
+Once deployed, the `MyToken` contract has access to all the functions defined in OpenZeppelin's `ERC20` contract implementation. Conveniently, you don't have to reinvent the wheel and can focus on what makes your token contract unique.
+
+Beyond inheritance, contracts have the ability to interact with other deployed contracts or even serve as a _factory_ or _proxy_ for deploying still more contracts! Those concepts are good topics for future blog posts.
+
+## A note on upgradeability
+
+While the blockchain is said to be immutable, there are patterns of writing smart contracts that can support upgradeability. These patterns introduce trade-offs which may or may not make sense for your use case.
+
+This is not exactly beginner-friendly content, but you can [read more](https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies) about OpenZeppelin's preferred approach if you are so inclined.
+
+## Starting off on your own
+
+A couple tips and resources to take your next steps:
+- The user interface can be a bit intimidating, but [Remix](https://remix.ethereum.org/) is great for being able to open a web browser and have a Solidity developer environment immediately ready for use.
+- [Solidity by Example](https://solidity-by-example.org/) is a great reference manual to keep nearby while writing contracts. Succinct code samples are organized by topic.
+- OpenZeppelin's [Contracts Wizard](https://docs.openzeppelin.com/contracts/5.x/wizard) is a terrific starting point for token contracts, in particular. You can select a few preferences and have the bones of a contract generated for you. There's even a convenient button to open that contract within a Remix environment.
+- If you'd like some guided instruction, [CryptoZombies](https://cryptozombies.io/) is an accessible and high quality Solidity tutorial.
+- When you're ready for more Solidity challenges that connect to a JavaScript front-end, give [Speedrun Ethereum](https://speedrunethereum.com/) a try.
+- If you prefer video tutorials, Patrick Collins has a very comprehensive course with [Python](https://www.youtube.com/watch?v=M576WGiDBdQ) and [JavaScript](https://www.youtube.com/watch?v=gyMwXuJrbJQ) editions.
+- When you get stumped, the [Ethereum Stack Exchange](https://ethereum.stackexchange.com/) is a great place to see if your question has been well-answered already.
+
+## Future iterations
+
+Remix shines when used for rapid ideation and learning the ropes. Once you get more invested in testing, writing custom scripts, and sharing your codebase with a team, you may outgrow Remix.
+
+When you're ready for them, there are a range of smart contract development framework options, written in various languages and with varying trade-offs. Ethereum.org maintains a list of those [frameworks](https://ethereum.org/en/developers/docs/frameworks/). For those of you in the Python ecosystem, I give an introduction to the Ape framework [here](https://snakecharmers.ethereum.org/intro-to-ape/).
+
+## And breathe
+
+We covered a lot of ground! Did all that sink in? Test yourself:
+
+<br />
+<QuizStatusChecker quiz="quiz-eth-intro-3" />
+
+If you're satisfied with your answers, you've now got a strong foundation on which to begin your dapp-building journey. Use the resources recommended above to take your next steps and be sure to document your own journey! Many of the tools in this industry are brand new or rapidly evolving. A great way to make a positive impact is simply to help improve the documentation of each tool as you find opportunities to.
+
+For now at least, this concludes the three-part series, _A Developer's Guide to Ethereum_. If you're building in the Python ecosystem, you'll find more one-off guides for web3.py on the Snake Charmers [blog](https://snakecharmers.ethereum.org/).
+
+Happy building! ⚡️
+
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
+
+<ContributorFooter
+  authors={["wolovim"]}
+  reviewers={[]}
+  contributors={[]}
+/>
+</Layout>
