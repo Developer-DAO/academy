@@ -2,17 +2,17 @@
   "question": "Which of the following go into `hardhat.config.js` in an NFT project?",
   "options": [
     {
-      "answer": "NFT_NAME."
+      "answer": "NFT_NAME"
     },
     {
-      "answer": "RPC_API_KEY.",
+      "answer": "RPC_API_KEY",
       "correct": true
     },
     {
-      "answer": "tokenURI."
+      "answer": "tokenURI"
     },
     {
-      "answer": "All of the above."
+      "answer": "All of the above"
     }
   ]
 }
