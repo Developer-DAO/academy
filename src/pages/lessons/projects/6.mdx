@@ -238,12 +238,10 @@ forge build
 My output:
 
 ```bash
-[⠊] Compiling...
-[⠑] Installing solc version 0.8.19
-[⠊] Successfully installed solc 0.8.19
-[⠒] Compiling 20 files with 0.8.19
-[⠑] Solc 0.8.19 finished in 6.08s
-Compiler run successful
+[⠒] Compiling...
+[⠔] Compiling 22 files with 0.8.20
+[⠃] Solc 0.8.20 finished in 4.35s
+Compiler run successful!
 ```
 
 And now we can test it:
@@ -255,13 +253,15 @@ forge test
 My output:
 
 ```bash
-[⠰] Compiling...
+[⠆] Compiling...
 No files changed, compilation skipped
 
 Running 2 tests for test/Counter.t.sol:CounterTest
-[PASS] testIncrement() (gas: 28334)
-[PASS] testSetNumber(uint256) (runs: 256, μ: 27553, ~: 28409)
-Test result: ok. 2 passed; 0 failed; finished in 19.11ms
+[PASS] testFuzz_SetNumber(uint256) (runs: 256, μ: 27631, ~: 28409)
+[PASS] test_Increment() (gas: 28379)
+Test result: ok. 2 passed; 0 failed; 0 skipped; finished in 27.32ms
+ 
+Ran 1 test suites: 2 tests passed, 0 failed, 0 skipped (2 total tests)
 ```
 
 As we mentioned earlier, we are going to use OpenZeppelin ERC20 implementation.
@@ -278,8 +278,9 @@ This looks for the repo called `openzeppelin-contracts` from the GitHub user
 This is the output I got:
 
 ```bash
-Installing openzeppelin-contracts in "/home/myuser/d_d_academy/my_token/lib/openzeppelin-contracts" (url: Some("https://github.com/OpenZeppelin/openzeppelin-contracts"), tag: None)
-    Installed openzeppelin-contracts v4.8.0
+Installing openzeppelin-contracts in /home/myuser/d_d_academy/my_token/lib/openzeppelin-contracts (url: Some("https://github.com/OpenZeppelin/openzeppelin-contracts"), tag: None)
+	...
+	Installed openzeppelin-contracts v5.0.0
 ```
 
 This lets us import OpenZeppelin contracts in our smart contracts. We need to
@@ -303,9 +304,16 @@ rm test/*
 ```
 
 <SideDrawer
-  buttonText="Checkpoint Questions will be here"
-  title="">
+  buttonText="Checkpoint Questions"
+  title="Foundations of our contract with Foundry"
+>
+  {/* <Question question="lesson-6/2-foundry/Q1" />
+  <Question question="lesson-6/2-foundry/Q2" />
+  <Question question="lesson-6/2-foundry/Q3" />
+  <Question question="lesson-6/2-foundry/Q4" />
+  <Question question="lesson-6/2-foundry/Q5" /> */}
 </SideDrawer>
+
 
 Everything's ready, so let's go ahead and start coding Solidity.
 
@@ -328,7 +336,7 @@ basics:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 contract MyToken {
 }
@@ -338,7 +346,7 @@ Once we have that, we can import and inherit OpenZeppelin ERC20:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
@@ -354,7 +362,7 @@ contract's constructor:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
@@ -375,7 +383,7 @@ contract on our constructor:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
@@ -444,8 +452,14 @@ We have now created doors to our house, but we haven't put locks in them!
 
 
 <SideDrawer
-  buttonText="Checkpoint Questions will be here"
-  title="">
+  buttonText="Checkpoint Questions"
+  title="Laying out the basics of the contract"
+>
+  {/* <Question question="lesson-6/3-create-contract/Q1" />
+  <Question question="lesson-6/3-create-contract/Q2" />
+  <Question question="lesson-6/3-create-contract/Q3" />
+  <Question question="lesson-6/3-create-contract/Q4" />
+  <Question question="lesson-6/3-create-contract/Q5" /> */}
 </SideDrawer>
 
 
@@ -522,7 +536,7 @@ Here we have our fully functioning house, I mean... token:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
@@ -592,10 +606,10 @@ forge build
 Here's what I got in the console:
 
 ```bash
-[⠒] Compiling...
-[⠃] Compiling 11 files with 0.8.19
-[⠒] Solc 0.8.19 finished in 1.29s
-Compiler run successful
+[⠢] Compiling...
+[⠒] Compiling 10 files with 0.8.20
+[⠑] Solc 0.8.20 finished in 252.16ms
+Compiler run successful!
 ```
 
 Everything compiled successfully and is ready to deploy.
@@ -608,11 +622,17 @@ your configuration (OS, version, Foundry and Solidity version, etc.)
 
 
 <SideDrawer
-  buttonText="Checkpoint Questions will be here"
-  title="">
+  buttonText="Checkpoint Questions"
+  title="Defining permissions for use of our contract"
+>
+  {/* <Question question="lesson-6/4-define-roles/Q1" />
+  <Question question="lesson-6/4-define-roles/Q2" />
+  <Question question="lesson-6/4-define-roles/Q3" />
+  <Question question="lesson-6/4-define-roles/Q4" />
+  <Question question="lesson-6/4-define-roles/Q5" /> */}
 </SideDrawer>
 
-## Register your house in the Real Estate Register
+### Register your house in the Real Estate Register
 
 Or... Let's deploy our contract!
 
@@ -633,7 +653,7 @@ more if you search for Sepolia Faucet in any search engine.
 We are going to create an `.env` file, where we will store our _secrets_. And
 when we say _secrets_, we are specially referring to the private key to your
 wallet. Never, ever share this with anyone, not even us. Anyone who gets hold of
-your keys, can drain your wallet. This is why we strongly advise using a separate wallet for your development activities,
+your keys, can drain your wallet. This is why we strongly advise using a separate browser profile, and most definitely a separate wallet for your development activities,
 that should not hold anything with real value in it. It wouldn't be the first time,
 even for experienced developers, to accidentally upload the `.env` file to
 GitHub, and once it's on the internet we can consider it to be, yes, public.
@@ -751,22 +771,21 @@ the tool will return an error when trying to verify.
 This is the output I got:
 
 ```less
-[⠒] Compiling...
+[⠊] Compiling...
 No files changed, compilation skipped
 Deployer: 0xf4bAFA90241e808461653C17dB0f8669Fa4342a1
-Deployed to: 0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf
-Transaction hash: 0xeb420acc65f54fc3a564db28856e4496acb59615f837d784c75a9c00a0bb96d4
+Deployed to: 0xec870005029ED5595F146f6AAAe699b442065b72
+Transaction hash: 0x436120f627b1b56ac92ca1df408f1ec591cd578c4168aad4d89bc73c4141aa78
 Starting contract verification...
 Waiting for etherscan to detect contract deployment...
-Start verifying contract `0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf` deployed on sepolia
+Start verifying contract `0xec870005029ED5595F146f6AAAe699b442065b72` deployed on sepolia
 
-Submitting verification for [src/MyToken.sol:MyToken] "0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf".
-
+Submitting verification for [src/MyToken.sol:MyToken] "0xec870005029ED5595F146f6AAAe699b442065b72".
 Submitted contract for verification:
         Response: `OK`
-        GUID: `fn91mxzy58kyjw5ps1tjid2jtulktj8zhdx583pxbfekthb5jm`
+        GUID: `hzmpq14eeasu92sd1hgzgdhttdu7iscirjlbs9eb1vsezkn8vc`
         URL:
-        https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf
+        https://sepolia.etherscan.io/address/0xec870005029ed5595f146f6aaae699b442065b72
 Contract verification status:
 Response: `NOTOK`
 Details: `Pending in queue`
@@ -775,30 +794,38 @@ Response: `OK`
 Details: `Pass - Verified`
 Contract successfully verified
 ```
+If by chance you get a message saying Etherscan hasn't detected or verified the deployment, 
+try running the command again.  
 
-If we filter out all information, we should pay attention to the second line, where
-the tool tells us what the address of the deployed contract is:
-`0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf`.
+By filtering through the information, we can pay attention to the second line, where 
+the tool tells us the address of the deployed contract:
+`0xec870005029ED5595F146f6AAAe699b442065b72`.
 
 
 <SideDrawer
-  buttonText="Checkpoint Questions will be here"
-  title="">
+  buttonText="Checkpoint Questions"
+  title="Deploying with Foundry"
+>
+  {/* <Question question="lesson-6/5-deployment/Q1" />
+  <Question question="lesson-6/5-deployment/Q2" />
+  <Question question="lesson-6/5-deployment/Q3" />
+  <Question question="lesson-6/5-deployment/Q4" />
+  <Question question="lesson-6/5-deployment/Q5" /> */}
 </SideDrawer>
 
 ## Querying the Block Explorer
 
 You can go into [Sepolia Etherscan](https://sepolia.etherscan.io/) block
-explorer and search for this address that the command returned to check out your
+explorer and search for the address that the command returned to check out your
 very own newly deployed smart contract!
 
 ![ERC20-etherscan](/assets/lessons/6/ERC20-etherscan.png)
 
-If you got to verify it, it also gives you a link to see your contract on the
-block explorer. In our case, it's the last line the _Submitted contract for
-verification_ section:
-[Sepolia Etherscan](https://sepolia.etherscan.io/address/0xce68ed7aed9a1c6c185f2b8b576e7cbd7bf5daaf)
-**and** you get to see the code for the contract and all its libraries right
+If you got to verify it, you will also get a link to see your contract on the
+block explorer. In our case, it's the last line of the _Submitted contract for
+verification_ section of the terminal output
+[Sepolia Etherscan](https://sepolia.etherscan.io/address/0xec870005029ed5595f146f6aaae699b442065b72).
+**And** you get to see the code for the contract and all its libraries right
 there in the tab named _Contract_ with the green checkmark.
 
 If you scroll down, you'll see our code. It was the first file of the set for
@@ -815,14 +842,12 @@ searching for the `balanceOf` function:
 ![ERC20-balanceOf](/assets/lessons/6/ERC20-balanceOf.png)
 
 Copy and paste your wallet's address - the one you used to deploy the contract,
-and click Query. You should have as many wei as you passed to the constructor
+and click *Query*. You should have as many wei as you passed to the constructor
 when deploying. In my case it was 1000000000000000000000 wei and since we left
 our decimals in 18, that would be exactly 1000 MTK.
 
 ![ERC20-1000MTK](/assets/lessons/6/ERC20-1000MTK.png)
 
-
-### 😊 FINAL QUIZ 😊 
 
 ## Invite your frens!
 
