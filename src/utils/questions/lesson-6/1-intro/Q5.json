@@ -1,0 +1,12 @@
+{
+  "question": "ETH, the native token of Ethereum is an ERC-20 token.",
+  "options": [
+    {
+      "answer": "True"
+    },
+    {
+      "answer": "False",
+      "correct": true
+    }
+  ]
+}

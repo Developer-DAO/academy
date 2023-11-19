@@ -1,0 +1,18 @@
+{
+  "question": "Which Ethereum token standard is commonly used for creating non-fungible tokens on the Ethereum blockchain?",
+  "options": [
+    {
+      "answer": "ERC-721",
+      "correct": true
+    },
+    {
+      "answer": "ERC-20"
+    },
+    {
+      "answer": "ERC-1559"
+    },
+    {
+      "answer": "ERC-10"
+    }
+  ]
+}
