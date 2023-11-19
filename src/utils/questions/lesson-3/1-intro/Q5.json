@@ -1,11 +1,11 @@
 {
-  "question": "Which answer is 'truthier'?",
+  "question": "Which answer is true of NFT data storage?",
   "options": [
     {
-      "answer": "We need a `.json` file to store our NFT data."
+      "answer": "NFT data must be stored in a `.json` file."
     },
     {
-      "answer": "We can store NFT data in a smart contract.",
+      "answer": "NFT data can be stored in a smart contract.",
       "correct": true
     }
   ]
