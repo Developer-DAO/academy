@@ -1,0 +1,18 @@
+{
+  "question": "Which method is used to retrieve the name of an ERC-20 token?",
+  "options": [
+    {
+      "answer": "`getTokenType()`"
+    },
+    {
+      "answer": "`tokenName()`"
+    },
+    {
+      "answer": "`nameOfToken()`"
+    },
+    {
+      "answer": "`name()`",
+      "correct": true
+    }
+  ]
+}

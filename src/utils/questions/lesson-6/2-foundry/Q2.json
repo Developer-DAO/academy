@@ -1,0 +1,18 @@
+{
+  "question": "What does the `forgeup` tool install on our system?",
+  "options": [
+    {
+      "answer": "An Ethereum client for Foundry"
+    },
+    {
+      "answer": "The sword of Solidity"
+    },
+    {
+      "answer": "Windows sub-system for Linux"
+    },
+    {
+      "answer": "Foundry toolkit",
+      "correct": true
+    }
+  ]
+}

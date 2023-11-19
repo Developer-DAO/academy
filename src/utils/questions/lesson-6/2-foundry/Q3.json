@@ -1,0 +1,18 @@
+{
+  "question": "What is the `lib` folder for in our Foundry project?",
+  "options": [
+    {
+      "answer": "Storing project scripts that we’ll run later"
+    },
+    {
+      "answer": "Creating a portal to the Coding Realm"
+    },
+    {
+      "answer": "Managing project dependencies using Git Submodules",
+      "correct": true
+    },
+    {
+      "answer": "Writing tests for our smart contract"
+    }
+  ]
+}
