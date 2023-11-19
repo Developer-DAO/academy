@@ -2,7 +2,7 @@
 i18n: "erc20"
 title: Your own Token with Foundry
 description:
-  Create and deploy an ERC20 Token (UNI, MKR, DAI, etc.) using the Foundry
+  Create and deploy an ERC-20 Token (UNI, MKR, DAI, etc.) using the Foundry
   toolkit.
 icons: ["solidity", "foundry", "openzeppelin", "ethereum", "etherscan"]
 ---
@@ -12,7 +12,7 @@ import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 <Layout
     title="Your own Token with Foundry" 
-    description="Create and deploy an ERC20 Token (UNI, MKR, DAI, etc.) using the Foundry
+    description="Create and deploy an ERC-20 Token (UNI, MKR, DAI, etc.) using the Foundry
   toolkit." 
 >
 <LessonHeader
@@ -21,8 +21,8 @@ import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 ## About this lesson
 
-If you're eager to learn how to create your first ERC20 token, you're in the right place. There are 
-a multitude of uses for the ERC20, and we'll introduce you to some of them.
+If you're eager to learn how to create your first ERC-20 token, you're in the right place. There are 
+a multitude of uses for the ERC-20, and we'll introduce you to some of them.
 We'll be building a smart contract with a range of developer tools, including the use of Foundry. 
 If you are new to coding, we suggest that you first complete our _Getting Started with Smart Contract
 Development_ project, to get to grips with the basics of Solidity you'll need in
@@ -43,7 +43,7 @@ source of much of our well-being. 🌱
 
 ## What are we creating?
 
-By the end of this lesson you will have created your own ERC20 token, and
+By the end of this lesson you will have created your own ERC-20 token, and
 you will be able to change its properties in any way you need. 
 But before we go any further, let's check-in and see what building blocks you have already.
 
@@ -62,7 +62,7 @@ We hope that was a little eye-opener for what's to come!
 
 
 
-### Tokens, crypto, coins, ERC20. Is it all the same?
+### Tokens, crypto, coins, ERC-20. Is it all the same?
 
 Let's begin with some context, so we all speak the same language. The Ethereum blockchain, and most EVM-compatible blockchains, have a native token that is used to pay for transaction costs, and also to reward validators in
 Proof of Stake (previously miners in Proof of Work). In Ethereum that native
@@ -72,7 +72,7 @@ Every _other_ token or 'crypto' you see, use or interact with on Ethereum is
 basically a smart contract that lets you send these tokens, receive them and
 check your balance. Stablecoins like **DAI**, Tether (**USDT**), USD Coin (**USDC**), or tokens from
 projects like Uniswap (**UNI**), MakerDAO (**MKR**), Basic Attention Token
-(**BAT**) are all smart contracts that follow a standard. The ERC20 standard.
+(**BAT**) are all smart contracts that follow a standard. The ERC-20 standard.
 
 ### Why would we want to create yet another Token?
 
@@ -89,12 +89,12 @@ Some basic functionality that our tokens need to provide are:
   account
 
 
-Has someone created a battle-tested library for the standard? Yes. OpenZeppelin, among others, has created an implementation we can inherit to create our own tokens easily. Here is a quick overview of what a contract needs in order to be called an ERC20 Token
+Has someone created a battle-tested library for the standard? Yes. OpenZeppelin, among others, has created an implementation we can inherit to create our own tokens easily. Here is a quick overview of what a contract needs in order to be called an ERC-20 Token
 contract:
 
-<SideDrawer buttonText="More info on the ERC20 Standard">
+<SideDrawer buttonText="More info on the ERC-20 Standard">
 
-To achive the functionality needed for an ERC20 token, the standard requires us
+To achive the functionality needed for an ERC-20 token, the standard requires us
 to implement 9 methods and 2 events.
 
 
@@ -146,7 +146,7 @@ mkdir d_d_academy
 cd d_d_academy
 ```
 
-You can use whatever tools you feel confident with, or accustumed to. For this example
+You can use whatever tools you feel confident with, or accustomed to. For this example
 we will be creating a Foundry project, but feel free to use Hardhat, or Truffle
 if that's your favourite flavor. The main focus of Foundry is that you don't
 need to use Javascript at all, if you don't want to. All the tools are CLI
@@ -264,7 +264,7 @@ Running 2 tests for test/Counter.t.sol:CounterTest
 Test result: ok. 2 passed; 0 failed; finished in 19.11ms
 ```
 
-As we mentioned earlier, we are going to use OpenZeppelin ERC20 implementation.
+As we mentioned earlier, we are going to use OpenZeppelin ERC-20 implementation.
 To use it, we need to install OpenZeppelin as a dependency in our project. To
 install dependencies in Foundry, we use:
 
@@ -302,10 +302,10 @@ rm src/*
 rm test/*
 ```
 
-<SideDrawer
+{/* <SideDrawer
   buttonText="Checkpoint Questions will be here"
   title="">
-</SideDrawer>
+</SideDrawer> */}
 
 Everything's ready, so let's go ahead and start coding Solidity.
 
@@ -313,7 +313,7 @@ Everything's ready, so let's go ahead and start coding Solidity.
 
 We need our house to have a structure and a floor plan with walls dividing the
 rooms. Let's think of that setting as the 9 methods and 2 events that we saw
-earlier for our code to be ERC20 compliant.
+earlier for our code to be ERC-20 compliant.
 
 It's a great exercise to try and implement them from scratch, and we ecourage
 you to do that once you start diving deeper into Solidity. It is also a great
@@ -334,7 +334,7 @@ contract MyToken {
 }
 ```
 
-Once we have that, we can import and inherit OpenZeppelin ERC20:
+Once we have that, we can import and inherit OpenZeppelin ERC-20:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -347,7 +347,7 @@ contract MyToken is ERC20 {
 ```
 
 Now that we have the full implementation inherited, we still have to specify a
-few more things before compiling, because the ERC20 constructor **needs** to
+few more things before compiling, because the ERC-20 constructor **needs** to
 receive 2 parameters, i.e. the token's name and symbol, or it will raise an error. In
 order to do that, we define our constructor and call our inherited
 contract's constructor:
@@ -432,21 +432,21 @@ contract MyToken is ERC20 {
 When we define our `mint` function, we decide who will be the receiver of said
 new tokens. For the `burn` function on the other hand, we are only letting holders burn
 their **own** tokens by using `msg.sender` as the address to call the internal
-`_burn` function in the OpenZeppelin ERC20 implementation.
+`_burn` function in the OpenZeppelin ERC-20 implementation.
 
 In a special case where someone approves operating on an amount of *their* tokens,
 we create a `burnFrom` function to be able to burn within that approved
 allowance from the other address. If we try to burn, or transfer, more than the
-approved allowance, the ERC20 implementation from OZ will revert the transaction
-because that's required by the ERC20 standard.
+approved allowance, the ERC-20 implementation from OZ will revert the transaction
+because that's required by the ERC-20 standard.
 
 We have now created doors to our house, but we haven't put locks in them!
 
 
-<SideDrawer
+{/* <SideDrawer
   buttonText="Checkpoint Questions will be here"
   title="">
-</SideDrawer>
+</SideDrawer> */}
 
 
 ## Lock the Door!
@@ -565,7 +565,7 @@ A few examples could be:
 
 - A token that accrues or drips more tokens, depending on how long have you been
   hodling. Tip: you can override functions like `balanceOf` and
-  `_beforeTokenTransfer` / `_afterTokenTransfer` from the inherited ERC20
+  `_beforeTokenTransfer` / `_afterTokenTransfer` from the inherited ERC-20
 - A token that can only be transferred or received if you hold another specific
   token, i.e. an NFT from a specific collection
 - A token that loses the balance if you don't transact or transfer it regularly
@@ -607,10 +607,10 @@ to ask our community for help by explaining your error, the console output and
 your configuration (OS, version, Foundry and Solidity version, etc.)
 
 
-<SideDrawer
+{/* <SideDrawer
   buttonText="Checkpoint Questions will be here"
   title="">
-</SideDrawer>
+</SideDrawer> */}
 
 ## Register your house in the Real Estate Register
 
@@ -781,10 +781,10 @@ the tool tells us what the address of the deployed contract is:
 `0xCE68eD7AEd9A1c6C185f2B8b576e7cBD7bf5dAAf`.
 
 
-<SideDrawer
+{/* <SideDrawer
   buttonText="Checkpoint Questions will be here"
   title="">
-</SideDrawer>
+</SideDrawer> */}
 
 ## Querying the Block Explorer
 
@@ -821,8 +821,6 @@ our decimals in 18, that would be exactly 1000 MTK.
 
 ![ERC20-1000MTK](/assets/lessons/6/ERC20-1000MTK.png)
 
-
-### 😊 FINAL QUIZ 😊 
 
 ## Invite your frens!
 
