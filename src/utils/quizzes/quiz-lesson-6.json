@@ -1,0 +1,287 @@
+{
+  "title": "Quiz: Lesson 6",
+  "questions": [
+    {
+      "question": "Which of the following are ERC-20 tokens?",
+      "options": [
+        {
+          "answer": "ETH"
+        },
+        {
+          "answer": "SOL"
+        },
+        {
+          "answer": "MKR",
+          "correct": true
+        },
+        {
+          "answer": "UNI",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Most open source and development work is done on which system?",
+      "options": [
+        {
+          "answer": "Windows"
+        },
+        {
+          "answer": "Unix based systems",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "How many methods are required by the ERC-20 standard to achieve the necessary functionality for a token contract?",
+      "options": [
+        {
+          "answer": "5"
+        },
+        {
+          "answer": "7"
+        },
+        {
+          "answer": "9",
+          "correct": true
+        },
+        {
+          "answer": "11"
+        }
+      ]
+    },
+    {
+      "question": "What does the totalSupply() method in the ERC-20 standard return?",
+      "options": [
+        {
+          "answer": "The total number of that particular token ever created in the network"
+        },
+        {
+          "answer": "The current total circulating supply of the token",
+          "correct": true
+        },
+        {
+          "answer": "The sum of all balances across all addresses"
+        },
+        {
+          "answer": "The number of tokens owned by the contract deployer"
+        }
+      ]
+    },
+    {
+      "question": "Which functionalities does our token need to provide?",
+      "options": [
+        {
+          "answer": "Get total supply of tokens on the network",
+          "correct": true
+        },
+        {
+          "answer": "Transfer tokens from one address to another",
+          "correct": true
+        },
+        {
+          "answer": "Approve an amount of tokens spent by a third party",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In Foundry, `forge` uses which of the following?",
+      "options": [
+        {
+          "answer": "Node Packages"
+        },
+        {
+          "answer": "Node version manager"
+        },
+        {
+          "answer": "Yarn packages"
+        },
+        {
+          "answer": " Git Submodules",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Scripts in Foundry are written in:",
+      "options": [
+        {
+          "answer": "Typescript"
+        },
+        {
+          "answer": "Vyper"
+        },
+        {
+          "answer": "Solidity",
+          "correct": true
+        },
+        {
+          "answer": "JavaScript"
+        }
+      ]
+    },
+    {
+      "question": "What is the purpose of the `remappings.txt` in our project?",
+      "options": [
+        {
+          "answer": "Remap the project's dependencies"
+        },
+        {
+          "answer": "List excuses for missing deadlines"
+        },
+        {
+          "answer": "Specify the project's structure"
+        },
+        {
+          "answer": "Specify how OpenZeppelin imports are organized in the project.",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In the context of smart contract development, what does \"inheritance\" mean?",
+      "options": [
+        {
+          "answer": "Passing down digital assets to your descendants"
+        },
+        {
+          "answer": "Using someone else's contract with their permission"
+        },
+        {
+          "answer": "Extending the functionality of an existing contract",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In ERC-20 token context, which are correct about the `_mint` function?",
+      "options": [
+        {
+          "answer": "It creates new tokens through the proof-of-stake consensus mechanism"
+        },
+        {
+          "answer": "It creates new tokens and assigns them to the contract deployer",
+          "correct": true
+        },
+        {
+          "answer": "It maintains the token minting history for auditability"
+        },
+        {
+          "answer": "It adds tokens to the total supply, increasing the overall token amount",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What pattern does the tutorial use to limit access to the mint function?",
+      "options": [
+        {
+          "answer": "Singleton Pattern"
+        },
+        {
+          "answer": "Observer Pattern"
+        },
+        {
+          "answer": "Decorator Pattern"
+        },
+        {
+          "answer": "AccessControl Pattern",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is the purpose of the `bytes32 public constant MINTER_ROLE` variable in our token contract?",
+      "options": [
+        {
+          "answer": "It increases contract security",
+          "correct": true
+        },
+        {
+          "answer": "To fetch the total supply of tokens minted"
+        },
+        {
+          "answer": "It securely encodes the minter role",
+          "correct": true
+        },
+        {
+          "answer": "It allows burning tokens"
+        }
+      ]
+    },
+    {
+      "question": "What does the `onlyRole(MINTER_ROLE)` modifier in the `mint` function achieve?",
+      "options": [
+        {
+          "answer": "It allows any address to call the mint function"
+        },
+        {
+          "answer": "It sets the role of the address calling the mint function"
+        },
+        {
+          "answer": "It ensures that only addresses with the minter role can call the `mint()` function",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Why is the `.env` file in the deployment process so significant?",
+      "options": [
+        {
+          "answer": "It contains the contract code"
+        },
+        {
+          "answer": "It stores metadata about the contract"
+        },
+        {
+          "answer": "It holds secrets, especially the private key",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "How does the `--verify` modifier in the `forge create` command help us?",
+      "options": [
+        {
+          "answer": "It creates a detailed output of the deployment in our terminal",
+          "correct": true
+        },
+        {
+          "answer": "It enables optimisations in the Solidity compiler"
+        },
+        {
+          "answer": "It verifies the deployed contract on Etherscan",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Why do we strongly advise to use a separate wallet for the development process, and to never share your private key?",
+      "options": [
+        {
+          "answer": "Private keys are not important in development"
+        },
+        {
+          "answer": "Sharing private keys enhances security"
+        },
+        {
+          "answer": "Anyone with access to the private key can control your wallet",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "It’s not possible to super-creatively modify and personalise the contract code to make an Earth changing application.",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "Are you nuts? Let's get to it! :)",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}
