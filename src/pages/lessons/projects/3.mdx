@@ -91,14 +91,14 @@ tiered NFTs and uncover the unique superpowers they possess. By the end of this
 tutorial, you will have gained a wealth of knowledge and accomplished the
 following steps:
 
-- Set up a development environment
-- Write and deploy a Solidity smart contract
-- Create tiered NFTs with varying levels of rarity and attributes
-- Write a script for deployment
-- Explore additional functionalities and possibilities with tiered NFTs... in
+- Setting up a development environment
+- Writing and deploying a Solidity smart contract
+- Creating tiered NFTs with varying levels of rarity and attributes
+- Writing scripts for deployment
+- Exploring additional functionalities and possibilities with tiered NFTs... in
   the smart contract!
-- Securely manage sensitive environment variables
-- Showcase your tiered NFTs on a public marketplace
+- Securely managing sensitive environment variables
+- Showcasing your tiered NFTs on a public marketplace
 
 ### Developer tooling
 
@@ -244,8 +244,8 @@ contracts. We'll write our smart contract step by step in five stages:
 
 ### Add a Mint Function
 
-Let’s get started by inheriting OpenZeppelin's ERC721.sol like we did last time.
-We add a constructor to our contract, which will mirror the one from ERC721.sol.
+Let’s get started by inheriting OpenZeppelin's `ERC721` contract like we did last time.
+We add a constructor to our contract, which will mirror the one from `ERC721.sol`.
 
 {/* @wolovim optional line?: Unlike in our *Basic NFT* lesson, where we added a third parameter to the constructor for storing the token's baseURI, we will have a different approach this time, which we will come to later. */}
 
@@ -441,7 +441,7 @@ contract TierNFT is ERC721 {
 
 ### Create tokenURI function
 
-When we inherited OpenZeppelin's ERC721, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this ERC721 contract we have the ability to define **a base path** for creating a
+When we inherited OpenZeppelin's `ERC721`, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this `ERC721` contract we have the ability to define **a base path** for creating a
 unique URI which adds the token ID to the end of it.
 
 ```solidity
@@ -495,11 +495,11 @@ it into the contract! Nifty, eh?
 
 Let’s stop to break it down and examine it a little.
 
-- Within the `tokenURI` function, you'll notice `override`, an ERC721 function
+- Within the `tokenURI` function, you'll notice `override`, an `ERC721` function
   we'll use, since we are not creating a separate JSON file to store images or
   other services, but creating it right here in the contract.
-- We also added `require(_exists(tokenId). "Nonexistent token");` . According to
-  ERC721 specification, it is required to throw an error if the NFT doesn't
+- We also added `require(_exists(tokenId). "Nonexistent token");`. According to
+  the ERC-721 specification, it is required to throw an error if the NFT doesn't
   exist.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit
   later.
@@ -769,7 +769,7 @@ contract TierNFT is ERC721, Ownable {
 ```
 
 If your phone is ringing, or someone is knocking at your door right now, ignore
-all of it! Let’s get this withdraw function coded in here!!
+all of it! Let’s get this withdraw function coded in here!
 
 ```solidity
     // tokenURI function part of the code...
