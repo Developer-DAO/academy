@@ -1,0 +1,12 @@
+{
+  "question": "After running `forge build` on our coded contract for the first time, the compiler will compile:",
+  "options": [
+    {
+      "answer": "MyToken.sol"
+    },
+    {
+      "answer": "multiple files",
+      "correct": true
+    }
+  ]
+}

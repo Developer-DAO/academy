@@ -510,7 +510,7 @@ Let's break down our changes in the code:
 
 - Added an `import` before our contract definition
 - Inherited `AccessControl` in our contract definition
-- Created a `bytes32 public constant` variable for the minter role
+- Created a `bytes32 public constant` variable for the minter role. The irreversible `keccak256` hash ensures security and prevents unintended changes to the role. As a fixed-size of 32 bytes, it is efficiently storable, and will incur minimal gas consumption.
 - Inside our `constructor`:
   - Granted the `DEFAULT_ADMIN_ROLE` to the contract deployer to be able to grant
     roles to others. Our contract inherits this by default from Access Control as the starting point for all admin roles.
@@ -621,7 +621,7 @@ to ask our community for help by explaining your error, the console output and
 your configuration (OS, version, Foundry and Solidity version, etc.)
 
 
-{/* <SideDrawer
+<SideDrawer
   buttonText="Checkpoint Questions"
   title="Defining permissions for use of our contract"
 >
@@ -630,7 +630,7 @@ your configuration (OS, version, Foundry and Solidity version, etc.)
   <Question question="lesson-6/4-define-roles/Q3" />
   <Question question="lesson-6/4-define-roles/Q4" />
   <Question question="lesson-6/4-define-roles/Q5" />
-</SideDrawer> */}
+</SideDrawer>
 
 ### Register your house in the Real Estate Register
 
@@ -802,7 +802,7 @@ the tool tells us the address of the deployed contract:
 `0xec870005029ED5595F146f6AAAe699b442065b72`.
 
 
-{/* <SideDrawer
+<SideDrawer
   buttonText="Checkpoint Questions"
   title="Deploying with Foundry"
 >
@@ -811,7 +811,7 @@ the tool tells us the address of the deployed contract:
   <Question question="lesson-6/5-deployment/Q3" />
   <Question question="lesson-6/5-deployment/Q4" />
   <Question question="lesson-6/5-deployment/Q5" />
-</SideDrawer> */}
+</SideDrawer>
 
 ## Querying the Block Explorer
 
