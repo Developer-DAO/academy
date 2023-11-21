@@ -4,7 +4,13 @@ title: Your own Token with Foundry
 description:
   Create and deploy an ERC-20 Token (UNI, MKR, DAI, etc.) using the Foundry
   toolkit.
-icons: ["solidity", "foundry", "openzeppelin", "ethereum", "etherscan"]
+icons: [
+  "solidity", 
+  "foundry", 
+  "openzeppelin", 
+  "ethereum", 
+  "etherscan"
+  ]
 ---
 
 import Layout from "../../../components/Layout";
@@ -21,31 +27,34 @@ import { LessonHeader } from "../../../components/mdx/LessonHeader";
 
 ## About this lesson
 
-If you're eager to learn how to create your first ERC-20 token, you're in the right place. There are 
-a multitude of uses for the ERC-20, and we'll introduce you to some of them.
-We'll be building a smart contract with a range of developer tools, including the use of Foundry. 
-If you are new to coding, we suggest that you first complete our _Getting Started with Smart Contract
+If you're eager to learn how to create your first ERC-20 token, you're in the
+right place. There are a multitude of uses for the ERC-20, and we'll introduce
+you to some of them. We'll be building a smart contract with a range of
+developer tools, including the use of Foundry. If you are new to coding, we
+suggest that you first complete our _Getting Started with Smart Contract
 Development_ project, to get to grips with the basics of Solidity you'll need in
-this lesson. And then move on to *Build a Basic NFT* where you can get familiar with using an IDE,
-wallet, RPC, testnet and Etherscan, all of which you'll be using here to some degree. We also have a series of
-follow-up projects 'in the works' to follow on from this tutorial, but let's get our focus on this one first.
+this lesson. And then move on to _Build a Basic NFT_ where you can get familiar
+with using an IDE, wallet, RPC, testnet and Etherscan, all of which you'll be
+using here to some degree. We also have a series of follow-up projects 'in the
+works' to follow on from this tutorial, but let's get our focus on this one
+first.
 
-We'll have checkpoint questions at stages for testing your
-previous knowledge, predicting next steps in the lesson, and helping you see how you're 
-absorbing the new content. You can also expect a final quiz,
-so make sure you're checking out any additional material here for a deeper dive of the
-new concepts. To complete the lesson, expect somewhere between one and three
-hours, depending on your previous experience and the need to learn new ideas.
-Let's make learning enjoyable by taking care of our well-being. We have
-a **pomodoro timer** ⌛ for you in the menu header. Make use of it to take
-regular breaks, and please _do_ go outside and "touch grass." 😊 Nature is the
-source of much of our well-being. 🌱
+We'll have checkpoint questions at stages for testing your previous knowledge,
+predicting next steps in the lesson, and helping you see how you're absorbing
+the new content. You can also expect a final quiz, so make sure you're checking
+out any additional material here for a deeper dive of the new concepts. To
+complete the lesson, expect somewhere between one and three hours, depending on
+your previous experience and the need to learn new ideas. Let's make learning
+enjoyable by taking care of our well-being. We have a **pomodoro timer** ⌛ for
+you in the menu header. Make use of it to take regular breaks, and please _do_
+go outside and "touch grass." 😊 Nature is the source of much of our well-being.
+🌱
 
 ## What are we creating?
 
-By the end of this lesson you will have created your own ERC-20 token, and
-you will be able to change its properties in any way you need. 
-But before we go any further, let's check-in and see what building blocks you have already.
+By the end of this lesson you will have created your own ERC-20 token, and you
+will be able to change its properties in any way you need. But before we go any
+further, let's check-in and see what building blocks you have already.
 
 <SideDrawer
   buttonText="Warm-up Questions"
@@ -58,25 +67,31 @@ But before we go any further, let's check-in and see what building blocks you ha
   <Question question="lesson-6/1-intro/Q5" />
 </SideDrawer>
 
-We hope that was a little eye-opener for what's to come! 
-
-
+We hope that was a little eye-opener for what's to come!
 
 ### Tokens, crypto, coins, ERC-20. Is it all the same?
 
-Let's begin with some context, so we all speak the same language. The Ethereum blockchain, and most EVM-compatible blockchains, have a native token that is used to pay for transaction costs, and also to reward validators in
-Proof of Stake (previously miners in Proof of Work). In Ethereum that native
-token is Ether, or **ETH**, in Polygon its **POL**, and so on. But let's focus on the Ethereum blockchain for the sake of clarity.
+Let's begin with some context, so we all speak the same language. The Ethereum
+blockchain, and most EVM-compatible blockchains, have a native token that is
+used to pay for transaction costs, and also to reward validators in Proof of
+Stake (previously miners in Proof of Work). In Ethereum that native token is
+Ether, or **ETH**, in Polygon its **POL**, and so on. But let's focus on the
+Ethereum blockchain for the sake of clarity.
 
 Every _other_ token or 'crypto' you see, use or interact with on Ethereum is
 basically a smart contract that lets you send these tokens, receive them and
-check your balance. Stablecoins like **DAI**, Tether (**USDT**), USD Coin (**USDC**), or tokens from
-projects like Uniswap (**UNI**), MakerDAO (**MKR**), Basic Attention Token
-(**BAT**) are all smart contracts that follow a standard. The ERC-20 standard.
+check your balance. Stablecoins like **DAI**, Tether (**USDT**), USD Coin
+(**USDC**), or tokens from projects like Uniswap (**UNI**), MakerDAO (**MKR**),
+Basic Attention Token (**BAT**) are all smart contracts that follow a standard.
+The ERC-20 standard.
 
 ### Why would we want to create yet another Token?
 
-A lot of reasons, but here are some. The most fundamental one is that we are learning, and want to know how the ecosystem works. Or we have a project, or DAO that needs some means of governance, or a community that wants take some ownership, be part of, or simply support our project. Maybe we need a token with extra functionality that doesn't even exist yet. The possibilities are endless!
+A lot of reasons, but here are some. The most fundamental one is that we are
+learning, and want to know how the ecosystem works. Or we have a project, or DAO
+that needs some means of governance, or a community that wants take some
+ownership, be part of, or simply support our project. Maybe we need a token with
+extra functionality that doesn't even exist yet. The possibilities are endless!
 
 ### What do we need to do with our Tokens?
 
@@ -88,15 +103,15 @@ Some basic functionality that our tokens need to provide are:
 - Approve an amount of tokens from an account to be spent by a third-party
   account
 
-
-Has someone created a battle-tested library for the standard? Yes. OpenZeppelin, among others, has created an implementation we can inherit to create our own tokens easily. Here is a quick overview of what a contract needs in order to be called an ERC-20 Token
-contract:
+Has someone created a battle-tested library for the standard? Yes. OpenZeppelin,
+among others, has created an implementation we can inherit to create our own
+tokens easily. Here is a quick overview of what a contract needs in order to be
+called an ERC-20 Token contract:
 
 <SideDrawer buttonText="More info on the ERC-20 Standard">
 
-To achive the functionality needed for an ERC-20 token, the standard requires us
-to implement 9 methods and 2 events.
-
+To achieve the functionality needed for an ERC-20 token, the standard requires
+us to implement some methods and events.
 
 ```solidity
 // Methods:
@@ -123,7 +138,9 @@ You can check the details in the full EIP-20 titled
 ## Let's code, but first...
 
 Before we start hacking away without any structure to follow, what is our actual
-project's structure, and what do we want to achieve? Since we are _BUIDLING_, I'd like to think of our project, or smart contract, roughly the same way as we would build a house:
+project's structure, and what do we want to achieve? Since we are _BUIDLING_,
+I'd like to think of our project, or smart contract, roughly the same way as we
+would build a house:
 
     * 1 - Foundations
     * 2 - Structure: Framing, Walls and Roof
@@ -132,8 +149,8 @@ project's structure, and what do we want to achieve? Since we are _BUIDLING_, I'
     * 5 - Final touches
 
 Before we build, we need a stable, levelled surface to place our foundations so
-we can build on top. The tools for coding and the project's file/folder structure will be our
-foundations.
+we can build on top. The tools for coding and the project's file/folder
+structure will be our foundations.
 
 ## Setting up Foundations
 
@@ -146,18 +163,18 @@ mkdir d_d_academy
 cd d_d_academy
 ```
 
-You can use whatever tools you feel confident with, or accustomed to. For this example
-we will be creating a Foundry project, but feel free to use Hardhat, or Truffle
-if that's your favourite flavor. The main focus of Foundry is that you don't
-need to use Javascript at all, if you don't want to. All the tools are CLI
+You can use whatever tools you feel confident with, or accustomed to. For this
+example we will be creating a Foundry project, but feel free to use Hardhat, or
+Truffle if that's your favourite flavor. The main focus of Foundry is that you
+don't need to use Javascript at all, if you don't want to. All the tools are CLI
 commands. For tests and scripts, you only need Solidity!
 
 ![foundry-banner.png](/assets/lessons/6/foundry-banner.png)
 
 These instructions are for Linux and MacOS. If you use Windows, we **strongly**
-recommend using WSL (Windows Subsystem for Linux), or else you'll need to
-build the tools from source. Using WSL is an investment in the long term anyway,
-since most development and Open Source work is done inside Unix environments. We
+recommend using WSL (Windows Subsystem for Linux), or else you'll need to build
+the tools from source. Using WSL is an investment in the long term anyway, since
+most development and Open Source work is done inside Unix environments. We
 encourage you to try it. There is also a Docker container if you prefer it. All
 options are detailed in the
 [Foundry Book](https://book.getfoundry.sh/getting-started/installation)
@@ -168,11 +185,12 @@ To download Foundry, we need to run this command on the console:
 curl -L https://foundry.paradigm.xyz | bash
 ```
 
-This will download and install the `foundryup` tool. It will also update
-the $PATH environment variable inside your shell's config file. Please read the
-output from this command to see if it detected your shell properly e.g. Bash, zsh,
-fish... and follow the instructions to refresh your environment, or just close
-the terminal and open a new one to be sure the environment has been updated.
+This will download and install the `foundryup` tool. It will also update the
+$PATH environment variable inside your shell's config file. Please read the
+output from this command to see if it detected your shell properly e.g. Bash,
+zsh, fish... and follow the instructions to refresh your environment, or just
+close the terminal and open a new one to be sure the environment has been
+updated.
 
 Now let's run this tool to install the Foundry toolkit:
 
@@ -180,8 +198,8 @@ Now let's run this tool to install the Foundry toolkit:
 foundryup
 ```
 
-If everything goes well, you'll have four tools to run in the console:
-`forge`, `cast`, `anvil` & `chisel`. Basic overview of each tool:
+If everything goes well, you'll have four tools to run in the console: `forge`,
+`cast`, `anvil` & `chisel`. Basic overview of each tool:
 
 - `forge` tests, builds and deploys your smart contracts
 - `cast` can make smart contract calls, send transactions, or retrieve any type
@@ -223,13 +241,13 @@ The folders in our project are used like this:
 
 - `lib` dependencies: forge uses Git Submodules instead of Node Packages. This
   means it works with any GitHub repository that contains smart contracts.
-- `script` scripts: automate transactions or deployment of our smart contracts. 
-Scripts are written in solidity!
+- `script` scripts: automate transactions or deployment of our smart contracts.
+  Scripts are written in solidity!
 - `src` source: where our smart contract code will live
 - `test` tests: write tests for our smart contracts also in Solidity!
 
-The default project includes a basic smart contract. We can build it to see how the
-`forge` commands work:
+The default project includes a basic smart contract. We can build it to see how
+the `forge` commands work:
 
 ```bash
 forge build
@@ -260,7 +278,7 @@ Running 2 tests for test/Counter.t.sol:CounterTest
 [PASS] testFuzz_SetNumber(uint256) (runs: 256, μ: 27631, ~: 28409)
 [PASS] test_Increment() (gas: 28379)
 Test result: ok. 2 passed; 0 failed; 0 skipped; finished in 27.32ms
- 
+
 Ran 1 test suites: 2 tests passed, 0 failed, 0 skipped (2 total tests)
 ```
 
@@ -314,7 +332,6 @@ rm test/*
   <Question question="lesson-6/2-foundry/Q5" />
 </SideDrawer>
 
-
 Everything's ready, so let's go ahead and start coding Solidity.
 
 ## Create the Framing and Walls
@@ -329,7 +346,7 @@ challenge to do it, and later compare your code to battle-tested code like
 OpenZeppelin's implemetation.
 
 In this lesson we'll start by inheriting OZ's, and then choose the specifics
-that *our* token needs.
+that _our_ token needs.
 
 Let's start by creating a `MyToken.sol` file inside the `src/` folder with the
 basics:
@@ -356,8 +373,8 @@ contract MyToken is ERC20 {
 
 Now that we have the full implementation inherited, we still have to specify a
 few more things before compiling, because the ERC-20 constructor **needs** to
-receive 2 parameters, i.e. the token's name and symbol, or it will raise an error. In
-order to do that, we define our constructor and call our inherited
+receive 2 parameters, i.e. the token's name and symbol, or it will raise an
+error. In order to do that, we define our constructor and call our inherited
 contract's constructor:
 
 ```solidity
@@ -374,12 +391,13 @@ contract MyToken is ERC20 {
 With those few lines, we inherit all the functions and events we need.
 
 One final consideration is adding a roof above ourselves, to be able to live in
-and finish the structure around us. We have all the rooms and functions we needed, but no tokens exist yet. What
-good is a house with no roof, or a token with no supply? We can think of the initial allocation of tokens
-as the way to put a roof on the house and finish the structure. If you choose
-not to have an initial allocation, that's also valid and can skip this, but for
-our example we'll allocate an arbitrary amount of tokens to the deployer of the
-contract on our constructor:
+and finish the structure around us. We have all the rooms and functions we
+needed, but no tokens exist yet. What good is a house with no roof, or a token
+with no supply? We can think of the initial allocation of tokens as the way to
+put a roof on the house and finish the structure. If you choose not to have an
+initial allocation, that's also valid and can skip this, but for our example
+we'll allocate an arbitrary amount of tokens to the deployer of the contract on
+our constructor:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -400,7 +418,7 @@ them to the `msg.sender`'s balance.
 ## Opening Doors to our house
 
 We now have a full structure, with a roof to shelter us from the weather. The
-only problem is that we didn't create any openings for anyone to enter or leave. 
+only problem is that we didn't create any openings for anyone to enter or leave.
 We can think of entering the house as `minting` new tokens or increasing the
 total supply, and leaving the house as `burning` tokens or decreasing the total
 supply. But these doors don't exist in our contract just yet.
@@ -438,18 +456,17 @@ contract MyToken is ERC20 {
 ```
 
 When we define our `mint` function, we decide who will be the receiver of said
-new tokens. For the `burn` function on the other hand, we are only letting holders burn
-their **own** tokens by using `msg.sender` as the address to call the internal
-`_burn` function in the OpenZeppelin ERC-20 implementation.
+new tokens. For the `burn` function on the other hand, we are only letting
+holders burn their **own** tokens by using `msg.sender` as the address to call
+the internal `_burn` function in the OpenZeppelin ERC-20 implementation.
 
-In a special case where someone approves operating on an amount of *their* tokens,
-we create a `burnFrom` function to be able to burn within that approved
+In a special case where someone approves operating on an amount of _their_
+tokens, we create a `burnFrom` function to be able to burn within that approved
 allowance from the other address. If we try to burn, or transfer, more than the
-approved allowance, the ERC-20 implementation from OZ will revert the transaction
-because that's required by the ERC-20 standard.
+approved allowance, the ERC-20 implementation from OZ will revert the
+transaction because that's required by the ERC-20 standard.
 
 We have now created doors to our house, but we haven't put locks in them!
-
 
 <SideDrawer
   buttonText="Checkpoint Questions"
@@ -462,20 +479,19 @@ We have now created doors to our house, but we haven't put locks in them!
   <Question question="lesson-6/3-create-contract/Q5" />
 </SideDrawer>
 
-
 ## Lock the Door!
 
 In our present state, our functions for minting and burning can be called by any
-address. That's ok for `burn` since people can only burn their own tokens, or their
-approved allowances. But we don't want just anyone to `mint` tokens and increase the
-total supply of our new token.
+address. That's ok for `burn` since people can only burn their own tokens, or
+their approved allowances. But we don't want just anyone to `mint` tokens and
+increase the total supply of our new token.
 
-To be able to limit the access to minting tokens, we are going to use an OpenZeppelin pattern
-called AccessControl to give granular access to functionality
-within our code. For that we will inherit yet another great contract from the OZ
-library. It basically lets us define **roles** and assign or un-assign them to any address we
-need. In our case, we will only create a `MINTER_ROLE` to allow access to our `mint`
-function:
+To be able to limit the access to minting tokens, we are going to use an
+OpenZeppelin pattern called AccessControl to give granular access to
+functionality within our code. For that we will inherit yet another great
+contract from the OZ library. It basically lets us define **roles** and assign
+or un-assign them to any address we need. In our case, we will only create a
+`MINTER_ROLE` to allow access to our `mint` function:
 
 ```solidity
 
@@ -510,21 +526,25 @@ Let's break down our changes in the code:
 
 - Added an `import` before our contract definition
 - Inherited `AccessControl` in our contract definition
-- Created a `bytes32 public constant` variable for the minter role. The irreversible `keccak256` hash ensures security and prevents unintended changes to the role. As a fixed-size of 32 bytes, it is efficiently storable, and will incur minimal gas consumption.
+- Created a `bytes32 public constant` variable for the minter role. The
+  irreversible `keccak256` hash ensures security and prevents unintended changes
+  to the role. As a fixed-size of 32 bytes, it is efficiently storable, and will
+  incur minimal gas consumption.
 - Inside our `constructor`:
-  - Granted the `DEFAULT_ADMIN_ROLE` to the contract deployer to be able to grant
-    roles to others. Our contract inherits this by default from Access Control as the starting point for all admin roles.
+  - Granted the `DEFAULT_ADMIN_ROLE` to the contract deployer to be able to
+    grant roles to others. Our contract inherits this by default from Access
+    Control as the starting point for all admin roles.
   - Granted the `MINTER_ROLE` to contract deployer to be able to mint tokens
 - Added the modifier `onlyRole(MINTER_ROLE)` to the `mint` function to restrict
   its access
 
 So, we basically imported `AccessControl` and inherited it to gain all its
-functionality. We gave 'minter' and 'admin' roles to the address that will deploy
-the contract, and then restricted access to our `mint` function.
+functionality. We gave 'minter' and 'admin' roles to the address that will
+deploy the contract, and then restricted access to our `mint` function.
 
 Now any address that doesn't have the `MINTER_ROLE` granted, will revert on any
-transaction that calls our `mint` function. Hooray! Our door is now locked, but only for intruders!
-
+transaction that calls our `mint` function. Hooray! Our door is now locked, but
+only for intruders!
 
 ## Final Touches and details
 
@@ -620,7 +640,6 @@ can find and fix them. If you can't fix them, you can go into our forum and try
 to ask our community for help by explaining your error, the console output and
 your configuration (OS, version, Foundry and Solidity version, etc.)
 
-
 <SideDrawer
   buttonText="Checkpoint Questions"
   title="Defining permissions for use of our contract"
@@ -653,10 +672,12 @@ more if you search for Sepolia Faucet in any search engine.
 We are going to create an `.env` file, where we will store our _secrets_. And
 when we say _secrets_, we are specially referring to the private key to your
 wallet. Never, ever share this with anyone, not even us. Anyone who gets hold of
-your keys, can drain your wallet. This is why we strongly advise using a separate browser profile, and most definitely a separate wallet for your development activities,
-that should not hold anything with real value in it. It wouldn't be the first time,
-even for experienced developers, to accidentally upload the `.env` file to
-GitHub, and once it's on the internet we can consider it to be, yes, public.
+your keys, can drain your wallet. This is why we strongly advise using a
+separate browser profile, and most definitely a separate wallet for your
+development activities, that should not hold anything with real value in it. It
+wouldn't be the first time, even for experienced developers, to accidentally
+upload the `.env` file to GitHub, and once it's on the internet we can consider
+it to be, yes, public.
 
 So, with that important notice out of the way, we create a new file in our
 project's root folder called `.env` and fill it with this:
@@ -690,20 +711,20 @@ Once we have these values inside the file, we can source it to have the values
 as enviroment variables before using Foundry's deploy tools.
 
 There are many ways to load these values into environment variables, depending
-on which shell you use e.g. Bash, zsh, fish... The next command works with most of
-bash-compatible shells:
+on which shell you use e.g. Bash, zsh, fish... The next command works with most
+of bash-compatible shells:
 
 ```bash
 export $(grep -v '^#' .env | xargs)
 ```
 
-If you are using Fish or another shell, you can search on how to create a function
-that does the same. Tip:
+If you are using Fish or another shell, you can search on how to create a
+function that does the same. Tip:
 [envsource fish function](https://gist.github.com/nikoheikkila/dd4357a178c8679411566ba2ca280fcc).
 
 Once we have those values in our environment, our Foundry tool to deploy will
-know which wallet to deploy from, node or RPC in the blockchain to connect
-to, and chain we want to deploy to.
+know which wallet to deploy from, node or RPC in the blockchain to connect to,
+and chain we want to deploy to.
 
 <Callout emoji='💡' size='md' variant='info'>
 
@@ -735,12 +756,12 @@ use the `forge create` tool.
 
 We don't **have** to copy our private key in the command! That's one of the
 reasons to use the `.env` file - we know exactly where our private key is and we
-are responsible to **not** publish this file anywhere. 
+are responsible to **not** publish this file anywhere.
 
-We can even delete the private key **after**
-we deploy the contract. If you write your private key in a command on the
-terminal, it gets stored in the terminal's history, which could be in a publicly
-accesible file in your computer. That's why we are using an `.env` file.
+We can even delete the private key **after** we deploy the contract. If you
+write your private key in a command on the terminal, it gets stored in the
+terminal's history, which could be in a publicly accesible file in your
+computer. That's why we are using an `.env` file.
 
 </Callout>
 
@@ -765,8 +786,8 @@ Do you see how we used the value that `cast` gave us as a parameter after the
 constructor right from our command-line! How cool is that?
 
 We also used `--verify` to let the tool know we want to verify our contract in
-Etherscan. If you didn't fill your Etherscan API KEY, don't use this modifier, or
-the tool will return an error when trying to verify.
+Etherscan. If you didn't fill your Etherscan API KEY, don't use this modifier,
+or the tool will return an error when trying to verify.
 
 This is the output I got:
 
@@ -794,18 +815,15 @@ Response: `OK`
 Details: `Pass - Verified`
 Contract successfully verified
 ```
-If by chance you get a message saying Etherscan hasn't detected or verified the deployment, 
-try running the command again.  
 
-By filtering through the information, we can pay attention to the second line, where 
-the tool tells us the address of the deployed contract:
+If by chance you get a message saying Etherscan hasn't detected or verified the
+deployment, try running the command again.
+
+By filtering through the information, we can pay attention to the second line,
+where the tool tells us the address of the deployed contract:
 `0xec870005029ED5595F146f6AAAe699b442065b72`.
 
-
-<SideDrawer
-  buttonText="Checkpoint Questions"
-  title="Deploying with Foundry"
->
+<SideDrawer buttonText="Checkpoint Questions" title="Deploying with Foundry">
   <Question question="lesson-6/5-deployment/Q1" />
   <Question question="lesson-6/5-deployment/Q2" />
   <Question question="lesson-6/5-deployment/Q3" />
@@ -833,36 +851,63 @@ me:
 
 ![ERC20-verified](/assets/lessons/6/ERC20-verified.png)
 
-Etherscan also gives you a front-end to easily interact with the contract. Inside
-our contract tab, you get 3 tabs: *Code*, *Read Contract* and *Write Contract*.
+Etherscan also gives you a front-end to easily interact with the contract.
+Inside our contract tab, you get 3 tabs: _Code_, _Read Contract_ and _Write
+Contract_.
 
-We can go and check for our balance by clicking in the *Read Contract* tab, and then
-searching for the `balanceOf` function:
+We can go and check for our balance by clicking in the _Read Contract_ tab, and
+then searching for the `balanceOf` function:
 
 ![ERC20-balanceOf](/assets/lessons/6/ERC20-balanceOf.png)
 
 Copy and paste your wallet's address - the one you used to deploy the contract,
-and click *Query*. You should have as many wei as you passed to the constructor
+and click _Query_. You should have as many wei as you passed to the constructor
 when deploying. In my case it was 1000000000000000000000 wei and since we left
 our decimals in 18, that would be exactly 1000 MTK.
 
 ![ERC20-1000MTK](/assets/lessons/6/ERC20-1000MTK.png)
 
-
-## Invite your frens!
+### Invite your frens!
 
 That's it! We deployed our contract on the Sepolia testnet, and our token should
-be live and kicking.
+be live and kicking. Now that we have built our house and it's has been accepted
+in the real estate register, we can invite our friends by transferring them some
+MTK, or maybe minting them some tokens, **even** if that affects your tokenomics
+😉
 
-Now that we have built our house and it's has been accepted in the real estate
-register, we can invite our friends by transferring them some MTK, or **even**
-minting them some tokens, **even** if that affects your tokenomics 😉
+### Consolidation
+
+Let's take one more moment to consolidate the steps you've just mastered:
+
+- You tested some of Foundry's amazing capabilities.
+- Set up your foundations and created a project using Foundry tools.
+- Built your own customisable contract utilising the power of `forge` for
+  effortless compilation.
+- Integrated OpenZeppelin, leveraging their ERC-20 and AccessControl
+  implementations for enhanced functionality and security.
+- Successfully configured your contract for deployment on the Sepolia testnet. 
+
+All in all, a very significant accomplishment!
 
 <br />
-<br />
+
 <QuizStatusChecker quiz="quiz-lesson-6" />
 <br />
-<br />
+
+## Next steps?
+
+So where do you go from here? In the future, we'll be adding to this ERC-20
+series of lessons. But for now, why not explore _A Developer's Guide to
+Ethereum_ three part track throught the lens of Python? Or complete the NFT
+track, all the way from the back-end to creating your own front-end, building
+your own Test Driven Development suite along the way. And of course, we have lots of other
+goodies in the pipeline to get your developer juices flowing.
+
+And make sure to check into the
+[Developer_DAO](https://handbook.developerdao.com/) community for our newsletter, workshops,
+DevNtells, hackathons, VIBES and many more initiatives that are going to enhance your
+developer journey in creating a better planet Earth with us 🌎🌤️💦🌈🌊
+
 
 import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
 
