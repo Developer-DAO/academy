@@ -1,0 +1,17 @@
+{
+  "question": "What are some common use cases for creating ERC-20 tokens?",
+  "options": [
+    {
+      "answer": "Supporting a project",
+      "correct": true
+    },
+    {
+      "answer": "Governance for DAOs",
+      "correct": true
+    },
+    {
+      "answer": "Learning and experimentation",
+      "correct": true
+    }
+  ]
+}

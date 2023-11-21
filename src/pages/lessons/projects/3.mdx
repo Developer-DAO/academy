@@ -91,13 +91,13 @@ tiered NFTs and uncover the unique superpowers they possess. By the end of this
 tutorial, you will have gained a wealth of knowledge and accomplished the
 following steps:
 
-- Setting up the development environment
+- Setting up a development environment
 - Writing and deploying a Solidity smart contract
 - Creating tiered NFTs with varying levels of rarity and attributes
-- Write scripts for deployment
-- Exploring additional functionalities and possibilities with tiered NFTs ... in
+- Writing scripts for deployment
+- Exploring additional functionalities and possibilities with tiered NFTs... in
   the smart contract!
-- Securely manage sensitive environment variables
+- Securely managing sensitive environment variables
 - Showcasing your tiered NFTs on a public marketplace
 
 ### Developer tooling
@@ -111,7 +111,7 @@ These tools include:
 - optional decentralized storage accounts
 - a web3 wallet for testing
 - some test MATIC
-- an API key from an RPC provider.
+- an API key from an RPC provider
 
 We will guide you through each step, ensuring a fun and comprehensive learning
 experience. Let's get started on this exciting journey into the world of tiered
@@ -126,8 +126,8 @@ as our package manager, we'll create a Hardhat project and remove the default
 files we don't need.
 
 Let’s first open a console and `cd` into our `d_d_academy` folder, or create it
-first if you haven't already. Then create a folder for our TierNFT project and
-make sure to `cd` into it too:
+first if you haven't already. Then create a folder for our TierNFT project, then
+`cd` into it:
 
 ```bash
 ## (OPTIONAL) create a folder for our D_D Academy projects
@@ -149,14 +149,14 @@ npx hardhat
 ```
 
 <Callout emoji="💡" size="md" variant="info">
-  The `--save-dev` flag used in the last command, lets the project know it's a
-  development dependency (not needed in production). You can view what
+  The `--save-dev` flag used in the last command lets the project know it's a
+  development dependency, i.e., not needed in production. You can view what
   dependencies are needed in the `package.json` file in the root of the project.
 </Callout>
 
 Choose `Create a Javascript project` and hardhat will create an example project
-for us. It will give us 3 prompts for options. Choosing the defaults is ok for
-us. Here's what mine asked me:
+for us. It will give us 3 prompts for options. The default options are okay for
+our purposes. Here are the prompts at the time of writing:
 
 ```less
 ✔ What do you want to do? · Create a JavaScript project
@@ -184,6 +184,7 @@ npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox
 ```
 
 </Callout>
+
 In a Hardhat project, some of the default folders are:
 
 - `contracts/` where the source files for your contracts should be.
@@ -205,11 +206,11 @@ We now need to add our last dependency. The OpenZeppelin contracts:
 npm install @openzeppelin/contracts
 ```
 
-<Callout emoji="💡" size="md" variant="info">
-  Open Zeppelin developed a lot of standard contracts that are super powerful,
-  widely used and fully tested and audited.
-</Callout>
-<SideDrawer buttonText="More on Open Zeppelin">
+OpenZeppelin is best known for implementing freely available contracts for
+various standards. They are powerful and widely used building blocks for Solidity
+developers, and come fully tested and audited.
+
+<SideDrawer buttonText="More on OpenZeppelin">
   <OpenZeppelin />
 </SideDrawer>
 
@@ -243,8 +244,8 @@ contracts. We'll write our smart contract step by step in five stages:
 
 ### Add a Mint Function
 
-Let’s get started by inheriting OpenZeppelin's ERC721.sol like we did last time.
-We add a constructor to our contract, which will mirror the one from ERC721.sol.
+Let’s get started by inheriting OpenZeppelin's `ERC721` contract like we did last time.
+We add a constructor to our contract, which will mirror the one from `ERC721.sol`.
 
 {/* @wolovim optional line?: Unlike in our *Basic NFT* lesson, where we added a third parameter to the constructor for storing the token's baseURI, we will have a different approach this time, which we will come to later. */}
 
@@ -440,7 +441,7 @@ contract TierNFT is ERC721 {
 
 ### Create tokenURI function
 
-When we inherited Open Zeppelin's ERC721, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this ERC721 contract we have the ability to define **a base path** for creating a
+When we inherited OpenZeppelin's `ERC721`, it gave us a function for `tokenURI` where we can store an image, a video, or much more. With the help of this `ERC721` contract we have the ability to define **a base path** for creating a
 unique URI which adds the token ID to the end of it.
 
 ```solidity
@@ -494,11 +495,11 @@ it into the contract! Nifty, eh?
 
 Let’s stop to break it down and examine it a little.
 
-- Within the `tokenURI` function, you'll notice `override`, an ERC721 function
+- Within the `tokenURI` function, you'll notice `override`, an `ERC721` function
   we'll use, since we are not creating a separate JSON file to store images or
   other services, but creating it right here in the contract.
-- We also added `require(_exists(tokenId). "Nonexistent token");` . According to
-  ERC721 specification, it is required to throw an error if the NFT doesn't
+- We also added `require(_exists(tokenId). "Nonexistent token");`. According to
+  the ERC-721 specification, it is required to throw an error if the NFT doesn't
   exist.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit
   later.
@@ -755,7 +756,7 @@ We need to find a way to actually withdraw any funds our contract generates, oth
 import "@openzeppelin/contracts/access/Ownable.sol";
 ````
 
-And inherit `Ownable` from the Open Zeppelin contract into our own.
+And inherit `Ownable` from the OpenZeppelin contract into our own.
 
 ```solidity
 // Modify the contract definition, by adding 'Ownable' at the end of the line:
@@ -768,7 +769,7 @@ contract TierNFT is ERC721, Ownable {
 ```
 
 If your phone is ringing, or someone is knocking at your door right now, ignore
-all of it! Let’s get this withdraw function coded in here!!
+all of it! Let’s get this withdraw function coded in here!
 
 ```solidity
     // tokenURI function part of the code...

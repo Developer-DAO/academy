@@ -1,0 +1,18 @@
+{
+  "question": "What does ERC stand for in the context of Ethereum tokens?",
+  "options": [
+    {
+      "answer": "Ethereum Record of Contracts"
+    },
+    {
+      "answer": "Ethereum Regulated Code"
+    },
+    {
+      "answer": "Ethereum Readable Contract"
+    },
+    {
+      "answer": "Ethereum Request for Comments",
+      "correct": true
+    }
+  ]
+}

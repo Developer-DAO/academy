@@ -2,17 +2,17 @@
   "question": "What does the term 'gas' refer to in the context of Ethereum?",
   "options": [
     {
-      "answer": "Digital currency used for transactions."
+      "answer": "Digital currency used for transactions"
     },
     {
-      "answer": "Unit of measure for computational effort.",
+      "answer": "Unit of measure for computational effort",
       "correct": true
     },
     {
-      "answer": "A poisonous fossil fuel."
+      "answer": "A poisonous fossil fuel"
     },
     {
-      "answer": "Encryption algorithm used in smart contracts."
+      "answer": "Encryption algorithm used in smart contracts"
     }
   ]
 }

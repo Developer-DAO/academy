@@ -1,0 +1,15 @@
+{
+  "question": "Which library is often used to create ERC-20 tokens easily?",
+  "options": [
+    {
+      "answer": "OpenAI"
+    },
+    {
+      "answer": "OpenZeppelin",
+      "correct": true
+    },
+    {
+      "answer": "Solidity Standard"
+    }
+  ]
+}
