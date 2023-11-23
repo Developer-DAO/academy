@@ -1,0 +1,12 @@
+{
+  "question": "We created an `address` variable to store our `MINTER_ROLE`.",
+  "options": [
+    {
+      "answer": "False",
+      "correct": true
+    },
+    {
+      "answer": "True"
+    }
+  ]
+}

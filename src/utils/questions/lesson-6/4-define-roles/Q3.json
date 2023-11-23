@@ -1,0 +1,18 @@
+{
+  "question": "What happens if an address without the `MINTER_ROLE` tries to call the `mint()` function?",
+  "options": [
+    {
+      "answer": "The function will execute without any issue"
+    },
+    {
+      "answer": "The contract will self-destruct"
+    },
+    {
+      "answer": "The contract will mint tokens to that address"
+    },
+    {
+      "answer": "The transaction will revert, and the function will not execute",
+      "correct": true
+    }
+  ]
+}

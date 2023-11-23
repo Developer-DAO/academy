@@ -1,0 +1,18 @@
+{
+  "question": "What role does the `--constructor-args` modifier play in the `forge create` command during contract deployment?",
+  "options": [
+    {
+      "answer": "Lets you set the gas limit as low as you want for deployment"
+    },
+    {
+      "answer": "Defines the number of tokens to be minted to a secret wallet address of yours"
+    },
+    {
+      "answer": "Specifies your deployment address for a lifetime of web3 streaming of your favoutite metal bands"
+    },
+    {
+      "answer": "Ever seen a contract without arguments? Neither have we. This is the VIP pass for your contract constructor at the deployment party!",
+      "correct": true
+    }
+  ]
+}

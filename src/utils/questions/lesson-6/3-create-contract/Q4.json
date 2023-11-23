@@ -1,0 +1,15 @@
+{
+  "question": "Which ‘visibility’ are we defining our `mint()` and `burn()` functions with? ",
+  "options": [
+    {
+      "answer": "`private`"
+    },
+    {
+      "answer": "`internal`"
+    },
+    {
+      "answer": "`public`",
+      "correct": true
+    }
+  ]
+}

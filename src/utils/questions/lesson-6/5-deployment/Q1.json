@@ -1,0 +1,15 @@
+{
+  "question": "What is the purpose of the `cast` command?",
+  "options": [
+    {
+      "answer": "To deploy the contract"
+    },
+    {
+      "answer": "To audition for a web3 AMA"
+    },
+    {
+      "answer": "To convert values to wei",
+      "correct": true
+    }
+  ]
+}

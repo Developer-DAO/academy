@@ -1,0 +1,18 @@
+{
+  "question": "How can you create a project named `my_token` using Foundry?",
+  "options": [
+    {
+      "answer": "`foundry create my_token`"
+    },
+    {
+      "answer": "`forge init my_token`",
+      "correct": true
+    },
+    {
+      "answer": "Write `my_token` in Solidity runes"
+    },
+    {
+      "answer": "`forge create my_token`"
+    }
+  ]
+}

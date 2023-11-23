@@ -1,0 +1,15 @@
+{
+  "question": "Coming up, we have a second import, AccessControl.sol. How will we inherit it correctly in the contract definition?",
+  "options": [
+    {
+      "answer": "`contract AccessControl is ERC20, MyToken`"
+    },
+    {
+      "answer": "`contract MyToken is AccessControl, ERC20`"
+    },
+    {
+      "answer": "`contract MyToken is ERC20, AccessControl`",
+      "correct": true
+    }
+  ]
+}
