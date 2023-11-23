@@ -21,7 +21,7 @@ have at least a fuzzy idea of how to answer these questions:
 - What makes Ethereum decentralized?
 - What is ether and why is it a necessary component of the network?
 
-In this post, we’ll build on these concepts and explore some of the implications
+In this lesson, we’ll build on these concepts and explore some of the implications
 for developers, so return to Part 1 if you skipped it or need a refresher.
 
 ## What’s next? 
@@ -34,7 +34,7 @@ We’re going to take a deeper look at how you can interact with the Ethereum ne
 
 ## Web2 vs. Web3
 
-It’s hard not to collect accounts in today’s web. You have one for each social media app, news site, delivery service, retailer, and airline — to name a few. Each of these accounts lives on the company's servers, which makes you subject to their terms and conditions, privacy policy, and security practices. Your account can be frozen, deleted, censored, or altered at the discretion of the host company.
+It’s hard not to collect accounts in today’s web. You have one for each social media app, news site, delivery service, retailer, and transit provider — to name a few. Each of these accounts lives on the company's servers, which makes you subject to their terms and conditions, privacy policy, and security practices. Your account can be frozen, deleted, censored, or altered at the discretion of the host company.
 
 Web3 represents a paradigm shift for account management: you and you alone own your Ethereum accounts. When you create an account, it’s done outside of the scope of any company and can travel with you to multiple apps. In fact, creating an Ethereum account doesn’t require interaction with the Ethereum blockchain at all. Let’s create one now to prove it.
 
@@ -89,10 +89,6 @@ Out[5]: HexBytes('0x7aca78f5e54...')
 That's all there is to it! There's no registration process and no round-trip to the blockchain or any server. In fact, you can disconnect from the Internet altogether and still create a valid Ethereum account.
 
 In the code above, you'll find two components of an account: a public address and a private key. Put simply, a **private key** is the password for an account. A **public address** is a shareable account number derived from the private key. As seen in the code sample, both are typically represented as hexadecimal numbers.
-
-<Callout emoji="💡" size="md" variant="info">
-**Note**: Conveniently, Ethereum users and app developers don't have to understand exactly how the the account generation process works, but if you're interested in a very deep dive, see my previous posts: Ethereum 201: Mnemonics and Ethereum 201: HD Wallets.
-</Callout>
 
 ## Using an account
 
@@ -175,7 +171,7 @@ Finally, a "raw" transaction is just the transaction data and signature represen
 
 ### Deploying smart contracts
 
-A full introduction to smart contracts will be covered in a separate blog post, but this is a good opportunity for a sneak peak; interacting with smart contracts looks very similar to a standard transaction.
+A full introduction to smart contracts will be covered in the next lesson, but this is a good opportunity for a sneak peak; interacting with smart contracts looks very similar to a standard transaction.
 
 Briefly, **smart contracts** are programs that live on the Ethereum blockchain, available for anyone to use. When you're ready to deploy a smart contract, you compile the code down to bytecode and include it in a transaction as a `data` value:
 
@@ -244,7 +240,7 @@ So, we can create Ethereum accounts with surprising ease: offline and separate f
 
 ### Permanent passwords
 
-A harsh reality of this world is that there are no password recovery services for basic account types. If you lose your private key and recovery phrase, you can kiss that account goodbye. Such is the double-edged sword of true ownership. App developers have an ethical obligation to onboard and educate Ethereum newcomers on this reality. (Note: social recovery wallets may improve this user experience and "account abstraction" is one related research effort – topics for another blog post.)
+A harsh reality of this world is that there are no password recovery services for basic account types. If you lose your private key and recovery phrase, you can kiss that account goodbye. Such is the double-edged sword of true ownership. App developers have an ethical obligation to onboard and educate Ethereum newcomers on this reality. (Note: social recovery wallets may improve this user experience and "account abstraction" is one related research effort – topics for another lesson.)
 
 ### Onboarding challenges
 
