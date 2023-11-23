@@ -1,0 +1,18 @@
+{
+  "question": "In the constructor, which role is granted to give the contract deployer operational control?",
+  "options": [
+    {
+      "answer": "`DEPLOYER_ROLE`"
+    },
+    {
+      "answer": "`DEFAULT_ADMIN_ROLE`",
+      "correct": true
+    },
+    {
+      "answer": "`TOKEN_ADMIN_ROLE`"
+    },
+    {
+      "answer": "`CONTRACT_OWNER_ADMIN`"
+    }
+  ]
+}

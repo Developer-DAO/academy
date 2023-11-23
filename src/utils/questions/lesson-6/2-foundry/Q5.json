@@ -1,0 +1,15 @@
+{
+  "question": "Why is the OpenZeppelin library installed as a dependency in the tutorial project?",
+  "options": [
+    {
+      "answer": "Foundry requires it for contract deployment"
+    },
+    {
+      "answer": "To increase project file size"
+    },
+    {
+      "answer": "To use OpenZeppelin's ERC-20 implementation",
+      "correct": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "question": "It is mandatory to allocate an initial amount of tokens on deployment in the constructor.",
+  "options": [
+    {
+      "answer": "True"
+    },
+    {
+      "answer": "False",
+      "correct": true
+    }
+  ]
+}

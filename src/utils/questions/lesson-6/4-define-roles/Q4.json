@@ -1,0 +1,18 @@
+{
+  "question": "Why do we use the keccak256 hash for the MINTER_ROLE variable?",
+  "options": [
+    {
+      "answer": "To fetch and display gas consumption for the role"
+    },
+    {
+      "answer": "To fetch the total supply of tokens minted"
+    },
+    {
+      "answer": " To prevent unintended changes to the role",
+      "correct": true
+    },
+    {
+      "answer": "To allow burning tokens"
+    }
+  ]
+}

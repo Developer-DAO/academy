@@ -1,0 +1,15 @@
+{
+  "question": "Where can you find the address of the deployed contract after deployment?",
+  "options": [
+    {
+      "answer": "In the `.env` file"
+    },
+    {
+      "answer": "In the `cast` output"
+    },
+    {
+      "answer": "In the deployment command",
+      "correct": true
+    }
+  ]
+}

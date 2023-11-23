@@ -1,0 +1,18 @@
+{
+  "question": "How can you load values from the `.env` file into environment variables in a bash-compatible shell?",
+  "options": [
+    {
+      "answer": "`loadenv`"
+    },
+    {
+      "answer": "You can't"
+    },
+    {
+      "answer": "`export $(grep -v '^#' .env | xargs)`",
+      "correct": true
+    },
+    {
+      "answer": "`source.env`"
+    }
+  ]
+}

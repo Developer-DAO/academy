@@ -1,0 +1,18 @@
+{
+  "question": "When implementing a `burn()` function in our ERC-20 contract, why is `msg.sender` used as the address?",
+  "options": [
+    {
+      "answer": "To determine the recipient of burned tokens"
+    },
+    {
+      "answer": "To restrict burning to the contract deployer only"
+    },
+    {
+      "answer": "To allow any address to burn tokens"
+    },
+    {
+      "answer": "To identify the sender of the burn transaction",
+      "correct": true
+    }
+  ]
+}
