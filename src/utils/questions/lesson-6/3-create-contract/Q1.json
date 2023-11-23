@@ -1,5 +1,5 @@
 {
-  "question": "Why is it necessary to provide the token's name and symbol in the constructor of an ERC-20 contract?",
+  "question": "Why is it necessary to provide the token's name and symbol in the constructor of an ERC-20 contract when using OpenZeppelin?",
   "options": [
     {
       "answer": "To personalize the token with emojis"
@@ -8,7 +8,7 @@
       "answer": "To prevent the contract from deploying successfully"
     },
     {
-      "answer": "To fulfill the ERC-20 standard and avoid errors",
+      "answer": "To provide the arguments that are inherited by the ERC20 Contract.",
       "correct": true
     }
   ]
