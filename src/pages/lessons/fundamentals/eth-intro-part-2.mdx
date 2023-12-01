@@ -96,7 +96,7 @@ This is an important takeaway: **the only way to affect a change on the blockcha
 
 ### Transferring ether
 
-Recall that `EthereumTesterProvider` enables a test environment seeded with accounts and fake ether. Let's start by viewing some test accounts and an account balance:
+Do you recall that `EthereumTesterProvider` enables a test environment seeded with accounts and fake ether? Let's start by viewing some test accounts and an account balance:
 
 ```python
 In [1]: w3 = Web3(Web3.EthereumTesterProvider())
@@ -130,11 +130,11 @@ Then send one of those fake ether over to the new account:
 In [8]: tx_hash = w3.eth.send_transaction({
       'from': acct_one,
       'to': acct_two.address,
-      'value': Web3.toWei(1, 'ether')
+      'value': Web3.to_wei(1, 'ether')
    })
 ```
 
-This transaction will execute immediately, but some important details are hidden from view. web3.py is smart enough to know that `EthereumTesterProvider` is managing `acct_one` and that we're using a test environment. For our convenience, `acct_one` is "unlocked," meaning transactions from the account are approved (signed) by default.
+This transaction will execute immediately, but some important details are hidden from view. web3.py is smart enough to know that `EthereumTesterProvider` is managing `acct_one` and that we're using a test environment. For our convenience, `acct_one` is "unlocked", meaning transactions from the account are approved (signed) by default.
 
 So, what does a transaction look like if not from an unlocked account? To find out, let's send some ether from `acct_two` – an account not managed by `EthereumTesterProvider`. This more manual process takes three steps: 1) specify the transaction details, 2) sign the transaction, then 3) broadcast the transaction to the network.
 
@@ -155,7 +155,7 @@ In[10]: signed = w3.eth.account.sign_transaction(tx, acct_two.key)
 In[11]: tx_hash = w3.eth.send_raw_transaction(signed.rawTransaction)
 ```
 
-Let's break that down. Step 1 defines a Python dictionary with the required transaction fields. We briefly learned about gas (transaction fees) in Part 1, but nonce may be new territory. In Ethereum, a **nonce** is simply the transaction count of the account. The Ethereum protocol keeps track of this value to prevent double-spending.
+Let's break that down. Step 1 defines a Python dictionary with the required transaction fields (A dictionary, or `dict`, is a Python type similar to an object in other programming languages). We briefly learned about gas (transaction fees) in Part 1, but nonce may be new territory. In Ethereum, a **nonce** is simply the transaction count of the account. The Ethereum protocol keeps track of this value to prevent double-spending.
 
 Since this is the first transaction being made by `acct_two`, its nonce is zero. If you supply the wrong value, the result is an invalid transaction and is rejected by web3.py:
 
@@ -165,7 +165,7 @@ ValidationError: Invalid transaction nonce: Expected 0, but got 4
 
 Note that a nonce is still required when sending a transaction from `acct_one`, but `EthereumTesterProvider` keeps track of transaction counts for managed accounts and adds the appropriate nonce to new transactions.
 
-Another detail you may have noticed is that a `from` value is missing from `tx`. In this case, the `sign_transaction` method can infer the sender's address from their private key. Again, a public address can be derived from a private key, but a private key cannot be reverse engineered from its public address.
+Another detail you may have noticed is that a `from` value is missing from the `tx` dict. In this case, the `sign_transaction` method can infer the sender's address from their private key. Again, a public address can be derived from a private key, but a private key cannot be reverse engineered from its public address.
 
 Finally, a "raw" transaction is just the transaction data and signature represented as bytes. Under the hood, `send_transaction` performs the same encoding required by `send_raw_transaction`.
 
@@ -186,7 +186,7 @@ tx = {
 }
 ```
 
-Besides requiring more gas, the only other distinction in a contract deployment transaction is the absence of a `to` value. The rest of the process is identical to a standard transfer of ether.
+Besides requiring more gas, the only other distinction in a contract deployment transaction is the absence of a `to` value. Intuitively, this makes some sense: if you're not sending value to another user or interacting with a deployed smart contract, the only option remaining is the deployment of a new contract which does not yet have a public address. The rest of the process is identical to a standard transfer of ether.
 
 ### Interacting with smart contracts
 
@@ -208,7 +208,7 @@ tx_hash = Example.constructor().transact()
 
 Transactions are the only way to affect the state of the blockchain, but they aren't the only way an account can be utilized. Simply proving ownership of a particular account can be useful in its own right.
 
-As an example, OpenSea, an Ethereum marketplace, will allow you to bid on items for sale by signing a message with your account. Only when an auction expires or the seller accepts your offer is an actual transaction placed. Similarly, the app uses signed messages as a form of authentication before showing you some account details.
+As an example, an NFT marketplace may allow you to bid on items for sale by signing a message with your account. Only when an auction expires or the seller accepts your offer is an actual transaction executed. (Important caveat: in order to execute a trade, you will have to have already approved the marketplace's ability to move your tokens.) The same marketplace can also use signed messages as a form of authentication before showing you some account details.
 
 Unlike transactions, signed messages cost nothing. They aren't broadcast to the network and aren't included in a block. A message is simply a bit of data signed with a private key. As you would expect, the private key of the sender remains hidden, but the receiver can mathematically prove the public address of the sender. In other words, the message sender can't be spoofed.
 
