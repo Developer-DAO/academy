@@ -1,4 +1,4 @@
-import { type Project, type Fundamental } from "@/interfaces";
+import { type Project, type Fundamental, type EthIntro } from "@/interfaces";
 import { createContext, useContext } from "react";
 
 interface IAppContext {

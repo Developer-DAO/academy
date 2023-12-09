@@ -1,0 +1,279 @@
+---
+title: A Developer's Guide to Ethereum, Pt. 2
+description: Introduction to Ethereum with web3.py and Python.
+icons: ["ethereum"]
+---
+
+import { LessonHeader } from "../../../components/mdx/LessonHeader";
+import Layout from "../../../components/Layout";
+
+<Layout
+    title="A Developer's Guide to Ethereum, Pt. 2" 
+    description="Introduction to Ethereum with web3.py and Python." 
+>
+<LessonHeader title="A Developer's Guide to Ethereum, Pt. 2" />
+
+Welcome back! In the first installment of this series we covered a lot of ground
+while interacting with a simulated Ethereum network. At this point, you should
+have at least a fuzzy idea of how to answer these questions:
+
+- What's a blockchain and what’s in a block?
+- What makes Ethereum decentralized?
+- What is ether and why is it a necessary component of the network?
+
+In this lesson, we’ll build on these concepts and explore some of the implications
+for developers, so return to Part 1 if you skipped it or need a refresher.
+
+## What’s next? 
+
+We’re going to take a deeper look at how you can interact with the Ethereum network, starting with accounts. There are some significant differences between Ethereum accounts and Web 2.0 accounts.
+
+<Callout emoji="💡" size="md" variant="info">
+**Note**: “Web 2.0” was coined to describe the Internet era that introduced user-generated content, e.g., social media and blogs. Ethereum and other decentralized technologies are said to be a part of the next generation of the Internet: **Web 3.0**. The abbreviation, **Web3**, is used by libraries like web3.js and web3.py, and elsewhere around the ecosystem.
+</Callout>
+
+## Web2 vs. Web3
+
+It’s hard not to collect accounts in today’s web. You have one for each social media app, news site, delivery service, retailer, and transit provider — to name a few. Each of these accounts lives on the company's servers, which makes you subject to their terms and conditions, privacy policy, and security practices. Your account can be frozen, deleted, censored, or altered at the discretion of the host company.
+
+Web3 represents a paradigm shift for account management: you and you alone own your Ethereum accounts. When you create an account, it’s done outside of the scope of any company and can travel with you to multiple apps. In fact, creating an Ethereum account doesn’t require interaction with the Ethereum blockchain at all. Let’s create one now to prove it.
+
+<Callout emoji="💡" size="md" variant="info">
+**Note**: This exercise is purely for educational purposes. Don't store real value in an account unless you understand the security implications. Some mistakes cannot be undone! More context to come.
+</Callout>
+
+## Creating an account
+
+Same drill as last time: the concepts will be demonstrated in an IPython shell. If you’re not a Python developer, no problem. Just follow along conceptually.
+
+### Environment setup
+
+Three steps to set the stage:
+
+1. Install web3.py, eth-tester, and IPython (if you didn't already in Part 1):
+
+```bash
+$ pip install web3 "web3[tester]" ipython
+```
+
+2. Start up a new sandbox:
+
+```bash
+$ ipython
+```
+
+3. Import the Web3 module:
+
+```python
+In [1]: from web3 import Web3
+```
+
+### Account generation
+
+Let's create that account:
+
+```python
+In [2]: w3 = Web3() # No provider necessary for this demo
+
+In [3]: acct = w3.eth.account.create()
+
+# public address:
+In [4]: acct.address
+Out[4]: '0x33736Bf0Ac7A046eAC36648ca852B91EAe5f567A'
+
+# private key:
+In [5]: acct.key
+Out[5]: HexBytes('0x7aca78f5e54...')
+```
+
+That's all there is to it! There's no registration process and no round-trip to the blockchain or any server. In fact, you can disconnect from the Internet altogether and still create a valid Ethereum account.
+
+In the code above, you'll find two components of an account: a public address and a private key. Put simply, a **private key** is the password for an account. A **public address** is a shareable account number derived from the private key. As seen in the code sample, both are typically represented as hexadecimal numbers.
+
+## Using an account
+
+This is an important takeaway: **the only way to affect a change on the blockchain is via a transaction** and every transaction must be signed by an account. Accounts can initiate transactions which transfer ether, deploy smart contracts, or interact with contracts to do things like mint new tokens. Let's briefly explore each.
+
+### Transferring ether
+
+Do you recall that `EthereumTesterProvider` enables a test environment seeded with accounts and fake ether? Let's start by viewing some test accounts and an account balance:
+
+```python
+In [1]: w3 = Web3(Web3.EthereumTesterProvider())
+
+In [2]: w3.eth.accounts
+Out[2]: ['0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf',
+ '0x2B5AD5c4795c026514f8317c7a215E218DcCD6cF',
+ '0x6813Eb9362372EEF6200f3b1dbC3f819671cBA69', ...]
+
+In [3]: acct_one = w3.eth.accounts[0]
+
+In [4]: w3.eth.get_balance(acct_one)
+Out[4]: 1000000000000000000000000
+```
+
+Next, we'll introduce a new account:
+
+```python
+In [5]: acct_two = w3.eth.account.create()
+
+In [6]: acct_two.address
+Out[6]: '0x2FF32Bcc040e98EBa3c0ae2d8ad9C451a78d3E24'
+
+In [7]: acct_two.key
+Out[7]: HexBytes('0x02af55504048265...f70e9965a3505ea')
+```
+
+Then send one of those fake ether over to the new account:
+
+```python
+In [8]: tx_hash = w3.eth.send_transaction({
+      'from': acct_one,
+      'to': acct_two.address,
+      'value': Web3.to_wei(1, 'ether')
+   })
+```
+
+This transaction will execute immediately, but some important details are hidden from view. web3.py is smart enough to know that `EthereumTesterProvider` is managing `acct_one` and that we're using a test environment. For our convenience, `acct_one` is "unlocked", meaning transactions from the account are approved (signed) by default.
+
+So, what does a transaction look like if not from an unlocked account? To find out, let's send some ether from `acct_two` – an account not managed by `EthereumTesterProvider`. This more manual process takes three steps: 1) specify the transaction details, 2) sign the transaction, then 3) broadcast the transaction to the network.
+
+```python
+# 1) manually build a transaction
+In [9]: tx = {
+          'to': acct_one,
+          'value': 10000000,
+          'gas': 21000,
+          'gasPrice': w3.eth.get_block('pending')['baseFeePerGas'],
+          'nonce': 0
+        }
+
+# 2) sign the transaction with the sender's private key
+In[10]: signed = w3.eth.account.sign_transaction(tx, acct_two.key)
+
+# 3) send the "raw" transaction
+In[11]: tx_hash = w3.eth.send_raw_transaction(signed.rawTransaction)
+```
+
+Let's break that down. Step 1 defines a Python dictionary with the required transaction fields (A dictionary, or `dict`, is a Python type similar to an object in other programming languages). We briefly learned about gas (transaction fees) in Part 1, but nonce may be new territory. In Ethereum, a **nonce** is simply the transaction count of the account. The Ethereum protocol keeps track of this value to prevent double-spending.
+
+Since this is the first transaction being made by `acct_two`, its nonce is zero. If you supply the wrong value, the result is an invalid transaction and is rejected by web3.py:
+
+```bash
+ValidationError: Invalid transaction nonce: Expected 0, but got 4
+```
+
+Note that a nonce is still required when sending a transaction from `acct_one`, but `EthereumTesterProvider` keeps track of transaction counts for managed accounts and adds the appropriate nonce to new transactions.
+
+Another detail you may have noticed is that a `from` value is missing from the `tx` dict. In this case, the `sign_transaction` method can infer the sender's address from their private key. Again, a public address can be derived from a private key, but a private key cannot be reverse engineered from its public address.
+
+Finally, a "raw" transaction is just the transaction data and signature represented as bytes. Under the hood, `send_transaction` performs the same encoding required by `send_raw_transaction`.
+
+### Deploying smart contracts
+
+A full introduction to smart contracts will be covered in the next lesson, but this is a good opportunity for a sneak peak; interacting with smart contracts looks very similar to a standard transaction.
+
+Briefly, **smart contracts** are programs that live on the Ethereum blockchain, available for anyone to use. When you're ready to deploy a smart contract, you compile the code down to bytecode and include it in a transaction as a `data` value:
+
+```python
+bytecode = "6080604052348015610...36f6c63430006010033"
+
+tx = {
+   'data': bytecode,
+   'value': 0,
+   'nonce': 0,
+   ...
+}
+```
+
+Besides requiring more gas, the only other distinction in a contract deployment transaction is the absence of a `to` value. Intuitively, this makes some sense: if you're not sending value to another user or interacting with a deployed smart contract, the only option remaining is the deployment of a new contract which does not yet have a public address. The rest of the process is identical to a standard transfer of ether.
+
+### Interacting with smart contracts
+
+Using a deployed contract is just another variation of the same transaction format. In this case, the `to` value points to the deployed contract's address and the `data` value will vary based on the inputs of the contract method being executed.
+
+Note that tools like web3.py offer more intuitive interfaces for deploying and interacting with contracts:
+
+```python
+# interact with an existing contract:
+myContract = web3.eth.contract(address=address, abi=abi)
+twentyone = myContract.functions.multiply7(3).call()
+
+# deploy a new contract:
+Example = w3.eth.contract(abi=abi, bytecode=bytecode)
+tx_hash = Example.constructor().transact()
+```
+
+### Signing messages
+
+Transactions are the only way to affect the state of the blockchain, but they aren't the only way an account can be utilized. Simply proving ownership of a particular account can be useful in its own right.
+
+As an example, an NFT marketplace may allow you to bid on items for sale by signing a message with your account. Only when an auction expires or the seller accepts your offer is an actual transaction executed. (Important caveat: in order to execute a trade, you will have to have already approved the marketplace's ability to move your tokens.) The same marketplace can also use signed messages as a form of authentication before showing you some account details.
+
+Unlike transactions, signed messages cost nothing. They aren't broadcast to the network and aren't included in a block. A message is simply a bit of data signed with a private key. As you would expect, the private key of the sender remains hidden, but the receiver can mathematically prove the public address of the sender. In other words, the message sender can't be spoofed.
+
+<Callout emoji="💡" size="md" variant="info">
+**Note**: the terms "onchain" and "offchain" are shorthand for whether data lives on the Ethereum blockchain. For example, smart contract state is managed *onchain*, but message signing occurs *offchain*.
+</Callout>
+
+We'll save a deep dive into message signing for a future lesson, but here's some pseudocode to give you an idea of the workflow:
+
+```python
+# 1. write a message
+msg = "amanaplanacanalpanama"
+
+# 2. sign it with an account's private key
+pk = b"..."
+signed_message = sign_message(message=msg, private_key=pk)
+
+# 3. send `signed_message` over the wire
+
+# 4. message receiver decodes sender's public address
+sender = decode_message_sender(msg, signed_message.signature)
+print(sender)
+# '0x5ce9454...b9aB12E'
+```
+
+## Web3 account implications
+
+So, we can create Ethereum accounts with surprising ease: offline and separate from any app. Those accounts can be used to sign messages or send various flavors of transactions. What does this mean for app developers?
+
+### Permanent passwords
+
+A harsh reality of this world is that there are no password recovery services for basic account types. If you lose your private key and recovery phrase, you can kiss that account goodbye. Such is the double-edged sword of true ownership. App developers have an ethical obligation to onboard and educate Ethereum newcomers on this reality. (Note: social recovery wallets may improve this user experience and "account abstraction" is one related research effort – topics for another lesson.)
+
+### Onboarding challenges
+
+Introducing new users to Ethereum is complicated. As you've been learning, there are a number of paradigm shifts that aren't immediately obvious. You may have to guide visitors with no Ethereum account yet or users with no ether to pay for transaction fees. The amount of education material required will depend on your audience, but the whole ecosystem will benefit if you're able to onboard new users gracefully.
+
+### Fewer account management features
+
+Given that users create accounts outside of your app, you may discover that your use case requires few or no account management features at all.
+
+### New business models
+
+Data mining isn't going away, but this new account ownership model enables a healthy alternative to the Web 2.0 model in which a company owns every bit of a user's data and sells it to the highest bidder. Ethereum's smart contract platform offers a world of new incentive structures.
+
+### New software architectures
+
+An interesting wrinkle in the definition of your business model will be what to handle onchain vs. offchain. As we've discussed, message signing requires no onchain interaction. There's also nothing stopping you from using a private database for some of your data and the Ethereum blockchain for other bits of data or functionality. There are plenty of tradeoffs to consider: usability, cost, transparency, decentralization, privacy, and so on.
+
+## And breathe
+
+Did all that sink in? Test yourself:
+
+<br />
+<QuizStatusChecker quiz="quiz-eth-intro-2" />
+
+There's no limit to the number of accounts you can generate and you're free to use the same account for several apps or create a new account for every app. This is partly what is meant when a public blockchain is described as **permissionless**: there is no gatekeeper between you and the network. Don't wait for anyone to give you permission to build.
+
+When you're ready to forge ahead, Part 3 more deeply introduces the next actor in the system: smart contracts.
+
+import { ContributorFooter } from "../../../components/mdx/ContributorFooter";
+
+<ContributorFooter
+  authors={["wolovim"]}
+  reviewers={[]}
+  contributors={[]}
+/>
+</Layout>
