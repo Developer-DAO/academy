@@ -8,7 +8,6 @@ import { AppContext } from "./AppContext";
 import {
   type Project,
   type Fundamental,
-  type EthIntro,
   type IFormatedLessons,
 } from "@/interfaces";
 import { useSession } from "next-auth/react";
