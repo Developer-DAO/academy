@@ -1,0 +1,190 @@
+{
+  "title": "Quiz: Intro to Ethereum, Pt. 2",
+  "questions": [
+    {
+      "question": "What is meant by the term web3?",
+      "options": [
+        {
+          "answer": "The third generation of the Internet, characterized by decentralized systems and native digital assets",
+          "correct": true
+        },
+        {
+          "answer": "The third iteration of the Internet, characterized by the rise of social media and user-generated content"
+        },
+        {
+          "answer": "Something related to radioactive spiders"
+        }
+      ]
+    },
+    {
+      "question": "Who can help you if you lose your private key or seed phrase?",
+      "options": [
+        {
+          "answer": "The Ethereum Foundation support channels"
+        },
+        {
+          "answer": "Your bank"
+        },
+        {
+          "answer": "You alone",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Who can prevent you from creating an Ethereum account?",
+      "options": [
+        {
+          "answer": "No one",
+          "correct": true
+        },
+        {
+          "answer": "Your bank"
+        },
+        {
+          "answer": "The Ethereum Foundation"
+        },
+        {
+          "answer": "Satoshi"
+        }
+      ]
+    },
+    {
+      "question": "Which is the best analogy for a public address?",
+      "options": [
+        {
+          "answer": "Rain on your wedding day"
+        },
+        {
+          "answer": "An account number for your account",
+          "correct": true
+        },
+        {
+          "answer": "A password for your wallet"
+        },
+        {
+          "answer": "A savings account at a bank"
+        }
+      ]
+    },
+    {
+      "question": "Which is the best analogy for a private key?",
+      "options": [
+        {
+          "answer": "Ten thousand spoons when all you need is a knife"
+        },
+        {
+          "answer": "A phone number for your account"
+        },
+        {
+          "answer": "A random number generator"
+        },
+        {
+          "answer": "A password for your account",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What can you do with an account?",
+      "options": [
+        {
+          "answer": "Deploy a smart contract",
+          "correct": true
+        },
+        {
+          "answer": "Send and receive ether",
+          "correct": true
+        },
+        {
+          "answer": "Interact with a smart contract",
+          "correct": true
+        },
+        {
+          "answer": "Sign transactions",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "In a production environment, web3.py automatically signs and sends your transactions",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "False",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is a nonce?",
+      "options": [
+        {
+          "answer": "The transaction count of an account",
+          "correct": true
+        },
+        {
+          "answer": "A transaction hash"
+        },
+        {
+          "answer": "A block hash"
+        },
+        {
+          "answer": "Random data added to a transaction"
+        }
+      ]
+    },
+    {
+      "question": "A transaction to deploy a new contract omits which value?",
+      "options": [
+        {
+          "answer": "data"
+        },
+        {
+          "answer": "from"
+        },
+        {
+          "answer": "to",
+          "correct": true
+        },
+        {
+          "answer": "nonce"
+        }
+      ]
+    },
+    {
+      "question": "What is true of message signing?",
+      "options": [
+        {
+          "answer": "The signer's private key is revealed"
+        },
+        {
+          "answer": "No gas fee is required to sign a message",
+          "correct": true
+        },
+        {
+          "answer": "The address of the signer can later be proven",
+          "correct": true
+        },
+        {
+          "answer": "Message signing may be used to authenticate a user",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "To build an Ethereum app, your entire technology stack must be open sourced",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "False",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

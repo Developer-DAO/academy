@@ -1,0 +1,177 @@
+{
+  "title": "Quiz: Intro to Ethereum, Pt. 3",
+  "questions": [
+    {
+      "question": "What is a smart contract?",
+      "options": [
+        {
+          "answer": "A performant database"
+        },
+        {
+          "answer": "A computer program that is deployed on a blockchain",
+          "correct": true
+        },
+        {
+          "answer": "Code that is guaranteed to have no vulnerabilities"
+        }
+      ]
+    },
+    {
+      "question": "What can a smart contract do?",
+      "options": [
+        {
+          "answer": "Send and receive ether",
+          "correct": true
+        },
+        {
+          "answer": "Deploy other smart contracts",
+          "correct": true
+        },
+        {
+          "answer": "Interact with other smart contracts",
+          "correct": true
+        },
+        {
+          "answer": "Maintain internal state",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "Before entrusting a contract with nontrivial assets, you should:",
+      "options": [
+        {
+          "answer": "Check for verified source code",
+          "correct": true
+        },
+        {
+          "answer": "Write and deploy your own version of the contract"
+        },
+        {
+          "answer": "Memorize the contract's bytecode"
+        },
+        {
+          "answer": "Check for a contract's audit report",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "You can build apps that rely on externally created smart contracts",
+      "options": [
+        {
+          "answer": "True",
+          "correct": true
+        },
+        {
+          "answer": "False"
+        }
+      ]
+    },
+    {
+      "question": "Before you fork someone's project to build your own, you should:",
+      "options": [
+        {
+          "answer": "Read and respect the software license",
+          "correct": true
+        },
+        {
+          "answer": "Credit the original authors where appropriate",
+          "correct": true
+        },
+        {
+          "answer": "Pretend it was all your idea"
+        }
+      ]
+    },
+    {
+      "question": "Ethereum smart contract languages include:",
+      "options": [
+        {
+          "answer": "Vyper",
+          "correct": true
+        },
+        {
+          "answer": "EVM"
+        },
+        {
+          "answer": "Fe",
+          "correct": true
+        },
+        {
+          "answer": "Solidity",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "For all users, a smart contract has the same state.",
+      "options": [
+        {
+          "answer": "True",
+          "correct": true
+        },
+        {
+          "answer": "False"
+        }
+      ]
+    },
+    {
+      "question": "What does ABI stand for?",
+      "options": [
+        {
+          "answer": "Average Binary Implementation"
+        },
+        {
+          "answer": "Approximate Beverage Intake"
+        },
+        {
+          "answer": "Alternate Bovine Intervention"
+        },
+        {
+          "answer": "Application Binary Interface",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question": "What is an ABI?",
+      "options": [
+        {
+          "answer": "A machine-readable description of a contract's functions, events, and data types",
+          "correct": true
+        },
+        {
+          "answer": "The compiled and optimized contract bytecode"
+        },
+        {
+          "answer": "A convention for auditing smart contracts"
+        }
+      ]
+    },
+    {
+      "question": "Using established token standards can make your app widely compatible with Ethereum assets and wallets.",
+      "options": [
+        {
+          "answer": "True",
+          "correct": true
+        },
+        {
+          "answer": "False"
+        }
+      ]
+    },
+    {
+      "question": "Once a contract is deployed, it is impossible to upgrade it.",
+      "options": [
+        {
+          "answer": "True"
+        },
+        {
+          "answer": "False",
+          "correct": true
+        }
+      ]
+    }
+  ]
+}

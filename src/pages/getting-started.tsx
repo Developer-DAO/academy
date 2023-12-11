@@ -76,7 +76,7 @@ const GettingStartedPage: NextPageWithLayout<Lessons> = () => {
         </Heading>
         <UnorderedList listStyleType="none" textAlign="center" as="div">
           <Heading size="md" color="yellow.300">
-            {`PROJECTS`}
+            {`PROJECT: BUILD AN NFT COLLECTION`}
           </Heading>
           <>
             {projects.map((lesson: Lesson, idx: number) => (
