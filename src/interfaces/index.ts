@@ -43,13 +43,6 @@ export interface Project {
   completed?: boolean;
 }
 
-export interface EthIntro {
-  path: string;
-  frontMatter: ProjectFrontMatter;
-  slug: string;
-  completed?: boolean;
-}
-
 export interface ProjectFrontMatter {
   title: string;
   description: string;
