@@ -85,7 +85,7 @@ export default function Footer() {
           Website code is licensed under{" "}
           <Link
             as={NextLink}
-            href={"https://github.com/Developer-DAO/academy/blob/main/LICENSE"}
+            href={"https://github.com/Developer-DAO/academy/blob/main/README.md#what-license-applies-to-this-sites-content-and-code"}
             passHref
             isExternal
             textDecoration="underline"
