@@ -88,8 +88,8 @@ are gooood!
   for out-of-the-box wallet management
   {/* ethers will be getting ejected and viem will get added, I guess: */}
   {/* - [viem](https://viem.sh/docs/getting-started.html) */}
-- [ethers](https://docs.ethers.org/v6/) is a compact JavaScript library for
-  interacting with the Ethereum eco-system
+- [viem](https://viem.sh/docs/getting-started.html) is a compact JavaScript
+  library for interacting with the Ethereum eco-system
 - [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to
   work effectively with Ethereum
 - [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app
@@ -148,7 +148,6 @@ Ok to proceed? (y) y
 ✔ Would you like to use Tailwind CSS? … No / Yes
 ✔ Would you like to use `src/` directory? … No / Yes
 ✔ Would you like to use App Router? (recommended) … No / Yes
-? Would you like to customize the default import alias (@/*)?
 ✔ Would you like to customize the default import alias (@/*)? … No / Yes
 Creating a new Next.js app in ((path)):/developerdao/frontend.
 ```
@@ -169,9 +168,11 @@ We need more of an intro than the following 'The Main Application' as to what
 app.js is and subsequently we should do the same for index.js (when we get to
 that section). A little hint of what index.js is here would help - we could use
 a prediction question to aid with/actually perform this task before this
-section: \_/} For users to easily interact with our smart contract and mint the
-NFTs we must provide an interface. A simple process that is easily accessible.
-Let's start by creating a way to handle wallet connections.
+section: \_/}
+
+For users to easily interact with our smart contract and mint the NFTs we must
+provide an interface. A simple process that is easily accessible. Let's start by
+creating a way to handle wallet connections.
 
 ### The Main Application
 
@@ -191,7 +192,6 @@ initial setup.
 
 ```jsx
 import "@/styles/globals.css";
-import "@rainbow-me/rainbowkit/styles.css";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -205,15 +205,18 @@ export default MyApp;
 We need to add some additional imports to create our configurations.
 
 ```jsx
-// previous imports...
+import "@/styles/globals.css";
+// new block of imports:
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { useEffect, useState } from "react";
+// end of new block of imports
 
-// function MyApp code...
+// the rest of the function MyApp code...
 ```
 
 - `import '@rainbow-me/rainbowkit/styles.css';` gives us some basic styling from
@@ -222,7 +225,7 @@ import { useEffect, useState } from "react";
   returns the default wallet provider option and a RainbowKit Provider to "wrap"
   around our app so that we can use its features throughout the app's pages and
   components.
-- `import { chain, configureChains, createClient, WagmiConfig, } from 'wagmi';`
+- `import { polygonMumbai, configureChains, createClient, WagmiConfig, } from 'wagmi';`
   provides a way to configure the WagmiConfig wrapper for our app based on the
   chains and providers of our choice along with some other customisations.
 - `import { alchemyProvider } from 'wagmi/providers/alchemy';` and
@@ -249,20 +252,22 @@ of `wagmiClient` using them.
 ```jsx
 // import statements code...
 
-const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
-  [alchemyProvider({ apiKey: process.env.API_KEY }), publicProvider()],
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [polygonMumbai],
+  [alchemyProvider({ apiKey: "YOUR-API-KEY-FROM-PROVIDER" }), publicProvider()],
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
+  appName: "TierNFTs Frontend Integration",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECTCLOUD_PROJECT_ID,
   chains,
 });
 
-const wagmiClient = createClient({
+const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  provider,
+  publicClient,
+  webSocketPublicClient,
 });
 
 // function MyApp code...
@@ -289,7 +294,7 @@ should look like this:
 
 function MyApp({ Component, pageProps }) {
   return (
-    <WagmiConfig client={wagmiClient}>
+    <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
@@ -308,18 +313,14 @@ Now that we have our application setup, we can edit the Index Page.
 
 ### The Index Page
 
-We need an explanation on what 'the Index Page' is about and it's relation to
-the stack, or as I mentioned preceeding 'The Main Application' section, we could
-use a prediction question to introduce this. LOng story short, the following
-'intro' is not an intro: \_/}
-
-The `index.js` page in the `/frontend/pages` directory should look like this
-after deleting all the _children_ within the `<main>` element and completely
-deleting the `<footer>`.
+Notice that we are using the `page folder routing` in our app, which give us an
+`index.js` page in the `/frontend/pages` directory. This file work as our
+homepage at the root level, in our url will be `htpp://localhost:3000/` by
+default and it's code should look like this after deleting all the _children_
+within the `<main>` element and completely deleting the `<footer>`.
 
 ```jsx
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -353,84 +354,89 @@ export default function Home() {
 // ======= COPY THE CODE BELOW =======
 
 const header = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between'
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingTop: "20px",
+  paddingLeft: "50px",
+  paddingRight: "50px",
+};
 
 const NFTFlex = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-  gap: '50px',
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  gap: "50px",
+};
 
 const NFTCard = {
-  display: 'flex',
-  flexDirection: 'column',
-  border: '2px solid white',
-  borderRadius: '10px',
-  padding: '20px',
-  alignItems: 'center',
-  gap: '10px',
-  fontWeight: 'bold',
-}
+  display: "flex",
+  flexDirection: "column",
+  border: "2px solid white",
+  borderRadius: "10px",
+  padding: "20px",
+  alignItems: "center",
+  gap: "10px",
+  fontWeight: "bold",
+};
 
 const NFTMint = {
-  fontWeight: '700',
-  padding: '5px 20px',
-  border: '2px solid white',
-  color: 'white',
-  backgroundColor: 'black',
-  borderRadius: '5px',
-  cursor: 'pointer',
-}
+  fontWeight: "700",
+  padding: "5px 20px",
+  border: "2px solid white",
+  color: "white",
+  backgroundColor: "black",
+  borderRadius: "5px",
+  cursor: "pointer",
+};
 
 const modal = {
-  position: 'fixed',
-  left: '0',
-  top: '0',
-  right: '0',
-  bottom: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  zIndex: '1',
-}
+  position: "fixed",
+  left: "0",
+  top: "0",
+  right: "0",
+  bottom: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  zIndex: "1",
+};
 
 const modalContent = {
-  backgroundColor: '#fff',
-  padding: '10px 30px',
-  borderRadius: '16px',
-  color: '#000'
-}
+  backgroundColor: "#fff",
+  padding: "10px 30px",
+  borderRadius: "16px",
+  color: "#000",
+};
 
 const modalBody = {
-  padding: '20px',
-  borderTop: '1px solid #eee',
-  borderBottom: '1px solid #eee',
-}
+  padding: "20px",
+  borderTop: "1px solid #eee",
+  borderBottom: "1px solid #eee",
+};
 
 const modalFooter = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-  padding: '20px',
-  justifyContent: 'space-evenly'
-}
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "20px",
+  justifyContent: "space-evenly",
+};
 
 const modalButton = {
-  padding: '10px 20px',
-  backgroundColor: '#fff',
-  color: '#666',
-  border: '0',
-  borderRadius: '10px',
-  fontSize: '18px',
-  fontWeight: '700',
-  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
-}
+  padding: "10px 20px",
+  backgroundColor: "#fff",
+  color: "#666",
+  border: "0",
+  borderRadius: "10px",
+  fontSize: "18px",
+  fontWeight: "700",
+  boxShadow:
+    "0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)",
+  cursor: "pointer",
+};
 ```
 
 </SideDrawer>
