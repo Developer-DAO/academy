@@ -17,9 +17,9 @@ async function main() {
   // console.log({ user });
   const newLesson = await prisma.lessons.create({
     data: {
-      quizFileName: "quiz-eth-intro-1.json",
+      quizFileName: "quiz-eth-intro-2.json",
       projectLessonNumber: null,
-      fundamentalLessonName: "eth-intro-part-1",
+      fundamentalLessonName: "eth-intro-part-2",
     },
   });
   console.log({ newLesson });
@@ -34,10 +34,11 @@ async function main() {
   // });
   // console.log({ completed2 });
   // const updateLesson2 = await prisma.lessons.update({
-  //   where: { id: "clm60bwug00001w43vws1c3iv" },
+  //   where: { id: "clpyducct00001w252m1t8im2" },
   //   data: {
-  //     quizFileName: "quiz-lesson-2.json",
-  //     lessonNumber: 2,
+  //     quizFileName: "quiz-eth-intro-3.json",
+  //     fundamentalLessonName: "eth-intro-part-3",
+  //     projectLessonNumber: null,
   //   },
   // });
   // console.log({ updateLesson2 });
