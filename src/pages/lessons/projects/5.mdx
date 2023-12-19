@@ -214,7 +214,7 @@ import { polygonMumbai } from "wagmi/chains";
 
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // MARKKOS89 NOTE: I WOULD REMOVE THIS IMPORT AND CONSIDER "USING/MOVING IT" TO INDEX.JS IMPROTS EXAPLANATION - go to line :238
 // end of new block of imports
 
 // the rest of the function MyApp code...
@@ -253,9 +253,12 @@ of `wagmiClient` using them.
 ```jsx
 // import statements code...
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const { chains, publicClient } = configureChains(
   [polygonMumbai],
-  [alchemyProvider({ apiKey: "YOUR-API-KEY-FROM-PROVIDER" }), publicProvider()],
+  [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID }),
+    publicProvider(),
+  ],
 );
 
 const { connectors } = getDefaultWallets({
@@ -268,7 +271,6 @@ const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
   publicClient,
-  webSocketPublicClient,
 });
 
 // function MyApp code...
@@ -279,16 +281,24 @@ can be added simply using the following syntax: `chain.chain_name`. For custom
 providers, like the `alchemyProvider` we can pass in our private `apiKey` as
 well.
 
-{/* Only the API key? Or the whole URL?: */} Set your API Key in a new file
-named `.env` inside our `frontend` directory as follows:
+Set your API Key in a new file named `.env` inside our `frontend` directory as
+follows:
 
 ```dotenv
 API_KEY='YOUR-API-KEY-FROM-PROVIDER'
 ```
 
-Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig` so
-that it can have access to their features throughout our application. Our code
-should look like this:
+in our case:
+
+```dotenv
+  NEXT_PUBLIC_ALCHEMY_ID=
+  NEXT_PUBLIC_PROJECT_ID=
+  NEXT_PUBLIC_CONTRACT_ADDRESS=
+```
+
+Great! Now we can wrap our application in the `RainbowKitProvider` and
+`WagmiConfig` so that it can have access to their features throughout our
+application. Our code should look like this:
 
 ```jsx
 // import statements and configs code...
@@ -322,7 +332,7 @@ within the `<main>` element and completely deleting the `<footer>`.
 
 ```jsx
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "@/styles/Home.module.css";
 
 export default function Home() {
   return (
@@ -436,7 +446,6 @@ const modalButton = {
   fontWeight: "700",
   boxShadow:
     "0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)",
-  cursor: "pointer",
 };
 ```
 
@@ -449,10 +458,16 @@ Moving onto imports.
 // prev imports...
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import {
+  useAccount,
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 import TierABI from "@/artifacts/contracts/TierNFT.sol/TierNFT.json";
 import styles from "@/styles/Home.module.css";
-import { ethers } from "ethers";
+import { parseEther } from "viem";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -467,20 +482,20 @@ import Image from "next/image";
   us interact with the smart contract outside the blockchain or
   contract-to-contract. You can read more about ABIs
   [here](https://www.quicknode.com/guides/solidity/what-is-an-abi).
-- The `ethers` library will assist us with some utilities in our code.
+- The `viem` library will assist us with some utilities in our code.
 - Once again, `useEffect` and `useState` are react hooks that will help us
   perform side effects and capture the state, respectively.
 
 ```jsx
 export default function Home() {
-  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
+  const CONTRACT_ADDRESS = const CONTRACT_ADDRESS =
+    process.env.NEXT_PUBLIC_TIERNFT_CONTRACT_ADDRESS || "0x5794c3de7a59587048b76060d282476e12a8aff8"; /* Or enter Contract Address between ''*/;
 
   const { isConnected } = useAccount();
 
   const [isUserConnected, setIsUserConnected] = useState(false);
   const [latestNFTMinted, setLatestNFTMinted] = useState(0);
   const [modalShow, setModalShow] = useState(false);
-  const [isMinting, setIsMinting] = useState(false);
 
   // More code to come...
 }
@@ -559,16 +574,19 @@ our smart contract and provide a way to mint them.
 export default function Home() {
   // variable definitions...
 
-  const {
-    data: mintData,
-    writeAsync: mint,
-    isLoading: isMintLoading,
-  } = useContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "mint",
+  const { config, isLoading: isMintLoading } = usePrepareContractWrite({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
+    functionName: "safeMint",
+    value: parseEther(mintingPrice), // "0.02"
+    // enabled: Boolean(mintingPrice !== "0"), // "true"
   });
 
+  const { data: mintData, write } = useContractWrite(config);
+
+  const { data: txData } = useWaitForTransaction({
+    hash: mintData?.hash,
+  });
   // return statement for rendering...
 }
 ```
@@ -589,6 +607,13 @@ Even though we have this function, we need to pass in custom `message values`
 i.e. an amount in **ETH**, as defined in our contract. For this we create our
 own `mintToken` function that calls the `mint` function from WAGMI within it.
 
+The `usePrepareContractWrite` hook also work better with the
+`usePrepareContractWrite` hook as explained on
+[wagmi docs]()https://wagmi.sh/react/hooks/useContractWrite#prepared-usage.
+
+(add more explanations maybe explaining how they work together and why we need
+it to perform better the UX)
+
 ```jsx
 // WAGMI useContractWrite hook...
 
@@ -596,7 +621,7 @@ const mintToken = async (e) => {
   try {
     let mintTxn = await mint({
       recklesslySetUnpreparedOverrides: {
-        value: ethers.utils.parseEther(e.target.value),
+        value: parseEther(e.target.value),
       },
     });
     await mintTxn.wait();
@@ -646,10 +671,18 @@ Now we can render our NFT Cards.
   <div style={NFTFlex}>
     <div style={NFTCard}>
       Tier 0
-      <Image src="/nfts/0_basic.svg" width="200px" height="200px" />
+      <Image
+        src="/nfts/0_basic.svg"
+        width="200"
+        height="200"
+        alt="Basic Tier"
+      />
       <button
         value="0.01"
-        onClick={(e) => mintToken(e)}
+        onClick={(e) => {
+          setMintingPrice(e.target.value);
+          mintToken();
+        }}
         style={NFTMint}
         disabled={isMintLoading}
       >
@@ -658,10 +691,18 @@ Now we can render our NFT Cards.
     </div>
     <div style={NFTCard}>
       Tier 1
-      <Image src="/nfts/1_medium.svg" width="200px" height="200px" />
+      <Image
+        src="/nfts/1_medium.svg"
+        width="200"
+        height="200"
+        alt="Medium Tier"
+      />
       <button
         value="0.02"
-        onClick={(e) => mintToken(e)}
+        onClick={(e) => {
+          setMintingPrice(e.target.value);
+          mintToken();
+        }}
         style={NFTMint}
         disabled={isMintLoading}
       >
@@ -670,10 +711,18 @@ Now we can render our NFT Cards.
     </div>
     <div style={NFTCard}>
       Tier 2
-      <Image src="/nfts/2_premium.svg" width="200px" height="200px" />
+      <Image
+        src="/nfts/2_premium.svg"
+        width="200"
+        height="200"
+        alt="Premium Tier"
+      />
       <button
         value="0.05"
-        onClick={(e) => mintToken(e)}
+        onClick={(e) => {
+          setMintingPrice(e.target.value);
+          mintToken();
+        }}
         style={NFTMint}
         disabled={isMintLoading}
       >
@@ -691,10 +740,13 @@ Let's see what is happening in each NFT Card by taking `Tier 0` as an example.
 ```jsx
 <div style={NFTCard}>
   Tier 0
-  <Image src="/nfts/0_basic.svg" width="200px" height="200px" />
+  <Image src="/nfts/0_basic.svg" width="200" height="200" alt="Premium Tier" />
   <button
     value="0.01"
-    onClick={(e) => mintToken(e)}
+    onClick={(e) => {
+      setMintingPrice(e.target.value);
+      mintToken();
+    }}
     style={NFTMint}
     disabled={isMintLoading}
   >
@@ -709,13 +761,13 @@ Let's see what is happening in each NFT Card by taking `Tier 0` as an example.
   content from the `/public` directory so we can directly reference the source
   as `/nfts/0_basic.svg`. We also need to pass in the width and height
   explicitly.
-- A `button` element let's us call the `mintToken` function `onClick` and we
-  send the value associated with the button to that function so that it can be
-  used to mint the specific tier of NFT in the `<button>` element. Make sure you
-  pass in the right value for each tier. Lastly, we want to disable the button
-  when another mint is underway. For this we use the true/ false values received
-  from `isMintLoading`. The button will be disabled when `isMintLoading` is
-  `true`.
+- A `button` element let's us first set the minting price choosen and then it
+  calls the `mintToken` function `onClick` and we send the value associated with
+  the button to that function so that it can be used to mint the specific tier
+  of NFT in the `<button>` element. Make sure you pass in the right value for
+  each tier. Lastly, we want to disable the button when another mint is
+  underway. For this we use the true/ false values received from
+  `isMintLoading`. The button will be disabled when `isMintLoading` is `true`.
 
 Great but anyone can view and call our mint functions in the frontend of our app
 even if their wallet is not connected to the application. This could result in
@@ -775,33 +827,38 @@ the following side drawer for the code written till now if stuck somewhere.
 <SideDrawer buttonText="Code so far for index.js">
 
 ```jsx
-import Head from 'next/head';
-import Image from 'next/image';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
-import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
-import styles from '../styles/Home.module.css';
-import { ethers } from 'ethers';
-import { useEffect, useState } from 'react';
+import Head from "next/head";
+import Image from "next/image";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount, useContractRead, useContractWrite } from "wagmi";
+import TierABI from "@/artifacts/contracts/TierNFT.sol/TierNFT.json";
+import styles from "@/styles/Home.module.css";
+import { parseEther } from "viem";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
-
-  const { isConnected } = useAccount();
+  const CONTRACT_ADDRESS =
+    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
+    "0x5794c3de7a59587048b76060d282476e12a8aff8";
+  /*Enter Contract Address between ''*/ const { isConnected } = useAccount();
 
   const [isUserConnected, setIsUserConnected] = useState(false);
   const [latestNFTMinted, setLatestNFTMinted] = useState(0);
   const [modalShow, setModalShow] = useState(false);
-  const [isMinting, setIsMinting] = useState(false);
+  const [mintingPrice, setMintingPrice] = useState("0");
 
-  const {
-    data: mintData,
-    writeAsync: mint,
-    isLoading: isMintLoading,
-  } = useContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "mint",
+  const { config, isLoading: isMintLoading } = usePrepareContractWrite({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
+    functionName: "safeMint",
+    value: parseEther(mintingPrice), // "0.02"
+    // enabled: Boolean(mintingPrice !== "0"), // "true"
+  });
+
+  const { data: mintData, write } = useContractWrite(config);
+
+  const { data: txData } = useWaitForTransaction({
+    hash: mintData?.hash,
   });
 
   useEffect(() => {
@@ -813,16 +870,16 @@ export default function Home() {
   }, [isConnected]);
 
   const mintToken = async (e) => {
-    try {
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
-      });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
-    } catch (error) {
-      console.log("Error minting NFT", error.message);
+    if (mintingPrice !== "0") {
+      try {
+        setModalShow(true);
+        write();
+        setMintingPrice("0");
+      } catch (error) {
+        console.log("Error minting NFT", error.message);
+      }
+    } else {
+      alert("Please select a tier to mint");
     }
   };
 
@@ -837,141 +894,163 @@ export default function Home() {
         <h1>TierNFTs</h1>
         <ConnectButton />
       </header>
-      {isUserConnected ?
+      {isUserConnected ? (
         <main className={styles.main}>
           <div style={NFTFlex}>
             <div style={NFTCard}>
               Tier 0
               <Image
-                src='/nfts/0_basic.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/0_basic.svg"
+                width="200"
+                height="200"
+                alt="Basic Tier"
+              />
               <button
-                value='0.01'
-                onClick={(e) => mintToken(e)}
+                value="0.01"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
-            <div style={NFTCard} >
+            <div style={NFTCard}>
               Tier 1
               <Image
-                src='/nfts/1_medium.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/1_medium.svg"
+                width="200"
+                height="200"
+                alt="Medium Tier"
+              />
               <button
-                value='0.02'
-                onClick={(e) => mintToken(e)}
+                value="0.02"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
-            <div style={NFTCard} >
+            <div style={NFTCard}>
               Tier 2
               <Image
-                src='/nfts/2_premium.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/2_premium.svg"
+                width="200"
+                height="200"
+                alt="Premium Tier"
+              />
               <button
-                value='0.05'
-                onClick={(e) => mintToken(e)}
+                value="0.05"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
           </div>
         </main>
-        :
+      ) : (
         <main className={styles.main}>
           <div>Please connect your wallet</div>
         </main>
-      }
+      )}
     </div>
-  )
+  );
 }
 
 const header = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between'
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingTop: "20px",
+  paddingLeft: "50px",
+  paddingRight: "50px",
+};
 
 const NFTFlex = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-  gap: '50px',
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  gap: "50px",
+};
 
 const NFTCard = {
-  display: 'flex',
-  flexDirection: 'column',
-  border: '2px solid white',
-  borderRadius: '10px',
-  padding: '20px',
-  alignItems: 'center',
-  gap: '10px',
-  fontWeight: 'bold',
-}
+  display: "flex",
+  flexDirection: "column",
+  border: "2px solid white",
+  borderRadius: "10px",
+  padding: "20px",
+  alignItems: "center",
+  gap: "10px",
+  fontWeight: "bold",
+};
 
 const NFTMint = {
-  fontWeight: '700',
-  padding: '5px 20px',
-  border: '2px solid white',
-  color: 'white',
-  backgroundColor: 'black',
-  borderRadius: '5px',
-  cursor: 'pointer',
-}
+  fontWeight: "700",
+  padding: "5px 20px",
+  border: "2px solid white",
+  color: "white",
+  backgroundColor: "black",
+  borderRadius: "5px",
+  cursor: "pointer",
+};
 
 const modal = {
-  position: 'fixed',
-  left: '0',
-  top: '0',
-  right: '0',
-  bottom: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  zIndex: '1',
-}
+  position: "fixed",
+  left: "0",
+  top: "0",
+  right: "0",
+  bottom: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  zIndex: "1",
+};
 
 const modalContent = {
-  backgroundColor: '#fff',
-  padding: '10px 30px',
-  borderRadius: '16px',
-  color: '#000'
-}
+  backgroundColor: "#fff",
+  padding: "10px 30px",
+  borderRadius: "16px",
+  color: "#000",
+};
 
 const modalBody = {
-  padding: '20px',
-  borderTop: '1px solid #eee',
-  borderBottom: '1px solid #eee',
-}
+  padding: "20px",
+  borderTop: "1px solid #eee",
+  borderBottom: "1px solid #eee",
+};
 
 const modalFooter = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-  padding: '20px',
-  justifyContent: 'space-evenly'
-}
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "20px",
+  justifyContent: "space-evenly",
+};
 
 const modalButton = {
-  padding: '10px 20px',
-  backgroundColor: '#fff',
-  color: '#666',
-  border: '0',
-  borderRadius: '10px',
-  fontSize: '18px',
-  fontWeight: '700',
-  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
-}
+  padding: "10px 20px",
+  backgroundColor: "#fff",
+  color: "#666",
+  border: "0",
+  borderRadius: "10px",
+  fontSize: "18px",
+  fontWeight: "700",
+  boxShadow:
+    "0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)",
+};
 ```
 
 </SideDrawer>
@@ -1000,53 +1079,53 @@ information about it from our smart contract.
 ```jsx
 // imports, consts and WAGMI useContractWrite hook...
 
-  const {
-    data: tokenData,
-    refetch: refetchTokenData,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "totalSupply",
-    watch: true,
-  })
+const { data: tokenData, refetch: refetchTokenData } = useContractRead({
+  address: CONTRACT_ADDRESS,
+  abi: TierABI.abi,
+  functionName: "totalSupply",
+  watch: true,
+  enabled: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+});
 
-  const {
-    data: tokenURI,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "tokenURI",
-    args: tokenData,
-    watch: true,
-  })
+const { data: tokenURI } = useContractRead({
+  address: CONTRACT_ADDRESS,
+  abi: TierABI.abi,
+  functionName: "tokenURI",
+  args: [1],
+  watch: true,
+  enabled: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+});
 
-  // useEffect to check user connection...
+// useEffect to check user connection...
 
-  useEffect(() => {
-    try {
-      if (tokenURI) {
-        setLatestNFTMinted(JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(',') + 1))));
-      }
-    } catch (error) {
-      console.log("Error fetching token URI", error.message);
+useEffect(() => {
+  try {
+    if (tokenURI) {
+      setLatestNFTMinted(
+        JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(",") + 1))),
+      );
     }
-  }, [tokenData, tokenURI]);
+  } catch (error) {
+    console.log("Error fetching token URI", error.message);
+  }
+}, [tokenData, tokenURI]);
 
-  const mintToken = async (e) => {
+const mintToken = async (e) => {
+  if (mintingPrice !== "0") {
     try {
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
-      });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
-      refetchTokenData();
+      setModalShow(true);
+      write();
+      refetchTokenData(); // <--------- this is the new line: here an exaplanation of the refetchTokenData() Function for i.e.
+      setMintingPrice("0");
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+    }
+  } else {
+    alert("Please select a tier to mint");
+  }
+};
 
-      // catch statement for mintToken function...
-  };
-
-  // return statement...
+// JSX return statement...
 ```
 
 - The first thing we need is the `tokenId` of the latest NFT minted. We can do
@@ -1076,20 +1155,19 @@ minted. This is how the mintToken function should look now:
 // useEffect for tokenURI...
 
 const mintToken = async (e) => {
-  try {
-    setIsMinting(true);
-    setModalShow(true);
-    let mintTxn = await mint({
-      recklesslySetUnpreparedOverrides: {
-        value: ethers.utils.parseEther(e.target.value),
-      },
-    });
-    await mintTxn.wait();
-    console.log("This is the mint data", mintData);
-    refetchTokenData();
-    setIsMinting(false);
-  } catch (error) {
-    console.log("Error minting NFT", error.message);
+  if (mintingPrice !== "0") {
+    try {
+      setModalShow(true);
+      write();
+      console.log("This is the mint data", mintData);
+      refetchTokenData(); // <--------- this is the new line: here an exaplanation of the refetchTokenData() Function for i.e.
+      setMintingPrice("0");
+    } catch (error) {
+      console.log("Error minting NFT", error.message);
+      setMintingPrice("0");
+    }
+  } else {
+    alert("Please select a tier to mint");
   }
 };
 
@@ -1112,7 +1190,7 @@ We're there at last! Now we can render our modal.
       <div style={NFTFlex}>{/* NFT Card div code... */}</div>
       {modalShow && (
         <div style={modal}>
-          {isMinting ? (
+          {txData === undefined ? (
             <div style={modalContent}>
               <h2>Minting...</h2>
             </div>
@@ -1123,26 +1201,31 @@ We're there at last! Now we can render our modal.
                 <h3>{latestNFTMinted.name}</h3>
                 <Image
                   src={latestNFTMinted.image}
-                  height="200px"
-                  width="200px"
+                  height="200"
+                  width="200"
+                  alt="NFT Image"
                 />
               </div>
               <div style={modalFooter}>
                 <button style={modalButton}>
                   <a
-                    href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`}
+                    href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${
+                      formatUnits(tokenData, 0) - 1
+                    }`}
                     target="_blank"
                   >
                     View on OpenSea
                   </a>
                 </button>
                 <button style={modalButton}>
-                  <a
-                    href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`}
-                    target="_blank"
-                  >
-                    View on Polygonscan
-                  </a>
+                  {txData && txData.transactionHash ? (
+                    <a
+                      href={`https://mumbai.polygonscan.com/tx/${txData.transactionHash}`}
+                      target="_blank"
+                    >
+                      View on Polygonscan
+                    </a>
+                  ) : undefined}
                 </button>
                 <button onClick={() => setModalShow(false)} style={modalButton}>
                   Close
@@ -1181,54 +1264,48 @@ If you are stuck somewhere, please refer to the code side drawer below.
 <SideDrawer buttonText="Final Code for index.js">
 
 ```jsx
-import Head from 'next/head';
-import Image from 'next/image';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
-import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
-import styles from '../styles/Home.module.css';
-import { ethers } from 'ethers';
-import { useEffect, useState } from 'react';
+import Head from "next/head";
+import Image from "next/image";
+import styles from "@/styles/Home.module.css";
+
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import {
+  useAccount,
+  useContractRead,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import TierABI from "@/artifacts/contracts/TierNFT.sol/TierNFT.json";
+import { useEffect, useState } from "react";
+import { parseEther, formatUnits } from "viem";
+
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "";
 
 export default function Home() {
-  const CONTRACT_ADDRESS = /*Enter Contract Address between ''*/;
-
   const { isConnected } = useAccount();
 
   const [isUserConnected, setIsUserConnected] = useState(false);
   const [latestNFTMinted, setLatestNFTMinted] = useState(0);
   const [modalShow, setModalShow] = useState(false);
-  const [isMinting, setIsMinting] = useState(false);
+  const [mintingPrice, setMintingPrice] = useState("0");
 
-  const {
-    data: mintData,
-    writeAsync: mint,
-    isLoading: isMintLoading,
-  } = useContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "mint",
-  });
-
-  const {
-    data: tokenData,
-    refetch: refetchTokenData,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  const { data: tokenData, refetch: refetchTokenData } = useContractRead({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "totalSupply",
     watch: true,
-  })
+    enabled: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+  });
 
-  const {
-    data: tokenURI,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  const { data: tokenURI } = useContractRead({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "tokenURI",
-    args: tokenData,
+    args: [1],
     watch: true,
-  })
+    enabled: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+  });
 
   useEffect(() => {
     try {
@@ -1241,35 +1318,51 @@ export default function Home() {
   useEffect(() => {
     try {
       if (tokenURI) {
-        setLatestNFTMinted(JSON.parse(window.atob(tokenURI.substring(tokenURI.indexOf(',') + 1))));
+        setLatestNFTMinted(
+          JSON.parse(
+            window.atob(tokenURI.substring(tokenURI.indexOf(",") + 1)),
+          ),
+        );
       }
     } catch (error) {
       console.log("Error fetching token URI", error.message);
     }
   }, [tokenData, tokenURI]);
 
-  const mintToken = async (e) => {
-    try {
-      setIsMinting(true);
-      setModalShow(true);
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
-      });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
-      refetchTokenData();
-      setIsMinting(false);
-    } catch (error) {
-      console.log("Error minting NFT", error.message);
+  const { config, isLoading: isMintLoading } = usePrepareContractWrite({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
+    functionName: "safeMint",
+    value: parseEther(mintingPrice), // "0.02"
+    // enabled: Boolean(mintingPrice !== "0"), // "true"
+  });
+
+  const { data: mintData, write } = useContractWrite(config);
+
+  const { data: txData } = useWaitForTransaction({
+    hash: mintData?.hash,
+  });
+
+  const mintToken = async () => {
+    if (mintingPrice !== "0") {
+      try {
+        setModalShow(true);
+        write();
+        refetchTokenData(); // <--------- this is the new line: here an exaplanation of the refetchTokenData() Function for i.e.
+        setMintingPrice("0");
+      } catch (error) {
+        console.log("Error minting NFT", error.message);
+        setMintingPrice("0");
+      }
+    } else {
+      alert("Please select a tier to mint");
     }
   };
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>NFT Minter</title>
+        <title>Create Next App</title>
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -1277,172 +1370,214 @@ export default function Home() {
         <h1>TierNFTs</h1>
         <ConnectButton />
       </header>
-      {isUserConnected ?
+      {isUserConnected ? (
         <main className={styles.main}>
           <div style={NFTFlex}>
             <div style={NFTCard}>
               Tier 0
               <Image
-                src='/nfts/0_basic.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/0_basic.svg"
+                width="200"
+                height="200"
+                alt="Basic Tier"
+              />
               <button
-                value='0.01'
-                onClick={(e) => mintToken(e)}
+                value="0.01"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
-            <div style={NFTCard} >
+            <div style={NFTCard}>
               Tier 1
               <Image
-                src='/nfts/1_medium.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/1_medium.svg"
+                width="200"
+                height="200"
+                alt="Medium Tier"
+              />
               <button
-                value='0.02'
-                onClick={(e) => mintToken(e)}
+                value="0.02"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
-            <div style={NFTCard} >
+            <div style={NFTCard}>
               Tier 2
               <Image
-                src='/nfts/2_premium.svg'
-                width='200px'
-                height='200px' />
+                src="/nfts/2_premium.svg"
+                width="200"
+                height="200"
+                alt="Premium Tier"
+              />
               <button
-                value='0.05'
-                onClick={(e) => mintToken(e)}
+                value="0.05"
+                onClick={(e) => {
+                  setMintingPrice(e.target.value);
+                  mintToken();
+                }}
                 style={NFTMint}
-                disabled={isMintLoading}>
+                disabled={isMintLoading}
+              >
                 Mint
               </button>
             </div>
           </div>
+
           {modalShow && (
             <div style={modal}>
-              {isMinting ?
+              {txData === undefined ? (
                 <div style={modalContent}>
                   <h2>Minting...</h2>
                 </div>
-                :
+              ) : (
                 <div style={modalContent}>
                   <h2>Mint Successful</h2>
                   <div style={modalBody}>
                     <h3>{latestNFTMinted.name}</h3>
-                    <Image src={latestNFTMinted.image} height='200px' width='200px' />
+                    <Image
+                      src={latestNFTMinted.image}
+                      height="200"
+                      width="200"
+                      alt="NFT Image" // px rem or em
+                    />
                   </div>
                   <div style={modalFooter}>
                     <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                      <a
+                        href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${
+                          formatUnits(tokenData, 0) - 1
+                        }`}
+                        target="_blank"
+                      >
                         View on OpenSea
                       </a>
                     </button>
                     <button style={modalButton}>
-                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
-                        View on Polygonscan
-                      </a>
+                      {txData && txData.transactionHash ? (
+                        <a
+                          href={`https://mumbai.polygonscan.com/tx/${txData.transactionHash}`}
+                          target="_blank"
+                        >
+                          View on Polygonscan
+                        </a>
+                      ) : undefined}
                     </button>
-                    <button onClick={() => setModalShow(false)} style={modalButton}>Close</button>
+                    <button
+                      onClick={() => setModalShow(false)}
+                      style={modalButton}
+                    >
+                      Close
+                    </button>
                   </div>
                 </div>
-              }
+              )}
             </div>
           )}
         </main>
-        :
+      ) : (
         <main className={styles.main}>
-          <div>Please connect your wallet</div>
+          <div>Please connect your wallet.</div>
         </main>
-      }
+      )}
     </div>
-  )
+  );
 }
 
 const header = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between'
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingTop: "20px",
+  paddingLeft: "50px",
+  paddingRight: "50px",
+};
 
 const NFTFlex = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-evenly',
-  gap: '50px',
-}
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-evenly",
+  gap: "50px",
+};
 
 const NFTCard = {
-  display: 'flex',
-  flexDirection: 'column',
-  border: '2px solid white',
-  borderRadius: '10px',
-  padding: '20px',
-  alignItems: 'center',
-  gap: '10px',
-  fontWeight: 'bold',
-}
+  display: "flex",
+  flexDirection: "column",
+  border: "2px solid white",
+  borderRadius: "10px",
+  padding: "20px",
+  alignItems: "center",
+  gap: "10px",
+  fontWeight: "bold",
+};
 
 const NFTMint = {
-  fontWeight: '700',
-  padding: '5px 20px',
-  border: '2px solid white',
-  color: 'white',
-  backgroundColor: 'black',
-  borderRadius: '5px',
-  cursor: 'pointer',
-}
+  fontWeight: "700",
+  padding: "5px 20px",
+  border: "2px solid white",
+  color: "white",
+  backgroundColor: "black",
+  borderRadius: "5px",
+  cursor: "pointer",
+};
 
 const modal = {
-  position: 'fixed',
-  left: '0',
-  top: '0',
-  right: '0',
-  bottom: '0',
-  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  zIndex: '1',
-}
+  position: "fixed",
+  left: "0",
+  top: "0",
+  right: "0",
+  bottom: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.8)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  zIndex: "1",
+};
 
 const modalContent = {
-  backgroundColor: '#fff',
-  padding: '10px 30px',
-  borderRadius: '16px',
-  color: '#000'
-}
+  backgroundColor: "#fff",
+  padding: "10px 30px",
+  borderRadius: "16px",
+  color: "#000",
+};
 
 const modalBody = {
-  padding: '20px',
-  borderTop: '1px solid #eee',
-  borderBottom: '1px solid #eee',
-}
+  padding: "20px",
+  borderTop: "1px solid #eee",
+  borderBottom: "1px solid #eee",
+};
 
 const modalFooter = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px',
-  padding: '20px',
-  justifyContent: 'space-evenly'
-}
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  padding: "20px",
+  justifyContent: "space-evenly",
+};
 
 const modalButton = {
-  padding: '10px 20px',
-  backgroundColor: '#fff',
-  color: '#666',
-  border: '0',
-  borderRadius: '10px',
-  fontSize: '18px',
-  fontWeight: '700',
-  boxShadow: '0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)',
-  cursor: 'pointer',
-}
+  padding: "10px 20px",
+  backgroundColor: "#fff",
+  color: "#666",
+  border: "0",
+  borderRadius: "10px",
+  fontSize: "18px",
+  fontWeight: "700",
+  boxShadow:
+    "0 0.2em 0.4em 0 rgba(0, 0, 0, 0.2), 0 0.3em 1em 0 rgba(0, 0, 0, 0.19)",
+};
 ```
 
 </SideDrawer>
