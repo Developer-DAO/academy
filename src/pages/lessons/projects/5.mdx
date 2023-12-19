@@ -209,7 +209,8 @@ import "@/styles/globals.css";
 // new block of imports:
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { WagmiConfig, createConfig, configureChains } from "wagmi";
+import { polygonMumbai } from "wagmi/chains";
 
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -449,10 +450,11 @@ Moving onto imports.
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
-import TierABI from "../../artifacts/contracts/TierNFT.sol/TierNFT.json";
-import styles from "../styles/Home.module.css";
+import TierABI from "@/artifacts/contracts/TierNFT.sol/TierNFT.json";
+import styles from "@/styles/Home.module.css";
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 // function Home() code...
 ```
