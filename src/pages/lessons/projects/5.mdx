@@ -1,6 +1,6 @@
 ---
 i18n: "smart-contracts"
-title: Connecting to a Frontend
+title: Connecting to a Front-end
 description: Connect your smart contract to a UI for people to interact with.
 icons: ["rainbowkit", "wagmi", "ethers"]
 author: "ropats16"
@@ -11,9 +11,9 @@ import Layout from "../../../components/Layout";
 
 <Layout
     title="Connect your Smart Contract to a Front End Application" 
-    description="Learn to seamlessly integrate your smart contracts with a user friendly frontend interface utilising web3 libraries. With engaging quizzes along the way." 
+    description="Learn to seamlessly integrate your smart contracts with a user friendly front-end interface utilising web3 libraries. With engaging quizzes along the way." 
 >
-<LessonHeader title="Lesson 5: Connecting to a Frontend" />
+<LessonHeader title="Lesson 5: Connecting to a Front-end" />
 
 ## About this lesson
 
@@ -21,7 +21,7 @@ Welcome to this final tutorial in a series on smart contract development of the
 ERC721 standard, a.k.a. NFTs. Throughout the previous lessons we learnt how to
 write smart contracts, use token standards, and utilise test driven development
 as well. But to create a full stack decentralised application, we also need a
-UI, or frontend for users to interact with. In this lesson that is exactly what
+UI, or front-end for users to interact with. In this lesson that is exactly what
 we're going to create.
 
 {/* We may as well comment out the following paragraph for this first PR of July/August 2023, since without any quizzes, it's not yet relevant: */}
@@ -36,13 +36,14 @@ in a good state of mind and body.
 
 ## What are we building
 
-In the first in this track of tutorials, you created a basic smart contract
+{/* Major repetition going on with this next paragraph and the intro paragraph */}
+~~In the first in this track of tutorials, you created a basic smart contract
 using Remix. Then your shift to a dedicated developer's environment to create
 and deploy an NFT contract to an actual test network. In lesson 3 you added
 tiers to your NFTs. And you finally learnt to make your contracts airtight by
 building your own automated tests in the fourth in the series. Now we're going
-use all of this knowledge and connect it to a frontend for users to see and
-interact with.
+use all of this knowledge and connect it to a front-end for users to see and
+interact with.~~
 
 We'll create a basic **NFT minting application** that displays the three tiers
 of NFTs created in our smart contract and gives users a one-click option to mint
@@ -50,30 +51,19 @@ them. Once minted, users will be redirected to a page that displays information
 of their mint. We'll need some extra magic to make that all happen. For handling
 wallet connections to our application, we'll be introducing you to _RainbowKit_.
 And using the provided _hooks_ from _WAGMI_, we can check the connection to the
-wallet and call functions from our smart contract through the frontend.
-_RainbowKit_ and _WAGMI_ are just another couple of shining examples of open
-source public goods. We love open source at _Developer_DAO_. And public goods
-are gooood!
-
-- [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box
-  wallet management (i.e. Handling wallet connections to our application).
-
-- [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
-  functions from our smart contract through the frontend using the provided
-  _hooks_. \*/}
+wallet and call functions from our smart contract through the front-end.
+RainbowKit and WAGMI are just another couple of shining examples of open source
+public goods. We love open source at Developer_DAO. And public goods are gooood!
 
 {/* We could do with a oneliner for each to  describe what index.js and app.js are for */}
 
 ## Let's breakdown the lesson
 
 - Set up our development environment with TierNFT project
-- initialise a nextJS app
+- Initialise a nextJS app
 - Install RainbowKit, WAGMI and Ethers to create main application
-
-  - import dependencie
-
-    s
-
+- Import dependencies
+{/* - "a main entry point for displaying ..." needs a clearer definition */}
 - Create an Index page as main entry point for displaying the app content.
 - Create NFT cards
 - Enable minting of NFTs in the application.
@@ -81,21 +71,24 @@ are gooood!
 <br />
 
 ## Tools to get the job done
-
+{/* @piablo check the descriptions below. I believe Marcos updated them with better versions */}
 - [nextJS](https://nextjs.org/) - a React framework for building a full-stack
   app
+- [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box
+  wallet management (i.e. Handling wallet connections to our application).
 - [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library
   for out-of-the-box wallet management
-  {/* ethers will be getting ejected and viem will get added, I guess: */}
-  {/* - [viem](https://viem.sh/docs/getting-started.html) */}
 - [viem](https://viem.sh/docs/getting-started.html) is a compact JavaScript
   library for interacting with the Ethereum eco-system
+- [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
+  functions from our smart contract through the front-end using the provided
+  _hooks_.
 - [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to
   work effectively with Ethereum
 - [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app
   connect to the blockchain
 
-\*_always make sure you access up-to-date release notes and documentation_
+\* _always make sure you access up-to-date release notes and documentation_
 
 Let's dive in!
 
@@ -108,10 +101,10 @@ Let's dive in!
 We're going to start where we left off in _Write Automated Tests for your
 TierNFT_.
 
-Open your code editor and `cd` into the **`TierNFT`** project directory. For all
-things related to our frontend we are going to create a new sub-directory within
-our project's root directory to maintain good practice, keep our code clean, and
-be easy to locate and read. The first step is to initiate a _nextJS_
+Open your code editor and `cd` into the **`tierNFT`** project directory. For all
+things related to our front-end we are going to create a new sub-directory
+within our project's root directory to maintain good practice, keep our code
+clean, and be easy to locate and read. The first step is to initiate a _Next.js_
 application.
 
 <Callout emoji="💡">
@@ -120,39 +113,36 @@ application.
 
 The next command creates a sub-directory named `frontend` inside our root
 directory and sets up all the necessary files and folders within it. The
-`create-next-app` command uses the `yarn` package manager by default. **So be
-careful and choose your command accordingly**. We have been using `npm` as our
-package manager for all our previous builds, so we'll choose the `--use-npm`
-flags:
+`create-next-app` command uses the `yarn` package manager by default, but since
+we have been using `npm` as the package manager for all our previous builds in
+this track, we'll add the `--use-npm` flags:
 
 {/* We need to check the following commands and flags are up-to-date, and for a Javascript project, if we prefer to stick to JS over TypeScript: */}
 
 ```bash
-# choose the following for npm
+# create your Next.js application
 npx create-next-app frontend --use-npm
-
-# careful, this is the default for yarn
-npx create-next-app frontend
 ```
 
 {/* I'm not sure if the following steps are correct, but having this information in the lesson, can be a great guide (Rohit was under pressure to get it out, so might have overlooked adding it then) I'll comment it out for now, and we can update it accordingly: */}
-{/* Choose 'No' to *TypeScript*, because we want to create a *JavaScript* project, but choose 'Yes' to all the other options: */}
+For your next steps, choose 'No' to _TypeScript_, because we want to create a
+_JavaScript_ project, but choose 'Yes' to all the other options:
 {/* DONE, TO REVIEW BY @elPiablo */}
 
 ```bash
 Need to install the following packages:
   create-next-app@14.0.4
 Ok to proceed? (y) y
-✔ Would you like to use TypeScript? … No / Yes
-✔ Would you like to use ESLint? … No / Yes
-✔ Would you like to use Tailwind CSS? … No / Yes
-✔ Would you like to use `src/` directory? … No / Yes
-✔ Would you like to use App Router? (recommended) … No / Yes
-✔ Would you like to customize the default import alias (@/*)? … No / Yes
+✔ Would you like to use TypeScript? … No
+✔ Would you like to use ESLint? … Yes
+✔ Would you like to use Tailwind CSS? … Yes
+✔ Would you like to use `src/` directory? … Yes
+✔ Would you like to use App Router? (recommended) … Yes
+✔ Would you like to customize the default import alias (@/*)? … Yes
 Creating a new Next.js app in ((path)):/developerdao/frontend.
 ```
 
-Once the setup is complete, we open the `frontend` directory and get cracking.
+Once the setup is complete, we open the `frontend` directory and get cracking:
 
 ```bash
 cd frontend
@@ -162,7 +152,7 @@ cd frontend
 
 ---
 
-## The Frontend
+## The Front-end
 
 We need more of an intro than the following 'The Main Application' as to what
 app.js is and subsequently we should do the same for index.js (when we get to
@@ -204,6 +194,7 @@ export default MyApp;
 
 We need to add some additional imports to create our configurations.
 
+{/* see below // import { useEffect, useState } from "react"; MARKKOS89 NOTE: I WOULD REMOVE THIS IMPORT AND CONSIDER "USING/MOVING IT" TO INDEX.JS IMPROTS EXAPLANATION - go to line :238 */}
 ```jsx
 import "@/styles/globals.css";
 // new block of imports:
@@ -214,7 +205,7 @@ import { polygonMumbai } from "wagmi/chains";
 
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { useEffect, useState } from "react"; // MARKKOS89 NOTE: I WOULD REMOVE THIS IMPORT AND CONSIDER "USING/MOVING IT" TO INDEX.JS IMPROTS EXAPLANATION - go to line :238
+import { useEffect, useState } from "react"; 
 // end of new block of imports
 
 // the rest of the function MyApp code...
@@ -262,7 +253,7 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "TierNFTs Frontend Integration",
+  appName: "TierNFTs Front-end Integration",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECTCLOUD_PROJECT_ID,
   chains,
 });
@@ -769,9 +760,9 @@ Let's see what is happening in each NFT Card by taking `Tier 0` as an example.
   underway. For this we use the true/ false values received from
   `isMintLoading`. The button will be disabled when `isMintLoading` is `true`.
 
-Great but anyone can view and call our mint functions in the frontend of our app
-even if their wallet is not connected to the application. This could result in
-some errors. We must check if a user is connected before we let them interact
+Great but anyone can view and call our mint functions in the front-end of our
+app even if their wallet is not connected to the application. This could result
+in some errors. We must check if a user is connected before we let them interact
 with our application simply by using the `isConnected` utility from Wagmi and
 setting setting its value in our `isUserConnected` state.
 
