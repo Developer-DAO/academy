@@ -67,6 +67,7 @@ public goods. We love open source at Developer_DAO. And public goods are gooood!
 - Create an Index page as main entry point for displaying the app content.
 - Create NFT cards
 - Enable minting of NFTs in the application.
+- Lesson Summary 
 
 <br />
 
@@ -87,6 +88,7 @@ public goods. We love open source at Developer_DAO. And public goods are gooood!
   work effectively with Ethereum
 - [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app
   connect to the blockchain
+- WALLETCONNECT STUFF: self-document steps to set-up from [here](https://www.rainbowkit.com/docs/installation) and choose place in lesson for these steps
 
 \* _always make sure you access up-to-date release notes and documentation_
 
@@ -194,7 +196,7 @@ export default MyApp;
 
 We need to add some additional imports to create our configurations.
 
-{/* see below // import { useEffect, useState } from "react"; MARKKOS89 NOTE: I WOULD REMOVE THIS IMPORT AND CONSIDER "USING/MOVING IT" TO INDEX.JS IMPROTS EXAPLANATION - go to line :238 */}
+n.b. see below in following code block // `import { useEffect, useState } from "react";` MARKKOS' NOTE: I would remove this `import` and consider using/moving it to `index.js` imports explanation - go to line :238 and see comments re: sidedrawer needed
 ```jsx
 import "@/styles/globals.css";
 // new block of imports:
@@ -225,8 +227,8 @@ import { useEffect, useState } from "react";
   provider configs for the providers we will be using. In our app we are using
   an `alchemyProvider` along with a fall back `publicProvider`. A provider
   allows our application to communicate with a blockchain.
-  {/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. */}
-- `useEffect` and `useState` are react hooks that help us perform side effects
+  {/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. We could add the sidedrawers in at the end of this chunk before a checkpoint set*/}
+- SIDE-DRAWER NEEDED FOR THESE: `useEffect` and `useState` are react hooks that help us perform side effects
   and capture the state, respectively. More on
   [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/)
   and the
@@ -240,6 +242,11 @@ import { useEffect, useState } from "react";
 
 After importing, we create the configurations we need, and create a new instance
 of `wagmiClient` using them.
+
+MAYBE HERE FOR WALLETCONNECT??: Because our dApp is going to use WalletConnect, we need to first go an grab a `projectID`
+from the [WalletConnectCloud](https://cloud.walletconnect.com/sign-in). You'll be done in a few minutes 🤗
+Let's get back to the `_app.js` file and create the configurations we need, and create a new instance
+of `wagmiClient` which uses them:
 
 ```jsx
 // import statements code...
