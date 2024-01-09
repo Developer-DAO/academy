@@ -13,9 +13,9 @@ import Layout from "../../../components/Layout";
     title="Introduction to web3 wallets" 
     description="Overview of wallet use cases and setting up environment." 
 >
-<LessonHeader title="Web3 wallets, and public and private keys..." />
+<LessonHeader title="Web3 wallets, and public and private keys..." />, e.
 
-### What do we have in store?
+## What do we have in store?
 
 If you are reading this, you may be new to blockchain development and want to
 know a bit about crypto wallets and how you can use them effectively along your
@@ -24,25 +24,25 @@ private keys, and we’ll discover why without a wallet we just can’t get near
 blockchain! We’ll also give you a run down of best practices on setting up your
 wallet for development, so you can get to work!
 
-### **First a bit on wallet variants, use cases and users**
+## First a bit on wallet variants, use cases and users
 
 A blockchain enthusiast can choose from a few different types of wallets.
 
-Custody.... who holds those elusive keys?
+### Custody . . . who holds those elusive keys?
 
-- **Custodial**: _You don't_ have the keys, but a _custodian_ does e.g. a CEX -
+- **Custodial**: _You don't_ have the keys, but a _custodian_ does, e.g. a CEX -
   centralised exchange
 - **Non custodial**: _You do_ have the keys. You’re a web3 boss!
-- **Shared custody**: Multiple people have different individual keys i.e. a
+- **Shared custody**: Multiple people have different individual keys, i.e. a
   multi-sig
 
-Wallets vary on their connectivity...
+### Wallets vary on their connectivity . . .
 
-- **Hot**: Always connected to the internet e.g. a browser extension, a mobile
+- **Hot**: Always connected to the internet, e.g. a browser extension, a mobile
   app, a CEX wallet
 - **Warm**: Connected, but requires human interaction to sign.... a more recent
   development
-- **Cold**: Never connected to the internet e.g. a USB hardware wallet, a paper
+- **Cold**: Never connected to the internet, e.g. a USB hardware wallet, a paper
   wallet
 
 The crypto original is the paper wallet. Make sure you have **at least** one
@@ -64,7 +64,7 @@ authorise transactions. The list of types and use cases is growing fast. You may
 even use your own shiny, new wallet to sign and prove that you have completed a
 lesson you are doing right now!
 
-### So you what actually goes on in this wallet?
+## So what actually goes on in this wallet?
 
 First things first. A wallet doesn’t hold any tokens. It’s a miracle of
 software, which acts like a window, letting you look from a centralised Web2
@@ -80,20 +80,19 @@ What the wallet **_does_** hold, are called a public and private key pair, and
 let’s not forget the mnemonic seed recovery phrase that generates this key pair,
 all of which you should have noted safely on your cold paper wallet. Right?
 
-### Public and private keys. A simple analogy
+## Public and private keys. A simple analogy
 
 Let’s remember that we are talking about a world of digital infrastructure where
 everything we send, receive and store as messages is represented……yes,
 digitally. Messages can be digital files of music, text, PDFs, video, you name
-it, and let’s not forget, digital money i.e. **_crypto_**graphic **_tokens_**.
-So we can think of a public key as an email address to which anyone can send an
+it, and let’s not forget, digital money, , i.e. **_crypto_**graphic **_tokens_**.
+So we can think of a public key as similar to an email address to which anyone can send an
 email message. And we can similarly consider a private key, as the password of
-that email account. We need the password to see, send and sign any messages and
-prove they are destined **for** us, or come **from** us.
+that email account. We need the password to read any messages when they are destined **for** us, or send and sign any messages, to prove they come **from** us.
 
 ![qafkeys.png](/assets/lessons/wallets/qafkeys.png)
 
-So, the public key is our digital identity on a decentralised network e.g. a
+So, the public key is our digital identity on a decentralised network, e.g. a
 blockchain. Therefore if the last project you worked on has forgotten to pay
 you, make sure they have your public key, so they can send you a digital message
 ..... containing some digital money! And that private key of yours is what you
@@ -101,7 +100,7 @@ use to sign any action, whether it is seeing or transacting with your assets, or
 simply proving who you are. Sharing your public keys is pretty much what you
 _do_ want to do, but sharing your private keys is certainly not.
 
-### Generation of your wallet keys and blockchain address - the basics
+## Generation of your wallet keys and blockchain address - the basics
 
 On downloading a wallet, the application generates a private key and an
 accompanying mnemonic phrase (12 or 24 random words from a finite list), which
@@ -118,9 +117,10 @@ networks, letting us interact with each other on them safely. Together, they are
 a powerful pair for proving your identity and what you own. **Guard your
 seed/recovery phrases and private keys with your life!**
 
-### Enough chit-chat. Let’s get you set up…… **with safety in mind!**
+## Enough chit-chat. Let’s get you set up . . . with safety in mind!
 
-**Step 1**. We recommend that you **do not** use your personal wallet for web
+### Step 1 
+We recommend that you **do not** use your personal wallet for web
 development. And you can actually make your life a lot less complicated by
 creating a new browser profile for each new wallet. You can see below, I have
 different use cases for wallets, and have a separate browser profile for each
@@ -136,10 +136,9 @@ particular wallet. As a developer, that’s handy when you need to send test
 transactions to mock actors when you are testing your apps. I also have a few
 accounts in my dev_workshops wallet.
 
-**Step 2**. Download a wallet. We are going to be using Metamask. It’s a well
-audited wallet with lots of features to get our job done.<a
-style={{textDecoration: 'underline'}} href="https://metamask.io/"
-target="\_blank">Download MetaMask</a> and follow the steps carefully:
+### Step 2 
+Download a wallet. We are going to be using Metamask. It’s a well
+audited wallet with lots of features to get our job done. [Download MetaMask](https://metamask.io/) and follow the steps carefully:
 
 ![MM_for_Brave.png](/assets/lessons/wallets/MM_for_Brave.png)
 
@@ -149,7 +148,7 @@ stored safely offline. If you have them saved on your machine and your operating
 system dies for whatever reason, you have no way of recovering these private
 details. There’s no customer service. Gone is gone.**
 
-### Ready to Roll!
+## Ready to Roll!
 
 We will have a separate article on using Git and Github, as you will likely be
 using shared public repositories quite often. We will show you how to safely
@@ -157,7 +156,7 @@ store private keys in private **.env** files. Stay tuned for that.
 
 Now you should be ready to get up and running with your projects. If you need
 test ETH, see the end of our article on _Testnets_, where you can find steps to
-the _faucet_ for Goerli Testnet. And check out _Connect with RPC_ for when you
+the _faucet_ for Sepolia Testnet. And check out _Connect with RPC_ for when you
 need to start deploying your work to the distributed networks that make up Web3.
 
 Don't lose those keys and happy coding!!!

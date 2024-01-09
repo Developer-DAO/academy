@@ -14,12 +14,14 @@ import Layout from "../../../components/Layout";
 >
 <LessonHeader title="Connecting to a Network via RPC" />
 
+## RPCs
+
 **Remote Procedure Call (RPC)** could be classified as a type of API
 (application programming interface) that allows for developers to run code that
 can be executed on servers remotely. In plain English, an RPC call is how a dApp
 communicates with the blockchain or accesses other information from remote
 servers. In this section, we will concern ourselves with RPC calls to the
-blockchain via _Metamask_ to Ethereum testnets such as _Rinkeby_ and RPC
+blockchain via _Metamask_ to Ethereum testnets such as _Ropsten_ and RPC
 endpoint providers such as _Infura_, _Alchemy_, _Chainstack_, and _Ankr_.
 
 ### Connecting to a Testnet with Metamask
@@ -38,22 +40,24 @@ Currency Symbol, and Block Explorer URL are shown below:
 
 ![Ropsten RPC Metamask](/assets/lessons/connect-with-rpc/ropsten-RPC-metamask.png)
 
-**Add a Network**
+### Add a Network
 
 A new network can be added in Metamask by clicking on the **Add a network**
 button and adding the 5 data inputs seen in the image above given in your
 tutorial or other source.
 
-## Connecting a dApp through an RPC Endpoint Provider
+### Connecting a dApp through an RPC Endpoint Provider
 
 In blockchain development, it is necessary to connect your dApp to the
 blockchain to deploy smart contracts and interact with the deployed contract.
 This can be done by either running your own blockchain node such as GETH or
 accessing the blockchain through an RPC endpoint service such as Infura,
 Alchemy, Chainstack, Ankr, etc. Connecting through node providers is much easier
-than running your own node. By using a node provider, it is quick, easy and
+than running your own node. 
+
+By using a node provider, it is quick, easy and
 **FREE** to open an account and get access to RPC endpoints of many different
-testnets including Goerli Ethereum, Polygon Mumbai, Optimism Kovan and Solana
+testnets including Sepolia Ethereum, Polygon Mumbai, Optimism Kovan and Solana
 Devnet. The websites for the aforementioned RPC endpoint providers can be found
 below:
 
