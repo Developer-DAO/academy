@@ -129,6 +129,9 @@ Let’s first open a console and `cd` into our `d_d_academy` folder, or create i
 first if you haven't already. Then create a folder for our TierNFT project, then
 `cd` into it:
 
+{/* If successful, update lesson 2 with the same two lines:
+## create a Hardhat project
+npx hardhat init */}
 ```bash
 ## (OPTIONAL) create a folder for our D_D Academy projects
 mkdir d_d_academy
@@ -145,7 +148,7 @@ npm init -y
 npm install --save-dev hardhat
 
 ## create a Hardhat project
-npx hardhat
+npx hardhat init
 ```
 
 <Callout emoji="💡" size="md" variant="info">
@@ -498,7 +501,7 @@ Let’s stop to break it down and examine it a little.
 - Within the `tokenURI` function, you'll notice `override`, an `ERC721` function
   we'll use, since we are not creating a separate JSON file to store images or
   other services, but creating it right here in the contract.
-- We also added `require(_exists(tokenId). "Nonexistent token");`. According to
+- We also added `require(_exists(tokenId), "Nonexistent token");`. According to
   the ERC-721 specification, it is required to throw an error if the NFT doesn't
   exist.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit
@@ -1040,6 +1043,8 @@ can get tokens for multiple testnets.
 ![3_faucet.png](/assets/lessons/3/3_faucet.png)
 
 ### Personal Security
+
+Take your time to understand the **good practices for developers** in this section. Before we deploy, we need to add a `.env` file to our root folder to make sure we are **not pushing and therefore exposing our private keys in public repositories**. 
 
 For your wallet's private key, the most sensitive data of the project, you need
 to open Metamask. Click on the three dots next to your _Account Name_, and then
