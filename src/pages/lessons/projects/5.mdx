@@ -11,23 +11,26 @@ import Layout from "../../../components/Layout";
 
 <Layout
     title="Connect your Smart Contract to a Front End Application" 
-    description="Learn to seamlessly integrate your smart contracts with a user friendly front-end interface utilising web3 libraries. With engaging quizzes along the way." 
+    description="Learn to seamlessly integrate your smart contracts with a user friendly front-end interface, utilising web3 libraries. With engaging quizzes along the way." 
 >
 <LessonHeader title="Lesson 5: Connecting to a Front-end" />
 
 ## About this lesson
+Congratulations on making it to this final tutorial in a series on smart contract 
+development of the ERC-721 standard, a.k.a. NFTs. In the first in the track, you 
+created a basic smart contract using Remix. Then a shift to a dedicated developer's 
+environment to create and deploy an NFT contract to an actual test network. In 
+lesson 3 you added tiers to your NFTs, finally learning to make your contracts 
+air-tight by building your own automated testing suite in the fourth of the series. 
 
-Welcome to this final tutorial in a series on smart contract development of the
-ERC721 standard, a.k.a. NFTs. Throughout the previous lessons we learnt how to
-write smart contracts, use token standards, and utilise test driven development
-as well. But to create a full stack decentralised application, we also need a
+But to create a full stack decentralised application, we also need a
 UI, or front-end for users to interact with. In this lesson that is exactly what
 we're going to create.
 
 {/* We may as well comment out the following paragraph for this first PR of July/August 2023, since without any quizzes, it's not yet relevant: */}
 {/* You can expect our familiar checkpoint questions throughout the tutorial for testing your previous knowledge, how well you’re picking up the new material, and even some on predicting upcoming steps in the lesson. They all help with critical thinking and active engagement. You'll find the updated code in side-drawers too as you progress, handy for identifying any pesky syntax errors you might come across. And of course, there is a final quiz waiting for you on completion. */}
 
-Expect somewhere from one to six hours to complete the lesson, depending on your
+Expect somewhere from one to four hours to complete the lesson, depending on your
 prior experience and the need to grasp new concepts. To help you maintain a
 steady pace and encourage breaks for rejuvenation, you'll find our pomodoro
 timer ⌛ in the menu header. It'll remind you to "go touch grass" and appreciate
@@ -36,29 +39,22 @@ in a good state of mind and body.
 
 ## What are we building
 
-{/* Major repetition going on with this next paragraph and the intro paragraph */}
-~~In the first in this track of tutorials, you created a basic smart contract
-using Remix. Then your shift to a dedicated developer's environment to create
-and deploy an NFT contract to an actual test network. In lesson 3 you added
-tiers to your NFTs. And you finally learnt to make your contracts airtight by
-building your own automated tests in the fourth in the series. Now we're going
-use all of this knowledge and connect it to a front-end for users to see and
-interact with.~~
+Now we're going use all of this knowledge and create a basic **NFT minting application** 
+that displays the three tiers of NFTs created in our smart contract and gives users 
+a one-click option to mint them. Once minted, users will be redirected to a page 
+that displays information of their mint. We'll need some extra magic to make that 
+all happen. 
 
-We'll create a basic **NFT minting application** that displays the three tiers
-of NFTs created in our smart contract and gives users a one-click option to mint
-them. Once minted, users will be redirected to a page that displays information
-of their mint. We'll need some extra magic to make that all happen. For handling
-wallet connections to our application, we'll be introducing you to _RainbowKit_.
+For handling wallet connections to our application, we'll be introducing you to _RainbowKit_.
 And using the provided _hooks_ from _WAGMI_, we can check the connection to the
 wallet and call functions from our smart contract through the front-end.
 RainbowKit and WAGMI are just another couple of shining examples of open source
 public goods. We love open source at Developer_DAO. And public goods are gooood!
 
-{/* We could do with a oneliner for each to  describe what index.js and app.js are for */}
 
 ## Let's breakdown the lesson
 
+{/* We could do with a oneliner for each to  describe what index.js and app.js are for */}
 - Set up our development environment with TierNFT project
 - Initialise a nextJS app
 - Install RainbowKit, WAGMI and Ethers to create main application
@@ -72,31 +68,26 @@ public goods. We love open source at Developer_DAO. And public goods are gooood!
 <br />
 
 ## Tools to get the job done
-{/* @piablo check the descriptions below. I believe Marcos updated them with better versions */}
+{/* upgrades to descriptions are welcome. I/we might need to move the actual URLs down into 
+the tutorial if really needed. For now, they avoid that potential rabbit hole scenario while here */}
 - [nextJS](https://nextjs.org/) - a React framework for building a full-stack
   app
-- [RainbowKit](https://www.rainbowkit.com/docs/introduction) for out-of-the-box
-  wallet management (i.e. Handling wallet connections to our application).
-- [RainbowKit](https://www.rainbowkit.com/docs/introduction) is a React library
+- [RainbowKit](https://www.rainbowkit.com/docs/introduction) - a React library
   for out-of-the-box wallet management
-- [viem](https://viem.sh/docs/getting-started.html) is a compact JavaScript
+- [viem](https://viem.sh/docs/getting-started.html) - a compact JavaScript
   library for interacting with the Ethereum eco-system
-- [WAGMI](https://wagmi.sh/) for checking connection to a wallet and calling
-  functions from our smart contract through the front-end using the provided
-  _hooks_.
 - [WAGMI](https://wagmi.sh/) is a collection of React hooks that allows us to
   work effectively with Ethereum
 - [Alchemy](https://dashboard.alchemy.com/) is an RPC provider that lets our app
   connect to the blockchain
-- WALLETCONNECT STUFF: self-document steps to set-up from [here](https://www.rainbowkit.com/docs/installation) and choose place in lesson for these steps
+- [WalletConnect](https://cloud.walletconnect.com/sign-in) - is a bridge that 
+connects Decentralized Applications (DApps) to your web3 wallet
 
 \* _always make sure you access up-to-date release notes and documentation_
 
 Let's dive in!
 
 <br />
-
-{/* --- */}
 
 ## Getting started
 
@@ -115,21 +106,17 @@ application.
 
 The next command creates a sub-directory named `frontend` inside our root
 directory and sets up all the necessary files and folders within it. The
-`create-next-app` command uses the `yarn` package manager by default, but since
-we have been using `npm` as the package manager for all our previous builds in
+`create-next-app` command uses the **yarn** package manager by default, but since
+we have been using **npm** as the package manager for all our previous builds in
 this track, we'll add the `--use-npm` flags:
-
-{/* We need to check the following commands and flags are up-to-date, and for a Javascript project, if we prefer to stick to JS over TypeScript: */}
 
 ```bash
 # create your Next.js application
 npx create-next-app frontend --use-npm
 ```
 
-{/* I'm not sure if the following steps are correct, but having this information in the lesson, can be a great guide (Rohit was under pressure to get it out, so might have overlooked adding it then) I'll comment it out for now, and we can update it accordingly: */}
 For your next steps, choose 'No' to _TypeScript_, because we want to create a
 _JavaScript_ project, but choose 'Yes' to all the other options:
-{/* DONE, TO REVIEW BY @elPiablo */}
 
 ```bash
 Need to install the following packages:
@@ -156,11 +143,11 @@ cd frontend
 
 ## The Front-end
 
-We need more of an intro than the following 'The Main Application' as to what
+{/* We need more of an intro than the following 'The Main Application' as to what
 app.js is and subsequently we should do the same for index.js (when we get to
 that section). A little hint of what index.js is here would help - we could use
 a prediction question to aid with/actually perform this task before this
-section: \_/}
+section:  */}
 
 For users to easily interact with our smart contract and mint the NFTs we must
 provide an interface. A simple process that is easily accessible. Let's start by
@@ -172,10 +159,6 @@ Install RainbowKit and it's dependencies:
 
 ```bash
 npm install @rainbow-me/rainbowkit wagmi viem
-
-# or if you have chosen to use yarn:
-
-yarn add @rainbow-me/rainbowkit wagmi viem
 ```
 
 To get this setup we need to start working on the `_app.js` file in the
@@ -196,7 +179,7 @@ export default MyApp;
 
 We need to add some additional imports to create our configurations.
 
-n.b. see below in following code block // `import { useEffect, useState } from "react";` MARKKOS' NOTE: I would remove this `import` and consider using/moving it to `index.js` imports explanation - go to line :238 and see comments re: sidedrawer needed
+{/* n.b. see below in following code block // `import { useEffect, useState } from "react";` MARKKOS' NOTE: I would remove this `import` and consider using/moving it to `index.js` imports explanation - go to line :238 and see comments re: sidedrawer needed */}
 ```jsx
 import "@/styles/globals.css";
 // new block of imports:
@@ -228,7 +211,7 @@ import { useEffect, useState } from "react";
   an `alchemyProvider` along with a fall back `publicProvider`. A provider
   allows our application to communicate with a blockchain.
   {/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. We could add the sidedrawers in at the end of this chunk before a checkpoint set*/}
-- SIDE-DRAWER NEEDED FOR THESE: `useEffect` and `useState` are react hooks that help us perform side effects
+- `useEffect` and `useState` are react hooks that help us perform side effects
   and capture the state, respectively. More on
   [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/)
   and the
@@ -240,13 +223,13 @@ import { useEffect, useState } from "react";
   effects by isolating them from a component.
 </Callout>
 
-After importing, we create the configurations we need, and create a new instance
-of `wagmiClient` using them.
 
-MAYBE HERE FOR WALLETCONNECT??: Because our dApp is going to use WalletConnect, we need to first go an grab a `projectID`
-from the [WalletConnectCloud](https://cloud.walletconnect.com/sign-in). You'll be done in a few minutes 🤗
-Let's get back to the `_app.js` file and create the configurations we need, and create a new instance
-of `wagmiClient` which uses them:
+Because our dApp is going to use WalletConnect, we need a `projectID`
+from the [WalletConnectCloud](https://cloud.walletconnect.com/sign-in). 
+So go and set up an account and grab that ID. You'll be done in a few minutes 🤗
+
+All good? Okay, let's get back to the `_app.js` file, set up the configurations we need, and create a new instance
+of the `wagmiClient` which will use them:
 
 ```jsx
 // import statements code...
@@ -476,6 +459,7 @@ import Image from "next/image";
 - We need to use the `useAccount` hook from WAGMI to check account connection
   and `useContractRead` and `useContractWrite` to interact with our smart
   contract. We will look into WAGMI and these hooks a little down the line.
+  {/* I eventually wanna create a side-drawer for ABI */}
 - `TierABI` is our contract's Application Binary Interface (ABI). The ABI helps
   us interact with the smart contract outside the blockchain or
   contract-to-contract. You can read more about ABIs
@@ -607,10 +591,10 @@ own `mintToken` function that calls the `mint` function from WAGMI within it.
 
 The `usePrepareContractWrite` hook also work better with the
 `usePrepareContractWrite` hook as explained on
-[wagmi docs]()https://wagmi.sh/react/hooks/useContractWrite#prepared-usage.
+[wagmi docs](https://wagmi.sh/react/hooks/useContractWrite#prepared-usage).
+{/* add more explanations maybe explaining how they work together and why we need
+it to perform better the UX */}
 
-(add more explanations maybe explaining how they work together and why we need
-it to perform better the UX)
 
 ```jsx
 // WAGMI useContractWrite hook...
@@ -631,7 +615,8 @@ const mintToken = async (e) => {
 
 // function Home() code...
 ```
-
+{/* if we can avoid the  following link, that would be great. I think at a later stage 
+ after this MVP, we can come back and create a few side-drawers for these hooks: */}
 - We pass in `e` as an argument so that we can pick the amount of ETH associated
   with a particular Tier. This is passed to the mint function using the
   `recklesslySetUnpreparedOverrides` override config. Read more about it
@@ -788,7 +773,7 @@ useEffect(() => {
 ```
 
 The `useEffect` hook runs the functions within it everytime the value of its
-dependencies (`isConnected`, in this case) changes.
+dependencies, `isConnected`, in this case, changes.
 
 Then we can wrap the `<main>` element as follows:
 
@@ -808,10 +793,10 @@ Then we can wrap the `<main>` element as follows:
 // closing <div> and styling consts...
 ```
 
-This type of syntax (`condition ? ifTrueDoThis : ifFalseDoThis`) is known as a
-`ternary` operator. It checks whether the condition is `true` or `false` and
+This `condition ? ifTrueDoThis : ifFalseDoThis` type of syntax is known as a
+**ternary** operator. It checks whether the condition is `true` or `false` and
 returns one of two values accordingly. In our case, we check if the the user is
-connected and show them the mint options if `true`, else we ask them to connect
+connected and show them the mint options `if` `true`, `else` we ask them to connect
 their wallet.
 
 Now our preview should look like this once a wallet is connected:
