@@ -82,7 +82,12 @@
     "initVersion": "7.10.3"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,md,json,yml}": "prettier --write"
+    "*.{js,ts,tsx,md,json,yml,mdx}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "engines": {
     "node": ">=18",
