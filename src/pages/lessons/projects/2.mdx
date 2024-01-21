@@ -184,7 +184,7 @@ Once we have our environment set up, we need to set up a project.
 
 ![you.shall.not.pass.jpeg](/assets/lessons/2/img_3.jpeg)
 
-We run the `npx hardhat` command to generate a basic project:
+We run the `npx hardhat init` command to generate a basic project:
 
 ```less
 // 888    888                      888 888               888
@@ -196,11 +196,12 @@ We run the `npx hardhat` command to generate a basic project:
 // 888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.
 // 888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888
 
-👷 Welcome to Hardhat v2.14.0 👷
+👷 Welcome to Hardhat v2.19.4 👷
 
 ? What do you want to do? …
 ❯ Create a JavaScript project
   Create a TypeScript project
+  Create a TypeScript project (with Viem)
   Create an empty hardhat.config.js
   Quit
 ```
@@ -319,7 +320,7 @@ and copy this code inside:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 contract ProjectNFT {
 }
@@ -358,7 +359,7 @@ This is what we need in our code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -395,7 +396,7 @@ which we can use as our ID for each new token created:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -437,7 +438,7 @@ NFT:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -500,7 +501,7 @@ Here's the modifications we will add and I'll explain them below:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -570,9 +571,11 @@ We propose a _choose your own adventure_ for this part of the project:
   <Question question="lesson-2/4-nft-id/Q5" />
 </SideDrawer>
 
+Go touch grass 😊 🌱
+
 <SideDrawer buttonText="Longer Path (learn about JSON and IPFS)">
 ## JSON
-Go touch some grass, and set your pomodoro when you get back ⌛😊
+{/* Go touch some grass, and set your pomodoro when you get back ⌛😊 */}
 
 We have most of our smart contract ready, so we are going to focus on the media
 that we want on our NFTs.
@@ -793,7 +796,7 @@ deployed contract to the console.
 Before we run our script, we need to tell Hardhat what Solidity version our
 contracts are using. For that, we need to go into the `hardhat.config.js` file
 in our project's root folder. Find the line that says `solidity: '0.8.xx',` and
-replace the `0.8.xx` for the pragma used in our contract: `0.8.12`.
+replace the `0.8.xx` for the pragma used in our contract: `0.8.20`.
 
 We could have used a range of Solidity versions e.g. `^0.8.0` in our contract,
 but we like to promote best practices by choosing a fixed Solidity version and
@@ -810,7 +813,7 @@ This is the output i got:
 
 ![deploy.output.png](/assets/lessons/2/img_16.png)
 
-Notice that it ‘Compiled 10 Solidity files successfully’, but we only wrote 1
+Notice that it ‘Compiled 12 Solidity files successfully’, but we only wrote 1
 Solidity file! Well, we are actually inheriting some of OpenZeppelin's
 implementations, so the compiler also has to process everything we are importing
 in our contract.
@@ -873,7 +876,7 @@ What is a testnet? It is a basically a whole running blockchain, but it runs
 only so people can try stuff out. On it, you have ETH, NFTs, or other tokens but
 they have no monetary value. This way, you can develop and test your contracts
 without fear of losing anything valuable. Ethereum has many testnets, and you
-might notice that we used _Goerli_ testnet. But we suggest that you use
+might notice that many used _Goerli_ testnet in the past. But we suggest that you use
 _Sepolia_ testnet, now that it has compatible NFT hosting support, and longevity
 for app development that _Goerli_ won't outlast.
 
@@ -895,7 +898,7 @@ In order to deploy to a real testnet we'll need:
   [#3](https://faucet.quicknode.com/ethereum/sepolia)
 - An API Key from an Ethereum RPC Node Provider
   ([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
-  [Ankr](https://rpc.ankr.com/eth_goerli))
+  [Ankr](https://rpc.ankr.com/eth_sepolia))
 - A minor change in the Hardhat configuration file
 
 First and foremost, **security**. We are exploring new grounds, experimenting,
@@ -945,9 +948,9 @@ const RPC_API_KEY = "YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY";
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.12",
+  solidity: "0.8.20",
   networks: {
-    goerli: {
+    sepolia: {
       url: RPC_API_KEY,
       accounts: [WALLET_PRIVATE_KEY],
     },
@@ -1016,7 +1019,7 @@ Just go to [Sepolia Etherscan](https://sepolia.etherscan.io/) (or
 deployed contract.
 
 You can view my links as an example on
-[Etherscan](https://goerli.etherscan.io/address/0x166A82F7cD8F7BA9D8C10b2cc792C1A20084564d)
+[Etherscan](https://sepolia.etherscan.io/address/0x1d3cd1708af35a49e80c093a8cc66a2325c01510)
 and [Opensea](https://testnets.opensea.io/collection/d-d-academy)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
