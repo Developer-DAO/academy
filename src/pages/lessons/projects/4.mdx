@@ -126,7 +126,7 @@ that same contract. Please create a new file called `TierNFT.sol` in a
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -148,7 +148,7 @@ contract TierNFT is ERC721, Ownable {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
+        ERC721(_name, _symbol) Ownable(msg.sender)
     {}
 
     function mint() public payable {
@@ -177,7 +177,7 @@ contract TierNFT is ERC721, Ownable {
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         string memory tierName = tokenTier[tokenId] == 2
             ? TIER_NAME_2
@@ -233,14 +233,14 @@ Copy the Solidity version from the `pragma` statement at the top of your
 contract, to the `hardhat.config.js` file and replace that `solidity: "version"`
 with that of your contract.
 
-For example, since our contract is using Solidity `0.8.12`:
+For example, since our contract is using Solidity `0.8.20`:
 
 ```javascript
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
 module.exports = {
-  solidity: "0.8.12",
+  solidity: "0.8.20",
 };
 ```
 
@@ -592,9 +592,10 @@ Let's look at testing `withdraw()` next with these 3 tests:
 ```javascript
 describe("withdrawal", async () => {
   it("should error if not owner", async function () {
-    await expect(contract.connect(otherUser).withdraw()).to.be.revertedWith(
-      "Ownable: caller is not the owner",
-    );
+    await expect(contract.connect(otherUser).withdraw()).to.be.revertedWithCustomError(
+      contract,
+      "OwnableUnauthorizedAccount"
+    ).withArgs(otherUser.address);
   });
 
   it("should error if balance is zero", async function () {
@@ -632,7 +633,7 @@ of additional highlights:
   withdraw from a zero-balance contact
 - Finally let's make sure an owner can successfully withdraw funds. Notice the
   `withdraw()` method call is surrounded by
-  `hre.ethers.provider.getBalance(contract.address)` lines. When we mint we know
+  `hre.ethers.provider.getBalance(contract.target)` lines. When we mint we know
   the contract now has `0.01` Eth so we check that. Then after running
   `withdraw`, check the balance again and it should be back to zero since all
   funds are withdrawn. Ok, yes we do have two `expect()` lines in one test that
@@ -714,7 +715,7 @@ be tested and understood by humans writing these tests.
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -736,7 +737,7 @@ contract TierNFT is ERC721, Ownable {
     mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
+        ERC721(_name, _symbol) Ownable(msg.sender)
     {}
 
     function mint() public payable {
@@ -808,7 +809,7 @@ contract TierNFT is ERC721, Ownable {
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         // string memory tierName = tierNameOf(tokenTier[tokenId]);
         string memory imageSVG = imageSVGOf(tokenTier[tokenId]);
@@ -851,7 +852,7 @@ Ok, here are some tests for these helpers!
 ```javascript
   describe('tokenURI and helpers', async () => {
     it('should error if token does not exist', async function () {
-      await expect(contract.tokenURI(0)).to.be.revertedWith('Nonexistent token')
+      await expect(contract.tokenURI(0)).to.be.revertedWithCustomError(contract, 'ERC721NonexistentToken').withArgs(0)
     })
   })
 

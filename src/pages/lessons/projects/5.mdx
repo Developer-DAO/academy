@@ -146,11 +146,11 @@ But first we need to install the necessary dependencies.
 changes from future and to give better learner experience   */}
 
 ```bash
-npm install @rainbow-me/rainbowkit wagmi ethers
+npm install @rainbow-me/rainbowkit wagmi viem @tanstack/react-query
 
 # or if you have chosen to use yarn:
 
-yarn add @rainbow-me/rainbowkit wagmi ethers
+yarn add @rainbow-me/rainbowkit wagmi viem @tanstack/react-query
 ```
 
 To get this setup we need to start working on the `_app.js` file in the `/frontend/pages`
@@ -172,99 +172,65 @@ We need to add some additional imports to create our configurations.
 // previous imports...
 import '@rainbow-me/rainbowkit/styles.css';
 import {
-  getDefaultWallets,
+  getDefaultConfig,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
 import {
-  chain,
-  configureChains,
-  createClient,
-  WagmiConfig,
-} from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from 'wagmi/providers/public';
+  polygonAmoy,
+} from 'wagmi/chains';
+import {
+  QueryClientProvider,
+  QueryClient,
+} from "@tanstack/react-query";
 import { useEffect, useState } from 'react';
 
-// function MyApp code...
-```
-
-- `import '@rainbow-me/rainbowkit/styles.css';` gives us some basic styling from
-Rainbowkit.
-- `import { getDefaultWallets, RainbowKitProvider, } from '@rainbow-me/rainbowkit';` returns
-the default wallet provider option and a RainbowKit Provider to "wrap" around our app
-so that we can use its features throughout the app's pages and components.
-- `import { chain, configureChains, createClient, WagmiConfig, } from 'wagmi';` provides
-a way to configure the WagmiConfig wrapper for our app based on the chains and providers
-of our choice along with some other customisations.
-- `import { alchemyProvider } from 'wagmi/providers/alchemy';` and 
-`import { publicProvider } from 'wagmi/providers/public';` give us the provider configs
-for the providers we will be using. In our app we are using an `alchemyProvider` along
-with a fall back `publicProvider`. A provider allows our application to communicate with 
-a blockchain.
-{/* It would be better to have a side drawer on 'state' and 'useEffect' here. We already have a few external links, and  we have hardly built anything so far in this lesson. That's a lot of potential rabbitholes. */}
-- `useEffect` and `useState` are react hooks that help us perform side effects and
-capture the state, respectively. More on [state](https://www.freecodecamp.org/news/what-is-state-in-react-explained-with-examples/) 
-and the [useEffect](https://www.freecodecamp.org/news/react-useeffect-absolute-beginners/) hook.
-
-<Callout emoji="💡">
-  Hooks are JavaScript functions that manage the state's behaviour and side effects by isolating them from a component.
-</Callout>
-
-After importing, we create the configurations we need, and create a new instance of 
-`wagmiClient` using them.
-
-```jsx
-// import statements code...
-
-const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
-  [
-    alchemyProvider({ apiKey: process.env.API_KEY }),
-    publicProvider()
-  ]
-);
-
-const { connectors } = getDefaultWallets({
+const config = getDefaultConfig({
   appName: 'My RainbowKit App',
-  chains
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [polygonAmoy],
+  ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors,
-  provider
-})
+const queryClient = new QueryClient();
 
 // function MyApp code...
 ```
 
-For this application we will continue using the `mumbai` testnet. Other chains can
-be added simply using the following syntax: `chain.chain_name`.
-For custom providers, like the `alchemyProvider` we can pass in our private
-`apiKey` as well. 
+- `import '@rainbow-me/rainbowkit/styles.css';` gives us some basic styling from RainbowKit.
+- `import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';` provides the default configuration options and a RainbowKit Provider to "wrap" around our app.
+- `import { WagmiProvider } from 'wagmi';` provides the main context for WAGMI hooks.
+- `import { QueryClient, QueryClientProvider } from "@tanstack/react-query";` is now required by WAGMI v2 for efficient data fetching and caching.
+- `import { polygonAmoy } from 'wagmi/chains';` imports the network configuration for Polygon Amoy.
 
-{/* Only the API key? Or the whole URL?: */}
-Set your API Key in a new file named `.env` inside our `frontend` directory 
-as follows:
-
-```dotenv
-API_KEY='YOUR-API-KEY-FROM-PROVIDER'
-```
-
-Now we can wrap our application in the `RainbowKitProvider` and `WagmiConfig`
-so that it can have access to their features throughout our application. Our code should 
-look like this:
+After importing, we create the configurations we need using `getDefaultConfig`.
 
 ```jsx
-// import statements and configs code...
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID', // Get one at https://cloud.walletconnect.com
+  chains: [polygonAmoy],
+  ssr: true,
+});
 
+const queryClient = new QueryClient();
+```
+
+For this application we will be using the `Amoy` testnet. Other chains can be added to the `chains` array.
+For the `projectId`, you'll need to sign up at [WalletConnect Cloud](https://cloud.walletconnect.com) to get a free project ID.
+
+Now we can wrap our application in the `WagmiProvider`, `QueryClientProvider`, and `RainbowKitProvider`. Our code should look like this:
+
+```jsx
 function MyApp({ Component, pageProps }) {
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <Component {...pageProps} />
-      </RainbowKitProvider >
-    </WagmiConfig >
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider>
+          <Component {...pageProps} />
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 };
 
@@ -413,10 +379,10 @@ Moving onto imports.
 // prev imports...
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
 import styles from '../styles/Home.module.css';
-import { ethers } from 'ethers';
+import { parseEther } from 'viem';
 import { useEffect, useState } from 'react';
 
 // function Home() code...
@@ -424,13 +390,13 @@ import { useEffect, useState } from 'react';
 
 - RainbowKit provides us a ready-made `ConnectButton`.
 - We need to use the `useAccount` hook from WAGMI to check account connection 
-and `useContractRead` and `useContractWrite` to interact with our smart 
+and `useReadContract` and `useWriteContract` to interact with our smart 
 contract. We will look into WAGMI and these hooks a little down the line.
 - `TierABI` is our contract's Application Binary Interface (ABI). The ABI 
 helps us interact with the smart contract outside the blockchain or 
 contract-to-contract. You can read more about ABIs 
 [here](https://www.quicknode.com/guides/solidity/what-is-an-abi).
-- The `ethers` library will assist us with some utilities in our code.
+- The `viem` library will assist us with some utilities like `parseEther`.
 - Once again, `useEffect` and `useState` are react hooks that will help us 
 perform side effects and capture the state, respectively.
 
@@ -525,51 +491,45 @@ export default function Home() {
   // variable definitions...
 
   const {
-      data: mintData,
-      writeAsync: mint,
-      isLoading: isMintLoading,
-    } = useContractWrite({
-      addressOrName: CONTRACT_ADDRESS,
-      contractInterface: TierABI.abi,
-      functionName: "mint",
-    });
+      data: mintHash,
+      writeContractAsync: mint,
+      isPending: isMintLoading,
+    } = useWriteContract();
 
  // return statement for rendering... 
 
 }
 ```
 
-The [`useContractWrite`](https://wagmi.sh/docs/hooks/useContractWrite) hook 
-from WAGMI let's us pass in the contract address, contract ABI and the 
-function name to return a JavaScript function (that we have called `mint`) 
+The [`useWriteContract`](https://wagmi.sh/react/api/hooks/useWriteContract) hook 
+from WAGMI returns a function (that we have called `mint`) 
 that can interact with our smart contract and trigger a `write` function in it. 
 
 How cool is that?!
 
-It also returns some additional features for error handling and checking
+It also returns some additional features for checking
 whether the function is running or completed.
 We are assigning well defined names to the returned values for easily calling them 
-later. For example, the `data` returned is called `mintData`.
+later. For example, the `data` returned is the transaction hash, which we call `mintHash`.
 
 Even though we have this function, we need to pass in custom `message values` 
-i.e. an amount in **ETH**, as defined in our contract. For this we create our 
-own `mintToken` function that calls the `mint` function from WAGMI within it.
+i.e. an amount in **ETH**, as defined in our contract, along with the contract address and ABI. 
+For this we create our own `mintToken` function that calls the `mint` function from WAGMI within it.
   
   {/* should be: // 'return statement for rendering...' 
   and not: // function Home() code... */}
 
 ```jsx
-// WAGMI useContractWrite hook...
+// WAGMI useWriteContract hook...
 
 const mintToken = async (e) => {
     try {
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
+      await mint({
+        address: CONTRACT_ADDRESS,
+        abi: TierABI.abi,
+        functionName: 'mint',
+        value: parseEther(e.target.value),
       });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
     } catch (error) {
       console.log("Error minting NFT", error.message);
     }
@@ -579,13 +539,8 @@ const mintToken = async (e) => {
 ```
 
 - We pass in `e` as an argument so that we can pick the amount of ETH 
-associated with a particular Tier. This is passed to the mint function using the 
-`recklesslySetUnpreparedOverrides` override config. Read more about it 
-[here](https://wagmi.sh/docs/hooks/useContractWrite#override-config). 
-- We want to wait for our minting transaction to complete before moving 
-on to other pieces of code so we use `wait()`.
-- After minting is processed we log the returned data to ensure the 
-success of our transaction.
+associated with a particular Tier. This is passed to the mint function along with the `address`, `abi`, and `functionName`.
+- After minting is triggered, we can use the returned hash to track the transaction.
 - Using `try...catch` statements makes our error handling more robust. The 
 compiler runs each line of code and exits in between if an error occurs.
 We can console log this error to easily identify the cause and location 
@@ -759,10 +714,10 @@ side drawer for the code written till now if stuck somewhere.
 import Head from 'next/head';
 import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
 import styles from '../styles/Home.module.css';
-import { ethers } from 'ethers';
+import { parseEther } from 'viem';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -776,14 +731,10 @@ export default function Home() {
   const [isMinting, setIsMinting] = useState(false);
 
   const {
-    data: mintData,
-    writeAsync: mint,
-    isLoading: isMintLoading,
-  } = useContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "mint",
-  });
+    data: mintHash,
+    writeContractAsync: mint,
+    isPending: isMintLoading,
+  } = useWriteContract();
 
   useEffect(() => {
     try {
@@ -795,13 +746,12 @@ export default function Home() {
 
   const mintToken = async (e) => {
     try {
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
+      await mint({
+        address: CONTRACT_ADDRESS,
+        abi: TierABI.abi,
+        functionName: 'mint',
+        value: parseEther(e.target.value),
       });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
     } catch (error) {
       console.log("Error minting NFT", error.message);
     }
@@ -978,26 +928,24 @@ To be able to display information about our latest mint, we must first
 get information about it from our smart contract.
 
 ```jsx
-// imports, consts and WAGMI useContractWrite hook...
+// imports, consts and WAGMI useWriteContract hook...
 
   const {
     data: tokenData,
     refetch: refetchTokenData,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "totalSupply",
-    watch: true,
   })
 
   const {
     data: tokenURI,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "tokenURI",
-    args: tokenData,
-    watch: true,
+    args: [tokenData],
   })
 
   // useEffect to check user connection...
@@ -1016,7 +964,7 @@ get information about it from our smart contract.
     try {
       let mintTxn = await mint({
         recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
+          value: parseEther(e.target.value),
         }
       });
       await mintTxn.wait();
@@ -1032,15 +980,13 @@ get information about it from our smart contract.
 - The first thing we need is the `tokenId` of the latest NFT minted. We 
 can do so by reading the value of the `totalSupply` stored in our smart 
 contract because the `totalSupply` should equal to the latest `tokenId` in
-our case. We can fetch this using the `useContractRead` hook from WAGMI 
+our case. We can fetch this using the `useReadContract` hook from WAGMI 
 that is configured for reading data from smart contracts. The cool thing about 
 solidity is that it automatically gives us a way to read values of variables 
 that are tagged as `public`, which is why we are able to read the value of 
 `totalSupply`.
 - The `refetchTokenData` function will be called in our `mintToken` function 
-to update the `tokenData` after minting has succeeded. We pass a 
-`watch: true` key-value pair so that the hook keeps an active watch on 
-the value of totalSupply.
+to update the `tokenData` after minting has succeeded.
 - Then the returned value (tokenData) is passed in as an argument to the 
 `tokenURI` function from our smart contract and we receive a `Base64` 
 encoded string in return.
@@ -1061,16 +1007,17 @@ now:
     try {
       setIsMinting(true);
       setModalShow(true);
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
+      const hash = await mint({
+        address: CONTRACT_ADDRESS,
+        abi: TierABI.abi,
+        functionName: 'mint',
+        value: parseEther(e.target.value),
       });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
+      console.log("Transaction Hash:", hash);
       refetchTokenData();
       setIsMinting(false);
     } catch (error) {
+      setIsMinting(false);
       console.log("Error minting NFT", error.message);
     }
   };
@@ -1112,12 +1059,12 @@ We're there at last! Now we can render our modal.
                   </div>
                   <div style={modalFooter}>
                     <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                      <a href={`https://testnets.opensea.io/assets/amoy/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
                         View on OpenSea
                       </a>
                     </button>
                     <button style={modalButton}>
-                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
+                      <a href={`https://amoy.polygonscan.com/tx/${mintHash}`} target="_blank">
                         View on Polygonscan
                       </a>
                     </button>
@@ -1158,10 +1105,10 @@ If you are stuck somewhere, please refer to the code side drawer below.
 import Head from 'next/head';
 import Image from 'next/image';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useContractRead, useContractWrite } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import TierABI from '../../artifacts/contracts/TierNFT.sol/TierNFT.json';
 import styles from '../styles/Home.module.css';
-import { ethers } from 'ethers';
+import { parseEther } from 'viem';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -1175,33 +1122,27 @@ export default function Home() {
   const [isMinting, setIsMinting] = useState(false);
 
   const {
-    data: mintData,
-    writeAsync: mint,
-    isLoading: isMintLoading,
-  } = useContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
-    functionName: "mint",
-  });
+    data: mintHash,
+    writeContractAsync: mint,
+    isPending: isMintLoading,
+  } = useWriteContract();
 
   const {
     data: tokenData,
     refetch: refetchTokenData,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "totalSupply",
-    watch: true,
   })
 
   const {
     data: tokenURI,
-  } = useContractRead({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: TierABI.abi,
+  } = useReadContract({
+    address: CONTRACT_ADDRESS,
+    abi: TierABI.abi,
     functionName: "tokenURI",
-    args: tokenData,
-    watch: true,
+    args: [tokenData],
   })
 
   useEffect(() => {
@@ -1226,16 +1167,17 @@ export default function Home() {
     try {
       setIsMinting(true);
       setModalShow(true);
-      let mintTxn = await mint({
-        recklesslySetUnpreparedOverrides: {
-          value: ethers.utils.parseEther(e.target.value),
-        }
+      const hash = await mint({
+        address: CONTRACT_ADDRESS,
+        abi: TierABI.abi,
+        functionName: 'mint',
+        value: parseEther(e.target.value),
       });
-      await mintTxn.wait();
-      console.log("This is the mint data", mintData);
+      console.log("Transaction Hash:", hash);
       refetchTokenData();
       setIsMinting(false);
     } catch (error) {
+      setIsMinting(false);
       console.log("Error minting NFT", error.message);
     }
   };
@@ -1312,12 +1254,12 @@ export default function Home() {
                   </div>
                   <div style={modalFooter}>
                     <button style={modalButton}>
-                      <a href={`https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
+                      <a href={`https://testnets.opensea.io/assets/amoy/${CONTRACT_ADDRESS}/${tokenData}`} target="_blank">
                         View on OpenSea
                       </a>
                     </button>
                     <button style={modalButton}>
-                      <a href={`https://mumbai.polygonscan.com/tx/${mintData.hash}`} target="_blank">
+                      <a href={`https://amoy.polygonscan.com/tx/${mintHash}`} target="_blank">
                         View on Polygonscan
                       </a>
                     </button>
