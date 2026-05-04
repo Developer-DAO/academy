@@ -225,7 +225,7 @@ the same name:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 contract TierNFT {
 }
@@ -251,7 +251,7 @@ We add a constructor to our contract, which will mirror the one from `ERC721.sol
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -269,7 +269,7 @@ remember what `++` does to our total supply?
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 
@@ -300,7 +300,7 @@ go into **gas optimisation** for you in a future lesson.
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -350,7 +350,7 @@ so, you'll definitely know `if else`!
 
     // constructor...
 
-		function mint() public payable {
+        function mint() public payable {
         require(
             msg.value >= TIER_VALUE_0,
             "Not enough value for the minimum Tier"
@@ -365,7 +365,7 @@ so, you'll definitely know `if else`!
         tokenTier[totalSupply] = tierId;
     }
 
-		// We will add more code here
+        // We will add more code here
 }
 ```
 
@@ -390,7 +390,7 @@ through the code and find out.
 <summary>**View full code here**</summary>
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -469,7 +469,7 @@ it into the contract! Nifty, eh?
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         string memory imageSVG = "PLACEHOLDER FOR SVG IMAGE";
 
@@ -489,7 +489,7 @@ it into the contract! Nifty, eh?
         return string(abi.encodePacked("data:application/json;base64,", json));
     }
 
-		// We will add more code here
+        // We will add more code here
 }
 ```
 
@@ -498,7 +498,7 @@ Let’s stop to break it down and examine it a little.
 - Within the `tokenURI` function, you'll notice `override`, an `ERC721` function
   we'll use, since we are not creating a separate JSON file to store images or
   other services, but creating it right here in the contract.
-- We also added `require(_exists(tokenId). "Nonexistent token");`. According to
+- We also added `_requireOwned(tokenId);`. According to
   the ERC-721 specification, it is required to throw an error if the NFT doesn't
   exist.
 - `imageSVG` is a placeholder for our image, and we will deal with it a bit
@@ -523,9 +523,9 @@ TokenID were `3`, our JSON would end up look something like this:
 
 ```solidity
 {
-	"name": "TierNFT #3",
-	"description": "TierNFTs collection",'
-	"image": "data:image/svg+xml;base64,A_BUNCH_OF_BASE64_LETTERS_AND_NUMBERS_HERE"
+    "name": "TierNFT #3",
+    "description": "TierNFTs collection",'
+    "image": "data:image/svg+xml;base64,A_BUNCH_OF_BASE64_LETTERS_AND_NUMBERS_HERE"
 }
 ```
 
@@ -534,7 +534,7 @@ TokenID were `3`, our JSON would end up look something like this:
 <summary>**here’s the updated code**</summary>
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
@@ -574,7 +574,7 @@ uint256) public tokenTier;
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         string memory imageSVG = "PLACEHOLDER FOR SVG IMAGE";
 
@@ -666,7 +666,7 @@ Standard.
 <summary>**View updated code**</summary>
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
@@ -712,7 +712,7 @@ contract TierNFT is ERC721 {
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         string memory tierName = tokenTier[tokenId] == 2
             ? TIER_NAME_2
@@ -763,7 +763,7 @@ And inherit `Ownable` from the OpenZeppelin contract into our own.
 
 contract TierNFT is ERC721, Ownable {
 
-		// Our whole contract code here
+        // Our whole contract code here
 
 }
 ```
@@ -774,7 +774,7 @@ all of it! Let’s get this withdraw function coded in here!
 ```solidity
     // tokenURI function part of the code...
 
-		// Function to withdraw funds from contract
+        // Function to withdraw funds from contract
     function withdraw() public onlyOwner {
         // Check that we have funds to withdraw
         uint256 balance = address(this).balance;
@@ -785,7 +785,7 @@ all of it! Let’s get this withdraw function coded in here!
         require(success, "Withdraw failed");
     }
 
-		// 'withdraw' will be our last function at the end of the contract
+        // 'withdraw' will be our last function at the end of the contract
 
 }
 ```
@@ -815,7 +815,7 @@ all of it! Let’s get this withdraw function coded in here!
 <summary>**View the Full Contract Here**</summary>
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -835,7 +835,7 @@ contract TierNFT is ERC721, Ownable { uint256 public totalSupply;
 mapping(uint256 => uint256) public tokenTier;
 
     constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol) {}
+        ERC721(_name, _symbol) Ownable(msg.sender) {}
 
     function mint() public payable {
         require(
@@ -860,7 +860,7 @@ mapping(uint256 => uint256) public tokenTier;
         override
         returns (string memory)
     {
-        require(_exists(tokenId), "Nonexistent token");
+        _requireOwned(tokenId);
 
         string memory tierName = tokenTier[tokenId] == 2
             ? TIER_NAME_2
@@ -987,10 +987,10 @@ require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.12",
+  solidity: "0.8.20",
   networks: {
-    mumbai: {
-      url: "https://rpc-mumbai.maticvigil.com",
+    amoy: {
+      url: "https://rpc-amoy.polygon.technology",
       accounts: [process.env.PRIVATE_KEY],
     },
   },
@@ -1078,7 +1078,7 @@ to keep your wallet safe and **unwanted guests out**.
 We will deploy our smart contract by using this command:
 
 ```bash
-npx hardhat run scripts/deploy.js --network mumbai
+npx hardhat run scripts/deploy.js --network amoy
 ```
 
 We specify the network where we want the contract to be deployed using the
@@ -1179,7 +1179,7 @@ main().catch((error) => {
 To mint our tier NFTs we will run the following command.
 
 ```bash
-npx hardhat run scripts/mint.js --network mumbai
+npx hardhat run scripts/mint.js --network amoy
 ```
 
 If we look at our terminal we will see something like this.

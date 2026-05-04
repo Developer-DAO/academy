@@ -319,7 +319,7 @@ and copy this code inside:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 contract ProjectNFT {
 }
@@ -358,7 +358,7 @@ This is what we need in our code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -395,7 +395,7 @@ which we can use as our ID for each new token created:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -437,7 +437,7 @@ NFT:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -500,7 +500,7 @@ Here's the modifications we will add and I'll explain them below:
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
@@ -793,7 +793,7 @@ deployed contract to the console.
 Before we run our script, we need to tell Hardhat what Solidity version our
 contracts are using. For that, we need to go into the `hardhat.config.js` file
 in our project's root folder. Find the line that says `solidity: '0.8.xx',` and
-replace the `0.8.xx` for the pragma used in our contract: `0.8.12`.
+replace the `0.8.xx` for the pragma used in our contract: `0.8.20`.
 
 We could have used a range of Solidity versions e.g. `^0.8.0` in our contract,
 but we like to promote best practices by choosing a fixed Solidity version and
@@ -872,17 +872,16 @@ going to run the deploy again, but this time to a testnet.
 What is a testnet? It is a basically a whole running blockchain, but it runs
 only so people can try stuff out. On it, you have ETH, NFTs, or other tokens but
 they have no monetary value. This way, you can develop and test your contracts
-without fear of losing anything valuable. Ethereum has many testnets, and you
-might notice that we used _Goerli_ testnet. But we suggest that you use
+without fear of losing anything valuable. Ethereum has many testnets, and we suggest that you use
 _Sepolia_ testnet, now that it has compatible NFT hosting support, and longevity
-for app development that _Goerli_ won't outlast.
+for app development.
 
 Before we go any further, let's take an extra step for precaution. In the next
 project we'll learn how to use collaborative tools to store our projects, but
 for now, let's open our root directory's `.gitignore` file and add this line:
 
 ```bash
-hardhat.config.js
+.env
 ```
 
 In order to deploy to a real testnet we'll need:
@@ -895,7 +894,7 @@ In order to deploy to a real testnet we'll need:
   [#3](https://faucet.quicknode.com/ethereum/sepolia)
 - An API Key from an Ethereum RPC Node Provider
   ([Alchemy](https://www.alchemy.com/), [Infura](https://infura.io/),
-  [Ankr](https://rpc.ankr.com/eth_goerli))
+  [Ankr](https://rpc.ankr.com/eth_sepolia))
 - A minor change in the Hardhat configuration file
 
 First and foremost, **security**. We are exploring new grounds, experimenting,
@@ -936,27 +935,36 @@ We are going to replace our file with this:
 
 ```jsx
 require("@nomicfoundation/hardhat-toolbox");
-
-const WALLET_PRIVATE_KEY = "YOUR-PRIVATE-KEY-DONT-SHARE";
-
-const RPC_API_KEY = "YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY";
+require("dotenv").config();
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.12",
+  solidity: "0.8.20",
   networks: {
-    goerli: {
-      url: RPC_API_KEY,
-      accounts: [WALLET_PRIVATE_KEY],
+    sepolia: {
+      url: process.env.RPC_URL,
+      accounts: [process.env.PRIVATE_KEY],
     },
   },
 };
 ```
 
-And you'll need to set the two global variables using the `const` keyword with
-your own values for Hardhat to communicate correctly to the network.
+We strongly recommend using a `.env` file to store your sensitive information. This is a common practice among professional developers to keep secrets out of their source code.
+
+First, install the `dotenv` package:
+
+```bash
+npm install dotenv
+```
+
+Then, create a `.env` file in your project root and add your keys:
+
+```bash
+RPC_URL=YOUR-API-KEY-FROM-INFURA-OR-ALCHEMY
+PRIVATE_KEY=YOUR-PRIVATE-KEY-DONT-SHARE
+```
 
 We have already gone through how to get your API KEY.
 
@@ -965,11 +973,11 @@ to open Metamask, click on the three dots next to your _Account Name_, and then
 on _Account Details_, then click on _Export Private Key_. It will ask for your
 Metamask password - the one you use to open it, NOT your seed phrase. It also
 issues a warning to 'Never disclose this key'. Confirm and you'll be able to
-copy your private key. Paste it in to our `hardhat.config.js`
+copy your private key. Paste it into your `.env` file.
 
 Please, if you are already a developer, and you plan to use Git to store your
-project, don't store your `hardhat.config.js` on it, because you will have your
-private key there.
+project, don't store your `.env` file on it, because you will have your
+private key there. That's why we added it to our `.gitignore` file earlier.
 
 <SideDrawer
   buttonText="Checkpoint Questions"
@@ -1006,7 +1014,7 @@ Remember we are deploying to the actual blockchain, a testnet, but a blockchain
 nonetheless.
 
 Now that we have run the deploy script, **delete the private key and the RPC API
-key from `hardhat.config.js`** to minimize the handling of the wallet. In the
+key from your `.env` file** to minimize the handling of the wallet. In the
 next project we will learn about tools to collaborate and store your projects
 online.
 
@@ -1016,7 +1024,7 @@ Just go to [Sepolia Etherscan](https://sepolia.etherscan.io/) (or
 deployed contract.
 
 You can view my links as an example on
-[Etherscan](https://goerli.etherscan.io/address/0x166A82F7cD8F7BA9D8C10b2cc792C1A20084564d)
+[Etherscan](https://sepolia.etherscan.io/)
 and [Opensea](https://testnets.opensea.io/collection/d-d-academy)
 
 ![opensea.png](/assets/lessons/2/img_20.png)
